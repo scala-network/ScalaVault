@@ -1,0 +1,275 @@
+<resources>
+
+    <style name="ToolBarStyle.Base" parent="">
+        <item name="popupTheme">@style/ThemeOverlay.AppCompat.Light</item>
+        <item name="theme">@style/ThemeOverlay.AppCompat.Dark.ActionBar</item>
+    </style>
+
+    <style name="ToolBarStyle" parent="ToolBarStyle.Base" />
+
+    <style name="ToolBarStyle.Event" parent="ToolBarStyle">
+        <item name="titleTextAppearance">@style/TextAppearance.Widget.Event.Toolbar.Title</item>
+    </style>
+
+    <style name="ToolBarStyle.ActionButton" parent="Widget.AppCompat.ActionButton">
+        <item name="android:textAllCaps">true</item>
+        <item name="android:textSize">10sp</item>
+        <item name="android:textColor">@color/white</item>
+        <item name="android:textStyle">bold</item>
+    </style>
+
+    <style name="TextAppearance.Widget.Event.Toolbar.Title" parent="TextAppearance.Widget.AppCompat.Toolbar.Title">
+        <!-- Text styling can be done here-->
+    </style>
+
+
+    <style name="MyMaterialTheme" parent="Theme.AppCompat.Light">
+        <item name="windowNoTitle">true</item>
+        <item name="windowActionBar">false</item>
+
+        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
+        <item name="colorPrimary">@color/scalaText</item>
+        <item name="colorAccent">@color/gradientPink</item>
+
+        <item name="android:spinnerItemStyle">@style/ScalaSpinnerItem</item>
+        <item name="android:spinnerStyle">@style/ScalaSpinner</item>
+    </style>
+
+    <style name="ScalaLabel" parent="@android:style/TextAppearance.DeviceDefault.Medium">
+        <item name="android:textColor">?colorPrimary</item>
+        <item name="android:textColorHint">@color/scalaText</item>
+    </style>
+
+    <style name="ScalaLabel.Small">
+        <item name="android:textSize">10sp</item>
+    </style>
+
+    <style name="ScalaLabel.Gray">
+        <item name="android:textColor">@color/scalaGray</item>
+    </style>
+
+    <style name="ScalaLabel.Caps">
+        <item name="android:textAllCaps">true</item>
+    </style>
+
+    <style name="ScalaLabel.Caps.White">
+        <item name="android:textColor">@color/scalaWhite</item>
+    </style>
+
+    <style name="ScalaLabel.Caps.Black">
+        <item name="android:textColor">@color/scalaBlack</item>
+    </style>
+
+    <style name="ScalaText.Funds">
+        <item name="android:textSize">16sp</item>
+        <item name="android:textColor">@color/scalaFab</item>
+        <item name="android:textStyle">bold</item>
+    </style>
+
+    <style name="ScalaText.Info">
+        <item name="android:textSize">16sp</item>
+        <item name="android:textColor">@color/scalaFab</item>
+    </style>
+
+    <style name="ScalaText.Balance">
+        <item name="android:textSize">32sp</item>
+        <item name="android:textColor">@color/scalaBlack</item>
+        <item name="android:textStyle">bold</item>
+    </style>
+
+    <style name="ScalaText.Balance.Orange">
+        <item name="android:textColor">@color/gradientOrange</item>
+    </style>
+
+    <style name="ScalaText.Unconfirmed">
+        <item name="android:textSize">14sp</item>
+        <item name="android:textColor">@color/scalaGray</item>
+        <item name="android:textStyle">bold</item>
+    </style>
+
+    <style name="ScalaText.PosAmount">
+        <item name="android:textSize">16sp</item>
+        <item name="android:textColor">@color/scalaBlack</item>
+        <item name="android:textStyle">bold</item>
+    </style>
+
+    <style name="ScalaText.PosFee">
+        <item name="android:textSize">10sp</item>
+        <item name="android:textColor">#FF898989</item>
+        <item name="android:textStyle">normal</item>
+    </style>
+
+    <style name="ScalaText.PosNote">
+        <item name="android:textSize">12sp</item>
+        <item name="android:textColor">#FF4A4A4A</item>
+        <item name="android:textStyle">italic</item>
+    </style>
+
+    <style name="ScalaText.PosDate">
+        <item name="android:textSize">10sp</item>
+        <item name="android:textColor">#FF616161</item>
+        <item name="android:textStyle">normal</item>
+    </style>
+
+    <!-- textSize is in dp here to match the layout of the numpad-->
+    <style name="ScalaLabel.NumPad">
+        <item name="android:textSize">36sp</item>
+        <item name="android:textColor">@color/scalaBlack</item>
+        <item name="android:background">?android:attr/selectableItemBackgroundBorderless</item>
+        <item name="android:gravity">center</item>
+    </style>
+
+    <style name="ScalaLabel.Title">
+        <item name="android:textSize">20sp</item>
+        <item name="android:textColor">@color/white</item>
+    </style>
+
+    <style name="ScalaLabel.Subtitle">
+        <item name="android:textSize">12sp</item>
+        <item name="android:textColor">@color/scalaWhite</item>
+    </style>
+
+    <style name="ScalaLabel.Heading">
+        <item name="android:textSize">14sp</item>
+        <item name="android:textColor">@color/scalaFab</item>
+        <item name="android:textStyle">bold</item>
+    </style>
+
+    <style name="ScalaLabel.Heading.Donation">
+        <item name="android:textSize">18sp</item>
+        <item name="android:textColor">@color/gradientPink</item>
+        <item name="android:textStyle">bold</item>
+    </style>
+
+    <style name="ScalaFab" parent="@android:style/TextAppearance.DeviceDefault.Medium">
+        <item name="android:textSize">12sp</item>
+        <item name="android:textColor">@color/scalaFab</item>
+        <item name="android:textStyle">bold</item>
+    </style>
+
+    <style name="ScalaText" parent="@android:style/TextAppearance.DeviceDefault.Medium">
+        <item name="android:textColor">?colorPrimary</item>
+        <item name="android:textColorHint">@color/scalaText</item>
+    </style>
+
+    <style name="ScalaText.Gray">
+        <item name="android:textColor">@color/scalaGray</item>
+    </style>
+
+    <style name="ScalaText.Black">
+        <item name="android:textColor">@color/scalaBlack</item>
+    </style>
+
+    <style name="ScalaText.Monospace">
+        <item name="android:fontFamily">monospace</item>
+    </style>
+
+    <style name="ScalaText.Monospace.Mnemonic">
+        <item name="android:lineSpacingMultiplier">1.2</item>
+        <item name="android:textSize">18sp</item>
+        <item name="android:textStyle">bold</item>
+    </style>
+
+    <style name="ScalaText.Label">
+        <item name="android:textSize">18sp</item>
+    </style>
+
+    <style name="ScalaText.Confirm">
+        <item name="android:textSize">16sp</item>
+    </style>
+
+    <style name="ScalaText.Confirm.Label">
+        <item name="android:textSize">16sp</item>
+        <item name="android:textStyle">bold</item>
+    </style>
+
+    <style name="ScalaText.Small">
+        <item name="android:textSize">10sp</item>
+    </style>
+
+    <style name="ScalaText.Medium">
+        <item name="android:textSize">12sp</item>
+    </style>
+
+    <style name="ScalaText.Large">
+        <item name="android:textSize">24sp</item>
+    </style>
+
+
+    <style name="ScalaText.Success">
+        <item name="android:textSize">18sp</item>
+        <item name="android:textColor">@color/dotGray</item>
+        <item name="android:textAllCaps">true</item>
+        <item name="android:textStyle">bold</item>
+    </style>
+
+    <style name="ScalaText.Gray.SuccessFee">
+        <item name="android:textSize">18sp</item>
+    </style>
+
+    <style name="ScalaText.Button" parent="@android:style/TextAppearance.DeviceDefault.Medium">
+        <item name="android:textSize">14sp</item>
+        <item name="android:textColor">@color/gradientOrange</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:textAllCaps">true</item>
+    </style>
+
+    <style name="ScalaText.Button.Small">
+        <item name="android:textSize">10sp</item>
+    </style>
+
+    <style name="ScalaButton" parent="@style/Widget.AppCompat.Button">
+        <item name="android:background">@drawable/button_selector</item>
+        <item name="android:textColor">@color/scalaWhite</item>
+        <item name="android:textAppearance">@style/ScalaLabel</item>
+        <item name="android:textAllCaps">true</item>
+    </style>
+
+    <style name="ScalaButton.Green">
+        <item name="android:background">@drawable/button_selector_green</item>
+    </style>
+
+    <style name="ScalaButton.Small">
+        <item name="android:textSize">11sp</item>
+    </style>
+
+    <style name="ScalaButton.Take">
+        <item name="android:background">@color/take</item>
+    </style>
+
+    <style name="ScalaButton.Give">
+        <item name="android:background">@color/give</item>
+    </style>
+
+    <style name="ScalaEdit" parent="ScalaText">
+        <item name="android:textColor">?colorPrimary</item>
+        <item name="android:backgroundTint">@color/gradientPink</item>
+    </style>
+
+
+    <style name="ScalaSpinner" parent="@style/Widget.AppCompat.Spinner">
+        <item name="android:background">@drawable/backgound_spinner</item>
+    </style>
+
+    <style name="ScalaSpinnerItem" parent="android:Widget.TextView.SpinnerItem">
+        <item name="android:textAppearance">@style/ScalaTextAppearanceSpinnerItem</item>
+    </style>
+
+    <style name="ScalaTextAppearanceSpinnerItem" parent="android:TextAppearance.Widget.TextView.SpinnerItem">
+        <item name="android:textColor">@color/gradientOrange</item>
+    </style>
+
+    <style name="ScalaSpinnerItem.Balance">
+        <item name="android:textSize">32sp</item>
+        <item name="android:textStyle">bold</item>
+    </style>
+
+
+    <style name="ScalaSpinnerGray" parent="@style/Widget.AppCompat.Spinner">
+        <item name="android:background">@drawable/backgound_spinner_gray</item>
+    </style>
+
+    <style name="ExtendedFAB" parent="ScalaButton">
+        <item name="android:textSize">16sp</item>
+    </style>
+</resources>

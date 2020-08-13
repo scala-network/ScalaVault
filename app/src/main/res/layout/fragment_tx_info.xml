@@ -1,0 +1,356 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_margin="8dp"
+    android:fillViewport="true">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:padding="16dp">
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_weight="2"
+                android:gravity="end"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/tvTxAmount"
+                    style="@style/ScalaText.PosAmount"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:selectAllOnFocus="true"
+                    android:textIsSelectable="true"
+                    tools:text="+ 1,092.00229" />
+
+                <TextView
+                    android:id="@+id/tvTxFee"
+                    style="@style/ScalaText.PosFee"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:selectAllOnFocus="true"
+                    android:textIsSelectable="true"
+                    tools:text="Fee 0.0003688271" />
+            </LinearLayout>
+
+            <TextView
+                android:id="@+id/tvTxTimestamp"
+                style="@style/ScalaText.PosDate"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginStart="24dp"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:selectAllOnFocus="true"
+                android:textIsSelectable="true"
+                tools:text="2017-10-09 12:44:13 +0200" />
+        </LinearLayout>
+
+        <android.support.v7.widget.CardView xmlns:card_view="http://schemas.android.com/apk/res-auto"
+            android:id="@+id/cvXmrTo"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="16dp"
+            android:foreground="?android:attr/selectableItemBackground"
+            android:visibility="gone"
+            card_view:cardCornerRadius="2dp"
+            card_view:cardElevation="8dp"
+            card_view:contentPadding="8dp">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <TextView
+                    style="@style/ScalaText.Medium"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:drawableStart="@drawable/ic_xmrto_32dp"
+                    android:drawablePadding="8dp"
+                    android:gravity="center"
+                    android:text="@string/label_send_btc_xmrto_info" />
+
+                <TableLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:shrinkColumns="1">
+
+                    <TableRow>
+
+                        <TextView
+                            style="@style/ScalaLabel.Small"
+                            android:layout_gravity="center_vertical"
+                            android:gravity="end"
+                            android:padding="8dp"
+                            android:text="@string/tx_amount_btc" />
+
+                        <TextView
+                            android:id="@+id/tvTxAmountBtc"
+                            style="@style/ScalaText"
+                            android:gravity="start"
+                            android:padding="8dp"
+                            android:selectAllOnFocus="true"
+                            android:textColor="@color/gradientOrange"
+                            android:textIsSelectable="true"
+                            tools:text="1.008 BTC" />
+                    </TableRow>
+
+                    <TableRow>
+
+                        <TextView
+                            style="@style/ScalaLabel.Small"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="top"
+                            android:gravity="end"
+                            android:padding="8dp"
+                            android:text="@string/tx_destination_btc" />
+
+                        <TextView
+                            android:id="@+id/tvDestinationBtc"
+                            style="@style/ScalaText"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:gravity="start"
+                            android:padding="8dp"
+                            android:selectAllOnFocus="true"
+                            android:text="mjn127C5wRQCULksMYMFHLp9UTdQuCfbZ9"
+                            android:textIsSelectable="true" />
+                    </TableRow>
+
+                    <TableRow>
+
+                        <TextView
+                            style="@style/ScalaLabel.Small"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center_vertical"
+                            android:gravity="end"
+                            android:padding="8dp"
+                            android:text="@string/label_send_btc_xmrto_key_lb" />
+
+                        <LinearLayout>
+
+                            <TextView
+                                android:id="@+id/tvTxXmrToKey"
+                                style="@style/ScalaText"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:background="@color/dotGray"
+                                android:drawableEnd="@drawable/ic_content_copy_white_24dp"
+                                android:drawablePadding="16dp"
+                                android:paddingStart="24dp"
+                                android:paddingTop="8dp"
+                                android:paddingEnd="8dp"
+                                android:paddingBottom="8dp"
+                                android:textColor="@color/white"
+                                tools:text="XLA.TO-d2KQ" />
+                        </LinearLayout>
+                    </TableRow>
+
+                </TableLayout>
+            </LinearLayout>
+
+        </android.support.v7.widget.CardView>
+
+        <TableLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:shrinkColumns="1">
+
+            <TableRow>
+
+                <TextView
+                    style="@style/ScalaLabel.Small"
+                    android:layout_gravity="top"
+                    android:gravity="end"
+                    android:padding="8dp"
+                    android:text="@string/tx_account" />
+
+                <RelativeLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content">
+
+                    <TextView
+                        android:id="@+id/tvAccount"
+                        style="@style/ScalaText"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentStart="true"
+                        android:layout_alignParentTop="true"
+                        android:gravity="start"
+                        android:paddingStart="8dp"
+                        android:paddingTop="8dp"
+                        android:paddingEnd="8dp"
+                        android:selectAllOnFocus="true"
+                        android:textIsSelectable="true"
+                        tools:text="(0,1)" />
+
+                    <TextView
+                        android:id="@+id/tvAddress"
+                        style="@style/ScalaText"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@+id/tvAccount"
+                        android:gravity="start"
+                        android:paddingStart="8dp"
+                        android:paddingEnd="8dp"
+                        android:paddingBottom="8dp"
+                        android:selectAllOnFocus="true"
+                        android:textIsSelectable="true"
+                        tools:text="4BKjy1uVRTPiz4pHyaXXawb82XpzLiowSDd8rEQJGqvN6AD6kWosLQ6VJXW9sghopxXgQSh1RTd54JdvvCRsXiF41xvfeW5" />
+                </RelativeLayout>
+            </TableRow>
+
+            <TableRow>
+
+                <TextView
+                    style="@style/ScalaLabel.Small"
+                    android:layout_gravity="top"
+                    android:gravity="end"
+                    android:padding="8sp"
+                    android:text="@string/tx_notes" />
+
+                <android.support.design.widget.TextInputLayout
+                    style="@style/Widget.MaterialComponents.TextInputLayout.FilledBox"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <android.support.design.widget.TextInputEditText
+                        android:id="@+id/etTxNotes"
+                        style="@style/ScalaEdit"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:backgroundTint="@color/scalaGray"
+                        android:hint="@string/tx_notes_hint"
+                        android:inputType="textMultiLine" />
+                </android.support.design.widget.TextInputLayout>
+            </TableRow>
+
+            <TableRow>
+
+                <TextView
+                    style="@style/ScalaLabel.Small"
+                    android:layout_gravity="top"
+                    android:gravity="end"
+                    android:padding="8dp"
+                    android:text="@string/tx_destination" />
+
+                <TextView
+                    android:id="@+id/tvDestination"
+                    style="@style/ScalaText"
+                    android:gravity="start"
+                    android:padding="8dp"
+                    android:selectAllOnFocus="true"
+                    android:textIsSelectable="true" />
+            </TableRow>
+
+            <TableRow>
+
+                <TextView
+                    style="@style/ScalaLabel.Small"
+                    android:layout_gravity="top"
+                    android:gravity="end"
+                    android:padding="8dp"
+                    android:text="@string/tx_paymentId" />
+
+                <TextView
+                    android:id="@+id/tvTxPaymentId"
+                    style="@style/ScalaText"
+                    android:gravity="start"
+                    android:padding="8dp"
+                    android:selectAllOnFocus="true"
+                    android:textIsSelectable="true" />
+            </TableRow>
+
+            <TableRow>
+
+                <TextView
+                    style="@style/ScalaLabel.Small"
+                    android:layout_gravity="top"
+                    android:gravity="end"
+                    android:padding="8dp"
+                    android:text="@string/tx_id" />
+
+                <TextView
+                    android:id="@+id/tvTxId"
+                    style="@style/ScalaText"
+                    android:gravity="start"
+                    android:padding="8dp"
+                    android:selectAllOnFocus="true"
+                    android:textIsSelectable="true" />
+            </TableRow>
+
+            <TableRow>
+
+                <TextView
+                    style="@style/ScalaLabel.Small"
+                    android:layout_gravity="top"
+                    android:gravity="end"
+                    android:padding="8dp"
+                    android:text="@string/tx_key" />
+
+                <TextView
+                    android:id="@+id/tvTxKey"
+                    style="@style/ScalaText"
+                    android:gravity="start"
+                    android:padding="8dp"
+                    android:selectAllOnFocus="true"
+                    android:textIsSelectable="true" />
+            </TableRow>
+
+            <TableRow>
+
+                <TextView
+                    style="@style/ScalaLabel.Small"
+                    android:layout_gravity="top"
+                    android:gravity="end"
+                    android:padding="8dp"
+                    android:text="@string/tx_blockheight" />
+
+                <TextView
+                    android:id="@+id/tvTxBlockheight"
+                    style="@style/ScalaText"
+                    android:gravity="start"
+                    android:padding="8dp"
+                    android:selectAllOnFocus="true"
+                    android:textIsSelectable="true" />
+            </TableRow>
+
+            <TableRow>
+
+                <TextView
+                    style="@style/ScalaLabel.Small"
+                    android:layout_gravity="top"
+                    android:gravity="end"
+                    android:padding="8dp"
+                    android:text="@string/tx_transfers" />
+
+                <TextView
+                    android:id="@+id/tvTxTransfers"
+                    style="@style/ScalaText"
+                    android:gravity="start"
+                    android:padding="8dp"
+                    android:selectAllOnFocus="true"
+                    android:textIsSelectable="true" />
+
+            </TableRow>
+
+        </TableLayout>
+    </LinearLayout>
+</ScrollView>

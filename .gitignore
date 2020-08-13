@@ -1,0 +1,17 @@
+.gradle
+/build
+*.iml
+/.idea
+/local.properties
+/captures
+.externalNativeBuild
+.DS_Store
+/app/build
+/app/release
+/app/alpha
+/app/prod
+/app/alphaMainnet
+/app/prodMainnet
+/app/alphaStagenet
+/app/prodStagenet
+/app/.cxx

@@ -1,0 +1,394 @@
+<resources>
+    <string name="wallet_activity_name">Carteira</string>
+
+    <string name="menu_about">Sobre nós</string>
+    <string name="menu_privacy">Política de Privacidade</string>
+
+    <string name="menu_share">Partilhar</string>
+    <string name="menu_help">Ajuda</string>
+    <string name="menu_receive">Receber</string>
+    <string name="menu_rename">Renomear &#8230;</string>
+    <string name="menu_archive">Arquivar</string>
+    <string name="menu_backup">Cópia de segurança</string>
+    <string name="menu_changepw">Alterar palavra passe</string>
+
+    <string name="password_weak">Continua a escrever &#8230;</string>
+    <string name="password_fair">Meh &#8230;</string>
+    <string name="password_good">Tu consegues fazer melhor!</string>
+    <string name="password_strong">Está quase lá &#8230;</string>
+    <string name="password_very_strong">Está forte, está!</string>
+
+    <string name="label_login_wallets">Carteiras</string>
+    <string name="label_credits">Créditos</string>
+    <string name="label_ok">OK</string>
+    <string name="label_cancel">Cancelar</string>
+    <string name="label_close">Fechar</string>
+    <string name="label_wallet_advanced_details">Toca para informação detalhada</string>
+
+    <string name="label_send_success">Enviado com sucesso</string>
+    <string name="label_send_done">Feito</string>
+
+    <string name="label_receive_info_gen_qr_code">Toca para código QR</string>
+
+    <string name="info_xmrto_enabled">Pagamento em BTC activado, toca para mais informação.</string>
+    <string name="info_ledger_enabled">Ledger activa, toca para mais informação.</string>
+
+    <string name="info_xmrto"><![CDATA[
+        <b>Introduziu um endereço Bitcoin.</b><br/>
+        <i>Vai enviar em XLA e o destinatário vai receber BTC através do serviço <b>XLA.TO</b></i>
+    ]]></string>
+
+    <string name="info_send_xmrto_success_order_label">XLA.TO Order</string>
+
+    <string name="info_send_xmrto_success_btc">%1$s BTC</string>
+
+    <string name="info_send_xmrto_paid">Confirmação Pendente</string>
+    <string name="info_send_xmrto_unpaid">Pagamento Pendente</string>
+    <string name="info_send_xmrto_error">Erro XLA.TO (%1$s)</string>
+    <string name="info_send_xmrto_sent">BTC Enviadas!</string>
+    <string name="info_send_xmrto_query">A comunicar &#8230;</string>
+
+    <string name="info_send_xmrto_parms"><![CDATA[
+        <b>Pode enviar %1$s &#8212; %2$s BTC</b>.<br/>
+        <i><b>XLA.TO</b> está com uma taxa de conversão de <b>%3$s BTC</b> <u>neste momento</u></i>.
+    ]]></string>
+    <string name="info_send_xmrto_zeroconf"><![CDATA[
+        <i>Quantidades até <b>%1$s BTC</b> serão enviadas <u>instantaneament</u>!</i>
+    ]]></string>
+
+    <string name="send_available_btc">Saldo: %2$s BTC (%1$s XLA)</string>
+
+    <string name="info_paymentid_integrated">&#x2714; ID do pagamento integrado</string>
+    <string name="info_prepare_tx">A preparar a transacção</string>
+
+    <string name="label_send_progress_xmrto_create">A criar um pedido XLA.TO</string>
+    <string name="label_send_progress_xmrto_query">A actualizar o pedido XLA.TO</string>
+    <string name="label_send_progress_create_tx">A preparar a transacção Scala</string>
+
+    <string name="label_send_progress_queryparms">A obter os parâmetros xmr.to</string>
+
+    <string name="label_generic_xmrto_error">ERRO XLA.TO</string>
+    <string name="text_generic_xmrto_error">Código: %1$d</string>
+
+    <string name="text_retry">Toca para voltar a tentar</string>
+    <string name="text_noretry_scala">Agora estamos emperrados aqui!</string>
+    <string name="text_noretry">Ups, XLA.TO não parece estar disponível neste momento!</string>
+
+    <string name="text_send_btc_amount">%1$s BTC = %2$s XLA</string>
+    <string name="text_send_btc_rate">(Rácio: %1$s BTC/XLA)</string>
+
+    <string name="label_send_btc_xmrto_info">Vai a xmr.to para suporte &amp; seguimento</string>
+    <string name="label_send_btc_xmrto_key_lb">Chave secreta\nXLA.TO</string>
+    <string name="label_send_btc_xmrto_key">XLA.TO Chave secreta</string>
+    <string name="label_send_btc_address">Endereço BTC de destino</string>
+    <string name="label_send_btc_amount">Quantidade</string>
+
+    <string name="label_send_txid">ID da Transacção</string>
+    <string name="label_send_address">Endereço de destino</string>
+    <string name="label_send_payment_id">ID do pagamento</string>
+    <string name="label_send_notes">Notas</string>
+
+    <string name="backup_progress">A efectuar cópia de segurança</string>
+    <string name="archive_progress">A arquivar</string>
+    <string name="rename_progress">A renomear</string>
+    <string name="changepw_progress">A altear a palavra passe</string>
+
+    <string name="service_progress">A concluir o processamento &#8230;\nIsto pode demorar!</string>
+
+    <string name="backup_failed">Cópia de segurança falhou!</string>
+    <string name="archive_failed">Erro ao arquivar!</string>
+    <string name="rename_failed">Erro ao renomear!</string>
+    <string name="changepw_failed">Erro ao alterar a palavra passe!</string>
+    <string name="changepw_success">Palavra passe alterada</string>
+
+    <string name="label_daemon">Nó</string>
+    <string name="status_wallet_loading">A carregar a carteira &#8230;</string>
+    <string name="status_wallet_unloaded">Carteira guardada</string>
+    <string name="status_wallet_unload_failed">Erro ao gravar a carteira!</string>
+    <string name="status_wallet_connecting">A conectar &#8230;</string>
+    <string name="status_wallet_connect_failed">Erro ao conectar!\nConfirma o utilizador/palavra passe</string>
+    <string name="status_wallet_node_invalid">Nó inválido!\nTenta outro.</string>
+    <string name="status_wallet_connect_ioex">Não foi possível chegar ao nó!\nTenta novamente ou outro.</string>
+
+    <string name="status_wallet_disconnected">Desconectado</string>
+
+    <string name="status_transaction_failed">Transacção falhou: %1$s</string>
+
+    <string name="send_xmrto_timeout">Já esperaste demasiado tempo!</string>
+
+    <string name="service_busy">Ainda estou ocupado com a tua última carteira &#8230;</string>
+
+    <string name="prompt_rename">Renomear %1$s</string>
+
+    <string name="prompt_changepw">Nova frase passe para %1$s</string>
+    <string name="prompt_changepwB">Repetir frase passe para %1$s</string>
+    <string name="prompt_password">Palavra passe para %1$s</string>
+    <string name="prompt_fingerprint_auth">Também podes abrir a carteira utilizando a impressão digital.\nPor favor, toca no sensor.</string>
+    <string name="prompt_send_password">Confirmar palavra passe</string>
+    <string name="bad_fingerprint">Impressão diginal não reconhecida. Tenta novamente.</string>
+    <string name="bad_password">Palavra passe incorrecta!</string>
+    <string name="bad_wallet">A carteira não existe!</string>
+    <string name="prompt_daemon_missing">O endereço do serviço tem que estar definido!</string>
+    <string name="prompt_wrong_net">A carteira não combina com a rede seleccionada</string>
+
+    <string name="label_watchonly">(Ver apenas)</string>
+
+    <string name="label_wallet_receive">Receber</string>
+    <string name="label_wallet_send">Enviar</string>
+
+    <string name="xmr_unconfirmed_amount">+ %1$s XLA não confirmado</string>
+
+    <string name="service_description">Serviço Scala Vault</string>
+
+    <string name="status_synced">Sincronizado:</string>
+    <string name="status_remaining">Blocos remanescentes</string>
+    <string name="status_syncing">A examinar:</string>
+
+    <string name="message_strorage_not_writable">Não é possível escrever no espaço externo! Pânico!</string>
+    <string name="message_strorage_not_permitted">Nós preciamos mesmo da permissão de escrever no espaço externo!</string>
+    <string name="message_camera_not_permitted">Sem câmara = Sem códigos QR!</string>
+
+    <string name="label_copy_viewkey">Ver chave</string>
+    <string name="label_copy_address">Endereço público</string>
+    <string name="label_copy_xmrtokey">Chave XLA.TO</string>
+    <string name="message_copy_viewkey">Chave de visualização copiada para a área de transferência</string>
+    <string name="message_copy_xmrtokey">Chave XLA.TO copiada para a área de transferência!</string>
+    <string name="message_copy_address">Endereço da carteira copiado para a área de transferência!</string>
+    <string name="message_copy_txid">ID da transacção copiado para a área de transferência!</string>
+    <string name="message_nocopy">Copiar está desactivo por razões de segurança!</string>
+
+    <string name="message_exchange_failed">Não foi possível obter a taxa de conversão!\nUsa XLA/XLA ou tenta outra vez</string>
+
+    <string name="generate_title">Criar Carteira</string>
+    <string name="generate_name_hint">Nome da Carteira</string>
+    <string name="generate_password_hint">Frase-passe da Carteira</string>
+    <string name="generate_fingerprint_hint">Permitir abrir a carteira com a impressão digital</string>
+    <string name="generate_fingerprint_warn"><![CDATA[
+        <strong>Autenticação por impressão digital</strong>
+        <p> Com a autenticação através da impressão digital, podes ver o teu saldo e receber fundos
+            sem introduzir a palavra passe.</p>
+        <p>Mas para segurança adicional, o monerujo vai sempre pedir para introduzir a palavra passe
+        para ver os detalhes da carteira ou enviar fundos.</p>
+        <strong>Aviso de segurança</strong>
+        <p> Finalmente, o monerujo quer relembrar que qualquer pessoa que consiga obter a tua
+        impressão digital vai conseguir cuscar o teu saldo da carteira.</p>
+        <p> Por exemplo, um utilizador malicioso pode abrir a tua carteira enquanto estiveres a dormir.</p>
+        <strong>Tens a certeza que queres activar esta funcionalidade?</strong>
+    ]]></string>
+
+    <string name="generate_bad_passwordB">As frases-passe não são iguais</string>
+    <string name="generate_empty_passwordB">Frase-passe não pode ser vazia</string>
+    <string name="generate_buttonGenerate">Faz-me lá uma carteria!</string>
+    <string name="generate_button_accept">Eu apontei a minha Semente Mnemónica</string>
+
+    <string name="generate_wallet_name">Dá-me um nome!</string>
+    <string name="generate_wallet_exists">A carteira já exite!</string>
+    <string name="generate_wallet_dot">Não pode começar com .</string>
+    <string name="generate_wallet_creating">A criar carteira</string>
+    <string name="generate_wallet_created">Carteira criada</string>
+
+    <string name="generate_restoreheight_error">Introduzir número ou data (AAAA-MM-DD)</string>
+
+    <string name="generate_wallet_type_key">Chaves</string>
+    <string name="generate_wallet_type_new">Nova</string>
+    <string name="generate_wallet_type_seed">Semente</string>
+    <string name="generate_wallet_type_view">Visualizar</string>
+
+    <string name="generate_address_hint">Endereço Público</string>
+    <string name="generate_viewkey_hint">Chave de visualização</string>
+    <string name="generate_spendkey_hint">Chave de utilização</string>
+    <string name="generate_mnemonic_hint">Chave Mnemónica de 25 Palavras</string>
+    <string name="generate_restoreheight_hint">Restaurar de Altura ou Data (AAAA-MM-DD)</string>
+
+    <string name="generate_address_label">Endereço público</string>
+    <string name="generate_viewkey_label">Chave de visualização</string>
+    <string name="generate_spendkey_label">Chave de utilização</string>
+    <string name="generate_mnemonic_label">Semente mnemónica</string>
+    <string name="generate_crazypass_label">Restaurar palavra passe dos ficheiros de cateira</string>
+
+    <string name="generate_check_key">Introduz uma chave válida</string>
+    <string name="generate_check_address">Introduz um endereço válido</string>
+    <string name="generate_check_mnemonic">Introduz a semente de 25 palavras</string>
+
+    <string name="send_amount_btc_xmr">%1$s (indicativo)</string>
+
+    <string name="send_paymentid_hint">ID do pagamento (opcional)</string>
+    <string name="send_amount_hint">0.00</string>
+    <string name="send_notes_hint">Notas privadas (opcional)</string>
+    <string name="send_generate_paymentid_hint">Gerar</string>
+    <string name="send_send_label">Gasta os meus queridos Scala</string>
+    <string name="send_send_timed_label">Gasta os meus queridos Scalaj (%1$s)</string>
+    <string name="send_qr_invalid">Não é um código QR</string>
+    <string name="send_qr_address_invalid">Não é um código QR válido</string>
+    <string name="send_address_invalid">Não é um endereço válido</string>
+    <string name="send_title">Enviar</string>
+    <string name="send_available">Saldo: %1$s XLA</string>
+    <string name="send_address_title">Endereço</string>
+    <string name="send_amount_title">Quantidade</string>
+    <string name="send_confirm_title">Confirmar</string>
+    <string name="send_success_title">Feito</string>
+
+    <string name="send_amount_label">Quantidade</string>
+    <string name="send_fee_btc_label">Taxa (XLA)</string>
+    <string name="send_fee_label">Taxa</string>
+    <string name="send_total_btc_label">Total (XLA)</string>
+    <string name="send_total_label">Total</string>
+
+    <string name="send_amount">%1$s XLA</string>
+    <string name="send_fee">+%1$s Taxa</string>
+
+    <string name="send_create_tx_error_title">Erro ao criar a transacção</string>
+
+    <string name="tx_list_fee">- Taxa %1$s</string>
+    <string name="tx_list_amount_failed">(%1$s)</string>
+    <string name="tx_list_failed_text">falhou</string>
+    <string name="tx_list_amount_negative">- %1$s</string>
+    <string name="tx_list_amount_positive">+ %1$s</string>
+
+    <string name="tx_timestamp">Data/hora</string>
+    <string name="tx_id">ID TX</string>
+    <string name="tx_key">Chave TX</string>
+    <string name="tx_destination">Destino</string>
+    <string name="tx_destination_btc">Destino\n(BTC)</string>
+    <string name="tx_paymentId">ID Pagamento</string>
+    <string name="tx_blockheight">Bloco</string>
+    <string name="tx_amount">Quantidade</string>
+    <string name="tx_amount_btc">Quantidade\n(BTC)</string>
+    <string name="tx_fee">Taxa</string>
+    <string name="tx_transfers">Transferências</string>
+    <string name="tx_notes">Notas</string>
+    <string name="tx_notes_hint">(opcional)</string>
+    <string name="tx_button_notes">Guardar</string>
+    <string name="tx_notes_set_failed">Erro ao gravar as notas</string>
+    <string name="tx_title">Detalhes da Transacção</string>
+
+    <string name="tx_pending">PENDENTE</string>
+    <string name="tx_failed">FALHADA</string>
+
+    <string name="receive_amount_hint">Quantidade</string>
+    <string name="receive_cannot_open">Não foi possível abrir a carteira!</string>
+    <string name="receive_paymentid_invalid">16 caracteres em hexadecimal (0&#8211;9,a&#8211;f)</string>
+    <string name="receive_integrated_paymentid_invalid">Tem que estar vazio com endereços integrados</string>
+
+    <string name="receive_amount_too_big">Max. %1$s</string>
+    <string name="receive_amount_negative">Mín. 0</string>
+    <string name="receive_amount_nan">XLA não é um número</string>
+
+    <string name="details_alert_message">Dados sensíveis vão ser mostrados.\nOlha à tua volta!</string>
+    <string name="details_alert_yes">Estou seguro</string>
+    <string name="details_alert_no">Volta atrás!</string>
+    <string name="details_title">Detalhes</string>
+
+    <string name="archive_alert_message">Vai ser feita uma cópia de segurança da carteira e depois será apagada!</string>
+    <string name="archive_alert_yes">Sim, faz isso!</string>
+    <string name="archive_alert_no">Não obrigado!</string>
+
+    <string name="fab_create_new">Criar nova carteira</string>
+    <string name="fab_restore_viewonly">Restaurar carteira apenas de visualização</string>
+    <string name="fab_restore_key">Restaurar carteira a partir de chaves privadas</string>
+    <string name="fab_restore_seed">Restaurar carteira a partir da semente de 25 palavras</string>
+
+    <string name="bad_saved_password">Palavra passe gravada incorrecta.\nInsere a palavra passe manualmente.</string>
+    <string name="prompt_open_wallet">A abrir a carteira&#8230;</string>
+
+    <string name="accounts_drawer_new">Criar Conta</string>
+    <string name="accounts_new">Conta nova adicionada #%1$d</string>
+    <string name="tx_account">Conta #</string>
+
+    <string name="send_sweepall">Enviar todos os fundos confirmados para esta conta!</string>
+    <string name="tx_subaddress">Subaddress #%1$d</string>
+    <string name="generate_address_label_sub">Subaddress Publico #%1$d</string>
+
+    <string name="menu_language">Linguagem</string>
+    <string name="language_system_default">Usar linguagem de sistema</string>
+
+    <string name="fab_restore_ledger">Restaurar de Ledger Nano S</string>
+
+    <string name="progress_ledger_progress">A comunicar com o Ledger</string>
+    <string name="progress_ledger_confirm">Confirmação com Ledger necessária!</string>
+    <string name="progress_ledger_lookahead">Recuperando subaddresses</string>
+    <string name="progress_ledger_verify">Verificando chaves</string>
+    <string name="progress_ledger_opentx">A cozinhar os numeros</string>
+    <string name="progress_ledger_mlsag">Produzindo hashes</string>
+    <string name="open_wallet_ledger_missing">Reconeta o teu Ledger</string>
+
+    <string name="accounts_progress_new">A criar conta</string>
+
+    <string name="toast_ledger_attached">%1$s Ligado</string>
+    <string name="toast_ledger_detached">%1$s Desligado</string>
+
+    <string name="progress_nfc_write">Escrevendo Tag</string>
+    <string name="nfc_write_failed">A escrita do Tag falhou!</string>
+    <string name="nfc_write_successful">Escrita do Tag bem sucedida</string>
+    <string name="nfc_tag_unsupported">A Tag não suporta NDEF!</string>
+    <string name="nfc_tag_size">A Tag tem %1$d bytes, mas nós precisamos de %2$d!</string>
+    <string name="nfc_tag_read_undef">Eu não percebo a Tag!</string>
+    <string name="nfc_tag_read_what">Eu não percebo o que queres fazer!</string>
+    <string name="nfc_tag_read_success">Leitura do Tag bem sucedida</string>
+    <string name="nfc_tag_tap">NFC Disponivel!</string>
+
+    <string name="receive_desc_hint">Descrição (opcional)</string>
+
+    <string name="send_address_not_openalias">Endereço OpenAlias não disponivel.</string>
+    <string name="send_address_openalias">OpenAlias seguro &#x2714;</string>
+    <string name="send_address_resolve_openalias">Resolvendo OpenAlias&#8230;</string>
+    <string name="send_address_no_dnssec">OpenAlias sem DNSSEC - endereço pode estar spoofed </string>
+
+    <string name="status_wallet_connect_wrongversion">Versão do Nó incompativel - atualizar por favor!</string>
+
+    <string name="menu_info">Mostrar Segredos</string><!--Changed to: Show Secrets!-->
+    <string name="menu_streetmode">Street Mode</string>
+
+    <string name="info_nodes_enabled">Node-o-matiC ativado, tocar para mais info.</string>
+    <string name="node_height">Ultimo bloco actualizado: %1$s</string>
+    <string name="label_nodes">Nós</string>
+    <string name="node_name_hint">Nome do Nó (Opcional)</string>
+    <string name="node_address_hint">Hostname</string>
+    <string name="node_port_hint">Port</string>
+    <string name="node_user_hint">Nome de usuario (Optional)</string>
+    <string name="node_pass_hint">Palavra passe (Optional)</string>
+    <string name="node_host_unresolved">Não foi possivel resolver host</string>
+    <string name="node_host_empty">Precisamos disto!</string>
+    <string name="node_port_numeric">Tem de ser numérico</string>
+    <string name="node_port_range">Tem de ser 1&#8211;65535</string>
+    <string name="node_fab_add">Adicionar Nó</string>
+    <string name="node_refresh_hint">Tocar para refrescar!</string>
+    <string name="node_test_error">ERRO LIGAÇÃO %1$d</string>
+    <string name="node_general_error">ERRO LIGAÇÂO</string>
+    <string name="node_auth_error">AUTENTIFICAÇÃO FALHOU</string>
+    <string name="node_result_label">Resultado do teste:</string>
+    <string name="node_result">Altura: %1$s (v%2$d), Ping: %3$.0fms, IP: %4$s</string>
+    <string name="node_testing">A testar IP: %1$s &#8230;</string>
+    <string name="node_refresh_wait">Por favor espera que o scan acabe</string>
+    <string name="node_create_hint">Tocar para selecionar Nós.</string>
+    <string name="node_pull_hint">Adicionar Nós manualmente ou puxa para fazer scan</string>
+    <string name="node_scanning">A fazer scan á rede &#8230;</string>
+    <string name="node_nobookmark">Adicionar aos bookmarks os melhores %1$d nós automaticamente</string>
+    <string name="label_test">Testar ligação</string><!--note: as in "Test a network connection"-->
+
+    <string name="backup_success">Backup bem sucedido</string>
+
+    <string name="send_address_resolve_bip70">A resolver URI&#8230; de pagamento</string>
+    <string name="send_address_not_bip70">Não foi possivel resolver URI de pagamento</string>
+    <string name="send_address_bip70">Pagemento URI &#x2714; resolvido</string>
+    <string name="send_address_hint">Receptor</string>
+
+    <string name="xmrto_error_001">XLA.TO offline - tenta mais tarde</string>
+    <string name="xmrto_error_004">Montante de BTC fora dos limites</string>
+    <string name="xmrto_error_010">URL de pagamento invalido ou fora de prazo</string>
+    <string name="xmrto_error_012">Demasiadas solicitações</string>
+
+    <string name="street_sweep_amount">A TOTALIDADE!</string> <!-- as in: "everything in the account" = "all the money" -->
+
+    <string name="menu_ledger_seed">Converter semente do Ledger</string>
+    <string name="prompt_ledger_seed">Palavras da semente do Ledger</string>
+    <string name="prompt_ledger_phrase">Palavra passe do Ledger (opcional)</string>
+    <string name="bad_ledger_seed">Semente do Ledger invalida!</string>
+    <string name="prompt_ledger_seed_warn">Introduzir a semente do Ledger aqui comporta um elevado risco de segurança!</string>
+
+    <string name="label_restoreheight">Restaurar de Altura</string> <!-- Restore Height -->
+
+    <string name="toast_ledger_start_app">Start Scala App on %1$s</string>
+
+    <string name="menu_rescan">Rescan!</string>
+</resources>

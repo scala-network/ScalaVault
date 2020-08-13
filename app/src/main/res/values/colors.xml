@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="tx_green">#2a9c6d</color>
+    <color name="tx_red">#e85238</color>
+    <color name="tx_pending">@color/scalaFab</color>
+    <color name="tx_failed">@color/scalaBlack</color>
+
+    <color name="gradientOrange">#6190ff</color>
+    <color name="gradientPink">#2f333d</color>
+
+    <color name="trafficGray">#9B9B9B</color>
+
+    <color name="take">#2a9c6d</color>
+    <color name="give">#e85238</color>
+
+    <color name="scalaWhite">#ffffff</color>
+    <color name="scalaBlack">#000000</color>
+    <color name="scalaBlue">#1F4E97</color>
+    <color name="scalaGray">#FD9B9B9B</color>
+
+    <color name="scalaStreetA">#D81F0759</color>
+    <color name="scalaStreetB">#D819001E</color>
+
+    <color name="dotGray">#FF4A4A4A</color>
+
+    <color name="scalaFab">#61000000</color>
+    <color name="scalaText">#FF616161</color>
+
+
+    <color name="colorPrimaryDark">#61221A</color>
+    <!--color name="colorAccent">#009ADA</color-->
+    <color name="colorAccent">@color/gradientPink</color>
+
+    <color name="white">#ffffff</color>
+</resources>
