@@ -14,13 +14,13 @@
  * limitations under the License.
  */
 
-package com.m2049r.xmrwallet.xmrto.network;
+package com.m2049r.xlawallet.xmrto.network;
 
-import com.m2049r.xmrwallet.xmrto.api.XmrToCallback;
-import com.m2049r.xmrwallet.xmrto.XmrToError;
-import com.m2049r.xmrwallet.xmrto.XmrToException;
-import com.m2049r.xmrwallet.xmrto.api.QueryOrderStatus;
-import com.m2049r.xmrwallet.xmrto.api.XmrToApi;
+import com.m2049r.xlawallet.xmrto.api.XmrToCallback;
+import com.m2049r.xlawallet.xmrto.XmrToError;
+import com.m2049r.xlawallet.xmrto.XmrToException;
+import com.m2049r.xlawallet.xmrto.api.QueryOrderStatus;
+import com.m2049r.xlawallet.xmrto.api.XmrToApi;
 
 import net.jodah.concurrentunit.Waiter;
 

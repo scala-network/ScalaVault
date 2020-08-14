@@ -14,9 +14,9 @@
  * limitations under the License.
  */
 
-package com.m2049r.xmrwallet.util;
+package com.m2049r.xlawallet.util;
 
-import com.m2049r.xmrwallet.data.UserNotes;
+import com.m2049r.xlawallet.data.UserNotes;
 
 import org.junit.Test;
 

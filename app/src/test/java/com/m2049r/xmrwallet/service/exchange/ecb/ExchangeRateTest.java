@@ -14,12 +14,12 @@
  * limitations under the License.
  */
 
-package com.m2049r.xmrwallet.service.exchange.ecb;
+package com.m2049r.xlawallet.service.exchange.ecb;
 
-import com.m2049r.xmrwallet.service.exchange.api.ExchangeApi;
-import com.m2049r.xmrwallet.service.exchange.api.ExchangeCallback;
-import com.m2049r.xmrwallet.service.exchange.api.ExchangeException;
-import com.m2049r.xmrwallet.service.exchange.api.ExchangeRate;
+import com.m2049r.xlawallet.service.exchange.api.ExchangeApi;
+import com.m2049r.xlawallet.service.exchange.api.ExchangeCallback;
+import com.m2049r.xlawallet.service.exchange.api.ExchangeException;
+import com.m2049r.xlawallet.service.exchange.api.ExchangeRate;
 
 import net.jodah.concurrentunit.Waiter;
 

@@ -2,11 +2,11 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/backgound_all"
+    android:background="@color/bg_body"
     android:gravity="center_horizontal"
     android:orientation="vertical">
 
-    <com.m2049r.xmrwallet.widget.Toolbar
+    <com.m2049r.xlawallet.widget.Toolbar
         android:id="@+id/toolbar"
         style="@style/ToolBarStyle.Event"
         android:layout_width="match_parent"
@@ -14,7 +14,7 @@
         android:background="@drawable/backgound_toolbar_mainnet"
         android:minHeight="?attr/actionBarSize" />
 
-    <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    <FrameLayout
         android:id="@+id/fragment_container"
         android:layout_width="match_parent"
         android:layout_height="match_parent" />

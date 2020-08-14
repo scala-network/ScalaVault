@@ -14,7 +14,7 @@
     <style name="ToolBarStyle.ActionButton" parent="Widget.AppCompat.ActionButton">
         <item name="android:textAllCaps">true</item>
         <item name="android:textSize">10sp</item>
-        <item name="android:textColor">@color/white</item>
+        <item name="android:textColor">@color/c_white</item>
         <item name="android:textStyle">bold</item>
     </style>
 
@@ -27,9 +27,9 @@
         <item name="windowNoTitle">true</item>
         <item name="windowActionBar">false</item>
 
-        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
-        <item name="colorPrimary">@color/scalaText</item>
-        <item name="colorAccent">@color/gradientPink</item>
+        <item name="colorPrimaryDark">@color/txt_main</item>
+        <item name="colorPrimary">@color/txt_main</item>
+        <item name="colorAccent">@color/txt_main</item>
 
         <item name="android:spinnerItemStyle">@style/ScalaSpinnerItem</item>
         <item name="android:spinnerStyle">@style/ScalaSpinner</item>
@@ -37,7 +37,7 @@
 
     <style name="ScalaLabel" parent="@android:style/TextAppearance.DeviceDefault.Medium">
         <item name="android:textColor">?colorPrimary</item>
-        <item name="android:textColorHint">@color/scalaText</item>
+        <item name="android:textColorHint">@color/txt_inactive</item>
     </style>
 
     <style name="ScalaLabel.Small">
@@ -120,18 +120,18 @@
     </style>
 
     <style name="ScalaLabel.Title">
-        <item name="android:textSize">20sp</item>
-        <item name="android:textColor">@color/white</item>
+        <item name="android:textSize">18sp</item>
+        <item name="android:textColor">@color/txt_headline</item>
     </style>
 
     <style name="ScalaLabel.Subtitle">
-        <item name="android:textSize">12sp</item>
-        <item name="android:textColor">@color/scalaWhite</item>
+        <item name="android:textSize">14sp</item>
+        <item name="android:textColor">@color/txt_secondary</item>
     </style>
 
     <style name="ScalaLabel.Heading">
         <item name="android:textSize">14sp</item>
-        <item name="android:textColor">@color/scalaFab</item>
+        <item name="android:textColor">@color/txt_headline</item>
         <item name="android:textStyle">bold</item>
     </style>
 
@@ -149,15 +149,15 @@
 
     <style name="ScalaText" parent="@android:style/TextAppearance.DeviceDefault.Medium">
         <item name="android:textColor">?colorPrimary</item>
-        <item name="android:textColorHint">@color/scalaText</item>
+        <item name="android:textColorHint">@color/txt_inactive</item>
     </style>
 
     <style name="ScalaText.Gray">
-        <item name="android:textColor">@color/scalaGray</item>
+        <item name="android:textColor">@color/txt_inactive</item>
     </style>
 
     <style name="ScalaText.Black">
-        <item name="android:textColor">@color/scalaBlack</item>
+        <item name="android:textColor">@color/txt_main</item>
     </style>
 
     <style name="ScalaText.Monospace">
@@ -198,7 +198,7 @@
 
     <style name="ScalaText.Success">
         <item name="android:textSize">18sp</item>
-        <item name="android:textColor">@color/dotGray</item>
+        <item name="android:textColor">@color/txt_main</item>
         <item name="android:textAllCaps">true</item>
         <item name="android:textStyle">bold</item>
     </style>
@@ -220,7 +220,7 @@
 
     <style name="ScalaButton" parent="@style/Widget.AppCompat.Button">
         <item name="android:background">@drawable/button_selector</item>
-        <item name="android:textColor">@color/scalaWhite</item>
+        <item name="android:textColor">@color/txt_button_filled</item>
         <item name="android:textAppearance">@style/ScalaLabel</item>
         <item name="android:textAllCaps">true</item>
     </style>
@@ -234,11 +234,11 @@
     </style>
 
     <style name="ScalaButton.Take">
-        <item name="android:background">@color/take</item>
+        <item name="android:background">@color/c_green</item>
     </style>
 
     <style name="ScalaButton.Give">
-        <item name="android:background">@color/give</item>
+        <item name="android:background">@color/c_orange</item>
     </style>
 
     <style name="ScalaEdit" parent="ScalaText">

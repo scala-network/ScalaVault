@@ -16,7 +16,7 @@
 
 package com.m2049r.levin.scanner;
 
-import com.m2049r.xmrwallet.data.NodeInfo;
+import com.m2049r.xlawallet.data.NodeInfo;
 
 import java.util.Collection;
 import java.util.HashSet;

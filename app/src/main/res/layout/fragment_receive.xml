@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:background="@color/bg_body">
 
     <EditText
         android:id="@+id/etDummy"
@@ -80,7 +81,7 @@
 
         </LinearLayout>
 
-        <com.m2049r.xmrwallet.widget.ExchangeView
+        <com.m2049r.xlawallet.widget.ExchangeView
             android:id="@+id/evAmount"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"

@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.m2049r.xmrwallet.util.ledger;
+package com.m2049r.xlawallet.util.ledger;
 
 import org.junit.Rule;
 import org.junit.Test;

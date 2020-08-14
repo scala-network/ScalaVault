@@ -6,7 +6,7 @@
     android:layout_height="wrap_content"
     android:layout_gravity="center"
     android:layout_margin="16dp"
-    card_view:cardCornerRadius="1dp"
+    card_view:cardCornerRadius="14dp"
     card_view:cardElevation="8dp">
 
     <RelativeLayout
@@ -22,6 +22,7 @@
             android:layout_marginStart="48dp"
             android:layout_marginTop="16dp"
             android:layout_toStartOf="@+id/ibOptions"
+            android:textColor="@color/txt_main"
             tools:text="My Wallet" />
 
         <TextView
@@ -33,6 +34,7 @@
             android:layout_marginBottom="16dp"
             android:layout_marginStart="48dp"
             android:layout_toStartOf="@+id/ibOptions"
+            android:textColor="@color/txt_secondary"
             tools:text="4AdkPJox...g3viqCuk" />
 
         <ImageButton

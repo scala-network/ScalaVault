@@ -21,8 +21,8 @@ import com.m2049r.levin.data.Section;
 import com.m2049r.levin.util.HexHelper;
 import com.m2049r.levin.util.LittleEndianDataInputStream;
 import com.m2049r.levin.util.LittleEndianDataOutputStream;
-import com.m2049r.xmrwallet.data.NodeInfo;
-import com.m2049r.xmrwallet.util.Helper;
+import com.m2049r.xlawallet.data.NodeInfo;
+import com.m2049r.xlawallet.util.Helper;
 
 import java.io.DataInput;
 import java.io.DataOutput;

@@ -1,4 +1,4 @@
-package com.m2049r.xmrwallet.util;
+package com.m2049r.xlawallet.util;
 
 import org.junit.Test;
 

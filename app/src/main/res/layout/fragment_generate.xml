@@ -3,7 +3,8 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:layout_margin="8dp">
+    android:layout_margin="15dp"
+    android:background="@color/bg_body">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -12,10 +13,11 @@
 
         <android.support.design.widget.TextInputLayout
             android:id="@+id/etWalletName"
-            style="@style/Widget.MaterialComponents.TextInputLayout.FilledBox"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginBottom="@dimen/header_top_first"
+            android:textColorHint="@color/txt_inactive"
             app:errorEnabled="true">
 
             <android.support.design.widget.TextInputEditText
@@ -31,10 +33,11 @@
 
         <android.support.design.widget.TextInputLayout
             android:id="@+id/etWalletPassword"
-            style="@style/Widget.MaterialComponents.TextInputLayout.FilledBox"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginBottom="@dimen/header_top_first"
+            android:textColorHint="@color/txt_inactive"
             app:errorEnabled="true">
 
             <android.support.design.widget.TextInputEditText
@@ -170,13 +173,17 @@
                 android:textAlignment="textStart" />
         </android.support.design.widget.TextInputLayout>
 
-        <Button
+        <android.support.design.button.MaterialButton
             android:id="@+id/bGenerate"
             style="@style/ScalaButton"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="8dp"
-            android:text="@string/generate_buttonGenerate" />
+            android:layout_height="55dp"
+            app:backgroundTint="@color/bg_blue"
+            android:text="@string/generate_buttonGenerate"
+            android:textSize="14sp"
+            android:textAllCaps="false"
+            android:textColor="@color/txt_button_filled"
+            app:cornerRadius="5dp" />
 
     </LinearLayout>
 </ScrollView>
