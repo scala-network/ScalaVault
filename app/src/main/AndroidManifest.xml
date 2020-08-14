@@ -22,11 +22,6 @@
         android:usesCleartextTraffic="true">
 
         <activity
-            android:name=".SplashActivity"
-            android:launchMode="singleTop">
-        </activity>
-
-        <activity
             android:name=".WalletActivity"
             android:configChanges="orientation|keyboardHidden"
             android:label="@string/wallet_activity_name"
@@ -40,8 +35,8 @@
             android:launchMode="singleTop"
             android:screenOrientation="locked">
             <intent-filter>
-                <action android:name="android.intent.action.MAIN"/>
-                <category android:name="android.intent.category.LAUNCHER"/>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
             <intent-filter>
                 <action android:name="android.hardware.usb.action.USB_DEVICE_ATTACHED" />
@@ -72,7 +67,7 @@
             android:name=".service.WalletService"
             android:description="@string/service_description"
             android:exported="false"
-            android:label="Scala Vault Service" />
+            android:label="Scala Wallet Service" />
 
         <provider
             android:name="android.support.v4.content.FileProvider"
