@@ -55,15 +55,15 @@ JNIEXPORT jint JNICALL JNI_OnLoad(JavaVM *jvm, void *reserved) {
     class_ArrayList = static_cast<jclass>(jenv->NewGlobalRef(
             jenv->FindClass("java/util/ArrayList")));
     class_TransactionInfo = static_cast<jclass>(jenv->NewGlobalRef(
-            jenv->FindClass("com/m2049r/xmrwallet/model/TransactionInfo")));
+            jenv->FindClass("com/scala/vault/model/TransactionInfo")));
     class_Transfer = static_cast<jclass>(jenv->NewGlobalRef(
-            jenv->FindClass("com/m2049r/xmrwallet/model/Transfer")));
+            jenv->FindClass("com/scala/vault/model/Transfer")));
     class_WalletListener = static_cast<jclass>(jenv->NewGlobalRef(
-            jenv->FindClass("com/m2049r/xmrwallet/model/WalletListener")));
+            jenv->FindClass("com/scala/vault/model/WalletListener")));
     class_Ledger = static_cast<jclass>(jenv->NewGlobalRef(
-            jenv->FindClass("com/m2049r/xmrwallet/ledger/Ledger")));
+            jenv->FindClass("com/scala/vault/ledger/Ledger")));
     class_WalletStatus = static_cast<jclass>(jenv->NewGlobalRef(
-            jenv->FindClass("com/m2049r/xmrwallet/model/Wallet$Status")));
+            jenv->FindClass("com/scala/vault/model/Wallet$Status")));
     return JNI_VERSION_1_6;
 }
 #ifdef __cplusplus
