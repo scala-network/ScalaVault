@@ -109,7 +109,7 @@ public class WalletActivity extends BaseActivity implements WalletFragment.Liste
 
     @Override
     public void setToolbarButton(int type) {
-        toolbar.setButton(type);
+        //toolbar.setButton(type);
     }
 
     @Override

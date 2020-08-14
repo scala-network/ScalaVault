@@ -42,10 +42,10 @@ public class Toolbar extends android.support.v7.widget.Toolbar {
         onButtonListener = listener;
     }
 
-    ImageView toolbarImage;
+    //ImageView toolbarImage;
     TextView toolbarTitle;
     TextView toolbarSubtitle;
-    Button bCredits;
+    //Button bCredits;
 
     public Toolbar(Context context) {
         super(context);
@@ -105,10 +105,10 @@ public class Toolbar extends android.support.v7.widget.Toolbar {
     public void setTitle(String title) {
         toolbarTitle.setText(title);
         if (title != null) {
-            toolbarImage.setVisibility(View.INVISIBLE);
+            //toolbarImage.setVisibility(View.INVISIBLE);
             toolbarTitle.setVisibility(View.VISIBLE);
         } else {
-            toolbarImage.setVisibility(View.VISIBLE);
+            //toolbarImage.setVisibility(View.VISIBLE);
             toolbarTitle.setVisibility(View.INVISIBLE);
         }
     }
@@ -121,7 +121,7 @@ public class Toolbar extends android.support.v7.widget.Toolbar {
 
     int buttonType = BUTTON_CREDITS;
 
-    public void setButton(int type) {
+    /*public void setButton(int type) {
         switch (type) {
             case BUTTON_BACK:
                 Timber.d("BUTTON_BACK");
@@ -155,7 +155,7 @@ public class Toolbar extends android.support.v7.widget.Toolbar {
                 bCredits.setVisibility(View.INVISIBLE);
         }
         buttonType = type;
-    }
+    }*/
 
     public void setSubtitle(String subtitle) {
         toolbarSubtitle.setText(subtitle);
