@@ -34,7 +34,7 @@
             android:visibility="visible" />
     </RelativeLayout>
 
-    <com.m2049r.xlawallet.widget.ExchangeEditText
+    <com.scalaproject.xlawallet.widget.ExchangeEditText
         android:id="@+id/etAmount"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

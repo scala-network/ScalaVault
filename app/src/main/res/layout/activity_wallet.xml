@@ -13,7 +13,7 @@
         android:gravity="center_horizontal"
         android:orientation="vertical">
 
-        <com.m2049r.xlawallet.widget.Toolbar
+        <com.scalaproject.xlawallet.widget.Toolbar
             android:id="@+id/toolbar"
             style="@style/ToolBarStyle.Event"
             android:layout_width="match_parent"

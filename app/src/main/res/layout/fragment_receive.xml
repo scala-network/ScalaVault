@@ -81,7 +81,7 @@
 
         </LinearLayout>
 
-        <com.m2049r.xlawallet.widget.ExchangeView
+        <com.scalaproject.xlawallet.widget.ExchangeView
             android:id="@+id/evAmount"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
