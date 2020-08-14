@@ -19,7 +19,7 @@
             android:gravity="center"
             android:minWidth="56dp" />
 
-        <com.scalaproject.xlawallet.widget.CTextInputLayout
+        <com.scala.vault.widget.CTextInputLayout
             android:id="@+id/etAmount"
             style="@style/Widget.MaterialComponents.TextInputLayout.FilledBox"
             android:layout_width="match_parent"
@@ -38,7 +38,7 @@
                 android:inputType="numberDecimal"
                 tools:text="87.00000" />
 
-        </com.scalaproject.xlawallet.widget.CTextInputLayout>
+        </com.scala.vault.widget.CTextInputLayout>
     </LinearLayout>
 
     <LinearLayout

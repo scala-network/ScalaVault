@@ -18,7 +18,7 @@
         android:layout_width="0dp"
         android:layout_height="0dp" />
 
-    <com.scalaproject.xlawallet.layout.SpendViewPager
+    <com.scala.vault.layout.SpendViewPager
         android:id="@+id/pager"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -43,7 +43,7 @@
             android:drawableStart="@drawable/ic_navigate_prev_white_24dp"
             tools:text="Back" />
 
-        <com.scalaproject.xlawallet.widget.DotBar
+        <com.scala.vault.widget.DotBar
             android:id="@+id/dotBar"
             android:layout_width="0dp"
             android:layout_height="match_parent"

@@ -20,7 +20,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
-        <com.scalaproject.xlawallet.widget.SendProgressView
+        <com.scala.vault.widget.SendProgressView
             android:id="@+id/evXmrToParms"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -55,7 +55,7 @@
         </LinearLayout>
     </FrameLayout>
 
-    <com.scalaproject.xlawallet.widget.ExchangeOtherEditText
+    <com.scala.vault.widget.ExchangeOtherEditText
         android:id="@+id/etAmount"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

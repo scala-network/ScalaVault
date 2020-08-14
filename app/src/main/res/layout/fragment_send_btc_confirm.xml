@@ -28,7 +28,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content">
 
-                    <com.scalaproject.xlawallet.widget.SendProgressView
+                    <com.scala.vault.widget.SendProgressView
                         android:id="@+id/evStageA"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
@@ -105,7 +105,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content">
 
-                    <com.scalaproject.xlawallet.widget.SendProgressView
+                    <com.scala.vault.widget.SendProgressView
                         android:id="@+id/evStageB"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
@@ -154,7 +154,7 @@
             android:layout_marginEnd="16dp"
             android:layout_marginStart="16dp">
 
-            <com.scalaproject.xlawallet.widget.SendProgressView
+            <com.scala.vault.widget.SendProgressView
                 android:id="@+id/evStageC"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
