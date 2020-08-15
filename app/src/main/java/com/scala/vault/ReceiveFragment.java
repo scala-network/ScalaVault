@@ -318,7 +318,7 @@ public class ReceiveFragment extends Fragment {
     void enableSubaddressButton(boolean enable) {
         bSubaddress.setEnabled(enable);
         if (enable) {
-            bSubaddress.setCompoundDrawablesWithIntrinsicBounds(0, R.drawable.ic_settings_orange_24dp, 0, 0);
+            bSubaddress.setCompoundDrawablesWithIntrinsicBounds(0, R.drawable.ic_settings_blue_24dp, 0, 0);
         } else {
             bSubaddress.setCompoundDrawablesWithIntrinsicBounds(0, R.drawable.ic_settings_gray_24dp, 0, 0);
         }

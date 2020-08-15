@@ -74,7 +74,7 @@
                 android:layout_marginStart="8dp"
                 android:layout_weight="0"
                 android:background="?android:attr/selectableItemBackgroundBorderless"
-                android:drawableTop="@drawable/ic_settings_orange_24dp"
+                android:drawableTop="@drawable/ic_settings_blue_24dp"
                 android:text="@string/send_generate_paymentid_hint"
                 android:textColor="@color/scalaGray"
                 android:visibility="visible" />

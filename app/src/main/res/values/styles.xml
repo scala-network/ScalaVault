@@ -31,6 +31,9 @@
         <item name="colorPrimary">@color/txt_main</item>
         <item name="colorAccent">@color/txt_main</item>
 
+        <item name="android:textColorPrimary">@color/txt_main</item>
+        <item name="android:textColorSecondary">@color/txt_main</item>
+
         <item name="android:spinnerItemStyle">@style/ScalaSpinnerItem</item>
         <item name="android:spinnerStyle">@style/ScalaSpinner</item>
     </style>
@@ -45,7 +48,7 @@
     </style>
 
     <style name="ScalaLabel.Gray">
-        <item name="android:textColor">@color/scalaGray</item>
+        <item name="android:textColor">@color/c_grey</item>
     </style>
 
     <style name="ScalaLabel.Caps">
@@ -53,11 +56,11 @@
     </style>
 
     <style name="ScalaLabel.Caps.White">
-        <item name="android:textColor">@color/scalaWhite</item>
+        <item name="android:textColor">@color/c_white</item>
     </style>
 
     <style name="ScalaLabel.Caps.Black">
-        <item name="android:textColor">@color/scalaBlack</item>
+        <item name="android:textColor">@color/c_dark_grey</item>
     </style>
 
     <style name="ScalaText.Funds">
@@ -73,48 +76,48 @@
 
     <style name="ScalaText.Balance">
         <item name="android:textSize">32sp</item>
-        <item name="android:textColor">@color/scalaBlack</item>
+        <item name="android:textColor">@color/txt_main</item>
         <item name="android:textStyle">bold</item>
     </style>
 
     <style name="ScalaText.Balance.Orange">
-        <item name="android:textColor">@color/gradientOrange</item>
+        <item name="android:textColor">@color/c_orange</item>
     </style>
 
     <style name="ScalaText.Unconfirmed">
         <item name="android:textSize">14sp</item>
-        <item name="android:textColor">@color/scalaGray</item>
+        <item name="android:textColor">@color/txt_inactive</item>
         <item name="android:textStyle">bold</item>
     </style>
 
     <style name="ScalaText.PosAmount">
         <item name="android:textSize">16sp</item>
-        <item name="android:textColor">@color/scalaBlack</item>
+        <item name="android:textColor">@color/txt_main</item>
         <item name="android:textStyle">bold</item>
     </style>
 
     <style name="ScalaText.PosFee">
         <item name="android:textSize">10sp</item>
-        <item name="android:textColor">#FF898989</item>
+        <item name="android:textColor">@color/txt_main</item>
         <item name="android:textStyle">normal</item>
     </style>
 
     <style name="ScalaText.PosNote">
         <item name="android:textSize">12sp</item>
-        <item name="android:textColor">#FF4A4A4A</item>
+        <item name="android:textColor">@color/txt_inactive</item>
         <item name="android:textStyle">italic</item>
     </style>
 
     <style name="ScalaText.PosDate">
         <item name="android:textSize">10sp</item>
-        <item name="android:textColor">#FF616161</item>
+        <item name="android:textColor">@color/txt_inactive</item>
         <item name="android:textStyle">normal</item>
     </style>
 
     <!-- textSize is in dp here to match the layout of the numpad-->
     <style name="ScalaLabel.NumPad">
         <item name="android:textSize">36sp</item>
-        <item name="android:textColor">@color/scalaBlack</item>
+        <item name="android:textColor">@color/txt_main</item>
         <item name="android:background">?android:attr/selectableItemBackgroundBorderless</item>
         <item name="android:gravity">center</item>
     </style>
@@ -137,7 +140,7 @@
 
     <style name="ScalaLabel.Heading.Donation">
         <item name="android:textSize">18sp</item>
-        <item name="android:textColor">@color/gradientPink</item>
+        <item name="android:textColor">@color/txt_inactive</item>
         <item name="android:textStyle">bold</item>
     </style>
 
@@ -209,7 +212,7 @@
 
     <style name="ScalaText.Button" parent="@android:style/TextAppearance.DeviceDefault.Medium">
         <item name="android:textSize">14sp</item>
-        <item name="android:textColor">@color/gradientOrange</item>
+        <item name="android:textColor">@color/c_orange</item>
         <item name="android:textStyle">bold</item>
         <item name="android:textAllCaps">true</item>
     </style>
@@ -243,7 +246,7 @@
 
     <style name="ScalaEdit" parent="ScalaText">
         <item name="android:textColor">?colorPrimary</item>
-        <item name="android:backgroundTint">@color/gradientPink</item>
+        <item name="android:backgroundTint">@color/txt_main</item>
     </style>
 
 
@@ -256,7 +259,7 @@
     </style>
 
     <style name="ScalaTextAppearanceSpinnerItem" parent="android:TextAppearance.Widget.TextView.SpinnerItem">
-        <item name="android:textColor">@color/gradientOrange</item>
+        <item name="android:textColor">@color/c_blue</item>
     </style>
 
     <style name="ScalaSpinnerItem.Balance">
@@ -272,4 +275,5 @@
     <style name="ExtendedFAB" parent="ScalaButton">
         <item name="android:textSize">16sp</item>
     </style>
+
 </resources>

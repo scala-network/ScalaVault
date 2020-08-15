@@ -6,13 +6,14 @@
     android:layout_height="wrap_content"
     android:layout_gravity="center"
     android:layout_margin="4dp"
-    card_view:cardCornerRadius="1dp"
+    card_view:cardCornerRadius="12dp"
     card_view:cardElevation="4dp">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
+        android:background="@color/bg_lighter"
         android:padding="8dp">
 
         <LinearLayout
@@ -27,7 +28,7 @@
                 android:layout_width="16dp"
                 android:layout_height="16dp"
                 android:layout_gravity="center"
-                android:src="@drawable/ic_xmrto_32dp"
+                android:src="@drawable/ic_scala_logo_b"
                 android:visibility="visible" />
 
             <LinearLayout
@@ -80,6 +81,6 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:src="@drawable/ic_navigate_next_black_24dp" />
+            android:src="@drawable/ic_navigate_next_default" />
     </LinearLayout>
 </android.support.v7.widget.CardView>
