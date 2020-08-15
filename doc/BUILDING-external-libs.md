@@ -1,6 +1,6 @@
 # BUILDING external libs
 
-Based on https://forum.getscala.org/5/support/87643/building-scala-v0-10-3-1-for-android and the internet.
+Based on https://forum.getmonero.org/5/support/87643/building-monero-v0-10-3-1-for-android and the internet.
 
 Do not follow this blindly.
 
