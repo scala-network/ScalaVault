@@ -1,16 +1,31 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
 	xmlns:app="http://schemas.android.com/apk/res-auto"
-	android:orientation="horizontal"
+	android:orientation="vertical"
     android:layout_width="fill_parent"
 	android:layout_height="fill_parent"
 	android:background="@color/bg_body"
 	android:gravity="center">
 
-	<ImageView
-		android:id="@+id/splashscreen"
+	<LinearLayout
+		android:orientation="vertical"
 		android:layout_width="wrap_content"
-		android:layout_height="100dp"
-		app:srcCompat="@mipmap/ic_logo_colors"/>
+		android:layout_height="wrap_content"
+		android:background="@color/bg_body">
+
+		<ImageView
+			android:id="@+id/splashscreen"
+			android:layout_width="wrap_content"
+			android:layout_height="100dp"
+			android:src="@mipmap/ic_logo_colors"/>
+
+		<TextView
+			style="@style/ScalaLabel"
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:text="VAULT"
+			android:textSize="30sp" />
+
+	</LinearLayout>
 
 </LinearLayout>
