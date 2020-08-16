@@ -16,7 +16,6 @@
             style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="@dimen/header_top_first"
             android:textColorHint="@color/txt_inactive"
             app:errorEnabled="true">
 
@@ -36,7 +35,6 @@
             style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="@dimen/header_top_first"
             android:textColorHint="@color/txt_inactive"
             app:errorEnabled="true">
 
