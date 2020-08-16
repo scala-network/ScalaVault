@@ -18,8 +18,8 @@
 
 package io.scalaproject.vault.service.exchange.ecb;
 
-import android.support.annotation.NonNull;
-import android.support.annotation.VisibleForTesting;
+import androidx.annotation.NonNull;
+import androidx.annotation.VisibleForTesting;
 
 import io.scalaproject.vault.service.exchange.api.ExchangeApi;
 import io.scalaproject.vault.service.exchange.api.ExchangeCallback;

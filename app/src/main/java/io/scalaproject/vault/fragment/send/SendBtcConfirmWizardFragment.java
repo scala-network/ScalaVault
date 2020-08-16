@@ -20,7 +20,7 @@ import android.app.Activity;
 import android.content.DialogInterface;
 import android.os.Bundle;
 import android.os.Handler;
-import android.support.design.widget.TextInputLayout;
+import com.google.android.material.textfield.TextInputLayout;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.view.KeyEvent;
@@ -33,7 +33,6 @@ import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import io.scalaproject.vault.BuildConfig;
 import io.scalaproject.vault.R;
 import io.scalaproject.vault.data.TxData;
 import io.scalaproject.vault.data.TxDataBtc;

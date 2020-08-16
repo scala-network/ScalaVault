@@ -19,7 +19,7 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:label="@string/app_name"
         android:supportsRtl="true"
-        android:theme="@style/MyMaterialTheme"
+        android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
 
         <activity
@@ -29,6 +29,13 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
+        <activity
+            android:name=".WizardHomeActivity"
+            android:configChanges="orientation|keyboardHidden"
+            android:label="Welcome"
+            android:launchMode="singleTask"
+            android:screenOrientation="behind" />
 
         <activity
             android:name=".WalletActivity"
@@ -68,6 +75,7 @@
                 android:resource="@xml/usb_device_filter" />
         </activity>
 
+
         <service
             android:name=".service.WalletService"
             android:description="@string/service_description"
@@ -75,7 +83,7 @@
             android:label="Scala Wallet Service" />
 
         <provider
-            android:name="android.support.v4.content.FileProvider"
+            android:name="androidx.core.content.FileProvider"
             android:authorities="${applicationId}.fileprovider"
             android:exported="false"
             android:grantUriPermissions="true">

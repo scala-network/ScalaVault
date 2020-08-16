@@ -18,7 +18,7 @@
 package io.scalaproject.vault.service.exchange.api;
 
 
-import android.support.annotation.NonNull;
+import androidx.annotation.NonNull;
 
 
 public interface ExchangeApi {

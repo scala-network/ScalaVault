@@ -1,5 +1,4 @@
 <resources>
-
     <style name="ToolBarStyle.Base" parent="">
         <item name="popupTheme">@style/ThemeOverlay.AppCompat.Light</item>
         <item name="theme">@style/ThemeOverlay.AppCompat.Dark.ActionBar</item>
@@ -21,9 +20,8 @@
     <style name="TextAppearance.Widget.Event.Toolbar.Title" parent="TextAppearance.Widget.AppCompat.Toolbar.Title">
         <!-- Text styling can be done here-->
     </style>
-
-
-    <style name="MyMaterialTheme" parent="Theme.AppCompat.Light">
+    
+    <style name="AppTheme" parent="Theme.MaterialComponents">
         <item name="windowNoTitle">true</item>
         <item name="windowActionBar">false</item>
 
@@ -36,6 +34,18 @@
 
         <item name="android:spinnerItemStyle">@style/ScalaSpinnerItem</item>
         <item name="android:spinnerStyle">@style/ScalaSpinner</item>
+    </style>
+
+    <style name="AppTheme.NoActionBar">
+        <item name="windowActionBar">false</item>
+        <item name="windowNoTitle">true</item>
+    </style>
+
+    <style name="AppTheme.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
+
+    <style name="AppTheme.PopupOverlay" parent="ThemeOverlay.AppCompat.Light">
+        <item name="android:colorBackground">@color/bg_lighter</item>
+        <item name="android:textColor">@color/c_grey</item>
     </style>
 
     <style name="ScalaLabel" parent="@android:style/TextAppearance.DeviceDefault.Medium">

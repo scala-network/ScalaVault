@@ -11,14 +11,14 @@
         android:orientation="vertical"
         android:padding="8dp">
 
-        <android.support.design.widget.TextInputLayout
+        <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/etWalletPasswordA"
             style="@style/Widget.MaterialComponents.TextInputLayout.FilledBox"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             app:errorEnabled="true">
 
-            <android.support.design.widget.TextInputEditText
+            <com.google.android.material.textfield.TextInputEditText
                 style="@style/ScalaEdit"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
@@ -26,9 +26,9 @@
                 android:imeOptions="actionNext"
                 android:inputType="textVisiblePassword"
                 android:textAlignment="textStart" />
-        </android.support.design.widget.TextInputLayout>
+        </com.google.android.material.textfield.TextInputLayout>
 
-        <android.support.design.widget.TextInputLayout
+        <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/etWalletPasswordB"
             style="@style/Widget.MaterialComponents.TextInputLayout.FilledBox"
             android:layout_width="match_parent"
@@ -36,7 +36,7 @@
             android:layout_marginTop="@dimen/section_top"
             app:errorEnabled="true">
 
-            <android.support.design.widget.TextInputEditText
+            <com.google.android.material.textfield.TextInputEditText
                 style="@style/ScalaEdit"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
@@ -44,7 +44,7 @@
                 android:imeOptions="actionDone"
                 android:inputType="textVisiblePassword"
                 android:textAlignment="textStart" />
-        </android.support.design.widget.TextInputLayout>
+        </com.google.android.material.textfield.TextInputLayout>
 
         <LinearLayout
             android:id="@+id/llFingerprintAuth"

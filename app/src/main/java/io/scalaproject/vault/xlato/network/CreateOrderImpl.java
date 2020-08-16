@@ -16,7 +16,7 @@
 
 package io.scalaproject.vault.xlato.network;
 
-import android.support.annotation.NonNull;
+import androidx.annotation.NonNull;
 
 import io.scalaproject.vault.xlato.api.CreateOrder;
 import io.scalaproject.vault.xlato.api.XlaToCallback;

@@ -19,8 +19,8 @@ package io.scalaproject.vault.fragment.send;
 import android.app.Activity;
 import android.content.DialogInterface;
 import android.os.Bundle;
-import android.support.design.widget.TextInputLayout;
-import android.support.v7.app.AlertDialog;
+import com.google.android.material.textfield.TextInputLayout;
+import androidx.appcompat.app.AlertDialog;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.view.KeyEvent;
@@ -32,7 +32,6 @@ import android.view.inputmethod.EditorInfo;
 import android.widget.Button;
 import android.widget.TextView;
 
-import io.scalaproject.vault.BuildConfig;
 import io.scalaproject.vault.R;
 import io.scalaproject.vault.data.TxData;
 import io.scalaproject.vault.model.PendingTransaction;

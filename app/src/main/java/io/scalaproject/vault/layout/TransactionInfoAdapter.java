@@ -17,8 +17,8 @@
 package io.scalaproject.vault.layout;
 
 import android.content.Context;
-import android.support.v4.content.ContextCompat;
-import android.support.v7.widget.RecyclerView;
+import androidx.core.content.ContextCompat;
+import androidx.recyclerview.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -30,7 +30,6 @@ import io.scalaproject.vault.model.TransactionInfo;
 import io.scalaproject.vault.util.Helper;
 import io.scalaproject.vault.data.UserNotes;
 
-import java.math.BigDecimal;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;

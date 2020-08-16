@@ -18,7 +18,7 @@
 
 package io.scalaproject.vault.service.exchange.krakenEcb;
 
-import android.support.annotation.NonNull;
+import androidx.annotation.NonNull;
 
 import io.scalaproject.vault.service.exchange.api.ExchangeApi;
 import io.scalaproject.vault.service.exchange.api.ExchangeCallback;

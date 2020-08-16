@@ -16,7 +16,7 @@
 
 package io.scalaproject.vault.service.exchange.ecb;
 
-import android.support.annotation.NonNull;
+import androidx.annotation.NonNull;
 
 import io.scalaproject.vault.service.exchange.api.ExchangeRate;
 

@@ -16,7 +16,7 @@
 
 package io.scalaproject.vault.fragment.send;
 
-import android.support.v4.app.Fragment;
+import androidx.fragment.app.Fragment;
 
 import io.scalaproject.vault.layout.SpendViewPager;
 

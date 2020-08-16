@@ -19,19 +19,14 @@
 package io.scalaproject.vault.widget;
 
 import android.content.Context;
-import android.os.Build;
 import android.util.AttributeSet;
 import android.view.LayoutInflater;
 import android.view.View;
-import android.widget.Button;
-import android.widget.ImageView;
 import android.widget.TextView;
 
 import io.scalaproject.vault.R;
 
-import timber.log.Timber;
-
-public class Toolbar extends android.support.v7.widget.Toolbar {
+public class Toolbar extends androidx.appcompat.widget.Toolbar {
     public interface OnButtonListener {
         void onButton(int type);
     }
