@@ -19,12 +19,13 @@
         android:layout_width="match_parent"
         android:layout_height="175dp"
         android:layout_margin="8dp"
+        android:paddingBottom="8dp"
         android:gravity="start|bottom"
         android:orientation="vertical"
         android:background="@drawable/corner_radius_gradient_blue">
 
         <TextView
-            style="@style/ScalaText.Small"
+            style="@style/ScalaText.Medium"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginStart="@dimen/header_top_first"
@@ -112,40 +113,6 @@
             android:gravity="start|bottom"
             tools:text="+ 0.00 unconfirmed" />
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/header_top_first"
-            android:layout_marginStart="@dimen/header_top_first"
-            android:gravity="start|bottom"
-            android:orientation="horizontal">
-
-            <ImageView
-                android:id="@+id/ivSynced"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginEnd="8dp"
-                android:src="@drawable/ic_done_all"
-                android:visibility="gone" />
-
-            <TextView
-                android:id="@+id/tvProgress"
-                style="@style/ScalaText.Small"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:visibility="visible"
-                android:textColor="@color/c_white"
-                tools:text="Synced 1 410 674 blocks" />
-        </LinearLayout>
-
-        <ProgressBar
-            android:id="@+id/pbProgress"
-            style="@style/Widget.AppCompat.ProgressBar.Horizontal"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:indeterminate="true"
-            android:visibility="invisible" />
-
     </LinearLayout>
 
     <LinearLayout
@@ -190,23 +157,72 @@
 
     </LinearLayout>
 
-    <TextView
-        style="@style/ScalaText.Medium"
-        android:layout_width="wrap_content"
+    <LinearLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_gravity="start"
-        android:layout_margin="8dp"
-        android:text="Transaction History" />
+        android:orientation="vertical">
+
+        <TextView
+            style="@style/ScalaText.Medium"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="start"
+            android:layout_weight = "0"
+            android:layout_margin="8dp"
+            android:text="Transaction History" />
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/list"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="fill_parent"
             android:layout_marginLeft="8dp"
             android:layout_marginRight="8dp"
             android:layout_marginBottom="8dp"
+            android:layout_weight = "1"
             android:clipToPadding="false"
-            android:paddingBottom="80dp"
             app:layoutManager="LinearLayoutManager"
             tools:listitem="@layout/item_transaction" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight = "0"
+            android:paddingTop="5dp"
+            android:paddingBottom="5dp"
+            android:paddingStart="@dimen/header_top_first"
+            android:paddingEnd="@dimen/header_top_first"
+            android:gravity="end|bottom"
+            android:orientation="horizontal"
+            android:background="@color/bg_darker">
+
+            <ImageView
+                android:id="@+id/ivSynced"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="8dp"
+                android:src="@drawable/ic_done_all"
+                android:visibility="gone" />
+
+            <TextView
+                android:id="@+id/tvProgress"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:visibility="visible"
+                android:textColor="@color/c_white"
+                android:textSize="12sp"
+                tools:text="Synced 1 410 674 blocks" />
+        </LinearLayout>
+
+        <ProgressBar
+            android:id="@+id/pbProgress"
+            style="@style/Widget.AppCompat.ProgressBar.Horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:indeterminate="true"
+            android:layout_marginStart="@dimen/header_top_first"
+            android:layout_marginEnd="@dimen/header_top_first"
+            android:layout_marginBottom="@dimen/header_top_first"
+            android:visibility="gone" />
+
+    </LinearLayout>
 </LinearLayout>
