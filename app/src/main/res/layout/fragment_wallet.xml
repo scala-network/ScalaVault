@@ -17,10 +17,20 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="175dp"
         android:layout_margin="8dp"
+        android:gravity="start|bottom"
         android:orientation="vertical"
         android:background="@drawable/corner_radius_gradient_blue">
+
+        <TextView
+            style="@style/ScalaText.Small"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/header_top_first"
+            android:gravity="start|bottom"
+            android:textColor="@color/c_white"
+            android:text="Balance" />
 
         <FrameLayout
             android:layout_width="match_parent"
@@ -39,7 +49,7 @@
             <LinearLayout
                 android:id="@+id/llBalance"
                 android:layout_width="match_parent"
-                android:layout_height="125dp"
+                android:layout_height="wrap_content"
                 android:layout_marginStart="@dimen/header_top_first"
                 android:gravity="start|bottom"
                 android:orientation="horizontal"
@@ -105,6 +115,7 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/header_top_first"
             android:layout_marginStart="@dimen/header_top_first"
             android:gravity="start|bottom"
             android:orientation="horizontal">
@@ -144,7 +155,7 @@
         android:layout_margin="8dp">
 
         <Button
-            android:id="@+id/receiveTx"
+            android:id="@+id/bReceive"
             android:layout_width="wrap_content"
             android:layout_height="55dp"
             android:layout_gravity="center"
@@ -161,7 +172,7 @@
             app:cornerRadius="5dp" />
 
         <Button
-            android:id="@+id/sendTx"
+            android:id="@+id/bSend"
             android:layout_width="wrap_content"
             android:layout_height="55dp"
             android:layout_gravity="center"
@@ -187,60 +198,15 @@
         android:layout_margin="8dp"
         android:text="Transaction History" />
 
-    <FrameLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_marginLeft="8dp"
-        android:layout_marginRight="8dp">
-
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/list"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
+            android:layout_marginLeft="8dp"
+            android:layout_marginRight="8dp"
+            android:layout_marginBottom="8dp"
             android:clipToPadding="false"
             android:paddingBottom="80dp"
             app:layoutManager="LinearLayoutManager"
             tools:listitem="@layout/item_transaction" />
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_gravity="bottom"
-            android:layout_marginLeft="4dp"
-            android:layout_marginTop="12dp"
-            android:layout_marginRight="4dp"
-            android:layout_marginBottom="12dp"
-            android:orientation="horizontal"
-            android:weightSum="2">
-
-            <Button
-                android:id="@+id/bReceive"
-                style="@style/ScalaButton.Take"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_margin="8dp"
-                android:layout_weight="1"
-                android:drawableStart="@drawable/ic_hand"
-                android:enabled="false"
-                android:paddingStart="16dp"
-                android:paddingEnd="16dp"
-                android:text="@string/label_wallet_receive"
-                android:visibility="invisible" />
-
-            <Button
-                android:id="@+id/bSend"
-                style="@style/ScalaButton.Give"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_margin="8dp"
-                android:layout_weight="1"
-                android:drawableStart="@drawable/ic_send"
-                android:enabled="false"
-                android:paddingStart="16dp"
-                android:paddingEnd="16dp"
-                android:text="@string/label_wallet_send"
-                android:visibility="invisible" />
-
-        </LinearLayout>
-    </FrameLayout>
 </LinearLayout>

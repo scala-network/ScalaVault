@@ -86,7 +86,7 @@ public class Helper {
 
     static public final String BASE_CRYPTO = "XLA";
 
-    static private final String WALLET_DIR = "monerujo" + FLAVOR_SUFFIX;
+    static private final String WALLET_DIR = "scala" + FLAVOR_SUFFIX;
     static private final String HOME_DIR = "scala" + FLAVOR_SUFFIX;
 
     static public int DISPLAY_DIGITS_INFO = 5;
