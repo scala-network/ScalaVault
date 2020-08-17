@@ -8,5 +8,5 @@
         android:top="8dp" />
     <stroke
         android:width="2dp"
-        android:color="@color/c_blue" />
+        android:color="@color/txt_button_outlined" />
 </shape>

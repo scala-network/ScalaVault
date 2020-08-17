@@ -7,11 +7,20 @@
     android:orientation="vertical"
     android:background="@color/bg_body">
 
+    <TextView
+        style="@style/ScalaText.Medium"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="start"
+        android:layout_margin="8dp"
+        android:text="My wallet" />
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="8dp"
-        android:orientation="vertical">
+        android:orientation="vertical"
+        android:background="@drawable/corner_radius_gradient_blue">
 
         <FrameLayout
             android:layout_width="match_parent"
@@ -22,15 +31,17 @@
                 style="@style/ScalaText.Balance"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_gravity="center"
+                android:layout_marginStart="@dimen/header_top_first"
+                android:layout_gravity="start|bottom"
                 android:text="@string/menu_streetmode"
                 android:visibility="invisible" />
 
             <LinearLayout
                 android:id="@+id/llBalance"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:gravity="center"
+                android:layout_height="125dp"
+                android:layout_marginStart="@dimen/header_top_first"
+                android:gravity="start|bottom"
                 android:orientation="horizontal"
                 android:visibility="visible">
 
@@ -87,15 +98,15 @@
             style="@style/ScalaText.Unconfirmed"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
-            android:gravity="center"
+            android:layout_marginStart="@dimen/header_top_first"
+            android:gravity="start|bottom"
             tools:text="+ 0.00 unconfirmed" />
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/header_top_first"
-            android:gravity="center"
+            android:layout_marginStart="@dimen/header_top_first"
+            android:gravity="start|bottom"
             android:orientation="horizontal">
 
             <ImageView
@@ -108,10 +119,11 @@
 
             <TextView
                 android:id="@+id/tvProgress"
-                style="@style/ScalaText.Medium"
+                style="@style/ScalaText.Small"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:visibility="visible"
+                android:textColor="@color/c_white"
                 tools:text="Synced 1 410 674 blocks" />
         </LinearLayout>
 
@@ -124,6 +136,56 @@
             android:visibility="invisible" />
 
     </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_margin="8dp">
+
+        <Button
+            android:id="@+id/receiveTx"
+            android:layout_width="wrap_content"
+            android:layout_height="55dp"
+            android:layout_gravity="center"
+            android:layout_marginEnd="5dp"
+            android:layout_weight="1"
+            android:onClick="onCreateWallet"
+            android:text="Receive"
+            android:textSize="14sp"
+            android:textAllCaps="false"
+            android:textColor="@color/txt_button_outlined"
+            app:backgroundTint="@android:color/transparent"
+            app:strokeColor="@color/btn_icon_dark"
+            app:strokeWidth="1dp"
+            app:cornerRadius="5dp" />
+
+        <Button
+            android:id="@+id/sendTx"
+            android:layout_width="wrap_content"
+            android:layout_height="55dp"
+            android:layout_gravity="center"
+            android:layout_marginStart="5dp"
+            android:layout_weight="1"
+            android:onClick="onCreateWallet"
+            android:text="Send"
+            android:textSize="14sp"
+            android:textAllCaps="false"
+            android:textColor="@color/txt_button_outlined"
+            app:backgroundTint="@android:color/transparent"
+            app:strokeColor="@color/btn_icon_dark"
+            app:strokeWidth="1dp"
+            app:cornerRadius="5dp" />
+
+    </LinearLayout>
+
+    <TextView
+        style="@style/ScalaText.Medium"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="start"
+        android:layout_margin="8dp"
+        android:text="Transaction History" />
 
     <FrameLayout
         android:layout_width="match_parent"

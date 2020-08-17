@@ -24,6 +24,8 @@ import android.content.Intent;
 import android.content.ServiceConnection;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
+import android.graphics.PorterDuff;
+import android.graphics.drawable.Drawable;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.IBinder;
@@ -259,12 +261,18 @@ public class WalletActivity extends BaseActivity implements WalletFragment.Liste
         if (renameItem != null)
             renameItem.setEnabled(hasWallet() && getWallet().isSynchronized());
         MenuItem streetmodeItem = menu.findItem(R.id.action_streetmode);
-        if (streetmodeItem != null)
+        streetmodeItem.setIcon(R.drawable.stealth_mode);
+
+        Drawable drawable = streetmodeItem.getIcon();
+        if (drawable != null) {
+            drawable.mutate();
             if (isStreetMode()) {
-                streetmodeItem.setIcon(R.drawable.gunther_csi_24dp);
+                drawable.setColorFilter(getResources().getColor(R.color.c_red), PorterDuff.Mode.SRC_ATOP);
             } else {
-                streetmodeItem.setIcon(R.drawable.gunther_24dp);
+                drawable.setColorFilter(getResources().getColor(R.color.c_green), PorterDuff.Mode.SRC_ATOP);
             }
+        }
+
         final MenuItem rescanItem = menu.findItem(R.id.action_rescan);
         if (rescanItem != null)
             rescanItem.setEnabled(isSynced());

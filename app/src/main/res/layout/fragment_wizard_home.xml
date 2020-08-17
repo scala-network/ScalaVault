@@ -94,9 +94,9 @@
 			android:text="Import from seed"
 			android:textSize="14sp"
 			android:textAllCaps="false"
-			android:textColor="@color/c_white"
+			android:textColor="@color/txt_button_outlined"
 			app:backgroundTint="@android:color/transparent"
-			app:strokeColor="@color/txt_button_filled"
+			app:strokeColor="@color/btn_icon_dark"
 			app:strokeWidth="1dp"
 			app:cornerRadius="5dp" />
 
