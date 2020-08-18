@@ -148,7 +148,7 @@
             android:drawablePadding="4dp"
             android:drawableStart="@drawable/ic_add_circle_outline"
             android:text="@string/label_wallet_advanced_details"
-            android:visibility="visible" />
+            android:visibility="gone" />
 
         <LinearLayout
             android:id="@+id/llAdvancedInfo"
