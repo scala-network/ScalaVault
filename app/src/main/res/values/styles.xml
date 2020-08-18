@@ -75,13 +75,13 @@
 
     <style name="ScalaText.Funds">
         <item name="android:textSize">14sp</item>
-        <item name="android:textColor">@color/scalaFab</item>
+        <item name="android:textColor">@color/txt_main</item>
         <item name="android:textStyle">bold</item>
     </style>
 
     <style name="ScalaText.Info">
         <item name="android:textSize">14sp</item>
-        <item name="android:textColor">@color/scalaFab</item>
+        <item name="android:textColor">@color/txt_main</item>
     </style>
 
     <style name="ScalaText.Balance">
@@ -156,7 +156,7 @@
 
     <style name="ScalaFab" parent="@android:style/TextAppearance.DeviceDefault.Medium">
         <item name="android:textSize">14sp</item>
-        <item name="android:textColor">@color/scalaFab</item>
+        <item name="android:textColor">@color/c_white</item>
         <item name="android:textStyle">bold</item>
     </style>
 

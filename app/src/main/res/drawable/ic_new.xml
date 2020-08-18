@@ -12,7 +12,7 @@
             android:translateX="219.000000"
             android:translateY="7.000000">
             <path
-                android:fillColor="#FEFEFE"
+                android:fillColor="@color/btn_icon_default"
                 android:pathData="M11.0476403,8.86547314 C10.1626979,9.41441547 9.41459398,10.1624996
 8.86563718,11.047619 L3.4524022,5.63432651 L5.63440531,3.45238095
 L11.0476403,8.86547314 Z M14.8450352,7.41694052 C14.2508096,7.41694052
