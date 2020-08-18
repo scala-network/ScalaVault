@@ -20,9 +20,10 @@
             android:indeterminate="true"
             android:visibility="gone" />
 
-        <FrameLayout
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:gravity="center"
             android:layout_marginTop="@dimen/header_top">
 
             <TextView
@@ -30,18 +31,17 @@
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:layout_gravity="center"
+                android:layout_marginEnd="8dp"
                 android:text="@string/generate_address_label" />
 
             <ImageButton
                 android:id="@+id/bCopyAddress"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_gravity="end"
-                android:layout_marginEnd="80dp"
                 android:background="?android:selectableItemBackground"
                 android:clickable="false"
                 android:src="@drawable/ic_content_nocopy_black_24dp" />
-        </FrameLayout>
+        </LinearLayout>
 
         <TextView
             android:id="@+id/tvWalletAddress"
@@ -131,25 +131,24 @@
 
         <Button
             android:id="@+id/bAccept"
-            style="@style/ScalaButton"
+            style="@style/ScalaButton.Blue"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/section_top"
             android:text="@string/generate_button_accept"
-            android:visibility="gone" />
+            android:visibility="visible" />
 
         <Button
             android:id="@+id/bAdvancedInfo"
-            style="@style/ScalaFab"
-            android:layout_width="wrap_content"
+            style="@style/ScalaButton.Grey"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:layout_marginTop="@dimen/section_top"
             android:background="?android:selectableItemBackground"
             android:drawablePadding="4dp"
             android:drawableStart="@drawable/ic_add_circle_outline"
             android:text="@string/label_wallet_advanced_details"
-            android:visibility="gone" />
+            android:visibility="visible" />
 
         <LinearLayout
             android:id="@+id/llAdvancedInfo"

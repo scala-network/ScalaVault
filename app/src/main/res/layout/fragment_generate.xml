@@ -177,7 +177,7 @@
             android:layout_width="match_parent"
             android:layout_height="55dp"
             app:backgroundTint="@color/bg_blue"
-            android:text="@string/generate_buttonGenerate"
+            android:text="OK"
             android:textSize="14sp"
             android:textAllCaps="false"
             android:textColor="@color/txt_button_filled"

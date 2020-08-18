@@ -178,6 +178,7 @@
     </style>
 
     <style name="ScalaText.Monospace.Mnemonic">
+        <item name="android:textColor">@color/c_white</item>
         <item name="android:lineSpacingMultiplier">1.2</item>
         <item name="android:textSize">16sp</item>
         <item name="android:textStyle">bold</item>
@@ -231,11 +232,18 @@
         <item name="android:textSize">12sp</item>
     </style>
 
-    <style name="ScalaButton" parent="@style/Widget.AppCompat.Button">
-        <item name="android:background">@drawable/button_selector</item>
+    <style name="ScalaButton" parent="@style/TextAppearance.AppCompat.Button">
         <item name="android:textColor">@color/txt_button_filled</item>
         <item name="android:textAppearance">@style/ScalaLabel</item>
-        <item name="android:textAllCaps">true</item>
+        <item name="android:textAllCaps">false</item>
+    </style>
+
+    <style name="ScalaButton.Blue">
+        <item name="backgroundTint">@color/bg_blue</item>
+    </style>
+
+    <style name="ScalaButton.Grey">
+        <item name="backgroundTint">@color/btn_bg_default</item>
     </style>
 
     <style name="ScalaButton.Green">
@@ -256,6 +264,7 @@
 
     <style name="ScalaEdit" parent="ScalaText">
         <item name="android:textColor">?colorPrimary</item>
+        <item name="android:textSize">14sp</item>
         <item name="android:backgroundTint">@color/txt_main</item>
     </style>
 
