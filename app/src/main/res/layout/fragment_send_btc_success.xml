@@ -24,7 +24,7 @@
                 android:layout_gravity="top"
                 android:layout_marginEnd="24dp"
                 android:padding="6dp"
-                android:src="@drawable/ic_check_circle_xmr" />
+                android:src="@drawable/ic_check_circle" />
 
             <LinearLayout
                 android:layout_width="match_parent"

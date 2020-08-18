@@ -143,7 +143,7 @@ public class SendBtcSuccessWizardFragment extends SendWizardFragment {
         if (committedTx != null) {
             tvTxId.setText(committedTx.txId);
             bCopyTxId.setEnabled(true);
-            bCopyTxId.setImageResource(R.drawable.ic_content_copy_black_24dp);
+            bCopyTxId.setImageResource(R.drawable.ic_content_copy_24dp);
             tvTxAmount.setText(getString(R.string.send_amount, Helper.getDisplayAmount(committedTx.amount)));
             tvTxFee.setText(getString(R.string.send_fee, Helper.getDisplayAmount(committedTx.fee)));
             if (btcData != null) {

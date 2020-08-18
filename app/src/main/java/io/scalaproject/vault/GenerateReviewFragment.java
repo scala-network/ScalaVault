@@ -288,7 +288,7 @@ public class GenerateReviewFragment extends Fragment {
                 }
                 if (showAdvanced) bAdvancedInfo.setVisibility(View.VISIBLE);
                 bCopyAddress.setClickable(true);
-                bCopyAddress.setImageResource(R.drawable.ic_content_copy_black_24dp);
+                bCopyAddress.setImageResource(R.drawable.ic_content_copy_24dp);
                 activityCallback.setTitle(name, getString(R.string.details_title));
                 activityCallback.setToolbarButton(
                         GenerateReviewFragment.VIEW_TYPE_ACCEPT.equals(type) ? Toolbar.BUTTON_NONE : Toolbar.BUTTON_BACK);

@@ -165,21 +165,21 @@ public class NodeInfoAdapter extends RecyclerView.Adapter<NodeInfoAdapter.ViewHo
 
     static public int getPingIcon(NodeInfo nodeInfo) {
         if (nodeInfo.isUnauthorized()) {
-            return R.drawable.ic_wifi_lock_black_24dp;
+            return R.drawable.ic_wifi_lock_24dp;
         }
         if (nodeInfo.isValid()) {
             final double ping = nodeInfo.getResponseTime();
             if (ping < NodeInfo.PING_GOOD) {
-                return R.drawable.ic_signal_wifi_4_bar_black_24dp;
+                return R.drawable.ic_signal_wifi_4_bar_24dp;
             } else if (ping < NodeInfo.PING_MEDIUM) {
-                return R.drawable.ic_signal_wifi_3_bar_black_24dp;
+                return R.drawable.ic_signal_wifi_3_bar_24dp;
             } else if (ping < NodeInfo.PING_BAD) {
-                return R.drawable.ic_signal_wifi_2_bar_black_24dp;
+                return R.drawable.ic_signal_wifi_2_bar_24dp;
             } else {
-                return R.drawable.ic_signal_wifi_1_bar_black_24dp;
+                return R.drawable.ic_signal_wifi_1_bar_24dp;
             }
         } else {
-            return R.drawable.ic_signal_wifi_off_black_24dp;
+            return R.drawable.ic_signal_wifi_off_24dp;
         }
     }
 

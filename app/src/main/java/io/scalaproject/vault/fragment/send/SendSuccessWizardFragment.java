@@ -116,7 +116,7 @@ public class SendSuccessWizardFragment extends SendWizardFragment {
         if (committedTx != null) {
             tvTxId.setText(committedTx.txId);
             bCopyTxId.setEnabled(true);
-            bCopyTxId.setImageResource(R.drawable.ic_content_copy_black_24dp);
+            bCopyTxId.setImageResource(R.drawable.ic_content_copy_24dp);
 
             if (sendListener.getActivityCallback().isStreetMode()
                     && (sendListener.getTxData().getAmount() == Wallet.SWEEP_ALL)) {

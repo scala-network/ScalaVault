@@ -378,7 +378,7 @@ public class ReceiveFragment extends Fragment {
     private void enableCopyAddress(boolean enable) {
         bCopyAddress.setClickable(enable);
         if (enable)
-            bCopyAddress.setImageResource(R.drawable.ic_content_copy_black_24dp);
+            bCopyAddress.setImageResource(R.drawable.ic_content_copy_24dp);
         else
             bCopyAddress.setImageResource(R.drawable.ic_content_nocopy_black_24dp);
     }

@@ -261,7 +261,7 @@ public class WalletActivity extends BaseActivity implements WalletFragment.Liste
         if (renameItem != null)
             renameItem.setEnabled(hasWallet() && getWallet().isSynchronized());
         MenuItem streetmodeItem = menu.findItem(R.id.action_streetmode);
-        streetmodeItem.setIcon(R.drawable.stealth_mode);
+        streetmodeItem.setIcon(R.drawable.stealth_mode_on);
 
         Drawable drawable = streetmodeItem.getIcon();
         if (drawable != null) {
