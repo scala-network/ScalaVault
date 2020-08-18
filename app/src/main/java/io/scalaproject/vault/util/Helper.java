@@ -424,7 +424,7 @@ public class Helper {
         LayoutInflater li = LayoutInflater.from(context);
         final View promptsView = li.inflate(R.layout.prompt_password, null);
 
-        AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(context);
+        AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(context, R.style.AlertDialogCustom);
         alertDialogBuilder.setView(promptsView);
 
         final TextInputLayout etPassword = promptsView.findViewById(R.id.etPassword);
