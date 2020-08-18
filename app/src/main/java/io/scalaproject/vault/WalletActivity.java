@@ -1084,7 +1084,7 @@ public class WalletActivity extends BaseActivity implements WalletFragment.Liste
                     getString(R.string.label_account, wallet.getAccountLabel(i), Helper.getDisplayAmount(wallet.getBalance(i), 2))
                     : wallet.getAccountLabel(i));
             final MenuItem item = menu.add(R.id.accounts_list, getAccountId(i), 2 * i, label);
-            item.setIcon(R.drawable.ic_account_balance_wallet_black_24dp);
+            item.setIcon(R.drawable.ic_account_balance_wallet_24dp);
             if (i == wallet.getAccountIndex())
                 item.setChecked(true);
         }
