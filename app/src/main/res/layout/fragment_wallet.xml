@@ -7,159 +7,212 @@
     android:orientation="vertical"
     android:background="@color/bg_body">
 
-    <TextView
-        style="@style/ScalaText.Medium"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="start"
-        android:layout_margin="8dp"
-        android:text="My wallet" />
-
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="175dp"
-        android:layout_margin="8dp"
-        android:paddingBottom="8dp"
-        android:gravity="start|bottom"
-        android:orientation="vertical"
-        android:background="@drawable/corner_radius_gradient_blue">
+        android:layout_height="wrap_content"
+        android:layout_weight="0"
+        android:orientation="vertical">
 
-        <TextView
-            style="@style/ScalaText.Medium"
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginStart="@dimen/header_top_first"
-            android:gravity="start|bottom"
-            android:textColor="@color/c_white"
-            android:text="Balance" />
-
-        <FrameLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_marginStart="8dp"
+            android:layout_marginEnd="8dp"
+            android:layout_marginTop="8dp"
+            android:orientation="horizontal">
 
             <TextView
-                android:id="@+id/tvStreetView"
-                style="@style/ScalaText.Balance"
+                android:id="@+id/tvWalletName"
+                style="@style/ScalaText.Medium"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="@dimen/header_top_first"
-                android:layout_gravity="start|bottom"
-                android:text="@string/menu_streetmode"
-                android:visibility="invisible" />
+                android:layout_gravity="start"
+                android:gravity="center"
+                android:text="My wallet" />
 
-            <LinearLayout
-                android:id="@+id/llBalance"
+            <Space
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1" />
+
+            <ImageView
+                android:id="@+id/ivSynced"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/ic_done_all"
+                android:visibility="gone" />
+
+            <TextView
+                android:id="@+id/tvProgress"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:visibility="visible"
+                android:layout_gravity="center"
+                android:textColor="@color/txt_secondary"
+                android:textSize="12sp"
+                tools:text="Synced 1 410 674 blocks" />
+        </LinearLayout>
+
+        <ProgressBar
+            android:id="@+id/pbProgress"
+            style="@style/Widget.AppCompat.ProgressBar.Horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginEnd="8dp"
+            android:indeterminate="true"
+            android:indeterminateTintMode="src_atop"
+            android:indeterminateTint="@color/c_blue"
+            android:visibility="visible" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="175dp"
+            android:layout_margin="8dp"
+            android:paddingBottom="8dp"
+            android:gravity="start|bottom"
+            android:orientation="vertical"
+            android:background="@drawable/corner_radius_gradient_blue">
+
+            <TextView
+                style="@style/ScalaText.Medium"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="@dimen/header_top_first"
                 android:gravity="start|bottom"
-                android:orientation="horizontal"
-                android:visibility="visible">
+                android:textColor="@color/c_white"
+                android:text="Balance" />
 
-                <FrameLayout
-                    android:id="@+id/flExchange"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center"
-                    android:layout_marginStart="8dp"
-                    android:layout_marginEnd="0dp"
-                    android:visibility="gone">
-
-                    <ImageView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="center"
-                        android:src="@drawable/ic_statsup" />
-
-                    <ProgressBar
-                        android:id="@+id/pbExchange"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="center"
-                        android:indeterminate="true" />
-                </FrameLayout>
+            <FrameLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
 
                 <TextView
-                    android:id="@+id/tvBalance"
+                    android:id="@+id/tvStreetView"
                     style="@style/ScalaText.Balance"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:gravity="center"
-                    android:visibility="visible"
-                    tools:text="1099700.23001" />
+                    android:layout_marginStart="@dimen/header_top_first"
+                    android:layout_gravity="start|bottom"
+                    android:text="@string/menu_streetmode"
+                    android:visibility="invisible" />
 
-                <Spinner
-                    android:id="@+id/sCurrency"
-                    android:layout_width="wrap_content"
+                <LinearLayout
+                    android:id="@+id/llBalance"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="8dp"
-                    android:entries="@array/currency"
-                    android:gravity="center"
-                    android:minWidth="80dp"
-                    android:paddingStart="4dp"
-                    android:paddingTop="0dp"
-                    android:paddingEnd="4dp"
-                    android:paddingBottom="2dp"
-                    tools:listitem="@layout/item_spinner_balance" />
-            </LinearLayout>
-        </FrameLayout>
+                    android:layout_marginStart="@dimen/header_top_first"
+                    android:gravity="start|bottom"
+                    android:orientation="horizontal"
+                    android:visibility="visible">
 
-        <TextView
-            android:id="@+id/tvUnconfirmedAmount"
-            style="@style/ScalaText.Unconfirmed"
+                    <FrameLayout
+                        android:id="@+id/flExchange"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:layout_marginStart="8dp"
+                        android:layout_marginEnd="0dp"
+                        android:visibility="gone">
+
+                        <ImageView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:src="@drawable/ic_statsup" />
+
+                        <ProgressBar
+                            android:id="@+id/pbExchange"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:indeterminate="true" />
+                    </FrameLayout>
+
+                    <TextView
+                        android:id="@+id/tvBalance"
+                        style="@style/ScalaText.Balance"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:gravity="center"
+                        android:visibility="visible"
+                        tools:text="1099700.23001" />
+
+                    <Spinner
+                        android:id="@+id/sCurrency"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="8dp"
+                        android:entries="@array/currency"
+                        android:gravity="center"
+                        android:minWidth="80dp"
+                        android:paddingStart="4dp"
+                        android:paddingTop="0dp"
+                        android:paddingEnd="4dp"
+                        android:paddingBottom="2dp"
+                        tools:listitem="@layout/item_spinner_balance" />
+                </LinearLayout>
+            </FrameLayout>
+
+            <TextView
+                android:id="@+id/tvUnconfirmedAmount"
+                style="@style/ScalaText.Unconfirmed"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/header_top_first"
+                android:gravity="start|bottom"
+                tools:text="+ 0.00 unconfirmed" />
+
+        </LinearLayout>
+
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginStart="@dimen/header_top_first"
-            android:gravity="start|bottom"
-            tools:text="+ 0.00 unconfirmed" />
+            android:orientation="horizontal"
+            android:layout_margin="8dp">
+
+            <Button
+                android:id="@+id/bReceive"
+                android:layout_width="wrap_content"
+                android:layout_height="55dp"
+                android:layout_gravity="center"
+                android:layout_marginEnd="5dp"
+                android:layout_weight="1"
+                android:onClick="onCreateWallet"
+                android:text="Receive"
+                android:textSize="14sp"
+                android:textAllCaps="false"
+                android:textColor="@color/txt_button_outlined"
+                app:backgroundTint="@android:color/transparent"
+                app:strokeColor="@color/btn_icon_dark"
+                app:strokeWidth="1dp"
+                app:cornerRadius="5dp" />
+
+            <Button
+                android:id="@+id/bSend"
+                android:layout_width="wrap_content"
+                android:layout_height="55dp"
+                android:layout_gravity="center"
+                android:layout_marginStart="5dp"
+                android:layout_weight="1"
+                android:onClick="onCreateWallet"
+                android:text="Send"
+                android:textSize="14sp"
+                android:textAllCaps="false"
+                android:textColor="@color/txt_button_outlined"
+                app:backgroundTint="@android:color/transparent"
+                app:strokeColor="@color/btn_icon_dark"
+                app:strokeWidth="1dp"
+                app:cornerRadius="5dp" />
+
+        </LinearLayout>
 
     </LinearLayout>
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:layout_margin="8dp">
-
-        <Button
-            android:id="@+id/bReceive"
-            android:layout_width="wrap_content"
-            android:layout_height="55dp"
-            android:layout_gravity="center"
-            android:layout_marginEnd="5dp"
-            android:layout_weight="1"
-            android:onClick="onCreateWallet"
-            android:text="Receive"
-            android:textSize="14sp"
-            android:textAllCaps="false"
-            android:textColor="@color/txt_button_outlined"
-            app:backgroundTint="@android:color/transparent"
-            app:strokeColor="@color/btn_icon_dark"
-            app:strokeWidth="1dp"
-            app:cornerRadius="5dp" />
-
-        <Button
-            android:id="@+id/bSend"
-            android:layout_width="wrap_content"
-            android:layout_height="55dp"
-            android:layout_gravity="center"
-            android:layout_marginStart="5dp"
-            android:layout_weight="1"
-            android:onClick="onCreateWallet"
-            android:text="Send"
-            android:textSize="14sp"
-            android:textAllCaps="false"
-            android:textColor="@color/txt_button_outlined"
-            app:backgroundTint="@android:color/transparent"
-            app:strokeColor="@color/btn_icon_dark"
-            app:strokeWidth="1dp"
-            app:cornerRadius="5dp" />
-
-    </LinearLayout>
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="match_parent"
+        android:layout_weight="1"
         android:orientation="vertical">
 
         <TextView
@@ -167,9 +220,20 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="start"
-            android:layout_weight = "0"
             android:layout_margin="8dp"
             android:text="Transaction History" />
+
+        <TextView
+            android:id="@+id/noTransaction"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:layout_margin="8dp"
+            android:gravity="center"
+            android:textColor="@color/c_white"
+            android:textSize="12sp"
+            android:visibility="gone"
+            android:text="No transaction" />
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/list"
@@ -180,49 +244,10 @@
             android:layout_marginBottom="8dp"
             android:layout_weight = "1"
             android:clipToPadding="false"
+            android:visibility="visible"
             app:layoutManager="LinearLayoutManager"
             tools:listitem="@layout/item_transaction" />
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_weight = "0"
-            android:paddingTop="5dp"
-            android:paddingBottom="5dp"
-            android:paddingStart="@dimen/header_top_first"
-            android:paddingEnd="@dimen/header_top_first"
-            android:gravity="end|bottom"
-            android:orientation="horizontal"
-            android:background="@color/bg_darker">
-
-            <ImageView
-                android:id="@+id/ivSynced"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginEnd="8dp"
-                android:src="@drawable/ic_done_all"
-                android:visibility="gone" />
-
-            <TextView
-                android:id="@+id/tvProgress"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:visibility="visible"
-                android:textColor="@color/c_white"
-                android:textSize="12sp"
-                tools:text="Synced 1 410 674 blocks" />
-        </LinearLayout>
-
-        <ProgressBar
-            android:id="@+id/pbProgress"
-            style="@style/Widget.AppCompat.ProgressBar.Horizontal"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:indeterminate="true"
-            android:layout_marginStart="@dimen/header_top_first"
-            android:layout_marginEnd="@dimen/header_top_first"
-            android:layout_marginBottom="@dimen/header_top_first"
-            android:visibility="gone" />
-
     </LinearLayout>
+
 </LinearLayout>
