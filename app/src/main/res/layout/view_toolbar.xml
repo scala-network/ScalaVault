@@ -5,8 +5,8 @@
 
     <ImageButton
         android:id="@+id/bMainLogo"
-        android:layout_width="32dp"
-        android:layout_height="32dp"
+        android:layout_width="24dp"
+        android:layout_height="24dp"
         android:background="@mipmap/ic_logo_colors" />
 
     <FrameLayout

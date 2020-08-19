@@ -65,7 +65,7 @@ public class WalletFragment extends Fragment
     private FrameLayout flExchange;
     private TextView tvBalance;
     private TextView tvUnconfirmedAmount;
-    private TextView tvProgress;
+    private TextView tvProgress, tvWalletName;
     private ImageView ivSynced;
     private ProgressBar pbProgress;
     private Button bReceive;
@@ -87,8 +87,9 @@ public class WalletFragment extends Fragment
 
     @Override
     public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
-        if (activityCallback.hasWallet())
+        if (activityCallback.hasWallet()) {
             inflater.inflate(R.menu.wallet_menu, menu);
+        }
         super.onCreateOptionsMenu(menu, inflater);
     }
 
@@ -104,6 +105,7 @@ public class WalletFragment extends Fragment
                 setColorFilter(getResources().getColor(R.color.trafficGray),
                         android.graphics.PorterDuff.Mode.MULTIPLY);
 
+        tvWalletName = view.findViewById(R.id.tvWalletName);
         tvProgress = view.findViewById(R.id.tvProgress);
         pbProgress = view.findViewById(R.id.pbProgress);
         tvBalance = view.findViewById(R.id.tvBalance);
@@ -353,7 +355,10 @@ public class WalletFragment extends Fragment
             bSend.setVisibility(View.VISIBLE);
             bSend.setEnabled(true);
         }
-        if (isVisible()) enableAccountsList(true); //otherwise it is enabled in onResume()
+        if (isVisible()) {
+            enableAccountsList(true); //otherwise it is enabled in onResume()
+            activityCallback.setToolbarButton(Toolbar.BUTTON_NONE);
+        }
     }
 
     public void unsync() {
@@ -404,8 +409,10 @@ public class WalletFragment extends Fragment
 
     void setActivityTitle(Wallet wallet) {
         if (wallet == null) return;
+
         walletTitle = wallet.getName();
-        String watchOnly = (wallet.isWatchOnly() ? getString(R.string.label_watchonly) : "");
+        tvWalletName.setText(walletTitle);
+
         walletSubtitle = wallet.getAccountLabel();
         activityCallback.setTitle(walletTitle, walletSubtitle);
         Timber.d("wallet title is %s", walletTitle);
@@ -514,12 +521,17 @@ public class WalletFragment extends Fragment
         Timber.d("onResume()");
         activityCallback.setTitle(walletTitle, walletSubtitle);
         //activityCallback.setToolbarButton(Toolbar.BUTTON_CLOSE); // TODO: Close button somewhere else
-        activityCallback.setToolbarButton(Toolbar.BUTTON_NONE);
+
         setProgress(syncProgress);
         setProgress(syncText);
         showReceive();
-        if (activityCallback.isSynced()) enableAccountsList(true);
+
+        if (activityCallback.isSynced()) {
+            enableAccountsList(true);
+            activityCallback.setToolbarButton(Toolbar.BUTTON_NONE);
+        }
     }
+
 
     @Override
     public void onPause() {
@@ -536,5 +548,4 @@ public class WalletFragment extends Fragment
             ((DrawerLocker) activityCallback).setDrawerEnabled(enable);
         }
     }
-
 }

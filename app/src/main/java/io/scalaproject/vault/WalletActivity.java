@@ -111,23 +111,23 @@ public class WalletActivity extends BaseActivity implements WalletFragment.Liste
 
     @Override
     public void setToolbarButton(int type) {
-        //toolbar.setButton(type);
+        toolbar.setButton(type);
     }
 
     @Override
     public void setTitle(String title, String subtitle) {
-        toolbar.setTitle(title, subtitle);
+        //toolbar.setTitle(title, subtitle);
     }
 
     @Override
     public void setTitle(String title) {
         Timber.d("setTitle:%s.", title);
-        toolbar.setTitle(title);
+        //toolbar.setTitle(title);
     }
 
     @Override
     public void setSubtitle(String subtitle) {
-        toolbar.setSubtitle(subtitle);
+        //toolbar.setSubtitle(subtitle);
     }
 
     private boolean synced = false;
@@ -322,18 +322,8 @@ public class WalletActivity extends BaseActivity implements WalletFragment.Liste
         }
     }
 
-    private void updateStreetMode() {
-        if (isStreetMode()) {
-            toolbar.setBackgroundResource(R.drawable.backgound_toolbar_streetmode);
-        } else {
-            showNet();
-        }
-        invalidateOptionsMenu();
-    }
-
     private void onEnableStreetMode() {
         enableStreetMode(true);
-        updateStreetMode();
     }
 
     private void onDisableStreetMode() {
@@ -344,7 +334,6 @@ public class WalletActivity extends BaseActivity implements WalletFragment.Liste
                     @Override
                     public void run() {
                         enableStreetMode(false);
-                        updateStreetMode();
                     }
                 });
             }
@@ -416,8 +405,6 @@ public class WalletActivity extends BaseActivity implements WalletFragment.Liste
         accountsView = findViewById(R.id.accounts_nav);
         accountsView.setNavigationItemSelectedListener(this);
 
-        showNet();
-
         Fragment walletFragment = new WalletFragment();
         getSupportFragmentManager().beginTransaction()
                 .add(R.id.fragment_container, walletFragment, WalletFragment.class.getName()).commit();
@@ -425,22 +412,6 @@ public class WalletActivity extends BaseActivity implements WalletFragment.Liste
 
         startWalletService();
         Timber.d("onCreate() done.");
-    }
-
-    public void showNet() {
-        switch (WalletManager.getInstance().getNetworkType()) {
-            case NetworkType_Mainnet:
-                toolbar.setBackgroundResource(R.drawable.backgound_toolbar_mainnet);
-                break;
-            case NetworkType_Testnet:
-                toolbar.setBackgroundResource(R.color.colorPrimaryDark);
-                break;
-            case NetworkType_Stagenet:
-                toolbar.setBackgroundResource(R.color.colorPrimaryDark);
-                break;
-            default:
-                throw new IllegalStateException("Unsupported Network: " + WalletManager.getInstance().getNetworkType());
-        }
     }
 
     @Override

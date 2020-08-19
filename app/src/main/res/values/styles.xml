@@ -30,10 +30,13 @@
         <item name="colorAccent">@color/txt_main</item>
 
         <item name="android:textColorPrimary">@color/txt_main</item>
-        <item name="android:textColorSecondary">@color/txt_main</item>
+        <item name="android:textColorSecondary">@color/btn_icon_default</item>
 
         <item name="android:spinnerItemStyle">@style/ScalaSpinnerItem</item>
         <item name="android:spinnerStyle">@style/ScalaSpinner</item>
+
+        <item name="actionMenuTextColor">@color/txt_main</item>
+        <item name="android:itemBackground">@color/bg_lighter</item>
     </style>
 
     <style name="AppTheme.NoActionBar">
@@ -45,7 +48,7 @@
 
     <style name="AppTheme.PopupOverlay" parent="ThemeOverlay.AppCompat.Light">
         <item name="android:colorBackground">@color/bg_lighter</item>
-        <item name="android:textColor">@color/c_grey</item>
+        <item name="android:textColor">@color/txt_main</item>
     </style>
 
     <style name="ScalaLabel" parent="@android:style/TextAppearance.DeviceDefault.Medium">

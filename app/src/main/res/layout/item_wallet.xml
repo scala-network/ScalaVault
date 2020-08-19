@@ -5,7 +5,10 @@
     android:layout_width="fill_parent"
     android:layout_height="wrap_content"
     android:layout_gravity="center"
-    android:layout_margin="16dp"
+    android:layout_marginStart="8dp"
+    android:layout_marginEnd="8dp"
+    android:layout_marginTop="4dp"
+    android:layout_marginBottom="4dp"
     card_view:cardCornerRadius="7.5dp"
     card_view:cardElevation="8dp">
 
@@ -13,6 +16,17 @@
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:background="@drawable/selector_login">
+
+        <ImageButton
+            android:id="@+id/ibRefresh"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentStart="true"
+            android:layout_centerInParent="true"
+            android:background="?android:attr/selectableItemBackgroundBorderless"
+            android:gravity="center"
+            android:padding="12dp"
+            android:src="@drawable/ic_account_balance_wallet_24dp" />
 
         <TextView
             android:id="@+id/tvName"

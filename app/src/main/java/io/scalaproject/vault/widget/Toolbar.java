@@ -132,7 +132,7 @@ public class Toolbar extends androidx.appcompat.widget.Toolbar {
                 Timber.d("BUTTON_NONE");
                 bMainLogo.setBackground(getResources().getDrawable(R.mipmap.ic_logo_colors));
                 //bCredits.setText(null);
-                bMainLogo.setVisibility(View.VISIBLE);
+                bMainLogo.setVisibility(View.INVISIBLE);
         }
         buttonType = type;
     }

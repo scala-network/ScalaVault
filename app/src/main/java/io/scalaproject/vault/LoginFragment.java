@@ -33,6 +33,7 @@ import android.view.ViewGroup;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.FrameLayout;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
@@ -64,6 +65,7 @@ public class LoginFragment extends Fragment implements WalletInfoAdapter.OnInter
     private List<WalletManager.WalletInfo> displayedList = new ArrayList<>();
 
     private ImageView ivGunther;
+    private ImageButton ibNode;
     private TextView tvNodeName;
     private TextView tvNodeAddress;
     private View pbNode;
@@ -192,8 +194,11 @@ public class LoginFragment extends Fragment implements WalletInfoAdapter.OnInter
                     findBestNode();
             }
         });
+
+        ibNode = view.findViewById(R.id.ibNode);
         tvNodeName = view.findViewById(R.id.tvNodeName);
         tvNodeAddress = view.findViewById(R.id.tvNodeAddress);
+
         view.findViewById(R.id.ibOption).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -425,6 +430,7 @@ public class LoginFragment extends Fragment implements WalletInfoAdapter.OnInter
             super.onPreExecute();
             pbNode.setVisibility(View.VISIBLE);
             llNode.setVisibility(View.INVISIBLE);
+            ibNode.setVisibility(View.INVISIBLE);
             activityCallback.setNode(null);
         }
 
@@ -453,18 +459,19 @@ public class LoginFragment extends Fragment implements WalletInfoAdapter.OnInter
             if (!isAdded()) return;
             pbNode.setVisibility(View.INVISIBLE);
             llNode.setVisibility(View.VISIBLE);
+            ibNode.setVisibility(View.VISIBLE);
             if (result != null) {
                 Timber.d("found a good node %s", result.toString());
                 showNode(result);
             } else {
                 if (!activityCallback.getFavouriteNodes().isEmpty()) {
                     tvNodeName.setText(getResources().getText(R.string.node_refresh_hint));
-                    tvNodeName.setCompoundDrawablesWithIntrinsicBounds(R.drawable.ic_refresh_black_24dp, 0, 0, 0);
+                    ibNode.setImageDrawable(getResources().getDrawable(R.drawable.ic_refresh_black_24dp));
                     tvNodeAddress.setText(null);
                     tvNodeAddress.setVisibility(View.GONE);
                 } else {
                     tvNodeName.setText(getResources().getText(R.string.node_create_hint));
-                    tvNodeName.setCompoundDrawablesWithIntrinsicBounds(0, 0, 0, 0);
+                    ibNode.setVisibility(View.INVISIBLE);
                     tvNodeAddress.setText(null);
                     tvNodeAddress.setVisibility(View.GONE);
                 }
@@ -479,7 +486,8 @@ public class LoginFragment extends Fragment implements WalletInfoAdapter.OnInter
 
     private void showNode(NodeInfo nodeInfo) {
         tvNodeName.setText(nodeInfo.getName());
-        tvNodeName.setCompoundDrawablesWithIntrinsicBounds(NodeInfoAdapter.getPingIcon(nodeInfo), 0, 0, 0);
+        ibNode.setVisibility(View.VISIBLE);
+        ibNode.setImageDrawable(getResources().getDrawable(NodeInfoAdapter.getPingIcon(nodeInfo)));
         tvNodeAddress.setText(nodeInfo.getAddress());
         tvNodeAddress.setVisibility(View.VISIBLE);
     }

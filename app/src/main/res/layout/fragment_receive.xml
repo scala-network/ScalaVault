@@ -73,11 +73,11 @@
                 android:layout_gravity="center"
                 android:layout_marginStart="8dp"
                 android:layout_weight="0"
+                android:text="Generate"
                 android:background="?android:attr/selectableItemBackgroundBorderless"
                 android:drawableTop="@drawable/ic_settings_blue_24dp"
-                android:text="@string/send_generate_paymentid_hint"
                 android:textColor="@color/scalaGray"
-                android:visibility="visible" />
+                android:visibility="gone" />
 
         </LinearLayout>
 
@@ -91,9 +91,10 @@
 
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/etNotes"
-            style="@style/Widget.MaterialComponents.TextInputLayout.FilledBox"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="wrap_content"
+            android:textColorHint="@color/txt_inactive">
 
             <com.google.android.material.textfield.TextInputEditText
                 style="@style/ScalaEdit"
@@ -121,7 +122,7 @@
                 android:foreground="?android:attr/selectableItemBackground"
                 card_view:cardCornerRadius="2dp"
                 card_view:cardElevation="8dp"
-                card_view:contentPadding="4dp">
+                card_view:contentPadding="0dp">
 
                 <TextView
                     android:id="@+id/tvQrCode"

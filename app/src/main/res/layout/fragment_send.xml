@@ -36,7 +36,7 @@
 
         <Button
             android:id="@+id/bPrev"
-            style="@style/ScalaButton"
+            style="@style/ScalaButton.Grey"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
@@ -49,16 +49,16 @@
             android:layout_height="match_parent"
             android:layout_gravity="center"
             android:layout_weight="1"
-            android:background="@color/gradientOrange"
+            android:background="@color/bg_body"
             app:activeColor="@color/white"
             app:activeDot="0"
             app:dotSize="12dp"
-            app:inactiveColor="@color/dotGray"
+            app:inactiveColor="@color/bg_darker"
             app:numberDots="3" />
 
         <Button
             android:id="@+id/bNext"
-            style="@style/ScalaButton"
+            style="@style/ScalaButton.Grey"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
@@ -68,12 +68,13 @@
 
     <Button
         android:id="@+id/bDone"
-        style="@style/ScalaButton"
+        style="@style/ScalaButton.Blue"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
         android:layout_gravity="bottom"
         android:text="@string/label_send_done"
+        app:cornerRadius="5dp"
         android:visibility="gone" />
 
 </RelativeLayout>

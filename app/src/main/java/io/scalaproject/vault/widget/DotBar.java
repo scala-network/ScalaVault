@@ -47,8 +47,8 @@ public class DotBar extends View {
 
         TypedArray ta = context.getTheme().obtainStyledAttributes(attrs, R.styleable.DotBar, 0, 0);
         try {
-            inactiveColor = ta.getInt(R.styleable.DotBar_inactiveColor, 0);
-            activeColor = ta.getInt(R.styleable.DotBar_activeColor, 0);
+            inactiveColor = getResources().getColor(R.color.c_inactive);
+            activeColor = getResources().getColor(R.color.c_light_grey);
             dotSize = ta.getDimensionPixelSize(R.styleable.DotBar_dotSize, 8);
             numDots = ta.getInt(R.styleable.DotBar_numberDots, 5);
             activeDot = ta.getInt(R.styleable.DotBar_activeDot, 0);
