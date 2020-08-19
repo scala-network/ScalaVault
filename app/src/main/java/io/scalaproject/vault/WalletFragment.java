@@ -65,7 +65,7 @@ public class WalletFragment extends Fragment
     private FrameLayout flExchange;
     private TextView tvBalance;
     private TextView tvUnconfirmedAmount;
-    private TextView tvProgress, tvWalletName;
+    private TextView tvProgress, tvWalletName, tvWalletAddress;
     private ImageView ivSynced;
     private ProgressBar pbProgress;
     private Button bReceive;
@@ -106,6 +106,7 @@ public class WalletFragment extends Fragment
                         android.graphics.PorterDuff.Mode.MULTIPLY);
 
         tvWalletName = view.findViewById(R.id.tvWalletName);
+        tvWalletAddress = view.findViewById(R.id.tvWalletAddress);
         tvProgress = view.findViewById(R.id.tvProgress);
         pbProgress = view.findViewById(R.id.pbProgress);
         tvBalance = view.findViewById(R.id.tvBalance);
@@ -211,11 +212,12 @@ public class WalletFragment extends Fragment
     }
 
     void showUnconfirmed(double unconfirmedAmount) {
-        if (!activityCallback.isStreetMode()) {
+        if (!activityCallback.isStreetMode() && unconfirmedAmount > 0.0) {
+            tvUnconfirmedAmount.setVisibility(View.VISIBLE);
             String unconfirmed = Helper.getFormattedAmount(unconfirmedAmount, true);
             tvUnconfirmedAmount.setText(getResources().getString(R.string.xmr_unconfirmed_amount, unconfirmed));
         } else {
-            tvUnconfirmedAmount.setText(null);
+            tvUnconfirmedAmount.setVisibility(View.GONE);
         }
     }
 
@@ -352,7 +354,7 @@ public class WalletFragment extends Fragment
 
     public void onSynced() {
         if (!activityCallback.isWatchOnly()) {
-            bSend.setVisibility(View.VISIBLE);
+            //bSend.setVisibility(View.VISIBLE);
             bSend.setEnabled(true);
         }
         if (isVisible()) {
@@ -363,7 +365,7 @@ public class WalletFragment extends Fragment
 
     public void unsync() {
         if (!activityCallback.isWatchOnly()) {
-            bSend.setVisibility(View.INVISIBLE);
+            //bSend.setVisibility(View.INVISIBLE);
             bSend.setEnabled(false);
         }
         if (isVisible()) enableAccountsList(false); //otherwise it is enabled in onResume()
@@ -379,7 +381,7 @@ public class WalletFragment extends Fragment
 
     private void showReceive() {
         if (walletLoaded) {
-            bReceive.setVisibility(View.VISIBLE);
+            //bReceive.setVisibility(View.VISIBLE);
             bReceive.setEnabled(true);
         }
     }
@@ -411,9 +413,13 @@ public class WalletFragment extends Fragment
         if (wallet == null) return;
 
         walletTitle = wallet.getName();
+        walletSubtitle = wallet.getAccountLabel();
+
+        String walletTitleTmp = walletSubtitle.isEmpty() ? walletTitle : walletTitle + " - " + walletSubtitle;
         tvWalletName.setText(walletTitle);
 
-        walletSubtitle = wallet.getAccountLabel();
+        tvWalletAddress.setText(Helper.getPrettyAddress(wallet.getAddress()));
+
         activityCallback.setTitle(walletTitle, walletSubtitle);
         Timber.d("wallet title is %s", walletTitle);
     }

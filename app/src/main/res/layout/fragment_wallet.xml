@@ -28,6 +28,7 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="start"
                 android:gravity="center"
+                android:textStyle="bold"
                 android:text="My wallet" />
 
             <Space
@@ -50,7 +51,7 @@
                 android:layout_gravity="center"
                 android:textColor="@color/txt_secondary"
                 android:textSize="12sp"
-                tools:text="Synced 1 410 674 blocks" />
+                tools:text="Synced 4674 blocks" />
         </LinearLayout>
 
         <ProgressBar
@@ -136,7 +137,7 @@
                         android:layout_height="wrap_content"
                         android:gravity="center"
                         android:visibility="visible"
-                        tools:text="1099700.23001" />
+                        tools:text="1099700.23" />
 
                     <Spinner
                         android:id="@+id/sCurrency"
@@ -161,7 +162,38 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="@dimen/header_top_first"
                 android:gravity="start|bottom"
+                android:visibility="gone"
                 tools:text="+ 0.00 unconfirmed" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:layout_marginEnd="8dp"
+                android:orientation="horizontal"
+                android:gravity="start|bottom">
+
+                <TextView
+                    style="@style/ScalaText.Wallet"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/header_top_first"
+                    android:gravity="start|bottom"
+                    tools:text="Address" />
+
+                <Space
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1" />
+
+                <TextView
+                    android:id="@+id/tvWalletAddress"
+                    style="@style/ScalaText.Wallet"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    tools:text="N/A" />
+
+            </LinearLayout>
 
         </LinearLayout>
 
@@ -173,7 +205,7 @@
 
             <Button
                 android:id="@+id/bReceive"
-                android:layout_width="wrap_content"
+                android:layout_width="fill_parent"
                 android:layout_height="55dp"
                 android:layout_gravity="center"
                 android:layout_marginEnd="5dp"
@@ -191,7 +223,7 @@
 
             <Button
                 android:id="@+id/bSend"
-                android:layout_width="wrap_content"
+                android:layout_width="fill_parent"
                 android:layout_height="55dp"
                 android:layout_gravity="center"
                 android:layout_marginStart="5dp"
@@ -215,6 +247,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_weight="1"
+        android:layout_marginTop="14dp"
         android:orientation="vertical">
 
         <TextView
@@ -223,6 +256,7 @@
             android:layout_height="wrap_content"
             android:layout_gravity="start"
             android:layout_margin="8dp"
+            android:textStyle="bold"
             android:text="Transaction History" />
 
         <TextView

@@ -98,8 +98,8 @@
     </style>
 
     <style name="ScalaText.Unconfirmed">
-        <item name="android:textSize">16sp</item>
-        <item name="android:textColor">@color/c_white</item>
+        <item name="android:textSize">14sp</item>
+        <item name="android:textColor">@color/txt_main</item>
         <item name="android:textStyle">normal</item>
     </style>
 
@@ -119,6 +119,12 @@
         <item name="android:textSize">14sp</item>
         <item name="android:textColor">@color/txt_secondary</item>
         <item name="android:textStyle">italic</item>
+    </style>
+
+    <style name="ScalaText.Wallet">
+        <item name="android:textSize">14sp</item>
+        <item name="android:textColor">@color/c_white</item>
+        <item name="android:textStyle">normal</item>
     </style>
 
     <style name="ScalaText.PosDate">

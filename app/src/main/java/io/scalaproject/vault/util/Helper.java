@@ -663,4 +663,8 @@ public class Helper {
     static public boolean preventScreenshot() {
         return !(BuildConfig.DEBUG || BuildConfig.FLAVOR_type.equals("alpha"));
     }
+
+    static public String getPrettyAddress(String address) {
+        return address.substring(0, 7) + "..." + address.substring(address.length() - 7);
+    }
 }
