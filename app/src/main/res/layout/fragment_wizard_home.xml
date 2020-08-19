@@ -37,7 +37,7 @@
 				android:layout_height="wrap_content"
 				android:text="VAULT"
 				android:gravity="center"
-				android:textSize="30sp"
+				android:textSize="26sp"
 				android:textColor="@color/txt_headline"/>
 
 		</LinearLayout>

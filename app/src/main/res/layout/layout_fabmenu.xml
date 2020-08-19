@@ -70,7 +70,7 @@
                 android:backgroundTint="@color/btn_bg_default"
                 android:elevation="6dp"
                 app:tint="@color/btn_icon_default"
-                android:src="@drawable/ic_eye"
+                android:src="@drawable/ic_stealth_mode_off"
                 app:borderWidth="0dp"
                 app:fabSize="mini"
                 app:pressedTranslationZ="12dp" />

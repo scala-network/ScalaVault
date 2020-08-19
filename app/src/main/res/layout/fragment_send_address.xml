@@ -95,7 +95,7 @@
                         android:layout_height="wrap_content"
                         android:layout_gravity="top"
                         android:paddingTop="8dp"
-                        android:src="@drawable/gunther_24dp" />
+                        android:src="@drawable/ic_stealth_mode_on" />
 
                     <TextView
                         android:id="@+id/tvXmrTo"

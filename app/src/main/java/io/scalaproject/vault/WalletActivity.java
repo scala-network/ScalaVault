@@ -260,22 +260,20 @@ public class WalletActivity extends BaseActivity implements WalletFragment.Liste
         MenuItem renameItem = menu.findItem(R.id.action_rename);
         if (renameItem != null)
             renameItem.setEnabled(hasWallet() && getWallet().isSynchronized());
-        MenuItem streetmodeItem = menu.findItem(R.id.action_streetmode);
-        streetmodeItem.setIcon(R.drawable.stealth_mode_on);
 
-        Drawable drawable = streetmodeItem.getIcon();
-        if (drawable != null) {
-            drawable.mutate();
+        MenuItem streetmodeItem = menu.findItem(R.id.action_streetmode);
+        if (streetmodeItem != null) {
             if (isStreetMode()) {
-                drawable.setColorFilter(getResources().getColor(R.color.c_red), PorterDuff.Mode.SRC_ATOP);
+                streetmodeItem.setIcon(R.drawable.ic_stealth_mode_off);
             } else {
-                drawable.setColorFilter(getResources().getColor(R.color.c_green), PorterDuff.Mode.SRC_ATOP);
+                streetmodeItem.setIcon(R.drawable.ic_stealth_mode_on);
             }
         }
 
         final MenuItem rescanItem = menu.findItem(R.id.action_rescan);
         if (rescanItem != null)
             rescanItem.setEnabled(isSynced());
+
         return super.onPrepareOptionsMenu(menu);
     }
 

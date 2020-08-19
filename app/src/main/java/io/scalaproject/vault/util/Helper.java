@@ -53,6 +53,7 @@ import android.view.animation.AnimationUtils;
 import android.view.inputmethod.EditorInfo;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import io.scalaproject.vault.BuildConfig;
@@ -581,8 +582,8 @@ public class Helper {
                 } else {
                     etPassword.requestFocus();
                 }
-                Button button = ((AlertDialog) dialog).getButton(AlertDialog.BUTTON_POSITIVE);
-                button.setOnClickListener(new View.OnClickListener() {
+                Button posButton = ((AlertDialog) dialog).getButton(AlertDialog.BUTTON_POSITIVE);
+                posButton.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
                         String pass = etPassword.getEditText().getText().toString();
@@ -592,6 +593,13 @@ public class Helper {
                         }
                     }
                 });
+
+                LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(
+                        LinearLayout.LayoutParams.WRAP_CONTENT,
+                        LinearLayout.LayoutParams.WRAP_CONTENT
+                );
+                params.setMargins(20,0,0,0);
+                posButton.setLayoutParams(params);
             }
         });
 
