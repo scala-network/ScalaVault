@@ -18,7 +18,7 @@
         android:background="@drawable/selector_login">
 
         <ImageButton
-            android:id="@+id/ibRefresh"
+            android:id="@+id/ibWallet"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentStart="true"
@@ -30,7 +30,7 @@
 
         <TextView
             android:id="@+id/tvName"
-            style="@style/ScalaText.Label"
+            style="@style/ScalaText.ItemTitle"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginStart="48dp"
@@ -40,7 +40,7 @@
 
         <TextView
             android:id="@+id/tvAddress"
-            style="@style/ScalaText.Small"
+            style="@style/ScalaText.ItemSubtitle"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_below="@id/tvName"

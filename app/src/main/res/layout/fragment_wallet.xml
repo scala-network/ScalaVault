@@ -168,7 +168,7 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="8dp"
+                android:layout_marginTop="12dp"
                 android:layout_marginEnd="8dp"
                 android:orientation="horizontal"
                 android:gravity="start|bottom">
@@ -178,7 +178,6 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="@dimen/header_top_first"
-                    android:gravity="start|bottom"
                     tools:text="Address" />
 
                 <Space
@@ -260,19 +259,19 @@
             android:text="Transaction History" />
 
         <TextView
-            android:id="@+id/noTransaction"
+            android:id="@+id/tvNoTransaction"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:layout_margin="8dp"
             android:gravity="center"
-            android:textColor="@color/c_white"
+            android:textColor="@color/txt_main"
             android:textSize="12sp"
-            android:visibility="gone"
+            android:visibility="visible"
             android:text="No transaction" />
 
         <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/list"
+            android:id="@+id/rvTransactions"
             android:layout_width="match_parent"
             android:layout_height="fill_parent"
             android:layout_marginLeft="8dp"
@@ -280,7 +279,7 @@
             android:layout_marginBottom="8dp"
             android:layout_weight = "1"
             android:clipToPadding="false"
-            android:visibility="visible"
+            android:visibility="gone"
             app:layoutManager="LinearLayoutManager"
             tools:listitem="@layout/item_transaction" />
 

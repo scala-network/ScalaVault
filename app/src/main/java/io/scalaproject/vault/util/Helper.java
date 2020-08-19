@@ -212,7 +212,7 @@ public class Helper {
         String displayB;
         if (isCrypto) {
             if ((amount >= 0) || (amount == 0)) {
-                displayB = String.format(Locale.US, "%,.5f", amount);
+                displayB = String.format(Locale.US, "%,.2f", amount);
             } else {
                 displayB = null;
             }

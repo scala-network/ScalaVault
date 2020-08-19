@@ -34,14 +34,14 @@
 
         <TextView
             android:id="@+id/tvName"
-            style="@style/ScalaText.PosAmount"
+            style="@style/ScalaText.ItemTitle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             tools:text="scala-v9.monerujo.io" />
 
         <TextView
             android:id="@+id/tvAddress"
-            style="@style/ScalaText.Small"
+            style="@style/ScalaText.ItemSubtitle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             tools:text="128.130.233.151:18089" />

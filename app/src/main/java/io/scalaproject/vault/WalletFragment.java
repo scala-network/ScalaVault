@@ -57,19 +57,19 @@ import timber.log.Timber;
 
 public class WalletFragment extends Fragment
         implements TransactionInfoAdapter.OnInteractionListener {
-    private TransactionInfoAdapter adapter;
+    private TransactionInfoAdapter txInfoAdapter;
     private NumberFormat formatter = NumberFormat.getInstance();
 
     private TextView tvStreetView;
     private LinearLayout llBalance;
     private FrameLayout flExchange;
-    private TextView tvBalance;
-    private TextView tvUnconfirmedAmount;
+    private TextView tvBalance, tvUnconfirmedAmount;
     private TextView tvProgress, tvWalletName, tvWalletAddress;
     private ImageView ivSynced;
     private ProgressBar pbProgress;
-    private Button bReceive;
-    private Button bSend;
+    private Button bReceive, bSend;
+    private TextView tvNoTransaction;
+    private RecyclerView rvTransactions;
 
     private Spinner sCurrency;
 
@@ -111,9 +111,14 @@ public class WalletFragment extends Fragment
         pbProgress = view.findViewById(R.id.pbProgress);
         tvBalance = view.findViewById(R.id.tvBalance);
         showBalance(Helper.getDisplayAmount(0));
+
         tvUnconfirmedAmount = view.findViewById(R.id.tvUnconfirmedAmount);
         showUnconfirmed(0);
+
         ivSynced = view.findViewById(R.id.ivSynced);
+
+        tvNoTransaction = view.findViewById(R.id.tvNoTransaction);
+        rvTransactions = view.findViewById(R.id.rvTransactions);
 
         sCurrency = view.findViewById(R.id.sCurrency);
         List<String> currencies = new ArrayList<>();
@@ -126,13 +131,11 @@ public class WalletFragment extends Fragment
         bSend = view.findViewById(R.id.bSend);
         bReceive = view.findViewById(R.id.bReceive);
 
-        RecyclerView recyclerView = view.findViewById(R.id.list);
-
-        adapter = new TransactionInfoAdapter(getActivity(), this);
-        recyclerView.setAdapter(adapter);
+        txInfoAdapter = new TransactionInfoAdapter(getActivity(), this);
+        rvTransactions.setAdapter(txInfoAdapter);
 
         SwipeableRecyclerViewTouchListener swipeTouchListener =
-                new SwipeableRecyclerViewTouchListener(recyclerView,
+                new SwipeableRecyclerViewTouchListener(rvTransactions,
                         new SwipeableRecyclerViewTouchListener.SwipeListener() {
                             @Override
                             public boolean canSwipeLeft(int position) {
@@ -147,24 +150,23 @@ public class WalletFragment extends Fragment
                             @Override
                             public void onDismissedBySwipeLeft(RecyclerView recyclerView, int[] reverseSortedPositions) {
                                 for (int position : reverseSortedPositions) {
-                                    dismissedTransactions.add(adapter.getItem(position).hash);
-                                    adapter.removeItem(position);
+                                    dismissedTransactions.add(txInfoAdapter.getItem(position).hash);
+                                    txInfoAdapter.removeItem(position);
                                 }
-                                adapter.notifyDataSetChanged();
+                                txInfoAdapter.notifyDataSetChanged();
                             }
 
                             @Override
                             public void onDismissedBySwipeRight(RecyclerView recyclerView, int[] reverseSortedPositions) {
                                 for (int position : reverseSortedPositions) {
-                                    dismissedTransactions.add(adapter.getItem(position).hash);
-                                    adapter.removeItem(position);
+                                    dismissedTransactions.add(txInfoAdapter.getItem(position).hash);
+                                    txInfoAdapter.removeItem(position);
                                 }
-                                adapter.notifyDataSetChanged();
+                                txInfoAdapter.notifyDataSetChanged();
                             }
                         });
 
-        recyclerView.addOnItemTouchListener(swipeTouchListener);
-
+        rvTransactions.addOnItemTouchListener(swipeTouchListener);
 
         bSend.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -346,9 +348,10 @@ public class WalletFragment extends Fragment
                         && !dismissedTransactions.contains(info.hash))
                     list.add(info);
             }
-            adapter.setInfos(list);
-            adapter.notifyDataSetChanged();
+            txInfoAdapter.setInfos(list);
+            txInfoAdapter.notifyDataSetChanged();
         }
+
         updateStatus(wallet);
     }
 
@@ -468,6 +471,15 @@ public class WalletFragment extends Fragment
             setProgress(101);
         }
         setProgress(sync);
+
+        if(txInfoAdapter.getItemCount() > 0) {
+            rvTransactions.setVisibility(View.VISIBLE);
+            tvNoTransaction.setVisibility(View.GONE);
+        } else {
+            rvTransactions.setVisibility(View.GONE);
+            tvNoTransaction.setVisibility(View.VISIBLE);
+        }
+
         // TODO show connected status somewhere
     }
 

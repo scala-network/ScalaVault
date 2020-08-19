@@ -39,9 +39,10 @@
                 android:id="@+id/ibNode"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
                 android:layout_alignParentStart="true"
                 android:layout_centerInParent="true"
-                android:paddingStart="4dp"
+                android:scaleType="fitStart"
                 android:background="?android:attr/selectableItemBackgroundBorderless"
                 android:src="@drawable/ic_refresh_black_24dp" />
 
@@ -68,18 +69,16 @@
 
                     <TextView
                         android:id="@+id/tvNodeName"
-                        style="@style/ScalaText.PosAmount"
+                        style="@style/ScalaText.ItemTitle"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginStart="32dp"
                         android:drawablePadding="8dp"
-                        android:textColor="@color/txt_main"
-                        android:textSize="14sp"
                         tools:text="scalanode.com" />
 
                     <TextView
                         android:id="@+id/tvNodeAddress"
-                        style="@style/ScalaText.Small"
+                        style="@style/ScalaText.ItemSubtitle"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginStart="32dp"
@@ -136,8 +135,9 @@
                 app:layoutManager="LinearLayoutManager"
                 tools:listitem="@layout/item_wallet" />
 
+            <include layout="@layout/layout_fabmenu" />
+
         </FrameLayout>
     </LinearLayout>
 
-    <include layout="@layout/layout_fabmenu" />
 </FrameLayout>

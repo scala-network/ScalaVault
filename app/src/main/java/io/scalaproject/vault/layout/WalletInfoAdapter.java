@@ -37,6 +37,7 @@ import java.util.Date;
 import java.util.List;
 import java.util.TimeZone;
 
+import io.scalaproject.vault.util.Helper;
 import timber.log.Timber;
 
 public class WalletInfoAdapter extends RecyclerView.Adapter<WalletInfoAdapter.ViewHolder> {
@@ -107,8 +108,10 @@ public class WalletInfoAdapter extends RecyclerView.Adapter<WalletInfoAdapter.Vi
 
         ViewHolder(View itemView) {
             super(itemView);
+
             tvName = itemView.findViewById(R.id.tvName);
             tvAddress = itemView.findViewById(R.id.tvAddress);
+
             ibOptions = itemView.findViewById(R.id.ibOptions);
             ibOptions.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -140,6 +143,7 @@ public class WalletInfoAdapter extends RecyclerView.Adapter<WalletInfoAdapter.Vi
 
                 }
             });
+
             itemView.setOnClickListener(this);
         }
 
@@ -150,7 +154,7 @@ public class WalletInfoAdapter extends RecyclerView.Adapter<WalletInfoAdapter.Vi
         void bind(int position) {
             infoItem = infoItems.get(position);
             tvName.setText(infoItem.name);
-            tvAddress.setText(infoItem.address.substring(0, 16) + "...");
+            tvAddress.setText(Helper.getPrettyAddress(infoItem.address));
         }
 
         @Override
