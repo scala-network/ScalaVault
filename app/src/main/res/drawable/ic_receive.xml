@@ -2,10 +2,16 @@
 <vector xmlns:android="http://schemas.android.com/apk/res/android"
     android:width="24dp"
     android:height="24dp"
-    android:viewportWidth="24"
-    android:viewportHeight="24">
+    android:viewportWidth="512"
+    android:viewportHeight="512">
 
     <path
         android:fillColor="@color/btn_icon_default"
-        android:pathData="M20,5.41 L18.59,4 L7,15.59 L7,9 L5,9 L5,19 L15,19 L15,17 L8.41,17 Z" />
+        android:pathData="M416,448 L332,448 C325.4,448,320,442.6,320,436 L320,396
+C320,389.4,325.4,384,332,384 L416,384 C433.7,384,448,369.7,448,352 L448,160
+C448,142.3,433.7,128,416,128 L332,128 C325.4,128,320,122.6,320,116 L320,76
+C320,69.4,325.4,64,332,64 L416,64 C469,64,512,107,512,160 L512,352
+C512,405,469,448,416,448 Z M369,247 L201,79 C186,64,160,74.5,160,96 L160,192
+L24,192 C10.7,192,0,202.7,0,216 L0,312 C0,325.3,10.7,336,24,336 L160,336
+L160,432 C160,453.5,186,464,201,449 L369,281 C378.3,271.6,378.3,256.4,369,247 Z" />
 </vector>

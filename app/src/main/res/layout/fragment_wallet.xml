@@ -71,9 +71,26 @@
             android:layout_height="175dp"
             android:layout_margin="8dp"
             android:paddingBottom="8dp"
-            android:gravity="start|bottom"
             android:orientation="vertical"
             android:background="@drawable/corner_radius_gradient_blue">
+
+            <ImageButton
+                android:id="@+id/ibNode"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:layout_marginEnd="8dp"
+                android:scaleType="fitStart"
+                android:layout_gravity="top|end"
+                android:background="?android:attr/selectableItemBackgroundBorderless"
+                android:tint="@color/c_white"
+                android:src="@drawable/ic_content_copy_24dp"
+                android:onClick="onCopyAddress" />
+
+            <androidx.legacy.widget.Space
+                android:layout_width="wrap_content"
+                android:layout_height="fill_parent"
+                android:layout_weight="1" />
 
             <TextView
                 style="@style/ScalaText.Medium"
@@ -86,7 +103,8 @@
 
             <FrameLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content">
+                android:layout_height="wrap_content"
+                android:gravity="start|bottom">
 
                 <TextView
                     android:id="@+id/tvStreetView"
@@ -173,13 +191,6 @@
                 android:orientation="horizontal"
                 android:gravity="start|bottom">
 
-                <TextView
-                    style="@style/ScalaText.Wallet"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="@dimen/header_top_first"
-                    tools:text="Address" />
-
                 <Space
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -190,7 +201,7 @@
                     style="@style/ScalaText.Wallet"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    tools:text="N/A" />
+                    android:text="Wallet Address" />
 
             </LinearLayout>
 

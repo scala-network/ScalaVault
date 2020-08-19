@@ -1153,6 +1153,11 @@ public class WalletActivity extends BaseActivity implements WalletFragment.Liste
         new AsyncAddAccount().executeOnExecutor(ScalaThreadPoolExecutor.SCALA_THREAD_POOL_EXECUTOR);
     }
 
+    public void onCopyAddress(View view) {
+        Helper.clipBoardCopy(this, getString(R.string.label_copy_address), getWallet().getAddress());
+        Toast.makeText(this, getString(R.string.message_copy_address), Toast.LENGTH_SHORT).show();
+    }
+
     private class AsyncAddAccount extends AsyncTask<Void, Void, Boolean> {
         boolean dialogOpened = false;
 
