@@ -1057,7 +1057,7 @@ public class WalletActivity extends BaseActivity implements WalletFragment.Liste
         final boolean showBalances = (n > 1) && !isStreetMode();
         for (int i = 0; i < n; i++) {
             final String label = (showBalances ?
-                    getString(R.string.label_account, i == 0 ? getString(R.string.primary_address) : getString(R.string.label_account), Helper.getDisplayAmount(wallet.getBalance(i), 2))
+                    getString(R.string.label_account, i == 0 ? getString(R.string.primary_address) : wallet.getAccountLabel(i), Helper.getDisplayAmount(wallet.getBalance(i), 2))
                     : wallet.getAccountLabel(i));
             final MenuItem item = menu.add(R.id.accounts_list, getAccountId(i), 2 * i, label);
             item.setIcon(R.drawable.ic_account_balance_wallet_24dp);

@@ -39,6 +39,8 @@
         <item name="android:itemBackground">@color/bg_lighter</item>
 
         <item name="android:colorControlActivated">@color/bg_blue</item>
+
+        <item name="android:itemTextAppearance">@style/ItemMenuTextAppearance</item>
     </style>
 
     <style name="AppTheme.NoActionBar">
@@ -52,6 +54,11 @@
         <item name="android:colorBackground">@color/bg_lighter</item>
         <item name="android:textColor">@color/txt_main</item>
     </style>
+
+    <style name="ItemMenuTextAppearance" parent="@android:style/TextAppearance.Widget.IconMenu.Item">
+        <item name="android:textColor">@color/txt_main</item>
+    </style>
+
 
     <style name="ScalaLabel" parent="@android:style/TextAppearance.DeviceDefault.Medium">
         <item name="android:textColor">?colorPrimary</item>
