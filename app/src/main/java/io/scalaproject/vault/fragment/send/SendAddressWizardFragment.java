@@ -88,8 +88,6 @@ public class SendAddressWizardFragment extends SendWizardFragment {
     private TextInputLayout etNotes;
     private CardView cvScan;
     private View tvPaymentIdIntegrated;
-    private TextView tvXmrTo;
-    private View llXmrTo;
     private ImageButton bPasteAddress;
 
     private boolean resolvingOA = false;
@@ -152,7 +150,6 @@ public class SendAddressWizardFragment extends SendWizardFragment {
                     Timber.d("isIntegratedAddress");
                     etAddress.setError(getString(R.string.info_paymentid_integrated));
                     tvPaymentIdIntegrated.setVisibility(View.VISIBLE);
-                    llXmrTo.setVisibility(View.INVISIBLE);
                     sendListener.setMode(SendFragment.Mode.XLA);
                 } else if (isBitcoinAddress() || (resolvedPP != null)) {
                     Timber.d("isBitcoinAddress");
@@ -160,7 +157,6 @@ public class SendAddressWizardFragment extends SendWizardFragment {
                 } else {
                     Timber.d("isStandardAddress or other");
                     tvPaymentIdIntegrated.setVisibility(View.INVISIBLE);
-                    llXmrTo.setVisibility(View.INVISIBLE);
                     sendListener.setMode(SendFragment.Mode.XLA);
                 }
             }
@@ -236,7 +232,6 @@ public class SendAddressWizardFragment extends SendWizardFragment {
     private void setBtcMode() {
         Timber.d("setBtcMode");
         tvPaymentIdIntegrated.setVisibility(View.INVISIBLE);
-        llXmrTo.setVisibility(View.VISIBLE);
         sendListener.setMode(SendFragment.Mode.BTC);
     }
 

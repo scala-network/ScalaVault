@@ -37,6 +37,8 @@
 
         <item name="actionMenuTextColor">@color/txt_main</item>
         <item name="android:itemBackground">@color/bg_lighter</item>
+
+        <item name="android:colorControlActivated">@color/bg_blue</item>
     </style>
 
     <style name="AppTheme.NoActionBar">
@@ -49,10 +51,6 @@
     <style name="AppTheme.PopupOverlay" parent="ThemeOverlay.AppCompat.Light">
         <item name="android:colorBackground">@color/bg_lighter</item>
         <item name="android:textColor">@color/txt_main</item>
-    </style>
-
-    <style name="DialogStyle" parent="android:Theme.Material.Light.Dialog.NoActionBar">
-        <item name="android:colorBackground">@color/bg_body</item>
     </style>
 
     <style name="ScalaLabel" parent="@android:style/TextAppearance.DeviceDefault.Medium">

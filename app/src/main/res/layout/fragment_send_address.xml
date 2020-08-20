@@ -40,7 +40,7 @@
                     android:layout_alignParentStart="true"
                     android:layout_toStartOf="@+id/bPasteAddress"
                     app:counterEnabled="true"
-                    app:counterMaxLength="16"
+                    app:counterMaxLength="97"
                     app:errorEnabled="true">
 
                     <com.google.android.material.textfield.TextInputEditText
@@ -61,7 +61,6 @@
                     android:layout_height="56dp"
                     android:layout_alignParentEnd="true"
                     android:layout_gravity="center"
-                    android:layout_marginStart="8dp"
                     android:background="?android:selectableItemBackgroundBorderless"
                     android:src="@drawable/ic_content_paste_24dp" />
             </RelativeLayout>

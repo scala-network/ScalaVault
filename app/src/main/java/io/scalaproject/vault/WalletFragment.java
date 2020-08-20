@@ -17,6 +17,7 @@
 package io.scalaproject.vault;
 
 import android.content.Context;
+import android.graphics.PorterDuff;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Looper;
@@ -405,6 +406,7 @@ public class WalletFragment extends Fragment
             pbProgress.setVisibility(View.VISIBLE);
         } else if (n >= 0) {
             pbProgress.setIndeterminate(false);
+
             pbProgress.setProgress(n);
             pbProgress.setVisibility(View.VISIBLE);
         } else { // <0
