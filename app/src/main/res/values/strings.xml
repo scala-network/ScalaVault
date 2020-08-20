@@ -8,15 +8,15 @@
     <string name="menu_share">Share</string>
     <string name="menu_help">Help</string>
     <string name="menu_receive">Receive</string>
-    <string name="menu_rename">Rename &#8230;</string>
+    <string name="menu_rename">Rename&#8230;</string>
     <string name="menu_archive">Archive</string>
     <string name="menu_backup">Backup</string>
     <string name="menu_changepw">Change Passphrase</string>
 
-    <string name="password_weak">Continue typing &#8230;</string>
-    <string name="password_fair">Meh &#8230;</string>
+    <string name="password_weak">Continue typing&#8230;</string>
+    <string name="password_fair">Meh&#8230;</string>
     <string name="password_good">C\'mon, you can do better!</string>
-    <string name="password_strong">Getting there &#8230;</string>
+    <string name="password_strong">Getting there&#8230;</string>
     <string name="password_very_strong">Yeah baby, h4x0r style!</string>
 
     <string name="label_login_wallets">Wallets</string>
@@ -47,7 +47,7 @@
     <string name="info_send_xmrto_unpaid">Payment Pending</string>
     <string name="info_send_xmrto_error">XLA.TO Error (%1$s)</string>
     <string name="info_send_xmrto_sent">BTC Sent!</string>
-    <string name="info_send_xmrto_query">Querying &#8230;</string>
+    <string name="info_send_xmrto_query">Querying&#8230;</string>
 
     <string name="info_send_xmrto_parms"><![CDATA[
         <b>You can send %1$s &#8212; %2$s BTC</b>.<br/>
@@ -94,7 +94,7 @@
     <string name="rename_progress">Rename in progress</string>
     <string name="changepw_progress">Change Password in progress</string>
 
-    <string name="service_progress">Wrapping things up &#8230;\nThis can take a while!</string>
+    <string name="service_progress">Wrapping things up&#8230;\nThis can take a while!</string>
 
     <string name="backup_success">Backup successful</string>
     <string name="backup_failed">Backup failed!</string>
@@ -106,10 +106,10 @@
     <string name="label_daemon">Node</string>
     <string name="connect_stagenet" translatable="false">Stagenet</string>
     <string name="connect_testnet" translatable="false">Testnet</string>
-    <string name="status_wallet_loading">Loading Wallet &#8230;</string>
+    <string name="status_wallet_loading">Loading Wallet&#8230;</string>
     <string name="status_wallet_unloaded">Wallet saved</string>
     <string name="status_wallet_unload_failed">Wallet save failed!</string>
-    <string name="status_wallet_connecting">Connecting &#8230;</string>
+    <string name="status_wallet_connecting">Connecting&#8230;</string>
     <string name="status_wallet_connect_failed">Node connection failed!\nCheck username/password</string>
     <string name="status_wallet_connect_wrongversion">Node version incompatible - please upgrade!</string>
     <string name="status_wallet_node_invalid">Node invalid!\nTry another.</string>
@@ -121,7 +121,7 @@
 
     <string name="send_xmrto_timeout">You waited too long my friend!</string>
 
-    <string name="service_busy">I am still busy with your last wallet &#8230;</string>
+    <string name="service_busy">I am still busy with your last wallet&#8230;</string>
 
     <string name="prompt_rename">Rename %1$s</string>
 
@@ -341,7 +341,7 @@
     <string name="accounts_balance" translatable="false">%1$s XLA</string>
     <string name="tx_account_formatted" translatable="false">(%1$d, %2$d)</string>
 
-    <string name="accounts_drawer_new">Create Account</string>
+    <string name="accounts_drawer_new">Create Stealth Address</string>
     <string name="accounts_new">Added new account #%1$d</string>
     <string name="tx_account">Account #</string>
 
@@ -403,7 +403,7 @@
     <string name="node_auth_error">AUTHENTICATION FAILED</string>
     <string name="node_result_label">Test Result:</string>
     <string name="node_result">Height: %1$s (v%2$d), Ping: %3$.0fms, IP: %4$s</string>
-    <string name="node_testing">Testing IP: %1$s &#8230;</string>
+    <string name="node_testing">Testing IP: %1$s&#8230;</string>
     <string name="node_refresh_wait">Please wait for scan to finish</string>
     <string name="node_create_hint">Touch to select or add nodes</string>
     <string name="node_pull_hint">Add nodes manually or pull down to scan</string>

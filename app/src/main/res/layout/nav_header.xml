@@ -1,28 +1,50 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="192dp"
-    android:background="@drawable/corner_radius_gradient_blue"
+    android:layout_height="212dp"
+    android:background="@color/bg_body"
     android:orientation="vertical"
-    android:padding="16dp">
+    android:paddingTop="40dp"
+    android:paddingStart="8dp">
+
+    <ImageView
+        android:layout_width="48dp"
+        android:layout_height="48dp"
+        android:layout_gravity="center_horizontal"
+        android:src="@mipmap/ic_logo_colors" />
 
     <TextView
         android:id="@+id/tvName"
         style="@style/ScalaText.Large"
-        android:textColor="@color/scalaWhite"
-        android:layout_width="match_parent"
+        android:textColor="@color/c_white"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_centerInParent="true"
+        android:layout_marginTop="16dp"
+        android:layout_gravity="center_horizontal"
+        android:textStyle="bold"
         tools:text="MyWallet" />
 
     <TextView
         android:id="@+id/tvBalance"
         style="@style/ScalaLabel.Caps.White"
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:gravity="end"
-        tools:text="12.34 XLA" />
+        android:layout_gravity="center_horizontal"
+        android:text="12.34 XLA" />
 
-</RelativeLayout>
+    <Space
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_weight="1" />
+
+    <TextView
+        style="@style/ScalaLabel.Small"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="start"
+        android:textAllCaps="true"
+        android:textStyle="bold"
+        android:text="Stealth Addresses" />
+
+</LinearLayout>
