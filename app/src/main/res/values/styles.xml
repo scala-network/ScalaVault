@@ -120,7 +120,7 @@
 
     <style name="ScalaText.PosAmount">
         <item name="android:textSize">14sp</item>
-        <item name="android:textColor">@color/txt_main</item>
+        <item name="android:textColor">@color/c_white</item>
         <item name="android:textStyle">bold</item>
     </style>
 

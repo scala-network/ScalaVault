@@ -40,6 +40,9 @@
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
+            android:insetTop="0dp"
+            android:insetBottom="0dp"
+            app:cornerRadius="0dp"
             android:drawableStart="@drawable/ic_navigate_prev_white_24dp"
             tools:text="Back" />
 
@@ -62,6 +65,9 @@
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
+            android:insetTop="0dp"
+            android:insetBottom="0dp"
+            app:cornerRadius="0dp"
             android:drawableEnd="@drawable/ic_navigate_next_white_24dp"
             tools:text="Next" />
     </LinearLayout>
