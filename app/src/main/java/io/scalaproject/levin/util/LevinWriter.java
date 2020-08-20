@@ -12,7 +12,12 @@
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
- */
+ *
+ * ////////////////
+ *
+ * Copyright (c) 2020 Scala
+ *
+ * Please see the included LICENSE file for more information.*/
 
 package io.scalaproject.vault.levin.util;
 

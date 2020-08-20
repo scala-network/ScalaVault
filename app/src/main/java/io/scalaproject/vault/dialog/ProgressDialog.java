@@ -15,7 +15,12 @@ package io.scalaproject.vault.dialog;
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
- */
+ *
+ * ////////////////
+ *
+ * Copyright (c) 2020 Scala
+ *
+ * Please see the included LICENSE file for more information.*/
 
 import android.app.AlertDialog;
 import android.content.Context;

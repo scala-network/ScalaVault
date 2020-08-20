@@ -12,7 +12,12 @@
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
- */
+ *
+ * ////////////////
+ *
+ * Copyright (c) 2020 Scala
+ *
+ * Please see the included LICENSE file for more information.*/
 
 // based on from https://stackoverflow.com/a/45325876 (which did not work for me)
 
