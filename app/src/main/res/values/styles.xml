@@ -77,7 +77,7 @@
     </style>
 
     <style name="ScalaText.Funds">
-        <item name="android:textSize">14sp</item>
+        <item name="android:textSize">16sp</item>
         <item name="android:textColor">@color/txt_main</item>
         <item name="android:textStyle">bold</item>
     </style>
@@ -93,8 +93,8 @@
         <item name="android:textStyle">normal</item>
     </style>
 
-    <style name="ScalaText.Balance.Orange">
-        <item name="android:textColor">@color/c_orange</item>
+    <style name="ScalaText.Balance.Success">
+        <item name="android:textColor">@color/c_green</item>
     </style>
 
     <style name="ScalaText.Unconfirmed">
@@ -183,6 +183,7 @@
     </style>
 
     <style name="ScalaText" parent="@android:style/TextAppearance.DeviceDefault.Medium">
+        <item name="android:textSize">14sp</item>
         <item name="android:textColor">?colorPrimary</item>
         <item name="android:textColorHint">@color/txt_inactive</item>
     </style>
@@ -215,7 +216,7 @@
     </style>
 
     <style name="ScalaText.Confirm.Label">
-        <item name="android:textSize">14sp</item>
+        <item name="android:textSize">16sp</item>
         <item name="android:textStyle">bold</item>
     </style>
 
@@ -245,7 +246,7 @@
 
     <style name="ScalaText.Button" parent="@android:style/TextAppearance.DeviceDefault.Medium">
         <item name="android:textSize">14sp</item>
-        <item name="android:textColor">@color/c_orange</item>
+        <item name="android:textColor">@color/btn_icon_default</item>
         <item name="android:textStyle">bold</item>
         <item name="android:textAllCaps">true</item>
     </style>
@@ -268,6 +269,10 @@
         <item name="backgroundTint">@color/btn_bg_default</item>
     </style>
 
+    <style name="ScalaButton.Lighter">
+        <item name="backgroundTint">@color/bg_lighter</item>
+    </style>
+
     <style name="ScalaButton.Green">
         <item name="android:background">@drawable/button_selector_green</item>
     </style>
@@ -287,7 +292,6 @@
     <style name="ScalaEdit" parent="ScalaText">
         <item name="android:textColor">?colorPrimary</item>
         <item name="android:textSize">14sp</item>
-        <item name="android:backgroundTint">@color/txt_main</item>
     </style>
 
 

@@ -6,15 +6,19 @@
     android:paddingEnd="16dp"
     android:paddingStart="16dp">
 
-    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical">
 
-        <ImageView
+        <TextView
+            style="@style/ScalaLabel.Title"
             android:layout_width="match_parent"
-            android:layout_height="48dp"
-            android:src="@drawable/ic_eye_black_24dp" />
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/header_top"
+            android:autoLink="web"
+            android:gravity="start"
+            android:text="Privacy Policy"/>
 
         <TextView
             android:id="@+id/tvCredits"

@@ -9,6 +9,9 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginEnd="8dp"
         android:orientation="vertical">
 
         <LinearLayout
@@ -30,7 +33,7 @@
                 android:orientation="horizontal">
 
                 <com.google.android.material.textfield.TextInputLayout
-                    style="@style/Widget.MaterialComponents.TextInputLayout.FilledBox"
+                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"
                     android:id="@+id/etAddress"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
@@ -60,59 +63,12 @@
                     android:layout_gravity="center"
                     android:layout_marginStart="8dp"
                     android:background="?android:selectableItemBackgroundBorderless"
-                    android:src="@drawable/ic_content_paste_orange_24dp" />
+                    android:src="@drawable/ic_content_paste_24dp" />
             </RelativeLayout>
 
-            <FrameLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content">
-
-                <TextView
-                    android:id="@+id/tvPaymentIdIntegrated"
-                    style="@style/ScalaText.Info"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="start|center_vertical"
-                    android:layout_margin="8dp"
-                    android:drawableStart="@drawable/ic_check_gray_24dp"
-                    android:drawablePadding="8dp"
-                    android:gravity="center"
-                    android:text="@string/info_paymentid_integrated"
-                    android:textSize="18sp"
-                    android:visibility="invisible" />
-
-
-                <LinearLayout
-                    android:id="@+id/llXmrTo"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center"
-                    android:orientation="horizontal"
-                    android:visibility="invisible">
-
-                    <ImageView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="top"
-                        android:paddingTop="8dp"
-                        android:src="@drawable/ic_stealth_mode_on" />
-
-                    <TextView
-                        android:id="@+id/tvXmrTo"
-                        style="@style/ScalaText.Info"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginLeft="8dp"
-                        android:layout_marginRight="8dp"
-                        android:gravity="start|top"
-                        android:singleLine="false"
-                        android:textSize="18sp"
-                        tools:text="@string/info_xmrto" />
-                </LinearLayout>
-            </FrameLayout>
 
             <com.google.android.material.textfield.TextInputLayout
-                style="@style/Widget.MaterialComponents.TextInputLayout.FilledBox"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"
                 android:id="@+id/etNotes"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">

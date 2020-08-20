@@ -63,7 +63,7 @@
             android:layout_marginEnd="8dp"
             android:indeterminate="true"
             android:indeterminateTintMode="src_atop"
-            android:indeterminateTint="@color/c_blue"
+            android:indeterminateTint="@color/bg_blue"
             android:visibility="visible" />
 
         <LinearLayout
@@ -145,6 +145,8 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_gravity="center"
+                            android:indeterminateTintMode="src_atop"
+                            android:indeterminateTint="@color/bg_blue"
                             android:indeterminate="true" />
                     </FrameLayout>
 

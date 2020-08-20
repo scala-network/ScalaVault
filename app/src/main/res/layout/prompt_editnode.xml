@@ -23,9 +23,10 @@
 
             <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/etNodeHost"
-                style="@style/Widget.MaterialComponents.TextInputLayout.FilledBox"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
+                android:layout_marginEnd="4dp"
                 android:layout_weight="8"
                 app:errorEnabled="true">
 
@@ -43,7 +44,7 @@
 
             <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/etNodePort"
-                style="@style/Widget.MaterialComponents.TextInputLayout.FilledBox"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="2"
@@ -64,7 +65,7 @@
 
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/etNodeName"
-            style="@style/Widget.MaterialComponents.TextInputLayout.FilledBox"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/data_top">
@@ -89,9 +90,10 @@
 
             <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/etNodeUser"
-                style="@style/Widget.MaterialComponents.TextInputLayout.FilledBox"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
+                android:layout_marginEnd="4dp"
                 android:layout_weight="1">
 
                 <com.google.android.material.textfield.TextInputEditText
@@ -108,7 +110,7 @@
 
             <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/etNodePass"
-                style="@style/Widget.MaterialComponents.TextInputLayout.FilledBox"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1">
@@ -133,7 +135,7 @@
 
             <TextView
                 android:id="@+id/tvResultLabel"
-                style="@style/ScalaLabel.Heading"
+                style="@style/ScalaLabel.Subtitle"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignParentStart="true"

@@ -7,7 +7,7 @@
     android:paddingStart="16dp"
     android:paddingTop="8dp">
 
-    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical">
@@ -15,7 +15,7 @@
         <ImageView
             android:layout_width="match_parent"
             android:layout_height="48dp"
-            android:src="@mipmap/ic_launcher" />
+            android:src="@mipmap/ic_logo_colors" />
 
         <TextView
             android:id="@+id/tvHelp"

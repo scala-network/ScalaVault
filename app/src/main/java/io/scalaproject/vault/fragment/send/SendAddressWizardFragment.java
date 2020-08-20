@@ -110,9 +110,6 @@ public class SendAddressWizardFragment extends SendWizardFragment {
         View view = inflater.inflate(R.layout.fragment_send_address, container, false);
 
         tvPaymentIdIntegrated = view.findViewById(R.id.tvPaymentIdIntegrated);
-        llXmrTo = view.findViewById(R.id.llXmrTo);
-        tvXmrTo = view.findViewById(R.id.tvXmrTo);
-        tvXmrTo.setText(Html.fromHtml(getString(R.string.info_xmrto)));
 
         etAddress = view.findViewById(R.id.etAddress);
         etAddress.getEditText().setRawInputType(InputType.TYPE_TEXT_FLAG_NO_SUGGESTIONS);
