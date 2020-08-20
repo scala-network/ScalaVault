@@ -208,7 +208,7 @@ public class GenerateFragment extends Fragment {
                 public void onClick(View view) {
                     if (!swFingerprintAllowed.isChecked()) return;
 
-                    AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
+                    AlertDialog.Builder builder = new AlertDialog.Builder(getActivity(), R.style.AlertDialogCustom);
                     builder.setMessage(Html.fromHtml(getString(R.string.generate_fingerprint_warn)))
                             .setCancelable(false)
                             .setPositiveButton(getString(R.string.label_ok), null)
@@ -646,7 +646,7 @@ public class GenerateFragment extends Fragment {
         if (ledgerDialog != null) return;
         final Activity activity = getActivity();
         View promptsView = getLayoutInflater().inflate(R.layout.prompt_ledger_seed, null);
-        android.app.AlertDialog.Builder alertDialogBuilder = new android.app.AlertDialog.Builder(activity);
+        android.app.AlertDialog.Builder alertDialogBuilder = new android.app.AlertDialog.Builder(activity, R.style.AlertDialogCustom);
         alertDialogBuilder.setView(promptsView);
 
         final TextInputLayout etSeed = promptsView.findViewById(R.id.etSeed);
@@ -711,6 +711,15 @@ public class GenerateFragment extends Fragment {
         if (Helper.preventScreenshot()) {
             ledgerDialog.getWindow().setFlags(WindowManager.LayoutParams.FLAG_SECURE, WindowManager.LayoutParams.FLAG_SECURE);
         }
+
+        LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(
+                LinearLayout.LayoutParams.WRAP_CONTENT,
+                LinearLayout.LayoutParams.WRAP_CONTENT
+        );
+        params.setMargins(20,0,0,0);
+
+        Button posButton = ((AlertDialog) ledgerDialog).getButton(DialogInterface.BUTTON_POSITIVE);
+        posButton.setLayoutParams(params);
 
         ledgerDialog.show();
     }

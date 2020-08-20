@@ -488,7 +488,7 @@ public class GenerateReviewFragment extends Fragment {
         LayoutInflater li = LayoutInflater.from(getActivity());
         View promptsView = li.inflate(R.layout.prompt_changepw, null);
 
-        AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(getActivity());
+        AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(getActivity(), R.style.AlertDialogCustom);
         alertDialogBuilder.setView(promptsView);
 
         final TextInputLayout etPasswordA = promptsView.findViewById(R.id.etWalletPasswordA);
@@ -507,7 +507,7 @@ public class GenerateReviewFragment extends Fragment {
                 public void onClick(View view) {
                     if (!swFingerprintAllowed.isChecked()) return;
 
-                    AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
+                    AlertDialog.Builder builder = new AlertDialog.Builder(getActivity(), R.style.AlertDialogCustom);
                     builder.setMessage(Html.fromHtml(getString(R.string.generate_fingerprint_warn)))
                             .setCancelable(false)
                             .setPositiveButton(getString(R.string.label_ok), null)
@@ -585,8 +585,8 @@ public class GenerateReviewFragment extends Fragment {
         openDialog.setOnShowListener(new DialogInterface.OnShowListener() {
             @Override
             public void onShow(final DialogInterface dialog) {
-                Button button = ((AlertDialog) dialog).getButton(AlertDialog.BUTTON_POSITIVE);
-                button.setOnClickListener(new View.OnClickListener() {
+                Button posButton = ((AlertDialog) dialog).getButton(AlertDialog.BUTTON_POSITIVE);
+                posButton.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
                         String newPasswordA = etPasswordA.getEditText().getText().toString();
@@ -604,6 +604,13 @@ public class GenerateReviewFragment extends Fragment {
                         }
                     }
                 });
+
+                LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(
+                        LinearLayout.LayoutParams.WRAP_CONTENT,
+                        LinearLayout.LayoutParams.WRAP_CONTENT
+                );
+                params.setMargins(20,0,0,0);
+                posButton.setLayoutParams(params);
             }
         });
 

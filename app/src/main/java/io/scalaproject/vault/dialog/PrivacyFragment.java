@@ -54,7 +54,7 @@ public class PrivacyFragment extends DialogFragment {
 
         ((TextView) view.findViewById(R.id.tvCredits)).setText(Html.fromHtml(getString(R.string.privacy_policy)));
 
-        AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
+        AlertDialog.Builder builder = new AlertDialog.Builder(getActivity(), R.style.AlertDialogCustom);
         builder.setView(view);
         builder.setNegativeButton(R.string.about_close,
                 new DialogInterface.OnClickListener() {

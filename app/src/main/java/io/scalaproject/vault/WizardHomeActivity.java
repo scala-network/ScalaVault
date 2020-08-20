@@ -15,6 +15,9 @@ import android.text.TextPaint;
 import android.text.method.LinkMovementMethod;
 import android.text.style.ClickableSpan;
 import android.view.View;
+import android.widget.TextView;
+
+import io.scalaproject.vault.dialog.PrivacyFragment;
 
 public class WizardHomeActivity extends BaseActivity
 {
@@ -32,14 +35,14 @@ public class WizardHomeActivity extends BaseActivity
 
         View view = findViewById(android.R.id.content).getRootView();
 
-        /*String sDisclaimerText = getResources().getString(R.string.disclaimer_agreement);
-        String sDiclaimer = getResources().getString(R.string.disclaimer);
+        String sDisclaimerText = getResources().getString(R.string.privacy_policy_intro);
+        String sDiclaimer = getResources().getString(R.string.privacy_policy_label);
 
         SpannableString ss = new SpannableString(sDisclaimerText);
         ClickableSpan clickableSpan = new ClickableSpan() {
             @Override
             public void onClick(View textView) {
-                showDisclaimer();
+                showPrivacyPolicy();
             }
 
             @Override
@@ -57,7 +60,7 @@ public class WizardHomeActivity extends BaseActivity
         tvDisclaimer.setText(ss);
         tvDisclaimer.setMovementMethod(LinkMovementMethod.getInstance());
         tvDisclaimer.setLinkTextColor(getResources().getColor(R.color.c_blue));
-        tvDisclaimer.setHighlightColor(Color.TRANSPARENT);*/
+        tvDisclaimer.setHighlightColor(Color.TRANSPARENT);
     }
 
     public void onEnterAddress(View view) {
@@ -80,7 +83,9 @@ public class WizardHomeActivity extends BaseActivity
         //Config.write("hide_setup_wizard", "1");
     }
 
-    private void showDisclaimer() {
+    private void showPrivacyPolicy() {
+        PrivacyFragment.display(getSupportFragmentManager());
+
         /*final Dialog dialog = new Dialog(this);
         dialog.setContentView(R.layout.disclaimer);
         dialog.setTitle("Disclaimer");

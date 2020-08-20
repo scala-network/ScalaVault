@@ -17,6 +17,7 @@
 package io.scalaproject.vault.fragment.send;
 
 import android.app.Activity;
+import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.os.Bundle;
 import android.os.Handler;
@@ -30,6 +31,7 @@ import android.view.ViewGroup;
 import android.view.WindowManager;
 import android.view.inputmethod.EditorInfo;
 import android.widget.Button;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -347,7 +349,7 @@ public class SendBtcConfirmWizardFragment extends SendWizardFragment implements 
     public void preSend() {
         final Activity activity = getActivity();
         View promptsView = getLayoutInflater().inflate(R.layout.prompt_password, null);
-        android.app.AlertDialog.Builder alertDialogBuilder = new android.app.AlertDialog.Builder(activity);
+        android.app.AlertDialog.Builder alertDialogBuilder = new android.app.AlertDialog.Builder(activity, R.style.AlertDialogCustom);
         alertDialogBuilder.setView(promptsView);
 
         final TextInputLayout etPassword = promptsView.findViewById(R.id.etPassword);
@@ -440,6 +442,15 @@ public class SendBtcConfirmWizardFragment extends SendWizardFragment implements 
         if (Helper.preventScreenshot()) {
             passwordDialog.getWindow().setFlags(WindowManager.LayoutParams.FLAG_SECURE, WindowManager.LayoutParams.FLAG_SECURE);
         }
+
+        LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(
+                LinearLayout.LayoutParams.WRAP_CONTENT,
+                LinearLayout.LayoutParams.WRAP_CONTENT
+        );
+        params.setMargins(20,0,0,0);
+
+        Button posButton = ((AlertDialog) passwordDialog).getButton(DialogInterface.BUTTON_POSITIVE);
+        posButton.setLayoutParams(params);
 
         passwordDialog.show();
     }

@@ -30,6 +30,7 @@ import android.view.ViewGroup;
 import android.view.WindowManager;
 import android.view.inputmethod.EditorInfo;
 import android.widget.Button;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import io.scalaproject.vault.R;
@@ -156,7 +157,7 @@ public class SendConfirmWizardFragment extends SendWizardFragment implements Sen
     }
 
     private void showAlert(String title, String message) {
-        AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
+        AlertDialog.Builder builder = new AlertDialog.Builder(getActivity(), R.style.AlertDialogCustom);
         builder.setCancelable(true).
                 setTitle(title).
                 setMessage(message).
@@ -226,7 +227,7 @@ public class SendConfirmWizardFragment extends SendWizardFragment implements Sen
     public void preSend() {
         final Activity activity = getActivity();
         View promptsView = getLayoutInflater().inflate(R.layout.prompt_password, null);
-        android.app.AlertDialog.Builder alertDialogBuilder = new android.app.AlertDialog.Builder(activity);
+        android.app.AlertDialog.Builder alertDialogBuilder = new android.app.AlertDialog.Builder(activity, R.style.AlertDialogCustom);
         alertDialogBuilder.setView(promptsView);
 
         final TextInputLayout etPassword = promptsView.findViewById(R.id.etPassword);
@@ -319,6 +320,15 @@ public class SendConfirmWizardFragment extends SendWizardFragment implements Sen
         if (Helper.preventScreenshot()) {
             passwordDialog.getWindow().setFlags(WindowManager.LayoutParams.FLAG_SECURE, WindowManager.LayoutParams.FLAG_SECURE);
         }
+
+        LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(
+                LinearLayout.LayoutParams.WRAP_CONTENT,
+                LinearLayout.LayoutParams.WRAP_CONTENT
+        );
+        params.setMargins(20,0,0,0);
+
+        Button posButton = ((android.app.AlertDialog) passwordDialog).getButton(DialogInterface.BUTTON_POSITIVE);
+        posButton.setLayoutParams(params);
 
         passwordDialog.show();
     }

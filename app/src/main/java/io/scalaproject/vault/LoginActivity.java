@@ -39,7 +39,9 @@ import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.inputmethod.EditorInfo;
+import android.widget.Button;
 import android.widget.EditText;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -336,7 +338,7 @@ public class LoginActivity extends BaseActivity
             }
         };
 
-        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        AlertDialog.Builder builder = new AlertDialog.Builder(this, R.style.AlertDialogCustom);
         AlertDialog diag = builder.setMessage(getString(R.string.details_alert_message))
                 .setPositiveButton(getString(R.string.details_alert_yes), dialogClickListener)
                 .setNegativeButton(getString(R.string.details_alert_no), dialogClickListener)
@@ -421,7 +423,7 @@ public class LoginActivity extends BaseActivity
         LayoutInflater li = LayoutInflater.from(this);
         View promptsView = li.inflate(R.layout.prompt_rename, null);
 
-        AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(this);
+        AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(this, R.style.AlertDialogCustom);
         alertDialogBuilder.setView(promptsView);
 
         final EditText etRename = promptsView.findViewById(R.id.etRename);
@@ -465,6 +467,15 @@ public class LoginActivity extends BaseActivity
                 return false;
             }
         });
+
+        LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(
+                LinearLayout.LayoutParams.WRAP_CONTENT,
+                LinearLayout.LayoutParams.WRAP_CONTENT
+        );
+        params.setMargins(20,0,0,0);
+
+        Button posButton = ((AlertDialog) dialog).getButton(DialogInterface.BUTTON_POSITIVE);
+        posButton.setLayoutParams(params);
 
         dialog.show();
     }
@@ -576,7 +587,7 @@ public class LoginActivity extends BaseActivity
             }
         };
 
-        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        AlertDialog.Builder builder = new AlertDialog.Builder(this, R.style.AlertDialogCustom);
         builder.setMessage(getString(R.string.archive_alert_message))
                 .setTitle(walletName)
                 .setPositiveButton(getString(R.string.archive_alert_yes), dialogClickListener)
@@ -1144,7 +1155,7 @@ public class LoginActivity extends BaseActivity
             currentLocaleIndex = Arrays.asList(localeDisplayName).indexOf(currentLocalizedString);
         }
 
-        AlertDialog.Builder builder = new AlertDialog.Builder(LoginActivity.this);
+        AlertDialog.Builder builder = new AlertDialog.Builder(LoginActivity.this, R.style.AlertDialogCustom);
         builder.setTitle(getString(R.string.menu_language));
         builder.setSingleChoiceItems(localeDisplayName, currentLocaleIndex, new DialogInterface.OnClickListener() {
             @Override

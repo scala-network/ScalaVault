@@ -50,7 +50,7 @@
         <h2>Contact Us</h2>
         <p>If you have any questions about our privacy policy,
         or how your data is being collected and processed,
-        please e-mail hello@scalaproject.io.
+        please e-mail <a href="mailto:hello@scalaproject.io">hello@scalaproject.io</a>.
         </p>
         ]]></string>
 </resources>

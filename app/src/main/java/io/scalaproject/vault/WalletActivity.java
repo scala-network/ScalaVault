@@ -43,7 +43,9 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.inputmethod.EditorInfo;
+import android.widget.Button;
 import android.widget.EditText;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -852,7 +854,7 @@ public class WalletActivity extends BaseActivity implements WalletFragment.Liste
             }
         };
 
-        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        AlertDialog.Builder builder = new AlertDialog.Builder(this, R.style.AlertDialogCustom);
         builder.setMessage(getString(R.string.details_alert_message))
                 .setPositiveButton(getString(R.string.details_alert_yes), dialogClickListener)
                 .setNegativeButton(getString(R.string.details_alert_no), dialogClickListener)
@@ -1079,7 +1081,7 @@ public class WalletActivity extends BaseActivity implements WalletFragment.Liste
         final LayoutInflater li = LayoutInflater.from(this);
         final View promptsView = li.inflate(R.layout.prompt_rename, null);
 
-        final AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(this);
+        final AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(this, R.style.AlertDialogCustom);
         alertDialogBuilder.setView(promptsView);
 
         final EditText etRename = promptsView.findViewById(R.id.etRename);
@@ -1125,6 +1127,15 @@ public class WalletActivity extends BaseActivity implements WalletFragment.Liste
                 return false;
             }
         });
+
+        LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(
+                LinearLayout.LayoutParams.WRAP_CONTENT,
+                LinearLayout.LayoutParams.WRAP_CONTENT
+        );
+        params.setMargins(20,0,0,0);
+
+        Button posButton = ((AlertDialog) dialog).getButton(DialogInterface.BUTTON_POSITIVE);
+        posButton.setLayoutParams(params);
 
         dialog.show();
     }

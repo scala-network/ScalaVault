@@ -66,6 +66,18 @@
                     android:src="@drawable/ic_content_paste_24dp" />
             </RelativeLayout>
 
+            <TextView
+                android:id="@+id/tvPaymentIdIntegrated"
+                style="@style/ScalaText.Info"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="start|center_vertical"
+                android:layout_margin="8dp"
+                android:drawableStart="@drawable/ic_check_gray_24dp"
+                android:drawablePadding="8dp"
+                android:gravity="center"
+                android:text="@string/info_paymentid_integrated"
+                android:visibility="visible" />
 
             <com.google.android.material.textfield.TextInputLayout
                 style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"

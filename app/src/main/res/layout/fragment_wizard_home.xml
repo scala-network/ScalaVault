@@ -160,7 +160,7 @@
 			android:layout_marginBottom="35dp"
 			android:layout_marginStart="35dp"
 			android:layout_marginEnd="35dp"
-			android:text="By using this application, you confirm your knowledge and acceptance of the Disclaimer"
+			android:text="@string/privacy_policy_intro"
 			android:textColor="@color/txt_main"
 			android:textAlignment="center"
 			android:textSize="14sp" />

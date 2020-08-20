@@ -4,21 +4,18 @@
     android:layout_height="wrap_content"
     android:paddingTop="8dp"
     android:paddingEnd="16dp"
-    android:paddingStart="16dp">
+    android:paddingStart="16dp"
+    android:background="@color/bg_body">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical">
 
-        <TextView
-            style="@style/ScalaLabel.Title"
+        <ImageView
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/header_top"
-            android:autoLink="web"
-            android:gravity="start"
-            android:text="Privacy Policy"/>
+            android:layout_height="48dp"
+            android:src="@drawable/ic_eye_black_24dp" />
 
         <TextView
             android:id="@+id/tvCredits"

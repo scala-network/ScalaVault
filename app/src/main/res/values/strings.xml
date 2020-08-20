@@ -438,4 +438,6 @@
     <string name="toast_ledger_start_app">Start Scala App on %1$s</string>
 
     <string name="menu_rescan">Rescan!</string>
+    <string name="privacy_policy_intro">We care about your privacy. To learn more, please read our Privacy Policy.</string>
+    <string name="privacy_policy_label">Privacy Policy</string>
 </resources>
