@@ -19,7 +19,7 @@
 
         <EditText
             android:id="@+id/etAmountA"
-            style="@style/ScalaText.Balance.Success"
+            style="@style/ScalaText.Small"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_gravity="center|start"
@@ -30,7 +30,8 @@
             android:padding="4dp"
             android:singleLine="true"
             android:textAlignment="textStart"
-            tools:text="87.00000" />
+            android:textStyle="bold"
+            tools:text="87.00" />
     </LinearLayout>
 
     <LinearLayout
@@ -50,7 +51,7 @@
 
         <TextView
             android:id="@+id/tvAmountB"
-            style="@style/ScalaText"
+            style="@style/ScalaText.Small"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_gravity="center|start"
