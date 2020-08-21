@@ -69,7 +69,7 @@ public class WizardHomeActivity extends BaseActivity
         startActivity(intent);
         finish();
 
-        //Config.write("hide_setup_wizard", "1");
+        Config.write(Config.CONFIG_KEY_HIDE_HOME_WIZARD, "1");
     }
 
     public void onImportFromSeed(View view) {
@@ -78,14 +78,14 @@ public class WizardHomeActivity extends BaseActivity
         startActivity(intent);
         finish();
 
-        //Config.write("hide_setup_wizard", "1");
+        Config.write(Config.CONFIG_KEY_HIDE_HOME_WIZARD, "1");
     }
 
     public void onSkip(View view) {
         startActivity(new Intent(WizardHomeActivity.this, LoginActivity.class));
         finish();
 
-        //Config.write("hide_setup_wizard", "1");
+        Config.write(Config.CONFIG_KEY_HIDE_HOME_WIZARD, "1");
     }
 
     private void showPrivacyPolicy() {
