@@ -63,17 +63,22 @@ public class WizardHomeActivity extends BaseActivity
         tvDisclaimer.setHighlightColor(Color.TRANSPARENT);
     }
 
-    public void onEnterAddress(View view) {
-        //startActivity(new Intent(WizardHomeActivity.this, WizardAddressActivity.class));
+    public void onCreateWallet(View view) {
+        Intent intent = new Intent(WizardHomeActivity.this, LoginActivity.class);
+        intent.putExtra("GenerateFragmentType", GenerateFragment.TYPE_NEW);
+        startActivity(intent);
         finish();
 
         //Config.write("hide_setup_wizard", "1");
     }
 
-    public void onCreateWallet(View view) {
-        //Uri uri = Uri.parse(getResources().getString(R.string.paper_wallet_url));
-        //Intent intent = new Intent(Intent.ACTION_VIEW, uri);
-        //startActivity(intent);
+    public void onImportFromSeed(View view) {
+        Intent intent = new Intent(WizardHomeActivity.this, LoginActivity.class);
+        intent.putExtra("GenerateFragmentType", GenerateFragment.TYPE_SEED);
+        startActivity(intent);
+        finish();
+
+        //Config.write("hide_setup_wizard", "1");
     }
 
     public void onSkip(View view) {
@@ -85,22 +90,5 @@ public class WizardHomeActivity extends BaseActivity
 
     private void showPrivacyPolicy() {
         PrivacyFragment.display(getSupportFragmentManager());
-
-        /*final Dialog dialog = new Dialog(this);
-        dialog.setContentView(R.layout.disclaimer);
-        dialog.setTitle("Disclaimer");
-        dialog.setCancelable(false);
-
-        Button btnOK = dialog.findViewById(R.id.btnAgree);
-
-        btnOK.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Config.write("disclaimer_agreed", "1");
-                dialog.dismiss();
-            }
-        });
-
-        dialog.show();*/
     }
 }

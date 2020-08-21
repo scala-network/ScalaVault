@@ -282,8 +282,15 @@ public class LoginActivity extends BaseActivity
 
         // try intents
         Intent intent = getIntent();
+
         if (!processUsbIntent(intent))
             processUriIntent(intent);
+
+        // If activity is created from Home Wizard
+        String generateFragmentType = intent.getStringExtra("GenerateFragmentType");
+        if(generateFragmentType != null && !generateFragmentType.isEmpty()) {
+            onAddWallet(generateFragmentType);
+        }
     }
 
     boolean checkServiceRunning() {
