@@ -1,7 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
-<merge xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
+    android:layout_height="match_parent"
+    android:layout_width="match_parent"
+    android:layout_marginTop="16dp"
+    android:orientation="horizontal">
 
     <ImageButton
         android:id="@+id/bMainLogo"
@@ -9,36 +12,24 @@
         android:layout_height="24dp"
         android:background="@mipmap/ic_logo_colors" />
 
-    <FrameLayout
+    <TextView
+        android:id="@+id/toolbarTitle"
+        style="@style/Toolbar.Title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="2dp"
+        android:layout_marginStart="12dp"
+        android:layout_gravity="top"
+        android:gravity="center"
+        android:visibility="invisible"
+        tools:text="Scala Vault" />
+
+    <ImageView
+        android:id="@+id/toolbarImage"
         android:layout_width="wrap_content"
         android:layout_height="match_parent"
-        android:layout_marginTop="4dp"
-        android:layout_gravity="center">
-
-        <LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:layout_gravity="center"
-            android:orientation="vertical">
-
-            <TextView
-                android:id="@+id/toolbarTitle"
-                style="@style/ScalaLabel.Title"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:gravity="center"
-                android:visibility="invisible"
-                tools:text="Scala Vault" />
-
-            <TextView
-                android:id="@+id/toolbarSubtitle"
-                style="@style/ScalaLabel.Subtitle"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:visibility="invisible"
-                tools:text="Scala Vault" />
-        </LinearLayout>
-    </FrameLayout>
-</merge>
+        android:layout_gravity="center"
+        android:layout_marginTop="-8dp"
+        android:src="@drawable/ic_scala_logo_round"
+        android:visibility="invisible" />
+</LinearLayout>

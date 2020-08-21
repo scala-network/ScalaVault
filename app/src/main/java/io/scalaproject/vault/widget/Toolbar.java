@@ -24,10 +24,12 @@
 package io.scalaproject.vault.widget;
 
 import android.content.Context;
+import android.os.Build;
 import android.util.AttributeSet;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import io.scalaproject.vault.R;
@@ -44,8 +46,9 @@ public class Toolbar extends androidx.appcompat.widget.Toolbar {
         onButtonListener = listener;
     }
 
+    ImageView toolbarImage;
     TextView toolbarTitle;
-    TextView toolbarSubtitle;
+    //TextView toolbarSubtitle;
     ImageButton bMainLogo;
 
     public Toolbar(Context context) {
@@ -80,8 +83,15 @@ public class Toolbar extends androidx.appcompat.widget.Toolbar {
     protected void onFinishInflate() {
         super.onFinishInflate();
 
+        toolbarImage = findViewById(R.id.toolbarImage);
+        if (Build.VERSION.SDK_INT < Build.VERSION_CODES.N) {
+            // the vector image does not work well for androis < Nougat
+            toolbarImage.getLayoutParams().width = (int) getResources().getDimension(R.dimen.logo_width);
+            toolbarImage.setImageResource(R.drawable.ic_scala_logo_round);
+        }
+
         toolbarTitle = findViewById(R.id.toolbarTitle);
-        toolbarSubtitle = findViewById(R.id.toolbarSubtitle);
+        //toolbarSubtitle = findViewById(R.id.toolbarSubtitle);
 
         bMainLogo = findViewById(R.id.bMainLogo);
         bMainLogo.setOnClickListener(new View.OnClickListener() {
@@ -96,6 +106,18 @@ public class Toolbar extends androidx.appcompat.widget.Toolbar {
     public void setTitle(String title, String subtitle) {
         setTitle(title);
         setSubtitle(subtitle);
+    }
+
+    public void setTitle(String title) {
+        toolbarTitle.setText(title);
+        if (title != null) {
+            toolbarImage.setVisibility(View.INVISIBLE);
+            toolbarTitle.setVisibility(View.VISIBLE);
+            //setButton(BUTTON_NONE);
+        } else {
+            toolbarImage.setVisibility(View.INVISIBLE);
+            toolbarTitle.setVisibility(View.INVISIBLE);
+        }
     }
 
     public final static int BUTTON_NONE = 0;

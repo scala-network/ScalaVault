@@ -56,7 +56,7 @@
     </style>
 
     <style name="ItemMenuTextAppearance" parent="@android:style/TextAppearance.Widget.IconMenu.Item">
-        <item name="android:textColor">@color/txt_main</item>
+        <item name="android:textColor">@color/c_white</item>
     </style>
 
 
@@ -183,6 +183,22 @@
         <item name="android:textSize">16sp</item>
         <item name="android:textColor">@color/txt_inactive</item>
         <item name="android:textStyle">bold</item>
+    </style>
+
+    <style name="Toolbar" parent="@android:style/TextAppearance.DeviceDefault.Medium">
+        <item name="android:textColor">?colorPrimary</item>
+        <item name="android:textColorHint">@color/txt_inactive</item>
+    </style>
+
+    <style name="Toolbar.Title">
+        <item name="android:textSize">16sp</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:textColor">@color/txt_headline</item>
+    </style>
+
+    <style name="Toolbar.Subtitle">
+        <item name="android:textSize">14sp</item>
+        <item name="android:textColor">@color/txt_secondary</item>
     </style>
 
     <style name="ScalaFab" parent="@android:style/TextAppearance.DeviceDefault.Medium">

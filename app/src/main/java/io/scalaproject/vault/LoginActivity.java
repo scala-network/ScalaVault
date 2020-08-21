@@ -215,7 +215,7 @@ public class LoginActivity extends BaseActivity
 
     @Override
     public void setToolbarButton(int type) {
-        //toolbar.setButton(type);
+        toolbar.setButton(type);
     }
 
     @Override
