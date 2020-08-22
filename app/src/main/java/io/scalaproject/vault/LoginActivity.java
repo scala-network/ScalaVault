@@ -196,7 +196,6 @@ public class LoginActivity extends BaseActivity
     private void addFavourite(String nodeString) {
         NodeInfo nodeInfo = NodeInfo.fromString(nodeString);
         if (nodeInfo != null) {
-            Timber.w("NODE STRING ISSS!!! %s", nodeString);
             nodeInfo.setFavourite(true);
             favouriteNodes.add(nodeInfo);
         } else
@@ -779,7 +778,7 @@ public class LoginActivity extends BaseActivity
                 // If request is cancelled, the result arrays are empty.
                 if (grantResults.length > 0
                         && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-                    startLoginFragment = true;
+                    //startLoginFragment = true;
                 } else {
                     String msg = getString(R.string.message_strorage_not_permitted);
                     Timber.e(msg);

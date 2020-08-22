@@ -1,12 +1,12 @@
 apply plugin: 'com.android.application'
 
 android {
-    compileSdkVersion 29
+    compileSdkVersion 28
     buildToolsVersion '29.0.2'
     defaultConfig {
         applicationId "io.scalaproject.vault"
         minSdkVersion 21
-        targetSdkVersion 29
+        targetSdkVersion 28
         versionCode 1
         versionName "0.1.0"
 
@@ -96,13 +96,13 @@ android {
 }
 
 dependencies {
-    implementation 'com.google.android.material:material:1.0.0'
+    implementation 'com.google.android.material:material:1.2.0'
     implementation "com.android.support:support-v4"
     implementation "com.android.support:recyclerview-v7"
     implementation 'androidx.cardview:cardview:1.0.0'
-    implementation 'androidx.swiperefreshlayout:swiperefreshlayout:1.0.0'
-    implementation 'com.google.android.material:material:1.1.0'
-    implementation 'androidx.appcompat:appcompat:1.1.0'
+    implementation 'androidx.swiperefreshlayout:swiperefreshlayout:1.1.0'
+    implementation 'com.google.android.material:material:1.2.0'
+    implementation 'androidx.appcompat:appcompat:1.2.0'
     implementation 'androidx.legacy:legacy-support-v4:1.0.0'
 
     implementation 'me.dm7.barcodescanner:zxing:1.9.8'
