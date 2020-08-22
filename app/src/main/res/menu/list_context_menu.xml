@@ -2,9 +2,9 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
 
     <item
-        android:id="@+id/action_streetmode"
+        android:id="@+id/action_StealthMode"
         android:orderInCategory="50"
-        android:title="@string/menu_streetmode" />
+        android:title="@string/menu_StealthMode" />
 
     <item
         android:id="@+id/action_receive"

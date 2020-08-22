@@ -146,7 +146,7 @@ public class SendAmountWizardFragment extends SendWizardFragment {
         Helper.showKeyboard(getActivity());
         final long funds = getTotalFunds();
         maxFunds = 1.0 * funds / 100L;
-        if (!sendListener.getActivityCallback().isStreetMode()) {
+        if (!sendListener.getActivityCallback().isStealthMode()) {
             tvFunds.setText(getString(R.string.send_available,
                     Wallet.getDisplayAmount(funds)));
         } else {

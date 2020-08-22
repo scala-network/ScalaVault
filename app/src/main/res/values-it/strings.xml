@@ -337,7 +337,7 @@
     <string name="status_wallet_connect_wrongversion">Versione del nodo incompatibile - si prega di aggiornare!</string>
 
     <string name="menu_info">Mostra i segreti!</string>
-    <string name="menu_streetmode">Modalità strada</string>
+    <string name="menu_StealthMode">Modalità strada</string>
 
     <string name="info_nodes_enabled">Node-o-matiC abilitato, tocca per maggiori informazioni.</string>
     <string name="node_height">Ultimo blocco aggiornato: %1$s</string>

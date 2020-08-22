@@ -144,7 +144,7 @@ public class SendBtcAmountWizardFragment extends SendWizardFragment {
         super.onResumeFragment();
         Timber.d("onResumeFragment()");
         final long funds = getTotalFunds();
-        if (!sendListener.getActivityCallback().isStreetMode()) {
+        if (!sendListener.getActivityCallback().isStealthMode()) {
             tvFunds.setText(getString(R.string.send_available,
                     Wallet.getDisplayAmount(funds)));
         } else {
@@ -195,7 +195,7 @@ public class SendBtcAmountWizardFragment extends SendWizardFragment {
 
                 String availBtcString;
                 String availXmrString;
-                if (!sendListener.getActivityCallback().isStreetMode()) {
+                if (!sendListener.getActivityCallback().isStealthMode()) {
                     availBtcString = df.format(availableXmr * orderParameters.getPrice());
                     availXmrString = df.format(availableXmr);
                 } else {

@@ -325,7 +325,7 @@
     <string name="nfc_tag_tap">NFC disponível!</string>
 
     <string name="menu_info">Mostrar Segredos!</string>
-    <string name="menu_streetmode">Modo Rua</string>
+    <string name="menu_StealthMode">Modo Rua</string>
 
     <string name="info_nodes_enabled">Nó-auto-mágiCo ativado, toque para mais informações.</string>
     <string name="node_height">Último bloco sincronizado em: %1$s</string>

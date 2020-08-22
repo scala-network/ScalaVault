@@ -334,7 +334,7 @@
     <string name="status_wallet_connect_wrongversion">節點版本不相容 - 請盡速更新！</string>
 
     <string name="menu_info">顯示私鑰資訊</string>
-    <string name="menu_streetmode">低調模式</string>
+    <string name="menu_StealthMode">低調模式</string>
 
     <string name="info_nodes_enabled">節點管理工具已啟用，點選了解更多。</string>
     <string name="node_height">最後區塊更新時間：%1$s</string>

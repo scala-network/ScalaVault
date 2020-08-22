@@ -214,7 +214,7 @@ public class SendConfirmWizardFragment extends SendWizardFragment implements Sen
             llConfirmSend.setVisibility(View.VISIBLE);
             bSend.setEnabled(true);
             tvTxFee.setText(Wallet.getDisplayAmount(pendingTransaction.getFee()));
-            if (getActivityCallback().isStreetMode()
+            if (getActivityCallback().isStealthMode()
                     && (sendListener.getTxData().getAmount() == Wallet.SWEEP_ALL)) {
                 tvTxAmount.setText(getString(R.string.street_sweep_amount));
                 tvTxTotal.setText(getString(R.string.street_sweep_amount));

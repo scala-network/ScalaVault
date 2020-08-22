@@ -335,7 +335,7 @@
     <string name="nfc_tag_tap">NFC dostupno!</string>
 
     <string name="menu_info">Pokaži tajne!</string>
-    <string name="menu_streetmode">Ulični mod</string>
+    <string name="menu_StealthMode">Ulični mod</string>
 
     <string name="info_nodes_enabled">Node-o-matiC (skener udaljenog čvora) omogućen, tapni za više info.</string>
     <string name="node_height">Poslednji blok ažuriran: %1$s</string>

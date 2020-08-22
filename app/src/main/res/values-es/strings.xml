@@ -324,7 +324,7 @@
 
     <string name="menu_info">Detalles</string><!--Changed to: Show Secrets!-->
 
-    <string name="menu_streetmode">Modo Público</string>
+    <string name="menu_StealthMode">Modo Público</string>
 
     <string name="info_nodes_enabled">Nodo-o-matiC habilitado, toque para más información.</string>
     <string name="node_height">Último bloque actualizado: %1$s</string>

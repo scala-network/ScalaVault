@@ -333,7 +333,7 @@
     <string name="nfc_tag_tap">NFC Disponible!</string>
 
     <string name="menu_info">Mostra Secrets!</string>
-    <string name="menu_streetmode">Mode de Carrer</string>
+    <string name="menu_StealthMode">Mode de Carrer</string>
 
     <string name="info_nodes_enabled">Node-o-matiC habilitat, premi aquí per més informació.</string>
     <string name="node_height">Últim bloc actualitzat: %1$s</string>

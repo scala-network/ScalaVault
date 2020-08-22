@@ -262,7 +262,7 @@
     <string name="nfc_tag_read_success">NFC标签读取成功</string>
     <string name="nfc_tag_tap">NFC可用！</string>
     <string name="menu_info">显示私密信息</string>
-    <string name="menu_streetmode">公共场合模式</string>
+    <string name="menu_StealthMode">公共场合模式</string>
     <string name="info_nodes_enabled">Node-o-matiC已可用，点此了解更多.</string>
     <string name="node_height">同步的最新区块: %1$s</string>
     <string name="label_nodes">节点</string>

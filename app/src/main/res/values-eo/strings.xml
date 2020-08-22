@@ -334,7 +334,7 @@
 
 
     <string name="menu_info">Montru sekretojn!</string>
-    <string name="menu_streetmode">Strata moduso</string>
+    <string name="menu_StealthMode">Strata moduso</string>
 
 
     <string name="info_nodes_enabled">Node-o-matiC permesiĝas, frapetu por detaloj.</string>

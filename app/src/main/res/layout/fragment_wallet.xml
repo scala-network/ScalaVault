@@ -113,7 +113,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginStart="@dimen/header_top_first"
                     android:layout_gravity="start|bottom"
-                    android:text="@string/menu_streetmode"
+                    android:text="@string/menu_StealthMode"
                     android:visibility="invisible" />
 
                 <LinearLayout

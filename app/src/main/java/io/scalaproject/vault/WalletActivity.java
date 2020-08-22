@@ -87,9 +87,10 @@ public class WalletActivity extends BaseActivity implements WalletFragment.Liste
         NavigationView.OnNavigationItemSelectedListener {
 
     public static final String REQUEST_ID = "id";
+    public static final String REQUEST_ADDRESS = "address";
     public static final String REQUEST_PW = "pw";
     public static final String REQUEST_FINGERPRINT_USED = "fingerprint";
-    public static final String REQUEST_STREETMODE = "streetmode";
+    public static final String REQUEST_STEALTHMODE = "stealthmode";
     public static final String REQUEST_URI = "uri";
 
     private NavigationView accountsView;
@@ -98,13 +99,13 @@ public class WalletActivity extends BaseActivity implements WalletFragment.Liste
 
     private Toolbar toolbar;
     private boolean needVerifyIdentity;
-    private boolean requestStreetMode = false;
+    private boolean requestStealthMode = false;
 
     private String password;
 
     private String uri = null;
 
-    private long streetMode = 0;
+    private long stealthMode = 0;
 
     @Override
     public void onPasswordChanged(String newPassword) {
@@ -145,16 +146,16 @@ public class WalletActivity extends BaseActivity implements WalletFragment.Liste
     }
 
     @Override
-    public boolean isStreetMode() {
-        return streetMode > 0;
+    public boolean isStealthMode() {
+        return stealthMode > 0;
     }
 
-    private void enableStreetMode(boolean enable) {
+    private void enableStealthMode(boolean enable) {
         if (enable) {
             needVerifyIdentity = true;
-            streetMode = getWallet().getDaemonBlockChainHeight();
+            stealthMode = getWallet().getDaemonBlockChainHeight();
         } else {
-            streetMode = 0;
+            stealthMode = 0;
         }
         final WalletFragment walletFragment = (WalletFragment)
                 getSupportFragmentManager().findFragmentByTag(WalletFragment.class.getName());
@@ -169,8 +170,8 @@ public class WalletActivity extends BaseActivity implements WalletFragment.Liste
     }
 
     @Override
-    public long getStreetModeHeight() {
-        return streetMode;
+    public long getStealthModeHeight() {
+        return stealthMode;
     }
 
     @Override
@@ -208,13 +209,13 @@ public class WalletActivity extends BaseActivity implements WalletFragment.Liste
         Bundle extras = getIntent().getExtras();
         if (extras != null) {
             acquireWakeLock();
-            String walletId = extras.getString(REQUEST_ID);
+            String walletName = extras.getString(REQUEST_ID);
             needVerifyIdentity = extras.getBoolean(REQUEST_FINGERPRINT_USED);
-            // we can set the streetmode height AFTER opening the wallet
-            requestStreetMode = extras.getBoolean(REQUEST_STREETMODE);
+            // we can set the stealthMode height AFTER opening the wallet
+            requestStealthMode = extras.getBoolean(REQUEST_STEALTHMODE);
             password = extras.getString(REQUEST_PW);
             uri = extras.getString(REQUEST_URI);
-            connectWalletService(walletId, password);
+            connectWalletService(walletName, password);
         } else {
             finish();
             //throw new IllegalStateException("No extras passed! Panic!");
@@ -240,10 +241,10 @@ public class WalletActivity extends BaseActivity implements WalletFragment.Liste
         }
     }
 
-    private void updateWalletFragmentAddress() {
+    private void initWalletFragmentAddress(String walletName, String walletAddress) {
         final WalletFragment walletFragment = (WalletFragment)
                 getSupportFragmentManager().findFragmentByTag(WalletFragment.class.getName());
-        walletFragment.setActivityTitle(getWallet());
+        walletFragment.initWalletText(walletName, walletAddress);
     }
 
     @Override
@@ -274,12 +275,12 @@ public class WalletActivity extends BaseActivity implements WalletFragment.Liste
         if (renameItem != null)
             renameItem.setEnabled(hasWallet() && getWallet().isSynchronized());
 
-        MenuItem streetmodeItem = menu.findItem(R.id.action_streetmode);
-        if (streetmodeItem != null) {
-            if (isStreetMode()) {
-                streetmodeItem.setIcon(R.drawable.ic_stealth_mode_off);
+        MenuItem stealthModeItem = menu.findItem(R.id.action_StealthMode);
+        if (stealthModeItem != null) {
+            if (isStealthMode()) {
+                stealthModeItem.setIcon(R.drawable.ic_stealth_mode_off);
             } else {
-                streetmodeItem.setIcon(R.drawable.ic_stealth_mode_on);
+                stealthModeItem.setIcon(R.drawable.ic_stealth_mode_on);
             }
         }
 
@@ -323,13 +324,13 @@ public class WalletActivity extends BaseActivity implements WalletFragment.Liste
             case R.id.action_rename:
                 onAccountRename();
                 return true;
-            case R.id.action_streetmode:
-                if (isStreetMode()) { // disable streetmode
+            case R.id.action_StealthMode:
+                if (isStealthMode()) { // disable stealthMode
                     item.setIcon(R.drawable.ic_stealth_mode_on);
-                    onDisableStreetMode();
+                    onDisableStealthMode();
                 } else {
                     item.setIcon(R.drawable.ic_stealth_mode_off);
-                    onEnableStreetMode();
+                    onEnableStealthMode();
                 }
                 return true;
             default:
@@ -337,18 +338,18 @@ public class WalletActivity extends BaseActivity implements WalletFragment.Liste
         }
     }
 
-    private void onEnableStreetMode() {
-        enableStreetMode(true);
+    private void onEnableStealthMode() {
+        enableStealthMode(true);
     }
 
-    private void onDisableStreetMode() {
+    private void onDisableStealthMode() {
         Helper.promptPassword(WalletActivity.this, getWallet().getName(), false, new Helper.PasswordAction() {
             @Override
             public void action(String walletName, String password, boolean fingerprintUsed) {
                 runOnUiThread(new Runnable() {
                     @Override
                     public void run() {
-                        enableStreetMode(false);
+                        enableStealthMode(false);
                     }
                 });
             }
@@ -450,15 +451,18 @@ public class WalletActivity extends BaseActivity implements WalletFragment.Liste
             mBoundService.setObserver(WalletActivity.this);
             Bundle extras = getIntent().getExtras();
             if (extras != null) {
-                String walletId = extras.getString(REQUEST_ID);
-                if (walletId != null) {
-                    setTitle(walletId, getString(R.string.status_wallet_connecting));
+                String walletName = extras.getString(REQUEST_ID);
+                if (walletName != null) {
+                    setTitle(walletName, getString(R.string.status_wallet_connecting));
+                }
+
+                String walletAddress = extras.getString(REQUEST_ADDRESS);
+                if (walletName != null && walletAddress != null) {
+                    initWalletFragmentAddress(walletName, walletAddress);
                 }
             }
 
             updateProgress();
-
-            updateWalletFragmentAddress();
 
             Timber.d("CONNECTED");
         }
@@ -666,7 +670,7 @@ public class WalletActivity extends BaseActivity implements WalletFragment.Liste
             haveWallet = true;
             invalidateOptionsMenu();
 
-            enableStreetMode(requestStreetMode);
+            enableStealthMode(requestStealthMode);
 
             final WalletFragment walletFragment = (WalletFragment)
                     getSupportFragmentManager().findFragmentById(R.id.fragment_container);
@@ -1047,7 +1051,7 @@ public class WalletActivity extends BaseActivity implements WalletFragment.Liste
 
     void updateAccountsBalance() {
         final TextView tvBalance = accountsView.getHeaderView(0).findViewById(R.id.tvBalance);
-        if (!isStreetMode()) {
+        if (!isStealthMode()) {
             tvBalance.setText(getString(R.string.accounts_balance,
                     Helper.getDisplayAmount(getWallet().getBalanceAll(), 5)));
         } else {
@@ -1067,7 +1071,7 @@ public class WalletActivity extends BaseActivity implements WalletFragment.Liste
         Menu menu = accountsView.getMenu();
         menu.removeGroup(R.id.accounts_list);
         final int n = wallet.getNumAccounts();
-        final boolean showBalances = (n > 1) && !isStreetMode();
+        final boolean showBalances = (n > 1) && !isStealthMode();
         for (int i = 0; i < n; i++) {
             final String label = (showBalances ?
                     getString(R.string.label_account, i == 0 ? getString(R.string.primary_address) : wallet.getAccountLabel(i), Helper.getDisplayAmount(wallet.getBalance(i), 2))

@@ -123,7 +123,7 @@ public class SendSuccessWizardFragment extends SendWizardFragment {
             bCopyTxId.setEnabled(true);
             bCopyTxId.setImageResource(R.drawable.ic_content_copy_24dp);
 
-            if (sendListener.getActivityCallback().isStreetMode()
+            if (sendListener.getActivityCallback().isStealthMode()
                     && (sendListener.getTxData().getAmount() == Wallet.SWEEP_ALL)) {
                 tvTxAmount.setText(getString(R.string.street_sweep_amount));
             } else {

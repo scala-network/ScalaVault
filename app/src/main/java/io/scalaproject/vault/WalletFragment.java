@@ -151,12 +151,12 @@ public class WalletFragment extends Fragment
                         new SwipeableRecyclerViewTouchListener.SwipeListener() {
                             @Override
                             public boolean canSwipeLeft(int position) {
-                                return activityCallback.isStreetMode();
+                                return activityCallback.isStealthMode();
                             }
 
                             @Override
                             public boolean canSwipeRight(int position) {
-                                return activityCallback.isStreetMode();
+                                return activityCallback.isStealthMode();
                             }
 
                             @Override
@@ -216,7 +216,7 @@ public class WalletFragment extends Fragment
 
     void showBalance(String balance) {
         tvBalance.setText(balance);
-        if (!activityCallback.isStreetMode()) {
+        if (!activityCallback.isStealthMode()) {
             llBalance.setVisibility(View.VISIBLE);
             tvStealthMode.setVisibility(View.INVISIBLE);
         } else {
@@ -226,7 +226,7 @@ public class WalletFragment extends Fragment
     }
 
     void showUnconfirmed(double unconfirmedAmount) {
-        if (!activityCallback.isStreetMode() && unconfirmedAmount > 0.0) {
+        if (!activityCallback.isStealthMode() && unconfirmedAmount > 0.0) {
             tvUnconfirmedAmount.setVisibility(View.VISIBLE);
             String unconfirmed = Helper.getFormattedAmount(unconfirmedAmount, true);
             tvUnconfirmedAmount.setText(getResources().getString(R.string.xmr_unconfirmed_amount, unconfirmed));
@@ -352,7 +352,7 @@ public class WalletFragment extends Fragment
         Timber.d("onRefreshed(%b)", full);
         if (full) {
             List<TransactionInfo> list = new ArrayList<>();
-            final long streetHeight = activityCallback.getStreetModeHeight();
+            final long streetHeight = activityCallback.getStealthModeHeight();
             Timber.d("StreetHeight=%d", streetHeight);
             for (TransactionInfo info : wallet.getHistory().getAll()) {
                 Timber.d("TxHeight=%d", info.blockheight);
@@ -425,13 +425,23 @@ public class WalletFragment extends Fragment
         }
     }
 
+    public void initWalletText(String walletName, String walletAddress) {
+        llWalletAddress.setVisibility(View.VISIBLE);
+
+        ivAddressType.setImageDrawable(getResources().getDrawable(R.drawable.ic_primary_address));
+        tvAddressType.setText("Primary Address");
+
+        tvWalletName.setText(walletName);
+        tvWalletAddress.setText(Helper.getPrettyAddress(walletAddress));
+    }
+
     public void setActivityTitle(Wallet wallet) {
         if (wallet == null) return;
 
+        llWalletAddress.setVisibility(View.VISIBLE);
+
         walletTitle = wallet.getName();
         tvWalletName.setText(walletTitle);
-
-        llWalletAddress.setVisibility(View.VISIBLE);
 
         if(accountIdx <= 0) { // Primary Address
             ivAddressType.setImageDrawable(getResources().getDrawable(R.drawable.ic_primary_address));
@@ -523,9 +533,9 @@ public class WalletFragment extends Fragment
 
         boolean isSynced();
 
-        boolean isStreetMode();
+        boolean isStealthMode();
 
-        long getStreetModeHeight();
+        long getStealthModeHeight();
 
         boolean isWatchOnly();
 

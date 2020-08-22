@@ -3,11 +3,11 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <item
-        android:id="@+id/action_streetmode"
+        android:id="@+id/action_StealthMode"
         android:checkable="true"
         android:icon="@drawable/ic_stealth_mode_on"
         android:orderInCategory="100"
-        android:title="@string/menu_streetmode"
+        android:title="@string/menu_StealthMode"
         app:showAsAction="ifRoom" />
 
     <item

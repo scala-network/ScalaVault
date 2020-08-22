@@ -330,7 +330,7 @@
     <string name="status_wallet_connect_wrongversion">Serveri versioon ei sobi - palun uuenda!</string>
 
     <string name="menu_info">Näita salajast infot</string>
-    <string name="menu_streetmode">Avalik režiim</string>
+    <string name="menu_StealthMode">Avalik režiim</string>
 
     <string name="info_nodes_enabled">Node-o-matiC sisse lülitatud, puuduta lisainfo saamiseks.</string>
     <string name="node_height">Viimane uuendatud plokk: %1$s</string>

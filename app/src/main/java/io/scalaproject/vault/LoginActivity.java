@@ -303,14 +303,14 @@ public class LoginActivity extends BaseActivity
     }
 
     @Override
-    public boolean onWalletSelected(String walletName, boolean streetmode) {
+    public boolean onWalletSelected(String walletName, String walletAddress, boolean stealthMode) {
         if (node == null) {
             Toast.makeText(this, getString(R.string.prompt_daemon_missing), Toast.LENGTH_SHORT).show();
             return false;
         }
         if (checkServiceRunning()) return false;
         try {
-            new AsyncOpenWallet(walletName, node, streetmode).execute();
+            new AsyncOpenWallet(walletName, walletAddress, node, stealthMode).execute();
         } catch (IllegalArgumentException ex) {
             Timber.e(ex.getLocalizedMessage());
             Toast.makeText(this, ex.getLocalizedMessage(), Toast.LENGTH_SHORT).show();
@@ -738,14 +738,14 @@ public class LoginActivity extends BaseActivity
         }
     }
 
-    void startWallet(String walletName, String walletPassword,
-                     boolean fingerprintUsed, boolean streetmode) {
+    void startWallet(String walletName, String walletAddress, String walletPassword, boolean fingerprintUsed, boolean stealthMode) {
         Timber.d("startWallet()");
         Intent intent = new Intent(getApplicationContext(), WalletActivity.class);
         intent.putExtra(WalletActivity.REQUEST_ID, walletName);
+        intent.putExtra(WalletActivity.REQUEST_ADDRESS, walletAddress);
         intent.putExtra(WalletActivity.REQUEST_PW, walletPassword);
         intent.putExtra(WalletActivity.REQUEST_FINGERPRINT_USED, fingerprintUsed);
-        intent.putExtra(WalletActivity.REQUEST_STREETMODE, streetmode);
+        intent.putExtra(WalletActivity.REQUEST_STEALTHMODE, stealthMode);
         if (uri != null) {
             intent.putExtra(WalletActivity.REQUEST_URI, uri);
             uri = null; // use only once
@@ -1264,13 +1264,15 @@ public class LoginActivity extends BaseActivity
         final static int IOEX = 3;
 
         private final String walletName;
+        private final String walletAddress;
         private final NodeInfo node;
-        private final boolean streetmode;
+        private final boolean stealthMode;
 
-        AsyncOpenWallet(String walletName, NodeInfo node, boolean streetmode) {
+        AsyncOpenWallet(String walletName, String walletAddress, NodeInfo node, boolean stealthMode) {
             this.walletName = walletName;
+            this.walletAddress = walletAddress;
             this.node = node;
-            this.streetmode = streetmode;
+            this.stealthMode = stealthMode;
         }
 
         @Override
@@ -1293,7 +1295,7 @@ public class LoginActivity extends BaseActivity
             if (result) {
                 Timber.d("selected wallet is .%s.", node.getName());
                 // now it's getting real, onValidateFields if wallet exists
-                promptAndStart(walletName, node, streetmode);
+                promptAndStart(walletName, walletAddress, node, stealthMode);
             } else {
                 if (node.getResponseCode() == 0) { // IOException
                     Toast.makeText(LoginActivity.this, getString(R.string.status_wallet_node_invalid), Toast.LENGTH_LONG).show();
@@ -1326,7 +1328,7 @@ public class LoginActivity extends BaseActivity
         return false;
     }
 
-    void promptAndStart(String walletName, Node node, final boolean streetmode) {
+    void promptAndStart(String walletName, final String walletAddress, Node node, final boolean stealthMode) {
         File walletFile = Helper.getWalletFile(this, walletName);
         if (WalletManager.getInstance().walletExists(walletFile)) {
             Helper.promptPassword(LoginActivity.this, walletName, false,
@@ -1334,7 +1336,7 @@ public class LoginActivity extends BaseActivity
                         @Override
                         public void action(String walletName, String password, boolean fingerprintUsed) {
                             if (checkDevice(walletName, password))
-                                startWallet(walletName, password, fingerprintUsed, streetmode);
+                                startWallet(walletName, walletAddress, password, fingerprintUsed, stealthMode);
                         }
                     });
         } else { // this cannot really happen as we prefilter choices

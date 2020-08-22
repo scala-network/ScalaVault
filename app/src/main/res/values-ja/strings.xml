@@ -339,7 +339,7 @@
     <string name="unknown_amount" translatable="false">\?\?\?</string>
 
     <string name="menu_info">シークレットを見せてください!</string>
-    <string name="menu_streetmode">ストリートモード</string>
+    <string name="menu_StealthMode">ストリートモード</string>
 
     <string name="node_wrong_net" translatable="false">ノードのスキャンはメインネット専用です!</string>
 

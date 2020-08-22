@@ -82,7 +82,7 @@ public class LoginFragment extends Fragment implements WalletInfoAdapter.OnInter
     public interface Listener {
         File getStorageRoot();
 
-        boolean onWalletSelected(String wallet, boolean streetmode);
+        boolean onWalletSelected(String wallet, String walletAddress, boolean stealthMode);
 
         void onWalletDetails(String wallet);
 
@@ -228,18 +228,18 @@ public class LoginFragment extends Fragment implements WalletInfoAdapter.OnInter
             Toast.makeText(getActivity(), getString(R.string.prompt_wrong_net), Toast.LENGTH_LONG).show();
             return;
         }
-        openWallet(infoItem.name, false);
+        openWallet(infoItem.name, infoItem.address, false);
     }
 
-    private void openWallet(String name, boolean streetmode) {
-        activityCallback.onWalletSelected(name, streetmode);
+    private void openWallet(String name, String address, boolean stealthMode) {
+        activityCallback.onWalletSelected(name, address, stealthMode);
     }
 
     @Override
     public boolean onContextInteraction(MenuItem item, WalletManager.WalletInfo listItem) {
         switch (item.getItemId()) {
-            case R.id.action_streetmode:
-                openWallet(listItem.name, true);
+            case R.id.action_StealthMode:
+                openWallet(listItem.name, listItem.address, true);
                 break;
             case R.id.action_info:
                 showInfo(listItem.name);

@@ -334,7 +334,7 @@
 
     <string name="menu_info">Ukázať Tajné Kľúče</string><!--Changed to: Show Secrets!-->
 
-    <string name="menu_streetmode">Mód Ulica</string>
+    <string name="menu_StealthMode">Mód Ulica</string>
     <string name="info_nodes_enabled">Node-o-matiC povolený, klepni pre viac info.</string>
     <string name="node_height">Posledný blok aktualizovaný: %1$s</string>
     <string name="label_nodes">Uzly</string>

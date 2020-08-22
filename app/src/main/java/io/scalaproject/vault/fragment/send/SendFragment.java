@@ -76,7 +76,7 @@ public class SendFragment extends Fragment
 
         long getTotalFunds();
 
-        boolean isStreetMode();
+        boolean isStealthMode();
 
         void onPrepareSend(String tag, TxData data);
 
