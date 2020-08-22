@@ -325,8 +325,10 @@ public class WalletActivity extends BaseActivity implements WalletFragment.Liste
                 return true;
             case R.id.action_streetmode:
                 if (isStreetMode()) { // disable streetmode
+                    item.setIcon(R.drawable.ic_stealth_mode_on);
                     onDisableStreetMode();
                 } else {
+                    item.setIcon(R.drawable.ic_stealth_mode_off);
                     onEnableStreetMode();
                 }
                 return true;

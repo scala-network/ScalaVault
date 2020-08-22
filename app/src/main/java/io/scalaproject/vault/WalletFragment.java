@@ -66,7 +66,7 @@ public class WalletFragment extends Fragment
     private TransactionInfoAdapter txInfoAdapter;
     private NumberFormat formatter = NumberFormat.getInstance();
 
-    private TextView tvStreetView;
+    private TextView tvStealthMode;
     private LinearLayout llBalance, llWalletAddress;
     private FrameLayout flExchange;
     private TextView tvBalance, tvUnconfirmedAmount, tvAddressType;
@@ -104,7 +104,7 @@ public class WalletFragment extends Fragment
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_wallet, container, false);
 
-        tvStreetView = view.findViewById(R.id.tvStreetView);
+        tvStealthMode = view.findViewById(R.id.tvStreetView);
         llBalance = view.findViewById(R.id.llBalance);
         flExchange = view.findViewById(R.id.flExchange);
         ((ProgressBar) view.findViewById(R.id.pbExchange)).getIndeterminateDrawable().
@@ -218,10 +218,10 @@ public class WalletFragment extends Fragment
         tvBalance.setText(balance);
         if (!activityCallback.isStreetMode()) {
             llBalance.setVisibility(View.VISIBLE);
-            tvStreetView.setVisibility(View.INVISIBLE);
+            tvStealthMode.setVisibility(View.INVISIBLE);
         } else {
             llBalance.setVisibility(View.INVISIBLE);
-            tvStreetView.setVisibility(View.VISIBLE);
+            tvStealthMode.setVisibility(View.VISIBLE);
         }
     }
 
