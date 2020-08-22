@@ -41,7 +41,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:src="@drawable/ic_done_all"
-                android:visibility="gone" />
+                android:visibility="visible" />
 
             <TextView
                 android:id="@+id/tvProgress"
@@ -49,7 +49,7 @@
                 android:layout_height="wrap_content"
                 android:visibility="visible"
                 android:layout_gravity="center"
-                android:textColor="@color/txt_secondary"
+                android:textColor="@color/txt_main"
                 android:textSize="12sp"
                 tools:text="Synced 4674 blocks" />
         </LinearLayout>
