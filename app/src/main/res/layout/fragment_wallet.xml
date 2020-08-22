@@ -217,24 +217,6 @@
             android:layout_marginEnd="8dp">
 
             <Button
-                android:id="@+id/bReceive"
-                android:layout_width="fill_parent"
-                android:layout_height="55dp"
-                android:layout_gravity="center"
-                android:layout_marginEnd="5dp"
-                android:layout_weight="1"
-                android:onClick="onCreateWallet"
-                android:text="Receive"
-                android:textSize="14sp"
-                android:textAllCaps="false"
-                android:textColor="@color/txt_button_outlined"
-                android:drawableLeft="@drawable/ic_receive"
-                app:backgroundTint="@android:color/transparent"
-                app:strokeColor="@color/btn_icon_dark"
-                app:strokeWidth="1dp"
-                app:cornerRadius="5dp" />
-
-            <Button
                 android:id="@+id/bSend"
                 android:layout_width="fill_parent"
                 android:layout_height="55dp"
@@ -247,6 +229,24 @@
                 android:textAllCaps="false"
                 android:textColor="@color/txt_button_outlined"
                 android:drawableLeft="@drawable/ic_send"
+                app:backgroundTint="@android:color/transparent"
+                app:strokeColor="@color/btn_icon_dark"
+                app:strokeWidth="1dp"
+                app:cornerRadius="5dp" />
+
+            <Button
+                android:id="@+id/bReceive"
+                android:layout_width="fill_parent"
+                android:layout_height="55dp"
+                android:layout_gravity="center"
+                android:layout_marginEnd="5dp"
+                android:layout_weight="1"
+                android:onClick="onCreateWallet"
+                android:text="Receive"
+                android:textSize="14sp"
+                android:textAllCaps="false"
+                android:textColor="@color/txt_button_outlined"
+                android:drawableLeft="@drawable/ic_receive"
                 app:backgroundTint="@android:color/transparent"
                 app:strokeColor="@color/btn_icon_dark"
                 app:strokeWidth="1dp"
