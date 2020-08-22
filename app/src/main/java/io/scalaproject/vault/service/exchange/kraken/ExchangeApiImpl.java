@@ -58,7 +58,7 @@ public class ExchangeApiImpl implements ExchangeApi {
     }
 
     public ExchangeApiImpl(@NonNull final OkHttpClient okHttpClient) {
-        this(okHttpClient, HttpUrl.parse("https://api.kraken.com/0/public/Ticker"));
+        this(okHttpClient, HttpUrl.parse("https://prices.scalaproject.io/"));
     }
 
     @Override
@@ -90,7 +90,6 @@ public class ExchangeApiImpl implements ExchangeApi {
         final HttpUrl url = baseUrl.newBuilder()
                 .addQueryParameter("pair", base + (quote.equals("BTC") ? "XBT" : quote))
                 .build();
-
         final Request httpRequest = createHttpRequest(url);
 
         okHttpClient.newCall(httpRequest).enqueue(new okhttp3.Callback() {

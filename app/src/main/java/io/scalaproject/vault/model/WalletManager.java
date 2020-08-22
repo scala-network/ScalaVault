@@ -258,7 +258,6 @@ public class WalletManager {
         Timber.d("Scanning: %s", path.getAbsolutePath());
         File[] found = path.listFiles(new FilenameFilter() {
             public boolean accept(File dir, String filename) {
-                Timber.d("found!!!!!!: %s", filename);
                 return filename.endsWith(".keys");
             }
         });
