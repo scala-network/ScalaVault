@@ -380,7 +380,7 @@
     <string name="unknown_amount" translatable="false">\?\?\?</string>
 
     <string name="menu_info">Show Secrets!</string>
-    <string name="menu_streetmode">Street Mode</string>
+    <string name="menu_streetmode">Stealth Mode</string>
 
     <string name="node_wrong_net" translatable="false">Node scanning only for mainnet!</string>
 
