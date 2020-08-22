@@ -67,11 +67,11 @@ public class WalletFragment extends Fragment
     private NumberFormat formatter = NumberFormat.getInstance();
 
     private TextView tvStreetView;
-    private LinearLayout llBalance;
+    private LinearLayout llBalance, llWalletAddress;
     private FrameLayout flExchange;
-    private TextView tvBalance, tvUnconfirmedAmount;
+    private TextView tvBalance, tvUnconfirmedAmount, tvAddressType;
     private TextView tvProgress, tvWalletName, tvWalletAddress;
-    private ImageView ivSynced;
+    private ImageView ivSynced, ivAddressType;
     private ProgressBar pbProgress;
     private Button bReceive, bSend;
     private TextView tvNoTransaction;
@@ -122,6 +122,12 @@ public class WalletFragment extends Fragment
         showUnconfirmed(0);
 
         ivSynced = view.findViewById(R.id.ivSynced);
+
+        llWalletAddress = view.findViewById(R.id.llWalletAddress);
+        llWalletAddress.setVisibility(View.INVISIBLE);
+
+        tvAddressType = view.findViewById(R.id.tvAddressType);
+        ivAddressType = view.findViewById(R.id.ivAddressType);
 
         tvNoTransaction = view.findViewById(R.id.tvNoTransaction);
         rvTransactions = view.findViewById(R.id.rvTransactions);
@@ -419,14 +425,21 @@ public class WalletFragment extends Fragment
         }
     }
 
-    void setActivityTitle(Wallet wallet) {
+    public void setActivityTitle(Wallet wallet) {
         if (wallet == null) return;
 
         walletTitle = wallet.getName();
-        walletSubtitle = wallet.getAccountLabel();
-
-        String walletTitleTmp = walletSubtitle.isEmpty() ? walletTitle : walletTitle + " - " + walletSubtitle;
         tvWalletName.setText(walletTitle);
+
+        llWalletAddress.setVisibility(View.VISIBLE);
+
+        if(accountIdx <= 0) { // Primary Address
+            ivAddressType.setImageDrawable(getResources().getDrawable(R.drawable.ic_primary_address));
+            tvAddressType.setText("Primary Address");
+        } else { // Stealth Address
+            ivAddressType.setImageDrawable(getResources().getDrawable(R.drawable.ic_stealth_address));
+            tvAddressType.setText("Stealth Address");
+        }
 
         tvWalletAddress.setText(Helper.getPrettyAddress(wallet.getAddress()));
 
@@ -444,17 +457,21 @@ public class WalletFragment extends Fragment
 
     private void updateStatus(Wallet wallet) {
         if (!isAdded()) return;
+
         Timber.d("updateStatus()");
         if ((walletTitle == null) || (accountIdx != wallet.getAccountIndex())) {
             accountIdx = wallet.getAccountIndex();
             setActivityTitle(wallet);
         }
+
         balance = wallet.getBalance();
         unlockedBalance = wallet.getUnlockedBalance();
         refreshBalance();
+
         String sync = "";
         if (!activityCallback.hasBoundService())
             throw new IllegalStateException("WalletService not bound.");
+
         Wallet.ConnectionStatus daemonConnected = activityCallback.getConnectionStatus();
         if (daemonConnected == Wallet.ConnectionStatus.ConnectionStatus_Connected) {
             if (!wallet.isSynchronized()) {
@@ -486,8 +503,6 @@ public class WalletFragment extends Fragment
             rvTransactions.setVisibility(View.GONE);
             tvNoTransaction.setVisibility(View.VISIBLE);
         }
-
-        // TODO show connected status somewhere
     }
 
     Listener activityCallback;

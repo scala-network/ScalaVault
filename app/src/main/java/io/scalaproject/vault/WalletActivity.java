@@ -240,6 +240,12 @@ public class WalletActivity extends BaseActivity implements WalletFragment.Liste
         }
     }
 
+    private void updateWalletFragmentAddress() {
+        final WalletFragment walletFragment = (WalletFragment)
+                getSupportFragmentManager().findFragmentByTag(WalletFragment.class.getName());
+        walletFragment.setActivityTitle(getWallet());
+    }
+
     @Override
     protected void onStop() {
         Timber.d("onStop()");
@@ -418,6 +424,7 @@ public class WalletActivity extends BaseActivity implements WalletFragment.Liste
         Timber.d("fragment added");
 
         startWalletService();
+
         Timber.d("onCreate() done.");
     }
 
@@ -446,7 +453,11 @@ public class WalletActivity extends BaseActivity implements WalletFragment.Liste
                     setTitle(walletId, getString(R.string.status_wallet_connecting));
                 }
             }
+
             updateProgress();
+
+            updateWalletFragmentAddress();
+
             Timber.d("CONNECTED");
         }
 
@@ -1059,11 +1070,14 @@ public class WalletActivity extends BaseActivity implements WalletFragment.Liste
             final String label = (showBalances ?
                     getString(R.string.label_account, i == 0 ? getString(R.string.primary_address) : wallet.getAccountLabel(i), Helper.getDisplayAmount(wallet.getBalance(i), 2))
                     : wallet.getAccountLabel(i));
+
             final MenuItem item = menu.add(R.id.accounts_list, getAccountId(i), 2 * i, label);
-            item.setIcon(R.drawable.ic_account_balance_wallet_24dp);
+            item.setIcon(i == 0 ? R.drawable.ic_primary_address : R.drawable.ic_stealth_address);
+
             if (i == wallet.getAccountIndex())
                 item.setChecked(true);
         }
+
         menu.setGroupCheckable(R.id.accounts_list, true, true);
     }
 
