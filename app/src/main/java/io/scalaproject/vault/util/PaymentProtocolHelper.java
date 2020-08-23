@@ -70,7 +70,7 @@ public class PaymentProtocolHelper {
         if ((bip70 == null) || (bip70.isEmpty()))
             return false; //pointless trying to lookup nothing
         Timber.d("Resolving %s", bip70);
-        getXmrToApi().createOrder(bip70, new XlaToCallback<CreateOrder>() {
+        getxlaToApi().createOrder(bip70, new XlaToCallback<CreateOrder>() {
             @Override
             public void onSuccess(CreateOrder createOrder) {
                 if (resolvedListener != null) {
@@ -91,17 +91,17 @@ public class PaymentProtocolHelper {
         return true;
     }
 
-    static private XlaToApi xmrToApi = null;
+    static private XlaToApi xlaToApi = null;
 
-    static private XlaToApi getXmrToApi() {
-        if (xmrToApi == null) {
+    static private XlaToApi getxlaToApi() {
+        if (xlaToApi == null) {
             synchronized (PaymentProtocolHelper.class) {
-                if (xmrToApi == null) {
-                    xmrToApi = new XlaToApiImpl(OkHttpHelper.getOkHttpClient(),
-                            Helper.getXmrToBaseUrl());
+                if (xlaToApi == null) {
+                    xlaToApi = new XlaToApiImpl(OkHttpHelper.getOkHttpClient(),
+                            Helper.getxlaToBaseUrl());
                 }
             }
         }
-        return xmrToApi;
+        return xlaToApi;
     }
 }

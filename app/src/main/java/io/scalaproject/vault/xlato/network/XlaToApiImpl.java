@@ -91,7 +91,7 @@ public class XlaToApiImpl implements XlaToApi, XlaToApiCall {
     public void call(@NonNull final String path, final JSONObject request, @NonNull final NetworkCallback callback) {
         final HttpUrl url = baseUrl.newBuilder()
                 .addPathSegment(path)
-                .addPathSegment("") // xmr.to needs a trailing slash!
+                .addPathSegment("") // xla.to needs a trailing slash!
                 .build();
 
         Timber.d(url.toString());
@@ -121,7 +121,7 @@ public class XlaToApiImpl implements XlaToApi, XlaToApiCall {
                         final JSONObject json = new JSONObject(response.body().string());
                         Timber.d(json.toString(2));
                         final XlaToError error = new XlaToError(json);
-                        Timber.e("xmr.to says %d/%s", response.code(), error.toString());
+                        Timber.e("xla.to says %d/%s", response.code(), error.toString());
                         callback.onError(new XlaToException(response.code(), error));
                     } catch (JSONException ex) {
                         callback.onError(new XlaToException(response.code()));

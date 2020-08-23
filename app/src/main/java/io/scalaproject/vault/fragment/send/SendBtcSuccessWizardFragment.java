@@ -68,12 +68,12 @@ public class SendBtcSuccessWizardFragment extends SendWizardFragment {
     private TextView tvTxPaymentId;
     private TextView tvTxAmount;
     private TextView tvTxFee;
-    private TextView tvXmrToAmount;
-    private TextView tvXmrToStatus;
-    private ImageView ivXmrToStatus;
-    private ImageView ivXmrToStatusBig;
-    private ProgressBar pbXmrto;
-    private TextView tvTxXmrToKey;
+    private TextView tvxlaToAmount;
+    private TextView tvxlaToStatus;
+    private ImageView ivxlaToStatus;
+    private ImageView ivxlaToStatusBig;
+    private ProgressBar pbxlato;
+    private TextView tvTxxlaToKey;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -93,10 +93,10 @@ public class SendBtcSuccessWizardFragment extends SendWizardFragment {
             }
         });
 
-        tvXmrToAmount = view.findViewById(R.id.tvXmrToAmount);
-        tvXmrToStatus = view.findViewById(R.id.tvXmrToStatus);
-        ivXmrToStatus = view.findViewById(R.id.ivXmrToStatus);
-        ivXmrToStatusBig = view.findViewById(R.id.ivXmrToStatusBig);
+        tvxlaToAmount = view.findViewById(R.id.tvxlaToAmount);
+        tvxlaToStatus = view.findViewById(R.id.tvxlaToStatus);
+        ivxlaToStatus = view.findViewById(R.id.ivxlaToStatus);
+        ivxlaToStatusBig = view.findViewById(R.id.ivxlaToStatusBig);
 
         tvTxId = view.findViewById(R.id.tvTxId);
         tvTxAddress = view.findViewById(R.id.tvTxAddress);
@@ -104,15 +104,15 @@ public class SendBtcSuccessWizardFragment extends SendWizardFragment {
         tvTxAmount = view.findViewById(R.id.tvTxAmount);
         tvTxFee = view.findViewById(R.id.tvTxFee);
 
-        pbXmrto = view.findViewById(R.id.pbXmrto);
-        pbXmrto.getIndeterminateDrawable().setColorFilter(0x61000000, android.graphics.PorterDuff.Mode.MULTIPLY);
+        pbxlato = view.findViewById(R.id.pbxlato);
+        pbxlato.getIndeterminateDrawable().setColorFilter(0x61000000, android.graphics.PorterDuff.Mode.MULTIPLY);
 
-        tvTxXmrToKey = view.findViewById(R.id.tvTxXmrToKey);
-        tvTxXmrToKey.setOnClickListener(new View.OnClickListener() {
+        tvTxxlaToKey = view.findViewById(R.id.tvTxxlaToKey);
+        tvTxxlaToKey.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Helper.clipBoardCopy(getActivity(), getString(R.string.label_copy_xmrtokey), tvTxXmrToKey.getText().toString());
-                Toast.makeText(getActivity(), getString(R.string.message_copy_xmrtokey), Toast.LENGTH_SHORT).show();
+                Helper.clipBoardCopy(getActivity(), getString(R.string.label_copy_xlatokey), tvTxxlaToKey.getText().toString());
+                Toast.makeText(getActivity(), getString(R.string.message_copy_xlatokey), Toast.LENGTH_SHORT).show();
             }
         });
 
@@ -155,9 +155,9 @@ public class SendBtcSuccessWizardFragment extends SendWizardFragment {
                 NumberFormat df = NumberFormat.getInstance(Locale.US);
                 df.setMaximumFractionDigits(12);
                 String btcAmount = df.format(btcData.getBtcAmount());
-                tvXmrToAmount.setText(getString(R.string.info_send_xmrto_success_btc, btcAmount));
+                tvxlaToAmount.setText(getString(R.string.info_send_xlato_success_btc, btcAmount));
                 //TODO         btcData.getBtcAddress();
-                tvTxXmrToKey.setText(btcData.getXmrtoUuid());
+                tvTxxlaToKey.setText(btcData.getxlatoUuid());
                 queryOrder();
             } else {
                 throw new IllegalStateException("btcData is null");
@@ -170,13 +170,13 @@ public class SendBtcSuccessWizardFragment extends SendWizardFragment {
 
     private void processQueryOrder(final QueryOrderStatus status) {
         Timber.d("processQueryOrder %s for %s", status.getState().toString(), status.getUuid());
-        if (!btcData.getXmrtoUuid().equals(status.getUuid()))
+        if (!btcData.getxlatoUuid().equals(status.getUuid()))
             throw new IllegalStateException("UUIDs do not match!");
         if (isResumed && (getView() != null))
             getView().post(new Runnable() {
                 @Override
                 public void run() {
-                    showXmrToStatus(status);
+                    showxlaToStatus(status);
                     if (!status.isTerminal()) {
                         getView().postDelayed(new Runnable() {
                             @Override
@@ -190,9 +190,9 @@ public class SendBtcSuccessWizardFragment extends SendWizardFragment {
     }
 
     private void queryOrder() {
-        Timber.d("queryOrder(%s)", btcData.getXmrtoUuid());
+        Timber.d("queryOrder(%s)", btcData.getxlatoUuid());
         if (!isResumed) return;
-        getXmrToApi().queryOrderStatus(btcData.getXmrtoUuid(), new XlaToCallback<QueryOrderStatus>() {
+        getxlaToApi().queryOrderStatus(btcData.getxlatoUuid(), new XlaToCallback<QueryOrderStatus>() {
             @Override
             public void onSuccess(QueryOrderStatus status) {
                 if (!isAdded()) return;
@@ -219,46 +219,46 @@ public class SendBtcSuccessWizardFragment extends SendWizardFragment {
 
     private int statusResource = 0;
 
-    void showXmrToStatus(final QueryOrderStatus status) {
+    void showxlaToStatus(final QueryOrderStatus status) {
         if (status.isError()) {
-            tvXmrToStatus.setText(getString(R.string.info_send_xmrto_error, status.toString()));
+            tvxlaToStatus.setText(getString(R.string.info_send_xlato_error, status.toString()));
             statusResource = R.drawable.ic_error_red_24dp;
-            pbXmrto.getIndeterminateDrawable().setColorFilter(0xff8b0000, android.graphics.PorterDuff.Mode.MULTIPLY);
+            pbxlato.getIndeterminateDrawable().setColorFilter(0xff8b0000, android.graphics.PorterDuff.Mode.MULTIPLY);
         } else if (status.isSent()) {
-            tvXmrToStatus.setText(getString(R.string.info_send_xmrto_sent));
+            tvxlaToStatus.setText(getString(R.string.info_send_xlato_sent));
             statusResource = R.drawable.ic_success_green_24dp;
-            pbXmrto.getIndeterminateDrawable().setColorFilter(0xFF417505, android.graphics.PorterDuff.Mode.MULTIPLY);
+            pbxlato.getIndeterminateDrawable().setColorFilter(0xFF417505, android.graphics.PorterDuff.Mode.MULTIPLY);
         } else if (status.isPending()) {
             if (status.isPaid()) {
-                tvXmrToStatus.setText(getString(R.string.info_send_xmrto_paid));
+                tvxlaToStatus.setText(getString(R.string.info_send_xlato_paid));
             } else {
-                tvXmrToStatus.setText(getString(R.string.info_send_xmrto_unpaid));
+                tvxlaToStatus.setText(getString(R.string.info_send_xlato_unpaid));
             }
-            statusResource = R.drawable.ic_pending_orange_24dp;
-            pbXmrto.getIndeterminateDrawable().setColorFilter(0xFFFF6105, android.graphics.PorterDuff.Mode.MULTIPLY);
+            statusResource = R.drawable.ic_pending_24dp;
+            pbxlato.getIndeterminateDrawable().setColorFilter(0xFFFF6105, android.graphics.PorterDuff.Mode.MULTIPLY);
         } else {
             throw new IllegalStateException("status is broken: " + status.toString());
         }
-        ivXmrToStatus.setImageResource(statusResource);
+        ivxlaToStatus.setImageResource(statusResource);
         if (status.isTerminal()) {
-            pbXmrto.setVisibility(View.INVISIBLE);
-            ivXmrToStatus.setVisibility(View.GONE);
-            ivXmrToStatusBig.setImageResource(statusResource);
-            ivXmrToStatusBig.setVisibility(View.VISIBLE);
+            pbxlato.setVisibility(View.INVISIBLE);
+            ivxlaToStatus.setVisibility(View.GONE);
+            ivxlaToStatusBig.setImageResource(statusResource);
+            ivxlaToStatusBig.setVisibility(View.VISIBLE);
         }
     }
 
-    private XlaToApi xmrToApi = null;
+    private XlaToApi xlaToApi = null;
 
-    private final XlaToApi getXmrToApi() {
-        if (xmrToApi == null) {
+    private final XlaToApi getxlaToApi() {
+        if (xlaToApi == null) {
             synchronized (this) {
-                if (xmrToApi == null) {
-                    xmrToApi = new XlaToApiImpl(OkHttpHelper.getOkHttpClient(),
-                            Helper.getXmrToBaseUrl());
+                if (xlaToApi == null) {
+                    xlaToApi = new XlaToApiImpl(OkHttpHelper.getOkHttpClient(),
+                            Helper.getxlaToBaseUrl());
                 }
             }
         }
-        return xmrToApi;
+        return xlaToApi;
     }
 }

@@ -513,8 +513,9 @@ public class NodeFragment extends Fragment
             );
             params.setMargins(20,0,0,0);
 
-            Button posButton = ((AlertDialog) editDialog).getButton(DialogInterface.BUTTON_POSITIVE);
-            posButton.setLayoutParams(params);
+            Button posButton = editDialog.getButton(DialogInterface.BUTTON_POSITIVE);
+            if(posButton != null)
+                posButton.setLayoutParams(params);
 
             if (Helper.preventScreenshot()) {
                 editDialog.getWindow().setFlags(WindowManager.LayoutParams.FLAG_SECURE, WindowManager.LayoutParams.FLAG_SECURE);

@@ -25,7 +25,7 @@ import android.os.Parcel;
 
 public class TxDataBtc extends TxData {
 
-    private String xmrtoUuid;
+    private String xlatoUuid;
     private String btcAddress;
     private String bip70;
     private double btcAmount;
@@ -38,12 +38,12 @@ public class TxDataBtc extends TxData {
         super(txDataBtc);
     }
 
-    public String getXmrtoUuid() {
-        return xmrtoUuid;
+    public String getxlatoUuid() {
+        return xlatoUuid;
     }
 
-    public void setXmrtoUuid(String xmrtoUuid) {
-        this.xmrtoUuid = xmrtoUuid;
+    public void setxlatoUuid(String xlatoUuid) {
+        this.xlatoUuid = xlatoUuid;
     }
 
     public String getBtcAddress() {
@@ -73,7 +73,7 @@ public class TxDataBtc extends TxData {
     @Override
     public void writeToParcel(Parcel out, int flags) {
         super.writeToParcel(out, flags);
-        out.writeString(xmrtoUuid);
+        out.writeString(xlatoUuid);
         out.writeString(btcAddress);
         out.writeString(bip70);
         out.writeDouble(btcAmount);
@@ -92,7 +92,7 @@ public class TxDataBtc extends TxData {
 
     protected TxDataBtc(Parcel in) {
         super(in);
-        xmrtoUuid = in.readString();
+        xlatoUuid = in.readString();
         btcAddress = in.readString();
         bip70 = in.readString();
         btcAmount = in.readDouble();
@@ -101,8 +101,8 @@ public class TxDataBtc extends TxData {
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder();
-        sb.append(",xmrtoUuid:");
-        sb.append(xmrtoUuid);
+        sb.append(",xlatoUuid:");
+        sb.append(xlatoUuid);
         sb.append(",btcAddress:");
         sb.append(btcAddress);
         sb.append(",bip70:");

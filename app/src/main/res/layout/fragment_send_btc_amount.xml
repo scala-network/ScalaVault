@@ -21,13 +21,13 @@
         android:layout_height="wrap_content">
 
         <io.scalaproject.vault.widget.SendProgressView
-            android:id="@+id/evXmrToParms"
+            android:id="@+id/evxlaToParms"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="center" />
 
         <LinearLayout
-            android:id="@+id/llXmrToParms"
+            android:id="@+id/llxlaToParms"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
@@ -39,10 +39,10 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="top"
                 android:paddingTop="8dp"
-                android:src="@drawable/ic_xmrto_32dp" />
+                android:src="@drawable/ic_xlato_32dp" />
 
             <TextView
-                android:id="@+id/tvXmrToParms"
+                android:id="@+id/tvxlaToParms"
                 style="@style/ScalaText.Info"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -50,7 +50,7 @@
                 android:layout_marginLeft="8dp"
                 android:layout_marginRight="8dp"
                 android:singleLine="false"
-                tools:text="@string/info_send_xmrto_parms" />
+                tools:text="@string/info_send_xlato_parms" />
 
         </LinearLayout>
     </FrameLayout>

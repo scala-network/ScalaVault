@@ -48,12 +48,12 @@
                             android:layout_height="wrap_content"
                             android:layout_marginBottom="8dp"
                             android:drawablePadding="8dp"
-                            android:drawableStart="@drawable/ic_xmrto_32dp"
+                            android:drawableStart="@drawable/ic_xlato_32dp"
                             android:gravity="center_vertical"
-                            android:text="@string/label_send_btc_xmrto_key" />
+                            android:text="@string/label_send_btc_xlato_key" />
 
                         <TextView
-                            android:id="@+id/tvTxXmrToKey"
+                            android:id="@+id/tvTxxlaToKey"
                             style="@style/ScalaText"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
@@ -73,7 +73,7 @@
                             android:layout_height="wrap_content"
                             android:layout_marginTop="8dp"
                             android:gravity="center_vertical"
-                            android:text="@string/label_send_btc_xmrto_info" />
+                            android:text="@string/label_send_btc_xlato_info" />
 
                         <TextView
                             style="@style/ScalaText.Confirm.Label"

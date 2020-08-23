@@ -86,7 +86,7 @@ public class SendBtcConfirmWizardFragment extends SendWizardFragment implements 
     private TextView tvTxBtcAmount;
     private TextView tvTxBtcRate;
     private TextView tvTxBtcAddress;
-    private TextView tvTxXmrToKey;
+    private TextView tvTxxlaToKey;
     private TextView tvTxFee;
     private TextView tvTxTotal;
     private View llConfirmSend;
@@ -105,7 +105,7 @@ public class SendBtcConfirmWizardFragment extends SendWizardFragment implements 
         tvTxBtcAddress = view.findViewById(R.id.tvTxBtcAddress);
         tvTxBtcAmount = view.findViewById(R.id.tvTxBtcAmount);
         tvTxBtcRate = view.findViewById(R.id.tvTxBtcRate);
-        tvTxXmrToKey = view.findViewById(R.id.tvTxXmrToKey);
+        tvTxxlaToKey = view.findViewById(R.id.tvTxxlaToKey);
 
         tvTxFee = view.findViewById(R.id.tvTxFee);
         tvTxTotal = view.findViewById(R.id.tvTxTotal);
@@ -118,11 +118,11 @@ public class SendBtcConfirmWizardFragment extends SendWizardFragment implements 
         llStageC = view.findViewById(R.id.llStageC);
         evStageC = view.findViewById(R.id.evStageC);
 
-        tvTxXmrToKey.setOnClickListener(new View.OnClickListener() {
+        tvTxxlaToKey.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Helper.clipBoardCopy(getActivity(), getString(R.string.label_copy_xmrtokey), tvTxXmrToKey.getText().toString());
-                Toast.makeText(getActivity(), getString(R.string.message_copy_xmrtokey), Toast.LENGTH_SHORT).show();
+                Helper.clipBoardCopy(getActivity(), getString(R.string.label_copy_xlatokey), tvTxxlaToKey.getText().toString());
+                Toast.makeText(getActivity(), getString(R.string.message_copy_xlatokey), Toast.LENGTH_SHORT).show();
             }
         });
 
@@ -212,11 +212,11 @@ public class SendBtcConfirmWizardFragment extends SendWizardFragment implements 
         Timber.d("SEND @%d", sendCountdown);
         if (sendCountdown <= 0) {
             Timber.i("User waited too long in password dialog.");
-            Toast.makeText(getContext(), getString(R.string.send_xmrto_timeout), Toast.LENGTH_SHORT).show();
+            Toast.makeText(getContext(), getString(R.string.send_xlato_timeout), Toast.LENGTH_SHORT).show();
             return;
         }
-        sendListener.getTxData().getUserNotes().setXmrtoStatus(xmrtoStatus);
-        ((TxDataBtc) sendListener.getTxData()).setXmrtoUuid(xmrtoStatus.getUuid());
+        sendListener.getTxData().getUserNotes().setxlatoStatus(xlatoStatus);
+        ((TxDataBtc) sendListener.getTxData()).setxlatoUuid(xlatoStatus.getUuid());
         // TODO make method in TxDataBtc to set both of the above in one go
         sendListener.commitTransaction();
         pbProgressSend.setVisibility(View.VISIBLE);
@@ -233,9 +233,9 @@ public class SendBtcConfirmWizardFragment extends SendWizardFragment implements 
     public void transactionCreated(final String txTag, final PendingTransaction pendingTransaction) {
         if (isResumed
                 && (inProgress == STAGE_C)
-                && (xmrtoStatus != null)
-                && (xmrtoStatus.isCreated()
-                && (xmrtoStatus.getUuid().equals(txTag)))) {
+                && (xlatoStatus != null)
+                && (xlatoStatus.isCreated()
+                && (xlatoStatus.getUuid().equals(txTag)))) {
             this.pendingTransaction = pendingTransaction;
             getView().post(new Runnable() {
                 @Override
@@ -321,7 +321,7 @@ public class SendBtcConfirmWizardFragment extends SendWizardFragment implements 
                 if (sendCountdown <= 0) {
                     bSend.setEnabled(false);
                     sendCountdown = 0;
-                    Toast.makeText(getContext(), getString(R.string.send_xmrto_timeout), Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getContext(), getString(R.string.send_xlato_timeout), Toast.LENGTH_SHORT).show();
                 }
                 int minutes = sendCountdown / 60;
                 int seconds = sendCountdown % 60;
@@ -464,33 +464,33 @@ public class SendBtcConfirmWizardFragment extends SendWizardFragment implements 
     // or createTransactionFailed()
     void prepareSend() {
         if (!isResumed) return;
-        if ((xmrtoStatus == null)) {
-            throw new IllegalStateException("xmrtoStatus is null");
+        if ((xlatoStatus == null)) {
+            throw new IllegalStateException("xlatoStatus is null");
         }
-        if ((!xmrtoStatus.isCreated())) {
+        if ((!xlatoStatus.isCreated())) {
             throw new IllegalStateException("order is not created");
         }
         showProgress(3, getString(R.string.label_send_progress_create_tx));
         TxData txData = sendListener.getTxData();
-        txData.setDestinationAddress(xmrtoStatus.getReceivingSubaddress());
-        txData.setAmount(Wallet.getAmountFromDouble(xmrtoStatus.getIncomingAmountTotal()));
-        getActivityCallback().onPrepareSend(xmrtoStatus.getUuid(), txData);
+        txData.setDestinationAddress(xlatoStatus.getReceivingSubaddress());
+        txData.setAmount(Wallet.getAmountFromDouble(xlatoStatus.getIncomingAmountTotal()));
+        getActivityCallback().onPrepareSend(xlatoStatus.getUuid(), txData);
     }
 
     SendFragment.Listener getActivityCallback() {
         return sendListener.getActivityCallback();
     }
 
-    private CreateOrder xmrtoOrder = null;
+    private CreateOrder xlatoOrder = null;
 
     private void processCreateOrder(final CreateOrder createOrder) {
         Timber.d("processCreateOrder %s", createOrder.getUuid());
-        xmrtoOrder = createOrder;
+        xlatoOrder = createOrder;
         if (QueryOrderStatus.State.TO_BE_CREATED.toString().equals(createOrder.getState())) {
             getView().post(new Runnable() {
                 @Override
                 public void run() {
-                    tvTxXmrToKey.setText(createOrder.getUuid());
+                    tvTxxlaToKey.setText(createOrder.getUuid());
                     tvTxBtcAddress.setText(createOrder.getBtcDestAddress());
                     hideProgress();
                 }
@@ -507,11 +507,11 @@ public class SendBtcConfirmWizardFragment extends SendWizardFragment implements 
             @Override
             public void run() {
                 if (ex instanceof XlaToException) {
-                    XlaToException xmrEx = (XlaToException) ex;
-                    XlaToError xmrErr = xmrEx.getError();
-                    if (xmrErr != null) {
-                        if (xmrErr.isRetryable()) {
-                            showStageError(xmrErr.getErrorId().toString(), xmrErr.getErrorMsg(),
+                    XlaToException xlaEx = (XlaToException) ex;
+                    XlaToError xlaErr = xlaEx.getError();
+                    if (xlaErr != null) {
+                        if (xlaErr.isRetryable()) {
+                            showStageError(xlaErr.getErrorId().toString(), xlaErr.getErrorMsg(),
                                     getString(R.string.text_retry));
                             evStageA.setOnClickListener(new View.OnClickListener() {
                                 @Override
@@ -521,16 +521,16 @@ public class SendBtcConfirmWizardFragment extends SendWizardFragment implements 
                                 }
                             });
                         } else {
-                            showStageError(xmrErr.getErrorId().toString(), xmrErr.getErrorMsg(),
+                            showStageError(xlaErr.getErrorId().toString(), xlaErr.getErrorMsg(),
                                     getString(R.string.text_noretry));
                         }
                     } else {
-                        showStageError(getString(R.string.label_generic_xmrto_error),
-                                getString(R.string.text_generic_xmrto_error, xmrEx.getCode()),
+                        showStageError(getString(R.string.label_generic_xlato_error),
+                                getString(R.string.text_generic_xlato_error, xlaEx.getCode()),
                                 getString(R.string.text_noretry));
                     }
                 } else {
-                    evStageA.showMessage(getString(R.string.label_generic_xmrto_error),
+                    evStageA.showMessage(getString(R.string.label_generic_xlato_error),
                             ex.getLocalizedMessage(),
                             getString(R.string.text_noretry));
                 }
@@ -541,16 +541,16 @@ public class SendBtcConfirmWizardFragment extends SendWizardFragment implements 
     private void createOrder() {
         if (!isResumed) return;
         Timber.d("createOrder");
-        xmrtoOrder = null;
-        xmrtoStatus = null;
-        showProgress(1, getString(R.string.label_send_progress_xmrto_create));
+        xlatoOrder = null;
+        xlatoStatus = null;
+        showProgress(1, getString(R.string.label_send_progress_xlato_create));
         TxDataBtc txDataBtc = (TxDataBtc) sendListener.getTxData();
 
         XlaToCallback<CreateOrder> callback = new XlaToCallback<CreateOrder>() {
             @Override
             public void onSuccess(CreateOrder createOrder) {
                 if (!isResumed) return;
-                if (xmrtoOrder != null) {
+                if (xlatoOrder != null) {
                     Timber.w("another ongoing create order request");
                     return;
                 }
@@ -560,7 +560,7 @@ public class SendBtcConfirmWizardFragment extends SendWizardFragment implements 
             @Override
             public void onError(Exception ex) {
                 if (!isResumed) return;
-                if (xmrtoOrder != null) {
+                if (xlatoOrder != null) {
                     Timber.w("another ongoing create order request");
                     return;
                 }
@@ -569,17 +569,17 @@ public class SendBtcConfirmWizardFragment extends SendWizardFragment implements 
         };
 
         if (txDataBtc.getBip70() != null) {
-            getXmrToApi().createOrder(txDataBtc.getBip70(), callback);
+            getxlaToApi().createOrder(txDataBtc.getBip70(), callback);
         } else {
-            getXmrToApi().createOrder(txDataBtc.getBtcAmount(), txDataBtc.getBtcAddress(), callback);
+            getxlaToApi().createOrder(txDataBtc.getBtcAmount(), txDataBtc.getBtcAddress(), callback);
         }
     }
 
-    private QueryOrderStatus xmrtoStatus = null;
+    private QueryOrderStatus xlatoStatus = null;
 
     private void processQueryOrder(final QueryOrderStatus status) {
         Timber.d("processQueryOrder %s for %s", status.getState().toString(), status.getUuid());
-        xmrtoStatus = status;
+        xlatoStatus = status;
         if (status.isCreated()) {
             getView().post(new Runnable() {
                 @Override
@@ -587,10 +587,10 @@ public class SendBtcConfirmWizardFragment extends SendWizardFragment implements 
                     NumberFormat df = NumberFormat.getInstance(Locale.US);
                     df.setMaximumFractionDigits(12);
                     String btcAmount = df.format(status.getBtcAmount());
-                    String xmrAmountTotal = df.format(status.getIncomingAmountTotal());
-                    tvTxBtcAmount.setText(getString(R.string.text_send_btc_amount, btcAmount, xmrAmountTotal));
-                    String xmrPriceBtc = df.format(status.getIncomingPriceBtc());
-                    tvTxBtcRate.setText(getString(R.string.text_send_btc_rate, xmrPriceBtc));
+                    String xlaAmountTotal = df.format(status.getIncomingAmountTotal());
+                    tvTxBtcAmount.setText(getString(R.string.text_send_btc_amount, btcAmount, xlaAmountTotal));
+                    String xlaPriceBtc = df.format(status.getIncomingPriceBtc());
+                    tvTxBtcRate.setText(getString(R.string.text_send_btc_rate, xlaPriceBtc));
 
                     double calcRate = status.getBtcAmount() / status.getIncomingPriceBtc();
                     Timber.d("Rates: %f / %f", calcRate, status.getIncomingPriceBtc());
@@ -600,9 +600,9 @@ public class SendBtcConfirmWizardFragment extends SendWizardFragment implements 
                     Timber.d("Expires @ %s, in %s seconds", status.getExpiresAt().toString(), status.getSecondsTillTimeout());
 
                     Timber.d("Status = %s", status.getState().toString());
-                    tvTxXmrToKey.setText(status.getUuid());
+                    tvTxxlaToKey.setText(status.getUuid());
 
-                    Timber.d("AmountRemaining=%f, XmrAmountTotal=%f", status.getRemainingAmountIncoming(), status.getIncomingAmountTotal());
+                    Timber.d("AmountRemaining=%f, xlaAmountTotal=%f", status.getRemainingAmountIncoming(), status.getIncomingAmountTotal());
                     hideProgress();
                     startSendTimer();
                     prepareSend();
@@ -627,30 +627,30 @@ public class SendBtcConfirmWizardFragment extends SendWizardFragment implements 
             @Override
             public void run() {
                 if (ex instanceof XlaToException) {
-                    XlaToException xmrEx = (XlaToException) ex;
-                    XlaToError xmrErr = xmrEx.getError();
-                    if (xmrErr != null) {
-                        if (xmrErr.isRetryable()) {
-                            showStageError(xmrErr.getErrorId().toString(), xmrErr.getErrorMsg(),
+                    XlaToException xlaEx = (XlaToException) ex;
+                    XlaToError xlaErr = xlaEx.getError();
+                    if (xlaErr != null) {
+                        if (xlaErr.isRetryable()) {
+                            showStageError(xlaErr.getErrorId().toString(), xlaErr.getErrorMsg(),
                                     getString(R.string.text_retry));
                             evStageB.setOnClickListener(new View.OnClickListener() {
                                 @Override
                                 public void onClick(View v) {
                                     evStageB.setOnClickListener(null);
-                                    queryOrder(xmrtoOrder.getUuid());
+                                    queryOrder(xlatoOrder.getUuid());
                                 }
                             });
                         } else {
-                            showStageError(xmrErr.getErrorId().toString(), xmrErr.getErrorMsg(),
+                            showStageError(xlaErr.getErrorId().toString(), xlaErr.getErrorMsg(),
                                     getString(R.string.text_noretry));
                         }
                     } else {
-                        showStageError(getString(R.string.label_generic_xmrto_error),
-                                getString(R.string.text_generic_xmrto_error, xmrEx.getCode()),
+                        showStageError(getString(R.string.label_generic_xlato_error),
+                                getString(R.string.text_generic_xlato_error, xlaEx.getCode()),
                                 getString(R.string.text_noretry));
                     }
                 } else {
-                    evStageB.showMessage(getString(R.string.label_generic_xmrto_error),
+                    evStageB.showMessage(getString(R.string.label_generic_xlato_error),
                             ex.getLocalizedMessage(),
                             getString(R.string.text_noretry));
                 }
@@ -664,20 +664,20 @@ public class SendBtcConfirmWizardFragment extends SendWizardFragment implements 
         getView().post(new Runnable() {
             @Override
             public void run() {
-                xmrtoStatus = null;
-                showProgress(2, getString(R.string.label_send_progress_xmrto_query));
-                getXmrToApi().queryOrderStatus(uuid, new XlaToCallback<QueryOrderStatus>() {
+                xlatoStatus = null;
+                showProgress(2, getString(R.string.label_send_progress_xlato_query));
+                getxlaToApi().queryOrderStatus(uuid, new XlaToCallback<QueryOrderStatus>() {
                     @Override
                     public void onSuccess(QueryOrderStatus status) {
                         if (!isResumed) return;
-                        if (xmrtoOrder == null) return;
-                        if (!status.getUuid().equals(xmrtoOrder.getUuid())) {
+                        if (xlatoOrder == null) return;
+                        if (!status.getUuid().equals(xlatoOrder.getUuid())) {
                             Timber.d("Query UUID does not match");
                             // ignore (we got a response to a stale request)
                             return;
                         }
-                        if (xmrtoStatus != null)
-                            throw new IllegalStateException("xmrtoStatus must be null here!");
+                        if (xlatoStatus != null)
+                            throw new IllegalStateException("xlatoStatus must be null here!");
                         processQueryOrder(status);
                     }
 
@@ -691,17 +691,17 @@ public class SendBtcConfirmWizardFragment extends SendWizardFragment implements 
         });
     }
 
-    private XlaToApi xmrToApi = null;
+    private XlaToApi xlaToApi = null;
 
-    private XlaToApi getXmrToApi() {
-        if (xmrToApi == null) {
+    private XlaToApi getxlaToApi() {
+        if (xlaToApi == null) {
             synchronized (this) {
-                if (xmrToApi == null) {
-                    xmrToApi = new XlaToApiImpl(OkHttpHelper.getOkHttpClient(),
-                            Helper.getXmrToBaseUrl());
+                if (xlaToApi == null) {
+                    xlaToApi = new XlaToApiImpl(OkHttpHelper.getOkHttpClient(),
+                            Helper.getxlaToBaseUrl());
                 }
             }
         }
-        return xmrToApi;
+        return xlaToApi;
     }
 }

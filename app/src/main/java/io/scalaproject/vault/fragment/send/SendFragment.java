@@ -573,20 +573,20 @@ public class SendFragment extends Fragment
         super.onCreateOptionsMenu(menu, inflater);
     }
 
-    // xmr.to info box
-    private static final String PREF_SHOW_XLATO_ENABLED = "info_xmrto_enabled_send";
+    // xla.to info box
+    private static final String PREF_SHOW_XLATO_ENABLED = "info_xlato_enabled_send";
 
-    boolean showXmrtoEnabled = true;
+    boolean showxlatoEnabled = true;
 
     void loadPrefs() {
         SharedPreferences sharedPref = activityCallback.getPrefs();
-        showXmrtoEnabled = sharedPref.getBoolean(PREF_SHOW_XLATO_ENABLED, false);
+        showxlatoEnabled = sharedPref.getBoolean(PREF_SHOW_XLATO_ENABLED, false);
     }
 
-    void saveXmrToPrefs() {
+    void savexlaToPrefs() {
         SharedPreferences sharedPref = activityCallback.getPrefs();
         SharedPreferences.Editor editor = sharedPref.edit();
-        editor.putBoolean(PREF_SHOW_XLATO_ENABLED, showXmrtoEnabled);
+        editor.putBoolean(PREF_SHOW_XLATO_ENABLED, showxlatoEnabled);
         editor.apply();
     }
 

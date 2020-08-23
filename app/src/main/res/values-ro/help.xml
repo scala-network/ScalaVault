@@ -118,7 +118,7 @@
         <h2>TX ID</h2>
         Acesta este ID-ul Tranzacției și poate fi folosit pentru a identifica tranzacția ta obfuscată
 		pe un explorator al bazei de date distribuită (Blockchain) a Scala, ca cel
-		aflat la acest link <a href="https://xmrchain.net/">https://xmrchain.net/</a>
+		aflat la acest link <a href="https://xlachain.net/">https://xlachain.net/</a>
         <h2>TX KEY (Cheia Tranzacției)</h2>
         Aceasta este cheia privată a tranzacției, aceasta este privată și trebuie păstrată ca atare,
 		această cheie permite unei terțe părți să dezvăluie care din semnăturile formate într-un inel
@@ -139,7 +139,7 @@
             <li>a BTC address</li>
             <li>a bitcoin: URI (including BIP70 like bitpay)</li>
         </u>
-        Please note, that sending BTC is processed through the XLA.TO service (see https://xmr.to
+        Please note, that sending BTC is processed through the XLA.TO service (see https://xla.to
         for details). See the section on sending BTC below.</p>
         <h2>Payment ID</h2>
         <p>Poți utiliza un ID de plată pentru a identifica suma trimisă între două terțe, acest lucru
@@ -149,7 +149,7 @@
         <h2>XLA.TO</h2>
         <p>XLA.TO este un serviciu terță parte care care acționeaza ca un schimb valutar între Scala și Bitcoin.
         Noi folosim API-ul XLA.TO pentru a integra plățile Bitcoin în Scala Vault. Verifică
-        https://xmr.to and și decide singur dacă este un serviciu pe care dorești să îl folosești. Echipa Scala Vault
+        https://xla.to and și decide singur dacă este un serviciu pe care dorești să îl folosești. Echipa Scala Vault
         nu este asociată în niciun fel cu XLA.TO și nu te poate ajuta cu serviciile oferite de ei.</p>
         <h2>Rata de schimb al XLA.TO<h2>
         <p>Pe ecranul cu \"Suma\" vor fi afișați parametrii ai serviciului XLA.TO. Aceștia includ cursul de
@@ -170,12 +170,12 @@
 		înapoi la pasul anterior apoi revenind la ecranul \"Confirm\".</p>
     ]]></string>
 
-    <string name="help_xmrto"><![CDATA[
+    <string name="help_xlato"><![CDATA[
         <h1>Transferul de BTC</h1>
         <h2>XLA.TO</h2>
         <p>XLA.TO este un serviciu terță parte care care acționeaza ca un schimb valutar între Scala și Bitcoin.
         Noi folosim API-ul XLA.TO pentru a integra plățile Bitcoin în Scala Vault. Verifică
-        https://xmr.to and și decide singur dacă este un serviciu pe care dorești să îl folosești.
+        https://xla.to and și decide singur dacă este un serviciu pe care dorești să îl folosești.
 		Echipa Scala Vault nu este asociată în niciun fel cu XLA.TO și nu te poate ajuta cu serviciile oferite de ei.</p>
         <h2>Rata de schimb al XLA.TO<h2>
         <p>Pe ecranul cu \"Suma\" vor fi afișați parametrii ai serviciului XLA.TO. Aceștia includ cursul de

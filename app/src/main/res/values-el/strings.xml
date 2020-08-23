@@ -29,29 +29,29 @@
 
     <string name="label_receive_info_gen_qr_code">Πατήστε για QR κωδικό</string>
 
-    <string name="info_xmrto_enabled">Συναλλαγή BTC ενεργοποιήθηκε, πάτα για περισσότερες πληροφορείες.</string>
+    <string name="info_xlato_enabled">Συναλλαγή BTC ενεργοποιήθηκε, πάτα για περισσότερες πληροφορείες.</string>
     <string name="info_ledger_enabled">Ledger ενεργοποιήθηκε, πάτα για περισσότερες πληροφορείες.</string>
 
-    <string name="info_xmrto"><![CDATA[
+    <string name="info_xlato"><![CDATA[
         <b>Έβαλες μια διεύθυνση bitcoin.</b><br/>
         <i>Θα στείλεις XLA και ο παραλήπτης θα πάρει BTC μέσο της υπηρεσίας <b>XLA.TO</b>.</i>
     ]]></string>
 
-    <string name="info_send_xmrto_success_order_label">Εντολή XLA.TO</string>
+    <string name="info_send_xlato_success_order_label">Εντολή XLA.TO</string>
 
-    <string name="info_send_xmrto_success_btc">%1$s BTC</string>
+    <string name="info_send_xlato_success_btc">%1$s BTC</string>
 
-    <string name="info_send_xmrto_paid">Επιβεβαίωση Εκκρεμεί</string>
-    <string name="info_send_xmrto_unpaid">Πληρωμή σε εκκρεμότητα</string>
-    <string name="info_send_xmrto_error">XLA.TO Σφάλμα (%1$s)</string>
-    <string name="info_send_xmrto_sent">BTC Αποστάλθηκαν!</string>
-    <string name="info_send_xmrto_query">Αίτηση &#8230;</string>
+    <string name="info_send_xlato_paid">Επιβεβαίωση Εκκρεμεί</string>
+    <string name="info_send_xlato_unpaid">Πληρωμή σε εκκρεμότητα</string>
+    <string name="info_send_xlato_error">XLA.TO Σφάλμα (%1$s)</string>
+    <string name="info_send_xlato_sent">BTC Αποστάλθηκαν!</string>
+    <string name="info_send_xlato_query">Αίτηση &#8230;</string>
 
-    <string name="info_send_xmrto_parms"><![CDATA[
+    <string name="info_send_xlato_parms"><![CDATA[
         <b>Μπορείς να στείλεις %1$s &#8212; %2$s BTC</b>.<br/>
         <i>Το <b>XLA.TO</b> σου δίνει ισοτιμία ανταλλαγής <b>%3$s BTC</b> <u>αυτή τη στιγμή</u></i>.
     ]]></string>
-    <string name="info_send_xmrto_zeroconf"><![CDATA[
+    <string name="info_send_xlato_zeroconf"><![CDATA[
         <i>Ποσά μέχρι <b>%1$s BTC</b> θα σταλούν <u>άμεσα</u>!</i>
     ]]></string>
 
@@ -60,14 +60,14 @@
     <string name="info_paymentid_integrated">&#x2714; ID πληρωμής ενσωματωμένο</string>
     <string name="info_prepare_tx">Προετοιμασία της συναλλαγής σου</string>
 
-    <string name="label_send_progress_xmrto_create">Δημιουργία εντολής με XLA.TO</string>
-    <string name="label_send_progress_xmrto_query">Αίτηση εντολής στο XLA.TO</string>
+    <string name="label_send_progress_xlato_create">Δημιουργία εντολής με XLA.TO</string>
+    <string name="label_send_progress_xlato_query">Αίτηση εντολής στο XLA.TO</string>
     <string name="label_send_progress_create_tx">Προετοιμασά συναλλαγής Scala</string>
 
-    <string name="label_send_progress_queryparms">Αίτηση στο xmr.to για παραμέτρους</string>
+    <string name="label_send_progress_queryparms">Αίτηση στο xla.to για παραμέτρους</string>
 
-    <string name="label_generic_xmrto_error">XLA.TO ΣΦΑΛΜΑ</string>
-    <string name="text_generic_xmrto_error">Κωδικός σφάλματος: %1$d</string>
+    <string name="label_generic_xlato_error">XLA.TO ΣΦΑΛΜΑ</string>
+    <string name="text_generic_xlato_error">Κωδικός σφάλματος: %1$d</string>
 
     <string name="text_retry">Πάτησε για να προσπαθήσεις ξανά</string>
     <string name="text_noretry_scala">Τώρα έχουμε κολλήσει εδώ!</string>
@@ -76,9 +76,9 @@
     <string name="text_send_btc_amount">%1$s BTC = %2$s XLA</string>
     <string name="text_send_btc_rate">(Rate: %1$s BTC/XLA)</string>
 
-    <string name="label_send_btc_xmrto_info">Επίσκεψη στο xmr.to για υποστήριξη &amp; με εντοπισμό συναλλαγής</string>
-    <string name="label_send_btc_xmrto_key_lb">Μυστικό Κλειδί\nXLA.TO</string>
-    <string name="label_send_btc_xmrto_key">XLA.TO Μυστικό Κλειδί</string>
+    <string name="label_send_btc_xlato_info">Επίσκεψη στο xla.to για υποστήριξη &amp; με εντοπισμό συναλλαγής</string>
+    <string name="label_send_btc_xlato_key_lb">Μυστικό Κλειδί\nXLA.TO</string>
+    <string name="label_send_btc_xlato_key">XLA.TO Μυστικό Κλειδί</string>
     <string name="label_send_btc_address">BTC Διεύθυνση Παραλήπτη</string>
     <string name="label_send_btc_amount">Ποσό</string>
 
@@ -111,7 +111,7 @@
 
     <string name="status_transaction_failed">Η συναλλαγή απέτυχε: %1$s</string>
 
-    <string name="send_xmrto_timeout">Περίμενες για πολύ καιρό φίλε μου!</string>
+    <string name="send_xlato_timeout">Περίμενες για πολύ καιρό φίλε μου!</string>
 
     <string name="service_busy">Δουλεύω ακόμα στο προηγούμενο πορτοφόλι σου &#8230;</string>
 
@@ -129,7 +129,7 @@
     <string name="label_wallet_receive">Λήψη</string>
     <string name="label_wallet_send">Αποστολή</string>
 
-    <string name="xmr_unconfirmed_amount">+ %1$s XLA μη επιβεβαιωμένα</string>
+    <string name="xla_unconfirmed_amount">%1$s XLA μη επιβεβαιωμένα</string>
 
     <string name="service_description">Υπηρεσία Scala Vault</string>
 
@@ -143,9 +143,9 @@
 
     <string name="label_copy_viewkey">Κλειδί Προβολής(View Key)</string>
     <string name="label_copy_address">Δημόσια Διεύθυνση(Public Address)</string>
-    <string name="label_copy_xmrtokey">Κλειδή XLA.TO</string>
+    <string name="label_copy_xlatokey">Κλειδή XLA.TO</string>
     <string name="message_copy_viewkey">Το Κλειδί Προβολής αντιγράφηκε στο πρόχειρο!</string>
-    <string name="message_copy_xmrtokey">Το Κλειδή XLA.TO αντιγράφηκε στο πρόχειρο!</string>
+    <string name="message_copy_xlatokey">Το Κλειδή XLA.TO αντιγράφηκε στο πρόχειρο!</string>
     <string name="message_copy_address">Η διύθυνση πορτοφολιού αντιγράφηκε στο πρόχειρο!</string>
     <string name="message_copy_txid">Το ID συναλλαγής αντιγράφηκε στο πρόχειρο!</string>
     <string name="message_nocopy">Η αντιγραφή είναι απενεργοποιημένη για λόγους ασφαλείας!</string>
@@ -186,7 +186,7 @@
     <string name="generate_check_address">Δώστε έγκυρη διεύθυνση</string>
     <string name="generate_check_mnemonic">Βάλε τον σπόρο σου 25-λέξεων</string>
 
-    <string name="send_amount_btc_xmr">%1$s (ενδεικτικό)</string>
+    <string name="send_amount_btc_xla">%1$s (ενδεικτικό)</string>
 
     <string name="send_paymentid_hint">ID Πληρωμής(Payment ID)(προαιρετικό)</string>
     <string name="send_amount_hint">0.00</string>
@@ -218,8 +218,8 @@
     <string name="tx_list_fee">- Κόμιστρο %1$s</string>
     <string name="tx_list_amount_failed">(%1$s)</string>
     <string name="tx_list_failed_text">απέτυχε</string>
-    <string name="tx_list_amount_negative">- %1$s</string>
-    <string name="tx_list_amount_positive">+ %1$s</string>
+    <string name="tx_list_amount_negative">%1$s</string>
+    <string name="tx_list_amount_positive">%1$s</string>
 
     <string name="tx_timestamp">Ημερομηνία</string>
     <string name="tx_id">ID Συναλλαγής(TX ID)</string>
@@ -369,10 +369,10 @@
     <string name="send_address_bip70">Resolved Payment URI &#x2714;</string>
     <string name="send_address_hint">Receiver</string>
 
-    <string name="xmrto_error_001">XLA.TO offline - try again later</string>
-    <string name="xmrto_error_004">BTC amount out of bounds</string>
-    <string name="xmrto_error_010">Invalid or outdated Payment URL</string>
-    <string name="xmrto_error_012">Too many requests</string>
+    <string name="xlato_error_001">XLA.TO offline - try again later</string>
+    <string name="xlato_error_004">BTC amount out of bounds</string>
+    <string name="xlato_error_010">Invalid or outdated Payment URL</string>
+    <string name="xlato_error_012">Too many requests</string>
 
     <string name="street_sweep_amount">EVERYTHING!</string> <!-- as in: "everything in the account" = "all the money" -->
 

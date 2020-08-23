@@ -33,28 +33,28 @@ public class UserNoteTest {
 
     @Test
     public void createFromTxNote_noNote() {
-        UserNotes userNotes = new UserNotes("{xmrto-iyrpxU,0.009BTC,mjn127C5wRQCULksMYMFHLp9UTdQuCfbZ9}");
-        assertTrue("xmrto-iyrpxU".equals(userNotes.xmrtoKey));
-        assertTrue("0.009".equals(userNotes.xmrtoAmount));
-        assertTrue("mjn127C5wRQCULksMYMFHLp9UTdQuCfbZ9".equals(userNotes.xmrtoDestination));
+        UserNotes userNotes = new UserNotes("{xlato-iyrpxU,0.009BTC,mjn127C5wRQCULksMYMFHLp9UTdQuCfbZ9}");
+        assertTrue("xlato-iyrpxU".equals(userNotes.xlatoKey));
+        assertTrue("0.009".equals(userNotes.xlatoAmount));
+        assertTrue("mjn127C5wRQCULksMYMFHLp9UTdQuCfbZ9".equals(userNotes.xlatoDestination));
         assertTrue(userNotes.note.isEmpty());
     }
 
     @Test
     public void createFromTxNote_withNote() {
-        UserNotes userNotes = new UserNotes("{xmrto-iyrpxU,0.009BTC,mjn127C5wRQCULksMYMFHLp9UTdQuCfbZ9} aNote");
-        assertTrue("xmrto-iyrpxU".equals(userNotes.xmrtoKey));
-        assertTrue("0.009".equals(userNotes.xmrtoAmount));
-        assertTrue("mjn127C5wRQCULksMYMFHLp9UTdQuCfbZ9".equals(userNotes.xmrtoDestination));
+        UserNotes userNotes = new UserNotes("{xlato-iyrpxU,0.009BTC,mjn127C5wRQCULksMYMFHLp9UTdQuCfbZ9} aNote");
+        assertTrue("xlato-iyrpxU".equals(userNotes.xlatoKey));
+        assertTrue("0.009".equals(userNotes.xlatoAmount));
+        assertTrue("mjn127C5wRQCULksMYMFHLp9UTdQuCfbZ9".equals(userNotes.xlatoDestination));
         assertTrue("aNote".equals(userNotes.note));
     }
 
     @Test
     public void createFromTxNote_withNoteNoSpace() {
-        UserNotes userNotes = new UserNotes("{xmrto-iyrpxU,0.009BTC,mjn127C5wRQCULksMYMFHLp9UTdQuCfbZ9}aNote");
-        assertTrue("xmrto-iyrpxU".equals(userNotes.xmrtoKey));
-        assertTrue("0.009".equals(userNotes.xmrtoAmount));
-        assertTrue("mjn127C5wRQCULksMYMFHLp9UTdQuCfbZ9".equals(userNotes.xmrtoDestination));
+        UserNotes userNotes = new UserNotes("{xlato-iyrpxU,0.009BTC,mjn127C5wRQCULksMYMFHLp9UTdQuCfbZ9}aNote");
+        assertTrue("xlato-iyrpxU".equals(userNotes.xlatoKey));
+        assertTrue("0.009".equals(userNotes.xlatoAmount));
+        assertTrue("mjn127C5wRQCULksMYMFHLp9UTdQuCfbZ9".equals(userNotes.xlatoDestination));
         assertTrue("aNote".equals(userNotes.note));
     }
 
@@ -62,19 +62,19 @@ public class UserNoteTest {
     public void createFromTxNote_brokenA() {
         String brokenNote = "{mrto-iyrpxU,0.009BTC,mjn127C5wRQCULksMYMFHLp9UTdQuCfbZ9}";
         UserNotes userNotes = new UserNotes(brokenNote);
-        assertNull(userNotes.xmrtoKey);
-        assertNull(userNotes.xmrtoAmount);
-        assertNull(userNotes.xmrtoDestination);
+        assertNull(userNotes.xlatoKey);
+        assertNull(userNotes.xlatoAmount);
+        assertNull(userNotes.xlatoDestination);
         assertTrue(brokenNote.equals(userNotes.note));
     }
 
     @Test
     public void createFromTxNote_brokenB() {
-        String brokenNote = "{xmrto-iyrpxU,0.009BTC,mjn127C5wRQCULksMYMFHLp9UTdQuCfbZ9";
+        String brokenNote = "{xlato-iyrpxU,0.009BTC,mjn127C5wRQCULksMYMFHLp9UTdQuCfbZ9";
         UserNotes userNotes = new UserNotes(brokenNote);
-        assertNull(userNotes.xmrtoKey);
-        assertNull(userNotes.xmrtoAmount);
-        assertNull(userNotes.xmrtoDestination);
+        assertNull(userNotes.xlatoKey);
+        assertNull(userNotes.xlatoAmount);
+        assertNull(userNotes.xlatoDestination);
         assertTrue(brokenNote.equals(userNotes.note));
     }
 
@@ -82,9 +82,9 @@ public class UserNoteTest {
     public void createFromTxNote_normal() {
         String aNote = "aNote";
         UserNotes userNotes = new UserNotes(aNote);
-        assertNull(userNotes.xmrtoKey);
-        assertNull(userNotes.xmrtoAmount);
-        assertNull(userNotes.xmrtoDestination);
+        assertNull(userNotes.xlatoKey);
+        assertNull(userNotes.xlatoAmount);
+        assertNull(userNotes.xlatoDestination);
         assertTrue(aNote.equals(userNotes.note));
     }
 
@@ -92,18 +92,18 @@ public class UserNoteTest {
     public void createFromTxNote_empty() {
         String aNote = "";
         UserNotes userNotes = new UserNotes(aNote);
-        assertNull(userNotes.xmrtoKey);
-        assertNull(userNotes.xmrtoAmount);
-        assertNull(userNotes.xmrtoDestination);
+        assertNull(userNotes.xlatoKey);
+        assertNull(userNotes.xlatoAmount);
+        assertNull(userNotes.xlatoDestination);
         assertTrue(aNote.equals(userNotes.note));
     }
 
     @Test
     public void createFromTxNote_null() {
         UserNotes userNotes = new UserNotes(null);
-        assertNull(userNotes.xmrtoKey);
-        assertNull(userNotes.xmrtoAmount);
-        assertNull(userNotes.xmrtoDestination);
+        assertNull(userNotes.xlatoKey);
+        assertNull(userNotes.xlatoAmount);
+        assertNull(userNotes.xlatoDestination);
         assertNotNull(userNotes.note);
         assertTrue(userNotes.note.isEmpty());
     }

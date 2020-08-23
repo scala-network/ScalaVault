@@ -160,7 +160,7 @@
 
         <h2>Transakcia ID</h2>
         Tio identigas vian transakcion, vi povas uzi ĝin por sekvi vian tro daŭran transakction ĉe
-        Monera blokĉen-esplorilo, kiel <a href="https://xmrchain.net/">https://xmrchain.net/</a>
+        Monera blokĉen-esplorilo, kiel <a href="https://xlachain.net/">https://xlachain.net/</a>
 
         <h2>Transakcia ŝlosilo</h2>
         Tio estas la privata ŝlosilo de la transakcio, vi konservu ĝin sekrete. Se iu triulo vidos
@@ -191,7 +191,7 @@
         <h2>XLA.TO</h2>
         <p>XLA.TO estas ekstera liveranto kiu agas kiel ŝanĝisto de Scala al Bitmono. Ni uzas la
         interfacon de XLA.TR por integrigi pagojn de bitmono en Scala Vault. Bonvolu mem legi ĉe
-        https://xmr.to kaj decidu ĉu vi volas uzi tion. La Scala Vault-teamo ne asocias kun XLA.TO kaj ne
+        https://xla.to kaj decidu ĉu vi volas uzi tion. La Scala Vault-teamo ne asocias kun XLA.TO kaj ne
         kapablas helpi vin kun ilia servo.</p>
 
         <h2>Kurzo de XLA.TO<h2>
@@ -215,12 +215,12 @@
         antaŭa fazo kaj el tie repaŝi ĝis la \"Konfirmi\"-ekrano.</p>
     ]]></string>
 
-    <string name="help_xmrto"><![CDATA[
+    <string name="help_xlato"><![CDATA[
         <h1>Elspezi Bitmonon</h1>
         <h2>XLA.TO</h2>
         <p>XLA.TO estas ekstera liveranto kiu aga kiel ŝanĝisto de Scala al Bitmono. Ni uzas la
         interfacon de XLA.TR por integrigi pagojn de bitmono en Scala Vault. Bonvolu mem legi ĉe
-        https://xmr.to kaj decidu ĉu vi volas uzi tion. La Scala Vault-teamo ne asocias kun XLA.TO kaj ne
+        https://xla.to kaj decidu ĉu vi volas uzi tion. La Scala Vault-teamo ne asocias kun XLA.TO kaj ne
         kapablas helpi vin kun ilia servo.</p>
         <h2>Kurzo de XLA.TO<h2>
         <p>Sur la \"Kvanto\"-ekrano montriĝos la nunaj parametroj de la XLA.TO-servo. Ili inkludas la

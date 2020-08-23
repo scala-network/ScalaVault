@@ -129,7 +129,7 @@
         lehetővé teszi egy üzlet számára a tranzakciód és a megvásárolt tételed összeegyeztetését.
         <h2>Tranzakcióazonosító</h2>
         A tranzakcióazonosítód (TX ID) szolgál arra, hogy a titkosított tranzakciódat azonosítani tudd
-        egy blokkkeresőben, mint például a <a href="https://xmrchain.net/">https://xmrchain.net/</a>.
+        egy blokkkeresőben, mint például a <a href="https://xlachain.net/">https://xlachain.net/</a>.
         <h2>Tranzakciókulcs</h2>
         Ez a tranzakciós privát kulcsod (TX KEY). Tartsd biztonságban, ugyanis harmadik félnek való megmutatása
         felfedi, hogy egy gyűrűn belül melyik aláírás a tiéd, ezáltal nyílttá téve a tranzakciódat.
@@ -148,7 +148,7 @@
             <li>a BTC address</li>
             <li>a bitcoin: URI (including BIP70 like bitpay)</li>
         </u>
-        Please note, that sending BTC is processed through the XLA.TO service (see https://xmr.to
+        Please note, that sending BTC is processed through the XLA.TO service (see https://xla.to
         for details). See the section on sending BTC below.</p>
         <h2>Fizetési azonosító</h2>
         <p>Fizetési azonosítót (payment ID) használhatsz arra a célra, hogy beazonosítsd, miért történt
@@ -158,7 +158,7 @@
         <h2>XLA.TO</h2>
         <p>Az XLA.TO egy harmadik féltől származó szolgáltatás, mely Moneróról Bitcoinra való átváltóként
         viselkedik. Az XLA.TO API-ját használjuk a Bitcoinban való fizetés monerujóba való integrálásához.
-        Kérlek, látogass el a https://xmr.to weboldalra, és döntsd el magad, hogy szeretnéd-e használni.
+        Kérlek, látogass el a https://xla.to weboldalra, és döntsd el magad, hogy szeretnéd-e használni.
         A monerujo csapata nincsen kapcsolatban az XLA.TO-val és nem tudnak segítséget nyújtani a
         szolgáltatásaikkal kapcsolatban.</p>
         <h2>XLA.TO árfolyam<h2>
@@ -182,12 +182,12 @@
         visszamész az előző lépésre, majd visszajössz a Megerősítés oldalra.</p>
     ]]></string>
 
-    <string name="help_xmrto"><![CDATA[
+    <string name="help_xlato"><![CDATA[
         <h1>BTC-küldés</h1>
         <h2>XLA.TO</h2>
         <p>Az XLA.TO egy harmadik féltől származó szolgáltatás, mely Moneróról Bitcoinra való átváltóként
         viselkedik. Az XLA.TO API-ját használjuk a Bitcoinban való fizetés monerujóba való integrálásához.
-        Kérlek, látogass el a https://xmr.to weboldalra, és döntsd el magad, hogy szeretnéd-e használni.
+        Kérlek, látogass el a https://xla.to weboldalra, és döntsd el magad, hogy szeretnéd-e használni.
         A monerujo csapata nincsen kapcsolatban az XLA.TO-val és nem tudnak segítséget nyújtani a
         szolgáltatásaikkal kapcsolatban.</p>
         <h2>XLA.TO árfolyam<h2>

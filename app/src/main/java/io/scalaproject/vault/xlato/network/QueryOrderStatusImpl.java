@@ -56,7 +56,7 @@ class QueryOrderStatusImpl implements QueryOrderStatus {
     private double remainingAmountIncoming; // "remaining_amount_incoming": <amount_in_incoming_currency_that_the_user_must_still_send_as_float>,
     private int incomingNumConfirmationsRemaining; // "incoming_num_confirmations_remaining": <num_incoming_currency_confirmations_remaining_before_bitcoins_will_be_sent_as_integer>,
     private double incomingPriceBtc; // "incoming_price_btc": <price_of_1_incoming_in_btc_currency_as_offered_by_service_as_float>,
-    private String receivingSubaddress; // "receiving_subaddress": <xmr_subaddress_user_needs_to_send_funds_to_as_string>,
+    private String receivingSubaddress; // "receiving_subaddress": <xla_subaddress_user_needs_to_send_funds_to_as_string>,
     private int recommendedMixin; // "recommended_mixin": <recommended_mixin_as_integer>,
 
     public QueryOrderStatus.State getState() {

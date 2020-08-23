@@ -19,6 +19,7 @@
             android:layout_marginStart="8dp"
             android:layout_marginEnd="8dp"
             android:layout_marginTop="8dp"
+            android:layout_marginBottom="4dp"
             android:orientation="horizontal">
 
             <TextView
@@ -191,15 +192,15 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="14dp"
                 android:layout_marginEnd="12dp"
+                android:layout_marginStart="12dp"
                 android:orientation="horizontal"
                 android:gravity="start|bottom"
                 android:visibility="visible">
 
                 <ImageView
                     android:id="@+id/ivAddressType"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="12dp"
+                    android:layout_width="18dp"
+                    android:layout_height="18dp"
                     android:src="@drawable/ic_primary_address"
                     android:visibility="visible" />
 
@@ -208,7 +209,7 @@
                     style="@style/ScalaText.Wallet"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="4dp"
+                    android:layout_marginStart="5dp"
                     android:layout_gravity="center_vertical"
                     android:text="Stealth address" />
 

@@ -28,7 +28,7 @@
                 android:layout_width="16dp"
                 android:layout_height="16dp"
                 android:layout_gravity="center"
-                android:src="@drawable/ic_scala_logo_round"
+                android:src="@drawable/ic_tx_in"
                 android:visibility="visible" />
 
             <LinearLayout

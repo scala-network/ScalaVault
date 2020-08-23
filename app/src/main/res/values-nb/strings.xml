@@ -30,28 +30,28 @@
 
     <string name="label_receive_info_gen_qr_code">Trykk for QR kode</string>
 
-    <string name="info_xmrto_enabled">BTC betaling tilgjengelig, trykk for mer info.</string>
+    <string name="info_xlato_enabled">BTC betaling tilgjengelig, trykk for mer info.</string>
     <string name="info_ledger_enabled">Ledger tilgjengelig, trykk for mer info.</string>
 
-    <string name="info_xmrto"><![CDATA[
+    <string name="info_xlato"><![CDATA[
         <b>Du skrev inn en Bitcoin addresse.</b><br/>
         <i>Du vil sende XLA og mottakeren vil få BTC gjennom <b>XLA.TO</b> tjenesten.</i>
     ]]></string>
 
-    <string name="info_send_xmrto_success_order_label">XLA.TO Ordre</string>
-    <string name="info_send_xmrto_success_btc">%1$s BTC</string>
+    <string name="info_send_xlato_success_order_label">XLA.TO Ordre</string>
+    <string name="info_send_xlato_success_btc">%1$s BTC</string>
 
-    <string name="info_send_xmrto_paid">Bekreftelse venter</string>
-    <string name="info_send_xmrto_unpaid">Betaling venter</string>
-    <string name="info_send_xmrto_error">XLA.TO error (%1$s)</string>
-    <string name="info_send_xmrto_sent">BTC sendt!</string>
-    <string name="info_send_xmrto_query">Spør &#8230;</string>
+    <string name="info_send_xlato_paid">Bekreftelse venter</string>
+    <string name="info_send_xlato_unpaid">Betaling venter</string>
+    <string name="info_send_xlato_error">XLA.TO error (%1$s)</string>
+    <string name="info_send_xlato_sent">BTC sendt!</string>
+    <string name="info_send_xlato_query">Spør &#8230;</string>
 
-    <string name="info_send_xmrto_parms"><![CDATA[
+    <string name="info_send_xlato_parms"><![CDATA[
         <b>Du kan sende %1$s &#8212; %2$s BTC</b>.<br/>
         <i><b>XLA.TO</b> gir deg en vekslingskurs på <b>%3$s BTC</b> <u>akkurat nå</u></i>.
     ]]></string>
-    <string name="info_send_xmrto_zeroconf"><![CDATA[
+    <string name="info_send_xlato_zeroconf"><![CDATA[
         <i>Mengder opp til <b>%1$s BTC</b> vil bli sendt <u>umiddelbart</u>!</i>
     ]]></string>
 
@@ -60,14 +60,14 @@
     <string name="info_paymentid_integrated">&#x2714; Betalings ID integrert</string>
     <string name="info_prepare_tx">Forbereder din transaksjon</string>
 
-    <string name="label_send_progress_xmrto_create">Lager XLA.TO ordre</string>
-    <string name="label_send_progress_xmrto_query">Spør etter XLA.TO ordre</string>
+    <string name="label_send_progress_xlato_create">Lager XLA.TO ordre</string>
+    <string name="label_send_progress_xlato_query">Spør etter XLA.TO ordre</string>
     <string name="label_send_progress_create_tx">Forbereder Scala transaksjon</string>
 
-    <string name="label_send_progress_queryparms">Spør etter xmr.to parametre</string>
+    <string name="label_send_progress_queryparms">Spør etter xla.to parametre</string>
 
-    <string name="label_generic_xmrto_error">XLA.TO ERROR</string>
-    <string name="text_generic_xmrto_error">Kode: %1$d</string>
+    <string name="label_generic_xlato_error">XLA.TO ERROR</string>
+    <string name="text_generic_xlato_error">Kode: %1$d</string>
 
     <string name="text_retry">Trykk for å prøve igjen</string>
     <string name="text_noretry_scala">Nå sitter vi fast her!</string>
@@ -76,9 +76,9 @@
     <string name="text_send_btc_amount">%1$s BTC = %2$s XLA</string>
     <string name="text_send_btc_rate">(Rate: %1$s BTC/XLA)</string>
 
-    <string name="label_send_btc_xmrto_info">Besøk xmr.to for støtte og sporing</string>
-    <string name="label_send_btc_xmrto_key_lb">Hemmelig nøkkel\nXLA.TO</string>
-    <string name="label_send_btc_xmrto_key">XLA.TO Hemmelig nøkkel</string>
+    <string name="label_send_btc_xlato_info">Besøk xla.to for støtte og sporing</string>
+    <string name="label_send_btc_xlato_key_lb">Hemmelig nøkkel\nXLA.TO</string>
+    <string name="label_send_btc_xlato_key">XLA.TO Hemmelig nøkkel</string>
     <string name="label_send_btc_address">BTC destinasjonsadresse</string>
     <string name="label_send_btc_amount">Mengde</string>
 
@@ -114,7 +114,7 @@
 
     <string name="status_transaction_failed">Transaksjon feila: %1$s</string>
 
-    <string name="send_xmrto_timeout">Du venta for lenge, min venn!</string>
+    <string name="send_xlato_timeout">Du venta for lenge, min venn!</string>
 
     <string name="service_busy">Jeg er fortsatt opptatt med din forrige lommebok &#8230;</string>
 
@@ -138,7 +138,7 @@
     <string name="label_wallet_receive">Motta</string>
     <string name="label_wallet_send">Gi</string>
 
-    <string name="xmr_unconfirmed_amount">+ %1$s XLA ubekrefta</string>
+    <string name="xla_unconfirmed_amount">%1$s XLA ubekrefta</string>
 
     <string name="service_description">monerujo tjeneste</string>
 
@@ -152,9 +152,9 @@
 
     <string name="label_copy_viewkey">View-nøkkel</string>
     <string name="label_copy_address">Offentlig adresse</string>
-    <string name="label_copy_xmrtokey">XLA.TO nøkkel</string>
+    <string name="label_copy_xlatokey">XLA.TO nøkkel</string>
     <string name="message_copy_viewkey">View-nøkkel kopiert til utklippstavle!</string>
-    <string name="message_copy_xmrtokey">XLA.TO-nøkkel kopiert til utklippstavle!</string>
+    <string name="message_copy_xlatokey">XLA.TO-nøkkel kopiert til utklippstavle!</string>
     <string name="message_copy_address">Lommebokadresse kopiert til utklippstavle!</string>
     <string name="message_copy_txid">Transaksjons-ID kopiert til utklippstavle!</string>
     <string name="message_nocopy">Kopiering skrudd av for sikkerhetsgrunner!</string>
@@ -211,7 +211,7 @@
     <string name="generate_check_address">Skriv inn gyldig adresse</string>
     <string name="generate_check_mnemonic">Skriv inn ditt 25-ord lange seed</string>
 
-    <string name="send_amount_btc_xmr">%1$s (veiledende)</string>
+    <string name="send_amount_btc_xla">%1$s (veiledende)</string>
 
     <string name="send_paymentid_hint">Betalings-ID (valgfritt)</string>
     <string name="send_amount_hint">0,00</string>
@@ -243,8 +243,8 @@
     <string name="tx_list_fee">- Avgift %1$s</string>
     <string name="tx_list_amount_failed">(%1$s)</string>
     <string name="tx_list_failed_text">feila</string>
-    <string name="tx_list_amount_negative">- %1$s</string>
-    <string name="tx_list_amount_positive">+ %1$s</string>
+    <string name="tx_list_amount_negative">%1$s</string>
+    <string name="tx_list_amount_positive">%1$s</string>
 
     <string name="tx_timestamp">Tidsstempel</string>
     <string name="tx_id">TX ID</string>
@@ -369,10 +369,10 @@
     <string name="send_address_bip70">Resolved Payment URI &#x2714;</string>
     <string name="send_address_hint">Receiver</string>
 
-    <string name="xmrto_error_001">XLA.TO offline - try again later</string>
-    <string name="xmrto_error_004">BTC amount out of bounds</string>
-    <string name="xmrto_error_010">Invalid or outdated Payment URL</string>
-    <string name="xmrto_error_012">Too many requests</string>
+    <string name="xlato_error_001">XLA.TO offline - try again later</string>
+    <string name="xlato_error_004">BTC amount out of bounds</string>
+    <string name="xlato_error_010">Invalid or outdated Payment URL</string>
+    <string name="xlato_error_012">Too many requests</string>
 
     <string name="street_sweep_amount">EVERYTHING!</string> <!-- as in: "everything in the account" = "all the money" -->
 

@@ -30,29 +30,29 @@
 
     <string name="label_receive_info_gen_qr_code">Tuŝu por QR-kodo</string>
 
-    <string name="info_xmrto_enabled">BTC-pago permesita, frapetu por detaloj.</string>
+    <string name="info_xlato_enabled">BTC-pago permesita, frapetu por detaloj.</string>
     <string name="info_ledger_enabled">Ledger permesita, frapetu por detaloj.</string>
 
-    <string name="info_xmrto"><![CDATA[
+    <string name="info_xlato"><![CDATA[
         <b>Vi entajpis Bitmono-adreson.</b><br/>
         <i>Vi sendos XLA-on, kaj per la<b>XLA.to</b>-servo, la ricevanto havos BTC-on.</i>
     ]]></string>
 
-    <string name="info_send_xmrto_success_order_label">mendo al XLA.TO</string>
+    <string name="info_send_xlato_success_order_label">mendo al XLA.TO</string>
 
-    <string name="info_send_xmrto_success_btc">%1$s BTC</string>
+    <string name="info_send_xlato_success_btc">%1$s BTC</string>
 
-    <string name="info_send_xmrto_paid">Konfirmo okazonta</string>
-    <string name="info_send_xmrto_unpaid">Pago okazonta</string>
-    <string name="info_send_xmrto_error">XLA.TO eraro (%1$s)</string>
-    <string name="info_send_xmrto_sent">BTC sendiĝis!</string>
-    <string name="info_send_xmrto_query">Informpetante &#8230;</string>
+    <string name="info_send_xlato_paid">Konfirmo okazonta</string>
+    <string name="info_send_xlato_unpaid">Pago okazonta</string>
+    <string name="info_send_xlato_error">XLA.TO eraro (%1$s)</string>
+    <string name="info_send_xlato_sent">BTC sendiĝis!</string>
+    <string name="info_send_xlato_query">Informpetante &#8230;</string>
 
-    <string name="info_send_xmrto_parms"><![CDATA[
+    <string name="info_send_xlato_parms"><![CDATA[
         <b>Vi povas sendi %1$s &#8212; %2$s BTC</b>.<br/>
         <i><b>XLA.TO</b> proponas al vi tiun kurzon: <b>%3$s BTC</b> <u>nun</u></i>.
     ]]></string>
-    <string name="info_send_xmrto_zeroconf"><![CDATA[
+    <string name="info_send_xlato_zeroconf"><![CDATA[
         <i>Kvantoj ĝis <b>%1$s BTC</b> sendiĝos <u>senatende</u>!</i>
     ]]></string>
 
@@ -61,14 +61,14 @@
     <string name="info_paymentid_integrated">&#x2714; Paga-ID integriĝis</string>
     <string name="info_prepare_tx">Preparante vian transakcion</string>
 
-    <string name="label_send_progress_xmrto_create">Kreante mendon al XLA.TO</string>
-    <string name="label_send_progress_xmrto_query">Petante XLA.TO-mendon </string>
+    <string name="label_send_progress_xlato_create">Kreante mendon al XLA.TO</string>
+    <string name="label_send_progress_xlato_query">Petante XLA.TO-mendon </string>
     <string name="label_send_progress_create_tx">Preparante la Scala-transakcion</string>
 
     <string name="label_send_progress_queryparms">Petante la XLA.TO-parametrojn</string>
 
-    <string name="label_generic_xmrto_error">ERARO JE XLA.TO</string>
-    <string name="text_generic_xmrto_error">kodo: %1$d</string>
+    <string name="label_generic_xlato_error">ERARO JE XLA.TO</string>
+    <string name="text_generic_xlato_error">kodo: %1$d</string>
 
     <string name="text_retry">Tuŝu por reprovi</string>
     <string name="text_noretry_scala">Ni blokiĝis ĉi tie!</string>
@@ -77,9 +77,9 @@
     <string name="text_send_btc_amount">%1$s BTC = %2$s XLA</string>
     <string name="text_send_btc_rate">(kurzo: %1$s BTC/XLA)</string>
 
-    <string name="label_send_btc_xmrto_info">Vizitu xmr.to por helpo kaj sekvado</string>
-    <string name="label_send_btc_xmrto_key_lb">Sekreta ŝlosilo\nXLA.TO</string>
-    <string name="label_send_btc_xmrto_key">XLA.TO sekreta ŝlosilo</string>
+    <string name="label_send_btc_xlato_info">Vizitu xla.to por helpo kaj sekvado</string>
+    <string name="label_send_btc_xlato_key_lb">Sekreta ŝlosilo\nXLA.TO</string>
+    <string name="label_send_btc_xlato_key">XLA.TO sekreta ŝlosilo</string>
     <string name="label_send_btc_address">Ricevanta BTC-adreso</string>
     <string name="label_send_btc_amount">Kvanto</string>
 
@@ -116,7 +116,7 @@
 
     <string name="status_transaction_failed">Transakcio malsukcesis: %1$s</string>
 
-    <string name="send_xmrto_timeout">Vi atendis tro longe, kara.</string>
+    <string name="send_xlato_timeout">Vi atendis tro longe, kara.</string>
 
     <string name="service_busy">Mi daŭre okupiĝas pri via lasta monujo &#8230;</string>
 
@@ -140,7 +140,7 @@
     <string name="label_wallet_receive">Ricevi</string>
     <string name="label_wallet_send">Doni</string>
 
-    <string name="xmr_unconfirmed_amount">+ %1$s XLA nekonfirmite</string>
+    <string name="xla_unconfirmed_amount">%1$s XLA nekonfirmite</string>
 
     <string name="service_description">monerujo Servo</string>
 
@@ -154,9 +154,9 @@
 
     <string name="label_copy_viewkey">Vida ŝlosilo</string>
     <string name="label_copy_address">Publika adreso</string>
-    <string name="label_copy_xmrtokey">XLA.TO ŝlosilo</string>
+    <string name="label_copy_xlatokey">XLA.TO ŝlosilo</string>
     <string name="message_copy_viewkey">Vida ŝlosilo kopiiĝis en la tondujon!</string>
-    <string name="message_copy_xmrtokey">XLA.TO ŝlosilo kopiiĝis en la tondujon!</string>
+    <string name="message_copy_xlatokey">XLA.TO ŝlosilo kopiiĝis en la tondujon!</string>
     <string name="message_copy_address">La monujadreso kopiiĝis en la tondujon!</string>
     <string name="message_copy_txid">La transakcia ID kopiiĝis en la tondujon!</string>
     <string name="message_nocopy">Por pli da sekureco, vi ne rajtas kopii tion!</string>
@@ -213,7 +213,7 @@
     <string name="generate_check_address">Entajpu validan adreson</string>
     <string name="generate_check_mnemonic">Entajpu vian 25-vortan semon</string>
 
-    <string name="send_amount_btc_xmr">%1$s (indika)</string>
+    <string name="send_amount_btc_xla">%1$s (indika)</string>
 
     <string name="send_paymentid_hint">Paga-ID (opcia)</string>
     <string name="send_amount_hint">0.00</string>
@@ -249,8 +249,8 @@
     <string name="tx_list_fee">- Kosto %1$s</string>
     <string name="tx_list_amount_failed">(%1$s)</string>
     <string name="tx_list_failed_text">masukcesis</string>
-    <string name="tx_list_amount_negative">- %1$s</string>
-    <string name="tx_list_amount_positive">+ %1$s</string>
+    <string name="tx_list_amount_negative">%1$s</string>
+    <string name="tx_list_amount_positive">%1$s</string>
 
     <string name="tx_timestamp">Tempindiko</string>
     <string name="tx_id">TX ID</string>
@@ -369,10 +369,10 @@
     <string name="send_address_bip70">Sukcesis solvi la pagan URI&#x2714;</string>
     <string name="send_address_hint">Ricevanto</string>
 
-    <string name="xmrto_error_001">XLA.TO ne enretas - provu pli poste</string>
-    <string name="xmrto_error_004">BTC-kvanto tro grandas</string>
-    <string name="xmrto_error_010">La paga URL malvalidas aŭ ne ĝisdatiĝis</string>
-    <string name="xmrto_error_012">Tro da mendoj</string>
+    <string name="xlato_error_001">XLA.TO ne enretas - provu pli poste</string>
+    <string name="xlato_error_004">BTC-kvanto tro grandas</string>
+    <string name="xlato_error_010">La paga URL malvalidas aŭ ne ĝisdatiĝis</string>
+    <string name="xlato_error_012">Tro da mendoj</string>
 
     <string name="street_sweep_amount">ĈIO!</string>
 

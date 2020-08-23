@@ -30,29 +30,29 @@
 
     <string name="label_receive_info_gen_qr_code">Koppints a QR-kódért</string>
 
-    <string name="info_xmrto_enabled">BTC fizetés engedélyezve, koppints ide a részletekért.</string>
+    <string name="info_xlato_enabled">BTC fizetés engedélyezve, koppints ide a részletekért.</string>
     <string name="info_ledger_enabled">Ledger engedélyezve, koppints ide a részletekért</string>
 
-    <string name="info_xmrto"><![CDATA[
+    <string name="info_xlato"><![CDATA[
         <b>Bitcoin-címet adtál meg.</b><br/>
         <i>XLA-t fogsz küldeni, a fogadó pedig BTC-t fog kapni az <b>XLA.TO</b> szolgáltatásán keresztül.</i>
     ]]></string>
 
-    <string name="info_send_xmrto_success_order_label">XLA.TO megrendelés</string>
+    <string name="info_send_xlato_success_order_label">XLA.TO megrendelés</string>
 
-    <string name="info_send_xmrto_success_btc">%1$s BTC</string>
+    <string name="info_send_xlato_success_btc">%1$s BTC</string>
 
-    <string name="info_send_xmrto_paid">Megerősítés folyamatban</string>
-    <string name="info_send_xmrto_unpaid">Kifizetés folyamatban</string>
-    <string name="info_send_xmrto_error">XLA.TO-hiba (%1$s)</string>
-    <string name="info_send_xmrto_sent">BTC elküldve!</string>
-    <string name="info_send_xmrto_query">Lekérdezés&#8230;</string>
+    <string name="info_send_xlato_paid">Megerősítés folyamatban</string>
+    <string name="info_send_xlato_unpaid">Kifizetés folyamatban</string>
+    <string name="info_send_xlato_error">XLA.TO-hiba (%1$s)</string>
+    <string name="info_send_xlato_sent">BTC elküldve!</string>
+    <string name="info_send_xlato_query">Lekérdezés&#8230;</string>
 
-    <string name="info_send_xmrto_parms"><![CDATA[
+    <string name="info_send_xlato_parms"><![CDATA[
         <b>Elküldhetsz: %1$s &#8212; %2$s BTC</b>.<br/>
         <i>Az <b>XLA.TO</b> <u>aktuális</u> árfolyama: <b>%3$s BTC</b></i>.
     ]]></string>
-    <string name="info_send_xmrto_zeroconf"><![CDATA[
+    <string name="info_send_xlato_zeroconf"><![CDATA[
         <i>A legfeljebb <b>%1$s BTC</b> nagyságú összegek <u>azonnal</u> elküldésre kerülnek!</i>
     ]]></string>
 
@@ -61,14 +61,14 @@
     <string name="info_paymentid_integrated">&#x2714; Fizetési azonosító integrálva</string>
     <string name="info_prepare_tx">Tranzakció előkészítése</string>
 
-    <string name="label_send_progress_xmrto_create">XLA.TO megrendelés létrehozása</string>
-    <string name="label_send_progress_xmrto_query">XLA.TO megrendelés lekérdezése</string>
+    <string name="label_send_progress_xlato_create">XLA.TO megrendelés létrehozása</string>
+    <string name="label_send_progress_xlato_query">XLA.TO megrendelés lekérdezése</string>
     <string name="label_send_progress_create_tx">Scala-tranzakció előkészítése</string>
 
     <string name="label_send_progress_queryparms">XLA.TO paraméterek lekérdezése</string>
 
-    <string name="label_generic_xmrto_error">XLA.TO HIBA</string>
-    <string name="text_generic_xmrto_error">Kód: %1$d</string>
+    <string name="label_generic_xlato_error">XLA.TO HIBA</string>
+    <string name="text_generic_xlato_error">Kód: %1$d</string>
 
     <string name="text_retry">Koppints az újrapróbálkozáshoz</string>
     <string name="text_noretry_scala">Itt most elakadtunk!</string>
@@ -77,9 +77,9 @@
     <string name="text_send_btc_amount">%1$s BTC = %2$s XLA</string>
     <string name="text_send_btc_rate">(Arány: %1$s BTC/XLA)</string>
 
-    <string name="label_send_btc_xmrto_info">Segítségért és nyomonkövetésért látogass el az XLA.TO weboldalra</string>
-    <string name="label_send_btc_xmrto_key_lb">Titkos kulcs\nXLA.TO</string>
-    <string name="label_send_btc_xmrto_key">XLA.TO titkos kulcs</string>
+    <string name="label_send_btc_xlato_info">Segítségért és nyomonkövetésért látogass el az XLA.TO weboldalra</string>
+    <string name="label_send_btc_xlato_key_lb">Titkos kulcs\nXLA.TO</string>
+    <string name="label_send_btc_xlato_key">XLA.TO titkos kulcs</string>
     <string name="label_send_btc_address">Kedvezményezett BTC-címe</string>
     <string name="label_send_btc_amount">Mennyiség</string>
 
@@ -114,7 +114,7 @@
 
     <string name="status_transaction_failed">Sikertelen tranzakció: %1$s</string>
 
-    <string name="send_xmrto_timeout">Túl sokat vártál, barátom!</string>
+    <string name="send_xlato_timeout">Túl sokat vártál, barátom!</string>
 
     <string name="service_busy">Még az előző tárcáddal vagyok elfoglalva&#8230;</string>
 
@@ -138,7 +138,7 @@
     <string name="label_wallet_receive">Fogadás</string>
     <string name="label_wallet_send">Küldés</string>
 
-    <string name="xmr_unconfirmed_amount">+ %1$s XLA függőben</string>
+    <string name="xla_unconfirmed_amount">%1$s XLA függőben</string>
 
     <string name="service_description">monerujo szolgáltatás</string>
 
@@ -152,9 +152,9 @@
 
     <string name="label_copy_viewkey">Figyelőkulcs</string>
     <string name="label_copy_address">Nyilvános cím</string>
-    <string name="label_copy_xmrtokey">XLA.TO kulcs</string>
+    <string name="label_copy_xlatokey">XLA.TO kulcs</string>
     <string name="message_copy_viewkey">Figyelőkulcs vágólapra másolva!</string>
-    <string name="message_copy_xmrtokey">XLA.TO kulcs vágólapra másolva!</string>
+    <string name="message_copy_xlatokey">XLA.TO kulcs vágólapra másolva!</string>
     <string name="message_copy_address">Tárcacím vágólapra másolva!</string>
     <string name="message_copy_txid">Tranzakcióazonosító vágólapra másolva!</string>
     <string name="message_nocopy">A másolás biztonsági okokból tiltásra került!</string>
@@ -211,7 +211,7 @@
     <string name="generate_check_address">Adj meg egy valós címet</string>
     <string name="generate_check_mnemonic">Add meg a 25 szavas magod</string>
 
-    <string name="send_amount_btc_xmr">%1$s (előrejelzés)</string>
+    <string name="send_amount_btc_xla">%1$s (előrejelzés)</string>
 
     <string name="send_paymentid_hint">Fizetési azonosító (opcionális)</string>
     <string name="send_amount_hint">0.00</string>
@@ -240,11 +240,11 @@
 
     <string name="send_create_tx_error_title">Tranzakciólétrehozási hiba</string>
 
-    <string name="tx_list_fee">- %1$s díj</string>
+    <string name="tx_list_fee">%1$s díj</string>
     <string name="tx_list_amount_failed">(%1$s)</string>
     <string name="tx_list_failed_text">sikertelen</string>
-    <string name="tx_list_amount_negative">- %1$s</string>
-    <string name="tx_list_amount_positive">+ %1$s</string>
+    <string name="tx_list_amount_negative">%1$s</string>
+    <string name="tx_list_amount_positive">%1$s</string>
 
     <string name="tx_timestamp">Időbélyeg</string>
     <string name="tx_id">Tranzakcióazonosító</string>
@@ -371,10 +371,10 @@
     <string name="send_address_bip70">Resolved Payment URI &#x2714;</string>
     <string name="send_address_hint">Receiver</string>
 
-    <string name="xmrto_error_001">XLA.TO offline - try again later</string>
-    <string name="xmrto_error_004">BTC amount out of bounds</string>
-    <string name="xmrto_error_010">Invalid or outdated Payment URL</string>
-    <string name="xmrto_error_012">Too many requests</string>
+    <string name="xlato_error_001">XLA.TO offline - try again later</string>
+    <string name="xlato_error_004">BTC amount out of bounds</string>
+    <string name="xlato_error_010">Invalid or outdated Payment URL</string>
+    <string name="xlato_error_012">Too many requests</string>
 
     <string name="street_sweep_amount">EVERYTHING!</string> <!-- as in: "everything in the account" = "all the money" -->
 

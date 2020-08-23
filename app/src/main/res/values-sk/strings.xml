@@ -30,30 +30,30 @@
 
     <string name="label_receive_info_gen_qr_code">Klepni pre QR kód</string>
 
-    <string name="info_xmrto_enabled">BTC platby aktivované, klepni pre viac info.</string>
+    <string name="info_xlato_enabled">BTC platby aktivované, klepni pre viac info.</string>
     <string name="info_ledger_enabled">Ledger aktivovaný, klepni pre viac info.</string>
 
-    <string name="info_xmrto"><![CDATA[
+    <string name="info_xlato"><![CDATA[
         <b>Vložil si Bitcoin adresu.</b><br/>
         <i>Pošleš XLA a adresát dostane BTC cez službu <b>XLA.TO</b>.</i>
     ]]></string>
 
-    <string name="info_send_xmrto_success_order_label">XLA.TO Objednávka</string>
+    <string name="info_send_xlato_success_order_label">XLA.TO Objednávka</string>
 
-    <string name="info_send_xmrto_success_btc">%1$s BTC</string>
+    <string name="info_send_xlato_success_btc">%1$s BTC</string>
 
 
-    <string name="info_send_xmrto_paid">Čaká na Potvrdenie</string>
-    <string name="info_send_xmrto_unpaid">Čakajúca Platba</string>
-    <string name="info_send_xmrto_error">XLA.TO Chyba (%1$s)</string>
-    <string name="info_send_xmrto_sent">BTC Odoslané!</string>
-    <string name="info_send_xmrto_query">Zisťujem &#8230;</string>
+    <string name="info_send_xlato_paid">Čaká na Potvrdenie</string>
+    <string name="info_send_xlato_unpaid">Čakajúca Platba</string>
+    <string name="info_send_xlato_error">XLA.TO Chyba (%1$s)</string>
+    <string name="info_send_xlato_sent">BTC Odoslané!</string>
+    <string name="info_send_xlato_query">Zisťujem &#8230;</string>
 
-    <string name="info_send_xmrto_parms"><![CDATA[
+    <string name="info_send_xlato_parms"><![CDATA[
         <b>Môžeš poslať %1$s &#8212; %2$s BTC</b>.<br/>
         <i><b>XLA.TO</b> ti dáva výmenný kurz of <b>%3$s BTC</b> <u>práve teraz</u></i>.
     ]]></string>
-    <string name="info_send_xmrto_zeroconf"><![CDATA[
+    <string name="info_send_xlato_zeroconf"><![CDATA[
         <i>čiastka do <b>%1$s BTC</b> bude odoslaná <u>okamžite</u>!</i>
     ]]></string>
 
@@ -62,14 +62,14 @@
     <string name="info_paymentid_integrated">&#x2714; Payment ID integrované</string>
     <string name="info_prepare_tx">Pripravujem transakciu</string>
 
-    <string name="label_send_progress_xmrto_create">Vytváram objednávku na XLA.TO</string>
-    <string name="label_send_progress_xmrto_query">Pýtam sa na objednávku XLA.TO</string>
+    <string name="label_send_progress_xlato_create">Vytváram objednávku na XLA.TO</string>
+    <string name="label_send_progress_xlato_query">Pýtam sa na objednávku XLA.TO</string>
     <string name="label_send_progress_create_tx">Pripravujem Scala transakciu</string>
 
     <string name="label_send_progress_queryparms">Posielam XLA.TO parametre</string>
 
-    <string name="label_generic_xmrto_error">CHYBA XLA.TO</string>
-    <string name="text_generic_xmrto_error">Kód chyby: %1$d</string>
+    <string name="label_generic_xlato_error">CHYBA XLA.TO</string>
+    <string name="text_generic_xlato_error">Kód chyby: %1$d</string>
 
     <string name="text_retry">Klepni pre opakovanie</string>
     <string name="text_noretry_scala">Uviazli sme tu!</string>
@@ -78,9 +78,9 @@
     <string name="text_send_btc_amount">%1$s BTC = %2$s XLA</string>
     <string name="text_send_btc_rate">(Kurz: %1$s BTC/XLA)</string>
 
-    <string name="label_send_btc_xmrto_info">Navštív XLA.TO pre podporu &amp; tracking</string>
-    <string name="label_send_btc_xmrto_key_lb">Tajný kľúč\nXLA.TO</string>
-    <string name="label_send_btc_xmrto_key">XLA.TO Tajný kľúč</string>
+    <string name="label_send_btc_xlato_info">Navštív XLA.TO pre podporu &amp; tracking</string>
+    <string name="label_send_btc_xlato_key_lb">Tajný kľúč\nXLA.TO</string>
+    <string name="label_send_btc_xlato_key">XLA.TO Tajný kľúč</string>
     <string name="label_send_btc_address">Cieľová BTC Adresa</string>
     <string name="label_send_btc_amount">Čiastka</string>
 
@@ -115,7 +115,7 @@
 
     <string name="status_transaction_failed">Transakcia zlyhala: %1$s</string>
 
-    <string name="send_xmrto_timeout">Čakal si príliš dlho kámo!</string>
+    <string name="send_xlato_timeout">Čakal si príliš dlho kámo!</string>
 
     <string name="service_busy">Stále ma vyťažuje posledná peňaženka &#8230;</string>
 
@@ -139,7 +139,7 @@
     <string name="label_wallet_receive">Prijať</string>
     <string name="label_wallet_send">Poslať</string>
 
-    <string name="xmr_unconfirmed_amount">+ %1$s XLA nepotvrdených</string>
+    <string name="xla_unconfirmed_amount">%1$s XLA nepotvrdených</string>
 
     <string name="service_description">monerujo Service</string>
 
@@ -153,9 +153,9 @@
 
     <string name="label_copy_viewkey">Prezerací Kľúč</string>
     <string name="label_copy_address">Verejná Adresa</string>
-    <string name="label_copy_xmrtokey">Kľúč XLA.TO</string>
+    <string name="label_copy_xlatokey">Kľúč XLA.TO</string>
     <string name="message_copy_viewkey">Prezerací Kľúč skopírovaný do schránky!</string>
-    <string name="message_copy_xmrtokey">XLA.TO kľúč skopírovaný do schránky!</string>
+    <string name="message_copy_xlatokey">XLA.TO kľúč skopírovaný do schránky!</string>
     <string name="message_copy_address">Adresa peňaženky skopírovaná do schránky!</string>
     <string name="message_copy_txid">ID Transakcie skopírované do schránky!</string>
     <string name="message_nocopy">Kopírovanie vypnuté z bezpečnostných dôvodov!</string>
@@ -209,7 +209,7 @@
     <string name="generate_check_address">Vlož platnú Adresu</string>
     <string name="generate_check_mnemonic">Vlož svoj 25-slovný seed</string>
 
-    <string name="send_amount_btc_xmr">%1$s (odhad)</string>
+    <string name="send_amount_btc_xla">%1$s (odhad)</string>
 
     <string name="send_paymentid_hint">ID Platby (voliteľné)</string>
     <string name="send_amount_hint">0.00</string>
@@ -241,8 +241,8 @@
     <string name="tx_list_fee">- poplatok %1$s</string>
     <string name="tx_list_amount_failed">(%1$s)</string>
     <string name="tx_list_failed_text">zlyhala</string>
-    <string name="tx_list_amount_negative">- %1$s</string>
-    <string name="tx_list_amount_positive">+ %1$s</string>
+    <string name="tx_list_amount_negative">%1$s</string>
+    <string name="tx_list_amount_positive">%1$s</string>
 
     <string name="tx_timestamp">časová pečiatka</string>
     <string name="tx_id">TX ID</string>
@@ -370,10 +370,10 @@
     <!-- please verify this means "Receiver" or "Recipient" as in "Receiver in the transaction" -->
     <string name="send_address_hint">Príjemca</string>
 
-    <string name="xmrto_error_001">XLA.TO je offline - skús neskôr</string>
-    <string name="xmrto_error_004">Množstvo BTC je mimo rámca</string>
-    <string name="xmrto_error_010">Neplatná alebo stará URL platby</string>
-    <string name="xmrto_error_012">Príliš veľa požiadaviek</string>
+    <string name="xlato_error_001">XLA.TO je offline - skús neskôr</string>
+    <string name="xlato_error_004">Množstvo BTC je mimo rámca</string>
+    <string name="xlato_error_010">Neplatná alebo stará URL platby</string>
+    <string name="xlato_error_012">Príliš veľa požiadaviek</string>
 
     <string name="street_sweep_amount">VŠETKO!</string> <!-- as in: "everything in the account" = "all the money" -->
 

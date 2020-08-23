@@ -125,7 +125,7 @@ git checkout release-v0.12.3
 
 If using default locations, this would mean:
 ```Shell
-cd <path-to-xmrwallet>/external-libs
+cd <path-to-xlawallet>/external-libs
 # remove old stuff
 find . -name "*.a" -or -name "*.h" -type f -delete
 ./collect.sh

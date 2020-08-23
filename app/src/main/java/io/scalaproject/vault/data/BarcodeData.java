@@ -42,7 +42,7 @@ public class BarcodeData {
     public static final String XLA_AMOUNT = "tx_amount";
     public static final String XLA_DESCRIPTION = "tx_description";
 
-    public static final String OA_XLA_ASSET = "xmr";
+    public static final String OA_XLA_ASSET = "xla";
     public static final String OA_BTC_ASSET = "btc";
 
     static final String BTC_SCHEME = "bitcoin";

@@ -101,7 +101,7 @@
         <h2>Betalings-ID</h2>
         Je kunt een Betalings-ID gebruiken om aan te geven waarom je Scala verzendt. Dit is volledig optioneel en blijft vertrouwelijk tussen beide partijen. Een bedrijf kan bijvoorbeeld jouw transactie koppelen aan een artikel dat je hebt gekocht.
         <h2>Transactie-ID</h2>
-        Met je transactie-ID kun je de versleutelde transactie vinden in een Scala-blockexplorer, bijvoorbeeld <a href="https://xmrchain.net/">https://xmrchain.net/</a>
+        Met je transactie-ID kun je de versleutelde transactie vinden in een Scala-blockexplorer, bijvoorbeeld <a href="https://xlachain.net/">https://xlachain.net/</a>
         <h2>Transactiesleutel</h2>
         Dit is de geheime sleutel van je transactie. Bewaar deze veilig, want als iemand bekendmaakt welke handtekening in een ring van jou is, wordt je transactie openbaar.
         <h2>Blok</h2>
@@ -118,14 +118,14 @@
             <li>a BTC address</li>
             <li>a bitcoin: URI (including BIP70 like bitpay)</li>
         </u>
-        Please note, that sending BTC is processed through the XLA.TO service (see https://xmr.to
+        Please note, that sending BTC is processed through the XLA.TO service (see https://xla.to
         for details). See the section on sending BTC below.</p>
         <h2>Betalings-ID</h2>
         <p>Je kunt een Betalings-ID gebruiken om aan te geven waarom je Scala verzendt. Dit is volledig optioneel en blijft vertrouwelijk tussen beide partijen. Een bedrijf kan bijvoorbeeld jouw transactie koppelen aan een artikel dat je hebt gekocht.<p>
         <h1>BTC verzenden</h1>
         <h2>XLA.TO</h2>
         <p>XLA.TO is een externe service waarmee je Scala kunt inwisselen voor Bitcoin.
-        We gebruiken de API van XLA.TO om Bitcoin-betalingen te integreren in Scala Vault. Neem eens een kijkje op https://xmr.to en besluit zelf of je dit wilt gebruiken. Het Scala Vault-team is niet verbonden aan XLA.TO en kan je niet helpen met deze service.</p>
+        We gebruiken de API van XLA.TO om Bitcoin-betalingen te integreren in Scala Vault. Neem eens een kijkje op https://xla.to en besluit zelf of je dit wilt gebruiken. Het Scala Vault-team is niet verbonden aan XLA.TO en kan je niet helpen met deze service.</p>
         <h2>Wisselkoers XLA.TO<h2>
         <p>Op het scherm \"Bedrag\" worden de huidige waarden voor het gebruik van XLA.TO weergegeven. Hierbij staat de huidige wisselkoers, maar ook het maximale en minimale BTC-bedrag. Houd er rekening mee dat deze koers op dit moment nog niet wordt gegarandeerd. Je ziet hier ook het maximale bedrag waarvoor de BTC-transactie meteen wordt uitgevoerd zonder te wachten op XLA-bevestigingen (zie de FAQ van XLA.TO voor meer informatie). En het mooiste is dat XLA.TO geen extra transactiekosten rekent. Hoe cool is dat?</p>
         <h2>XLA.TO-opdracht<h2>
@@ -137,11 +137,11 @@
         <p>Als de knop heeft afgeteld naar nul, moet je een nieuw aanbod van XLA.TO aanvragen. Ga daarvoor terug naar de vorige stap en open het scherm \"Bevestigen\" opnieuw.</p>
     ]]></string>
 
-    <string name="help_xmrto"><![CDATA[
+    <string name="help_xlato"><![CDATA[
         <h1>BTC verzenden</h1>
         <h2>XLA.TO</h2>
         <p>XLA.TO is een externe service waarmee je Scala kunt inwisselen voor Bitcoin.
-        We gebruiken de API van XLA.TO om Bitcoin-betalingen te integreren in Scala Vault. Neem eens een kijkje op https://xmr.to en besluit zelf of je dit wilt gebruiken. Het Scala Vault-team is niet verbonden aan XLA.TO en kan je niet helpen met deze service.</p>
+        We gebruiken de API van XLA.TO om Bitcoin-betalingen te integreren in Scala Vault. Neem eens een kijkje op https://xla.to en besluit zelf of je dit wilt gebruiken. Het Scala Vault-team is niet verbonden aan XLA.TO en kan je niet helpen met deze service.</p>
         <h2>Wisselkoers XLA.TO<h2>
         <p>Op het scherm \"Bedrag\" worden de huidige waarden voor het gebruik van XLA.TO weergegeven. Hierbij staat de huidige wisselkoers, maar ook het maximale en minimale BTC-bedrag. Houd er rekening mee dat deze koers op dit moment nog niet wordt gegarandeerd. Je ziet hier ook het maximale bedrag waarvoor de BTC-transactie meteen wordt uitgevoerd zonder te wachten op XLA-bevestigingen (zie de FAQ van XLA.TO voor meer informatie). En het mooiste is dat XLA.TO geen extra transactiekosten rekent. Hoe cool is dat?</p>
         <h2>XLA.TO-opdracht<h2>

@@ -49,13 +49,13 @@ public class XlaToApiOrderParameterTest {
 
     private MockWebServer mockWebServer;
 
-    private XlaToApi xmrToApi;
+    private XlaToApi xlaToApi;
 
     private OkHttpClient okHttpClient = new OkHttpClient();
     private Waiter waiter;
 
     @Mock
-    XlaToCallback<QueryOrderParameters> mockParametersXmrToCallback;
+    XlaToCallback<QueryOrderParameters> mockParametersxlaToCallback;
 
     @Before
     public void setUp() throws Exception {
@@ -66,7 +66,7 @@ public class XlaToApiOrderParameterTest {
 
         MockitoAnnotations.initMocks(this);
 
-        xmrToApi = new XlaToApiImpl(okHttpClient, mockWebServer.url("/"));
+        xlaToApi = new XlaToApiImpl(okHttpClient, mockWebServer.url("/"));
     }
 
     @After
@@ -78,7 +78,7 @@ public class XlaToApiOrderParameterTest {
     public void orderParameter_shouldBeGetMethod()
             throws InterruptedException {
 
-        xmrToApi.queryOrderParameters(mockParametersXmrToCallback);
+        xlaToApi.queryOrderParameters(mockParametersxlaToCallback);
 
         RecordedRequest request = mockWebServer.takeRequest();
         assertEquals("GET", request.getMethod());
@@ -97,7 +97,7 @@ public class XlaToApiOrderParameterTest {
                 createMockOrderParameterResponse(isZeroConfEnabled, price, upperLimit, lowerLimit, zeroConfMaxAmount));
         mockWebServer.enqueue(jsonMockResponse);
 
-        xmrToApi.queryOrderParameters(new XlaToCallback<QueryOrderParameters>() {
+        xlaToApi.queryOrderParameters(new XlaToCallback<QueryOrderParameters>() {
             @Override
             public void onSuccess(final QueryOrderParameters orderParameter) {
                 waiter.assertEquals(orderParameter.getLowerLimit(), lowerLimit);
@@ -121,7 +121,7 @@ public class XlaToApiOrderParameterTest {
     public void orderParameter_wasNotSuccessfulShouldCallOnError()
             throws TimeoutException {
         mockWebServer.enqueue(new MockResponse().setResponseCode(500));
-        xmrToApi.queryOrderParameters(new XlaToCallback<QueryOrderParameters>() {
+        xlaToApi.queryOrderParameters(new XlaToCallback<QueryOrderParameters>() {
             @Override
             public void onSuccess(final QueryOrderParameters orderParameter) {
                 waiter.fail();
@@ -145,7 +145,7 @@ public class XlaToApiOrderParameterTest {
         mockWebServer.enqueue(new MockResponse().
                 setResponseCode(503).
                 setBody("{\"error_msg\":\"third party service not available\",\"error\":\"XLATO-ERROR-007\"}"));
-        xmrToApi.queryOrderParameters(new XlaToCallback<QueryOrderParameters>() {
+        xlaToApi.queryOrderParameters(new XlaToCallback<QueryOrderParameters>() {
             @Override
             public void onSuccess(final QueryOrderParameters orderParameter) {
                 waiter.fail();
@@ -155,11 +155,11 @@ public class XlaToApiOrderParameterTest {
             @Override
             public void onError(final Exception e) {
                 waiter.assertTrue(e instanceof XlaToException);
-                XlaToException xmrEx = (XlaToException) e;
-                waiter.assertTrue(xmrEx.getCode() == 503);
-                waiter.assertNotNull(xmrEx.getError());
-                waiter.assertEquals(xmrEx.getError().getErrorId(), XlaToError.Error.XLATO_ERROR_007);
-                waiter.assertEquals(xmrEx.getError().getErrorMsg(), "third party service not available");
+                XlaToException xlaEx = (XlaToException) e;
+                waiter.assertTrue(xlaEx.getCode() == 503);
+                waiter.assertNotNull(xlaEx.getError());
+                waiter.assertEquals(xlaEx.getError().getErrorId(), XlaToError.Error.XLATO_ERROR_007);
+                waiter.assertEquals(xlaEx.getError().getErrorMsg(), "third party service not available");
                 waiter.resume();
             }
 

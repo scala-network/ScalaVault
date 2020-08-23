@@ -57,8 +57,8 @@ import java.util.Locale;
 import timber.log.Timber;
 
 public class ExchangeView extends LinearLayout {
-    String xmrAmount = null;
-    String notXmrAmount = null;
+    String xlaAmount = null;
+    String notxlaAmount = null;
 
     public void enable(boolean enable) {
         etAmount.setEnabled(enable);
@@ -66,29 +66,29 @@ public class ExchangeView extends LinearLayout {
         sCurrencyB.setEnabled(enable);
     }
 
-    void setXmr(String xmr) {
-        xmrAmount = xmr;
+    void setxla(String xla) {
+        xlaAmount = xla;
         if (onNewAmountListener != null) {
-            onNewAmountListener.onNewAmount(xmr);
+            onNewAmountListener.onNewAmount(xla);
         }
     }
 
-    public void setAmount(String xmrAmount) {
-        if (xmrAmount != null) {
+    public void setAmount(String xlaAmount) {
+        if (xlaAmount != null) {
             setCurrencyA(0);
-            etAmount.getEditText().setText(xmrAmount);
-            setXmr(xmrAmount);
-            this.notXmrAmount = null;
+            etAmount.getEditText().setText(xlaAmount);
+            setxla(xlaAmount);
+            this.notxlaAmount = null;
             doExchange();
         } else {
-            setXmr(null);
-            this.notXmrAmount = null;
+            setxla(null);
+            this.notxlaAmount = null;
             tvAmountB.setText("--");
         }
     }
 
     public String getAmount() {
-        return xmrAmount;
+        return xlaAmount;
     }
 
     public void setError(String msg) {
@@ -259,11 +259,10 @@ public class ExchangeView extends LinearLayout {
             public void onTextChanged(CharSequence s, int start, int before, int count) {
             }
         });
-
     }
 
-    final static double MAX_AMOUNT_XLA = 1000;
-    final static double MAX_AMOUNT_NOTXLA = 100000;
+    final static double MAX_AMOUNT_XLA = 10000000;
+    final static double MAX_AMOUNT_NOTXLA = 100000000;
 
     public boolean checkEnteredAmount() {
         boolean ok = true;
@@ -315,10 +314,10 @@ public class ExchangeView extends LinearLayout {
     }
 
     private void clearAmounts() {
-        if ((xmrAmount != null) || (notXmrAmount != null)) {
+        if ((xlaAmount != null) || (notxlaAmount != null)) {
             tvAmountB.setText("--");
-            setXmr(null);
-            notXmrAmount = null;
+            setxla(null);
+            notxlaAmount = null;
         }
     }
 
@@ -357,27 +356,27 @@ public class ExchangeView extends LinearLayout {
 
     public void exchange(double rate) {
         if (getCurrencyA() == 0) {
-            if (xmrAmount == null) return;
-            if (!xmrAmount.isEmpty() && (rate > 0)) {
-                double amountB = rate * Double.parseDouble(xmrAmount);
-                notXmrAmount = Helper.getFormattedAmount(amountB, getCurrencyB() == 0);
+            if (xlaAmount == null) return;
+            if (!xlaAmount.isEmpty() && (rate > 0)) {
+                double amountB = rate * Double.parseDouble(xlaAmount);
+                notxlaAmount = Helper.getFormattedAmount(amountB, getCurrencyB() == 0);
             } else {
-                notXmrAmount = "";
+                notxlaAmount = "";
             }
-            tvAmountB.setText(notXmrAmount);
+            tvAmountB.setText(notxlaAmount);
         } else if (getCurrencyB() == 0) {
-            if (notXmrAmount == null) return;
-            if (!notXmrAmount.isEmpty() && (rate > 0)) {
-                double amountB = rate * Double.parseDouble(notXmrAmount);
-                setXmr(Helper.getFormattedAmount(amountB, true));
+            if (notxlaAmount == null) return;
+            if (!notxlaAmount.isEmpty() && (rate > 0)) {
+                double amountB = rate * Double.parseDouble(notxlaAmount);
+                setxla(Helper.getFormattedAmount(amountB, true));
             } else {
-                setXmr("");
+                setxla("");
             }
-            tvAmountB.setText(xmrAmount);
+            tvAmountB.setText(xlaAmount);
         } else { // no XLA currency - cannot happen!
             Timber.e("No XLA currency!");
-            setXmr(null);
-            notXmrAmount = null;
+            setxla(null);
+            notxlaAmount = null;
             return;
         }
     }
@@ -391,30 +390,30 @@ public class ExchangeView extends LinearLayout {
                 if (getCurrencyA() == 0) {
                     // sanitize the input
                     cleanAmount = Helper.getDisplayAmount(Wallet.getAmountFromString(enteredAmount));
-                    setXmr(cleanAmount);
-                    notXmrAmount = null;
+                    setxla(cleanAmount);
+                    notxlaAmount = null;
                     Timber.d("cleanAmount = %s", cleanAmount);
                 } else if (getCurrencyB() == 0) { // we use B & 0 here for the else below ...
                     // sanitize the input
                     double amountA = Double.parseDouble(enteredAmount);
                     cleanAmount = String.format(Locale.US, "%.2f", amountA);
-                    setXmr(null);
-                    notXmrAmount = cleanAmount;
+                    setxla(null);
+                    notxlaAmount = cleanAmount;
                 } else { // no XLA currency - cannot happen!
                     Timber.e("No XLA currency!");
-                    setXmr(null);
-                    notXmrAmount = null;
+                    setxla(null);
+                    notxlaAmount = null;
                     return false;
                 }
                 Timber.d("prepareExchange() %s", cleanAmount);
             } else {
-                setXmr("");
-                notXmrAmount = "";
+                setxla("");
+                notxlaAmount = "";
             }
             return true;
         } else {
-            setXmr(null);
-            notXmrAmount = null;
+            setxla(null);
+            notxlaAmount = null;
             return false;
         }
     }
@@ -462,7 +461,7 @@ public class ExchangeView extends LinearLayout {
 
     // Hooks
     public interface OnNewAmountListener {
-        void onNewAmount(String xmr);
+        void onNewAmount(String xla);
     }
 
     OnNewAmountListener onNewAmountListener;

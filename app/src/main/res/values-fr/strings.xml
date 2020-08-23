@@ -30,30 +30,30 @@
 
     <string name="label_receive_info_gen_qr_code">Toucher pour le QR Code</string>
 
-    <string name="info_xmrto_enabled">Paiement BTC activé, tapez pour plus d\'infos.</string>
+    <string name="info_xlato_enabled">Paiement BTC activé, tapez pour plus d\'infos.</string>
     <string name="info_ledger_enabled">Ledger activé, tapez pour plus d\'infos.</string>
 
-    <string name="info_xmrto"><![CDATA[
+    <string name="info_xlato"><![CDATA[
         <b>Vous avez entré une adresse Bitcoin.</b><br/>
         <i>Vous envoyez des XLA et le destinataire recevra des BTC via le service <b>XLA.TO</b>.</i>
     ]]></string>
 
-    <string name="info_send_xmrto_success_order_label">Ordres XLA.TO</string>
+    <string name="info_send_xlato_success_order_label">Ordres XLA.TO</string>
 
-    <string name="info_send_xmrto_success_btc">%1$s BTC</string>
+    <string name="info_send_xlato_success_btc">%1$s BTC</string>
 
 
-    <string name="info_send_xmrto_paid">En Attente de Confirmation</string>
-    <string name="info_send_xmrto_unpaid">En Attente de Paiement</string>
-    <string name="info_send_xmrto_error">Erreur XLA.TO (%1$s)</string>
-    <string name="info_send_xmrto_sent">BTC Envoyé !</string>
-    <string name="info_send_xmrto_query">Interrogation &#8230;</string>
+    <string name="info_send_xlato_paid">En Attente de Confirmation</string>
+    <string name="info_send_xlato_unpaid">En Attente de Paiement</string>
+    <string name="info_send_xlato_error">Erreur XLA.TO (%1$s)</string>
+    <string name="info_send_xlato_sent">BTC Envoyé !</string>
+    <string name="info_send_xlato_query">Interrogation &#8230;</string>
 
-    <string name="info_send_xmrto_parms"><![CDATA[
+    <string name="info_send_xlato_parms"><![CDATA[
         <b>Vous pouvez envoyer %1$s &#8212; %2$s BTC</b>.<br/>
         <i><b>XLA.TO</b> vous donne un taux de change de <b>%3$s BTC</b> <u>actuellement</u></i>.
     ]]></string>
-    <string name="info_send_xmrto_zeroconf"><![CDATA[
+    <string name="info_send_xlato_zeroconf"><![CDATA[
         <i>Les montant n\'excédant pas <b>%1$s BTC</b> seront envoyés <u>immédiatement</u>!</i>
     ]]></string>
 
@@ -62,14 +62,14 @@
     <string name="info_paymentid_integrated">&#x2714; ID de Paiement intégré</string>
     <string name="info_prepare_tx">Préparation de votre transaction</string>
 
-    <string name="label_send_progress_xmrto_create">Création de l\'ordre XLA.TO</string>
-    <string name="label_send_progress_xmrto_query">Interrogation de l\'ordre XLA.TO</string>
+    <string name="label_send_progress_xlato_create">Création de l\'ordre XLA.TO</string>
+    <string name="label_send_progress_xlato_query">Interrogation de l\'ordre XLA.TO</string>
     <string name="label_send_progress_create_tx">Préparation de la Transaction Scala</string>
 
-    <string name="label_send_progress_queryparms">Interrogation des paramètres xmr.to</string>
+    <string name="label_send_progress_queryparms">Interrogation des paramètres xla.to</string>
 
-    <string name="label_generic_xmrto_error">ERREUR XLA.TO</string>
-    <string name="text_generic_xmrto_error">Code : %1$d</string>
+    <string name="label_generic_xlato_error">ERREUR XLA.TO</string>
+    <string name="text_generic_xlato_error">Code : %1$d</string>
 
     <string name="text_retry">Touchez pour réessayer</string>
     <string name="text_noretry_scala">Maintenant on est coincé ici !</string>
@@ -78,9 +78,9 @@
     <string name="text_send_btc_amount">%1$s BTC = %2$s XLA</string>
     <string name="text_send_btc_rate">(Taux : %1$s BTC/XLA)</string>
 
-    <string name="label_send_btc_xmrto_info">Visitez xmr.to pour l\'assistance &amp; le suivi</string>
-    <string name="label_send_btc_xmrto_key_lb">Clef Secrète\nXLA.TO</string>
-    <string name="label_send_btc_xmrto_key">Clef Secrète XLA.TO</string>
+    <string name="label_send_btc_xlato_info">Visitez xla.to pour l\'assistance &amp; le suivi</string>
+    <string name="label_send_btc_xlato_key_lb">Clef Secrète\nXLA.TO</string>
+    <string name="label_send_btc_xlato_key">Clef Secrète XLA.TO</string>
     <string name="label_send_btc_address">Adresse BTC Destination</string>
     <string name="label_send_btc_amount">Montant</string>
 
@@ -116,7 +116,7 @@
 
     <string name="status_transaction_failed">Transaction échouée : %1$s</string>
 
-    <string name="send_xmrto_timeout">Vous avez attendu trop longtemps l\'ami !</string>
+    <string name="send_xlato_timeout">Vous avez attendu trop longtemps l\'ami !</string>
 
     <string name="service_busy">Je suis toujours occupé avec votre dernier portefeuille &#8230;</string>
 
@@ -140,7 +140,7 @@
     <string name="label_wallet_receive">Recevoir</string>
     <string name="label_wallet_send">Envoyer</string>
 
-    <string name="xmr_unconfirmed_amount">+ %1$s XLA non confirmés</string>
+    <string name="xla_unconfirmed_amount">%1$s XLA non confirmés</string>
 
     <string name="service_description">Service Scala Vault</string>
 
@@ -154,9 +154,9 @@
 
     <string name="label_copy_viewkey">Clef d\'Audit</string>
     <string name="label_copy_address">Adresse Publique</string>
-    <string name="label_copy_xmrtokey">Clef XLA.TO</string>
+    <string name="label_copy_xlatokey">Clef XLA.TO</string>
     <string name="message_copy_viewkey">Clef d\'audit copiée !</string>
-    <string name="message_copy_xmrtokey">Clef XLA.TO copiée !</string>
+    <string name="message_copy_xlatokey">Clef XLA.TO copiée !</string>
     <string name="message_copy_address">Adresse du Portefeuille copiée !</string>
     <string name="message_copy_txid">ID de Transaction copié !</string>
     <string name="message_nocopy">Copie désactivée par sécurité !</string>
@@ -214,7 +214,7 @@
     <string name="generate_check_address">Entrez une Adresse valide</string>
     <string name="generate_check_mnemonic">Entrez votre phrase Mnémonique</string>
 
-    <string name="send_amount_btc_xmr">%1$s (indicatif)</string>
+    <string name="send_amount_btc_xla">%1$s (indicatif)</string>
 
     <string name="send_paymentid_hint">ID de Paiement (optionnel)</string>
     <string name="send_amount_hint">0.00</string>
@@ -246,8 +246,8 @@
     <string name="tx_list_fee">- Frais %1$s</string>
     <string name="tx_list_amount_failed">(%1$s)</string>
     <string name="tx_list_failed_text">Echoué</string>
-    <string name="tx_list_amount_negative">- %1$s</string>
-    <string name="tx_list_amount_positive">+ %1$s</string>
+    <string name="tx_list_amount_negative">%1$s</string>
+    <string name="tx_list_amount_positive">%1$s</string>
 
     <string name="tx_timestamp">Horodatage</string>
     <string name="tx_id">ID TX</string>
@@ -373,10 +373,10 @@
     <!-- please verify this means "Receiver" or "Recipient" as in "Receiver in the transaction" -->
     <string name="send_address_hint">Destinataire</string>
 
-    <string name="xmrto_error_001">XLA.TO hors ligne - réessayer ultérieurement</string>
-    <string name="xmrto_error_004">Montant BTC hors limites</string>
-    <string name="xmrto_error_010">URL de Paiement invalide ou périmée</string>
-    <string name="xmrto_error_012">Trop de requêtes</string>
+    <string name="xlato_error_001">XLA.TO hors ligne - réessayer ultérieurement</string>
+    <string name="xlato_error_004">Montant BTC hors limites</string>
+    <string name="xlato_error_010">URL de Paiement invalide ou périmée</string>
+    <string name="xlato_error_012">Trop de requêtes</string>
 
     <string name="street_sweep_amount">TOTALITÉ!</string> <!-- as in: "everything in the account" = "all the money" -->
 

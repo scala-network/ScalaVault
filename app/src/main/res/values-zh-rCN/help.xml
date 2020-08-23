@@ -116,7 +116,7 @@
         你可以使用支付ID来查看交易的原因，该ID为非必填项，且其中信息不会对外公开。
         举例来说，这可以让商业机构对照你的交易和你购买的物品。
         <h2>交易ID</h2>
-        你可以使用交易ID来在Scala区块链浏览器上查看被隐藏的交易。如：<a href="https://xmrchain.net/">https://xmrchain.net/</a>
+        你可以使用交易ID来在Scala区块链浏览器上查看被隐藏的交易。如：<a href="https://xlachain.net/">https://xlachain.net/</a>
         <h2>交易密钥</h2>
         这是你的交易私钥，请妥善保存，因为泄露该私钥会暴露你在环中真正的签名，从而导致交易等信息可被他人知晓。        
 	<h2>区块</h2>
@@ -134,7 +134,7 @@
             <li>一个比特币地址</li>
             <li>一个比特币的URI（如同bitpay，包含BIP70）</li>
         </u>
-        请注意，如果你发往的是比特币地址，那么钱包将自动使用XLA.TO的服务(详情可查看 https://xmr.to
+        请注意，如果你发往的是比特币地址，那么钱包将自动使用XLA.TO的服务(详情可查看 https://xla.to
         ). 查看下面关于发送比特币的信息。</p>
         <h2>支付ID</h2>
         <p> 你可以使用支付ID来查看交易的原因，该ID为非必填项，且其中信息不会对外公开。
@@ -142,7 +142,7 @@
         <h1>发送BTC</h1>
         <h2>XLA.TO</h2>
         <p>XLA.TO 是一个可以将门罗币转换为比特币的第三方服务。
-        我们利用XLA.TO的API将其服务整合至Scala Vault中。请参阅 https://xmr.to 后自行决定是否使用。
+        我们利用XLA.TO的API将其服务整合至Scala Vault中。请参阅 https://xla.to 后自行决定是否使用。
         Scala Vault开发团队与XLA.TO无任何关联，无法为你解决其服务的问题。</p>
         <h2>XLA.TO 汇率<h2>
         <p>在 \"金额\" 的页面中你将看到 XLA.TO 服务的参数。包含了汇率以及BTC金额的上下限。
@@ -158,11 +158,11 @@
         <p>当倒数计时结束的时候，你将需要回到上一步，重新向XLA.TO寻求汇率报价后，再回到\"确认\"页面。</p>
     ]]></string>
 
-    <string name="help_xmrto"><![CDATA[
+    <string name="help_xlato"><![CDATA[
         <h1>发送 BTC</h1>
         <h2>XLA.TO</h2>
         <p>XLA.TO 是一个可以将门罗币转换为比特币的第三方服务。
-        我们利用XLA.TO的API将其服务整合至Scala Vault中。请参阅 https://xmr.to 后自行决定是否使用。
+        我们利用XLA.TO的API将其服务整合至Scala Vault中。请参阅 https://xla.to 后自行决定是否使用。
         Scala Vault开发团队与XLA.TO无任何关联，无法为你解决其服务的问题。</p>
         <h2>XLA.TO 汇率<h2>
         <p>在 \"金额\" 的页面中你将看到 XLA.TO 服务的参数。包含了汇率以及BTC金额的上下限。

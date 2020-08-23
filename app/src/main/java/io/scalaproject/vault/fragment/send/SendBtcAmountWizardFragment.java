@@ -69,9 +69,9 @@ public class SendBtcAmountWizardFragment extends SendWizardFragment {
     private TextView tvFunds;
     private ExchangeOtherEditText etAmount;
 
-    private TextView tvXmrToParms;
+    private TextView tvxlaToParms;
     private SendProgressView evParams;
-    private View llXmrToParms;
+    private View llxlaToParms;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -85,10 +85,10 @@ public class SendBtcAmountWizardFragment extends SendWizardFragment {
 
         tvFunds = view.findViewById(R.id.tvFunds);
 
-        evParams = view.findViewById(R.id.evXmrToParms);
-        llXmrToParms = view.findViewById(R.id.llXmrToParms);
+        evParams = view.findViewById(R.id.evxlaToParms);
+        llxlaToParms = view.findViewById(R.id.llxlaToParms);
 
-        tvXmrToParms = view.findViewById(R.id.tvXmrToParms);
+        tvxlaToParms = view.findViewById(R.id.tvxlaToParms);
 
         etAmount = view.findViewById(R.id.etAmount);
         etAmount.requestFocus();
@@ -136,7 +136,7 @@ public class SendBtcAmountWizardFragment extends SendWizardFragment {
 
     @Override
     public void onPauseFragment() {
-        llXmrToParms.setVisibility(View.INVISIBLE);
+        llxlaToParms.setVisibility(View.INVISIBLE);
     }
 
     @Override
@@ -158,7 +158,7 @@ public class SendBtcAmountWizardFragment extends SendWizardFragment {
             }
         }
         setBip70Mode();
-        callXmrTo();
+        callxlaTo();
     }
 
     long getTotalFunds() {
@@ -178,34 +178,34 @@ public class SendBtcAmountWizardFragment extends SendWizardFragment {
                 String min = df.format(orderParameters.getLowerLimit());
                 String max = df.format(orderParameters.getUpperLimit());
                 String rate = df.format(orderParameters.getPrice());
-                Spanned xmrParmText = Html.fromHtml(getString(R.string.info_send_xmrto_parms, min, max, rate));
+                Spanned xlaParmText = Html.fromHtml(getString(R.string.info_send_xlato_parms, min, max, rate));
                 if (orderParameters.isZeroConfEnabled()) {
                     String zeroConf = df.format(orderParameters.getZeroConfMaxAmount());
-                    Spanned zeroConfText = Html.fromHtml(getString(R.string.info_send_xmrto_zeroconf, zeroConf));
-                    xmrParmText = (Spanned) TextUtils.concat(xmrParmText, " ", zeroConfText);
+                    Spanned zeroConfText = Html.fromHtml(getString(R.string.info_send_xlato_zeroconf, zeroConf));
+                    xlaParmText = (Spanned) TextUtils.concat(xlaParmText, " ", zeroConfText);
                 }
-                tvXmrToParms.setText(xmrParmText);
+                tvxlaToParms.setText(xlaParmText);
                 maxBtc = orderParameters.getUpperLimit();
                 minBtc = orderParameters.getLowerLimit();
                 Timber.d("minBtc=%f / maxBtc=%f", minBtc, maxBtc);
 
                 final long funds = getTotalFunds();
-                double availableXmr = 1.0 * funds / 1000000000000L;
-                maxBtc = Math.min(maxBtc, availableXmr * orderParameters.getPrice());
+                double availablexla = 1.0 * funds / 1000000000000L;
+                maxBtc = Math.min(maxBtc, availablexla * orderParameters.getPrice());
 
                 String availBtcString;
-                String availXmrString;
+                String availxlaString;
                 if (!sendListener.getActivityCallback().isStealthMode()) {
-                    availBtcString = df.format(availableXmr * orderParameters.getPrice());
-                    availXmrString = df.format(availableXmr);
+                    availBtcString = df.format(availablexla * orderParameters.getPrice());
+                    availxlaString = df.format(availablexla);
                 } else {
                     availBtcString = getString(R.string.unknown_amount);
-                    availXmrString = availBtcString;
+                    availxlaString = availBtcString;
                 }
                 tvFunds.setText(getString(R.string.send_available_btc,
-                        availXmrString,
+                        availxlaString,
                         availBtcString));
-                llXmrToParms.setVisibility(View.VISIBLE);
+                llxlaToParms.setVisibility(View.VISIBLE);
                 evParams.hideProgress();
             }
         });
@@ -221,30 +221,30 @@ public class SendBtcAmountWizardFragment extends SendWizardFragment {
             @Override
             public void run() {
                 if (ex instanceof XlaToException) {
-                    XlaToException xmrEx = (XlaToException) ex;
-                    XlaToError xmrErr = xmrEx.getError();
-                    if (xmrErr != null) {
-                        if (xmrErr.isRetryable()) {
-                            evParams.showMessage(xmrErr.getErrorId().toString(), xmrErr.getErrorMsg(),
+                    XlaToException xlaEx = (XlaToException) ex;
+                    XlaToError xlaErr = xlaEx.getError();
+                    if (xlaErr != null) {
+                        if (xlaErr.isRetryable()) {
+                            evParams.showMessage(xlaErr.getErrorId().toString(), xlaErr.getErrorMsg(),
                                     getString(R.string.text_retry));
                             evParams.setOnClickListener(new View.OnClickListener() {
                                 @Override
                                 public void onClick(View v) {
                                     evParams.setOnClickListener(null);
-                                    callXmrTo();
+                                    callxlaTo();
                                 }
                             });
                         } else {
-                            evParams.showMessage(xmrErr.getErrorId().toString(), xmrErr.getErrorMsg(),
+                            evParams.showMessage(xlaErr.getErrorId().toString(), xlaErr.getErrorMsg(),
                                     getString(R.string.text_noretry));
                         }
                     } else {
-                        evParams.showMessage(getString(R.string.label_generic_xmrto_error),
-                                getString(R.string.text_generic_xmrto_error, xmrEx.getCode()),
+                        evParams.showMessage(getString(R.string.label_generic_xlato_error),
+                                getString(R.string.text_generic_xlato_error, xlaEx.getCode()),
                                 getString(R.string.text_noretry));
                     }
                 } else {
-                    evParams.showMessage(getString(R.string.label_generic_xmrto_error),
+                    evParams.showMessage(getString(R.string.label_generic_xlato_error),
                             ex.getLocalizedMessage(),
                             getString(R.string.text_noretry));
                 }
@@ -252,9 +252,9 @@ public class SendBtcAmountWizardFragment extends SendWizardFragment {
         });
     }
 
-    private void callXmrTo() {
+    private void callxlaTo() {
         evParams.showProgress(getString(R.string.label_send_progress_queryparms));
-        getXmrToApi().queryOrderParameters(new XlaToCallback<QueryOrderParameters>() {
+        getxlaToApi().queryOrderParameters(new XlaToCallback<QueryOrderParameters>() {
             @Override
             public void onSuccess(final QueryOrderParameters orderParameters) {
                 processOrderParms(orderParameters);
@@ -267,17 +267,17 @@ public class SendBtcAmountWizardFragment extends SendWizardFragment {
         });
     }
 
-    private XlaToApi xmrToApi = null;
+    private XlaToApi xlaToApi = null;
 
-    private XlaToApi getXmrToApi() {
-        if (xmrToApi == null) {
+    private XlaToApi getxlaToApi() {
+        if (xlaToApi == null) {
             synchronized (this) {
-                if (xmrToApi == null) {
-                    xmrToApi = new XlaToApiImpl(OkHttpHelper.getOkHttpClient(),
-                            Helper.getXmrToBaseUrl());
+                if (xlaToApi == null) {
+                    xlaToApi = new XlaToApiImpl(OkHttpHelper.getOkHttpClient(),
+                            Helper.getxlaToBaseUrl());
                 }
             }
         }
-        return xmrToApi;
+        return xlaToApi;
     }
 }

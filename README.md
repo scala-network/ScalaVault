@@ -12,7 +12,7 @@ Donations setting has been set to 0% in the XLArig lib embedded within the appli
 * ETH: `0x133a15dF7177823Dd407ca87A190bbE4585a379e`
 
 ## Credits
-* Forked from [monerujo](https://github.com/m2049r/xmrwallet)
+* Forked from [monerujo](https://github.com/m2049r/xlawallet)
 
 ## Contacts
 * [Website](https://scalaproject.io/)

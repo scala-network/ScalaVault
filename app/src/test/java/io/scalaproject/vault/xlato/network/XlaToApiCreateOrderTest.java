@@ -112,7 +112,7 @@ public class XlaToApiCreateOrderTest {
             throws TimeoutException {
         final double amount = 1.23456789;
         final String address = "19y91nJyzXsLEuR7Nj9pc3o5SeHNc8A9RW";
-        final String uuid = "xmrto-abcdef";
+        final String uuid = "xlato-abcdef";
         final String state = "TO_BE_CREATED";
         MockResponse jsonMockResponse = new MockResponse().setBody(
                 createMockCreateOrderResponse(amount, address, uuid, state));
@@ -175,11 +175,11 @@ public class XlaToApiCreateOrderTest {
             @Override
             public void onError(final Exception e) {
                 waiter.assertTrue(e instanceof XlaToException);
-                XlaToException xmrEx = (XlaToException) e;
-                waiter.assertTrue(xmrEx.getCode() == 400);
-                waiter.assertNotNull(xmrEx.getError());
-                waiter.assertEquals(xmrEx.getError().getErrorId(), XlaToError.Error.XLATO_ERROR_002);
-                waiter.assertEquals(xmrEx.getError().getErrorMsg(), "malformed bitcoin address");
+                XlaToException xlaEx = (XlaToException) e;
+                waiter.assertTrue(xlaEx.getCode() == 400);
+                waiter.assertNotNull(xlaEx.getError());
+                waiter.assertEquals(xlaEx.getError().getErrorId(), XlaToError.Error.XLATO_ERROR_002);
+                waiter.assertEquals(xlaEx.getError().getErrorMsg(), "malformed bitcoin address");
                 waiter.resume();
             }
 

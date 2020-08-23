@@ -32,7 +32,7 @@ import org.json.JSONObject;
 class QueryOrderParametersImpl implements QueryOrderParameters {
 
     private double lowerLimit; //  "lower_limit": <lower_order_limit_in_btc_as_float>,
-    private double price; // "price": <price_of_1_btc_in_xmr_as_offered_by_service_as_float>,
+    private double price; // "price": <price_of_1_btc_in_xla_as_offered_by_service_as_float>,
     private double upperLimit; // "upper_limit": <upper_order_limit_in_btc_as_float>,
     private boolean isZeroConfEnabled; // "zero_conf_enabled": <true_if_zero_conf_is_enabled_as_boolean>,
     private double zeroConfMaxAmount; // "zero_conf_max_amount": <up_to_this_amount_zero_conf_is_possible_as_float>

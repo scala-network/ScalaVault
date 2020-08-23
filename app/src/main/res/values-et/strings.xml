@@ -30,29 +30,29 @@
 
     <string name="label_receive_info_gen_qr_code">Puuduta QR koodi saamiseks</string>
 
-    <string name="info_xmrto_enabled">Bitcoini maksed sisse lülitatud, puuduta lisainfo saamiseks.</string>
+    <string name="info_xlato_enabled">Bitcoini maksed sisse lülitatud, puuduta lisainfo saamiseks.</string>
     <string name="info_ledger_enabled">Ledger\'i tugi sisse lülitatud, puuduta lisainfo saamiseks.</string>
 
-    <string name="info_xmrto"><![CDATA[
+    <string name="info_xlato"><![CDATA[
         <b>Sa sisestasid Bitcoini aadressi.</b><br/>
         <i>See tähendab, et sa saadad Scalasid ning kohale jõuavad Bitcoinid kasutades XLA.TO teenust.</i>
     ]]></string>
 
-    <string name="info_send_xmrto_success_order_label">XLA.TO tellimus</string>
+    <string name="info_send_xlato_success_order_label">XLA.TO tellimus</string>
 
-    <string name="info_send_xmrto_success_btc">%1$s BTC</string>
+    <string name="info_send_xlato_success_btc">%1$s BTC</string>
 
-    <string name="info_send_xmrto_paid">Ootan kinnitust</string>
-    <string name="info_send_xmrto_unpaid">Ootan makset</string>
-    <string name="info_send_xmrto_error">XLA.TO viga (%1$s)</string>
-    <string name="info_send_xmrto_sent">BTC saadetud!</string>
-    <string name="info_send_xmrto_query">Küsin &#8230;</string>
+    <string name="info_send_xlato_paid">Ootan kinnitust</string>
+    <string name="info_send_xlato_unpaid">Ootan makset</string>
+    <string name="info_send_xlato_error">XLA.TO viga (%1$s)</string>
+    <string name="info_send_xlato_sent">BTC saadetud!</string>
+    <string name="info_send_xlato_query">Küsin &#8230;</string>
 
-    <string name="info_send_xmrto_parms"><![CDATA[
+    <string name="info_send_xlato_parms"><![CDATA[
         <b>Sa saad saata %1$s &#8212; %2$s BTC</b>.<br/>
         <i><b>XLA.TO</b> annab <u>hetkel</u> vahetuskursiks <b>%3$s BTC</b></i>.
     ]]></string>
-    <string name="info_send_xmrto_zeroconf"><![CDATA[
+    <string name="info_send_xlato_zeroconf"><![CDATA[
         <i>Kuni <b>%1$s BTC</b> saadetakse <u>viivitamatult</u>!</i>
     ]]></string>
 
@@ -61,14 +61,14 @@
     <string name="info_paymentid_integrated">&#x2714; Makse ID integreeritud</string>
     <string name="info_prepare_tx">Valmistan ülekannet ette</string>
 
-    <string name="label_send_progress_xmrto_create">Loon XLA.TO tellimust</string>
-    <string name="label_send_progress_xmrto_query">Küsin XLA.TO tellimust</string>
+    <string name="label_send_progress_xlato_create">Loon XLA.TO tellimust</string>
+    <string name="label_send_progress_xlato_query">Küsin XLA.TO tellimust</string>
     <string name="label_send_progress_create_tx">Valmistan ette Scala ülekannet</string>
 
     <string name="label_send_progress_queryparms">Küsin XLA.TO parameetreid</string>
 
-    <string name="label_generic_xmrto_error">XLA.TO viga</string>
-    <string name="text_generic_xmrto_error">Kood: %1$d</string>
+    <string name="label_generic_xlato_error">XLA.TO viga</string>
+    <string name="text_generic_xlato_error">Kood: %1$d</string>
 
     <string name="text_retry">Puuduta uuesti proovimiseks</string>
     <string name="text_noretry_scala">Nüüd jõudsime küll tupikusse!</string>
@@ -77,9 +77,9 @@
     <string name="text_send_btc_amount">%1$s BTC = %2$s XLA</string>
     <string name="text_send_btc_rate">(Kurss: %1$s BTC/XLA)</string>
 
-    <string name="label_send_btc_xmrto_info">Külasta xmr.to lisainfo saamiseks &amp; jälgin</string>
-    <string name="label_send_btc_xmrto_key_lb">Privaatvõti\nXLA.TO</string>
-    <string name="label_send_btc_xmrto_key">XLA.TO privaatvõti</string>
+    <string name="label_send_btc_xlato_info">Külasta xla.to lisainfo saamiseks &amp; jälgin</string>
+    <string name="label_send_btc_xlato_key_lb">Privaatvõti\nXLA.TO</string>
+    <string name="label_send_btc_xlato_key">XLA.TO privaatvõti</string>
     <string name="label_send_btc_address">Sihtkoha Bitcoini aadress</string>
     <string name="label_send_btc_amount">Kogus</string>
 
@@ -114,7 +114,7 @@
 
     <string name="status_transaction_failed">Ülekanne ebaõnnestus: %1$s</string>
 
-    <string name="send_xmrto_timeout">Sõber, sa ootasid liiga kaua!</string>
+    <string name="send_xlato_timeout">Sõber, sa ootasid liiga kaua!</string>
 
     <string name="service_busy">Ma tegelen ikka veel su eelmise rahakotiga &#8230;</string>
 
@@ -138,7 +138,7 @@
     <string name="label_wallet_receive">Küsi raha</string>
     <string name="label_wallet_send">Saada</string>
 
-    <string name="xmr_unconfirmed_amount">+ %1$s XLA kinnitamata</string>
+    <string name="xla_unconfirmed_amount">%1$s XLA kinnitamata</string>
 
     <string name="service_description">monerujo teenus</string>
 
@@ -152,9 +152,9 @@
 
     <string name="label_copy_viewkey">Vaatamise võti</string>
     <string name="label_copy_address">Avalik aadress</string>
-    <string name="label_copy_xmrtokey">XLA.TO võti</string>
+    <string name="label_copy_xlatokey">XLA.TO võti</string>
     <string name="message_copy_viewkey">Vaatamise võti on kopeeritud lõikepuhvrisse!</string>
-    <string name="message_copy_xmrtokey">XLA.TO võti on kopeeritud lõikepuhvrisse!</string>
+    <string name="message_copy_xlatokey">XLA.TO võti on kopeeritud lõikepuhvrisse!</string>
     <string name="message_copy_address">Rahakoti aadress on kopeeritud lõikepuhvrisse!</string>
     <string name="message_copy_txid">Ülekande ID on kopeeritud lõikepuhvrisse!</string>
     <string name="message_nocopy">Lõikepuhvrisse kopeerimine on turvakaalutlustel keelatud!</string>
@@ -208,7 +208,7 @@
     <string name="generate_check_address">Sisesta korrektne  aadress</string>
     <string name="generate_check_mnemonic">Sisesta oma 25-sõnaline seeme</string>
 
-    <string name="send_amount_btc_xmr">%1$s (umbkaudne)</string>
+    <string name="send_amount_btc_xla">%1$s (umbkaudne)</string>
 
     <string name="send_paymentid_hint">Makse ID (valikuline)</string>
     <string name="send_amount_hint">0.00</string>
@@ -244,8 +244,8 @@
     <string name="tx_list_fee">- teenustasu %1$s</string>
     <string name="tx_list_amount_failed">(%1$s)</string>
     <string name="tx_list_failed_text">ebaõnnestus</string>
-    <string name="tx_list_amount_negative">- %1$s</string>
-    <string name="tx_list_amount_positive">+ %1$s</string>
+    <string name="tx_list_amount_negative">%1$s</string>
+    <string name="tx_list_amount_positive">%1$s</string>
 
     <string name="tx_timestamp">Aeg</string>
     <string name="tx_id">Ülekande ID</string>
@@ -367,10 +367,10 @@
     <!-- please verify this means "Receiver" or "Recipient" as in "Receiver in the transaction" -->
     <string name="send_address_hint">Saaja</string>
 
-    <string name="xmrto_error_001">XLA.TO offline - try again later</string>
-    <string name="xmrto_error_004">BTC amount out of bounds</string>
-    <string name="xmrto_error_010">Invalid or outdated Payment URL</string>
-    <string name="xmrto_error_012">Too many requests</string>
+    <string name="xlato_error_001">XLA.TO offline - try again later</string>
+    <string name="xlato_error_004">BTC amount out of bounds</string>
+    <string name="xlato_error_010">Invalid or outdated Payment URL</string>
+    <string name="xlato_error_012">Too many requests</string>
 
     <string name="street_sweep_amount">EVERYTHING!</string> <!-- as in: "everything in the account" = "all the money" -->
 

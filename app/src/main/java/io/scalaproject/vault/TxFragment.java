@@ -77,8 +77,8 @@ public class TxFragment extends Fragment {
     private TextView etTxNotes;
 
     // XLATO stuff
-    private View cvXmrTo;
-    private TextView tvTxXmrToKey;
+    private View cvxlaTo;
+    private TextView tvTxxlaToKey;
     private TextView tvDestinationBtc;
     private TextView tvTxAmountBtc;
 
@@ -88,8 +88,8 @@ public class TxFragment extends Fragment {
 
         View view = inflater.inflate(R.layout.fragment_tx_info, container, false);
 
-        cvXmrTo = view.findViewById(R.id.cvXmrTo);
-        tvTxXmrToKey = view.findViewById(R.id.tvTxXmrToKey);
+        cvxlaTo = view.findViewById(R.id.cvxlaTo);
+        tvTxxlaToKey = view.findViewById(R.id.tvTxxlaToKey);
         tvDestinationBtc = view.findViewById(R.id.tvDestinationBtc);
         tvTxAmountBtc = view.findViewById(R.id.tvTxAmountBtc);
 
@@ -108,11 +108,11 @@ public class TxFragment extends Fragment {
 
         etTxNotes.setRawInputType(InputType.TYPE_CLASS_TEXT);
 
-        tvTxXmrToKey.setOnClickListener(new View.OnClickListener() {
+        tvTxxlaToKey.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Helper.clipBoardCopy(getActivity(), getString(R.string.label_copy_xmrtokey), tvTxXmrToKey.getText().toString());
-                Toast.makeText(getActivity(), getString(R.string.message_copy_xmrtokey), Toast.LENGTH_SHORT).show();
+                Helper.clipBoardCopy(getActivity(), getString(R.string.label_copy_xlatokey), tvTxxlaToKey.getText().toString());
+                Toast.makeText(getActivity(), getString(R.string.message_copy_xlatokey), Toast.LENGTH_SHORT).show();
             }
         });
 
@@ -288,13 +288,13 @@ public class TxFragment extends Fragment {
     }
 
     void showBtcInfo() {
-        if (userNotes.xmrtoKey != null) {
-            cvXmrTo.setVisibility(View.VISIBLE);
-            tvTxXmrToKey.setText(userNotes.xmrtoKey);
-            tvDestinationBtc.setText(userNotes.xmrtoDestination);
-            tvTxAmountBtc.setText(userNotes.xmrtoAmount + " BTC");
+        if (userNotes.xlatoKey != null) {
+            cvxlaTo.setVisibility(View.VISIBLE);
+            tvTxxlaToKey.setText(userNotes.xlatoKey);
+            tvDestinationBtc.setText(userNotes.xlatoDestination);
+            tvTxAmountBtc.setText(userNotes.xlatoAmount + " BTC");
         } else {
-            cvXmrTo.setVisibility(View.GONE);
+            cvxlaTo.setVisibility(View.GONE);
         }
     }
 

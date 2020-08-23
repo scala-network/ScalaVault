@@ -140,7 +140,7 @@
         o produto que você comprou.
         <h2>ID TX</h2>
         O ID da transação pode ser usado em exploradores de Blockchain do Scala como o
-        <a href="https://xmrchain.net/">https://xmrchain.net/</a> para identificar a transação (ofuscada).
+        <a href="https://xlachain.net/">https://xlachain.net/</a> para identificar a transação (ofuscada).
         <h2>Chave TX (chave da transação)</h2>
         Essa é a chava privada da sua transação. Matenha-a segura, pois ao divulgá-la para um terceiro permitirá que ele identifique
         qual das assinaturas é a sua, transformando sua transação em transparente para essa pessoa ou entidade.
@@ -160,7 +160,7 @@
             <li>um endereço BTC</li>
             <li>um URI bitcoin: (incluindo o BIP70 usado em serviços como o bitpay)</li>
         </u>
-        Observe que o envio de BTC é processado pelo serviço XLA.TO (veja https://xmr.to para detalhes).
+        Observe que o envio de BTC é processado pelo serviço XLA.TO (veja https://xla.to para detalhes).
         Consulte a seção sobre envio de BTC abaixo.</p>
         <h2>ID do Pagamento</h2>
         <p>Você pode usar o ID do Pagamento para identificar a razão pela qual você transacionou com a contraparte.
@@ -169,7 +169,7 @@
         <h1>Enviando BTC</h1>
         <h2>XLA.TO</h2>
         <p>XLA.TO é um serviço terceiro que age como casa de câmbio de Scala para Bitcoin.
-        Nós usamos a API do XLA.TO para integrar pagamentos em Bitcoin direto na carteira Scala Vault. Consulte https://xmr.to
+        Nós usamos a API do XLA.TO para integrar pagamentos em Bitcoin direto na carteira Scala Vault. Consulte https://xla.to
         e decide por sua própria conta se este é um serviço que você quer usar. A equipe Scala Vault não está associada com o XLA.TO
         e não podemos ajudá-lo caso algo não funcione no serviço.</p>
         <h2>Cotação XLA.TO<h2>
@@ -191,11 +191,11 @@
         anterior e faça o processo novamente.</p>
     ]]></string>
 
-    <string name="help_xmrto"><![CDATA[
+    <string name="help_xlato"><![CDATA[
       <h1>Enviando BTC</h1>
       <h2>XLA.TO</h2>
       <p>XLA.TO é um serviço terceiro que age como casa de câmbio de Scala para Bitcoin.
-      Nós usamos a API do XLA.TO para integrar pagamentos em Bitcoin direto na carteira Scala Vault. Consulte https://xmr.to
+      Nós usamos a API do XLA.TO para integrar pagamentos em Bitcoin direto na carteira Scala Vault. Consulte https://xla.to
       e decida por sua própria conta se este é um serviço que você quer usar. A equipe Scala Vault não está associada com o XLA.TO
       e não podemos ajudá-lo caso algo não funcione no serviço.</p>
       <h2>Cotação XLA.TO<h2>

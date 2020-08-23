@@ -220,7 +220,7 @@
         商品を紐付けることができます。
         <h2>取引ID(TX ID)</h2>
         これはあなたの取引IDです。あなたはこれを難読化された形で、
-        <a href="https://xmrchain.net/">https://xmrchain.net/</a>
+        <a href="https://xlachain.net/">https://xlachain.net/</a>
         のようなブロックチェーン検索サイトで閲覧することができます。
         <h2>取引キー(TX KEY)</h2>
         これはあなたの取引用の秘密鍵です。これを第三者に公開してしまうと、
@@ -245,7 +245,7 @@
             <li>BTCアドレス</li>
             <li>bitcoin: URI (bitpayのようなBIP70もいい)</li>
         </u>
-        BTCの送信はXLA.TOサービス（https://xmr.to）を介して処理されることに注意してください。
+        BTCの送信はXLA.TOサービス（https://xla.to）を介して処理されることに注意してください。
         下記のBTCの送信に関するセクションを参照してください。</p>
         <h2>ペイメントID(Payment ID)</h2>
         <p>あなたは2者間でモネロを送金した理由を特定するために
@@ -259,7 +259,7 @@
         機能するサードパーティ製のサービスです。私達は
         XLA.TO のAPIを使うことでビットコインの支払い機能を
         Scala Vaultに組み込んでいます。
-        https://xmr.to を確認して、これがあなたが使いたい
+        https://xla.to を確認して、これがあなたが使いたい
         機能であるかどうかをご自身で判断してください。
         Scala Vaultの開発チームは XLA.TO とは無関係であり、
         XLA.TOのサービスに関してあなたをサポートすることはできません。</p>
@@ -290,14 +290,14 @@
         もう一度 XLA.TO から新しい見積もりを取得する必要があります。</p>
     ]]></string>
 
-    <string name="help_xmrto"><![CDATA[
+    <string name="help_xlato"><![CDATA[
         <h1>BTCの送金</h1>
         <h2>XLA.TO</h2>
         <p>XLA.TO はモネロからビットコインに換金する交換所として
         機能するサードパーティ製のサービスです。私達は
         XLA.TO のAPIを使うことでビットコインの支払い機能を
         Scala Vaultに組み込んでいます。
-        https://xmr.to を確認して、これがあなたが使いたい
+        https://xla.to を確認して、これがあなたが使いたい
         機能であるかどうかをご自身で判断してください。
         Scala Vaultの開発チームは XLA.TO とは無関係であり、
         XLA.TOのサービスに関してあなたをサポートすることはできません。</p>

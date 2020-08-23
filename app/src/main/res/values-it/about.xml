@@ -28,7 +28,7 @@
         <p>Se usi la funzionalità (opzionale) del cambio, monerujo recupera il tasso di cambio attraverso le API pubbliche di coinmarketcap.com.
         Controlla la loro politica per la privacy (in lingua inglese) su https://coinmarketcap.com/privacy per conoscere i dettagli su come vengono raccolti i dati nelle tue richieste.</p>
         <p>Se utilizzi l\'app per effettuare pagamenti ad indirizzi BTC, stai usando il servizio XLA.TO.
-        Controlla la loro politica per la privacy (in lingua inglese) su https://xmr.to/ per conoscere i dettagli. Scala Vault invia a loro l\'indirizzo di destinazione BTC e l\'ammontare della transazione. Anche il tuo IP potrebbe essere raccolto.</p>
+        Controlla la loro politica per la privacy (in lingua inglese) su https://xla.to/ per conoscere i dettagli. Scala Vault invia a loro l\'indirizzo di destinazione BTC e l\'ammontare della transazione. Anche il tuo IP potrebbe essere raccolto.</p>
         <h2>Permessi app</h2>
         <ul>
         <li>INTERNET : Connessione alla rete Scala attraverso un nodo </li>

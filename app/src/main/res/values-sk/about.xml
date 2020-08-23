@@ -28,7 +28,7 @@
         <p>Pokiaľ používaš (voliteľnú) funkciu zmenárne, monerujo vyhľadá výmenný kurz cez verejné API portálu coinmarketcap.com.
         Pre viac detailov pozri zásady ochrany osobných údajov na https://coinmarketcap.com/privacy kde je uvedené aké dáta zbierajú</p>
         <p>Pokiaľ používaš aplikáciu pre platby na BTC adresy, využívaš služby XLA.TO.
-        Pre viac detailov pozri zásady ochrany osobných údajov na https://xmr.to/ . Scala Vault im posiela cieľovú BTC
+        Pre viac detailov pozri zásady ochrany osobných údajov na https://xla.to/ . Scala Vault im posiela cieľovú BTC
         addresu príjemcu a posielané množstvo. Tvoju IP bude tiež možné zaznamenať. </p>
         <h2>Povolenia</h2>
         <ul>

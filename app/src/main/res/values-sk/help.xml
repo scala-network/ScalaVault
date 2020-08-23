@@ -134,7 +134,7 @@
         Môžeš použiť ID Platby na identifikáciu platby medzi dvoma stranami. Nie je to síce povinný, ale je to súkromný údaj.
 		Tak napríklad s týmto môžeš zosúladiť svoj biznis s kúpenou položkou. Táto funkcia bude v Scala nahradená podadresami.
         <h2>TX ID</h2>
-        Toto je ID transakcie, ktoré slúži na identifikáciu transakcie v Scala blockchain exploreri, ako napr. <a href="https://xmrchain.net/">https://xmrchain.net/</a>
+        Toto je ID transakcie, ktoré slúži na identifikáciu transakcie v Scala blockchain exploreri, ako napr. <a href="https://xlachain.net/">https://xlachain.net/</a>
         <h2>TX KĽÚČ (Transaction Key)</h2>
         Toto je Tvoj súkromný kľúč transakcie, uchovaj ho bezpečne a neposkytuj ho tretím stranám,
 		aby nemohli identifikovať tvoj podpis v kruhovom podpise a spraviť tak transakciu verejnú a transparentnú.		
@@ -154,7 +154,7 @@
             <li>BTC adresu</li>
             <li>bitcoin: URI (vrátane BIP70 ako bitpay)</li>
         </u>
-        Nezabúdajte, že posielanie BTC prebieha cez službu XLA.TO (detaily na https://xmr.to). Pozri sekciu nižšie o posielaní BTC</p>
+        Nezabúdajte, že posielanie BTC prebieha cez službu XLA.TO (detaily na https://xla.to). Pozri sekciu nižšie o posielaní BTC</p>
         <h2>ID Platby</h2>
         <p>ID Platby môžeš použiť na identifikáciu platby medzi dvoma stranami.
 		Nie je to síce povinný, ale je to súkromný údaj.
@@ -163,7 +163,7 @@
         <h2>XLA.TO</h2>
         <p>XLA.TO je služba tretej strany, ktorá umožňuje zámenu z Scala na Bitcoin.
         Používame XLA.TO API na integráciu Bitcoin platieb do Scala Vault. Prosím mrkni na
-		https://xmr.to a rozhodni sa sám, či je to naozaj služba, ktorú chceš používať.
+		https://xla.to a rozhodni sa sám, či je to naozaj služba, ktorú chceš používať.
 		Tím Scala Vault nie je nijako spojený so službou XLA.TO a teda nemôže pomôcť s prípadnými problémami s touto službou.</p>
         <h2>XLA.TO Výmenný Kurz<h2>
         <p>Na obrazovke \"Množstvo\" uvidíš aktuálne parametre služby XLA.TO, vrátane aktuálneho kurzu BTC, hornej a dolnej hranice.
@@ -182,11 +182,11 @@
         <p>Akonáhle odpočítavanie dosiahne nulu, budeš potrebovať nový kľúč z XLA.TO návratom na predchádzajúci krok a obrazovku \"Potvrdiť\" .</p>
     ]]></string>
 
-    <string name="help_xmrto"><![CDATA[
+    <string name="help_xlato"><![CDATA[
         <h1>Posielanie BTC</h1>
         <h2>XLA.TO</h2>
         <p>XLA.TO  je služba tretej strany umožňujúca zámenu Scala na Bitcoin.
-        Používame XLA.TO API na integráciu Bitcoin platieb do Scala Vault. Prosím mrkni na https://xmr.to
+        Používame XLA.TO API na integráciu Bitcoin platieb do Scala Vault. Prosím mrkni na https://xla.to
 		a rozhodni sa sám, či to je niečo, čo chceš používať. 
 		Tím Scala Vault nie je nijako spojený so službou XLA.TO a teda nemôže pomôcť s prípadnými problémami s touto službou.</p>
         <h2>XLA.TO Výmenný Kurz<h2>

@@ -38,4 +38,4 @@ dlopen=''
 dlpreopen=''
 
 # Directory that this library needs to be installed in:
-libdir='/opt/xmrwallet/external-libs/build/build/libsodium/x86_64/lib'
+libdir='/opt/xlawallet/external-libs/build/build/libsodium/x86_64/lib'

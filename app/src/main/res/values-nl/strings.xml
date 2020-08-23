@@ -30,29 +30,29 @@
 
     <string name="label_receive_info_gen_qr_code">Tik voor QR-code</string>
 
-    <string name="info_xmrto_enabled">BTC-betaling ingeschakeld. Tik voor meer info.</string>
+    <string name="info_xlato_enabled">BTC-betaling ingeschakeld. Tik voor meer info.</string>
     <string name="info_ledger_enabled">Ledger ingeschakeld. Tik voor meer info.</string>
 
-    <string name="info_xmrto"><![CDATA[
+    <string name="info_xlato"><![CDATA[
         <b>Je hebt een Bitcoin-adres ingevoerd.</b><br/>
         <i>Je verzendt XLA en de ontvanger krijgt BTC via <b>XLA.TO</b>.</i>
     ]]></string>
 
-    <string name="info_send_xmrto_success_order_label">XLA.TO-opdracht</string>
+    <string name="info_send_xlato_success_order_label">XLA.TO-opdracht</string>
 
-    <string name="info_send_xmrto_success_btc">%1$s BTC</string>
+    <string name="info_send_xlato_success_btc">%1$s BTC</string>
 
-    <string name="info_send_xmrto_paid">Wacht op bevestiging</string>
-    <string name="info_send_xmrto_unpaid">Wacht op betaling</string>
-    <string name="info_send_xmrto_error">Fout bij XLA.TO (%1$s)</string>
-    <string name="info_send_xmrto_sent">BTC verzonden!</string>
-    <string name="info_send_xmrto_query">Aanvragen…</string>
+    <string name="info_send_xlato_paid">Wacht op bevestiging</string>
+    <string name="info_send_xlato_unpaid">Wacht op betaling</string>
+    <string name="info_send_xlato_error">Fout bij XLA.TO (%1$s)</string>
+    <string name="info_send_xlato_sent">BTC verzonden!</string>
+    <string name="info_send_xlato_query">Aanvragen…</string>
 
-    <string name="info_send_xmrto_parms"><![CDATA[
+    <string name="info_send_xlato_parms"><![CDATA[
         <b>Je kunt  %1$s &#8212; %2$s BTC verzenden</b>.<br/>
         <i><b>XLA.TO</b> biedt <u>nu</u> een wisselkoers van <b>%3$s BTC</b> aan</i>.
     ]]></string>
-    <string name="info_send_xmrto_zeroconf"><![CDATA[
+    <string name="info_send_xlato_zeroconf"><![CDATA[
         <i>Bedragen tot <b>%1$s BTC</b> worden <u>meteen</u> verzonden!</i>
     ]]></string>
 
@@ -61,14 +61,14 @@
     <string name="info_paymentid_integrated">&#x2714; Betalings-ID geïntegreerd</string>
     <string name="info_prepare_tx">Transactie wordt voorbereid</string>
 
-    <string name="label_send_progress_xmrto_create">XLA.TO-opdracht maken</string>
-    <string name="label_send_progress_xmrto_query">XLA.TO-opdracht aanvragen</string>
+    <string name="label_send_progress_xlato_create">XLA.TO-opdracht maken</string>
+    <string name="label_send_progress_xlato_query">XLA.TO-opdracht aanvragen</string>
     <string name="label_send_progress_create_tx">Scala-transactie voorbereiden</string>
 
     <string name="label_send_progress_queryparms">XLA.TO-parameters aanvragen</string>
 
-    <string name="label_generic_xmrto_error">FOUT BIJ XLA.TO</string>
-    <string name="text_generic_xmrto_error">Code: %1$d</string>
+    <string name="label_generic_xlato_error">FOUT BIJ XLA.TO</string>
+    <string name="text_generic_xlato_error">Code: %1$d</string>
 
     <string name="text_retry">Opnieuw proberen</string>
     <string name="text_noretry_scala">Nu zitten we vast…</string>
@@ -77,9 +77,9 @@
     <string name="text_send_btc_amount">%1$s BTC = %2$s XLA</string>
     <string name="text_send_btc_rate">(Koers: %1$s BTC/XLA)</string>
 
-    <string name="label_send_btc_xmrto_info">Ga naar xmr.to voor hulp en traceren</string>
-    <string name="label_send_btc_xmrto_key_lb">Geheime sleutel\nXLA.TO</string>
-    <string name="label_send_btc_xmrto_key">Geheime sleutel XLA.TO</string>
+    <string name="label_send_btc_xlato_info">Ga naar xla.to voor hulp en traceren</string>
+    <string name="label_send_btc_xlato_key_lb">Geheime sleutel\nXLA.TO</string>
+    <string name="label_send_btc_xlato_key">Geheime sleutel XLA.TO</string>
     <string name="label_send_btc_address">BTC-doeladres</string>
     <string name="label_send_btc_amount">Bedrag</string>
 
@@ -114,7 +114,7 @@
 
     <string name="status_transaction_failed">Transactie mislukt: %1$s</string>
 
-    <string name="send_xmrto_timeout">Je hebt te lang gewacht, vriend!</string>
+    <string name="send_xlato_timeout">Je hebt te lang gewacht, vriend!</string>
 
     <string name="service_busy">Ik ben nog bezig met de vorige…</string>
 
@@ -138,7 +138,7 @@
     <string name="label_wallet_receive">Ontvangen</string>
     <string name="label_wallet_send">Geven</string>
 
-    <string name="xmr_unconfirmed_amount">+ %1$s XLA onbevestigd</string>
+    <string name="xla_unconfirmed_amount">%1$s XLA onbevestigd</string>
 
     <string name="service_description">monerujo-service</string>
 
@@ -152,9 +152,9 @@
 
     <string name="label_copy_viewkey">Alleen-lezen sleutel</string>
     <string name="label_copy_address">Openbaar adres</string>
-    <string name="label_copy_xmrtokey">Sleutel XLA.TO</string>
+    <string name="label_copy_xlatokey">Sleutel XLA.TO</string>
     <string name="message_copy_viewkey">Alleen-lezen sleutel gekopieerd naar klembord!</string>
-    <string name="message_copy_xmrtokey">Sleutel XLA.TO gekopieerd naar klembord!</string>
+    <string name="message_copy_xlatokey">Sleutel XLA.TO gekopieerd naar klembord!</string>
     <string name="message_copy_address">Portemonnee-adres gekopieerd naar klembord!</string>
     <string name="message_copy_txid">Transactie-ID gekopieerd naar klembord!</string>
     <string name="message_nocopy">Kopiëren uitgeschakeld voor de veiligheid!</string>
@@ -208,7 +208,7 @@
     <string name="generate_check_address">Voer geldig adres in</string>
     <string name="generate_check_mnemonic">Voer je 25 woorden in</string>
 
-    <string name="send_amount_btc_xmr">%1$s (schatting)</string>
+    <string name="send_amount_btc_xla">%1$s (schatting)</string>
 
     <string name="send_paymentid_hint">Betalings-ID (optioneel)</string>
     <string name="send_amount_hint">0,00</string>
@@ -240,8 +240,8 @@
     <string name="tx_list_fee">- kosten %1$s</string>
     <string name="tx_list_amount_failed">(%1$s)</string>
     <string name="tx_list_failed_text">mislukt</string>
-    <string name="tx_list_amount_negative">- %1$s</string>
-    <string name="tx_list_amount_positive">+ %1$s</string>
+    <string name="tx_list_amount_negative">%1$s</string>
+    <string name="tx_list_amount_positive">%1$s</string>
 
     <string name="tx_timestamp">Tijdstempel</string>
     <string name="tx_id">Transactie-ID</string>
@@ -369,10 +369,10 @@
     <!-- please verify this means "Receiver" or "Recipient" as in "Receiver in the transaction" -->
     <string name="send_address_hint">Ontvanger</string>
 
-    <string name="xmrto_error_001">XLA.TO offline - try again later</string>
-    <string name="xmrto_error_004">BTC amount out of bounds</string>
-    <string name="xmrto_error_010">Invalid or outdated Payment URL</string>
-    <string name="xmrto_error_012">Too many requests</string>
+    <string name="xlato_error_001">XLA.TO offline - try again later</string>
+    <string name="xlato_error_004">BTC amount out of bounds</string>
+    <string name="xlato_error_010">Invalid or outdated Payment URL</string>
+    <string name="xlato_error_012">Too many requests</string>
 
     <string name="street_sweep_amount">EVERYTHING!</string> <!-- as in: "everything in the account" = "all the money" -->
 

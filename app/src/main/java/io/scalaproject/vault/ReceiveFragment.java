@@ -133,8 +133,8 @@ public class ReceiveFragment extends Fragment {
 
         evAmount.setOnNewAmountListener(new ExchangeView.OnNewAmountListener() {
             @Override
-            public void onNewAmount(String xmr) {
-                Timber.d("new amount = %s", xmr);
+            public void onNewAmount(String xla) {
+                Timber.d("new amount = %s", xla);
                 generateQr();
             }
         });
@@ -476,14 +476,14 @@ public class ReceiveFragment extends Fragment {
         Timber.d("GENQR");
         String address = tvAddress.getText().toString();
         String notes = etNotes.getEditText().getText().toString();
-        String xmrAmount = evAmount.getAmount();
-        Timber.d("%s/%s/%s", xmrAmount, notes, address);
-        if ((xmrAmount == null) || !Wallet.isAddressValid(address)) {
+        String xlaAmount = evAmount.getAmount();
+        Timber.d("%s/%s/%s", xlaAmount, notes, address);
+        if ((xlaAmount == null) || !Wallet.isAddressValid(address)) {
             clearQR();
             Timber.d("CLEARQR");
             return;
         }
-        bcData = new BarcodeData(BarcodeData.Asset.XLA, address, null, notes, xmrAmount);
+        bcData = new BarcodeData(BarcodeData.Asset.XLA, address, null, notes, xlaAmount);
         int size = Math.max(ivQrCode.getWidth(), ivQrCode.getHeight());
         Bitmap qr = generate(bcData.getUriString(), size, size);
         if (qr != null) {

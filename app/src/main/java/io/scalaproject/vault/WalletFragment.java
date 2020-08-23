@@ -229,7 +229,7 @@ public class WalletFragment extends Fragment
         if (!activityCallback.isStealthMode() && unconfirmedAmount > 0.0) {
             tvUnconfirmedAmount.setVisibility(View.VISIBLE);
             String unconfirmed = Helper.getFormattedAmount(unconfirmedAmount, true);
-            tvUnconfirmedAmount.setText(getResources().getString(R.string.xmr_unconfirmed_amount, unconfirmed));
+            tvUnconfirmedAmount.setText(getResources().getString(R.string.xla_unconfirmed_amount, unconfirmed));
         } else {
             tvUnconfirmedAmount.setVisibility(View.GONE);
         }
@@ -255,11 +255,11 @@ public class WalletFragment extends Fragment
     private final ExchangeApi exchangeApi = Helper.getExchangeApi();
 
     void refreshBalance() {
-        double unconfirmedXmr = Helper.getDecimalAmount(balance - unlockedBalance).doubleValue();
-        showUnconfirmed(unconfirmedXmr);
+        double unconfirmedxla = Helper.getDecimalAmount(balance - unlockedBalance).doubleValue();
+        showUnconfirmed(unconfirmedxla);
         if (sCurrency.getSelectedItemPosition() == 0) { // XLA
-            double amountXmr = Helper.getDecimalAmount(unlockedBalance).doubleValue();
-            showBalance(Helper.getFormattedAmount(amountXmr, true));
+            double amountxla = Helper.getDecimalAmount(unlockedBalance).doubleValue();
+            showBalance(Helper.getFormattedAmount(amountxla, true));
         } else { // not XLA
             String currency = (String) sCurrency.getSelectedItem();
             Timber.d(currency);
@@ -314,8 +314,8 @@ public class WalletFragment extends Fragment
 
     public void exchangeFailed() {
         sCurrency.setSelection(0, true); // default to XLA
-        double amountXmr = Helper.getDecimalAmount(unlockedBalance).doubleValue();
-        showBalance(Helper.getFormattedAmount(amountXmr, true));
+        double amountxla = Helper.getDecimalAmount(unlockedBalance).doubleValue();
+        showBalance(Helper.getFormattedAmount(amountxla, true));
         hideExchanging();
     }
 
@@ -421,7 +421,7 @@ public class WalletFragment extends Fragment
             pbProgress.setProgress(n);
             pbProgress.setVisibility(View.VISIBLE);
         } else { // <0
-            pbProgress.setVisibility(View.INVISIBLE);
+            pbProgress.setVisibility(View.GONE);
         }
     }
 

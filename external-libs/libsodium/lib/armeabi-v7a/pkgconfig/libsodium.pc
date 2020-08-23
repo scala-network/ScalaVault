@@ -1,4 +1,4 @@
-prefix=/opt/xmrwallet/external-libs/build/build/libsodium/arm
+prefix=/opt/xlawallet/external-libs/build/build/libsodium/arm
 exec_prefix=${prefix}
 libdir=${exec_prefix}/lib
 includedir=${prefix}/include

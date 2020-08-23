@@ -1159,8 +1159,10 @@ public class WalletActivity extends BaseActivity implements WalletFragment.Liste
         );
         params.setMargins(20,0,0,0);
 
-        Button posButton = ((AlertDialog) dialog).getButton(DialogInterface.BUTTON_POSITIVE);
-        posButton.setLayoutParams(params);
+        Button posButton = dialog.getButton(DialogInterface.BUTTON_POSITIVE);
+
+        if(posButton != null)
+            posButton.setLayoutParams(params);
 
         dialog.show();
     }

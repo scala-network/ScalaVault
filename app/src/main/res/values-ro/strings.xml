@@ -29,29 +29,29 @@
 
     <string name="label_receive_info_gen_qr_code">Atinge pentru codul QR</string>
 
-    <string name="info_xmrto_enabled">Plată BTC activată, apasă pentru mai multe informații.</string>
+    <string name="info_xlato_enabled">Plată BTC activată, apasă pentru mai multe informații.</string>
     <string name="info_ledger_enabled">Ledger activată, apasă pentru mai multe informații.</string>
 
-    <string name="info_xmrto"><![CDATA[
+    <string name="info_xlato"><![CDATA[
         <b>Ai introdus o adresă de Bitcoin.</b><br/>
         <i>Vei trimite XLA și destinatarul va primi BTC folosind serviciul <b>XLA.TO</b>.</i>
     ]]></string>
 
-    <string name="info_send_xmrto_success_order_label">Ordin XLA.TO</string>
+    <string name="info_send_xlato_success_order_label">Ordin XLA.TO</string>
 
-    <string name="info_send_xmrto_success_btc">%1$s BTC</string>
+    <string name="info_send_xlato_success_btc">%1$s BTC</string>
 
-    <string name="info_send_xmrto_paid">Confirmare în așteptare</string>
-    <string name="info_send_xmrto_unpaid">Plată în așteptare</string>
-    <string name="info_send_xmrto_error">Eroare XLA.TO (%1$s)</string>
-    <string name="info_send_xmrto_sent">BTC trimis!</string>
-    <string name="info_send_xmrto_query">Interogare &#8230;</string>
+    <string name="info_send_xlato_paid">Confirmare în așteptare</string>
+    <string name="info_send_xlato_unpaid">Plată în așteptare</string>
+    <string name="info_send_xlato_error">Eroare XLA.TO (%1$s)</string>
+    <string name="info_send_xlato_sent">BTC trimis!</string>
+    <string name="info_send_xlato_query">Interogare &#8230;</string>
 
-    <string name="info_send_xmrto_parms"><![CDATA[
+    <string name="info_send_xlato_parms"><![CDATA[
         <b>Poți trimite %1$s &#8212; %2$s BTC</b>.<br/>
         <i><b>XLA.TO</b> îți oferă un curs de <b>%3$s BTC</b> <u>în acest moment</u></i>.
     ]]></string>
-    <string name="info_send_xmrto_zeroconf"><![CDATA[
+    <string name="info_send_xlato_zeroconf"><![CDATA[
         <i>Sume până la <b>%1$s BTC</b> vor fi trimise <u>instantaneu</u>!</i>
     ]]></string>
 
@@ -60,14 +60,14 @@
     <string name="info_paymentid_integrated">&#x2714; Payment ID integrat</string>
     <string name="info_prepare_tx">Se pregătește tranzacția</string>
 
-    <string name="label_send_progress_xmrto_create">Creearea ordinului XLA.TO</string>
-    <string name="label_send_progress_xmrto_query">Interogare ordin XLA.TO</string>
+    <string name="label_send_progress_xlato_create">Creearea ordinului XLA.TO</string>
+    <string name="label_send_progress_xlato_query">Interogare ordin XLA.TO</string>
     <string name="label_send_progress_create_tx">Pregătirea tranzacției Scala</string>
 
-    <string name="label_send_progress_queryparms">Interogare parametrii xmr.to</string>
+    <string name="label_send_progress_queryparms">Interogare parametrii xla.to</string>
 
-    <string name="label_generic_xmrto_error">EROARE XLA.TO</string>
-    <string name="text_generic_xmrto_error">Cod: %1$d</string>
+    <string name="label_generic_xlato_error">EROARE XLA.TO</string>
+    <string name="text_generic_xlato_error">Cod: %1$d</string>
 
     <string name="text_retry">Atinge pentru reîncercare</string>
     <string name="text_noretry_scala">Pff.. ne-am blocat cum!</string>
@@ -76,9 +76,9 @@
     <string name="text_send_btc_amount">%1$s BTC = %2$s XLA</string>
     <string name="text_send_btc_rate">(Rată: %1$s BTC/XLA)</string>
 
-    <string name="label_send_btc_xmrto_info">Vizitează xmr.to pentru suport &amp; interogare</string>
-    <string name="label_send_btc_xmrto_key_lb">Cheia secretă \nXLA.TO</string>
-    <string name="label_send_btc_xmrto_key">Cheia secretă XLA.TO </string>
+    <string name="label_send_btc_xlato_info">Vizitează xla.to pentru suport &amp; interogare</string>
+    <string name="label_send_btc_xlato_key_lb">Cheia secretă \nXLA.TO</string>
+    <string name="label_send_btc_xlato_key">Cheia secretă XLA.TO </string>
     <string name="label_send_btc_address">Destinație adresă BTC</string>
     <string name="label_send_btc_amount">Sumă</string>
 
@@ -111,7 +111,7 @@
 
     <string name="status_transaction_failed">Tranzacție eșuată: %1$s</string>
 
-    <string name="send_xmrto_timeout">Ai așteptat prea mult prietene!</string>
+    <string name="send_xlato_timeout">Ai așteptat prea mult prietene!</string>
 
     <string name="service_busy">Încă sunt ocupat cu ultimul tău portofel &#8230;</string>
 
@@ -129,7 +129,7 @@
     <string name="label_wallet_receive">Primește</string>
     <string name="label_wallet_send">Oferă</string>
 
-    <string name="xmr_unconfirmed_amount">+ %1$s XLA neconfirmat</string>
+    <string name="xla_unconfirmed_amount">%1$s XLA neconfirmat</string>
 
     <string name="service_description">Serviciul Scala Vault</string>
 
@@ -143,9 +143,9 @@
 
     <string name="label_copy_viewkey">Cheie Vizualizare</string>
     <string name="label_copy_address">Adresă publică</string>
-    <string name="label_copy_xmrtokey">Cheie XLA.TO</string>
+    <string name="label_copy_xlatokey">Cheie XLA.TO</string>
     <string name="message_copy_viewkey">Cheie vizualizre copiată la clipboard!</string>
-    <string name="message_copy_xmrtokey">Cheie XLA.TO copiată la clipboard!</string>
+    <string name="message_copy_xlatokey">Cheie XLA.TO copiată la clipboard!</string>
     <string name="message_copy_address">Adresă portofel copiatp la clipboard!</string>
     <string name="message_copy_txid">ID tranzacție copiată la clipboard!</string>
     <string name="message_nocopy">Copierea dezactivată din motive de securitate!</string>
@@ -186,7 +186,7 @@
     <string name="generate_check_address">Introdu Adresă validă</string>
     <string name="generate_check_mnemonic">Introdu cele 25 de cuvinte</string>
 
-    <string name="send_amount_btc_xmr">%1$s (indicativ)</string>
+    <string name="send_amount_btc_xla">%1$s (indicativ)</string>
 
     <string name="send_paymentid_hint">Payment ID (facultativ)</string>
     <string name="send_amount_hint">0.00</string>
@@ -218,8 +218,8 @@
     <string name="tx_list_fee">- Comision %1$s</string>
     <string name="tx_list_amount_failed">(%1$s)</string>
     <string name="tx_list_failed_text">eșuat</string>
-    <string name="tx_list_amount_negative">- %1$s</string>
-    <string name="tx_list_amount_positive">+ %1$s</string>
+    <string name="tx_list_amount_negative">%1$s</string>
+    <string name="tx_list_amount_positive">%1$s</string>
 
     <string name="tx_timestamp">Timestamp-ul</string>
     <string name="tx_id">ID Tranzacție</string>
@@ -369,10 +369,10 @@
     <string name="send_address_bip70">Resolved Payment URI &#x2714;</string>
     <string name="send_address_hint">Receiver</string>
 
-    <string name="xmrto_error_001">XLA.TO offline - try again later</string>
-    <string name="xmrto_error_004">BTC amount out of bounds</string>
-    <string name="xmrto_error_010">Invalid or outdated Payment URL</string>
-    <string name="xmrto_error_012">Too many requests</string>
+    <string name="xlato_error_001">XLA.TO offline - try again later</string>
+    <string name="xlato_error_004">BTC amount out of bounds</string>
+    <string name="xlato_error_010">Invalid or outdated Payment URL</string>
+    <string name="xlato_error_012">Too many requests</string>
 
     <string name="street_sweep_amount">EVERYTHING!</string> <!-- as in: "everything in the account" = "all the money" -->
 

@@ -25,7 +25,7 @@ public interface QueryOrderParameters {
 
     double getLowerLimit(); //  "lower_limit": <lower_order_limit_in_btc_as_float>,
 
-    double getPrice(); // "price": <price_of_1_btc_in_xmr_as_offered_by_service_as_float>,
+    double getPrice(); // "price": <price_of_1_btc_in_xla_as_offered_by_service_as_float>,
 
     double getUpperLimit(); // "upper_limit": <upper_order_limit_in_btc_as_float>,
 

@@ -104,7 +104,7 @@
         舉例來說這可以讓公司行號辨別你的這筆款項是用來支付某項購買的商品。
         <h2>交易 ID</h2>
         這是可以用來在 Scala 區塊鏈瀏覽器上查詢的被隱蔽交易 ID。
-        在這裡可查詢：<a href="https://xmrchain.net/">https://xmrchain.net/</a>
+        在這裡可查詢：<a href="https://xlachain.net/">https://xlachain.net/</a>
         <h2>TX KEY (交易金鑰)</h2>
         這是該筆交易的私鑰。請妥善保護這組金鑰，因為這金鑰將可揭露你該筆交易的環狀簽名而使得該筆交易透明化。
         <h2>區塊</h2>
@@ -123,14 +123,14 @@
             <li>以 bitcoin: 開頭的 URI (包含像 bitpay 所使用的 BIP70 協議)</li>
         </u>
         但請注意一件事情，發送 BTC 的功能是透過 XLA.TO 服務實現的，請參考下方的「發送 BTC」說明
-        (詳見 https://xmr.to 以了解更多)。</p>
+        (詳見 https://xla.to 以了解更多)。</p>
         <h2>付款 ID</h2>
         <p>你可以使用付款 ID 以幫助識別雙方的款項交易。這是選填項目並且完全為隱私保護的。
         舉例來說這可以讓公司行號辨別你的這筆款項是用來支付某項購買的商品。<p>
         <h1>發送 BTC</h1>
         <h2>XLA.TO</h2>
         <p>XLA.TO 是一個可以將 XLA 轉換為 BTC 的第三方服務。
-        我們利用 XLA.TO 的 API 將其服務整合至 Scala Vault 中。請參閱 https://xmr.to 後自行決定是否使用。
+        我們利用 XLA.TO 的 API 將其服務整合至 Scala Vault 中。請參閱 https://xla.to 後自行決定是否使用。
         Scala Vault 開發團隊與 XLA.TO 並無相關，無法為你解決其服務上的問題</p>
         <h2>XLA.TO 匯率<h2>
         <p>在「金額」的頁面中你將看到 XLA.TO 服務的參數。包含了匯率以及 BTC 金額的上下限。
@@ -146,11 +146,11 @@
         <p>當倒數計時歸零的時候，你將會需要回到上一步再回到「確認」頁面重新向 XLA.TO 尋求匯率報價</p>
     ]]></string>
 
-    <string name="help_xmrto"><![CDATA[
+    <string name="help_xlato"><![CDATA[
         <h1>發送 BTC</h1>
         <h2>XLA.TO</h2>
         <p>XLA.TO 是一個可以將 XLA 轉換為 BTC 的第三方服務。
-        我們利用 XLA.TO 的 API 將其服務整合至 Scala Vault 中。請參閱 https://xmr.to 後自行決定是否使用。
+        我們利用 XLA.TO 的 API 將其服務整合至 Scala Vault 中。請參閱 https://xla.to 後自行決定是否使用。
         Scala Vault 開發團隊與 XLA.TO 並無相關，無法為你解決其服務上的問題</p>
         <h2>XLA.TO 匯率<h2>
         <p>在「金額」的頁面中你將看到 XLA.TO 服務的參數。包含了匯率以及 BTC 金額的上下限。

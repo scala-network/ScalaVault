@@ -145,16 +145,13 @@ public class TransactionInfoAdapter extends RecyclerView.Adapter<TransactionInfo
             this.infoItem = infoItems.get(position);
 
             UserNotes userNotes = new UserNotes(infoItem.notes);
-            if (userNotes.xmrtoKey != null) {
-                ivTxType.setVisibility(View.VISIBLE);
-            } else {
-                ivTxType.setVisibility(View.GONE); // gives us more space for the amount
-            }
 
             String displayAmount = Helper.getDisplayAmount(infoItem.amount, Helper.DISPLAY_DIGITS_INFO);
             if (infoItem.direction == TransactionInfo.Direction.Direction_Out) {
+                ivTxType.setImageDrawable(itemView.getResources().getDrawable(R.drawable.ic_tx_out));
                 tvAmount.setText(context.getString(R.string.tx_list_amount_negative, displayAmount));
             } else {
+                ivTxType.setImageDrawable(itemView.getResources().getDrawable(R.drawable.ic_tx_in));
                 tvAmount.setText(context.getString(R.string.tx_list_amount_positive, displayAmount));
             }
 
@@ -183,8 +180,8 @@ public class TransactionInfoAdapter extends RecyclerView.Adapter<TransactionInfo
                 this.tvPaymentId.setText(infoItem.paymentId.equals("0000000000000000") ?
                         (infoItem.subaddress != 0 ?
                                 (context.getString(R.string.tx_subaddress, infoItem.subaddress)) :
-                                "") :
-                        infoItem.paymentId);
+                                infoItem.hash) :
+                        infoItem.hash);
             } else {
                 this.tvPaymentId.setText(userNotes.note);
             }

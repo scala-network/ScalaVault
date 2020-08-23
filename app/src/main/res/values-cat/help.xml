@@ -102,7 +102,7 @@
         <h2>ID de Pagament</h2>
 	Podeu utilitzar un ID de pagament per identificar el motiu pel qual heu enviat a Scala entre dues parts. Això és totalment opcional i privat. Per exemple, això pot permetre 	a una empresa associar la transacció amb un article que heu comprat.
         <h2>ID de Transacció</h2>
-	Aquest és el vostre ID de transacció que podeu utilitzar per identificar la vostra transacció oculta en un Explorador de Blockchain de Scala com <a href="https://		xmrchain.net/"> https://xmrchain.net/ </a>
+	Aquest és el vostre ID de transacció que podeu utilitzar per identificar la vostra transacció oculta en un Explorador de Blockchain de Scala com <a href="https://		xlachain.net/"> https://xlachain.net/ </a>
         <h2>Clau de Transacció</h2>
         Aquesta és la vostra clau privada de transacció, manteniu-la segureta ja que mostrar-la a tercers els revelia quina signatura dins un anell és la vostra, fent que la vostra 	transacció sigui transparent.
         <h2>Bloc</h2>
@@ -119,13 +119,13 @@
             <li>una adreça BTC</li>
             <li>un bitcoin: URI (inclòs BIP70 com bitpay)</li>
         </u>
-        Tingueu en compte que l’enviament de BTC es duu a terme a través del servei XLA.TO (consulteu https://xmr.to per a més detalls). Consulteu la secció sobre l’enviament de BTC 	més avall.</p>
+        Tingueu en compte que l’enviament de BTC es duu a terme a través del servei XLA.TO (consulteu https://xla.to per a més detalls). Consulteu la secció sobre l’enviament de BTC 	més avall.</p>
         <h2>ID de Pagament</h2>
         <p>Podeu utilitzar un ID de pagament per identificar el motiu pel qual heu enviat a Scala entre dues parts. Això és totalment opcional i privat. Per exemple, això pot 	permetre a una empresa associar la transacció amb un article que heu comprat.<p>
         <h1>Enviant BTC</h1>
         <h2>XLA.TO</h2>
         <p>XLA.TO és un servei de tercers que fa proporciona el canvi de Scala a Bitcoin.
-         Nosaltres fem servir l’API XLA.TO per integrar els pagaments de Bitcoin a Scala Vault. Si us plau, doneu un cop d’ull a https://xmr.to i decidiu vosaltres mateixos si és una 	cosa que volgueu utilitzar. L’equip de 	Scala Vault no està associat amb XLA.TO i no pot oferir assistència amb el seu servei.</p>
+         Nosaltres fem servir l’API XLA.TO per integrar els pagaments de Bitcoin a Scala Vault. Si us plau, doneu un cop d’ull a https://xla.to i decidiu vosaltres mateixos si és una 	cosa que volgueu utilitzar. L’equip de 	Scala Vault no està associat amb XLA.TO i no pot oferir assistència amb el seu servei.</p>
         <h2>Tipus de Canvi XLA.TO<h2>
         <p>A la pantalla \"Quantitat\" es mostraran els paràmetres actuals del servei XLA.TO. Aquests
          inclouen el tipus de canvi actual, així com els límits de BTC superiors i inferiors. Tingueu en compte que la tarifa no està garantida en aquell mateix moment. També veureu
@@ -143,11 +143,11 @@
         <p>Una vegada el compte enrere arribi a zero haureu d’obtenir una nova sol·licitud de XLA.TO tornant enrere al pas anterior i després tornar a la pantalla de 			\"Confirmar\".</p>
     ]]></string>
 
-    <string name="help_xmrto"><![CDATA[
+    <string name="help_xlato"><![CDATA[
         <h1>Enviant BTC</h1>
         <h2>XLA.TO</h2>
         <p>XLA.TO és un servei de tercers que fa proporciona el canvi de Scala a Bitcoin.
-         Nosaltres fem servir l’API XLA.TO per integrar els pagaments de Bitcoin a Scala Vault. Si us plau, doneu un cop d’ull a https://xmr.to i decidiu vosaltres mateixos si és una 	cosa que volgueu utilitzar. L’equip de 	Scala Vault no està associat amb XLA.TO i no pot oferir assistència amb el seu servei.</p>
+         Nosaltres fem servir l’API XLA.TO per integrar els pagaments de Bitcoin a Scala Vault. Si us plau, doneu un cop d’ull a https://xla.to i decidiu vosaltres mateixos si és una 	cosa que volgueu utilitzar. L’equip de 	Scala Vault no està associat amb XLA.TO i no pot oferir assistència amb el seu servei.</p>
         <h2>Tipus de Canvi XLA.TO<h2>
         <p>A la pantalla \"Quantitat\" es mostraran els paràmetres actuals del servei XLA.TO. Aquests
          inclouen el tipus de canvi actual, així com els límits de BTC superiors i inferiors. Tingueu en compte que la tarifa no està garantida en aquell mateix moment. També veureu

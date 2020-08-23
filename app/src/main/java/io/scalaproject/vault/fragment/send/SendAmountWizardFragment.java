@@ -126,9 +126,9 @@ public class SendAmountWizardFragment extends SendWizardFragment {
             }
 
             if (sendListener != null) {
-                String xmr = etAmount.getNativeAmount();
-                if (xmr != null) {
-                    sendListener.getTxData().setAmount(Wallet.getAmountFromString(xmr));
+                String xla = etAmount.getNativeAmount();
+                if (xla != null) {
+                    sendListener.getTxData().setAmount(Wallet.getAmountFromString(xla));
                 } else {
                     sendListener.getTxData().setAmount(0L);
                 }

@@ -117,7 +117,7 @@
         med något du köpt.
         <h2>TX ID</h2>
         Det här är ditt Transaktions-ID, det kan du använda för att identifiera förvirrande
-        transaktioner på Blockkedjeutforskare som <a href="https://xmrchain.net/">https://xmrchain.net/</a>
+        transaktioner på Blockkedjeutforskare som <a href="https://xlachain.net/">https://xlachain.net/</a>
         <h2>TX Nyckel (Transaktionsnyckel)</h2>
         Det här är din transaktions privatnyckel, förvara den här säkert eftersom tillgång till
         den avslöjar vilken signatur i en ring som är din.
@@ -137,7 +137,7 @@
             <li>a BTC address</li>
             <li>a bitcoin: URI (including BIP70 like bitpay)</li>
         </u>
-        Please note, that sending BTC is processed through the XLA.TO service (see https://xmr.to
+        Please note, that sending BTC is processed through the XLA.TO service (see https://xla.to
         for details). See the section on sending BTC below.</p>
         <h2>Betalnings-ID</h2>
         <p>Du kan använda ett Betalnings-ID för att identifiera anledningen du skickat Scala till någon,
@@ -146,7 +146,7 @@
         <h1>Skicka BTC</h1>
         <h2>XLA.TO</h2>
         <p>XLA.TO är en tredjeparts tjänst som byter ut Scala mot Bitcoin. Vi använder XLA.TO API:n
-        för att integrera Bitcoin betalningar i Scala Vault. Vänligen besök https://xmr.to och bestäm
+        för att integrera Bitcoin betalningar i Scala Vault. Vänligen besök https://xla.to och bestäm
         för dig själv om det är någonting du vill använda. Scala Vault laget är inte associerad med
         XLA.TO och kan inte hjälpa dig med deras tjänst.</p>
         <h2>XLA.TO Växelkurs<h2>
@@ -169,9 +169,9 @@
         tillbaka till den tidigare skärmen och sedan gå till \"Bekräfta\"skärmen.</p>
     ]]></string>
 
-    <string name="help_xmrto"><![CDATA[
+    <string name="help_xlato"><![CDATA[
       <p>XLA.TO är en tredjeparts tjänst som byter ut Scala mot Bitcoin. Vi använder XLA.TO API:n
-      för att integrera Bitcoin betalningar i Scala Vault. Vänligen besök https://xmr.to och bestäm
+      för att integrera Bitcoin betalningar i Scala Vault. Vänligen besök https://xla.to och bestäm
       för dig själv om det är någonting du vill använda. Scala Vault laget är inte associerad med
       XLA.TO och kan inte hjälpa dig med deras tjänst.</p>
       <h2>XLA.TO Växelkurs<h2>

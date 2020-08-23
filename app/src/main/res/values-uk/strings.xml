@@ -30,30 +30,30 @@
 
     <string name="label_receive_info_gen_qr_code">Натисніть для використання QR-коду</string>
 
-    <string name="info_xmrto_enabled">Доступні перекази в BTC, натисніть для доп. інформації</string>
+    <string name="info_xlato_enabled">Доступні перекази в BTC, натисніть для доп. інформації</string>
     <string name="info_ledger_enabled">Доступний Ledger, натисніть для доп. інформації</string>
 
-    <string name="info_xmrto"><![CDATA[
+    <string name="info_xlato"><![CDATA[
         <b>Ви ввели Bitcoin адресу.</b><br/>
         <i>Надсилайте XLA, одержувач отримає BTC, використовуючи сервіс XLA.TO</i>
     ]]></string>
 
-    <string name="info_send_xmrto_success_order_label">Заявка XLA.TO</string>
+    <string name="info_send_xlato_success_order_label">Заявка XLA.TO</string>
 
-    <string name="info_send_xmrto_success_btc">%1$s BTC</string>
+    <string name="info_send_xlato_success_btc">%1$s BTC</string>
 
 
-    <string name="info_send_xmrto_paid">Очікування підтвердження</string>
-    <string name="info_send_xmrto_unpaid">Очікування платежу</string>
-    <string name="info_send_xmrto_error">Помилка XLA.TO (%1$s)</string>
-    <string name="info_send_xmrto_sent">BTC успішно відправлені!</string>
-    <string name="info_send_xmrto_query">Запит &#8230;</string>
+    <string name="info_send_xlato_paid">Очікування підтвердження</string>
+    <string name="info_send_xlato_unpaid">Очікування платежу</string>
+    <string name="info_send_xlato_error">Помилка XLA.TO (%1$s)</string>
+    <string name="info_send_xlato_sent">BTC успішно відправлені!</string>
+    <string name="info_send_xlato_query">Запит &#8230;</string>
 
-    <string name="info_send_xmrto_parms"><![CDATA[
+    <string name="info_send_xlato_parms"><![CDATA[
         <b>Ви можете відправити %1$s &#8212; %2$s BTC</b>.<br/>
         <i><b>XLA.TO</b> встановлює курс обміну <b>%3$s BTC</b> <u>в даний момент</u></i>.
     ]]></string>
-    <string name="info_send_xmrto_zeroconf"><![CDATA[
+    <string name="info_send_xlato_zeroconf"><![CDATA[
         <i>Сума до <b>%1$s BTC</b> буде відправлена <u>негайно</u>!</i>
     ]]></string>
 
@@ -62,14 +62,14 @@
     <string name="info_paymentid_integrated">&#x2714; Інтегрований ID платежу</string>
     <string name="info_prepare_tx">Підготовка транзакції</string>
 
-    <string name="label_send_progress_xmrto_create">Створення заявки XLA.TO</string>
-    <string name="label_send_progress_xmrto_query">Запит заявки XLA.TO</string>
+    <string name="label_send_progress_xlato_create">Створення заявки XLA.TO</string>
+    <string name="label_send_progress_xlato_query">Запит заявки XLA.TO</string>
     <string name="label_send_progress_create_tx">Підготовка транзакції Scala</string>
 
     <string name="label_send_progress_queryparms">Запит параметрів XLA.TO</string>
 
-    <string name="label_generic_xmrto_error">XLA.TO ПОМИЛКА</string>
-    <string name="text_generic_xmrto_error">Код: %1$d</string>
+    <string name="label_generic_xlato_error">XLA.TO ПОМИЛКА</string>
+    <string name="text_generic_xlato_error">Код: %1$d</string>
 
     <string name="text_retry">Натисніть, щоб повторити спробу</string>
     <string name="text_noretry_scala">Тепер ми застрягли тут!</string>
@@ -78,9 +78,9 @@
     <string name="text_send_btc_amount">%1$s BTC = %2$s XLA</string>
     <string name="text_send_btc_rate">(Курс: %1$s BTC/XLA)</string>
 
-    <string name="label_send_btc_xmrto_info">Відвідайте xmr.to для отримання допомоги &amp;</string>
-    <string name="label_send_btc_xmrto_key_lb">Секретний ключ\nXLA.TO</string>
-    <string name="label_send_btc_xmrto_key">XLA.TO секретний ключ</string>
+    <string name="label_send_btc_xlato_info">Відвідайте xla.to для отримання допомоги &amp;</string>
+    <string name="label_send_btc_xlato_key_lb">Секретний ключ\nXLA.TO</string>
+    <string name="label_send_btc_xlato_key">XLA.TO секретний ключ</string>
     <string name="label_send_btc_address">Адреса отримувача BTC</string>
     <string name="label_send_btc_amount">Сума</string>
 
@@ -115,7 +115,7 @@
 
     <string name="status_transaction_failed">Помилка транзакції: %1$s</string>
 
-    <string name="send_xmrto_timeout">Ти надто довго чекав, друже!</string>
+    <string name="send_xlato_timeout">Ти надто довго чекав, друже!</string>
 
     <string name="service_busy">Я все ще зайнятий твоїм гаманцем &#8230;</string>
 
@@ -139,7 +139,7 @@
     <string name="label_wallet_receive">Отримати</string>
     <string name="label_wallet_send">Відправити</string>
 
-    <string name="xmr_unconfirmed_amount">+ %1$s XLA непідтверджено</string>
+    <string name="xla_unconfirmed_amount">%1$s XLA непідтверджено</string>
 
     <string name="service_description">Служба Scala Vault</string>
 
@@ -153,9 +153,9 @@
 
     <string name="label_copy_viewkey">Ключ перегляду</string>
     <string name="label_copy_address">Публічна адреса</string>
-    <string name="label_copy_xmrtokey">XLA.TO ключ</string>
+    <string name="label_copy_xlatokey">XLA.TO ключ</string>
     <string name="message_copy_viewkey">Ключ перегляду скопійовано в буфер обміну!</string>
-    <string name="message_copy_xmrtokey">Ключ XLA.TO скопійовано в буфер обміну!</string>
+    <string name="message_copy_xlatokey">Ключ XLA.TO скопійовано в буфер обміну!</string>
     <string name="message_copy_address">Адресу гаманця скопійовано в буфер обміну!</string>
     <string name="message_copy_txid">ID транзакції скопійовано в буфер обміну!</string>
     <string name="message_nocopy">Копіювання недоступно з міркувань безпеки!</string>
@@ -212,7 +212,7 @@
     <string name="generate_check_address">Введіть діючу адресу</string>
     <string name="generate_check_mnemonic">Введіть вашу мнемонічну фразу</string>
 
-    <string name="send_amount_btc_xmr">%1$s (приблизно)</string>
+    <string name="send_amount_btc_xla">%1$s (приблизно)</string>
 
     <string name="send_paymentid_hint">ID платежу (необов\'язково)</string>
     <string name="send_amount_hint">0.00</string>
@@ -244,8 +244,8 @@
     <string name="tx_list_fee">- Комісія %1$s</string>
     <string name="tx_list_amount_failed">(%1$s)</string>
     <string name="tx_list_failed_text">Не вдалося</string>
-    <string name="tx_list_amount_negative">- %1$s</string>
-    <string name="tx_list_amount_positive">+ %1$s</string>
+    <string name="tx_list_amount_negative">%1$s</string>
+    <string name="tx_list_amount_positive">%1$s</string>
 
     <string name="tx_timestamp">Відмітка часу</string>
     <string name="tx_id">TX ID</string>
@@ -373,10 +373,10 @@
     <!-- please verify this means "Receiver" or "Recipient" as in "Receiver in the transaction" -->
     <string name="send_address_hint">Отримувач</string>
 
-    <string name="xmrto_error_001">XLA.TO недоступний - спробуйте пізніше</string>
-    <string name="xmrto_error_004">Сума BTC виходить за допустимі ліміти</string>
-    <string name="xmrto_error_010">Невірний або застарілий платіжний URL</string>
-    <string name="xmrto_error_012">Перевищено кількість запитів</string>
+    <string name="xlato_error_001">XLA.TO недоступний - спробуйте пізніше</string>
+    <string name="xlato_error_004">Сума BTC виходить за допустимі ліміти</string>
+    <string name="xlato_error_010">Невірний або застарілий платіжний URL</string>
+    <string name="xlato_error_012">Перевищено кількість запитів</string>
 
     <string name="street_sweep_amount">ВСЕ!</string> <!-- as in: "everything in the account" = "all the money" -->
 

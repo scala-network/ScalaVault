@@ -35,7 +35,7 @@ import static org.junit.Assert.assertTrue;
 
 public class OpenAliasHelperTest {
 
-    private final static String MONERUJO = "oa1:xmr recipient_address=4AdkPJoxn7JCvAby9szgnt93MSEwdnxdhaASxbTBm6x5dCwmsDep2UYN4FhStDn5i11nsJbpU7oj59ahg8gXb1Mg3viqCuk; recipient_name=Scala Vault Development; tx_description=Donation to Scala Vault Core Team;";
+    private final static String MONERUJO = "oa1:xla recipient_address=4AdkPJoxn7JCvAby9szgnt93MSEwdnxdhaASxbTBm6x5dCwmsDep2UYN4FhStDn5i11nsJbpU7oj59ahg8gXb1Mg3viqCuk; recipient_name=Scala Vault Development; tx_description=Donation to Scala Vault Core Team;";
 
     @Rule
     public ExpectedException thrown = ExpectedException.none();
@@ -49,7 +49,7 @@ public class OpenAliasHelperTest {
 
     @Test
     public void quotedSemicolon() {
-        Map<String, String> attrs = OpenAliasHelper.parse("oa1:xmr abc=\";\";def=99;");
+        Map<String, String> attrs = OpenAliasHelper.parse("oa1:xla abc=\";\";def=99;");
         assertNotNull(attrs);
         assertTrue(attrs.get("abc").equals(";"));
         assertTrue(attrs.get("def").equals("99"));
@@ -57,7 +57,7 @@ public class OpenAliasHelperTest {
 
     @Test
     public void space() {
-        Map<String, String> attrs = OpenAliasHelper.parse("oa1:xmr abc=\\ ;def=99;");
+        Map<String, String> attrs = OpenAliasHelper.parse("oa1:xla abc=\\ ;def=99;");
         assertNotNull(attrs);
         assertTrue(attrs.get("abc").equals(" "));
         assertTrue(attrs.get("def").equals("99"));
@@ -65,7 +65,7 @@ public class OpenAliasHelperTest {
 
     @Test
     public void quotaedSpace() {
-        Map<String, String> attrs = OpenAliasHelper.parse("oa1:xmr abc=\" \";def=99;");
+        Map<String, String> attrs = OpenAliasHelper.parse("oa1:xla abc=\" \";def=99;");
         assertNotNull(attrs);
         assertTrue(attrs.get("abc").equals(" "));
         assertTrue(attrs.get("def").equals("99"));
@@ -74,7 +74,7 @@ public class OpenAliasHelperTest {
     @Test
     public void quotes() {
         Map<String, String> attrs;
-        attrs = OpenAliasHelper.parse("oa1:xmr abc=\"def\";");
+        attrs = OpenAliasHelper.parse("oa1:xla abc=\"def\";");
         assertNotNull(attrs);
         assertTrue(attrs.get("abc").equals("def"));
     }
@@ -82,7 +82,7 @@ public class OpenAliasHelperTest {
     @Test
     public void simple() {
         Map<String, String> attrs;
-        attrs = OpenAliasHelper.parse("oa1:xmr abc=def;");
+        attrs = OpenAliasHelper.parse("oa1:xla abc=def;");
         assertNotNull(attrs);
         assertTrue(attrs.get("abc").equals("def"));
     }
@@ -90,7 +90,7 @@ public class OpenAliasHelperTest {
     @Test
     public void duplex() {
         Map<String, String> attrs;
-        attrs = OpenAliasHelper.parse("oa1:xmr abc=def;ghi=jkl;");
+        attrs = OpenAliasHelper.parse("oa1:xla abc=def;ghi=jkl;");
         assertNotNull(attrs);
         assertTrue(attrs.get("abc").equals("def"));
         assertTrue(attrs.get("ghi").equals("jkl"));
@@ -99,7 +99,7 @@ public class OpenAliasHelperTest {
     @Test
     public void duplexQ() {
         Map<String, String> attrs;
-        attrs = OpenAliasHelper.parse("oa1:xmr abc=def;ghi=jkl;");
+        attrs = OpenAliasHelper.parse("oa1:xla abc=def;ghi=jkl;");
         assertNotNull(attrs);
         assertTrue(attrs.get("abc").equals("def"));
         assertTrue(attrs.get("ghi").equals("jkl"));
@@ -108,21 +108,21 @@ public class OpenAliasHelperTest {
     @Test
     public void simple_unterminated() {
         Map<String, String> attrs;
-        attrs = OpenAliasHelper.parse("oa1:xmr abc=def;ghi=jkl");
+        attrs = OpenAliasHelper.parse("oa1:xla abc=def;ghi=jkl");
         assertNull(attrs);
     }
 
     @Test
     public void unterminatedQuotes() {
         Map<String, String> attrs;
-        attrs = OpenAliasHelper.parse("oa1:xmr abc=\"def;ghi=jkl;");
+        attrs = OpenAliasHelper.parse("oa1:xla abc=\"def;ghi=jkl;");
         assertNull(attrs);
     }
 
     @Test
     public void quoteEnd() {
         Map<String, String> attrs;
-        attrs = OpenAliasHelper.parse("oa1:xmr abc=def\";ghi=jkl;");
+        attrs = OpenAliasHelper.parse("oa1:xla abc=def\";ghi=jkl;");
         assertNotNull(attrs);
         assertTrue(attrs.get("abc").equals("def\""));
         assertTrue(attrs.get("ghi").equals("jkl"));
@@ -131,7 +131,7 @@ public class OpenAliasHelperTest {
     @Test
     public void quoteMiddle() {
         Map<String, String> attrs;
-        attrs = OpenAliasHelper.parse("oa1:xmr abc=d\"ef;ghi=jkl;");
+        attrs = OpenAliasHelper.parse("oa1:xla abc=d\"ef;ghi=jkl;");
         assertNotNull(attrs);
         assertTrue(attrs.get("abc").equals("d\"ef"));
         assertTrue(attrs.get("ghi").equals("jkl"));
@@ -140,7 +140,7 @@ public class OpenAliasHelperTest {
     @Test
     public void quoteMultiple() {
         Map<String, String> attrs;
-        attrs = OpenAliasHelper.parse("oa1:xmr abc=d\"ef\";ghi=jkl;");
+        attrs = OpenAliasHelper.parse("oa1:xla abc=d\"ef\";ghi=jkl;");
         assertNotNull(attrs);
         assertTrue(attrs.get("abc").equals("d\"ef\""));
         assertTrue(attrs.get("ghi").equals("jkl"));
@@ -149,14 +149,14 @@ public class OpenAliasHelperTest {
     @Test
     public void quoteMalformedValue() {
         Map<String, String> attrs;
-        attrs = OpenAliasHelper.parse("oa1:xmr abc=d\"e;f\";ghi=jkl;");
+        attrs = OpenAliasHelper.parse("oa1:xla abc=d\"e;f\";ghi=jkl;");
         assertNull(attrs);
     }
 
     @Test
     public void quotedSemicolon2() {
         Map<String, String> attrs;
-        attrs = OpenAliasHelper.parse("oa1:xmr abc=\"d;ef\";ghi=jkl;");
+        attrs = OpenAliasHelper.parse("oa1:xla abc=\"d;ef\";ghi=jkl;");
         assertNotNull(attrs);
         assertTrue(attrs.get("abc").equals("d;ef"));
         assertTrue(attrs.get("ghi").equals("jkl"));
@@ -165,7 +165,7 @@ public class OpenAliasHelperTest {
     @Test
     public void quotedQuote() {
         Map<String, String> attrs;
-        attrs = OpenAliasHelper.parse("oa1:xmr abc=\"d\"ef\";ghi=jkl;");
+        attrs = OpenAliasHelper.parse("oa1:xla abc=\"d\"ef\";ghi=jkl;");
         assertNotNull(attrs);
         assertTrue(attrs.get("abc").equals("d\"ef"));
         assertTrue(attrs.get("ghi").equals("jkl"));

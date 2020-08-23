@@ -41,6 +41,7 @@
         <item name="android:colorControlActivated">@color/bg_blue</item>
 
         <item name="android:itemTextAppearance">@style/ItemMenuTextAppearance</item>
+        <item name="android:alertDialogTheme">@style/AlertDialogCustom</item>
     </style>
 
     <style name="AppTheme.NoActionBar">
@@ -345,14 +346,11 @@
     </style>
 
     <style name="AlertDialogCustom" parent="Theme.AppCompat.Light.Dialog.Alert">
-        <!-- Used for the buttons -->
-        <item name="colorAccent">@color/colorAccent</item>
-        <!-- Used for the title and text -->
-        <item name="android:textColorPrimary">@color/txt_main</item>
-
-        <item name="android:background">@color/bg_body</item>
+        <item name="android:background">@color/bg_lighter</item>
         <item name="android:textColor">@color/txt_main</item>
+        <item name="android:colorPrimaryDark">@color/txt_main</item>
         <item name="android:textColorAlertDialogListItem">@color/txt_main</item>
+        <item name="android:textColorPrimary">@color/txt_main</item>
         <item name="android:textColorSecondary">@color/txt_main</item>
     </style>
 

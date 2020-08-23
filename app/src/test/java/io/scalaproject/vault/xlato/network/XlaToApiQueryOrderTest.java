@@ -59,13 +59,13 @@ public class XlaToApiQueryOrderTest {
 
     private MockWebServer mockWebServer;
 
-    private XlaToApi xmrToApi;
+    private XlaToApi xlaToApi;
 
     private OkHttpClient okHttpClient = new OkHttpClient();
     private Waiter waiter;
 
     @Mock
-    XlaToCallback<QueryOrderStatus> mockQueryXmrToCallback;
+    XlaToCallback<QueryOrderStatus> mockQueryxlaToCallback;
 
     @Before
     public void setUp() throws Exception {
@@ -76,7 +76,7 @@ public class XlaToApiQueryOrderTest {
 
         MockitoAnnotations.initMocks(this);
 
-        xmrToApi = new XlaToApiImpl(okHttpClient, mockWebServer.url("/"));
+        xlaToApi = new XlaToApiImpl(okHttpClient, mockWebServer.url("/"));
     }
 
     @After
@@ -88,7 +88,7 @@ public class XlaToApiQueryOrderTest {
     public void orderStatus_shouldBePostMethod()
             throws InterruptedException {
 
-        xmrToApi.queryOrderStatus("xmrto - efMsiU", mockQueryXmrToCallback);
+        xlaToApi.queryOrderStatus("xlato - efMsiU", mockQueryxlaToCallback);
 
         RecordedRequest request = mockWebServer.takeRequest();
         assertEquals("POST", request.getMethod());
@@ -98,7 +98,7 @@ public class XlaToApiQueryOrderTest {
     public void orderStatus_shouldBeContentTypeJson()
             throws InterruptedException {
 
-        xmrToApi.queryOrderStatus("xmrto - efMsiU", mockQueryXmrToCallback);
+        xlaToApi.queryOrderStatus("xlato - efMsiU", mockQueryxlaToCallback);
 
         RecordedRequest request = mockWebServer.takeRequest();
         assertEquals("application/json; charset=utf-8", request.getHeader("Content-Type"));
@@ -108,9 +108,9 @@ public class XlaToApiQueryOrderTest {
     public void orderStatus_shouldContainValidBody()
             throws InterruptedException {
 
-        final String validBody = "{\"uuid\":\"xmrto - efMsiU\"}";
+        final String validBody = "{\"uuid\":\"xlato - efMsiU\"}";
 
-        xmrToApi.queryOrderStatus("xmrto - efMsiU", mockQueryXmrToCallback);
+        xlaToApi.queryOrderStatus("xlato - efMsiU", mockQueryxlaToCallback);
 
         RecordedRequest request = mockWebServer.takeRequest();
         String body = request.getBody().readUtf8();
@@ -126,17 +126,17 @@ public class XlaToApiQueryOrderTest {
         final String state = "UNPAID";
         final double btcAmount = 0.1;
         final String btcDestAddress = "1FhnVJi2V1k4MqXm2nHoEbY5LV7FPai7bb";
-        final String uuid = "xmrto - efMsiU";
+        final String uuid = "xlato - efMsiU";
         final int btcNumConfirmationsBeforePurge = 144;
         final String createdAt = "2017-11-17T12:20:02Z";
         final String expiresAt = "2017-11-17T12:35:02Z";
         final int secondsTillTimeout = 882;
-        final double xmrAmountTotal = 6.464;
-        final double xmrAmountRemaining = 6.464;
-        final int xmrNumConfirmationsRemaining = -1;
-        final double xmrPriceBtc = 0.0154703;
-        final String xmrReceivingSubaddress = "83BGzCTthheE2KxNTBPnPJjJUthYPfDfCf3ENSVQcpga8RYSxNz9qCz1qp9MLye9euMjckGi11cRdeVGqsVqTLgH8w5fJ1D";
-        final int xmrRecommendedMixin = 5;
+        final double xlaAmountTotal = 6.464;
+        final double xlaAmountRemaining = 6.464;
+        final int xlaNumConfirmationsRemaining = -1;
+        final double xlaPriceBtc = 0.0154703;
+        final String xlaReceivingSubaddress = "83BGzCTthheE2KxNTBPnPJjJUthYPfDfCf3ENSVQcpga8RYSxNz9qCz1qp9MLye9euMjckGi11cRdeVGqsVqTLgH8w5fJ1D";
+        final int xlaRecommendedMixin = 5;
 
         MockResponse jsonMockResponse = new MockResponse().setBody(
                 createMockQueryOrderResponse(
@@ -148,15 +148,15 @@ public class XlaToApiQueryOrderTest {
                         createdAt,
                         expiresAt,
                         secondsTillTimeout,
-                        xmrAmountTotal,
-                        xmrAmountRemaining,
-                        xmrNumConfirmationsRemaining,
-                        xmrPriceBtc,
-                        xmrReceivingSubaddress,
-                        xmrRecommendedMixin));
+                        xlaAmountTotal,
+                        xlaAmountRemaining,
+                        xlaNumConfirmationsRemaining,
+                        xlaPriceBtc,
+                        xlaReceivingSubaddress,
+                        xlaRecommendedMixin));
         mockWebServer.enqueue(jsonMockResponse);
 
-        xmrToApi.queryOrderStatus(uuid, new XlaToCallback<QueryOrderStatus>() {
+        xlaToApi.queryOrderStatus(uuid, new XlaToCallback<QueryOrderStatus>() {
             @Override
             public void onSuccess(final QueryOrderStatus orderStatus) {
                 waiter.assertEquals(orderStatus.getState().toString(), state);
@@ -171,12 +171,12 @@ public class XlaToApiQueryOrderTest {
                     waiter.fail(ex);
                 }
                 waiter.assertEquals(orderStatus.getSecondsTillTimeout(), secondsTillTimeout);
-                waiter.assertEquals(orderStatus.getIncomingAmountTotal(), xmrAmountTotal);
-                waiter.assertEquals(orderStatus.getRemainingAmountIncoming(), xmrAmountRemaining);
-                waiter.assertEquals(orderStatus.getIncomingNumConfirmationsRemaining(), xmrNumConfirmationsRemaining);
-                waiter.assertEquals(orderStatus.getIncomingPriceBtc(), xmrPriceBtc);
-                waiter.assertEquals(orderStatus.getReceivingSubaddress(), xmrReceivingSubaddress);
-                waiter.assertEquals(orderStatus.getRecommendedMixin(), xmrRecommendedMixin);
+                waiter.assertEquals(orderStatus.getIncomingAmountTotal(), xlaAmountTotal);
+                waiter.assertEquals(orderStatus.getRemainingAmountIncoming(), xlaAmountRemaining);
+                waiter.assertEquals(orderStatus.getIncomingNumConfirmationsRemaining(), xlaNumConfirmationsRemaining);
+                waiter.assertEquals(orderStatus.getIncomingPriceBtc(), xlaPriceBtc);
+                waiter.assertEquals(orderStatus.getReceivingSubaddress(), xlaReceivingSubaddress);
+                waiter.assertEquals(orderStatus.getRecommendedMixin(), xlaRecommendedMixin);
                 waiter.resume();
             }
 
@@ -193,7 +193,7 @@ public class XlaToApiQueryOrderTest {
     public void orderStatus_wasNotSuccessfulShouldCallOnError()
             throws TimeoutException {
         mockWebServer.enqueue(new MockResponse().setResponseCode(500));
-        xmrToApi.queryOrderStatus("xmrto - efMsiU", new XlaToCallback<QueryOrderStatus>() {
+        xlaToApi.queryOrderStatus("xlato - efMsiU", new XlaToCallback<QueryOrderStatus>() {
             @Override
             public void onSuccess(final QueryOrderStatus orderStatus) {
                 waiter.fail();
@@ -217,7 +217,7 @@ public class XlaToApiQueryOrderTest {
         mockWebServer.enqueue(new MockResponse().
                 setResponseCode(404).
                 setBody("{\"error_msg\":\"requested order not found\",\"error\":\"XLATO-ERROR-006\"}"));
-        xmrToApi.queryOrderStatus("xmrto - efMsiU", new XlaToCallback<QueryOrderStatus>() {
+        xlaToApi.queryOrderStatus("xlato - efMsiU", new XlaToCallback<QueryOrderStatus>() {
             @Override
             public void onSuccess(final QueryOrderStatus orderStatus) {
                 waiter.fail();
@@ -227,11 +227,11 @@ public class XlaToApiQueryOrderTest {
             @Override
             public void onError(final Exception e) {
                 waiter.assertTrue(e instanceof XlaToException);
-                XlaToException xmrEx = (XlaToException) e;
-                waiter.assertTrue(xmrEx.getCode() == 404);
-                waiter.assertNotNull(xmrEx.getError());
-                waiter.assertEquals(xmrEx.getError().getErrorId(), XlaToError.Error.XLATO_ERROR_006);
-                waiter.assertEquals(xmrEx.getError().getErrorMsg(), "requested order not found");
+                XlaToException xlaEx = (XlaToException) e;
+                waiter.assertTrue(xlaEx.getCode() == 404);
+                waiter.assertNotNull(xlaEx.getError());
+                waiter.assertEquals(xlaEx.getError().getErrorId(), XlaToError.Error.XLATO_ERROR_006);
+                waiter.assertEquals(xlaEx.getError().getErrorMsg(), "requested order not found");
                 waiter.resume();
             }
 
@@ -248,27 +248,27 @@ public class XlaToApiQueryOrderTest {
             final String createdAt,
             final String expiresAt,
             final int secondsTillTimeout,
-            final double xmrAmountTotal,
-            final double xmrAmountRemaining,
-            final int xmrNumConfirmationsRemaining,
-            final double xmrPriceBtc,
-            final String xmrReceivingSubaddress,
-            final int xmrRecommendedMixin
+            final double xlaAmountTotal,
+            final double xlaAmountRemaining,
+            final int xlaNumConfirmationsRemaining,
+            final double xlaPriceBtc,
+            final String xlaReceivingSubaddress,
+            final int xlaRecommendedMixin
     ) {
         return "{\n" +
-                "    \"incoming_price_btc\": \"" + xmrPriceBtc + "\",\n" +
+                "    \"incoming_price_btc\": \"" + xlaPriceBtc + "\",\n" +
                 "    \"uuid\":\"" + uuid + "\",\n" +
                 "    \"state\":\"" + state + "\",\n" +
                 "    \"btc_amount\":\"" + btcAmount + "\",\n" +
                 "    \"btc_dest_address\":\"" + btcDestAddress + "\",\n" +
-                "    \"receiving_subaddress\":\"" + xmrReceivingSubaddress + "\",\n" +
+                "    \"receiving_subaddress\":\"" + xlaReceivingSubaddress + "\",\n" +
                 "    \"created_at\":\"" + createdAt + "\",\n" +
                 "    \"expires_at\":\"" + expiresAt + "\",\n" +
                 "    \"seconds_till_timeout\":\"" + secondsTillTimeout + "\",\n" +
-                "    \"incoming_amount_total\":\"" + xmrAmountTotal + "\",\n" +
-                "    \"remaining_amount_incoming\":\"" + xmrAmountRemaining + "\",\n" +
-                "    \"incoming_num_confirmations_remaining\":\"" + xmrNumConfirmationsRemaining + "\",\n" +
-                "    \"recommended_mixin\":\"" + xmrRecommendedMixin + "\",\n" +
+                "    \"incoming_amount_total\":\"" + xlaAmountTotal + "\",\n" +
+                "    \"remaining_amount_incoming\":\"" + xlaAmountRemaining + "\",\n" +
+                "    \"incoming_num_confirmations_remaining\":\"" + xlaNumConfirmationsRemaining + "\",\n" +
+                "    \"recommended_mixin\":\"" + xlaRecommendedMixin + "\",\n" +
                 "    \"btc_num_confirmations_threshold\":\"" + btcNumConfirmationsBeforePurge + "\",\n"
                 + "}";
     }

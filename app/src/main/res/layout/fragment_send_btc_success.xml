@@ -109,7 +109,7 @@
             tools:text="4AdkPJoxn7JCvAby9szgnt93MSEwdnxdhaASxbTBm6x5dCwmsDep2UYN4FhStDn5i11nsJbpU7oj59ahg8gXb1Mg3viqCuk" />
 
         <androidx.cardview.widget.CardView xmlns:card_view="http://schemas.android.com/apk/res-auto"
-            android:id="@+id/cvXmrTo"
+            android:id="@+id/cvxlaTo"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginBottom="16dp"
@@ -129,13 +129,13 @@
                     android:orientation="vertical">
 
                     <FrameLayout
-                        android:id="@+id/flXmrtoProgress"
+                        android:id="@+id/flxlatoProgress"
                         android:layout_width="72dp"
                         android:layout_height="wrap_content"
                         android:layout_centerInParent="true">
 
                         <ProgressBar
-                            android:id="@+id/pbXmrto"
+                            android:id="@+id/pbxlato"
                             android:layout_width="match_parent"
                             android:layout_height="72dp"
                             android:layout_gravity="center"
@@ -144,15 +144,15 @@
                             android:indeterminateTint="@color/scalaFab" />
 
                         <ImageView
-                            android:id="@+id/ivXmrToStatus"
+                            android:id="@+id/ivxlaToStatus"
                             android:layout_width="24dp"
                             android:layout_height="24dp"
                             android:layout_gravity="center"
-                            android:src="@drawable/ic_pending_orange_24dp"
+                            android:src="@drawable/ic_pending_24dp"
                             android:visibility="visible" />
 
                         <ImageView
-                            android:id="@+id/ivXmrToStatusBig"
+                            android:id="@+id/ivxlaToStatusBig"
                             android:layout_width="72dp"
                             android:layout_height="72dp"
                             android:layout_gravity="center"
@@ -169,13 +169,13 @@
                     </FrameLayout>
 
                     <TextView
-                        android:id="@+id/tvXmrToStatus"
+                        android:id="@+id/tvxlaToStatus"
                         style="@style/ScalaText"
                         android:layout_width="72dp"
                         android:layout_height="wrap_content"
-                        android:layout_below="@+id/flXmrtoProgress"
+                        android:layout_below="@+id/flxlatoProgress"
                         android:gravity="center"
-                        android:text="@string/info_send_xmrto_query"
+                        android:text="@string/info_send_xlato_query"
                         android:textSize="10sp"
                         android:textStyle="bold"
                         tools:text="Confirmation Pending" />
@@ -192,12 +192,12 @@
                         style="@style/ScalaText"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="@string/info_send_xmrto_success_order_label"
+                        android:text="@string/info_send_xlato_success_order_label"
                         android:textAllCaps="true"
                         android:textStyle="bold" />
 
                     <TextView
-                        android:id="@+id/tvXmrToAmount"
+                        android:id="@+id/tvxlaToAmount"
                         style="@style/ScalaText.Balance.Success"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
@@ -206,7 +206,7 @@
                         tools:text="0.001 BTC" />
 
                     <TextView
-                        android:id="@+id/tvTxXmrToKey"
+                        android:id="@+id/tvTxxlaToKey"
                         style="@style/ScalaText"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
@@ -229,7 +229,7 @@
                         android:drawablePadding="4dp"
                         android:drawableStart="@drawable/ic_info_outline_gray_24dp"
                         android:gravity="center"
-                        android:text="@string/label_send_btc_xmrto_info"
+                        android:text="@string/label_send_btc_xlato_info"
                         android:textSize="12sp" />
                 </LinearLayout>
             </LinearLayout>

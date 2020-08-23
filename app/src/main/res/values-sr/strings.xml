@@ -31,29 +31,29 @@
 
     <string name="label_receive_info_gen_qr_code">Takni za QR kod</string>
 
-    <string name="info_xmrto_enabled">Omogućeno BTC plaćanje, tapni za više info.</string>
+    <string name="info_xlato_enabled">Omogućeno BTC plaćanje, tapni za više info.</string>
     <string name="info_ledger_enabled">Knjiga računa omogućena, tapni za više info.</string>
 
-    <string name="info_xmrto"><![CDATA[
+    <string name="info_xlato"><![CDATA[
         <b>Ubacio/la si Bitkoin adresu.</b><br/>
         <i>You&apos;će poslati XLA a primalac će dobiti BTC koristeći <b>XLA.TO</b> servis.</i>
     ]]></string>
 
-    <string name="info_send_xmrto_success_order_label">XLA.TO Nalog</string>
+    <string name="info_send_xlato_success_order_label">XLA.TO Nalog</string>
 
-    <string name="info_send_xmrto_success_btc">%1$s BTC</string>
+    <string name="info_send_xlato_success_btc">%1$s BTC</string>
 
-    <string name="info_send_xmrto_paid">Potvrda u toku</string>
-    <string name="info_send_xmrto_unpaid">Plaćanje u toku</string>
-    <string name="info_send_xmrto_error">XLA.TO Greška (%1$s)</string>
-    <string name="info_send_xmrto_sent">BTC Poslato!</string>
-    <string name="info_send_xmrto_query">Ispitivanje &#8230;</string>
+    <string name="info_send_xlato_paid">Potvrda u toku</string>
+    <string name="info_send_xlato_unpaid">Plaćanje u toku</string>
+    <string name="info_send_xlato_error">XLA.TO Greška (%1$s)</string>
+    <string name="info_send_xlato_sent">BTC Poslato!</string>
+    <string name="info_send_xlato_query">Ispitivanje &#8230;</string>
 
-    <string name="info_send_xmrto_parms"><![CDATA[
+    <string name="info_send_xlato_parms"><![CDATA[
         <b>Možeš poslati %1$s &#8212; %2$s BTC</b>.<br/>
         <i><b>XLA.TO</b> daje ti devizni kurs od <b>%3$s BTC</b> <u>trenutno</u></i>.
     ]]></string>
-    <string name="info_send_xmrto_zeroconf"><![CDATA[
+    <string name="info_send_xlato_zeroconf"><![CDATA[
         <i>Sume do <b>%1$s BTC</b> biće poslate <u>instantly</u>!</i>
     ]]></string>
 
@@ -62,14 +62,14 @@
     <string name="info_paymentid_integrated">&#x2714; ID plaćanja integrisan</string>
     <string name="info_prepare_tx">Priprema tvoje transakcije</string>
 
-    <string name="label_send_progress_xmrto_create">Kreiranje XLA.TO Nalog</string>
-    <string name="label_send_progress_xmrto_query">Ispitivanje XLA.TO Nalog</string>
+    <string name="label_send_progress_xlato_create">Kreiranje XLA.TO Nalog</string>
+    <string name="label_send_progress_xlato_query">Ispitivanje XLA.TO Nalog</string>
     <string name="label_send_progress_create_tx">Pripremanje Scala transakcije</string>
 
     <string name="label_send_progress_queryparms">Ispitivanje XLA.TO parametara</string>
 
-    <string name="label_generic_xmrto_error">XLA.TO GREŠKA</string>
-    <string name="text_generic_xmrto_error">Kod: %1$d</string>
+    <string name="label_generic_xlato_error">XLA.TO GREŠKA</string>
+    <string name="text_generic_xlato_error">Kod: %1$d</string>
 
     <string name="text_retry">Takni za novi pokušaj </string>
     <string name="text_noretry_scala">Sada se zaglavismo!</string>
@@ -78,9 +78,9 @@
     <string name="text_send_btc_amount">%1$s BTC = %2$s XLA</string>
     <string name="text_send_btc_rate">(Rate: %1$s BTC/XLA)</string>
 
-    <string name="label_send_btc_xmrto_info">Poseti xmr.to za bekap &amp; praćenje</string>
-    <string name="label_send_btc_xmrto_key_lb">Tajna šifra\nXLA.TO</string>
-    <string name="label_send_btc_xmrto_key">XLA.TO Tajna šifra</string>
+    <string name="label_send_btc_xlato_info">Poseti xla.to za bekap &amp; praćenje</string>
+    <string name="label_send_btc_xlato_key_lb">Tajna šifra\nXLA.TO</string>
+    <string name="label_send_btc_xlato_key">XLA.TO Tajna šifra</string>
     <string name="label_send_btc_address">Odredište BTC adrese</string>
     <string name="label_send_btc_amount">Suma</string>
 
@@ -118,7 +118,7 @@
 
     <string name="status_transaction_failed">Transakcija neuspela: %1$s</string>
 
-    <string name="send_xmrto_timeout">Predugo si čekao prijatelju!</string>
+    <string name="send_xlato_timeout">Predugo si čekao prijatelju!</string>
 
     <string name="service_busy">Još sam zauzet sa tvojim poslednjim novčanikom &#8230;</string>
 
@@ -142,7 +142,7 @@
     <string name="label_wallet_receive">Primljeno</string>
     <string name="label_wallet_send">Daj</string>
 
-    <string name="xmr_unconfirmed_amount">+ %1$s XLA nepotvrđeno</string>
+    <string name="xla_unconfirmed_amount">%1$s XLA nepotvrđeno</string>
 
     <string name="service_description">monerujo Servis</string>
 
@@ -156,9 +156,9 @@
 
     <string name="label_copy_viewkey">Vidna šifra</string>
     <string name="label_copy_address">Javna adresa</string>
-    <string name="label_copy_xmrtokey">XLA.TO šifra</string>
+    <string name="label_copy_xlatokey">XLA.TO šifra</string>
     <string name="message_copy_viewkey">Vidna šifra kopirana u klipbord!</string>
-    <string name="message_copy_xmrtokey">XLA.TO šifra kopirana u klipbord!</string>
+    <string name="message_copy_xlatokey">XLA.TO šifra kopirana u klipbord!</string>
     <string name="message_copy_address">Adresa novčanika kopirna u klipbord!</string>
     <string name="message_copy_txid">ID transakcije kopiran u klipord!</string>
     <string name="message_nocopy">Kopiranje je onemogućeno iz sigurnosnih razloga!</string>
@@ -214,7 +214,7 @@
     <string name="generate_check_address">Unesi validnu adresu</string>
     <string name="generate_check_mnemonic">Unesi tvoje seme od 25 reči</string>
 
-    <string name="send_amount_btc_xmr">%1$s (indikativno)</string>
+    <string name="send_amount_btc_xla">%1$s (indikativno)</string>
 
     <string name="send_paymentid_hint">ID plaćanja (opciono)</string>
     <string name="send_amount_hint">0.00</string>
@@ -251,8 +251,8 @@
     <string name="tx_list_fee">- naknada %1$s</string>
     <string name="tx_list_amount_failed">(%1$s)</string>
     <string name="tx_list_failed_text">neuspelo</string>
-    <string name="tx_list_amount_negative">- %1$s</string>
-    <string name="tx_list_amount_positive">+ %1$s</string>
+    <string name="tx_list_amount_negative">%1$s</string>
+    <string name="tx_list_amount_positive">%1$s</string>
 
     <string name="tx_timestamp">Vremenski žig</string>
     <string name="tx_id">TX ID</string>
@@ -369,10 +369,10 @@
     <string name="send_address_bip70">rešavanje plaćanja URI &#x2714;</string>
     <string name="send_address_hint">Primalac</string>
 
-    <string name="xmrto_error_001">XLA.TO van mreže - pokušajte kasnije ponovo</string>
-    <string name="xmrto_error_004">BTC iznos izvan granica</string>
-    <string name="xmrto_error_010">Nevalidan ili neažuriran URL plaćanja</string>
-    <string name="xmrto_error_012">Previše zahteva</string>
+    <string name="xlato_error_001">XLA.TO van mreže - pokušajte kasnije ponovo</string>
+    <string name="xlato_error_004">BTC iznos izvan granica</string>
+    <string name="xlato_error_010">Nevalidan ili neažuriran URL plaćanja</string>
+    <string name="xlato_error_012">Previše zahteva</string>
 
     <string name="street_sweep_amount">SVE!</string>
 

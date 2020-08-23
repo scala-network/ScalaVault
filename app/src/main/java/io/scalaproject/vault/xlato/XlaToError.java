@@ -96,15 +96,15 @@ public class XlaToError {
     public int getErrorMsgId() {
         switch (errorId) {
             case XLATO_ERROR_001:
-                return R.string.xmrto_error_001;
+                return R.string.xlato_error_001;
             case XLATO_ERROR_004:
-                return R.string.xmrto_error_004;
+                return R.string.xlato_error_004;
             case XLATO_ERROR_010:
-                return R.string.xmrto_error_010;
+                return R.string.xlato_error_010;
             case XLATO_ERROR_012:
-                return R.string.xmrto_error_012;
+                return R.string.xlato_error_012;
             default:
-                return R.string.xmrto_error;
+                return R.string.xlato_error;
         }
     }
 

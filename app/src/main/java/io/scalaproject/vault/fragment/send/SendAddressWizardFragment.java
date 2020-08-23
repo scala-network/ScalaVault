@@ -137,7 +137,7 @@ public class SendAddressWizardFragment extends SendWizardFragment {
                         // maybe a bip72 or 70 URI
                         final String bip70 = PaymentProtocolHelper.getBip70(enteredAddress);
                         if (bip70 != null) {
-                            // looks good - resolve through xmr.to
+                            // looks good - resolve through xla.to
                             processBip70(bip70);
                         }
                     }
