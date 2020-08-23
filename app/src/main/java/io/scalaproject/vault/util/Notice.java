@@ -51,13 +51,14 @@ public class Notice {
         synchronized (Notice.class) {
             if (notices != null) return;
             notices = new ArrayList<>();
+            /*
             notices.add(
                     new Notice(NOTICE_SHOW_NODES,
                             R.string.info_nodes_enabled,
                             R.string.help_node,
                             1)
             );
-            /*
+
             notices.add(
                     new Notice(NOTICE_SHOW_XLATO_ENABLED_SEND,
                             R.string.info_xlato_enabled,
