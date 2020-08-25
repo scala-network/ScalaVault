@@ -1,22 +1,25 @@
+
 # Scala Vault
 
-A secure and ligthweight wallet to store your Scala coins on any Android device.
+A secure and light weight wallet to store your Scala coins on any Android device.
+
+<img src="https://i.imgur.com/5LWw5p9.jpg" alt="" data-canonical-src="https://i.imgur.com/5LWw5p9.jpg" width="200" height="400" /> <img src="https://i.imgur.com/hW0NBhq.jpg" alt="" data-canonical-src="https://i.imgur.com/hW0NBhq.jpg" width="200" height="400" /> <img src="https://i.imgur.com/hs6l68l.jpg" alt="" data-canonical-src="https://i.imgur.com/hs6l68l.jpg" width="200" height="400" />
+
 
 ## Features		
-TBD
-
-## Donations
-Donations setting has been set to 0% in the XLArig lib embedded within the application.
-* XLA: `SEiTBcLGpfm3uj5b5RaZDGSUoAGnLCyG5aJjAwko67jqRwWEH26NFPd26EUpdL1zh4RTmTdRWLz8WCmk5F4umYaFByMtJT6RLjD6vzApQJWfi`
-* BTC: `1XTLY5LqdBXRW6hcHtnuMU7c68mAyW6qm`
-* ETH: `0x133a15dF7177823Dd407ca87A190bbE4585a379e`
+* Multiple Wallets
+* Subaddress Support
+* Stealth Mode
+* QR Code Scanning
+* Automatic Price Conversion to other Currencies
+* Easy to use UI
 
 ## Credits
-* Forked from [monerujo](https://github.com/m2049r/xlawallet)
+* Forked from [monerujo](https://github.com/m2049r/xmrwallet)
 
 ## Contacts
 * [Website](https://scalaproject.io/)
-* hello@scalaproject.io
+* [hello@scalaproject.io](mailto:hello@scalaproject.io)
 * [Discord](https://discord.gg/djAFVvy)
 * [Telegram](https://t.me/scalaofficial)
 * [Twitter](https://twitter.com/scalahq)
@@ -24,4 +27,4 @@ Donations setting has been set to 0% in the XLArig lib embedded within the appli
 
 # License
 
-monerujo is licensed as Apache, thus this derivative work also is.
+See [LICENSE](https://github.com/scala-network/ScalaVault/blob/master/LICENSE).

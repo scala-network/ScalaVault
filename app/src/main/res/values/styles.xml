@@ -350,13 +350,19 @@
         <item name="android:textSize">16sp</item>
     </style>
 
-    <style name="AlertDialogCustom" parent="Theme.AppCompat.Light.Dialog.Alert">
+
+    <style name="AlertDialogCustom" parent="ThemeOverlay.MaterialComponents.MaterialAlertDialog">
         <item name="android:background">@color/bg_lighter</item>
-        <item name="android:textColor">@color/txt_main</item>
-        <item name="android:colorPrimaryDark">@color/txt_main</item>
-        <item name="android:textColorAlertDialogListItem">@color/txt_main</item>
-        <item name="android:textColorPrimary">@color/txt_main</item>
-        <item name="android:textColorSecondary">@color/txt_main</item>
+        <item name="buttonBarNegativeButtonStyle">@style/NegativeButtonStyle</item>
+        <item name="buttonBarPositiveButtonStyle">@style/PositiveButtonStyle</item>
+    </style>
+
+    <style name="NegativeButtonStyle" parent="Widget.MaterialComponents.Button.TextButton.Dialog">
+        <item name="android:textColor">@color/c_white</item>
+    </style>
+
+    <style name="PositiveButtonStyle" parent="Widget.MaterialComponents.Button.TextButton.Dialog">
+        <item name="android:textColor">@color/c_white</item>
     </style>
 
 </resources>
