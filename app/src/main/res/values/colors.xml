@@ -8,6 +8,7 @@
     <color name="c_blue">#6190ff</color>
     <color name="c_light_blue">#729cff</color>
     <color name="c_green">#78c2a4</color>
+    <color name="c_green_bright">#2ee584</color>
     <color name="c_red">#e85238</color>
     <color name="c_yellow">#d1e838</color>
     <color name="c_purple">#ca2c92</color>
@@ -43,7 +44,7 @@
 
     <!--Legacy Colors-->
 
-    <color name="tx_green">#2a9c6d</color>
+    <color name="tx_green">#2ee584</color>
     <color name="tx_red">#e85238</color>
     <color name="tx_pending">@color/scalaFab</color>
     <color name="tx_failed">@color/scalaBlack</color>

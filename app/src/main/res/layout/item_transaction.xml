@@ -23,13 +23,23 @@
             android:layout_weight="9"
             android:orientation="horizontal">
 
+            <LinearLayout
+                android:layout_width="32dp"
+                android:layout_height="32dp"
+                android:layout_gravity="center"
+                android:gravity="center"
+                android:orientation="horizontal"
+                android:background="@drawable/rounded_grey">
+
             <ImageView
                 android:id="@+id/ivTxType"
-                android:layout_width="16dp"
-                android:layout_height="16dp"
+                android:layout_width="24dp"
+                android:layout_height="24dp"
                 android:layout_gravity="center"
                 android:src="@drawable/ic_tx_in"
                 android:visibility="visible" />
+
+            </LinearLayout>
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -39,15 +49,16 @@
 
                 <TextView
                     android:id="@+id/tx_amount"
-                    style="@style/ScalaText.ItemTitle"
+                    style="@style/ScalaText.PosAmount"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:textColor="@color/c_green"
                     android:gravity="end"
                     tools:text="+ 999.99" />
 
                 <TextView
                     android:id="@+id/tx_fee"
-                    style="@style/ScalaText.ItemSubtitle"
+                    style="@style/ScalaText.PosFee"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:gravity="end"

@@ -124,6 +124,11 @@
         <item name="android:textStyle">normal</item>
     </style>
 
+    <style name="ScalaText.PaymentID">
+        <item name="android:textSize">14sp</item>
+        <item name="android:textColor">@color/c_white</item>
+        <item name="android:textStyle">bold</item>
+    </style>
 
     <style name="ScalaText.PosAmount">
         <item name="android:textSize">14sp</item>

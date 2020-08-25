@@ -149,10 +149,12 @@ public class TransactionInfoAdapter extends RecyclerView.Adapter<TransactionInfo
             String displayAmount = Helper.getDisplayAmount(infoItem.amount, Helper.DISPLAY_DIGITS_INFO);
             if (infoItem.direction == TransactionInfo.Direction.Direction_Out) {
                 ivTxType.setImageDrawable(itemView.getResources().getDrawable(R.drawable.ic_tx_out));
-                tvAmount.setText(context.getString(R.string.tx_list_amount_negative, displayAmount));
+                tvAmount.setText("-" + context.getString(R.string.tx_list_amount_negative, displayAmount));
+                tvAmount.setTextColor(context.getResources().getColor(R.color.c_white));
             } else {
                 ivTxType.setImageDrawable(itemView.getResources().getDrawable(R.drawable.ic_tx_in));
-                tvAmount.setText(context.getString(R.string.tx_list_amount_positive, displayAmount));
+                tvAmount.setText("+" + context.getString(R.string.tx_list_amount_positive, displayAmount));
+                tvAmount.setTextColor(context.getResources().getColor(R.color.c_green));
             }
 
             if ((infoItem.fee > 0)) {
