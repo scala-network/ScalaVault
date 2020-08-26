@@ -717,6 +717,8 @@ public class GenerateFragment extends Fragment {
             ledgerDialog.getWindow().setFlags(WindowManager.LayoutParams.FLAG_SECURE, WindowManager.LayoutParams.FLAG_SECURE);
         }
 
+        ledgerDialog.show();
+        
         LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(
                 LinearLayout.LayoutParams.WRAP_CONTENT,
                 LinearLayout.LayoutParams.WRAP_CONTENT
@@ -725,7 +727,5 @@ public class GenerateFragment extends Fragment {
 
         Button posButton = ((AlertDialog) ledgerDialog).getButton(DialogInterface.BUTTON_POSITIVE);
         posButton.setLayoutParams(params);
-
-        ledgerDialog.show();
     }
 }

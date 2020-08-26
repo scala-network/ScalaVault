@@ -413,6 +413,16 @@ public class NodeFragment extends Fragment
 
         private void show() {
             editDialog.show();
+
+            LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(
+                    LinearLayout.LayoutParams.WRAP_CONTENT,
+                    LinearLayout.LayoutParams.WRAP_CONTENT
+            );
+            params.setMargins(20,0,0,0);
+
+            Button posButton = editDialog.getButton(DialogInterface.BUTTON_POSITIVE);
+            if(posButton != null)
+                posButton.setLayoutParams(params);
         }
 
         private void test() {
@@ -506,16 +516,6 @@ public class NodeFragment extends Fragment
                     });
                 }
             });
-
-            LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(
-                    LinearLayout.LayoutParams.WRAP_CONTENT,
-                    LinearLayout.LayoutParams.WRAP_CONTENT
-            );
-            params.setMargins(20,0,0,0);
-
-            Button posButton = editDialog.getButton(DialogInterface.BUTTON_POSITIVE);
-            if(posButton != null)
-                posButton.setLayoutParams(params);
 
             if (Helper.preventScreenshot()) {
                 editDialog.getWindow().setFlags(WindowManager.LayoutParams.FLAG_SECURE, WindowManager.LayoutParams.FLAG_SECURE);

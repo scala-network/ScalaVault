@@ -513,16 +513,17 @@ public class LoginActivity extends BaseActivity
             }
         });
 
+        dialog.show();
+
         LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(
                 LinearLayout.LayoutParams.WRAP_CONTENT,
                 LinearLayout.LayoutParams.WRAP_CONTENT
         );
         params.setMargins(20,0,0,0);
 
-        Button posButton = ((AlertDialog) dialog).getButton(DialogInterface.BUTTON_POSITIVE);
-        posButton.setLayoutParams(params);
-
-        dialog.show();
+        Button posButton = dialog.getButton(DialogInterface.BUTTON_POSITIVE);
+        if(posButton != null)
+            posButton.setLayoutParams(params);
     }
 
     private class AsyncBackup extends AsyncTask<String, Void, Boolean> {
