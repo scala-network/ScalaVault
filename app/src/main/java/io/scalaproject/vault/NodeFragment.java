@@ -88,7 +88,7 @@ public class NodeFragment extends Fragment
 
         void setSubtitle(String title);
 
-        Set<NodeInfo> getAllNodes();
+        Set<NodeInfo> getFavoriteNodes();
 
         void setFavouriteNodes(Set<NodeInfo> favouriteNodes);
     }
@@ -173,7 +173,7 @@ public class NodeFragment extends Fragment
 
         Helper.hideKeyboard(getActivity());
 
-        nodeList = new HashSet<>(activityCallback.getAllNodes());
+        nodeList = new HashSet<>(activityCallback.getFavoriteNodes());
         nodesAdapter.setNodes(nodeList);
 
         ViewGroup llNotice = view.findViewById(R.id.llNotice);

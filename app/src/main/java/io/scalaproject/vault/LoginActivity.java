@@ -96,7 +96,7 @@ public class LoginActivity extends BaseActivity
     private static final String NODES_PREFS_NAME = "nodes";
     private static final String PREF_DAEMON_MAINNET = "daemon_mainnet";
     private static final String DEFAULT_DAEMON = "nodes.scalapay.io:11812";
-    private static final String DEFAULT_DAEMONLIST_MAINNET = "nodes.scalapay.io:11812;scalanode.com:20189;xlanode.com:20189;mine.scalaproject.io:8000;scala.ethospool.org:11812;daemon.pool.gntl.co.uk:11812";
+    private static final String DEFAULT_DAEMONLIST_MAINNET = "scalanode.com:20189;xlanode.com:20189;mine.scalaproject.io:8000;scala.ethospool.org:11812;daemon.pool.gntl.co.uk:11812";
 
     private NodeInfo node = null;
 
@@ -163,6 +163,10 @@ public class LoginActivity extends BaseActivity
         });
     }
 
+    public Set<NodeInfo> getFavoriteNodes() {
+        return favouriteNodes;
+    }
+
     public Set<NodeInfo> getAllNodes() {
         StrictMode.ThreadPolicy currentPolicy = StrictMode.getThreadPolicy();
         StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitNetwork().build();
@@ -186,6 +190,7 @@ public class LoginActivity extends BaseActivity
             if (nodeEntry != null) // just in case, ignore possible future errors
                 addFavourite((String) nodeEntry.getValue());
         }
+
         if (storedNodes.isEmpty()) { // try to load legacy list & remove it (i.e. migrate the data once)
             SharedPreferences sharedPref = getPreferences(Context.MODE_PRIVATE);
             switch (WalletManager.getInstance().getNetworkType()) {
@@ -202,6 +207,9 @@ public class LoginActivity extends BaseActivity
                     throw new IllegalStateException("unsupported net " + WalletManager.getInstance().getNetworkType());
             }
         }
+
+        // Always add the default node
+        addFavourite(DEFAULT_DAEMON);
     }
 
     private void saveFavourites() {
