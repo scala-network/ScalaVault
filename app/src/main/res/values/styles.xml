@@ -126,8 +126,8 @@
 
     <style name="ScalaText.PaymentID">
         <item name="android:textSize">14sp</item>
-        <item name="android:textColor">@color/c_white</item>
-        <item name="android:textStyle">bold</item>
+        <item name="android:textColor">@color/txt_main</item>
+        <item name="android:textStyle">normal</item>
     </style>
 
     <style name="ScalaText.PosAmount">
@@ -139,7 +139,7 @@
     <style name="ScalaText.PosFee">
         <item name="android:textSize">12sp</item>
         <item name="android:textColor">@color/txt_main</item>
-        <item name="android:textStyle">normal</item>
+        <item name="android:textStyle">italic</item>
     </style>
 
     <style name="ScalaText.PosNote">

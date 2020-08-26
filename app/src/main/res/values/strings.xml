@@ -352,6 +352,8 @@
     <string name="menu_language">Language</string>
     <string name="language_system_default">Use System Language</string>
 
+    <string name="menu_nodes">Remote Nodes</string>
+
     <string name="fab_restore_ledger">Restore from Ledger Nano S</string>
 
     <string name="progress_ledger_progress">Communicating with Ledger</string>

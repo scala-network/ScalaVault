@@ -211,7 +211,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginStart="5dp"
                     android:layout_gravity="center_vertical"
-                    android:text="Stealth address" />
+                    android:text="Primary address" />
 
                 <Space
                     android:layout_width="wrap_content"

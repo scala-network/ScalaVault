@@ -5,15 +5,16 @@
     android:layout_width="fill_parent"
     android:layout_height="wrap_content"
     android:layout_gravity="center"
-    android:layout_margin="4dp"
-    card_view:cardCornerRadius="7.5dp"
+    android:layout_marginTop="4dp"
+    android:layout_marginBottom="4dp"
+    card_view:cardCornerRadius="5dp"
     card_view:cardElevation="4dp">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        android:background="@color/bg_lighter"
+        android:background="@drawable/corner_radius_lighter_small"
         android:padding="8dp">
 
         <LinearLayout
@@ -52,7 +53,7 @@
                     style="@style/ScalaText.PosAmount"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:textColor="@color/c_green"
+                    android:textColor="@color/c_green_bright"
                     android:gravity="end"
                     tools:text="+ 999.99" />
 
@@ -68,7 +69,7 @@
 
         <TextView
             android:id="@+id/tx_paymentid"
-            style="@style/ScalaText.PosNote"
+            style="@style/ScalaText.PaymentID"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_gravity="center"

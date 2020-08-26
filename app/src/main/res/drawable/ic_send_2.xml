@@ -6,6 +6,6 @@
     android:viewportHeight="24">
 
     <path
-        android:fillColor="@color/bg_blue"
+        android:fillColor="@color/btn_icon_default"
         android:pathData="M2.01,21 L23,12 L2.01,3 L2,10 L17,12 L2,14 Z" />
 </vector>

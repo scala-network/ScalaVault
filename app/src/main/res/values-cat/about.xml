@@ -7,11 +7,9 @@
     <string name="credits_text"><![CDATA[
         <b>Credits</b>
         <br/>
-        Monerujo Team
-        Scala Project Team
+        Scala Team
         <br/><br/>
-        <a href="https://monerujo.io/">scalaproject.io</a>
-        <a href="https://monerujo.io/">monerujo.io</a>
+        <a href="https://scalaproject.io/">scalaproject.io</a>
         ]]></string>
 
     <string name="privacy_policy"><![CDATA[

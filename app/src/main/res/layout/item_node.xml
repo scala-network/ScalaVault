@@ -5,7 +5,9 @@
     android:layout_height="wrap_content"
     android:layout_marginStart="8dp"
     android:layout_marginEnd="8dp"
-    android:background="@drawable/selector_login">
+    android:layout_marginTop="4dp"
+    android:layout_marginBottom="4dp"
+    android:background="@drawable/corner_radius_lighter">
 
     <ImageButton
         android:id="@+id/ibBookmark"
@@ -37,7 +39,7 @@
             style="@style/ScalaText.ItemTitle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            tools:text="scala-v9.monerujo.io" />
+            tools:text="nodes.scalapay.io" />
 
         <TextView
             android:id="@+id/tvAddress"

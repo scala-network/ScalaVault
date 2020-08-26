@@ -39,6 +39,8 @@ import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
+
+import android.os.StrictMode;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
@@ -92,9 +94,9 @@ public class LoginActivity extends BaseActivity
     private static final String GENERATE_STACK = "gen";
 
     private static final String NODES_PREFS_NAME = "nodes";
-    private static final String PREF_DAEMON_STAGENET = "daemon_stagenet";
     private static final String PREF_DAEMON_MAINNET = "daemon_mainnet";
-    private static final String DEFAULT_DAEMONLIST_MAINNET = "scalanode.com:20189;xlanode.com:20189;mine.scalaproject.io:8000;scala.ethospool.org:11812;daemon.pool.gntl.co.uk:11812";
+    private static final String DEFAULT_DAEMON = "nodes.scalapay.io:11812";
+    private static final String DEFAULT_DAEMONLIST_MAINNET = "nodes.scalapay.io:11812;scalanode.com:20189;xlanode.com:20189;mine.scalaproject.io:8000;scala.ethospool.org:11812;daemon.pool.gntl.co.uk:11812";
 
     private NodeInfo node = null;
 
@@ -113,9 +115,18 @@ public class LoginActivity extends BaseActivity
         WalletManager.getInstance().setDaemon(node);
     }
 
-    @Override
     public Set<NodeInfo> getFavouriteNodes() {
         return favouriteNodes;
+    }
+
+    public NodeInfo getDefaultNode() {
+        NodeInfo nodeInfo = NodeInfo.fromString(DEFAULT_DAEMON);
+        if (nodeInfo != null) {
+            nodeInfo.setFavourite(true);
+        } else
+            Timber.w("Default nodeString invalid: %s", DEFAULT_DAEMON);
+
+        return nodeInfo;
     }
 
     @Override
@@ -152,6 +163,21 @@ public class LoginActivity extends BaseActivity
         });
     }
 
+    public Set<NodeInfo> getAllNodes() {
+        StrictMode.ThreadPolicy currentPolicy = StrictMode.getThreadPolicy();
+        StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitNetwork().build();
+        StrictMode.setThreadPolicy(policy);
+
+        try {
+            //loadFavourites();
+            loadLegacyList(DEFAULT_DAEMONLIST_MAINNET);
+        } finally {
+            StrictMode.setThreadPolicy(currentPolicy);
+        }
+
+        return getFavouriteNodes();
+    }
+
     private void loadFavourites() {
         Timber.d("loadFavourites");
         favouriteNodes.clear();
@@ -169,8 +195,8 @@ public class LoginActivity extends BaseActivity
                     sharedPref.edit().remove(PREF_DAEMON_MAINNET).apply();
                     break;
                 case NetworkType_Stagenet:
-                    loadLegacyList(sharedPref.getString(PREF_DAEMON_STAGENET, null));
-                    sharedPref.edit().remove(PREF_DAEMON_STAGENET).apply();
+                    /*loadLegacyList(sharedPref.getString(PREF_DAEMON_STAGENET, null));
+                    sharedPref.edit().remove(PREF_DAEMON_STAGENET).apply();*/
                     break;
                 default:
                     throw new IllegalStateException("unsupported net " + WalletManager.getInstance().getNetworkType());
@@ -195,7 +221,7 @@ public class LoginActivity extends BaseActivity
 
     private void addFavourite(String nodeString) {
         NodeInfo nodeInfo = NodeInfo.fromString(nodeString);
-        if (nodeInfo != null) {
+        if (nodeInfo != null && !favouriteNodes.contains(nodeInfo)) {
             nodeInfo.setFavourite(true);
             favouriteNodes.add(nodeInfo);
         } else
@@ -673,8 +699,8 @@ public class LoginActivity extends BaseActivity
                 toolbar.setBackgroundResource(R.color.colorPrimaryDark);
                 break;
             case NetworkType_Stagenet:
-                toolbar.setSubtitle(getString(R.string.connect_stagenet));
-                toolbar.setBackgroundResource(R.color.colorPrimaryDark);
+                /*toolbar.setSubtitle(getString(R.string.connect_stagenet));
+                toolbar.setBackgroundResource(R.color.colorPrimaryDark);*/
                 break;
             default:
                 throw new IllegalStateException("NetworkType unknown: " + net);
@@ -1243,6 +1269,9 @@ public class LoginActivity extends BaseActivity
                 return true;
             case R.id.action_language:
                 onChangeLocale();
+                return true;
+            case R.id.action_nodes:
+                onNodePrefs();
                 return true;
             case R.id.action_ledger_seed:
                 Fragment f = getSupportFragmentManager().findFragmentById(R.id.fragment_container);

@@ -108,6 +108,8 @@ public class LoginFragment extends Fragment implements WalletInfoAdapter.OnInter
 
         NodeInfo getNode();
 
+        NodeInfo getDefaultNode();
+
         Set<NodeInfo> getFavouriteNodes();
 
         boolean hasLedger();
@@ -441,6 +443,19 @@ public class LoginFragment extends Fragment implements WalletInfoAdapter.OnInter
 
         @Override
         protected NodeInfo doInBackground(Void... params) {
+            // Always try to use Scala nodes proxy first
+            NodeInfo defaultNode = activityCallback.getDefaultNode();
+            Timber.d("testing default node %s", defaultNode.getName());
+
+            if(defaultNode != null)
+                defaultNode.testRpcService();
+
+            if(defaultNode.isSuccessful() && defaultNode.isValid()) {
+                activityCallback.setNode(defaultNode);
+                return defaultNode;
+            }
+
+            // Default node is not available: try one in the list
             List<NodeInfo> nodesToTest = new ArrayList<>(activityCallback.getFavouriteNodes());
             Timber.d("testing best node from %d", nodesToTest.size());
             if (nodesToTest.isEmpty()) return null;

@@ -4,18 +4,11 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical">
-
-    <LinearLayout
-        android:id="@+id/llNotice"
-        android:layout_alignParentTop="true"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical" />
+    android:orientation="vertical"
+    android:background="@color/bg_body">
 
     <TextView
         android:id="@+id/tvPull"
-        android:layout_below="@+id/llNotice"
         style="@style/ScalaLabel.Heading"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

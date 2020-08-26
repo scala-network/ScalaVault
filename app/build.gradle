@@ -96,13 +96,16 @@ android {
 }
 
 dependencies {
-    implementation 'com.google.android.material:material:1.2.0'
+    //noinspection GradleDependency
+    implementation 'com.google.android.material:material:1.0.0' // keep this version as it fixes a bug with Material Button
     implementation "com.android.support:support-v4"
     implementation "com.android.support:recyclerview-v7"
     implementation 'androidx.cardview:cardview:1.0.0'
     implementation 'androidx.swiperefreshlayout:swiperefreshlayout:1.1.0'
-    implementation 'com.google.android.material:material:1.2.0'
-    implementation 'androidx.appcompat:appcompat:1.2.0'
+    //noinspection GradleDependency
+    implementation 'com.google.android.material:material:1.1.0'  // keep this version as it fixes a bug with Material Button
+    //noinspection GradleDependency
+    implementation 'androidx.appcompat:appcompat:1.1.0'  // keep this version as it fixes a bug with Material Button
     implementation 'androidx.legacy:legacy-support-v4:1.0.0'
 
     implementation 'me.dm7.barcodescanner:zxing:1.9.8'
