@@ -96,7 +96,7 @@ public class LoginActivity extends BaseActivity
     private static final String NODES_PREFS_NAME = "nodes";
     private static final String PREF_DAEMON_MAINNET = "daemon_mainnet";
     private static final String DEFAULT_DAEMON = "nodes.scalapay.io:11812";
-    private static final String DEFAULT_DAEMONLIST_MAINNET = "scalanode.com:20189;xlanode.com:20189;mine.scalaproject.io:8000;scala.ethospool.org:11812;daemon.pool.gntl.co.uk:11812";
+    private static final String DEFAULT_DAEMONLIST_MAINNET = "nodes.scalapay.io:11812;scalanode.com:20189;xlanode.com:20189;mine.scalaproject.io:8000;scala.ethospool.org:11812;daemon.pool.gntl.co.uk:11812";
 
     private NodeInfo node = null;
 
