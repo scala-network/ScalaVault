@@ -811,9 +811,8 @@ public class LoginActivity extends BaseActivity
         switch (requestCode) {
             case Helper.PERMISSIONS_REQUEST_WRITE_EXTERNAL_STORAGE:
                 // If request is cancelled, the result arrays are empty.
-                if (grantResults.length > 0
-                        && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-                    //startLoginFragment = true;
+                if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                    startLoginFragment = true;
                 } else {
                     String msg = getString(R.string.message_strorage_not_permitted);
                     Timber.e(msg);
