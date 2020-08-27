@@ -96,7 +96,7 @@ public class LoginActivity extends BaseActivity
     private static final String NODES_PREFS_NAME = "nodes";
     private static final String PREF_DAEMON_MAINNET = "daemon_mainnet";
     private static final String DEFAULT_DAEMON = "nodes.scalapay.io:11812";
-    private static final String DEFAULT_DAEMONLIST_MAINNET = "nodes.scalapay.io:11812;scalanode.com:20189;xlanode.com:20189;mine.scalaproject.io:8000;scala.ethospool.org:11812;daemon.pool.gntl.co.uk:11812";
+    private static final String DEFAULT_DAEMONLIST_MAINNET = "nodes.scalapay.io:11812;scalanode.com:11812;xlanode.com:11812;mine.scalaproject.io:8000;scala.ethospool.org:11812;daemon.pool.gntl.co.uk:11812";
 
     private NodeInfo node = null;
 
@@ -811,9 +811,8 @@ public class LoginActivity extends BaseActivity
         switch (requestCode) {
             case Helper.PERMISSIONS_REQUEST_WRITE_EXTERNAL_STORAGE:
                 // If request is cancelled, the result arrays are empty.
-                if (grantResults.length > 0
-                        && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-                    //startLoginFragment = true;
+                if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                    startLoginFragment = true;
                 } else {
                     String msg = getString(R.string.message_strorage_not_permitted);
                     Timber.e(msg);
