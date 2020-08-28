@@ -23,9 +23,9 @@ package io.scalaproject.vault.ledger;
 import android.hardware.usb.UsbDevice;
 import android.hardware.usb.UsbManager;
 
-import com.btchip.BTChipException;
-import com.btchip.comm.BTChipTransport;
-import com.btchip.comm.android.BTChipTransportAndroidHID;
+import io.btchip.BTChipException;
+import io.btchip.comm.BTChipTransport;
+import io.btchip.comm.android.BTChipTransportAndroidHID;
 import io.scalaproject.vault.BuildConfig;
 import io.scalaproject.vault.model.WalletManager;
 import io.scalaproject.vault.util.Helper;
