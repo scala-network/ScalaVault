@@ -93,14 +93,13 @@ public class LoginActivity extends BaseActivity
         ReceiveFragment.Listener, NodeFragment.Listener {
     private static final String GENERATE_STACK = "gen";
 
-    private static final String NODES_PREFS_NAME = "nodes";
-    private static final String PREF_DAEMON_MAINNET = "daemon_mainnet";
-    private static final String DEFAULT_DAEMON = "nodes.scalapay.io:11812";
-    private static final String DEFAULT_DAEMONLIST_MAINNET = "nodes.scalapay.io:11812;scalanode.com:20189;xlanode.com:20189;mine.scalaproject.io:8000;scala.ethospool.org:11812;daemon.pool.gntl.co.uk:11812";
+    private static final String NODES_USERDEFINED_NAME = "userdefined_nodes";
+    private static final String DEFAULT_REMOTE_NODES = "nodes.scalapay.io:11812;scalanode.com:20189;xlanode.com:20189;mine.scalaproject.io:8000;scala.ethospool.org:11812;daemon.pool.gntl.co.uk:11812";
 
     private NodeInfo node = null;
 
-    Set<NodeInfo> favouriteNodes = new HashSet<>();
+    Set<NodeInfo> allNodes = new HashSet<>();
+    Set<NodeInfo> userDefinedNodes = new HashSet<>();
 
     @Override
     public NodeInfo getNode() {
@@ -115,132 +114,82 @@ public class LoginActivity extends BaseActivity
         WalletManager.getInstance().setDaemon(node);
     }
 
-    public Set<NodeInfo> getFavouriteNodes() {
-        return favouriteNodes;
-    }
-
-    public NodeInfo getDefaultNode() {
-        NodeInfo nodeInfo = NodeInfo.fromString(DEFAULT_DAEMON);
-        if (nodeInfo != null) {
-            nodeInfo.setFavourite(true);
-        } else
-            Timber.w("Default nodeString invalid: %s", DEFAULT_DAEMON);
-
-        return nodeInfo;
+    public Set<NodeInfo> getAllNodes() {
+        return allNodes;
     }
 
     @Override
-    public void setFavouriteNodes(Set<NodeInfo> nodes) {
+    public void setUserDefinedNodes(Set<NodeInfo> nodes) {
         Timber.d("adding %d nodes", nodes.size());
-        favouriteNodes.clear();
+
+        userDefinedNodes.clear();
+
         for (NodeInfo node : nodes) {
-            Timber.d("adding %s %b", node, node.isFavourite());
-            if (node.isFavourite())
-                favouriteNodes.add(node);
+            Timber.d("adding %s %b", node, node.isUserDefined());
+            if (node.isUserDefined())
+                userDefinedNodes.add(node);
         }
-        if (favouriteNodes.isEmpty() && (!nodes.isEmpty())) { // no favourites - pick best ones
-            List<NodeInfo> nodeList = new ArrayList<>(nodes);
-            Collections.sort(nodeList, NodeInfo.BestNodeComparator);
-            int i = 0;
-            for (NodeInfo node : nodeList) {
-                Timber.d("adding %s", node);
-                node.setFavourite(true);
-                favouriteNodes.add(node);
-                if (++i >= 3) break; // add max first 3 nodes
-            }
-            Toast.makeText(this, getString(R.string.node_nobookmark, i), Toast.LENGTH_LONG).show();
-        }
-        saveFavourites();
+
+        saveUserDefinedNodes();
     }
 
-    private void loadFavouritesWithNetwork() {
+    private void loadNodesWithNetwork() {
         Helper.runWithNetwork(new Helper.Action() {
             @Override
             public boolean run() {
-                loadFavourites();
+                loadNodes();
                 return true;
             }
         });
     }
 
-    public Set<NodeInfo> getFavoriteNodes() {
-        return favouriteNodes;
-    }
+    private void loadNodes() {
+        Timber.d("loadUserDefinedNodes");
+        allNodes.clear();
 
-    public Set<NodeInfo> getAllNodes() {
-        StrictMode.ThreadPolicy currentPolicy = StrictMode.getThreadPolicy();
-        StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitNetwork().build();
-        StrictMode.setThreadPolicy(policy);
-
-        try {
-            //loadFavourites();
-            loadLegacyList(DEFAULT_DAEMONLIST_MAINNET);
-        } finally {
-            StrictMode.setThreadPolicy(currentPolicy);
-        }
-
-        return getFavouriteNodes();
-    }
-
-    private void loadFavourites() {
-        Timber.d("loadFavourites");
-        favouriteNodes.clear();
-        Map<String, ?> storedNodes = getSharedPreferences(NODES_PREFS_NAME, Context.MODE_PRIVATE).getAll();
-        for (Map.Entry<String, ?> nodeEntry : storedNodes.entrySet()) {
+        // Load Userdefined nodes
+        Map<String, ?> userdefinedNodes = getSharedPreferences(NODES_USERDEFINED_NAME, Context.MODE_PRIVATE).getAll();
+        for (Map.Entry<String, ?> nodeEntry : userdefinedNodes.entrySet()) {
             if (nodeEntry != null) // just in case, ignore possible future errors
-                addFavourite((String) nodeEntry.getValue());
+                addNode((String) nodeEntry.getValue());
         }
 
-        if (storedNodes.isEmpty()) { // try to load legacy list & remove it (i.e. migrate the data once)
-            SharedPreferences sharedPref = getPreferences(Context.MODE_PRIVATE);
-            switch (WalletManager.getInstance().getNetworkType()) {
-                case NetworkType_Mainnet:
-                    loadLegacyList(DEFAULT_DAEMONLIST_MAINNET);
-                    loadLegacyList(sharedPref.getString(PREF_DAEMON_MAINNET, null));
-                    sharedPref.edit().remove(PREF_DAEMON_MAINNET).apply();
-                    break;
-                case NetworkType_Stagenet:
-                    /*loadLegacyList(sharedPref.getString(PREF_DAEMON_STAGENET, null));
-                    sharedPref.edit().remove(PREF_DAEMON_STAGENET).apply();*/
-                    break;
-                default:
-                    throw new IllegalStateException("unsupported net " + WalletManager.getInstance().getNetworkType());
-            }
-        }
-
-        // Always add the default node
-        addFavourite(DEFAULT_DAEMON);
+        // Load default nodes
+        loadDefaultNodes();
     }
 
-    private void saveFavourites() {
-        List<Node> favourites = new ArrayList<>();
-        Timber.d("SAVE");
-        SharedPreferences.Editor editor = getSharedPreferences(NODES_PREFS_NAME, Context.MODE_PRIVATE).edit();
+    private void saveUserDefinedNodes() {
+        Timber.d("Save Userdefined nodes");
+
+        SharedPreferences.Editor editor = getSharedPreferences(NODES_USERDEFINED_NAME, Context.MODE_PRIVATE).edit();
         editor.clear();
+
         int i = 1;
-        for (Node info : favouriteNodes) {
+        for (Node info : userDefinedNodes) {
             String nodeString = info.toNodeString();
             editor.putString(Integer.toString(i), nodeString);
             Timber.d("saved %d:%s", i, nodeString);
             i++;
         }
+
         editor.apply();
     }
 
-    private void addFavourite(String nodeString) {
+    private void addNode(String nodeString) {
         NodeInfo nodeInfo = NodeInfo.fromString(nodeString);
-        if (nodeInfo != null && !favouriteNodes.contains(nodeInfo)) {
-            nodeInfo.setFavourite(true);
-            favouriteNodes.add(nodeInfo);
+        if (nodeInfo != null) {
+            allNodes.add(nodeInfo);
         } else
             Timber.w("nodeString invalid: %s", nodeString);
     }
 
-    private void loadLegacyList(final String legacyListString) {
-        if (legacyListString == null) return;
-        final String[] nodeStrings = legacyListString.split(";");
+    private void loadDefaultNodes() {
+        if (DEFAULT_REMOTE_NODES == null)
+            return;
+
+        final String[] nodeStrings = DEFAULT_REMOTE_NODES.split(";");
         for (final String nodeString : nodeStrings) {
-            addFavourite(nodeString);
+            addNode(nodeString);
         }
     }
 
@@ -305,7 +254,7 @@ public class LoginActivity extends BaseActivity
             }
         });
 
-        loadFavouritesWithNetwork();
+        loadNodesWithNetwork();
 
         if (Helper.getWritePermission(this)) {
             if (savedInstanceState == null) startLoginFragment();

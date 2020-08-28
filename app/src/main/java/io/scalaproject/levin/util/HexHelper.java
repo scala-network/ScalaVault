@@ -19,7 +19,7 @@
  *
  * Please see the included LICENSE file for more information.*/
 
-package io.scalaproject.vault.levin.util;
+package io.scalaproject.levin.util;
 
 import java.math.BigInteger;
 import java.net.InetAddress;

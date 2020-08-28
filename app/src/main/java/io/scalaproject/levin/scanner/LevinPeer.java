@@ -1,4 +1,4 @@
-package io.scalaproject.vault.levin.scanner;
+package io.scalaproject.levin.scanner;
 
 import java.net.InetAddress;
 import java.net.InetSocketAddress;

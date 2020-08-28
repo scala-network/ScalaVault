@@ -19,12 +19,12 @@
  *
  * Please see the included LICENSE file for more information.*/
 
-package io.scalaproject.vault.levin.data;
+package io.scalaproject.levin.data;
 
-import io.scalaproject.vault.levin.util.HexHelper;
-import io.scalaproject.vault.levin.util.LevinReader;
-import io.scalaproject.vault.levin.util.LevinWriter;
-import io.scalaproject.vault.levin.util.LittleEndianDataOutputStream;
+import io.scalaproject.levin.util.HexHelper;
+import io.scalaproject.levin.util.LevinReader;
+import io.scalaproject.levin.util.LevinWriter;
+import io.scalaproject.levin.util.LittleEndianDataOutputStream;
 
 import java.io.ByteArrayOutputStream;
 import java.io.DataOutput;

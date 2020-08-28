@@ -50,7 +50,7 @@
         android:elevation="6dp">
 
         <Button
-            android:id="@+id/fab"
+            android:id="@+id/fabAddNode"
             style="@style/ExtendedFAB"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"

@@ -35,8 +35,6 @@ import timber.log.Timber;
 
 public class Node {
     static public final String MAINNET = "mainnet";
-    static public final String STAGENET = "stagenet";
-    static public final String TESTNET = "testnet";
 
     private String name = null;
     final private NetworkType networkType;
@@ -46,7 +44,7 @@ public class Node {
     private int levinPort = 0;
     private String username = "";
     private String password = "";
-    private boolean favourite = false;
+    private boolean userdefined = false;
 
     @Override
     public int hashCode() {
@@ -102,25 +100,10 @@ public class Node {
         String da[] = daemonAddress.split(":");
         if ((da.length > 2) || (da.length < 1))
             throw new IllegalArgumentException("Too many ':' or too few");
+
         String host = da[0];
 
-        if (daParts.length == 1) {
-            networkType = NetworkType.NetworkType_Mainnet;
-        } else {
-            switch (daParts[1]) {
-                case MAINNET:
-                    networkType = NetworkType.NetworkType_Mainnet;
-                    break;
-                case STAGENET:
-                    networkType = NetworkType.NetworkType_Stagenet;
-                    break;
-                case TESTNET:
-                    networkType = NetworkType.NetworkType_Testnet;
-                    break;
-                default:
-                    throw new IllegalArgumentException("invalid net: " + daParts[1]);
-            }
-        }
+        networkType = NetworkType.NetworkType_Mainnet;
         if (networkType != WalletManager.getInstance().getNetworkType())
             throw new IllegalArgumentException("wrong net: " + networkType);
 
@@ -165,23 +148,15 @@ public class Node {
         }
         sb.append(host).append(":").append(rpcPort);
         sb.append("/");
-        switch (networkType) {
-            case NetworkType_Mainnet:
-                sb.append(MAINNET);
-                break;
-            case NetworkType_Stagenet:
-                sb.append(STAGENET);
-                break;
-            case NetworkType_Testnet:
-                sb.append(TESTNET);
-                break;
-        }
+        sb.append(MAINNET);
+
         if (name != null)
             try {
                 sb.append("/").append(URLEncoder.encode(name, "UTF-8"));
             } catch (UnsupportedEncodingException ex) {
                 Timber.w(ex); // if we can't encode it, we don't store it
             }
+
         return sb.toString();
     }
 
@@ -264,16 +239,16 @@ public class Node {
         return password;
     }
 
-    public boolean isFavourite() {
-        return favourite;
+    public boolean isUserDefined() {
+        return userdefined;
     }
 
-    public void setFavourite(boolean favourite) {
-        this.favourite = favourite;
+    public void setUserDefined(boolean userdefined) {
+        this.userdefined = userdefined;
     }
 
     public void toggleFavourite() {
-        favourite = !favourite;
+        userdefined = !userdefined;
     }
 
     public Node(Node anotherNode) {
@@ -291,7 +266,7 @@ public class Node {
         levinPort = anotherNode.levinPort;
         username = anotherNode.username;
         password = anotherNode.password;
-        favourite = anotherNode.favourite;
+        userdefined = anotherNode.userdefined;
     }
 
     static private int DEFAULT_LEVIN_PORT = 0;

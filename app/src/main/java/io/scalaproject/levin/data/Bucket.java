@@ -19,10 +19,10 @@
  *
  * Please see the included LICENSE file for more information.*/
 
-package io.scalaproject.vault.levin.data;
+package io.scalaproject.levin.data;
 
-import io.scalaproject.vault.levin.util.HexHelper;
-import io.scalaproject.vault.levin.util.LevinReader;
+import io.scalaproject.levin.util.HexHelper;
+import io.scalaproject.levin.util.LevinReader;
 
 import java.io.DataInput;
 import java.io.DataOutput;

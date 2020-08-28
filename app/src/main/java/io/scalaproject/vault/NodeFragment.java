@@ -73,9 +73,10 @@ public class NodeFragment extends Fragment
 
     private SwipeRefreshLayout pullToRefresh;
     private TextView tvPull;
-    private View fab;
+    private View fabAddNode;
 
-    private Set<NodeInfo> nodeList = new HashSet<>();
+    private Set<NodeInfo> allNodes = new HashSet<>();
+    private Set<NodeInfo> userdefinedNodes = new HashSet<>();
 
     private NodeInfoAdapter nodesAdapter;
 
@@ -88,16 +89,9 @@ public class NodeFragment extends Fragment
 
         void setSubtitle(String title);
 
-        Set<NodeInfo> getFavoriteNodes();
+        Set<NodeInfo> getAllNodes();
 
-        void setFavouriteNodes(Set<NodeInfo> favouriteNodes);
-    }
-
-    void filterFavourites() {
-        for (Iterator<NodeInfo> iter = nodeList.iterator(); iter.hasNext(); ) {
-            Node node = iter.next();
-            if (!node.isFavourite()) iter.remove();
-        }
+        void setUserDefinedNodes(Set<NodeInfo> userDefinedNodes);
     }
 
     @Override
@@ -113,11 +107,14 @@ public class NodeFragment extends Fragment
 
     @Override
     public void onPause() {
-        Timber.d("onPause() %d", nodeList.size());
+        Timber.d("onPause() %d", allNodes.size());
+
         if (asyncFindNodes != null)
             asyncFindNodes.cancel(true);
+
         if (activityCallback != null)
-            activityCallback.setFavouriteNodes(nodeList);
+            activityCallback.setUserDefinedNodes(userdefinedNodes);
+
         super.onPause();
     }
 
@@ -136,10 +133,10 @@ public class NodeFragment extends Fragment
     void updateRefreshElements() {
         if (isRefreshing()) {
             activityCallback.setToolbarButton(Toolbar.BUTTON_NONE);
-            fab.setVisibility(View.GONE);
+            fabAddNode.setVisibility(View.GONE);
         } else {
             activityCallback.setToolbarButton(Toolbar.BUTTON_BACK);
-            fab.setVisibility(View.VISIBLE);
+            fabAddNode.setVisibility(View.VISIBLE);
         }
     }
 
@@ -149,8 +146,8 @@ public class NodeFragment extends Fragment
         Timber.d("onCreateView");
         View view = inflater.inflate(R.layout.fragment_node, container, false);
 
-        fab = view.findViewById(R.id.fab);
-        fab.setOnClickListener(this);
+        fabAddNode = view.findViewById(R.id.fabAddNode);
+        fabAddNode.setOnClickListener(this);
 
         RecyclerView recyclerView = view.findViewById(R.id.list);
         nodesAdapter = new NodeInfoAdapter(getActivity(), this);
@@ -173,8 +170,8 @@ public class NodeFragment extends Fragment
 
         Helper.hideKeyboard(getActivity());
 
-        nodeList = new HashSet<>(activityCallback.getFavoriteNodes());
-        nodesAdapter.setNodes(nodeList);
+        allNodes = new HashSet<>(activityCallback.getAllNodes());
+        nodesAdapter.setNodes(allNodes);
 
         ViewGroup llNotice = view.findViewById(R.id.llNotice);
         Notice.showAll(llNotice, ".*_nodes");
@@ -217,7 +214,7 @@ public class NodeFragment extends Fragment
     public void onClick(View v) {
         int id = v.getId();
         switch (id) {
-            case R.id.fab:
+            case R.id.fabAddNode:
                 EditDialog diag = createEditDialog(null);
                 if (diag != null) {
                     diag.show();
@@ -230,7 +227,6 @@ public class NodeFragment extends Fragment
         @Override
         protected void onPreExecute() {
             super.onPreExecute();
-            filterFavourites();
             nodesAdapter.setNodes(null);
             nodesAdapter.allowClick(false);
             tvPull.setText(getString(R.string.node_scanning));
@@ -240,9 +236,10 @@ public class NodeFragment extends Fragment
         protected Boolean doInBackground(Void... params) {
             Timber.d("scanning");
             Set<NodeInfo> seedList = new HashSet<>();
-            seedList.addAll(nodeList);
-            nodeList.clear();
+            seedList.addAll(allNodes);
+            allNodes.clear();
             Timber.d("seed %d", seedList.size());
+
             Dispatcher d = new Dispatcher(new Dispatcher.Listener() {
                 @Override
                 public void onGet(NodeInfo info) {
@@ -270,7 +267,7 @@ public class NodeFragment extends Fragment
                 d.awaitTermination(NODES_TO_FIND);
             }
             // final (filtered) result
-            nodeList.addAll(d.getRpcNodes());
+            allNodes.addAll(d.getRpcNodes());
             return true;
         }
 
@@ -302,7 +299,7 @@ public class NodeFragment extends Fragment
             //if (isCancelled()) return;
             tvPull.setText(getString(R.string.node_pull_hint));
             pullToRefresh.setRefreshing(false);
-            nodesAdapter.setNodes(nodeList);
+            nodesAdapter.setNodes(allNodes);
             nodesAdapter.allowClick(true);
             updateRefreshElements();
         }
@@ -390,8 +387,8 @@ public class NodeFragment extends Fragment
             if (applyChanges()) {
                 closeDialog();
                 if (nodeBackup == null) { // this is a (FAB) new node
-                    nodeInfo.setFavourite(true);
-                    nodeList.add(nodeInfo);
+                    nodeInfo.setUserDefined(true);
+                    allNodes.add(nodeInfo);
                 }
                 shutdown = true;
                 new AsyncTestNode().execute();

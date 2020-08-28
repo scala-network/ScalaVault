@@ -19,9 +19,9 @@
  *
  * Please see the included LICENSE file for more information.*/
 
-package io.scalaproject.vault.levin.util;
+package io.scalaproject.levin.util;
 
-import io.scalaproject.vault.levin.data.Section;
+import io.scalaproject.levin.data.Section;
 
 import java.io.DataOutput;
 import java.io.IOException;

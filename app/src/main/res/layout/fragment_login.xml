@@ -132,14 +132,27 @@
                 android:layout_gravity="center"
                 android:padding="48dp" />
 
+            <TextView
+                android:id="@+id/tvNoWallet"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:layout_margin="8dp"
+                android:gravity="center"
+                android:textColor="@color/txt_main"
+                android:textSize="12sp"
+                android:visibility="visible"
+                android:text="No transaction" />
+
             <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/list"
+                android:id="@+id/listWallets"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:clipToPadding="false"
                 android:paddingBottom="72dp"
                 app:layoutManager="LinearLayoutManager"
-                tools:listitem="@layout/item_wallet" />
+                tools:listitem="@layout/item_wallet"
+                android:visibility="visible"/>
 
             <include layout="@layout/layout_fabmenu" />
 

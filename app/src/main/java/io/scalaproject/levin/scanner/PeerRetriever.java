@@ -19,13 +19,13 @@
  *
  * Please see the included LICENSE file for more information.*/
 
-package io.scalaproject.vault.levin.scanner;
+package io.scalaproject.levin.scanner;
 
-import io.scalaproject.vault.levin.data.Bucket;
-import io.scalaproject.vault.levin.data.Section;
-import io.scalaproject.vault.levin.util.HexHelper;
-import io.scalaproject.vault.levin.util.LittleEndianDataInputStream;
-import io.scalaproject.vault.levin.util.LittleEndianDataOutputStream;
+import io.scalaproject.levin.data.Bucket;
+import io.scalaproject.levin.data.Section;
+import io.scalaproject.levin.util.HexHelper;
+import io.scalaproject.levin.util.LittleEndianDataInputStream;
+import io.scalaproject.levin.util.LittleEndianDataOutputStream;
 import io.scalaproject.vault.data.NodeInfo;
 import io.scalaproject.vault.util.Helper;
 

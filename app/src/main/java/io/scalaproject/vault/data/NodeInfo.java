@@ -26,8 +26,8 @@ import com.burgstaller.okhttp.CachingAuthenticatorDecorator;
 import com.burgstaller.okhttp.digest.CachingAuthenticator;
 import com.burgstaller.okhttp.digest.Credentials;
 import com.burgstaller.okhttp.digest.DigestAuthenticator;
-import io.scalaproject.vault.levin.scanner.Dispatcher;
-import io.scalaproject.vault.levin.scanner.LevinPeer;
+import io.scalaproject.levin.scanner.Dispatcher;
+import io.scalaproject.levin.scanner.LevinPeer;
 import io.scalaproject.vault.util.OkHttpHelper;
 
 import org.json.JSONException;

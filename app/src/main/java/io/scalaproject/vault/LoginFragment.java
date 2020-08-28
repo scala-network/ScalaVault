@@ -76,6 +76,9 @@ public class LoginFragment extends Fragment implements WalletInfoAdapter.OnInter
     private View pbNode;
     private View llNode;
 
+    private RecyclerView recyclerView;
+    private TextView tvNoWallet;
+
     private Listener activityCallback;
 
     // Container Activity must implement this interface
@@ -108,9 +111,7 @@ public class LoginFragment extends Fragment implements WalletInfoAdapter.OnInter
 
         NodeInfo getNode();
 
-        NodeInfo getDefaultNode();
-
-        Set<NodeInfo> getFavouriteNodes();
+        Set<NodeInfo> getAllNodes();
 
         boolean hasLedger();
     }
@@ -135,7 +136,7 @@ public class LoginFragment extends Fragment implements WalletInfoAdapter.OnInter
     @Override
     public void onResume() {
         super.onResume();
-        Timber.d("onResume() %s", activityCallback.getFavouriteNodes().size());
+        Timber.d("onResume() %s", activityCallback.getAllNodes().size());
         activityCallback.setTitle(null);
         activityCallback.setToolbarButton(Toolbar.BUTTON_CREDITS);
         activityCallback.showNet();
@@ -182,7 +183,9 @@ public class LoginFragment extends Fragment implements WalletInfoAdapter.OnInter
         fabLedger.setOnClickListener(this);
         fabScreen.setOnClickListener(this);
 
-        RecyclerView recyclerView = view.findViewById(R.id.list);
+        tvNoWallet = view.findViewById(R.id.tvNoWallet);
+
+        recyclerView = view.findViewById(R.id.listWallets);
         registerForContextMenu(recyclerView);
         this.adapter = new WalletInfoAdapter(getActivity(), this);
         recyclerView.setAdapter(adapter);
@@ -195,7 +198,7 @@ public class LoginFragment extends Fragment implements WalletInfoAdapter.OnInter
         llNode.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (activityCallback.getFavouriteNodes().isEmpty())
+                if (activityCallback.getAllNodes().isEmpty())
                     startNodePrefs();
                 else
                     findBestNode();
@@ -277,6 +280,15 @@ public class LoginFragment extends Fragment implements WalletInfoAdapter.OnInter
         WalletManager mgr = WalletManager.getInstance();
         List<WalletManager.WalletInfo> walletInfos =
                 mgr.findWallets(activityCallback.getStorageRoot());
+
+        if(walletInfos.isEmpty()) {
+            recyclerView.setVisibility(View.GONE);
+            tvNoWallet.setVisibility(View.VISIBLE);
+        } else {
+            recyclerView.setVisibility(View.VISIBLE);
+            tvNoWallet.setVisibility(View.GONE);
+        }
+
         walletList.clear();
         walletList.addAll(walletInfos);
         filterList();
@@ -443,20 +455,7 @@ public class LoginFragment extends Fragment implements WalletInfoAdapter.OnInter
 
         @Override
         protected NodeInfo doInBackground(Void... params) {
-            // Always try to use Scala nodes proxy first
-            NodeInfo defaultNode = activityCallback.getDefaultNode();
-            Timber.d("testing default node %s", defaultNode.getName());
-
-            if(defaultNode != null)
-                defaultNode.testRpcService();
-
-            if(defaultNode.isSuccessful() && defaultNode.isValid()) {
-                activityCallback.setNode(defaultNode);
-                return defaultNode;
-            }
-
-            // Default node is not available: try one in the list
-            List<NodeInfo> nodesToTest = new ArrayList<>(activityCallback.getFavouriteNodes());
+            List<NodeInfo> nodesToTest = new ArrayList<>(activityCallback.getAllNodes());
             Timber.d("testing best node from %d", nodesToTest.size());
             if (nodesToTest.isEmpty()) return null;
             for (NodeInfo node : nodesToTest) {
@@ -484,7 +483,7 @@ public class LoginFragment extends Fragment implements WalletInfoAdapter.OnInter
                 Timber.d("found a good node %s", result.toString());
                 showNode(result);
             } else {
-                if (!activityCallback.getFavouriteNodes().isEmpty()) {
+                if (!activityCallback.getAllNodes().isEmpty()) {
                     tvNodeName.setText(getResources().getText(R.string.node_refresh_hint));
                     ibNode.setImageDrawable(getResources().getDrawable(R.drawable.ic_refresh_black_24dp));
                     tvNodeAddress.setText(null);

@@ -19,7 +19,7 @@
  *
  * Please see the included LICENSE file for more information.*/
 
-package io.scalaproject.vault.levin.scanner;
+package io.scalaproject.levin.scanner;
 
 import io.scalaproject.vault.data.NodeInfo;
 
@@ -81,7 +81,7 @@ public class Dispatcher implements PeerRetriever.OnGetPeers {
                         retrievePeers(retrievedPeer);
                     final NodeInfo nodeInfo = retrievedPeer.getNodeInfo();
                     Timber.d("Retrieved %s", nodeInfo);
-                    if ((nodeInfo.isValid() || nodeInfo.isFavourite())) {
+                    if ((nodeInfo.isValid() || nodeInfo.isUserDefined())) {
                         nodeInfo.setName();
                         rpcNodes.add(nodeInfo);
                         Timber.d("RPC: %s", nodeInfo);
@@ -159,7 +159,7 @@ public class Dispatcher implements PeerRetriever.OnGetPeers {
         for (Iterator<NodeInfo> iter = rpcNodes.iterator(); iter.hasNext(); ) {
             NodeInfo info = iter.next();
             // don't remove favourites
-            if (!info.isFavourite()) {
+            if (!info.isUserDefined()) {
                 if (!testHeight(info.getHeight(), consensus)) {
                     iter.remove();
                     Timber.d("Removed %s", info);
@@ -191,7 +191,7 @@ public class Dispatcher implements PeerRetriever.OnGetPeers {
     public void seedPeers(Collection<NodeInfo> seedNodes) {
         for (NodeInfo node : seedNodes) {
             node.clear();
-            if (node.isFavourite()) {
+            if (node.isUserDefined()) {
                 rpcNodes.add(node);
                 if (listener != null) listener.onGet(node);
             }
