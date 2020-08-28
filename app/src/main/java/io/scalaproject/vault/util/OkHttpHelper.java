@@ -42,7 +42,7 @@ public class OkHttpHelper {
         return Singleton;
     }
 
-    public static final int HTTP_TIMEOUT = 1000; //ms
+    public static final int HTTP_TIMEOUT = 2500; //ms
 
     static private OkHttpClient EagerSingleton;
 

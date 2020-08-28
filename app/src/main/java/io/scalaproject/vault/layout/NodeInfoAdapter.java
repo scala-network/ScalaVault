@@ -121,6 +121,7 @@ public class NodeInfoAdapter extends RecyclerView.Adapter<NodeInfoAdapter.ViewHo
         ViewHolder(View itemView) {
             super(itemView);
             ibBookmark = itemView.findViewById(R.id.ibBookmark);
+            ibBookmark.setVisibility(View.GONE); /* Favorite heart disabled */
             tvName = itemView.findViewById(R.id.tvName);
             tvIp = itemView.findViewById(R.id.tvAddress);
             ivPing = itemView.findViewById(R.id.ivPing);
