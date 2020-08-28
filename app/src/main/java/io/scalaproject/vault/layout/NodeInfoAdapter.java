@@ -135,11 +135,11 @@ public class NodeInfoAdapter extends RecyclerView.Adapter<NodeInfoAdapter.ViewHo
         }
 
         private void showStar() {
-            if (nodeItem.isFavourite()) {
+            /*if (nodeItem.isFavourite()) {
                 ibBookmark.setImageResource(R.drawable.ic_favorite_24dp);
             } else {
                 ibBookmark.setImageResource(R.drawable.ic_favorite_border_24dp);
-            }
+            }*/
         }
 
         void bind(int position) {

@@ -44,7 +44,7 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import io.scalaproject.vault.levin.scanner.Dispatcher;
+import io.scalaproject.levin.scanner.Dispatcher;
 import io.scalaproject.vault.data.Node;
 import io.scalaproject.vault.data.NodeInfo;
 import io.scalaproject.vault.layout.NodeInfoAdapter;
