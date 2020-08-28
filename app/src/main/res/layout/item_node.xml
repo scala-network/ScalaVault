@@ -9,27 +9,12 @@
     android:layout_marginBottom="4dp"
     android:background="@drawable/corner_radius_lighter">
 
-    <ImageButton
-        android:id="@+id/ibBookmark"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentStart="true"
-        android:layout_centerInParent="true"
-        android:layout_marginStart="8dp"
-        android:layout_marginEnd="8dp"
-        android:padding="12dp"
-        android:background="?android:attr/selectableItemBackgroundBorderless"
-        android:gravity="center"
-        android:src="@drawable/ic_favorite_border_24dp" />
-
     <ImageView
         android:id="@+id/ivPing"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentStart="true"
         android:layout_centerInParent="true"
-        android:layout_marginStart="8dp"
-        android:layout_marginEnd="8dp"
         android:padding="12dp"
         android:background="?android:attr/selectableItemBackgroundBorderless"
         android:gravity="center"
@@ -41,7 +26,7 @@
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
         android:layout_centerInParent="true"
-        android:layout_margin="8dp"
+        android:layout_marginEnd="8dp"
         android:layout_toEndOf="@id/ivPing"
         android:gravity="start"
         android:orientation="vertical">

@@ -112,7 +112,6 @@ public class NodeInfoAdapter extends RecyclerView.Adapter<NodeInfoAdapter.ViewHo
     }
 
     class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
-        final ImageButton ibBookmark;
         final TextView tvName;
         final TextView tvIp;
         final ImageView ivPing;
@@ -120,18 +119,9 @@ public class NodeInfoAdapter extends RecyclerView.Adapter<NodeInfoAdapter.ViewHo
 
         ViewHolder(View itemView) {
             super(itemView);
-            ibBookmark = itemView.findViewById(R.id.ibBookmark);
-            ibBookmark.setVisibility(View.GONE); /* Favorite heart disabled */
             tvName = itemView.findViewById(R.id.tvName);
             tvIp = itemView.findViewById(R.id.tvAddress);
             ivPing = itemView.findViewById(R.id.ivPing);
-            ibBookmark.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    nodeItem.toggleFavourite();
-                    showStar();
-                }
-            });
         }
 
         private void showStar() {
@@ -154,7 +144,6 @@ public class NodeInfoAdapter extends RecyclerView.Adapter<NodeInfoAdapter.ViewHo
             }
             itemView.setOnClickListener(this);
             itemView.setClickable(itemsClickable);
-            ibBookmark.setClickable(itemsClickable);
             showStar();
         }
 
