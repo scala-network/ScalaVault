@@ -5,7 +5,7 @@
     android:layout_height="wrap_content"
     android:orientation="vertical"
     android:padding="8dp"
-    android:background="@color/bg_body">
+    android:background="@color/bg_lighter">
 
     <TextView
         style="@style/ScalaLabel"
