@@ -17,7 +17,7 @@
  ********************************************************************************
  */
 
-package com.btchip.utils;
+package io.btchip.utils;
 
 import java.io.ByteArrayOutputStream;
 

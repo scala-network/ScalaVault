@@ -18,7 +18,7 @@
  ********************************************************************************
  */
 
-package com.btchip.comm.android;
+package io.btchip.comm.android;
 
 import android.hardware.usb.UsbConstants;
 import android.hardware.usb.UsbDevice;
@@ -28,10 +28,10 @@ import android.hardware.usb.UsbInterface;
 import android.hardware.usb.UsbManager;
 import android.hardware.usb.UsbRequest;
 
-import com.btchip.BTChipException;
-import com.btchip.comm.BTChipTransport;
-import com.btchip.comm.LedgerHelper;
-import com.btchip.utils.Dump;
+import io.btchip.BTChipException;
+import io.btchip.comm.BTChipTransport;
+import io.btchip.comm.LedgerHelper;
+import io.btchip.utils.Dump;
 
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;

@@ -17,7 +17,7 @@
  ********************************************************************************
  */
 
-package com.btchip;
+package io.btchip;
 
 public class BTChipException extends Exception {
 

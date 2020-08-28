@@ -18,9 +18,9 @@
  ********************************************************************************
  */
 
-package com.btchip.comm;
+package io.btchip.comm;
 
-import com.btchip.BTChipException;
+import io.btchip.BTChipException;
 
 public interface BTChipTransport {
     byte[] exchange(byte[] command);
