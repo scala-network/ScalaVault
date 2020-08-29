@@ -602,6 +602,17 @@ public class LoginActivity extends BaseActivity
         }
     }
 
+    private void showLoginFragment() {
+        Timber.d("showLoginFragment()");
+        try {
+            Fragment f = getSupportFragmentManager().findFragmentById(R.id.fragment_container);
+            if (f instanceof LoginFragment) {
+                onBackPressed();
+            }
+        } catch (ClassCastException ex) {
+        }
+    }
+
     public void onWalletChangePassword() {//final String walletName, final String walletPassword) {
         try {
             GenerateReviewFragment detailsFragment = (GenerateReviewFragment)
@@ -1229,6 +1240,9 @@ public class LoginActivity extends BaseActivity
                 return true;
             case R.id.action_nodes:
                 onNodePrefs();
+                return true;
+            case R.id.action_wallets:
+                showLoginFragment();
                 return true;
             case R.id.action_ledger_seed:
                 Fragment f = getSupportFragmentManager().findFragmentById(R.id.fragment_container);
