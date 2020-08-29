@@ -142,7 +142,7 @@
                 android:textColor="@color/txt_main"
                 android:textSize="12sp"
                 android:visibility="visible"
-                android:text="No transaction" />
+                android:text="No wallet" />
 
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/listWallets"
