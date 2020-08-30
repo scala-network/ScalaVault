@@ -64,11 +64,11 @@
         <h1>Détails du Portefeuille</h1>
         <h2>Adresse Publique</h2>
         Votre adresse publique est comme votre numéro de compte en banque, vous pouvez la partager avec n’importe qui sans
-        craindre de perdre vos Scalaj. On porra envoyer des Scalaj dans votre portefeuille en utilisant cette adresse.
+        craindre de perdre vos Scala. On porra envoyer des Scala dans votre portefeuille en utilisant cette adresse.
         <h2>Phrase Mnémonique</h2>
         C’est la seule donée nécessaire pour récupérer votre portefeuille ultérieurement et obtenir l’accès à
         vos fonds. Il est très imprtant de la garder sécurisée et confidentielle, car elle donne <em>à quiconque</em>
-        le contrôle total de vos Scalaj ! Si vous ne l’avez pas écrite à un emplacement sécurisé, faites-le !
+        le contrôle total de vos Scala ! Si vous ne l’avez pas écrite à un emplacement sécurisé, faites-le !
         <h2>Mdp de restauration des fichiers du Portefeuille</h2>
         Assurez vous de noter ce mot de passe. Si vous réinitialisez votre appareil ou désinstallez l’application,
         vous en aurez besoin pour accéder de nouveau à votre portefeuille.<br/>
@@ -93,7 +93,7 @@
         Votre clef d’Audit peut vous servir à surveiller les transactions entrantes sur votre portefeuille sans autoriser
         la dépense de vos fonds dans votre portefeuille.
         <h2>Clefs de dépense</h2>
-        Votre clef de dépense permet à quiconque de dépenser les Scalaj associés à votre portefeuille, alors ne la
+        Votre clef de dépense permet à quiconque de dépenser les Scala associés à votre portefeuille, alors ne la
         communiquez à personne, gardez-la en sécurité comme votre phrase Mnémonique.
     ]]></string>
 
@@ -115,7 +115,7 @@
         <h3>Détails</h3>
         <p>Affichez les détails du portefeuille, phrase mnémonique &amp; Clefs.</p>
         <h3>Recevoir</h3>
-        <p>Faites un QR code pour recevoir des Scalaj.</p>
+        <p>Faites un QR code pour recevoir des Scala.</p>
         <h3>Renommer</h3>
         <p>Renommez le portefeuille. Les sauvegardes ne sont pas renommées.</p>
         <h3>Sauvegarde</h3>
@@ -130,10 +130,10 @@
     <string name="help_tx_details"><![CDATA[
         <h1>Détails de la Transaction</h1>
         <h2>Destination</h2>
-        C’est l’adresse publique du portefeuille auquel vous avez envoyé des Scalaj
+        C’est l’adresse publique du portefeuille auquel vous avez envoyé des Scala
         <h2>ID de Paiement</h2>
         Vous pouvez utiliser un ID de paiement pour identifier la raison pour laquelle vous avez
-        envoyé des Scalaj entre deux parties. C’est totallement privé et optionnel. Il permet par
+        envoyé des Scala entre deux parties. C’est totallement privé et optionnel. Il permet par
         exemple à une société de faire concorder votre transaction avec un article que vous avez
         acheté.
         <h2>ID TX</h2>
@@ -150,7 +150,7 @@
     <string name="help_send"><![CDATA[
         <h1>Envoyer</h1>
         <h2>Adresse de Destinataire</h2>
-        <p>C’est l’adresse publique du portefeuille auquel vous allez envoyer des Scalaj, vous pouvez
+        <p>C’est l’adresse publique du portefeuille auquel vous allez envoyer des Scala, vous pouvez
         la copier/coller, scanner un QR code ou la saisir manuellement. Vérifiez là bien trois fois
         afin de vous assurer que vous n’envoyez pas de pièces à la mauvaise adresse.</p>
         <p>En complément de l’utilisation d’une adresse XLA, vous pouvez aussi utiliser
@@ -163,7 +163,7 @@
         plus de détails). Voir la rubrique sur l’envoi de BTC plus bas.</p>
         <h2>ID de Paiement</h2>
         <p>Vous pouvez utiliser un ID de paiement pour identifier la raison pour laquelle vous avez
-        envoyé des Scalaj entre deux parties. C’est totallement privé et optionnel. Il permet par
+        envoyé des Scala entre deux parties. C’est totallement privé et optionnel. Il permet par
         exemple à une société de faire concorder votre transaction avec un article que vous avez
         acheté.</p>
         <h1>Envoyer des BTC</h1>
@@ -242,10 +242,10 @@
         ce mode, votre solde n’est visible sur aucun écran afin que vous puissiez utiliser votre
         portefeuille en toute sécurité dans la rue, un bar ou autre lieu public. Les transactions
         précédentes sont également masquées. Les nouvelles transactions seront affichées, afin que vous
-        puissiez voir que vous avez envoyé ou reçu vos doux Scalaj !</p>
+        puissiez voir que vous avez envoyé ou reçu vos doux Scala !</p>
         <h2>Analyse</h2>
         Comme Scala aime garder les choses confidentielles, nous devons scanner la chaîne de blocs
-        chaque fois que vous ouvrez un portefeuille Scala Vault pour voir si de nouveaux Scalaj ont été
+        chaque fois que vous ouvrez un portefeuille Scala Vault pour voir si de nouveaux Scala ont été
         envoyés à votre portefeuille, cela ne stocke sur votre appareil que les informations appartenant
         à votre portefeuille. Parfois cela peut prendre un moment si vous n’avez pas synchronisé depuis
         longtemps.

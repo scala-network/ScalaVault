@@ -199,7 +199,7 @@
     <string name="send_notes_hint">Privat anteckning (valfri)</string>
     <string name="send_generate_paymentid_hint">Skapa</string>
     <string name="send_send_label">Spendera mina Scala</string>
-    <string name="send_send_timed_label">Spendera mina Scalaj (%1$s)</string>
+    <string name="send_send_timed_label">Spendera mina Scala (%1$s)</string>
     <string name="send_qr_invalid">Inte en QR-kod</string>
     <string name="send_qr_address_invalid">Inte en giltig QR-kod för betalning</string>
     <string name="send_address_invalid">Inte en giltig adress</string>

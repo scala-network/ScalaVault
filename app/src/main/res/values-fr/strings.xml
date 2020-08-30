@@ -221,7 +221,7 @@
     <string name="send_notes_hint">Notes Privées (optionnelles)</string>
     <string name="send_generate_paymentid_hint">Générer</string>
     <string name="send_send_label">Dépenser mes beaux Scala</string>
-    <string name="send_send_timed_label">Dépenser mes beaux Scalaj (%1$s)</string>
+    <string name="send_send_timed_label">Dépenser mes beaux Scala (%1$s)</string>
     <string name="send_qr_invalid">QR Code invalide</string>
     <string name="send_qr_address_invalid">QR code de paiement invalide</string>
     <string name="send_address_invalid">Adresse invalide</string>

@@ -262,8 +262,8 @@
     <string name="label_copy_xlatokey">Clave XLA.TO</string>
     <string name="message_copy_xlatokey">¡Clave XLA.TO copiada al portapapeles!</string>
     <string name="send_amount_btc_xla">%1$s (indicativo)</string>
-    <string name="send_send_label">Enviar mis preciados scalaj</string>
-    <string name="send_send_timed_label">Gastar mis preciados scalaj (%1$s)</string>
+    <string name="send_send_label">Enviar mis preciados Scala</string>
+    <string name="send_send_timed_label">Gastar mis preciados Scala (%1$s)</string>
     <string name="send_address_invalid">No es una dirección válida</string>
     <string name="send_fee_btc_label">Comisión (XLA)</string>
     <string name="send_total_btc_label">Total (XLA)</string>

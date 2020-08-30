@@ -73,12 +73,12 @@
         <h1>Monujdetaloj</h1>
         <h2>Publika adreso</h2>
         Via publika adreso estas kiel via banka kontonumero, kiun vi povas montri al iu ajn, kaj fidi
-        ke vi ne perdos viajn Scalajn. Per tiu adreso, homoj sendos Scalajn al via monujo.
+        ke vi ne perdos viajn Scalan. Per tiu adreso, homoj sendos Scalan al via monujo.
 
         <h2>Mnemonika semo</h2>
         Tio estas la nura datumo, kiu bezoniĝas por restaŭri vian monujon en la estonteco, kaj reiĝi
         estro de via mono! Estas gravege konservi ĝin private kaj sekrete, ĉar ĝi lasus <em>iun ajn</em>
-        forŝteli viajn Scalajn! Se vi je jam skribis ĝin surpapere, bonvolu fari tion tuj!
+        forŝteli viajn Scalan! Se vi je jam skribis ĝin surpapere, bonvolu fari tion tuj!
 
         <h2>Pasvorto por retrovi monujdosierojn</h2>
         Certiĝu ke vi skribas tiun pasvorton surpapere. Se vi restartas vian aparaton aŭ malinstalas
@@ -109,7 +109,7 @@
         elspezon de la mono troviĝanta en via monujo.
 
         <h2>Elspezŝlosilo</h2>
-        Via elspezŝlosilo ebligas ĉiun ajn elspezi la Scalajn ligitajn kun via monujo, do ne montru
+        Via elspezŝlosilo ebligas ĉiun ajn elspezi la Scalan ligitajn kun via monujo, do ne montru
         ĝin al iu ajn, konservu ĝin sekure, kiel vian Mnemonikan Semon.
     ]]></string>
 
@@ -134,7 +134,7 @@
         <p>Montras la monujdetalojn, semon kaj ŝlosilojn.</p>
 
         <h3>Ricevi</h3>
-        <p>Kreas QR-kodon por ricevi Scalajn.</p>
+        <p>Kreas QR-kodon por ricevi Scalan.</p>
 
         <h3>Renomi</h3>
         <p>Renomas la monujon. Sekurkopioj ne renomiĝos.</p>
@@ -152,7 +152,7 @@
     <string name="help_tx_details"><![CDATA[
         <h1>Transakciaj detaloj</h1>
         <h2>Destino</h2>
-        Jen la publika adreso de la monujo al kiu vi sendas Scalajn.
+        Jen la publika adreso de la monujo al kiu vi sendas Scalan.
 
         <h2>Paga ID</h2>
         Vi povas uzi pagan IDon por identigi la kialon de la transakcio. Tio estas tute opcia kaj
@@ -173,7 +173,7 @@
     <string name="help_send"><![CDATA[
         <h1>Sendi</h1>
         <h2>Adreso de la ricevonto</h2>
-        Jen la publika adreso de la monujo al kiu vi sendas Scalajn. Vi povas kopii tion el via
+        Jen la publika adreso de la monujo al kiu vi sendas Scalan. Vi povas kopii tion el via
         tondujo, skani QR-kodo, aŭ mane entajpi ĝin. Kontrolu ĝin trifoje por certiĝi ke vi ne sendas
         monon al malĝusta adreso.</p>
         <p>Aldone al tio, vi ankaŭ povas uzi
@@ -249,11 +249,11 @@
         <p>Strata moduso enŝaltiĝas/malŝaltiĝas en la menuo aŭ ĉe la bildeto de la vizaĝo de Gunther.
         En tiu moduso, via saldo ne montriĝos, sur neniu ekrano, tiel vi povas sekure uzi vian
         monujon surstrate, trinkeje, aŭ ie publike. Antaŭaj transakcioj ankaŭ kaŝiĝas. Nova
-        transakcioj montriĝos, til vi povos vidi ke vi sendis/ricevis dolĉajn Scalajn!</p>
+        transakcioj montriĝos, til vi povos vidi ke vi sendis/ricevis dolĉajn Scalan!</p>
 
         <h2>Skanado</h2>
         Ĉar Scala ŝatas privatumi, je ĉiu starto la monujo devas skani la blokĉenon por vidi ĉu
-        novaj Scalaj sendiĝis al via monujo, kaj via aparato memoras nur la informojn kiuj apartenas
+        novaj Scala sendiĝis al via monujo, kaj via aparato memoras nur la informojn kiuj apartenas
         al via monujo. Povas daŭri iom da tempo fojfoje, des pli se vi ne sinkronizis de longa tempo.
         <h2>La saldo</h2>
         <p><b>Helpon! La saldo de mia monujo malaperis aŭ ne konfirmiĝis!</b><br/>

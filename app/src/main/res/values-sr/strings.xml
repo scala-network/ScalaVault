@@ -222,7 +222,7 @@
     <string name="send_generate_paymentid_hint">Generiši</string>
 
     <string name="send_send_label">Potroši moj slatki Scala</string>
-    <string name="send_send_timed_label">Potroši moj slatki Scalaj (%1$s)</string>
+    <string name="send_send_timed_label">Potroši moj slatki Scala (%1$s)</string>
     <string name="send_qr_invalid">Nije QR kod</string>
     <string name="send_qr_address_invalid">Nije validan QR kod za plaćanje</string>
     <string name="send_address_invalid">Nije validna adresa</string>

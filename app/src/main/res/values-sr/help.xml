@@ -119,7 +119,7 @@
         <h3>Details</h3>
         <p>Show the wallet details, seed &amp; keys.</p>
         <h3>Receive</h3>
-        <p>Make a QR code for receiving Scalaj.</p>
+        <p>Make a QR code for receiving Scala.</p>
         <h3>Rename</h3>
         <p>Rename the wallet. Backups are not renamed.</p>
         <h3>Backup</h3>
@@ -152,7 +152,7 @@
     <string name="help_send"><![CDATA[
         <h1>Send</h1>
         <h2>Receiver’s address</h2>
-        <p>This is the public address of the wallet you are sending Scalaj to, you can copy this from
+        <p>This is the public address of the wallet you are sending Scala to, you can copy this from
         your clipboard, scan a QR code or enter it manually. Make sure you triple check this to
         ensure you aren’t sending coins to the wrong address.</p>
         <p>In addition to using an XLA address, you can also use
@@ -228,10 +228,10 @@
         <p>Street mode can be enabled/disabled in the menu or Gunther\'s head icon. In this mode, your
         balance is not shown on any screen so you can safely use your wallet on the street, a pub or
         other public place. Previous transactions are also hidden. New transactions will be shown, so
-        you can see that you have sent/received sweet Scalaj!</p>
+        you can see that you have sent/received sweet Scala!</p>
         <h2>Scanning</h2>
         Because Scala likes to keep things private, every time you open a Scala Vault wallet we have to
-        scan the blockchain to see if any new Scalaj have been sent to your wallet, this only
+        scan the blockchain to see if any new Scala have been sent to your wallet, this only
         stores information to your phone which belongs to your wallet. Sometimes it can take a while
         because you haven’t synced in a long time.
         <h2>The Balance</h2>

@@ -229,7 +229,7 @@
         <p>Street mode can be enabled/disabled in the menu or Gunther\'s head icon. In this mode, your
         balance is not shown on any screen so you can safely use your wallet on the street, a pub or
         other public place. Previous transactions are also hidden. New transactions will be shown, so
-        you can see that you have sent/received sweet Scalaj!</p>
+        you can see that you have sent/received sweet Scala!</p>
         <h2>Beolvasás</h2>
         Mivel a Scala szereti titokban tartani a dolgokat, így a monerujo-tárca minden egyes megnyitásakor
         beolvasásra kerül a blokklánc, hogy megnézzük, került-e a tárcádba Scala. Ez csakis olyan információt

@@ -214,7 +214,7 @@
         <p>Street mode can be enabled/disabled in the menu or Gunther\'s head icon. In this mode, your
         balance is not shown on any screen so you can safely use your wallet on the street, a pub or
         other public place. Previous transactions are also hidden. New transactions will be shown, so
-        you can see that you have sent/received sweet Scalaj!</p>
+        you can see that you have sent/received sweet Scala!</p>
         <h2>Scanarea</h2>
         Deoarece Scala păstrează lucrurile într-un mod privat, de fiecare dată când deschizi
 		portofelul Scala Vault, noi scanăm baza de date distribuită (blockchain) pentru a vedea dacă

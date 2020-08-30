@@ -62,12 +62,12 @@
         <h1>Dettagli del Portafoglio</h1>
         <h2>Indirizzo pubblico</h2>
 	Il tuo indirizzo pubblico Scala equivale al tuo IBAN. Puoi condividerlo con chiunque senza temere di
-	perdere i tuoi Scalaj. I Scalaj verranno inviati al tuo portafoglio utilizzando questo indirizzo.
+	perdere i tuoi Scala. I Scala verranno inviati al tuo portafoglio utilizzando questo indirizzo.
         <h2>Seed Mnemonico</h2>
         Questa è l&apos;unica informazione necessaria per recuperare il tuo portafoglio in futuro
 		e avere pieno accesso ai tuoi fondi.
 		E&apos; molto importante mantenerlo privato e conservarlo in un luogo sicuro, poiché può concedere a <em>chiunque</em>
-		pieno accesso ai tuoi Scalaj! Se non lo hai già fatto, annotati il Seed Mnemonico e conservalo in un luogo sicuro!
+		pieno accesso ai tuoi Scala! Se non lo hai già fatto, annotati il Seed Mnemonico e conservalo in un luogo sicuro!
         <h2>Password di ripristino dei file del portafoglio</h2>
         Assicurati di aver salvato questa password. Se resetti il tuo dispositivo o disinstalli l&apos;app
         ne avrai bisogno per accedere di nuovo al tuo portafoglio.<br/>
@@ -92,7 +92,7 @@
 	La tua chiave di visualizzazione può essere usata per monitorare le transazioni in ingresso
 	al tuo portafoglio senza concedere il permesso di spendere i fondi.
         <h2>Chiave di Spesa</h2>
-	La tua chiave di spesa permette a chiunque di spendere i Scalaj contenuti nel tuo portafoglio,
+	La tua chiave di spesa permette a chiunque di spendere i Scala contenuti nel tuo portafoglio,
 	pertanto non rivelarla a nessuno e conservala in un luogo sicuro, come fai con il tuo Seed Mnemonico.
     ]]></string>
 
@@ -113,7 +113,7 @@
         <h3>Dettagli</h3>
         <p>Mostra i dettagli del portafoglio, seed e chiavi.</p>
         <h3>Ricevi</h3>
-        <p>Genera un codice QR per ricevere Scalaj.</p>
+        <p>Genera un codice QR per ricevere Scala.</p>
         <h3>Rinomina</h3>
         <p>Rinomina il portafoglio. Le copie di backup non vengono rinominate.</p>
         <h3>Backup</h3>
@@ -128,7 +128,7 @@
     <string name="help_tx_details"><![CDATA[
         <h1>Dettagli della transazione</h1>
         <h2>Destinazione</h2>
-        Questo è l&apos;indirizzo pubblico del portafoglio cui hai inviato Scalaj
+        Questo è l&apos;indirizzo pubblico del portafoglio cui hai inviato Scala
         <h2>ID Pagamento</h2>
 	Puoi usare un ID Pagamento per identificare la causale della transazione. Questa è un&apos;informazione opzionale e privata.
 	Ad esempio può aiutare un venditore ad associare una transazione ricevuta ad un bene da te acquistato.
@@ -145,9 +145,9 @@
     <string name="help_send"><![CDATA[
         <h1>Invia</h1>
         <h2>Indirizzo del ricevente</h2>
-	<p>Questo è l&apos;indirizzo pubblico del portafoglio cui stai inviando Scalaj, puoi incollare qui un indirizzo
+	<p>Questo è l&apos;indirizzo pubblico del portafoglio cui stai inviando Scala, puoi incollare qui un indirizzo
 		che hai precededentemente copiato sul blocco appunti, scansionare un codice QR o inserire un indirizzo
-		manualmente. Accertati più volte che sia l&apos;indirizzo corretto e che tu non stia inviando Scalaj ad un indirizzo sbagliato.</p>
+		manualmente. Accertati più volte che sia l&apos;indirizzo corretto e che tu non stia inviando Scala ad un indirizzo sbagliato.</p>
         <p>In addition to using an XLA address, you can also use
         <ul>
             <li>an OpenAlias for XLA or BTC</li>
@@ -228,10 +228,10 @@
 	<p>La modalità strada può essere abilitata/disabilitata nel menu o toccando l&apos;icona della testa di Gunther.
 		In questa modalità, il tuo saldo non viene mostrato sullo schermo in modo tale da consentirti di usare
 		il tuo portafoglio per strada, in un pub o in qualsiasi altro luogo pubblico. Anche le transazioni precedenti
-		vengono nascoste. Le transazioni nuove verranno invece mostrate, così puoi vedere che hai inviato/ricevuto dei bei Scalaj!</p>
+		vengono nascoste. Le transazioni nuove verranno invece mostrate, così puoi vedere che hai inviato/ricevuto dei bei Scala!</p>
         <h2>Scansione</h2>
 	Dal momento che a Scala piace tenere le cose private, tutte le volte in cui apri un portafoglio Scala Vault dobbiamo
-	effettuare una scansione della blockchain per controllare se nuovi Scalaj sono stati inviati al tuo portafoglio.
+	effettuare una scansione della blockchain per controllare se nuovi Scala sono stati inviati al tuo portafoglio.
 	Questa procedura salva sul tuo telefono informazioni che riguardano il tuo portafoglio. A volte essa può risultare
 	lenta perché la scansione non è stata fatta da parecchio tempo.
         <h2>Il Saldo</h2>

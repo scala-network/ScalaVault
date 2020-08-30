@@ -193,7 +193,7 @@
     <string name="send_notes_hint">Προσωπικές σημειώσεις (προαιρετικό)</string>
     <string name="send_generate_paymentid_hint">Δημιουργία</string>
     <string name="send_send_label">Ξόδεψε τα γλυκά μου Scala</string>
-    <string name="send_send_timed_label">Ξόδεψε τα γλυκά μου Scalaj (%1$s)</string>
+    <string name="send_send_timed_label">Ξόδεψε τα γλυκά μου Scala (%1$s)</string>
     <string name="send_qr_invalid">Δεν είναι QR κώδικας</string>
     <string name="send_qr_address_invalid">Δεν είναι έγκυρος κωδικός QR πληρωμής</string>
     <string name="send_address_invalid">Δεν είναι έγκυρη η διεύθυνση</string>

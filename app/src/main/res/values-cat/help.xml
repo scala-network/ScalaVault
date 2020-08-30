@@ -85,7 +85,7 @@
         <h3>Detalls</h3>
         <p>Mostra els detalls del portamonedes, la llavor i les seves claus.</p>
         <h3>Rebre</h3>
-        <p>Crea un codi QR per rebre Scalaj.</p>
+        <p>Crea un codi QR per rebre Scala.</p>
         <h3>Canvi de Nom</h3>
         <p>Canvia el nom del portamonedes. El canvi de nom no afecta a les còpies de seguretat.</p>
         <h3>Còpia de Seguretat</h3>
@@ -112,7 +112,7 @@
     <string name="help_send"><![CDATA[
         <h1>Enviar</h1>
         <h2>Adreça del Receptor</h2>
-        <p>Aquesta és l’adreça pública del portamonedes a la qual esteu enviant Scalaj. Podeu copiar-la al porta-retalls, escanejar un codi QR o introduir-la manualment. Assegureu-	vos de confirmar-ho a consciencia i que no estigueu enviant monedes a la direcció incorrecta.</p>
+        <p>Aquesta és l’adreça pública del portamonedes a la qual esteu enviant Scala. Podeu copiar-la al porta-retalls, escanejar un codi QR o introduir-la manualment. Assegureu-	vos de confirmar-ho a consciencia i que no estigueu enviant monedes a la direcció incorrecta.</p>
         <p>A més d’utilitzar una adreça XLA, també podeu utilitzar
         <ul>
             <li>un OpenAlias per XLA o BTC</li>
@@ -168,9 +168,9 @@
     <string name="help_wallet"><![CDATA[
         <h1>El Portamonedes</h1>
         <h2>Mode de carrer</h2>
-        <p>El mode de carrer es pot habilitar / desactivar des del menú o a la icona principal de Gunther. En aquest mode, el vostre balanç no es mostra a cap pantalla perquè pugueu 	utilitzar la vostra cartera amb seguretat al carrer, al pub o qualsevol lloc públic. Les transaccions anteriors també estan ocultes. Es mostraran les noves transaccions 	perquè pogueu veure que heu enviat / rebut els vostres estimats Scalaj!</p>
+        <p>El mode de carrer es pot habilitar / desactivar des del menú o a la icona principal de Gunther. En aquest mode, el vostre balanç no es mostra a cap pantalla perquè pugueu 	utilitzar la vostra cartera amb seguretat al carrer, al pub o qualsevol lloc públic. Les transaccions anteriors també estan ocultes. Es mostraran les noves transaccions 	perquè pogueu veure que heu enviat / rebut els vostres estimats Scala!</p>
         <h2>Escanejant</h2>
-        Perquè a Scala li agrada mantenir les coses privades, cada cop que obri un portamonedes Scala Vault hem d’escanejar la blockchain per veure si s’han enviat nous scalaj al seu 	portamonedes. Això només emmagatzema l’informació al telèfon que pertany al seu portamonedes. De vegades pot trigar una estona perquè no s’ha sincronitzat en molt de temps.
+        Perquè a Scala li agrada mantenir les coses privades, cada cop que obri un portamonedes Scala Vault hem d’escanejar la blockchain per veure si s’han enviat nous Scala al seu 	portamonedes. Això només emmagatzema l’informació al telèfon que pertany al seu portamonedes. De vegades pot trigar una estona perquè no s’ha sincronitzat en molt de temps.
         <h2>El Balanç</h2>
         <p><b>Ajuda! El balanç del meu portamonedes ha desaparegut o consta com a no confirmat!</b><br/>
         No patiu! Quan envieu fons desde el vostre portamonedes part del balanç apareixerà com a no confirmat de forma temporal.        

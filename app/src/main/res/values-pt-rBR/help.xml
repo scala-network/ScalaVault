@@ -223,7 +223,7 @@
         <p>O modo rua pode ser ativado/desativado no menu ou no ícone da cabeça do Gunther. Neste modo, o seu
         saldo não será exibido em nenhuma tela para que você possa usar sua carteira com segurança na rua, em um bar ou
         outro lugar público. Transações anteriores também serão ocultas. Novas transações serão mostradas, então
-        você pode ver que você enviou/recebeu Scalaj!</p>
+        você pode ver que você enviou/recebeu Scala!</p>
         <h2>Escaneando</h2>
         Como o Scala sempre mantém tudo privado, sempre que você abrir sua carteira o Scala Vault precisa escanear
         o blockchain para identificar se você recebeu algum novo Scala. Somente as informações que correspondem à sua

@@ -105,7 +105,7 @@
         <h3>Detalhes</h3>
         <p>Mostra os detalhes da carteira, semente &amp; chaves.</p>
         <h3>Receber</h3>
-        <p>Cria um código QR para receber Scalaj.</p>
+        <p>Cria um código QR para receber Scala.</p>
         <h3>Renomear</h3>
         <p>Renomeia a carteira. As cópias de segurança não são renomeadas.</p>
         <h3>Cópia de segurança</h3>
@@ -120,9 +120,9 @@
     <string name="help_tx_details"><![CDATA[
         <h1>Detalhes da Transacção</h1>
         <h2>Destino</h2>
-        O endereço público para o qual enviaste Scalaj
+        O endereço público para o qual enviaste Scala
         <h2>ID do Pagamento</h2>
-        Utiliza-se o ID do Pagamento para identificar a razão porque foram transaccionados Scalaj.
+        Utiliza-se o ID do Pagamento para identificar a razão porque foram transaccionados Scala.
         Isto é opcional e privado. Por exemplo, isto permite que um negócio identifique que item
         é que uma determinada transacção está a pagar.
         <h2>ID TX</h2>
@@ -138,7 +138,7 @@
     <string name="help_send"><![CDATA[
         <h1>Enviar</h1>
         <h2>Endereço do Destinatário</h2>
-        <p> Este é o endereço público da carteira para a qual vais enviar Scalaj, podes copiar esta
+        <p> Este é o endereço público da carteira para a qual vais enviar Scala, podes copiar esta
         informação da área de transferência, capturara um código QR, ou introduzir manualmente. Confirma
         atentamente que não estás a enviar para o endereço errado.</p>
         <p>Para alem de usar um endereço de XLA também podes usar
@@ -150,7 +150,7 @@
 	Não deixar de notar que, enviar BTC é processado através do serviço XLA.TO (ver https://xla.to
 	para detalhes). Ver a secção enviar BTC.</p>
         <h2>ID do Pagamento</h2>
-        <p>Utiliza-se o ID do Pagamento para identificar a razão porque foram transaccionados Scalaj.
+        <p>Utiliza-se o ID do Pagamento para identificar a razão porque foram transaccionados Scala.
         Isto é opcional e privado. Por exemplo, isto permite que um negócio identifique que item
         é que uma determinada transacção está a pagar.</p>
         <h1>Enviar BTC</h1>
@@ -231,17 +231,17 @@
         <p>O Street mode pode ser ligado/desligado no menu ou na cabeça do icon Gunther. Neste modo
 	o teu saldo não é mostrado no teu ecrã para que possas usar a tua carteira de forma segura 
 	na rua, num bar ou outro local publico. As transações anteriores são também escondidas. As novas 
-	transações serão mostradas, para que cossas ver se enviaste/recebeste os teus preciosos Scalaj!</p>
+	transações serão mostradas, para que cossas ver se enviaste/recebeste os teus preciosos Scala!</p>
         <h2>A Examinar</h2>
         Como o Scala gosta de manter as coisas privadas, cada vez que abres uma carteira Scala Vault temos
-        que examinar a blockchain para ver se novos Scalaj foram enviados para a tua carteira. Apenas
+        que examinar a blockchain para ver se novos Scala foram enviados para a tua carteira. Apenas
         informação correspondente à tua carteira é guardada no telefone. Por vezes pode demorar algum tempo
         por já não sincronizares há algum tempo.
         <h2>O Saldo</h2>
         <p><b>Ajudem! O saldo da minha carteira desapareceu ou está não-confirmado!</b><br/>
         Não entres em pânico! Quando envias fundos da tua carteira, algum do teu saldo aparece temporariamente
         como não confirmado.
-        Isto acontece como resultado da forma como os Scalaj são trocados na blockchain.
+        Isto acontece como resultado da forma como os Scala são trocados na blockchain.
         Podes ler mais sobre iston em https://getscala.org/resources/scalapedia/change.html
         <h2>Lista de Transacções</h2>
         <p>Uma lista de transacções da carteira. Em carteiras de visualização, apenas são mostradas transacções

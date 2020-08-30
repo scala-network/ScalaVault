@@ -67,7 +67,7 @@
         <h1>Detalles del monedero</h1>
         <h2>Dirección pública</h2>
         Tu dirección pública es como el número de tu cuenta bancaria que puedes compartir con
-        cualquiera sin miedo a perder tus fondos. La gente enviará scalaj a tu monedero usando esta
+        cualquiera sin miedo a perder tus fondos. La gente enviará Scala a tu monedero usando esta
         dirección.
         <h2>Semilla</h2>
         Este es el único dato necesario para recuperar tu cartera en un futuro y obtener acceso
@@ -101,7 +101,7 @@
         Tu clave de vista puede usarse para monitorizar las transacciones entrantes de tu
         monedero sin otorgar permiso para gastar los fondos guardados en ella.
         <h2>Clave de gasto</h2>
-        Tu clave de gasto permite a quien sea gastar los scalaj asociados a tu cartera, de modo
+        Tu clave de gasto permite a quien sea gastar los Scala asociados a tu cartera, de modo
         que no digas a nadie esta clave, guárdala tan segura como tu semilla mnemotécnica.
     ]]></string>
 
@@ -124,7 +124,7 @@
         <h3>Detalles</h3>
         <p>Muestra los detalles del monedero, su semilla y sus claves.</p>
         <h3>Recibir</h3>
-        <p>Crea un código QR para recibir scalaj.</p>
+        <p>Crea un código QR para recibir Scala.</p>
         <h3>Renombrar</h3>
         <p>Permite cambiar el nombre de tu monedero. La copia de seguridad no será renombrada.</p>
         <h3>Copia de seguridad</h3>
@@ -139,7 +139,7 @@
     <string name="help_tx_details"><![CDATA[
         <h1>Detalles de la transacción</h1>
         <h2>Destinatario</h2>
-        Esta es la dirección pública del monedero al que has enviado scalaj
+        Esta es la dirección pública del monedero al que has enviado Scala
         <h2>ID de Pago</h2>
         Al ser Scala ofuscado por naturaleza, puedes usar un ID de Pago para identificar un envío de Scala entre
         dos partes. Esto es completamente opcional y privado. Por ejemplo, esto permitiría que un
@@ -157,9 +157,9 @@
     <string name="help_send"><![CDATA[
         <h1>Enviar</h1>
         <h2>Dirección del receptor</h2>
-        <p>Esta es la dirección pública del monedero al que vas a enviar scalaj. Puedes copiarla
+        <p>Esta es la dirección pública del monedero al que vas a enviar Scala. Puedes copiarla
         desde tu portapapeles, escanear un código QR o introducirla manualmente. Asegúrate de
-        comprobarla varias veces para confirmar que no estás enviando scalaj a la dirección equivocada.</p>
+        comprobarla varias veces para confirmar que no estás enviando Scala a la dirección equivocada.</p>
         <p>In addition to using an XLA address, you can also use
         <ul>
             <li>an OpenAlias for XLA or BTC</li>
@@ -247,10 +247,10 @@
         <p>El Modo Público puede ser habilitado/deshabilitado en el menú o en el icono de Gunther\'s. En este modo, tu
         balance no se muestra en ninguna pantalla para que puedas usar de manera segura tu monedero en la calle, un pub u
         otro lugar público. Transacciones anteriores también se ocultan. Nuevas transacciones serán mostradas, para
-        que puedas ver que has enviado/recibido Scalaj.</p>
+        que puedas ver que has enviado/recibido Scala.</p>
         <h2>Escaneado</h2>
         Como a Scala le gusta mantener las cosas privadas, cada vez que abres una cartera de
-        Scala Vault es necesario escanear la cadena de bloques para ver si nuevos scalaj han sido
+        Scala Vault es necesario escanear la cadena de bloques para ver si nuevos Scala han sido
         enviados a tu dirección. Esto solo almacena en tu teléfono las transacciones que pertenecen a tu
         monedero. Esto puede llevar un rato si hace tiempo que no sincronizas.
         <h2>Saldo</h2>

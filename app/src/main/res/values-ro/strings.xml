@@ -193,7 +193,7 @@
     <string name="send_notes_hint">Notițe private (facultativ)</string>
     <string name="send_generate_paymentid_hint">Generează</string>
     <string name="send_send_label">Spend my sweet Scala</string>
-    <string name="send_send_timed_label">Spend my sweet Scalaj (%1$s)</string>
+    <string name="send_send_timed_label">Spend my sweet Scala (%1$s)</string>
     <string name="send_qr_invalid">Cod QR invalid</string>
     <string name="send_qr_address_invalid">Cod QR de plată invalid</string>
     <string name="send_address_invalid">Adresă invalidă</string>

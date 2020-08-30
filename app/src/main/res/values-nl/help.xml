@@ -52,9 +52,9 @@
     <string name="help_details"><![CDATA[
         <h1>Portemonneegegevens</h1>
         <h2>Openbaar adres</h2>
-        Je openbare adres is te vergelijken met een bankrekeningnummer dat je aan iedereen kunt geven zonder het risico te lopen dat je je scalaj kwijtraakt. Anderen gebruiken dit adres om scalaj naar jouw portemonnee te sturen.
+        Je openbare adres is te vergelijken met een bankrekeningnummer dat je aan iedereen kunt geven zonder het risico te lopen dat je je Scala kwijtraakt. Anderen gebruiken dit adres om Scala naar jouw portemonnee te sturen.
         <h2>Hersteltekst</h2>
-        Dit is het enige dat je nodig hebt om later je portemonnee te herstellen en volledige toegang tot je geld te krijgen. Het is belangrijk om deze gegevens verborgen te houden, want hiermee kan <em>iedereen</em> volledige toegang tot je scalaj krijgen. Als je de hersteltekst nog niet hebt opgeschreven op een veilige plek, doe het dan nu!
+        Dit is het enige dat je nodig hebt om later je portemonnee te herstellen en volledige toegang tot je geld te krijgen. Het is belangrijk om deze gegevens verborgen te houden, want hiermee kan <em>iedereen</em> volledige toegang tot je Scala krijgen. Als je de hersteltekst nog niet hebt opgeschreven op een veilige plek, doe het dan nu!
         <h2>Wachtwoord voor portemonneebestanden</h2>
         Zorg dat je dit wachtwoord opschrijft. Als je dit apparaat opnieuw instelt of de app verwijdert, heb je dit wachtwoord nodig om je portemonnee weer te gebruiken.<br/>
         <h3>CrAzYpass</h3>
@@ -69,7 +69,7 @@
         <h2>Alleen-lezen sleutel</h2>
         Met je alleen-lezen sleutel kunnen binnenkomende transacties voor je portemonnee worden gevolgd zonder toestemming te geven om het geld in je portemonnee uit te geven.
         <h2>Bestedingssleutel</h2>
-        Met je bestedingssleutel kan iedereen de scalaj in je portemonnee uitgeven. Laat deze sleutel dus aan niemand zien; bewaar hem veilig, net als je hersteltekst.
+        Met je bestedingssleutel kan iedereen de Scala in je portemonnee uitgeven. Laat deze sleutel dus aan niemand zien; bewaar hem veilig, net als je hersteltekst.
     ]]></string>
 
     <string name="help_list"><![CDATA[
@@ -85,7 +85,7 @@
         <h3>Details</h3>
         <p>Details, hersteltekst en sleutels weergeven.</p>
         <h3>Ontvangen</h3>
-        <p>Een QR-code maken voor het ontvangen van scalaj.</p>
+        <p>Een QR-code maken voor het ontvangen van Scala.</p>
         <h3>Hernoemen</h3>
         <p>De portemonnee een andere naam geven. De naam van back-ups wordt niet veranderd.</p>
         <h3>Back-up</h3>
@@ -111,7 +111,7 @@
     <string name="help_send"><![CDATA[
         <h1>Verzenden</h1>
         <h2>Adres ontvanger</h2>
-        <p>Dit is het openbare adres van de portemonnee waar je scalaj naartoe stuurt. Je kunt dit kopiëren via het klembord, een QR-code scannen of het adres handmatig invoeren. Controleer dit nauwkeurig om er zeker van te zijn dat je geen geld naar het verkeerde adres stuurt.</p>
+        <p>Dit is het openbare adres van de portemonnee waar je Scala naartoe stuurt. Je kunt dit kopiëren via het klembord, een QR-code scannen of het adres handmatig invoeren. Controleer dit nauwkeurig om er zeker van te zijn dat je geen geld naar het verkeerde adres stuurt.</p>
         <p>In addition to using an XLA address, you can also use
         <ul>
             <li>an OpenAlias for XLA or BTC</li>
@@ -159,9 +159,9 @@
         <p>Street mode can be enabled/disabled in the menu or Gunther\'s head icon. In this mode, your
         balance is not shown on any screen so you can safely use your wallet on the street, a pub or
         other public place. Previous transactions are also hidden. New transactions will be shown, so
-        you can see that you have sent/received sweet Scalaj!</p>
+        you can see that you have sent/received sweet Scala!</p>
         <h2>Scannen</h2>
-        Omdat Scala graag alles geheim houdt, scannen we iedere keer als je een Scala Vault-portemonnee opent de blockchain om te kijken of er nieuwe scalaj naar je portemonnee zijn overgemaakt. Hierbij wordt alleen informatie die bij je portemonnee hoort opgeslagen op je telefoon. Soms kan het even duren als je een tijd niet hebt gesynchroniseerd.
+        Omdat Scala graag alles geheim houdt, scannen we iedere keer als je een Scala Vault-portemonnee opent de blockchain om te kijken of er nieuwe Scala naar je portemonnee zijn overgemaakt. Hierbij wordt alleen informatie die bij je portemonnee hoort opgeslagen op je telefoon. Soms kan het even duren als je een tijd niet hebt gesynchroniseerd.
         <h2>Het saldo</h2>
         <p><b>Help! Het saldo van mijn portemonnee is verdwenen of niet bevestigd!</b><br/>
         Geen paniek! Wanneer je geld uit je portemonnee verzend, wordt een deel van je saldo tijdelijk aangegeven als onbevestigd.

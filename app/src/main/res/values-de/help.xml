@@ -109,7 +109,7 @@
         <h3>Details</h3>
         <p>Zeige die Wallet-Details, Seed &amp; Keys.</p>
         <h3>Empfangen</h3>
-        <p>Generiere einen QR-Code, um Scalaj zu empfangen.</p>
+        <p>Generiere einen QR-Code, um Scala zu empfangen.</p>
         <h3>Umbenennen</h3>
         <p>Benenne das Wallet um. Backups werden nicht umbenannt.</p>
         <h3>Backup</h3>
@@ -124,7 +124,7 @@
     <string name="help_tx_details"><![CDATA[
         <h1>Transaktionsdetails</h1>
         <h2>Ziel</h2>
-        Dies ist die öffentliche Adresse des Wallets, zu dem du Scalaj gesendet hast.
+        Dies ist die öffentliche Adresse des Wallets, zu dem du Scala gesendet hast.
         <h2>Zahlungs-ID</h2>
         Du kannst eine Zahlungs-ID benutzen, um Zahlungen zu identifizieren. Dies ist optional und ist nicht öffentlich einsehbar. 
 		Zum Beispiel kann ein Unternehmen damit Zahlungen und Verkäufe miteinander verbinden.
@@ -141,9 +141,9 @@
     <string name="help_send"><![CDATA[
         <h1>Senden</h1>
         <h2>Empfängeradresse</h2>
-        <p>Dies ist die öffentliche Adresse des Wallets, an das du Scalaj sendest. Du kannst sie aus der Zwischenablage kopieren,
+        <p>Dies ist die öffentliche Adresse des Wallets, an das du Scala sendest. Du kannst sie aus der Zwischenablage kopieren,
 	einen QR-Code scannen oder sie manuell eingeben. Vergewissere dich, dass es die richtige Adresse ist, um
-        sicherzustellen, die Scalaj nicht irrtümlich an eine falsche Adresse zu senden.</p>
+        sicherzustellen, die Scala nicht irrtümlich an eine falsche Adresse zu senden.</p>
         <p>Zusätzlich zu einer normalen Scala-Adresse kannst du auch
         <ul>
             <li>einen OpenAlias für XLA oder BTC</li>
@@ -224,16 +224,16 @@
         <p>Der Straßenmodus kann im Menü unterhalb Gunthers Kopfsymbol an- und ausgeschaltet werden. In diesem Modus wird dein
         Guthaben in keinem Menüpunkt angezeigt, sodass du dein Wallet gefahrlos auf der Straße, in einer Bar oder
         anderem öffentlichen Ort nutzen kannst. Vorherige Transaktionen sind ebenfalls verborgen. Neue Transaktionen werden angezeigt, damit
-        du sehen kannst, wenn du diese genialen Scalaj versendet oder empfangen hast!</p>
+        du sehen kannst, wenn du diese genialen Scala versendet oder empfangen hast!</p>
         <h2>Scannen</h2>
         Weil Scala gerne Dinge geheim hält, wird nach jedem Öffnen eines Scala Vault-Wallets die Blockchain gescannt,
-	um zu überprüfen, ob neue Scalaj zu diesem Wallet gesendet wurden. Dies speichert ausschließlich Informationen,
+	um zu überprüfen, ob neue Scala zu diesem Wallet gesendet wurden. Dies speichert ausschließlich Informationen,
 	die zum Wallet auf diesem Gerät gehören. Manchmal kann dies etwas länger dauern, falls die letzte Synchronisierung
         eine Weile her ist.
         <h2>Das Guthaben</h2>
         <p><b>Hilfe! Mein Wallet-Guthaben ist verschwunden oder ist unbestätigt!</b><br/>
         Keine Panik! Wenn du Gelder von deinem Wallet sendest, wird ein Teil deines Guthabens kurzzeitig als unbestätigt angezeigt.
-        Dies geschieht aufgrund der zugrunde liegenden Technologie und wie Scalaj auf der Blockchain bewegt werden.
+        Dies geschieht aufgrund der zugrunde liegenden Technologie und wie Scala auf der Blockchain bewegt werden.
         Lies mehr darüber auf https://getscala.org/resources/scalapedia/change.html
         <h2>Transaktionsliste</h2>
         <p>Eine Liste deiner Transaktionen. In View-Wallets werden nur die eingehenden Transaktionen angezeigt.</p>

@@ -61,7 +61,7 @@
         <h2>Mnemonisk Seed</h2>
         Dette er den eneste dataen du trenger for å gjenoprette lommeboka di senere,
 		og få full tilgang til pengene dine. Å holde denne privat er veldig viktig, siden den gir <em>hvem som helst</em> full
-        tilgang til dine scalaj! Hvis du ikke har skrevet den ned, vær så snill og gjør det!
+        tilgang til dine Scala! Hvis du ikke har skrevet den ned, vær så snill og gjør det!
         <h2>Lommebokfiler gjenoprettelsespassord</h2>
         Vær sikker på at du skriver ned dette passordet. Hvis du nullstiller enheten eller avinstallerer appen, vil
         du trenge tilgang til lommeboka di igjen.<br/>
@@ -140,9 +140,9 @@
     <string name="help_send"><![CDATA[
         <h1>Send</h1>
         <h2>Mottakers adresse</h2>
-        <p>Dette er den offentlige adressen til lommeboka du skal sende scalaj til, som du kan
+        <p>Dette er den offentlige adressen til lommeboka du skal sende Scala til, som du kan
 		kopiere fra utklippstavla, skanne fra en QR-kode eller skrive inn manuellt. Vær sikker på at du trippelsjekker dette
-        for å forsikre deg om at du ikke sender scalaj til feil adresse.</p>
+        for å forsikre deg om at du ikke sender Scala til feil adresse.</p>
         <p>In addition to using an XLA address, you can also use
         <ul>
             <li>an OpenAlias for XLA or BTC</li>
@@ -228,10 +228,10 @@
         <p>Street mode can be enabled/disabled in the menu or Gunther\'s head icon. In this mode, your
         balance is not shown on any screen so you can safely use your wallet on the street, a pub or
         other public place. Previous transactions are also hidden. New transactions will be shown, so
-        you can see that you have sent/received sweet Scalaj!</p>
+        you can see that you have sent/received sweet Scala!</p>
         <h2>Skanning</h2>
         Fordi Scala liker å holde ting privat, må vi hver gang du åpner en lommebok i Scala Vault
-        skanne blokkjeden for å se om noen nye scalaj har blitt sendt til lommeboka di, som bare
+        skanne blokkjeden for å se om noen nye Scala har blitt sendt til lommeboka di, som bare
         lagrer informasjon til telefonen din som tilhører lommeboka. Noen ganger kan det ta litt
 		tid fordi du ikke har synkronisert på en stund.
         <h2>Saldo</h2>

@@ -219,7 +219,7 @@
     <string name="send_notes_hint">Персональна замітка (необов\'язково)</string>
     <string name="send_generate_paymentid_hint">Генерація</string>
     <string name="send_send_label">Витратити мої солодкі Scala</string>
-    <string name="send_send_timed_label">Витратити мої солодкі Scalaj (%1$s)</string>
+    <string name="send_send_timed_label">Витратити мої солодкі Scala (%1$s)</string>
     <string name="send_qr_invalid">Це не QR-код</string>
     <string name="send_qr_address_invalid">Неприпустимий платіж по QR-коду</string>
     <string name="send_address_invalid">Неприпустима адреса</string>

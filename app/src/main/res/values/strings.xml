@@ -225,7 +225,7 @@
     <string name="send_generate_paymentid_hint">Generate</string>
     <string name="send_qr_hint" translatable="false">Scan</string>
     <string name="send_send_label">Spend my sweet Scala</string>
-    <string name="send_send_timed_label">Spend my sweet Scalaj (%1$s)</string>
+    <string name="send_send_timed_label">Spend my sweet Scala (%1$s)</string>
     <string name="send_qr_invalid">Not a QR Code</string>
     <string name="send_qr_address_invalid">Not a valid payment QR code</string>
     <string name="send_address_invalid">Not a valid address</string>

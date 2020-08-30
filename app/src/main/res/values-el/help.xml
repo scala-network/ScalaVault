@@ -87,7 +87,7 @@
         <h3>Λεπτομέριες</h3>
         <p>Δες λεπτομέρειες πορτοφολιού, σπόρο &amp; κλειδιά.</p>
         <h3>Λήψη</h3>
-        <p>Δημιουργία ενός κωδικού QR για λήψη Scalaj.</p>
+        <p>Δημιουργία ενός κωδικού QR για λήψη Scala.</p>
         <h3>Μετονομασία</h3>
         <p>Μετονόμασε το πορτοφόλι. Τα αντίγραφα ασφαλείας δεν θα μετονομαστούν.</p>
         <h3>Αντιγρ. Ασφαλείας</h3>
@@ -120,7 +120,7 @@
     <string name="help_send"><![CDATA[
         <h1>Αποστολή</h1>
         <h2>Διεύθυνση παραλήπτη</h2>
-        <p>Αυή είναι η δημόσια διεύθυνση πορτοφολιού που στέλνεις Scalaj, μπορείς να το αντιγράψεις
+        <p>Αυή είναι η δημόσια διεύθυνση πορτοφολιού που στέλνεις Scala, μπορείς να το αντιγράψεις
         από το πρόχειρο, να σαρώσεις έναν κωδικό QR ή να το πληκτρολογήσεις. Βεβαιώσου οτι έχεις τριπλο-ελέγξει
         για να είσαι σίγουρος ότι δεν στέλνεις σε λάθος διύθυνση τα κεφάλαια σου.</p>
         <p>In addition to using an XLA address, you can also use
@@ -208,10 +208,10 @@
         <p>Street mode can be enabled/disabled in the menu or Gunther\'s head icon. In this mode, your
         balance is not shown on any screen so you can safely use your wallet on the street, a pub or
         other public place. Previous transactions are also hidden. New transactions will be shown, so
-        you can see that you have sent/received sweet Scalaj!</p>
+        you can see that you have sent/received sweet Scala!</p>
         <h2>Σάρωση</h2>
         Επειδή το Scala θέλει να κρατάει τα πράγματα ιδιωτικά, κάθε φορά που ανοίγεις ένα πορτοφόλι
-        Scala Vault πρέπει να σαρώσουμε όλο το blockchain για να βρεθούν νέα ληφθέντα Scalaj στο πορτοφόλι σας, αυτό
+        Scala Vault πρέπει να σαρώσουμε όλο το blockchain για να βρεθούν νέα ληφθέντα Scala στο πορτοφόλι σας, αυτό
         αποθηκεύει μόνο πληροφορίες στο τηλέφωνό σου που ανιστοιχούν στο πορτοφόλι σου. Μερικές φορές
         μπορεί να χρειαστεί λίγος χρόνος γιατί δεν έχεις συγχρονίσει για μεγάλο χρονικό διάστημα.
         <h2>Το Υπόλοιπο</h2>

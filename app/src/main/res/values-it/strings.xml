@@ -220,7 +220,7 @@
     <string name="send_notes_hint">Note private (opzionali)</string>
     <string name="send_generate_paymentid_hint">Genera</string>
     <string name="send_send_label">Spendi i miei bei Scala</string>
-    <string name="send_send_timed_label">Spendi i miei bei Scalaj (%1$s)</string>
+    <string name="send_send_timed_label">Spendi i miei bei Scala (%1$s)</string>
     <string name="send_qr_invalid">Non è un codice QR</string>
     <string name="send_qr_address_invalid">Non è un codice QR pagamento valido</string>
     <string name="send_address_invalid">Non è un indirizzo valido</string>
