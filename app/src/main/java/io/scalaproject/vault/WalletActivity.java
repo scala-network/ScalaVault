@@ -31,6 +31,7 @@ import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.graphics.PorterDuff;
 import android.graphics.drawable.Drawable;
+import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.IBinder;
@@ -1194,6 +1195,12 @@ public class WalletActivity extends BaseActivity implements WalletFragment.Liste
     public void onCopyAddress(View view) {
         Helper.clipBoardCopy(this, getString(R.string.label_copy_address), getWallet().getAddress());
         Toast.makeText(this, getString(R.string.message_copy_address), Toast.LENGTH_SHORT).show();
+    }
+
+    public void OnDownloadMM(View view) {
+        Uri uri = Uri.parse(getString(R.string.mm_url));
+        Intent intent = new Intent(Intent.ACTION_VIEW, uri);
+        startActivity(intent);
     }
 
     private class AsyncAddAccount extends AsyncTask<Void, Void, Boolean> {

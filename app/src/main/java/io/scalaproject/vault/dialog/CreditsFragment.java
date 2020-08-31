@@ -24,12 +24,15 @@ package io.scalaproject.vault.dialog;
 import android.app.AlertDialog;
 import android.app.Dialog;
 import android.content.DialogInterface;
+import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import androidx.fragment.app.DialogFragment;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 import android.text.Html;
+import android.text.method.LinkMovementMethod;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.TextView;
@@ -58,6 +61,9 @@ public class CreditsFragment extends DialogFragment {
         final View view = LayoutInflater.from(getActivity()).inflate(R.layout.fragment_credits, null);
 
         ((TextView) view.findViewById(R.id.tvCredits)).setText(Html.fromHtml(getString(R.string.credits_text)));
+
+        ((TextView) view.findViewById(R.id.ScalaURL)).setText(Html.fromHtml(getString(R.string.ScalaLink)));
+        ((TextView) view.findViewById(R.id.monerujoURL)).setText(Html.fromHtml(getString(R.string.monerujoLink)));
 
         AlertDialog.Builder builder = new AlertDialog.Builder(getActivity(), R.style.AlertDialogCustom);
         builder.setView(view);
