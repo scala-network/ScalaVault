@@ -669,7 +669,7 @@ public class Helper {
         return !(BuildConfig.DEBUG || BuildConfig.FLAVOR_type.equals("alpha"));
     }
 
-    static public String getPrettyAddress(String address) {
-        return address.substring(0, 7) + "..." + address.substring(address.length() - 7);
+    static public String getPrettyString(String text) {
+        return text.substring(0, 7) + "..." + text.substring(text.length() - 7);
     }
 }

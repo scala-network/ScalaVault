@@ -182,8 +182,8 @@ public class TransactionInfoAdapter extends RecyclerView.Adapter<TransactionInfo
                 this.tvPaymentId.setText(infoItem.paymentId.equals("0000000000000000") ?
                         (infoItem.subaddress != 0 ?
                                 (context.getString(R.string.tx_subaddress, infoItem.subaddress)) :
-                                infoItem.hash) :
-                        infoItem.hash);
+                                Helper.getPrettyString(infoItem.hash)) :
+                        Helper.getPrettyString(infoItem.hash));
             } else {
                 this.tvPaymentId.setText(userNotes.note);
             }

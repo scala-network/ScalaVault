@@ -50,48 +50,50 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
+                android:layout_marginStart="12dp"
                 android:orientation="vertical">
 
                 <TextView
                     android:id="@+id/tx_amount"
                     style="@style/ScalaText.PosAmount"
-                    android:layout_width="match_parent"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:textColor="@color/c_green_bright"
-                    android:gravity="end"
-                    tools:text="+ 999.99" />
+                    tools:text="+ 99999999.99" />
 
                 <TextView
                     android:id="@+id/tx_fee"
                     style="@style/ScalaText.PosFee"
-                    android:layout_width="match_parent"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:gravity="end"
                     tools:text="Fee 1.22" />
             </LinearLayout>
         </LinearLayout>
 
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="12dp"
+            android:orientation="vertical"
+            android:layout_weight="6"
+            android:gravity="end">
+
         <TextView
             android:id="@+id/tx_paymentid"
             style="@style/ScalaText.PaymentID"
-            android:layout_width="0dp"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:layout_marginEnd="16dp"
-            android:layout_marginStart="16dp"
-            android:layout_weight="13"
-            android:gravity="start"
-            tools:text="0123456789abcdef" />
+            tools:text="PaymendId"
+            android:visibility="visible"/>
 
         <TextView
             android:id="@+id/tx_datetime"
             style="@style/ScalaText.PosDate"
-            android:layout_width="0dp"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:layout_weight="6"
-            android:gravity="center"
             tools:text="2020-08-19 21:32" />
+
+        </LinearLayout>
 
         <ImageView
             android:layout_width="wrap_content"

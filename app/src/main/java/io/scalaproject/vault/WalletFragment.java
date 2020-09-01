@@ -432,7 +432,7 @@ public class WalletFragment extends Fragment
         tvAddressType.setText("Primary Address");
 
         tvWalletName.setText(walletName);
-        tvWalletAddress.setText(Helper.getPrettyAddress(walletAddress));
+        tvWalletAddress.setText(Helper.getPrettyString(walletAddress));
     }
 
     public void setActivityTitle(Wallet wallet) {
@@ -451,7 +451,7 @@ public class WalletFragment extends Fragment
             tvAddressType.setText("Stealth Address");
         }
 
-        tvWalletAddress.setText(Helper.getPrettyAddress(wallet.getAddress()));
+        tvWalletAddress.setText(Helper.getPrettyString(wallet.getAddress()));
 
         activityCallback.setTitle(walletTitle, walletSubtitle);
         Timber.d("wallet title is %s", walletTitle);
