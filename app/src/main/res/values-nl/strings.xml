@@ -332,7 +332,7 @@
     <string name="status_wallet_connect_wrongversion">Incompatibele versie van node. Je moet upgraden!</string>
 
     <string name="menu_info">Details</string><!--Changed to: Show Secrets!-->
-    <string name="menu_StealthMode">Street Mode</string>
+    <string name="menu_StealthMode">Stealth Mode</string>
 
     <string name="info_nodes_enabled">Node-o-matiC enabled, tap for more info.</string>
     <string name="node_height">Last block updated: %1$s</string>

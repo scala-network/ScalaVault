@@ -448,7 +448,7 @@ public class WalletFragment extends Fragment
             tvAddressType.setText("Primary Address");
         } else { // Stealth Address
             ivAddressType.setImageDrawable(getResources().getDrawable(R.drawable.ic_stealth_address));
-            tvAddressType.setText("Stealth Address");
+            tvAddressType.setText("Subaddress");
         }
 
         tvWalletAddress.setText(Helper.getPrettyString(wallet.getAddress()));
