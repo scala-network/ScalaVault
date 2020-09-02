@@ -73,7 +73,7 @@ public class LoginFragment extends Fragment implements WalletInfoAdapter.OnInter
     private ImageButton ibNode;
     private TextView tvNodeName;
     private TextView tvNodeAddress;
-    private View pbNode, pbProgress;
+    private View pbNode;
     private View llNode;
 
     private RecyclerView recyclerView;
@@ -212,8 +212,6 @@ public class LoginFragment extends Fragment implements WalletInfoAdapter.OnInter
         ibNode = view.findViewById(R.id.ibNode);
         tvNodeName = view.findViewById(R.id.tvNodeName);
         tvNodeAddress = view.findViewById(R.id.tvNodeAddress);
-
-        pbProgress = view.findViewById(R.id.pbProgress);
 
         view.findViewById(R.id.ibOption).setOnClickListener(new View.OnClickListener() {
             @Override
@@ -458,7 +456,6 @@ public class LoginFragment extends Fragment implements WalletInfoAdapter.OnInter
             ibNode.setVisibility(View.INVISIBLE);
 
             activityCallback.showProgressDialog(R.string.connection_remote_daemon);
-            //pbProgress.setVisibility(View.VISIBLE);
 
             activityCallback.setNode(null);
         }
@@ -488,7 +485,6 @@ public class LoginFragment extends Fragment implements WalletInfoAdapter.OnInter
             if (!isAdded()) return;
 
             activityCallback.hideProgressDialog();
-            //pbProgress.setVisibility(View.GONE);
 
             pbNode.setVisibility(View.INVISIBLE);
             llNode.setVisibility(View.VISIBLE);
