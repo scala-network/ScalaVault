@@ -5,7 +5,8 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:paddingTop="8dp"
     android:paddingEnd="16dp"
-    android:paddingStart="16dp">
+    android:paddingStart="16dp"
+    android:background="@color/bg_lighter">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -135,7 +136,7 @@
             android:layout_height="55dp"
             android:layout_gravity="center"
             android:layout_marginTop="8dp"
-            android:backgroundTint="@color/bg_lighter"
+            android:backgroundTint="@color/btn_bg_default"
             android:insetLeft="2dp"
             android:insetRight="2dp"
             android:text="Download"
