@@ -473,7 +473,10 @@ public class WalletService extends Service {
     @Nullable
     private Wallet.Status start(String walletName, String walletPassword) {
         Timber.d("start()");
-        startNotfication();
+
+        // Remove notifications for now... we don't need it with the wallet.
+        //startNotfication();
+
         showProgress(getString(R.string.status_wallet_loading));
         showProgress(10);
         if (listener == null) {
