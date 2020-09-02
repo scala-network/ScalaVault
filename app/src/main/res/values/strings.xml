@@ -446,6 +446,6 @@
     <string name="privacy_policy_intro">We care about your privacy. To learn more, please read our Privacy Policy.</string>
     <string name="privacy_policy_label">Privacy Policy</string>
     <string name="primary_address">Primary Address</string>
-    <string name="menu_wallets">Wallets</string>
     <string name="mm_url">https://github.com/scala-network/MobileMiner/releases</string>
+    <string name="connection_remote_daemon">Connecting to remote node...</string>
 </resources>

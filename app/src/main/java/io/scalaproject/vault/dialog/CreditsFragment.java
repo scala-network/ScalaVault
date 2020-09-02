@@ -33,6 +33,7 @@ import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 import android.text.Html;
 import android.text.method.LinkMovementMethod;
+import android.text.method.MovementMethod;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.TextView;
@@ -60,10 +61,13 @@ public class CreditsFragment extends DialogFragment {
     public Dialog onCreateDialog(Bundle savedInstanceState) {
         final View view = LayoutInflater.from(getActivity()).inflate(R.layout.fragment_credits, null);
 
-        ((TextView) view.findViewById(R.id.tvCredits)).setText(Html.fromHtml(getString(R.string.credits_text)));
+        TextView tvScalaURL = view.findViewById(R.id.ScalaURL);
+        tvScalaURL.setText(Html.fromHtml(getString(R.string.ScalaLink)));
+        tvScalaURL.setMovementMethod(LinkMovementMethod.getInstance());
 
-        ((TextView) view.findViewById(R.id.ScalaURL)).setText(Html.fromHtml(getString(R.string.ScalaLink)));
-        ((TextView) view.findViewById(R.id.monerujoURL)).setText(Html.fromHtml(getString(R.string.monerujoLink)));
+        TextView tvmonerujoURL = view.findViewById(R.id.monerujoURL);
+        tvmonerujoURL.setText(Html.fromHtml(getString(R.string.monerujoLink)));
+        tvmonerujoURL.setMovementMethod(LinkMovementMethod.getInstance());
 
         AlertDialog.Builder builder = new AlertDialog.Builder(getActivity(), R.style.AlertDialogCustom);
         builder.setView(view);

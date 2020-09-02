@@ -112,12 +112,21 @@
             style="@style/ScalaLabel.Heading"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginStart="8dp"
             android:layout_marginBottom="8dp"
             android:gravity="start|center"
             android:paddingTop="8dp"
             android:textColor="@color/txt_headline"
             android:text="@string/label_login_wallets" />
+
+        <ProgressBar
+            android:id="@+id/pbProgress"
+            style="@style/Widget.AppCompat.ProgressBar.Horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:indeterminate="true"
+            android:indeterminateTintMode="src_atop"
+            android:indeterminateTint="@color/bg_blue"
+            android:visibility="gone" />
 
         <FrameLayout
             android:layout_width="match_parent"

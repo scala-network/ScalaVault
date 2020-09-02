@@ -489,9 +489,11 @@ public class WalletFragment extends Fragment
                 long walletHeight = wallet.getBlockChainHeight();
                 long n = daemonHeight - walletHeight;
                 sync = getString(R.string.status_syncing) + " " + formatter.format(n) + " " + getString(R.string.status_remaining);
+
                 if (firstBlock == 0) {
                     firstBlock = walletHeight;
                 }
+
                 int x = 100 - Math.round(100f * n / (1f * daemonHeight - firstBlock));
                 if (x == 0) x = 101; // indeterminate
                 setProgress(x);
@@ -499,11 +501,13 @@ public class WalletFragment extends Fragment
             } else {
                 sync = getString(R.string.status_synced) + " " + formatter.format(wallet.getBlockChainHeight());
                 ivSynced.setVisibility(View.VISIBLE);
+                setProgress(-1);
             }
         } else {
             sync = getString(R.string.status_wallet_connecting);
             setProgress(101);
         }
+
         setProgress(sync);
 
         if(txInfoAdapter.getItemCount() > 0) {

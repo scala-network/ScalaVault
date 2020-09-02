@@ -396,7 +396,7 @@ public class Wallet {
 //virtual bool parse_uri(const std::string &uri, std::string &address, std::string &payment_id, uint64_t &tvAmount, std::string &tx_description, std::string &recipient_name, std::vector<std::string> &unknown_parameters, std::string &error) = 0;
 //virtual bool rescanSpent() = 0;
 
-    private static final String NEW_ACCOUNT_NAME = "Untitled account"; // src/wallet/wallet2.cpp:941
+    private static final String NEW_ACCOUNT_NAME = "Untitled Address"; // src/wallet/wallet2.cpp:941
 
     public void addAccount() {
         addAccount(NEW_ACCOUNT_NAME);

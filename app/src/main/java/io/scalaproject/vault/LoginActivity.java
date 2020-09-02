@@ -221,6 +221,16 @@ public class LoginActivity extends BaseActivity
     }
 
     @Override
+    public void showProgressDialog(final Integer msg_id) {
+        super.showProgressDialog(msg_id);
+    }
+
+    @Override
+    public void hideProgressDialog() {
+        super.dismissProgressDialog();
+    }
+
+    @Override
     protected void onCreate(Bundle savedInstanceState) {
         Timber.d("onCreate()");
         super.onCreate(savedInstanceState);
@@ -333,10 +343,20 @@ public class LoginActivity extends BaseActivity
         };
 
         AlertDialog.Builder builder = new AlertDialog.Builder(this, R.style.AlertDialogCustom);
-        AlertDialog diag = builder.setMessage(getString(R.string.details_alert_message))
+        AlertDialog dialog = builder.setMessage(getString(R.string.details_alert_message))
                 .setPositiveButton(getString(R.string.details_alert_yes), dialogClickListener)
                 .setNegativeButton(getString(R.string.details_alert_no), dialogClickListener)
                 .show();
+
+        LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(
+                LinearLayout.LayoutParams.WRAP_CONTENT,
+                LinearLayout.LayoutParams.WRAP_CONTENT
+        );
+        params.setMargins(20,0,0,0);
+
+        Button posButton = dialog.getButton(DialogInterface.BUTTON_POSITIVE);
+        if(posButton != null)
+            posButton.setLayoutParams(params);
     }
 
     @Override
@@ -583,11 +603,21 @@ public class LoginActivity extends BaseActivity
         };
 
         AlertDialog.Builder builder = new AlertDialog.Builder(this, R.style.AlertDialogCustom);
-        builder.setMessage(getString(R.string.archive_alert_message))
+        AlertDialog dialog = builder.setMessage(getString(R.string.archive_alert_message))
                 .setTitle(walletName)
                 .setPositiveButton(getString(R.string.archive_alert_yes), dialogClickListener)
                 .setNegativeButton(getString(R.string.archive_alert_no), dialogClickListener)
                 .show();
+
+        LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(
+                LinearLayout.LayoutParams.WRAP_CONTENT,
+                LinearLayout.LayoutParams.WRAP_CONTENT
+        );
+        params.setMargins(20,0,0,0);
+
+        Button posButton = dialog.getButton(DialogInterface.BUTTON_POSITIVE);
+        if(posButton != null)
+            posButton.setLayoutParams(params);
     }
 
     void reloadWalletList() {
@@ -597,17 +627,6 @@ public class LoginActivity extends BaseActivity
                     getSupportFragmentManager().findFragmentById(R.id.fragment_container);
             if (loginFragment != null) {
                 loginFragment.loadList();
-            }
-        } catch (ClassCastException ex) {
-        }
-    }
-
-    private void showLoginFragment() {
-        Timber.d("showLoginFragment()");
-        try {
-            Fragment f = getSupportFragmentManager().findFragmentById(R.id.fragment_container);
-            if (f instanceof LoginFragment) {
-                onBackPressed();
             }
         } catch (ClassCastException ex) {
         }
@@ -1172,7 +1191,18 @@ public class LoginActivity extends BaseActivity
                 startActivity(getIntent().addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK));
             }
         });
-        builder.show();
+
+        AlertDialog dialog = builder.show();
+
+        LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(
+                LinearLayout.LayoutParams.WRAP_CONTENT,
+                LinearLayout.LayoutParams.WRAP_CONTENT
+        );
+        params.setMargins(20,0,0,0);
+
+        Button posButton = dialog.getButton(DialogInterface.BUTTON_POSITIVE);
+        if(posButton != null)
+            posButton.setLayoutParams(params);
     }
 
     @Override
@@ -1240,9 +1270,6 @@ public class LoginActivity extends BaseActivity
                 return true;
             case R.id.action_nodes:
                 onNodePrefs();
-                return true;
-            case R.id.action_wallets:
-                showLoginFragment();
                 return true;
             case R.id.action_ledger_seed:
                 Fragment f = getSupportFragmentManager().findFragmentById(R.id.fragment_container);

@@ -3,6 +3,12 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <item
+        android:id="@+id/action_wallets"
+        android:orderInCategory="75"
+        android:title="@string/label_login_wallets"
+        app:showAsAction="never"/>
+
+    <item
         android:id="@+id/action_StealthMode"
         android:checkable="true"
         android:icon="@drawable/ic_stealth_mode_on"

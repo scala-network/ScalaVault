@@ -295,6 +295,9 @@ public class WalletActivity extends BaseActivity implements WalletFragment.Liste
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
+            case R.id.action_wallets:
+                showLoginFragment();
+                return true;
             case R.id.action_rescan:
                 onWalletRescan();
                 return true;
@@ -336,6 +339,18 @@ public class WalletActivity extends BaseActivity implements WalletFragment.Liste
                 return true;
             default:
                 return super.onOptionsItemSelected(item);
+        }
+    }
+
+    private void showLoginFragment() {
+        Timber.d("showLoginFragment()");
+        try {
+            onBackPressed();
+            /*Fragment f = getSupportFragmentManager().findFragmentById(R.id.fragment_container);
+            if (f instanceof LoginFragment) {
+                onBackPressed();
+            }*/
+        } catch (ClassCastException ex) {
         }
     }
 
@@ -1076,7 +1091,7 @@ public class WalletActivity extends BaseActivity implements WalletFragment.Liste
         for (int i = 0; i < n; i++) {
             final String label = (showBalances ?
                     getString(R.string.label_account, i == 0 ? getString(R.string.primary_address) : wallet.getAccountLabel(i), Helper.getDisplayAmount(wallet.getBalance(i), 2))
-                    : wallet.getAccountLabel(i));
+                    : i == 0 ? getString(R.string.primary_address) : wallet.getAccountLabel(i));
 
             final MenuItem item = menu.add(R.id.accounts_list, getAccountId(i), 2 * i, label);
             item.setIcon(i == 0 ? R.drawable.ic_primary_address : R.drawable.ic_stealth_address);
