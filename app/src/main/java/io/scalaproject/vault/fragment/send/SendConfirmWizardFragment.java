@@ -326,6 +326,8 @@ public class SendConfirmWizardFragment extends SendWizardFragment implements Sen
             passwordDialog.getWindow().setFlags(WindowManager.LayoutParams.FLAG_SECURE, WindowManager.LayoutParams.FLAG_SECURE);
         }
 
+        passwordDialog.show();
+
         LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(
                 LinearLayout.LayoutParams.WRAP_CONTENT,
                 LinearLayout.LayoutParams.WRAP_CONTENT
@@ -334,8 +336,6 @@ public class SendConfirmWizardFragment extends SendWizardFragment implements Sen
 
         Button posButton = ((android.app.AlertDialog) passwordDialog).getButton(DialogInterface.BUTTON_POSITIVE);
         posButton.setLayoutParams(params);
-
-        passwordDialog.show();
     }
 
     // creates a pending transaction and calls us back with transactionCreated()

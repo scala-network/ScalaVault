@@ -46,8 +46,8 @@
 
     <color name="tx_green">#2ee584</color>
     <color name="tx_red">#e85238</color>
-    <color name="tx_pending">@color/scalaFab</color>
-    <color name="tx_failed">@color/scalaBlack</color>
+    <color name="tx_pending">@color/c_light_grey</color>
+    <color name="tx_failed">@color/c_yellow</color>
 
     <color name="gradientOrange">#6190ff</color>
     <color name="gradientPink">#2f333d</color>

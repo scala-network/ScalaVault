@@ -45,6 +45,6 @@
         android:layout_gravity="start"
         android:textAllCaps="true"
         android:textStyle="bold"
-        android:text="Stealth Addresses" />
+        android:text="Subaddresses" />
 
 </LinearLayout>

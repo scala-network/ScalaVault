@@ -40,7 +40,6 @@
                     android:layout_alignParentStart="true"
                     android:layout_toStartOf="@+id/bPasteAddress"
                     app:counterEnabled="true"
-                    app:counterMaxLength="97"
                     app:errorEnabled="true">
 
                     <com.google.android.material.textfield.TextInputEditText
