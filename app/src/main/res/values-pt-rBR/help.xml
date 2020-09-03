@@ -292,7 +292,7 @@
 
     <string name="help_uri"><![CDATA[
         <h1>Usando um link de pagamento</h1>
-        <p>Você abriu o monerujo a partir de um link de pagamento. Para enviar os fundos, siga estes passos:</p>
+        <p>Você abriu o Scala Vault a partir de um link de pagamento. Para enviar os fundos, siga estes passos:</p>
         <p>
         1. Abra a carteira da qual você quer gastar<br>
         2. Espere que a carteira esteja sincronizada &amp; o botão "Enviar" vai aparecer<br>

@@ -33,11 +33,6 @@
     <string name="info_xlato_enabled">Pagamento BTC abilitato, tocca per maggiori informazioni.</string>
     <string name="info_ledger_enabled">Ledger abilitato, tocca per maggiori informazioni.</string>
 
-    <string name="info_xlato"><![CDATA[
-        <b>Hai inserito un indirizzo Bitcoin.</b><br/>
-        <i>Invierai XLA e il destinatario riceverà BTC tramite il servizio <b>XLA.TO</b>.</i>
-    ]]></string>
-
     <string name="info_send_xlato_success_order_label">Ordine XLA.TO</string>
 
     <string name="info_send_xlato_success_btc">%1$s BTC</string>

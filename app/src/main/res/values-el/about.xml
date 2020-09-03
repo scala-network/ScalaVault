@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="about_close">Close</string>
-    <string name="about_whoami">I am Scala Vault</string>
+    <string name="about_whoami">Scala Vault</string>
     <string name="about_version">Version %1$s (%2$d)</string>
 
     <string name="credits_text"><![CDATA[
@@ -16,7 +16,7 @@
         <h1>Privacy Policy</h1>
         <p>This page informs you of our policies regarding the collection,
         use and disclosure of personal information we receive from users of our
-        app (monerujo: Scala Wallet).
+        app (Scala Vault).
         </p>
         <p>By using the app, you agree to the collection and use of information in
         accordance with this policy.
@@ -29,7 +29,7 @@
         in encrypted form.
         </p>
         <p>Other personal data is not collected by the app.</p>
-        <p>If you use the exchange (optional) functionality, monerujo fetches the exchange
+        <p>If you use the exchange (optional) functionality, Scala Vault fetches the exchange
         rate through the public API of coinmarketcap.com.
         See their privacy policy at https://coinmarketcap.com/privacy for
         details on how data in your requests is collected.</p>
@@ -47,14 +47,14 @@
         <h2>Changes to this Privacy Policy</h2>
         <p>We may update this privacy policy from time to time. We will notify
         you of any changes by posting the new privacy policy in the app and on the
-        website (www.monerujo.io)
+        website (www.scalaproject.io)
         You are advised to review this privacy policy periodically for any changes.
         <p>This Privacy Policy was last updated: 10th November, 2017.
         </p>
         <h2>Contact Us</h2>
         <p>If you have any questions about our privacy policy,
         or how your data is being collected and processed,
-        please e-mail privacy@monerujo.io.
+        please e-mail hello@scalaproject.io.
         </p>
         ]]></string>
 </resources>

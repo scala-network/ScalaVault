@@ -132,7 +132,7 @@
 
     <string name="xla_unconfirmed_amount">%1$s XLA obekräftade</string>
 
-    <string name="service_description">monerujo-tjänsten</string>
+    <string name="service_description">Scala Vault-tjänsten</string>
 
     <string name="status_synced">Synkade:</string>
     <string name="status_remaining">Återstående block</string>
@@ -157,7 +157,7 @@
     <string name="generate_name_hint">Plånbokens namn</string>
     <string name="generate_password_hint">Plånbokens lösenfras</string>
     <string name="generate_fingerprint_hint">Tillåt öppning av plånboken med fingeravtryck</string>
-    <string name="generate_fingerprint_warn"><![CDATA[<strong>Autentisering med fingeravtryck</strong> <p>När fingeravtrycksautentisering är aktiverad kan du se plånbokens saldo och ta emot pengar utan att ange lösenord.</p> <p>Men för ytterligare säkerhet kräver monerujo ändå att du anger lösenord för att granska information om plånboken eller skicka pengar.</p> <strong>Säkerhetsvarning</strong> <p>Slutligen vill monerujo påminna dig att vem som helst som kan komma åt ditt fingeravtryck kan se saldot i din plånbok.</p> <p>En elak användare i din närhet kan till exempel öppna din plånbok när du sover.</p> <strong>Är det säkert att du vill aktivera denna funktion?</strong>]]></string>
+    <string name="generate_fingerprint_warn"><![CDATA[<strong>Autentisering med fingeravtryck</strong> <p>När fingeravtrycksautentisering är aktiverad kan du se plånbokens saldo och ta emot pengar utan att ange lösenord.</p> <p>Men för ytterligare säkerhet kräver Scala Vault ändå att du anger lösenord för att granska information om plånboken eller skicka pengar.</p> <strong>Säkerhetsvarning</strong> <p>Slutligen vill monerujo påminna dig att vem som helst som kan komma åt ditt fingeravtryck kan se saldot i din plånbok.</p> <p>En elak användare i din närhet kan till exempel öppna din plånbok när du sover.</p> <strong>Är det säkert att du vill aktivera denna funktion?</strong>]]></string>
     <string name="generate_bad_passwordB">Lösenfraserna matchar inte</string>
     <string name="generate_empty_passwordB">Lösenfrasen får inte vara tom</string>
     <string name="generate_buttonGenerate">Skapa min plånbok nu då!</string>

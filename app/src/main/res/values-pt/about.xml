@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="about_close">Fechar</string>
-    <string name="about_whoami">Eu sou o Scala Vault</string>
+    <string name="about_whoami">Scala Vault</string>
     <string name="about_version">Versão %1$s (%2$d)</string>
 
     <string name="credits_text"><![CDATA[
@@ -16,7 +16,7 @@
         <h1>Política de Privacidade</h1>
         <p>Esta página contém informação acerca das nossas políticas de recolha, uso
         e divulgação das informações pessoais que recebemos dos utilizadores
-        da nossa app (monerujo: Scala Wallet).
+        da nossa app (Scala Vault).
         </p>
         <p>Ao utilizar esta app está a concordar com a recolha e uso de
         informação de acordo com esta política.
@@ -29,14 +29,11 @@
         encriptada.
         </p>
         <p>Quaisquer outros dados pessoais não são recolhidos pela app.</p>
-        <p>Se utilizar a conversão para USD/EUR, o monerujo obtém as taxas de conversão a
+        <p>Se utilizar a conversão para USD/EUR, o Scala Vault obtém as taxas de conversão a
         partir da API pública do kraken.com.
         Confirme a política de privacidade deste serviço em https://www.kraken.com/legal/privacy para
         mais detalhes em como estes pedidos são processados (especialmente a
         secção "Informação que recolhemos automaticament").</p>
-        <p>Se utilizar esta app para pagar em BTC, você estará a utilizar o serviço XLA.TO.
-        Veja a sua política de privacidade em https://xla.to/ para mais detalhes. O monerujo envia
-        para este serviço a quantidade e o endereço de destino das BTC. O seu IP vai ser registado.</p>
         <h2>Permissões da app</h2>
         <ul>
         <li>INTERNET : Ligar à rede Scala</li>
@@ -48,14 +45,14 @@
         <h2>Alterações a esta política de privacidade</h2>
         <p>Nós podemos alterar esta política de privacidade de tempos em temps. Iremos notificar
         quaisquer alterações actualizando esta política de privacidade na app e no
-        website oficial (www.monerujo.io)
+        website oficial (www.scalaproject.io)
         É aconselhável que reveja esta política de privacidade periodicamente para conferir quaisquer alterações.
         <p>A última actualização à política de privacidade foi em: 10 de Novembro de 2017.
         </p>
         <h2>Contacte-nos</h2>
         <p>Se tiver alguma questão acerca da nossa política de privacidade,
         ou sobre como os seus dados são recolhidos e processados,
-        por favor envie um email para privacy@monerujo.io.
+        por favor envie um email para hello@scalaproject.io.
         </p>
         ]]></string>
 </resources>

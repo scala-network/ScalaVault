@@ -140,7 +140,7 @@
 
     <string name="xla_unconfirmed_amount">%1$s XLA onbevestigd</string>
 
-    <string name="service_description">monerujo-service</string>
+    <string name="service_description">Scala Vault-service</string>
 
     <string name="status_synced">Gesynchroniseerd:</string>
     <string name="status_remaining">Blokken te gaan</string>
@@ -168,7 +168,7 @@
     <string name="generate_fingerprint_warn"><![CDATA[
         strong>Verificatie met vingerafdruk</strong>
         <p>Als je verificatie met vingerafdruk toestaat, kun je het saldo van je portemonnee bekijken en geld ontvangen zonder een wachtwoord in te voeren.</p>
-        <p>Maar voor de veiligheid vereist monerujo wel dat je een wachtwoord invoert om details van de portemonnee te bekijken of geld over te maken.</p>
+        <p>Maar voor de veiligheid vereist Scala Vault wel dat je een wachtwoord invoert om details van de portemonnee te bekijken of geld over te maken.</p>
         <strong>Beveiligingswaarschuwing</strong>
         <p>Houd er rekening mee dat iedereen die toegang heeft tot je vingerafdruk het saldo van je portemonnee kan bekijken.</p>
         <p>Een kwaadwillige gebruiker kan bijvoorbeeld je portemonnee openen terwijl je slaapt.</p>

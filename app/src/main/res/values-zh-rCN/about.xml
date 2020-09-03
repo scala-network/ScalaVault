@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="about_close">关闭</string>
-    <string name="about_whoami">我是 Scala Vault</string>
+    <string name="about_whoami">Scala Vault</string>
     <string name="about_version">版本 %1$s (%2$d)</string>
 
     <string name="credits_text"><![CDATA[
@@ -14,13 +14,13 @@
 
     <string name="privacy_policy"><![CDATA[
         <h1>隐私政策</h1>
-        <p>该页将帮助您了解 monerujo: Scala Wallet 是如何收集、使用以及披露用户信息。</p>
+        <p>该页将帮助您了解 Scala Vault 是如何收集、使用以及披露用户信息。</p>
         <p>使用该App，代表您已经明确同意该隐私政策。</p>
         <h2>收集的信息</h2>
         <p>个人信息指可用于辨认个人身份的任何信息。</p>
         <p>Scala Vault只会在本地使用您的Scala密钥以及公开地址，以处理交易，并再加密后发往门罗网络。</p>
-        <p>其他个人信息都不会被 monerujo 收集。</p>
-        <p>如果您使用交易的功能(可选)，monerujo將通过coinmarketcap.com的公开
+        <p>其他个人信息都不会被 Scala Vault 收集。</p>
+        <p>如果您使用交易的功能(可选)，Scala Vault將通过coinmarketcap.com的公开
         API 获取当前汇率。如果您想了解被收集的信息如何被使用，请访问 https://coinmarketcap.com/privacy
         查看他们的隐私政策。</p>
         <p>如果您想使用该App支付款项至比特币地址，您将使用 XLA.TO 所提供的服务。Scala Vault
@@ -35,11 +35,11 @@
         <li>CAMERA : 扫描QR码以接收Scala。</li>
         </ul>
         <h2>政策更新</h2>
-        <p>本隐私政策可能会不定期更新。在更新的同时，我們也会在该App以及网站 (www.monerujo.io)
+        <p>本隐私政策可能会不定期更新。在更新的同时，我們也会在该App以及网站 (www.scalaproject.io)
         上公告新的隐私政策和改动条款。但我们仍建议您定时查看该隐私政策以及时知晓其变动。
         <p>本隐私政策最后更新日期为 2017 年 11 月 10 日。
         </p>
         <h2>联系我们</h2>
-        <p>如果您对隐私政策或个人信息的收集和处理有任何疑问，欢迎发送电子邮件至privacy@monerujo.io。</p>
+        <p>如果您对隐私政策或个人信息的收集和处理有任何疑问，欢迎发送电子邮件至hello@scalaproject.io。</p>
         ]]></string>
 </resources>

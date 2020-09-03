@@ -309,7 +309,7 @@
 
     <string name="help_uri"><![CDATA[
         <h1>Using a payment link</h1>
-        <p>You have started monerujo with a payment link. In order to send funds, please do the following:</p>
+        <p>You have started Scala Vault with a payment link. In order to send funds, please do the following:</p>
         <p>
         1. Open the wallet you want to spend from<br>
         2. Wait until the wallet is synced &amp; the "Give" button appears<br>

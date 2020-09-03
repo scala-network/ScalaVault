@@ -144,7 +144,7 @@
 
     <string name="xla_unconfirmed_amount">%1$s XLA が未承認</string>
 
-    <string name="service_description">monerujo のサービス</string>
+    <string name="service_description">Scala Vault のサービス</string>
 
     <string name="status_synced">同期済み:</string>
     <string name="status_remaining">残りのブロック</string>
@@ -172,7 +172,7 @@
     <string name="generate_fingerprint_warn"><![CDATA[
         <strong>指紋認証</strong>
         <p>指紋認証を有効化すると、あなたはウォレット残高の閲覧と資産の受取をパスワード無しで行なえます。</p>
-        <p>しかしセキュリティのため、monerujoはウォレットの詳細の閲覧と送金にはパスワードを要します。</p>
+        <p>しかしセキュリティのため、Scala Vaultはウォレットの詳細の閲覧と送金にはパスワードを要します。</p>
         <strong>セキュリティ警告</strong>
         <p>そして最後に、あなたの指紋を入手できる人間は誰でもあなたのウォレット残高を覗くことができます。</p>
         <p>例えば、あなたの周りの邪悪な人間が、あなたが寝ている間にウォレットを開くかもしれません。</p>

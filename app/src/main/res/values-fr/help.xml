@@ -314,7 +314,7 @@
 
     <string name="help_uri"><![CDATA[
         <h1>Utiliser un lien de paiement</h1>
-        <p>Vous avez démarré monerujo avec un lien de paiement. Afin d’envoyer des fonds, merci de procéder comme suit :</p>
+        <p>Vous avez démarré Scala Vault avec un lien de paiement. Afin d’envoyer des fonds, merci de procéder comme suit :</p>
         <p>
         1. Ouvrez le portefeuille à partir duquel vous souhaitez envoyer des fonds<br>
         2. Attendez que le portefeuille soit synchronisé &amp; que le bouton "Envoyer" apparaisse<br>

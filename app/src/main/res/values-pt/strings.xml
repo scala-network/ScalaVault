@@ -167,10 +167,10 @@
         <strong>Autenticação por impressão digital</strong>
         <p> Com a autenticação através da impressão digital, podes ver o teu saldo e receber fundos
             sem introduzir a palavra passe.</p>
-        <p>Mas para segurança adicional, o monerujo vai sempre pedir para introduzir a palavra passe
+        <p>Mas para segurança adicional, o Scala Vault vai sempre pedir para introduzir a palavra passe
         para ver os detalhes da carteira ou enviar fundos.</p>
         <strong>Aviso de segurança</strong>
-        <p> Finalmente, o monerujo quer relembrar que qualquer pessoa que consiga obter a tua
+        <p> Finalmente, o Scala Vault quer relembrar que qualquer pessoa que consiga obter a tua
         impressão digital vai conseguir cuscar o teu saldo da carteira.</p>
         <p> Por exemplo, um utilizador malicioso pode abrir a tua carteira enquanto estiveres a dormir.</p>
         <strong>Tens a certeza que queres activar esta funcionalidade?</strong>

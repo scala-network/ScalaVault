@@ -76,7 +76,7 @@
         új jelszó megadása (ami akár a korábbival megegyező is lehet) esetén az applikáció generálni fog
         számodra egy CrAzYpass-t, majd azzal biztosítani fogja a tárcafájljaid. Írd le!
         <h3>CrAzYpass-os tárcák</h3>
-        Ha bármikor szükségessé válik a monerujo újratelepítése (például gyári állapo visszaállítása vagy
+        Ha bármikor szükségessé válik a Scala Vault újratelepítése (például gyári állapo visszaállítása vagy
         telefoncsere esetén) vagy tárcafájljaidat egy másik eszközön, esetleg számítógépen szeretnéd használni,
         akkor ezt a visszaállító jelszót kell használnod a tárcád újbóli eléréséhez.<br/>
         A Jelszómódosítás menüpontban másik jelszót választhatsz, ám légy figyelmes, ugyanis ez új visszaállító
@@ -92,10 +92,10 @@
     <string name="help_list"><![CDATA[
         <h1>Tárcalista</h1>
         <h2>Csomópont</h2>
-        <p>A monerujo távoli csomópontot használ a Scala-hálózattal való kommunikációhoz, így nem
+        <p>A Scala Vault távoli csomópontot használ a Scala-hálózattal való kommunikációhoz, így nem
         kell az egész blokklánc egy másolatát letölteni és tárolni. A népszerű távoli csomópontokról
         és a saját csomópont futtatásáról a https://scalaworld.com weboldalon olvashatsz.<p>
-        <p>A monerujo tartalmaz néhány előbeállított távoli csomópontot. Megjegyzésre az utolsó öt
+        <p>A Scala Vault tartalmaz néhány előbeállított távoli csomópontot. Megjegyzésre az utolsó öt
         használt csomópont kerül.</p>
         <h2>Tárcák</h2>
         <p>Itt láthatod a tárcáidat. Helyileg az eszközöd belső tárhelyén, a <tt>scala vault</tt>
@@ -142,73 +142,10 @@
         <h2>Kedvezményezett címe</h2>
         <p>Azon tárca nyilvános címe, melyre Monerót küldesz. Begépelhető kézileg, de akár vágólapról vagy
         QR-kódból is beilleszthető. Többször is ellenőrizd, hogy biztosan jó címre utalsz-e.</p>
-        <p>In addition to using an XLA address, you can also use
-        <ul>
-            <li>an OpenAlias for XLA or BTC</li>
-            <li>a BTC address</li>
-            <li>a bitcoin: URI (including BIP70 like bitpay)</li>
-        </u>
-        Please note, that sending BTC is processed through the XLA.TO service (see https://xla.to
-        for details). See the section on sending BTC below.</p>
         <h2>Fizetési azonosító</h2>
         <p>Fizetési azonosítót (payment ID) használhatsz arra a célra, hogy beazonosítsd, miért történt
         tranzakció két fél között. Ez teljes mértékben opcionális és privát. A fizetési azonosító például
         lehetővé teszi egy üzlet számára a tranzakciód és a megvásárolt tételed összeegyeztetését.<p>
-        <h1>BTC-küldés</h1>
-        <h2>XLA.TO</h2>
-        <p>Az XLA.TO egy harmadik féltől származó szolgáltatás, mely Moneróról Bitcoinra való átváltóként
-        viselkedik. Az XLA.TO API-ját használjuk a Bitcoinban való fizetés monerujóba való integrálásához.
-        Kérlek, látogass el a https://xla.to weboldalra, és döntsd el magad, hogy szeretnéd-e használni.
-        A monerujo csapata nincsen kapcsolatban az XLA.TO-val és nem tudnak segítséget nyújtani a
-        szolgáltatásaikkal kapcsolatban.</p>
-        <h2>XLA.TO árfolyam<h2>
-        <p>A Mennyiség oldalon kerülnek megjelenítésre az XLA.TO szolgáltatás paraméterei. Ez magában
-        foglalja az aktuális árfolyamot, valamint a BTC alsó és felső határértékeit. Vedd figyelembe,
-        hogy ez az árfolyam ekkor még nem garantált. Megjelenítésre kerül az a mennyiség is, amely mellett
-        a BTC-tranzakció azonnal megvalósításra kerül XLA-megerősítések nélkül (részletekért olvad el az
-        XLA.TO oldalán a gyakran ismételt kérdéseket). Az XLA.TO nem számol fel extra költségeket - milyen
-        király már ez?</p>
-        <h2>XLA.TO megrendelés<h2>
-        <p>A Megerősítés oldalon láthatod a tényleges megrendelést. A megrendelés korlátozott ideig
-        érvényes - láthatod a visszaszámlálást a Küldés gombon. Az árfolyam különbözhet a korábbi képernyőkön
-        látottaktól.</p>
-        <h2>XLA.TO titkos kulcs<h2>
-        <p>Mivel a monerujo csak a tranzakciód Scala részét kezeli, így az XLA.TO titkos kulcsod
-        használható a megrendelésed Bitcoin részének nyomonkövetésére az XLA.TO kezdőlapján.</p>
-        <p>Kérjük vedd figyelembe, hogy ez a titkos kulcs csak a tranzakció kezdetétől számított
-        24 óráig érvényes!</p>
-        <h2>XLA.TO visszaszámlálás!</h2>
-        <p>Amint a visszaszámlálás eléri a nullát, új ajánlatot kell kérned az XLA.TO-tól azáltal, hogy
-        visszamész az előző lépésre, majd visszajössz a Megerősítés oldalra.</p>
-    ]]></string>
-
-    <string name="help_xlato"><![CDATA[
-        <h1>BTC-küldés</h1>
-        <h2>XLA.TO</h2>
-        <p>Az XLA.TO egy harmadik féltől származó szolgáltatás, mely Moneróról Bitcoinra való átváltóként
-        viselkedik. Az XLA.TO API-ját használjuk a Bitcoinban való fizetés monerujóba való integrálásához.
-        Kérlek, látogass el a https://xla.to weboldalra, és döntsd el magad, hogy szeretnéd-e használni.
-        A monerujo csapata nincsen kapcsolatban az XLA.TO-val és nem tudnak segítséget nyújtani a
-        szolgáltatásaikkal kapcsolatban.</p>
-        <h2>XLA.TO árfolyam<h2>
-        <p>A Mennyiség oldalon kerülnek megjelenítésre az XLA.TO szolgáltatás paraméterei. Ez magában
-        foglalja az aktuális árfolyamot, valamint a BTC alsó és felső határértékeit. Vedd figyelembe,
-        hogy ez az árfolyam ekkor még nem garantált. Megjelenítésre kerül az a mennyiség is, amely mellett
-        a BTC-tranzakció azonnal megvalósításra kerül XLA-megerősítések nélkül (részletekért olvad el az
-        XLA.TO oldalán a gyakran ismételt kérdéseket). Az XLA.TO nem számol fel extra költségeket - milyen
-        király már ez?</p>
-        <h2>XLA.TO megrendelés<h2>
-        <p>A Megerősítés oldalon láthatod a tényleges megrendelést. A megrendelés korlátozott ideig
-        érvényes - láthatod a visszaszámlálást a Küldés gombon. Az árfolyam különbözhet a korábbi képernyőkön
-        látottaktól.</p>
-        <h2>XLA.TO titkos kulcs<h2>
-        <p>ivel a monerujo csak a tranzakciód Scala részét kezeli, így az XLA.TO titkos kulcsod
-        használható a megrendelésed Bitcoin részének nyomonkövetésére az XLA.TO kezdőlapján.</p>
-        <p>Kérjük vedd figyelembe, hogy ez a titkos kulcs csak a tranzakció kezdetétől számított
-        24 óráig érvényes!</p>
-        <h2>XLA.TO visszaszámlálás!</h2>
-        <p>Amint a visszaszámlálás eléri a nullát, új ajánlatot kell kérned az XLA.TO-tól azáltal, hogy
-        visszamész az előző lépésre, majd visszajössz a Megerősítés oldalra.</p>
     ]]></string>
 
     <string name="help_create_ledger"><![CDATA[
@@ -231,7 +168,7 @@
         other public place. Previous transactions are also hidden. New transactions will be shown, so
         you can see that you have sent/received sweet Scala!</p>
         <h2>Beolvasás</h2>
-        Mivel a Scala szereti titokban tartani a dolgokat, így a monerujo-tárca minden egyes megnyitásakor
+        Mivel a Scala szereti titokban tartani a dolgokat, így a Scala Vault-tárca minden egyes megnyitásakor
         beolvasásra kerül a blokklánc, hogy megnézzük, került-e a tárcádba Scala. Ez csakis olyan információt
         tárol a telefonodon, mely a tárcádhoz tartozik. Ha már hosszú ideje nem szinkronizáltál, a művelet
         eltarthat egy ideig.
@@ -299,7 +236,7 @@
 
     <string name="help_uri"><![CDATA[
         <h1>Using a payment link</h1>
-        <p>You have started monerujo with a payment link. In order to send funds, please do the following:</p>
+        <p>You have started Scala Vault with a payment link. In order to send funds, please do the following:</p>
         <p>
         1. Open the wallet you want to spend from<br>
         2. Wait until the wallet is synced &amp; the "Give" button appears<br>

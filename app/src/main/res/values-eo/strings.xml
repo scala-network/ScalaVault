@@ -142,7 +142,7 @@
 
     <string name="xla_unconfirmed_amount">%1$s XLA nekonfirmite</string>
 
-    <string name="service_description">monerujo Servo</string>
+    <string name="service_description">Scala Vault Servo</string>
 
     <string name="status_synced">Sinkronizas:</string>
     <string name="status_remaining">Restaj blokoj</string>
@@ -171,7 +171,7 @@
         <strong>Aŭtentiĝi per fingropremaĵo</strong>
         <p>Per la fringra aŭtentiĝo, vi povos vidi la saldon de la monujo kaj ricevi monon, sen
         entajpi vian pasvorton.</p>
-        <p>Sed por plia sekureco, monerujo petos vin, ke vi retajpu vian pasvorton por vidi
+        <p>Sed por plia sekureco, Scala Vault petos vin, ke vi retajpu vian pasvorton por vidi
         monujdetalojn aŭ por elspezi.</p>
         <strong>Sekureca atentigo</strong>
         <p>Ankoraŭ indas scii, ke iu ajn, posedante vian fingropremaĵon, kapablos eltrovi la

@@ -107,7 +107,7 @@
     <string name="label_wallet_receive">收款</string>
     <string name="label_wallet_send">发送</string>
     <string name="xla_unconfirmed_amount">%1$s XLA未确认</string>
-    <string name="service_description">monerujo服务</string>
+    <string name="service_description">Scala Vault服务</string>
     <string name="status_synced">已同步：</string>
     <string name="status_remaining">区块剩余</string>
     <string name="status_syncing">扫描中：</string>
@@ -130,9 +130,9 @@
     <string name="generate_fingerprint_warn"><![CDATA[
 <strong>指纹授权</strong>
 <p>启用指纹授权后，无需输入密码，也可查看钱包余额和收款。</p>
-<p>出于安全性的考量，若要查看钱包明细和汇款，monerujo还是会要求您输入密码。</p>
+<p>出于安全性的考量，若要查看钱包明细和汇款，Scala Vault还是会要求您输入密码。</p>
 <strong>安全警告</strong>
-<p>最后monerujo提醒您，任何取得您指纹的人，都能够进入您的账户。</p>
+<p>最后Scala Vault提醒您，任何取得您指纹的人，都能够进入您的账户。</p>
 <p>比如，他人可能趁您熟睡时，使用您的指纹登录您的账户。</p>
 <strong>您确定要开启此功能？</strong>
 ]]></string>

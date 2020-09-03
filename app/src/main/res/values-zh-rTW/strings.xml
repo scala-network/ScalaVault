@@ -142,7 +142,7 @@
 
     <string name="xla_unconfirmed_amount">%1$s 未確認的 XLA </string>
 
-    <string name="service_description">monerujo 服務</string>
+    <string name="service_description">Scala Vault 服務</string>
 
     <string name="status_synced">已同步區塊：</string>
     <string name="status_remaining">剩餘區塊</string>
@@ -172,7 +172,7 @@
         <p>啟用指紋驗證後，無需輸入密碼，就可以查看錢包餘額並接收資金。</p>
         <p>但為安全起見，查看錢包詳細資訊或發送資金時，仍須輸入密碼。</p>
         <strong>安全警告</strong>
-        <p>最後，monerujo 提醒您，任何可以取得您指紋的人都能夠窺視您的錢包餘額。</p>
+        <p>最後，Scala Vault 提醒您，任何可以取得您指紋的人都能夠窺視您的錢包餘額。</p>
         <p>例如，您身邊的惡意使用者可以趁您睡著時使用您的指紋開啟錢包。</p>
         <strong>您確定要啟用本功能嗎？</strong>
     ]]></string>

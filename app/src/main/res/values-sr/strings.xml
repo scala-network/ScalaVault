@@ -144,7 +144,7 @@
 
     <string name="xla_unconfirmed_amount">%1$s XLA nepotvrđeno</string>
 
-    <string name="service_description">monerujo Servis</string>
+    <string name="service_description">Scala Vault Servis</string>
 
     <string name="status_synced">Sinhronizovano:</string>
     <string name="status_remaining">Preostali blokovi</string>
@@ -173,10 +173,10 @@
         <strong>Autorizacija otiska prsta</strong>
         <p>Sa omogućenom autorizacijom otiska prsta možeš videti stanje u novčaniku i primiti sredstva
         bez unosa lozinke.</p>
-        <p>Ali za dodatnu sigurnost, monerujo će ipak tražiti da uneseš lozinku za
+        <p>Ali za dodatnu sigurnost, Scala Vault će ipak tražiti da uneseš lozinku za
         pregledanje novčaničkih detalja ili slanje sredstava.</p>
         <strong>Sigurnosno upozorenje</strong>
-        <p>Konačno, monerujo želi da te podseti da biloko ko može imati tvoj otisak prsta biće
+        <p>Konačno, Scala Vault želi da te podseti da biloko ko može imati tvoj otisak prsta biće
         sposoban da zaviri u stanje tvog novčanika.</p>
         <p>Na primer, zlonamerni korisnik iz tvoje okoline može ti otvoriti novčanik dok spavaš.</p>
         <strong>Da li si siguran da omogućavaš ovu funkciju?</strong>

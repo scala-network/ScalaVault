@@ -169,7 +169,7 @@
     <string name="generate_fingerprint_warn"><![CDATA[
         <strong>Autenticação por impressão digital</strong>
         <p>Com a autenticação por impressão digital ativa, é possível verificar o saldo e receber transações sem escrever a senha.</p>
-        <p>Porém por questões de segurança extra, o monerujo seguirá solicitando sua senha para ver detalhes da carteira ou enviar transações.</p>
+        <p>Porém por questões de segurança extra, o Scala Vault seguirá solicitando sua senha para ver detalhes da carteira ou enviar transações.</p>
         <strong>Aviso de Segurança</strong>
         <p>Queremos lembrar que qualquer pessoa com acesso às suas digitais poderá espiar o seu saldo.</p>
         <p>Por exemplo, uma pessoa com má intenção pode abrir sua carteira usando sua digital enquanto você dorme.</p>

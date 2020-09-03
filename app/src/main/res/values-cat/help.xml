@@ -78,7 +78,7 @@
          de descarregar i emmagatzemar una còpia de tota la blockchain sencera. Podeu trobar una llista dels nodes remots més populars o aprendre a configurar el vostre propi node 	remot aquí https://scalaworld.com/<p>
         <p>Scala Vault té alguns Nodes remots incorporats. Se’n recorda dels últims cinc nodes empleats.</p>
         <h2>Portamonedes</h2>
-        <p>Aquí podeu veure els portamonedes. Es troben a la carpeta <tt> monerujo </tt>
+        <p>Aquí podeu veure els portamonedes. Es troben a la carpeta <tt> Scala Vault </tt>
          dins l’emmagatzematge intern del dispositiu. Podeu utilitzar una aplicació d’exploració d’arxius per veure’ls. Haurieu de fer còpies de seguretat d’aquesta carpeta de 	manera regular en un emmagatzematge extern al dispositiu en cas que el vostre dispositiu exploti o el robin.</p>
         <p>Seleccioneu una portamonedes per obrir-lo o premeu el botó "+" per crear-ne un de nou.
          O seleccioneu una de les operacions del portamonedes:</p>
@@ -89,7 +89,7 @@
         <h3>Canvi de Nom</h3>
         <p>Canvia el nom del portamonedes. El canvi de nom no afecta a les còpies de seguretat.</p>
         <h3>Còpia de Seguretat</h3>
-        <p>Feu una còpia del portamonedes en la carpeta <tt> backups </tt> dins del <tt> monerujo </tt>
+        <p>Feu una còpia del portamonedes en la carpeta <tt> backups </tt> dins del <tt> Scala Vault </tt>
          per a sobreescriure còpies anteriors.</p>
         <h3>Arxiu</h3>
         <p>Feu una còpia de seguretat i a continuació elimineu el portamonedes. La còpia es mantindrà a la carpeta <tt> backups </tt>. Si ja no necessiteu les vostres còpies de 	seguretat les haureu d’eliminar amb un explorador d’arxius o una aplicació segura.</p>
@@ -231,7 +231,7 @@
 
     <string name="help_uri"><![CDATA[
         <h1>Fer servir un enllaç de pagament</h1>
-        <p>Heu iniciat monerujo amb un enllaç de pagament. Per enviar fons, feu el següent:</p>
+        <p>Heu iniciat Scala Vault amb un enllaç de pagament. Per enviar fons, feu el següent:</p>
         <p>
         1. Obrir el portamonedes desde la qual voleu gastar els fons<br>
         2. Espereu fins que es sincronitzi el portamonedes i el botó de "Donar" apareixi<br>

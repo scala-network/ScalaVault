@@ -140,7 +140,7 @@
 
     <string name="xla_unconfirmed_amount">%1$s XLA kinnitamata</string>
 
-    <string name="service_description">monerujo teenus</string>
+    <string name="service_description">Scala Vault teenus</string>
 
     <string name="status_synced">Uuendatud:</string>
     <string name="status_remaining">Plokki veel</string>
@@ -170,7 +170,7 @@
         <p>Kui sõrmejäljega avamine on sisse lülitatud, saad kontoseisu vaadata ja raha vastu võtta ilma parooli sisestamata.</p>
         <p>Kuid kõrgema turvalisuse nimel palutakse sul sisestada parool siis, kui vaatad rahakoti infot või saadad raha.</p>
         <strong>Turvahoiatus</strong>
-        <p>Lõpetuseks, monerujo tahab sulle meelde tuletada, et igaüks, kes pääseb ligi sinu sõrmejäljele, saab vaadata su kontoseisu.</p>
+        <p>Lõpetuseks, Scala Vault tahab sulle meelde tuletada, et igaüks, kes pääseb ligi sinu sõrmejäljele, saab vaadata su kontoseisu.</p>
         <p>Näiteks on võimalik pahatahtlikel inimestel nii avada su rahakott, kui sa magad.</p>
         <strong>Oled kindel, et soovid selle aktiveerida?</strong>
     ]]></string>

@@ -271,7 +271,7 @@
     <string name="send_fee">+%1$s Comisión</string>
     <string name="tx_destination_btc">Destino\n(BTC)</string>
     <string name="tx_amount_btc">Monto\n(BTC)</string>
-    <string name="about_whoami">Soy Scala Vault</string>
+    <string name="about_whoami">Scala Vault</string>
     <string name="info_send_xlato_success_order_label">Orden XLA.TO</string>
 
     <string name="info_xlato_enabled">Pago en BTC activado, toca para más info.</string>

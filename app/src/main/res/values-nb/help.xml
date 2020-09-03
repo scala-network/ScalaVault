@@ -77,7 +77,7 @@
         ett nytt passord (kanskje til og med det samme som før) vil appen generere et CrAzYpass for
         deg og sikre lommebokfilene dine med det. Skriv det ned!
         <h3>CrAzYpass lommebøker</h3>
-        Hvis du noen gang trenger å reinstallere monerujo (for eksempel etter å ha nullstilt enheten eller bytta
+        Hvis du noen gang trenger å reinstallere Scala Vault (for eksempel etter å ha nullstilt enheten eller bytta
         til en ny en) eller du vil bruke lommebokfilene dine på en annen enhet eller PC, må du bruke
         dette gjenoppretelsespassordet for å få tilgang til lommeboka di igjen.<br/>
         Ved å velge \"Change Passphrase\" fra menyen, kan du velge et annet passord. Vær oppmerksom
@@ -297,7 +297,7 @@
 
     <string name="help_uri"><![CDATA[
         <h1>Using a payment link</h1>
-        <p>You have started monerujo with a payment link. In order to send funds, please do the following:</p>
+        <p>You have started Scala Vault with a payment link. In order to send funds, please do the following:</p>
         <p>
         1. Open the wallet you want to spend from<br>
         2. Wait until the wallet is synced &amp; the "Give" button appears<br>

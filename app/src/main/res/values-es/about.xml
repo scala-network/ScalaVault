@@ -15,7 +15,7 @@
         <h1>Política de Privacidad</h1>
         <p>Esta página le informa de nuestras políticas con respecto a la recopilación, uso
         y divulgación de la información personal que recibimos de los usuarios de nuestra app
-        (monerujo: Scala Wallet).
+        (Scala Vault).
         </p>
         <p>Al usar esta app, acepta la recopilación y uso de información en acuerdo con
         esta política.
@@ -28,7 +28,7 @@
         Scala de forma cifrada.
         </p>
         <p>Otros datos personales no son recopilados por la app.</p>
-        <p>Si utiliza la funcionalidad de cambio (opcional), monerujo obtiene la tasa
+        <p>Si utiliza la funcionalidad de cambio (opcional), Scala Vault obtiene la tasa
         de cambio a través de la API pública de coinmarketcap.com.
         Vea su política de privadad en https://coinmarketcap.com/privacy para conocer más
         detalles acerca de como se recopilan los datos de sus peticiones.</p>
@@ -43,7 +43,7 @@
         <h2>Cambios a esta Política de Privacidad</h2>
         <p>Es posible que actualicemos esta política de privacidad de vez en cuando. Le
         notificaremos de cualquier cambio publicando la nueva política de privacidad en la app
-        y en el sitio web (www.monerujo.io)
+        y en el sitio web (www.scalaproject.io)
         Le aconsejamos que revise esta política de privacidad periódicamente para cualquier
         cambio.
         <p>Esta Política de Privacidad fue actualizada por última vez: 10 de Noviembre de 2017.
@@ -51,7 +51,7 @@
         <h2>Contáctanos</h2>
         <p>Si tiene cualquier cuestión sobre nuestra política de privacidad,
         o sobre como sus datos están siendo recolectados y procesados,
-        por favor escríbanos a privacy@monerujo.io
+        por favor escríbanos a hello@scalaproject.io
         </p>
         ]]></string>
 </resources>

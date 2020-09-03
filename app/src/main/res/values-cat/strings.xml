@@ -171,10 +171,10 @@
         <strong>Autenticació d’empremta digitals</strong>
         <p>Amb l’autenticació d’empremta digital habilitada podeu veure el balanç del portamonedes i rebre fons
          sense la necessitat d’introduir la contrasenya.</p>
-        <p>Per a més seguretat, monerujo encara us demanarà que introduïu la contrasenya per
+        <p>Per a més seguretat, Scala Vault encara us demanarà que introduïu la contrasenya per
          veure els detalls del portamonedes o enviar fons.</p>
         <strong>Advertència de seguretat</strong>
-        <p>Finalment, monerujo vol recordar-li que qualsevol que pugui obtenir la seva empremta digital serà
+        <p>Finalment, Scala Vault vol recordar-li que qualsevol que pugui obtenir la seva empremta digital serà
          capaç d’observar el balanç del seu portamonedes.</p>
         <p>Per exemple, un usuari maliciós del vostre voltant pot obrir la vostra cartera quan esteu dormint.</p>
         <strong>Esteu segurs d’habilitar aquesta funcionalitat?</strong>

@@ -142,7 +142,7 @@
 
     <string name="xla_unconfirmed_amount">%1$s XLA unbestätigt</string>
 
-    <string name="service_description">monerujo Service</string>
+    <string name="service_description">Scala Vault Service</string>
 
     <string name="status_synced">Synchronisiert:</string>
     <string name="status_remaining">Blöcke verbleibend</string>

@@ -140,7 +140,7 @@
 
     <string name="xla_unconfirmed_amount">%1$s XLA ubekrefta</string>
 
-    <string name="service_description">monerujo tjeneste</string>
+    <string name="service_description">Scala Vault tjeneste</string>
 
     <string name="status_synced">Synkronisert:</string>
     <string name="status_remaining">Gjenværende blokker</string>
@@ -169,10 +169,10 @@
         <strong>Fingerprint Authentication</strong>
         <p>With fingerprint authentication enabled, you can view wallet balance and receive funds
         without entering password.</p>
-        <p>But for additional security, monerujo will still require you to enter password when
+        <p>But for additional security, Scala Vault will still require you to enter password when
         viewing wallet details or sending funds.</p>
         <strong>Security Warning</strong>
-        <p>Finally, monerujo wants to remind you that anyone who can get your fingerprint will be
+        <p>Finally, Scala Vault wants to remind you that anyone who can get your fingerprint will be
         able to peep into your wallet balance.</p>
         <p>For instance, a malicious user around you can open your wallet when you are asleep.</p>
         <strong>Are you sure to enable this function?</strong>

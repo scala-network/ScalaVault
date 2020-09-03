@@ -33,11 +33,6 @@
     <string name="info_xlato_enabled">BTC fizetés engedélyezve, koppints ide a részletekért.</string>
     <string name="info_ledger_enabled">Ledger engedélyezve, koppints ide a részletekért</string>
 
-    <string name="info_xlato"><![CDATA[
-        <b>Bitcoin-címet adtál meg.</b><br/>
-        <i>XLA-t fogsz küldeni, a fogadó pedig BTC-t fog kapni az <b>XLA.TO</b> szolgáltatásán keresztül.</i>
-    ]]></string>
-
     <string name="info_send_xlato_success_order_label">XLA.TO megrendelés</string>
 
     <string name="info_send_xlato_success_btc">%1$s BTC</string>
@@ -140,7 +135,7 @@
 
     <string name="xla_unconfirmed_amount">%1$s XLA függőben</string>
 
-    <string name="service_description">monerujo szolgáltatás</string>
+    <string name="service_description">Scala Vault szolgáltatás</string>
 
     <string name="status_synced">Szinkronizálva:</string>
     <string name="status_remaining">blokk van hátra</string>
@@ -169,10 +164,10 @@
         <strong>Ujjlenyomat-azonosítás</strong>
         <p>Az ujjlenyomat-azonosítás engedélyezésével jelszó megadása nélkül tekintheted meg a
         tárcaegyenleget és fogadhatsz pénzösszegeket.</p>
-        <p>A további biztonság érdekében ugyanakkor a monerujo továbbra is jelszót fog kérni a
+        <p>A további biztonság érdekében ugyanakkor a Scala Vault továbbra is jelszót fog kérni a
         tárca részletes adatainak megtekintése és a pénzküldés esetén.</p>
         <strong>Biztonsági figyelmeztetés</strong>
-        <p>A monerujo felhívja a figyelmed arra, hogy az ujjlenyomatoddal rendelkező személy(ek)
+        <p>A Scala Vault felhívja a figyelmed arra, hogy az ujjlenyomatoddal rendelkező személy(ek)
         megtekinthetik a tárcaegyenleged.</p>
         <p>Egy rosszhiszemű személy például megnyithatja a tárcádat míg te alszol.</p>
         <strong>Biztosan engedélyezni szeretnéd ezt a funckiót?</strong>
