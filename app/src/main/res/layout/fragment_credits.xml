@@ -130,7 +130,7 @@
             android:textSize="14sp"/>
 
         <Button
-            android:id="@+id/btnDebugInfo"
+            android:id="@+id/btnDownloadMM"
             android:layout_width="140dp"
             android:layout_height="55dp"
             android:layout_gravity="center"

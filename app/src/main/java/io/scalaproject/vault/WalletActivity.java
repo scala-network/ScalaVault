@@ -1212,12 +1212,6 @@ public class WalletActivity extends BaseActivity implements WalletFragment.Liste
         Toast.makeText(this, getString(R.string.message_copy_address), Toast.LENGTH_SHORT).show();
     }
 
-    public void OnDownloadMM(View view) {
-        Uri uri = Uri.parse(getString(R.string.mm_url));
-        Intent intent = new Intent(Intent.ACTION_VIEW, uri);
-        startActivity(intent);
-    }
-
     private class AsyncAddAccount extends AsyncTask<Void, Void, Boolean> {
         boolean dialogOpened = false;
 

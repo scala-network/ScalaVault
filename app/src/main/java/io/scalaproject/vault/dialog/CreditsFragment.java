@@ -36,6 +36,7 @@ import android.text.method.LinkMovementMethod;
 import android.text.method.MovementMethod;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.widget.Button;
 import android.widget.TextView;
 
 import io.scalaproject.vault.R;
@@ -68,6 +69,16 @@ public class CreditsFragment extends DialogFragment {
         TextView tvmonerujoURL = view.findViewById(R.id.monerujoURL);
         tvmonerujoURL.setText(Html.fromHtml(getString(R.string.monerujoLink)));
         tvmonerujoURL.setMovementMethod(LinkMovementMethod.getInstance());
+
+        Button btnDownloadMM = view.findViewById(R.id.btnDownloadMM);
+        btnDownloadMM.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Uri uri = Uri.parse(getString(R.string.mm_url));
+                Intent intent = new Intent(Intent.ACTION_VIEW, uri);
+                startActivity(intent);
+            }
+        });
 
         AlertDialog.Builder builder = new AlertDialog.Builder(getActivity(), R.style.AlertDialogCustom);
         builder.setView(view);
