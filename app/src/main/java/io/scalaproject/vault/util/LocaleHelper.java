@@ -63,7 +63,7 @@ public class LocaleHelper {
         }
 
         int firstCodePointLen = str.offsetByCodePoints(0, 1);
-        return str.substring(0, firstCodePointLen).toUpperCase(locale)
+        return str.substring(0, firstCodePointLen).toUpperCase()
                 + str.substring(firstCodePointLen);
     }
 
