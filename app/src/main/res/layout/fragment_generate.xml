@@ -57,25 +57,26 @@
             android:paddingBottom="16dp"
             android:visibility="gone">
 
-            <Switch
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent" />
-
             <TextView
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
                 android:gravity="center_vertical"
                 android:text="@string/generate_fingerprint_hint"
-                android:textSize="18sp" />
+                android:textSize="14sp" />
+
+            <Switch
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent" />
         </LinearLayout>
 
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/etWalletMnemonic"
-            style="@style/Widget.MaterialComponents.TextInputLayout.FilledBox"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginBottom="@dimen/header_top_first"
+            android:textColorHint="@color/txt_inactive"
             android:visibility="gone"
             app:errorEnabled="true">
 
@@ -91,10 +92,11 @@
 
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/etWalletAddress"
-            style="@style/Widget.MaterialComponents.TextInputLayout.FilledBox"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginBottom="@dimen/header_top_first"
+            android:textColorHint="@color/txt_inactive"
             android:visibility="gone"
             app:counterEnabled="true"
             app:counterMaxLength="97"
@@ -112,10 +114,11 @@
 
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/etWalletViewKey"
-            style="@style/Widget.MaterialComponents.TextInputLayout.FilledBox"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginBottom="@dimen/header_top_first"
+            android:textColorHint="@color/txt_inactive"
             android:visibility="gone"
             app:counterEnabled="true"
             app:counterMaxLength="64"
@@ -133,10 +136,11 @@
 
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/etWalletSpendKey"
-            style="@style/Widget.MaterialComponents.TextInputLayout.FilledBox"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginBottom="@dimen/header_top_first"
+            android:textColorHint="@color/txt_inactive"
             android:visibility="gone"
             app:counterEnabled="true"
             app:counterMaxLength="64"
@@ -154,10 +158,11 @@
 
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/etWalletRestoreHeight"
-            style="@style/Widget.MaterialComponents.TextInputLayout.FilledBox"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginBottom="@dimen/header_top_first"
+            android:textColorHint="@color/txt_inactive"
             android:visibility="gone"
             app:errorEnabled="true">
 
