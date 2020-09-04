@@ -130,7 +130,7 @@
 		Zum Beispiel kann ein Unternehmen damit Zahlungen und Verkäufe miteinander verbinden.
         <h2>TX-ID</h2>
         Dies ist deine Transaktions-ID, die du benutzen kannst, um verschleierte Transaktionen mit einem Scala-
-        Blockchain-Explorer wie <a href="https://xlachain.net/">https://xlachain.net/</a> zu identifizieren.
+        Blockchain-Explorer wie <a href="https://explorer.scalaproject.io/">https://explorer.scalaproject.io/</a> zu identifizieren.
         <h2>TX-Schlüssel (Transaktionsschlüssel)</h2>
         Dies ist dein geheimer Transaktionsschlüssel. Bewahre ihn sicher auf, da er Dritten deine Signatur in einem Ring offenbart 
 	und deshalb deine Transaktionen transparent macht.

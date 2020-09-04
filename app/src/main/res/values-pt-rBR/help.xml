@@ -140,7 +140,7 @@
         o produto que você comprou.
         <h2>ID TX</h2>
         O ID da transação pode ser usado em exploradores de Blockchain do Scala como o
-        <a href="https://xlachain.net/">https://xlachain.net/</a> para identificar a transação (ofuscada).
+        <a href="https://explorer.scalaproject.io/">https://explorer.scalaproject.io/</a> para identificar a transação (ofuscada).
         <h2>Chave TX (chave da transação)</h2>
         Essa é a chava privada da sua transação. Matenha-a segura, pois ao divulgá-la para um terceiro permitirá que ele identifique
         qual das assinaturas é a sua, transformando sua transação em transparente para essa pessoa ou entidade.

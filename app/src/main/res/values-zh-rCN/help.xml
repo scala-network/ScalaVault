@@ -116,7 +116,7 @@
         你可以使用支付ID来查看交易的原因，该ID为非必填项，且其中信息不会对外公开。
         举例来说，这可以让商业机构对照你的交易和你购买的物品。
         <h2>交易ID</h2>
-        你可以使用交易ID来在Scala区块链浏览器上查看被隐藏的交易。如：<a href="https://xlachain.net/">https://xlachain.net/</a>
+        你可以使用交易ID来在Scala区块链浏览器上查看被隐藏的交易。如：<a href="https://explorer.scalaproject.io/">https://explorer.scalaproject.io/</a>
         <h2>交易密钥</h2>
         这是你的交易私钥，请妥善保存，因为泄露该私钥会暴露你在环中真正的签名，从而导致交易等信息可被他人知晓。        
 	<h2>区块</h2>

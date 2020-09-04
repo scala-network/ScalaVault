@@ -46,27 +46,35 @@ public class Notice {
     private static final String NOTICE_SHOW_XLATO_ENABLED_SEND = "notice_xlato_enabled_send";
     private static final String NOTICE_SHOW_LEDGER = "notice_ledger_enabled_login";
     private static final String NOTICE_SHOW_NODES = "notice_nodes";
+    private static final String NOTICE_SHOW_MINER = "notice_miner";
 
     private static void init() {
         synchronized (Notice.class) {
             if (notices != null) return;
             notices = new ArrayList<>();
-            /*
+
             notices.add(
                     new Notice(NOTICE_SHOW_NODES,
-                            R.string.info_nodes_enabled,
-                            R.string.help_node,
+                            R.string.info_nodes_enabled_2,
+                            R.string.help_node_2,
                             1)
             );
 
+            notices.add(
+                    new Notice(NOTICE_SHOW_MINER,
+                            R.string.info_mobile_miner,
+                            R.string.help_mobile_miner,
+                            1)
+            );
+
+            /*
             notices.add(
                     new Notice(NOTICE_SHOW_XLATO_ENABLED_SEND,
                             R.string.info_xlato_enabled,
                             R.string.help_xlato,
                             1)
             );
-            */
-            /*
+
             notices.add(
                     new Notice(NOTICE_SHOW_XLATO_ENABLED_LOGIN,
                             R.string.info_xlato_enabled,

@@ -104,7 +104,7 @@
         舉例來說這可以讓公司行號辨別你的這筆款項是用來支付某項購買的商品。
         <h2>交易 ID</h2>
         這是可以用來在 Scala 區塊鏈瀏覽器上查詢的被隱蔽交易 ID。
-        在這裡可查詢：<a href="https://xlachain.net/">https://xlachain.net/</a>
+        在這裡可查詢：<a href="https://explorer.scalaproject.io/">https://explorer.scalaproject.io/</a>
         <h2>TX KEY (交易金鑰)</h2>
         這是該筆交易的私鑰。請妥善保護這組金鑰，因為這金鑰將可揭露你該筆交易的環狀簽名而使得該筆交易透明化。
         <h2>區塊</h2>

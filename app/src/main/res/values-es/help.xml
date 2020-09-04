@@ -146,7 +146,7 @@
         negocio pueda asociar inequívocamente tu transacción con un producto que has comprado.
         <h2>ID de Transacción</h2>
         Este es un identificador de tu transacción que puede ser utilizado para ubicar tu transacción
-        ofuscada en la cadena de bloques de Scala usando un explorador como <a href="https://xlachain.net/">https://xlachain.net/</a>
+        ofuscada en la cadena de bloques de Scala usando un explorador como <a href="https://explorer.scalaproject.io/">https://explorer.scalaproject.io/</a>
         <h2>Clave de transacción</h2>
         Esta es la clave privada de tu transacción, mantenla segura ya que revelarla a un tercero
         desvela que firma en un anillo de transacciones es la tuya, por tanto haciendo tus transacciones transparentes.

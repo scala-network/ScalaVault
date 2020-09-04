@@ -134,7 +134,7 @@
 	Ad esempio può aiutare un venditore ad associare una transazione ricevuta ad un bene da te acquistato.
         <h2>TX ID (ID di Transazione)</h2>
 	Questo è l&apos;ID della transazione che puoi usare per identificare la tua transazione offuscata su un explorer della
-	blockchain Scala, ad esempio <a href="https://xlachain.net/">https://xlachain.net/</a>
+	blockchain Scala, ad esempio <a href="https://explorer.scalaproject.io/">https://explorer.scalaproject.io/</a>
         <h2>TX KEY (Chiave di transazione)</h2>
 	Questa è la tua chiave privata della transazione. Conservala al sicuro poiché rivelare questa chiave a terze
 	parti rivela quale firma in un anello è la tua, rendendo quindi la tua transazione trasparente.

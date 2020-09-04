@@ -81,6 +81,7 @@ public class GenerateFragment extends Fragment {
     private TextInputLayout etWalletSpendKey;
     private TextInputLayout etWalletRestoreHeight;
     private Button bGenerate;
+    private Switch sFingerprintAuth;
 
     private String type = null;
 
@@ -119,6 +120,7 @@ public class GenerateFragment extends Fragment {
         etWalletSpendKey = view.findViewById(R.id.etWalletSpendKey);
         etWalletRestoreHeight = view.findViewById(R.id.etWalletRestoreHeight);
         bGenerate = view.findViewById(R.id.bGenerate);
+        sFingerprintAuth = view.findViewById(R.id.sFingerprintAuth);
 
         etWalletAddress.getEditText().setRawInputType(InputType.TYPE_TEXT_FLAG_NO_SUGGESTIONS);
         etWalletViewKey.getEditText().setRawInputType(InputType.TYPE_TEXT_FLAG_NO_SUGGESTIONS);
@@ -207,11 +209,10 @@ public class GenerateFragment extends Fragment {
         if (FingerprintHelper.isDeviceSupported(getContext())) {
             llFingerprintAuth.setVisibility(View.VISIBLE);
 
-            final Switch swFingerprintAllowed = (Switch) llFingerprintAuth.getChildAt(0);
-            swFingerprintAllowed.setOnClickListener(new View.OnClickListener() {
+            sFingerprintAuth.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    if (!swFingerprintAllowed.isChecked()) return;
+                    if (!sFingerprintAuth.isChecked()) return;
 
                     AlertDialog.Builder builder = new AlertDialog.Builder(getActivity(), R.style.AlertDialogCustom);
                     builder.setMessage(Html.fromHtml(getString(R.string.generate_fingerprint_warn)))
@@ -220,7 +221,7 @@ public class GenerateFragment extends Fragment {
                             .setNegativeButton(getString(R.string.label_cancel), new DialogInterface.OnClickListener() {
                                 @Override
                                 public void onClick(DialogInterface dialogInterface, int i) {
-                                    swFingerprintAllowed.setChecked(false);
+                                    sFingerprintAuth.setChecked(false);
                                 }
                             })
                             .show();
@@ -512,7 +513,7 @@ public class GenerateFragment extends Fragment {
 
         String name = etWalletName.getEditText().getText().toString();
         String password = etWalletPassword.getEditText().getText().toString();
-        boolean fingerprintAuthAllowed = ((Switch) llFingerprintAuth.getChildAt(0)).isChecked();
+        boolean fingerprintAuthAllowed = sFingerprintAuth.isChecked();
 
         // create the real wallet password
         String crazyPass = KeyStoreHelper.getCrazyPass(getActivity(), password);

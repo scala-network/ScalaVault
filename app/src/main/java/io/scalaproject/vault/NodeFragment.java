@@ -72,7 +72,6 @@ public class NodeFragment extends Fragment
     static private NumberFormat FORMATTER = NumberFormat.getInstance();
 
     private SwipeRefreshLayout pullToRefresh;
-    private TextView tvPull;
     private View fabAddNode;
 
     private Set<NodeInfo> allNodes = new HashSet<>();
@@ -92,6 +91,10 @@ public class NodeFragment extends Fragment
         Set<NodeInfo> getAllNodes();
 
         void setUserDefinedNodes(Set<NodeInfo> userDefinedNodes);
+
+        void showProgressDialog(final Integer msg_id);
+
+        void hideProgressDialog();
     }
 
     @Override
@@ -153,8 +156,6 @@ public class NodeFragment extends Fragment
         nodesAdapter = new NodeInfoAdapter(getActivity(), this);
         recyclerView.setAdapter(nodesAdapter);
 
-        tvPull = view.findViewById(R.id.tvPull);
-
         pullToRefresh = view.findViewById(R.id.pullToRefresh);
         pullToRefresh.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
@@ -174,7 +175,7 @@ public class NodeFragment extends Fragment
         nodesAdapter.setNodes(allNodes);
 
         ViewGroup llNotice = view.findViewById(R.id.llNotice);
-        Notice.showAll(llNotice, ".*_nodes");
+        Notice.showAll(llNotice, "notice_nodes");
 
         return view;
     }
@@ -229,7 +230,7 @@ public class NodeFragment extends Fragment
             super.onPreExecute();
             nodesAdapter.setNodes(null);
             nodesAdapter.allowClick(false);
-            tvPull.setText(getString(R.string.node_scanning));
+            //activityCallback.showProgressDialog(R.string.node_scanning);
         }
 
         @Override
@@ -297,7 +298,7 @@ public class NodeFragment extends Fragment
             asyncFindNodes = null;
             if (!isAdded()) return;
             //if (isCancelled()) return;
-            tvPull.setText(getString(R.string.node_pull_hint));
+            //activityCallback.hideProgressDialog();
             pullToRefresh.setRefreshing(false);
             nodesAdapter.setNodes(allNodes);
             nodesAdapter.allowClick(true);

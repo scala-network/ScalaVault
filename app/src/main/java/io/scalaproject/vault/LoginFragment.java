@@ -195,7 +195,7 @@ public class LoginFragment extends Fragment implements WalletInfoAdapter.OnInter
         recyclerView.setAdapter(adapter);
 
         ViewGroup llNotice = view.findViewById(R.id.llNotice);
-        Notice.showAll(llNotice, ".*_login");
+        Notice.showAll(llNotice, "notice_miner");
 
         pbNode = view.findViewById(R.id.pbNode);
         llNode = view.findViewById(R.id.llNode);

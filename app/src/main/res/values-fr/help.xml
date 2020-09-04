@@ -138,7 +138,7 @@
         acheté.
         <h2>ID TX</h2>
         C’est votre ID de transaction, vous pouvez l’utiliser pour identifier vos transaction masquées
-        sur un explorateur de la chaîne de blocs Scala comme <a href="https://xlachain.net/">https://xlachain.net/</a>
+        sur un explorateur de la chaîne de blocs Scala comme <a href="https://explorer.scalaproject.io/">https://explorer.scalaproject.io/</a>
         <h2>Clef TX (Clef de Transaction)</h2>
         C’est la clef privée de votre transaction, conservez là en sécurité car la révéler à un
         tiers révèlerait quelle signature est la votre dans un cercle, et donc rendrait votre

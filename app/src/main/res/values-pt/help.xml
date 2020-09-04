@@ -127,7 +127,7 @@
         é que uma determinada transacção está a pagar.
         <h2>ID TX</h2>
         Este é o ID da tua Transacção que podes utilizar para identificar a tua transacção ofuscada
-        num explorador da Scala Blockchain como o <a href="https://xlachain.net/">https://xlachain.net/</a>
+        num explorador da Scala Blockchain como o <a href="https://explorer.scalaproject.io/">https://explorer.scalaproject.io/</a>
         <h2>Chave TX (Chave da Transacção)</h2>
         Esta é a chave privada da tua transacção, mantém-a segura já que revelá-la a um terceiro
         revela qual a tua assinatura num anel, fazendo com que a tua transacção seja transparente.

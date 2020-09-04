@@ -101,7 +101,7 @@
         <h2>Betalings-ID</h2>
         Je kunt een Betalings-ID gebruiken om aan te geven waarom je Scala verzendt. Dit is volledig optioneel en blijft vertrouwelijk tussen beide partijen. Een bedrijf kan bijvoorbeeld jouw transactie koppelen aan een artikel dat je hebt gekocht.
         <h2>Transactie-ID</h2>
-        Met je transactie-ID kun je de versleutelde transactie vinden in een Scala-blockexplorer, bijvoorbeeld <a href="https://xlachain.net/">https://xlachain.net/</a>
+        Met je transactie-ID kun je de versleutelde transactie vinden in een Scala-blockexplorer, bijvoorbeeld <a href="https://explorer.scalaproject.io/">https://explorer.scalaproject.io/</a>
         <h2>Transactiesleutel</h2>
         Dit is de geheime sleutel van je transactie. Bewaar deze veilig, want als iemand bekendmaakt welke handtekening in een ring van jou is, wordt je transactie openbaar.
         <h2>Blok</h2>

@@ -1260,7 +1260,7 @@ public class LoginActivity extends BaseActivity
                 HelpFragment.display(getSupportFragmentManager(), R.string.help_list);
                 return true;
             case R.id.action_help_node:
-                HelpFragment.display(getSupportFragmentManager(), R.string.help_node);
+                HelpFragment.display(getSupportFragmentManager(), R.string.help_node_2);
                 return true;
             case R.id.action_privacy_policy:
                 PrivacyFragment.display(getSupportFragmentManager());

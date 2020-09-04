@@ -134,7 +134,7 @@
         Môžeš použiť ID Platby na identifikáciu platby medzi dvoma stranami. Nie je to síce povinný, ale je to súkromný údaj.
 		Tak napríklad s týmto môžeš zosúladiť svoj biznis s kúpenou položkou. Táto funkcia bude v Scala nahradená podadresami.
         <h2>TX ID</h2>
-        Toto je ID transakcie, ktoré slúži na identifikáciu transakcie v Scala blockchain exploreri, ako napr. <a href="https://xlachain.net/">https://xlachain.net/</a>
+        Toto je ID transakcie, ktoré slúži na identifikáciu transakcie v Scala blockchain exploreri, ako napr. <a href="https://explorer.scalaproject.io/">https://explorer.scalaproject.io/</a>
         <h2>TX KĽÚČ (Transaction Key)</h2>
         Toto je Tvoj súkromný kľúč transakcie, uchovaj ho bezpečne a neposkytuj ho tretím stranám,
 		aby nemohli identifikovať tvoj podpis v kruhovom podpise a spraviť tak transakciu verejnú a transparentnú.		

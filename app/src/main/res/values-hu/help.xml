@@ -129,7 +129,7 @@
         lehetővé teszi egy üzlet számára a tranzakciód és a megvásárolt tételed összeegyeztetését.
         <h2>Tranzakcióazonosító</h2>
         A tranzakcióazonosítód (TX ID) szolgál arra, hogy a titkosított tranzakciódat azonosítani tudd
-        egy blokkkeresőben, mint például a <a href="https://xlachain.net/">https://xlachain.net/</a>.
+        egy blokkkeresőben, mint például a <a href="https://explorer.scalaproject.io/">https://explorer.scalaproject.io/</a>.
         <h2>Tranzakciókulcs</h2>
         Ez a tranzakciós privát kulcsod (TX KEY). Tartsd biztonságban, ugyanis harmadik félnek való megmutatása
         felfedi, hogy egy gyűrűn belül melyik aláírás a tiéd, ezáltal nyílttá téve a tranzakciódat.

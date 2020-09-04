@@ -141,7 +141,7 @@
         with an item you bought.
         <h2>TX ID</h2>
         This is your Transaction ID you can use it to identify your obfuscated transaction on a Scala
-        Blockchain explorer like <a href="https://xlachain.net/">https://xlachain.net/</a>
+        Blockchain explorer like <a href="https://explorer.scalaproject.io/">https://explorer.scalaproject.io/</a>
         <h2>TX KEY (Transaction Key)</h2>
         This is your transaction private key, keep this safe as revealing this to a third party
         reveals which signature in a ring is yours, thereby making your transaction transparent.

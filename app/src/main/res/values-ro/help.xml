@@ -118,7 +118,7 @@
         <h2>TX ID</h2>
         Acesta este ID-ul Tranzacției și poate fi folosit pentru a identifica tranzacția ta obfuscată
 		pe un explorator al bazei de date distribuită (Blockchain) a Scala, ca cel
-		aflat la acest link <a href="https://xlachain.net/">https://xlachain.net/</a>
+		aflat la acest link <a href="https://explorer.scalaproject.io/">https://explorer.scalaproject.io/</a>
         <h2>TX KEY (Cheia Tranzacției)</h2>
         Aceasta este cheia privată a tranzacției, aceasta este privată și trebuie păstrată ca atare,
 		această cheie permite unei terțe părți să dezvăluie care din semnăturile formate într-un inel

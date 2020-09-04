@@ -220,7 +220,7 @@
         商品を紐付けることができます。
         <h2>取引ID(TX ID)</h2>
         これはあなたの取引IDです。あなたはこれを難読化された形で、
-        <a href="https://xlachain.net/">https://xlachain.net/</a>
+        <a href="https://explorer.scalaproject.io/">https://explorer.scalaproject.io/</a>
         のようなブロックチェーン検索サイトで閲覧することができます。
         <h2>取引キー(TX KEY)</h2>
         これはあなたの取引用の秘密鍵です。これを第三者に公開してしまうと、

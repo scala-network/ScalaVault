@@ -117,7 +117,7 @@
         med något du köpt.
         <h2>TX ID</h2>
         Det här är ditt Transaktions-ID, det kan du använda för att identifiera förvirrande
-        transaktioner på Blockkedjeutforskare som <a href="https://xlachain.net/">https://xlachain.net/</a>
+        transaktioner på Blockkedjeutforskare som <a href="https://explorer.scalaproject.io/">https://explorer.scalaproject.io/</a>
         <h2>TX Nyckel (Transaktionsnyckel)</h2>
         Det här är din transaktions privatnyckel, förvara den här säkert eftersom tillgång till
         den avslöjar vilken signatur i en ring som är din.
