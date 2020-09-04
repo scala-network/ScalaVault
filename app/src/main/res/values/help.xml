@@ -227,6 +227,8 @@
         <p>Download it here: <a href="https://github.com/scala-network/MobileMiner/releases">Scala Miner/</a>
     ]]></string>
 
+    <string name="help_node">OBSOLETE</string>
+
     <string name="help_node_2"><![CDATA[
         <h1>Nodes</h1>
         <h2>TL;DR</h2>
