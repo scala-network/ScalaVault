@@ -79,6 +79,8 @@ public class WalletFragment extends Fragment
 
     private Spinner sCurrency;
 
+    private String _walletName, _walletAddress;
+
     private List<String> dismissedTransactions = new ArrayList<>();
 
     public void resetDismissedTransactions() {
@@ -435,12 +437,9 @@ public class WalletFragment extends Fragment
         tvWalletAddress.setText(Helper.getPrettyString(walletAddress));
     }
 
-    public void setActivityTitle(Wallet wallet) {
-        if (wallet == null) return;
-
+    private void updateWalletInfo(Wallet wallet) {
         llWalletAddress.setVisibility(View.VISIBLE);
 
-        walletTitle = wallet.getName();
         tvWalletName.setText(walletTitle);
 
         if(accountIdx <= 0) { // Primary Address
@@ -452,9 +451,15 @@ public class WalletFragment extends Fragment
         }
 
         tvWalletAddress.setText(Helper.getPrettyString(wallet.getAddress()));
+    }
 
-        activityCallback.setTitle(walletTitle, walletSubtitle);
+    public void setActivityTitle(Wallet wallet) {
+        if (wallet == null) return;
+
+        activityCallback.setTitle(wallet.getName(), walletSubtitle);
         Timber.d("wallet title is %s", walletTitle);
+
+        updateWalletInfo(wallet);
     }
 
     private long firstBlock = 0;
@@ -517,6 +522,8 @@ public class WalletFragment extends Fragment
             rvTransactions.setVisibility(View.GONE);
             tvNoTransaction.setVisibility(View.VISIBLE);
         }
+
+        updateWalletInfo(wallet);
     }
 
     Listener activityCallback;
@@ -575,6 +582,9 @@ public class WalletFragment extends Fragment
         Timber.d("onResume()");
         activityCallback.setTitle(walletTitle, walletSubtitle);
         //activityCallback.setToolbarButton(Toolbar.BUTTON_CLOSE); // TODO: Close button somewhere else
+
+        if(activityCallback.hasBoundService())
+            updateWalletInfo(activityCallback.getWallet());
 
         setProgress(syncProgress);
         setProgress(syncText);
