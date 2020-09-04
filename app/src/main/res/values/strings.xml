@@ -35,7 +35,7 @@
     <string name="info_ledger_enabled">Ledger enabled, tap for more info.</string>
 
     <string name="ScalaLink" translatable="false">&lt;a href=&quot;https://scalaproject.io&quot;&gt;Scala&lt;/a&gt;</string>
-    <string name="monerujoLink" translatable="false">&lt;a href=&quot;https://www.scalaproject.io/&quot;&gt;Scala&lt;/a&gt;</string>
+    <string name="monerujoLink" translatable="false">&lt;a href=&quot;https://github.com/m2049r/xmrwallet&quot;&gt;monerujo&lt;/a&gt;</string>
 
     <string name="info_send_xlato_success_order_label">XLA.TO Order</string>
 
