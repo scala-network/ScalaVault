@@ -76,7 +76,7 @@
         <h2>Nod</h2>
         Scala Vault använder en Avlägsen Nod för att kommunicera med Scala-nätverket utan att
         behöva ladda ner och lagra en kopia av hela blockkedjan. Du kan hitta en lista av populära
-        avlägsna noder eller lära dig hur man kör sin egen avlägsen nod här https://scalaworld.com/
+        avlägsna noder eller lära dig hur man kör sin egen avlägsen nod här https://scalaproject.io/
         <p>
         <p>Scala Vault kommer med några avlägsna noder inställda. Den kommer ihåg de 5 senast använda noderna.</p>
         <h2>Plånböcker</h2>

@@ -94,7 +94,7 @@
         <h2>Csomópont</h2>
         <p>A Scala Vault távoli csomópontot használ a Scala-hálózattal való kommunikációhoz, így nem
         kell az egész blokklánc egy másolatát letölteni és tárolni. A népszerű távoli csomópontokról
-        és a saját csomópont futtatásáról a https://scalaworld.com weboldalon olvashatsz.<p>
+        és a saját csomópont futtatásáról a https://scalaproject.io weboldalon olvashatsz.<p>
         <p>A Scala Vault tartalmaz néhány előbeállított távoli csomópontot. Megjegyzésre az utolsó öt
         használt csomópont kerül.</p>
         <h2>Tárcák</h2>

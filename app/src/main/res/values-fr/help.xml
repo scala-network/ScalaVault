@@ -103,7 +103,7 @@
         <p>Scala Vault utilise un nœud distant pour communiquer avec le réseau Scala sans avoir à
         télécharger et stocker une copie complète de la chaîne de bloc. vous pourrez trouver une
         liste de nœud distant populaire ou apprendre comment faire fonctionner votre propre nœud
-        distant ici https://scalaworld.com/<p>
+        distant ici https://scalaproject.io/<p>
         <p>Scala Vault est fourni avec quelques Nœuds distants préenregistrés. Les cinq derniers nœuds utilisé sont sauvegardés.</p>
         <h2>Portefeuilles</h2>
         <p>Ici vous pouvez voir vos Portefeuilles. Ils se trouvent dans le dossier <tt>scala vault</tt>

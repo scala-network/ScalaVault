@@ -81,7 +81,7 @@
         <p>Scala Vault folosește un dispozitiv la distanță (remote node) pentru a comunica cu Rețeaua Scala
 		fără a descărca și a stoca o copie a întregii baze de date distribuite (blockchain). Poți găsi o listă
 		populară de noduri de asamblare aflate la distanța, sau despre cum să creezi un nod de asamblare personal,
-		la adresa https://scalaworld.com/<p>
+		la adresa https://scalaproject.io/<p>
         <p>Scala Vault vine cu o listă presetată de noduri de asamblare aflate la distanță (remote nodes).
 		De asemenea Scala Vault reține ultimele cinci noduri folosite.</p>
         <h2>Portofele</h2>

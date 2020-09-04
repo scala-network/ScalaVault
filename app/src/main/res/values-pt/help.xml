@@ -93,7 +93,7 @@
         <h2>Nó</h2>
         <p>O Scala Vault utiliza um Nó Remoto para comunicar com a rede Scala sem ter que descarregar e
         guardar uma cópia da blockchain inteira. Podes encontrar uma lista de nós remotos populares ou
-        aprende como correr o teu próprio nó remoto em https://scalaworld.com/<p>
+        aprende como correr o teu próprio nó remoto em https://scalaproject.io/<p>
         <p>O Scala Vault vem com alguns Nós Remotos predefinidos. O histórico dos últimos 5 nós é guardado.</p>
         <h2>Carteiras</h2>
         <p>Aqui vês as tuas carteiras. Estão localizadas na pasta <tt>scala vault</tt>

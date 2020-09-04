@@ -110,7 +110,7 @@
         <h2>Nodo</h2>
         <p>Scala Vault utiliza un nodo remoto para comunicarse con la red de Scala sin tener que
         descargar y almacenar una copia completa de la cadena de bloques. Puedes encontrar una lista
-        de nodos remotos populares o aprender como montar tu propio nodo remoto aquí https://scalaworld.com</p>
+        de nodos remotos populares o aprender como montar tu propio nodo remoto aquí https://scalaproject.io</p>
         <p>Scala Vault viene con un nodo remoto ya preconfigurado. También recuerda los últimos cinco
         nodos utilizados.</p>
         <h2>Monederos</h2>

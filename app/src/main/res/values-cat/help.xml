@@ -75,7 +75,7 @@
         <h1>Llista de Portamonedes</h1>
         <h2>Node</h2>
         <p>Scala Vault utilitza un node remot per comunicar-se amb la xarxa Scala sense necessitat
-         de descarregar i emmagatzemar una còpia de tota la blockchain sencera. Podeu trobar una llista dels nodes remots més populars o aprendre a configurar el vostre propi node 	remot aquí https://scalaworld.com/<p>
+         de descarregar i emmagatzemar una còpia de tota la blockchain sencera. Podeu trobar una llista dels nodes remots més populars o aprendre a configurar el vostre propi node 	remot aquí https://scalaproject.io/<p>
         <p>Scala Vault té alguns Nodes remots incorporats. Se’n recorda dels últims cinc nodes empleats.</p>
         <h2>Portamonedes</h2>
         <p>Aquí podeu veure els portamonedes. Es troben a la carpeta <tt> Scala Vault </tt>

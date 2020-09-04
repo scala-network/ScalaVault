@@ -95,7 +95,7 @@
         <h2>Node</h2>
         <p>Scala Vault bruker en ekstern node for å kommunisere med Scala-nettverket, uten å måtte
         laste ned og oppbevare en kopi av blokkjeden selv. Du kan finne en liste over populære
-        eksterne noder eller lære hvordan du driver din egen eksterne node her: https://scalaworld.com/<p>
+        eksterne noder eller lære hvordan du driver din egen eksterne node her: https://scalaproject.io/<p>
         <p>Scala Vault kommer med noen eksterne noder lagt inn. Den husker de fem siste nodene du har brukt.</p>
         <h2>Lommebøker</h2>
         <p>Her ser du lommebøkene dine. De ligger i <tt>scala vault</tt> mappa

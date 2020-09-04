@@ -107,7 +107,7 @@
         <h2>Node</h2>
         <p>Scala Vault uses a Remote Node to communicate with the Scala Network without having
         to download and store a copy of the whole blockchain itself. You can find a list of popular
-        remote nodes or learn how to run your own remote node here https://scalaworld.com/<p>
+        remote nodes or learn how to run your own remote node here https://scalaproject.io/<p>
         <p>Scala Vault comes with some Remote Nodes preset. It remembers the last five nodes used.</p>
         <h2>Wallets</h2>
         <p>Here you see your wallets. They are located in the <tt>scala vault</tt> folder

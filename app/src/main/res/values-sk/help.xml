@@ -102,7 +102,7 @@
         <h2>Uzol</h2>
         <p>Scala Vault používa vzdialené uzly na komunikáciu so sieťou Scala. Nie je tak potrebné sťahovať
 		a ukladať celú blockchain ako takú. Zoznam populárnych uzlov spolu s návodmi ako ich rozbehať môžeš nájsť na 
-		https://scalaworld.com/<p>
+		https://scalaproject.io/<p>
         <p>Scala Vault prichádza s niekoľkými prednastavenými uzlami. Pamätá si posledných 5 použitých uzlov.</p>
         <h2>Peňaženky</h2>
         <p>Tu vidíš svoje peňaženky. Sú umiestnené v adresári <tt>scala vault</tt> na internom úložisku Tvojho zariadenia.

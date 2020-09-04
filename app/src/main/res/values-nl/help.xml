@@ -75,7 +75,7 @@
     <string name="help_list"><![CDATA[
         <h1>Portemonneelijst</h1>
         <h2>Node</h2>
-        <p>Scala Vault gebruikt een externe node om te communiceren met het Scala-netwerk zonder zelf een exemplaar van de hele blockchain te hoeven downloaden en opslaan. Hier vind je een lijst met populaire externe nodes, of kun je leren hoe je er zelf een draait: https://scalaworld.com/<p>
+        <p>Scala Vault gebruikt een externe node om te communiceren met het Scala-netwerk zonder zelf een exemplaar van de hele blockchain te hoeven downloaden en opslaan. Hier vind je een lijst met populaire externe nodes, of kun je leren hoe je er zelf een draait: https://scalaproject.io/<p>
         <p>Bepaalde externe nodes zijn vooraf ingesteld in Scala Vault. De laatste vijf gebruikte nodes worden onthouden.</p>
         <h2>Portemonnees</h2>
         <p>Hier worden je portemonnees weergegeven. Ze zijn opgeslagen in de map <tt>scala vault</tt> in de interne opslag van je apparaat. Je kunt ze vinden in een bestandenverkenner-app.
