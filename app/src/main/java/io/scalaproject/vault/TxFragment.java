@@ -33,6 +33,7 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -76,6 +77,8 @@ public class TxFragment extends Fragment {
     private TextView tvTxTransfers;
     private TextView etTxNotes;
 
+    private Button bOK;
+
     // XLATO stuff
     private View cvxlaTo;
     private TextView tvTxxlaToKey;
@@ -107,6 +110,14 @@ public class TxFragment extends Fragment {
         etTxNotes = view.findViewById(R.id.etTxNotes);
 
         etTxNotes.setRawInputType(InputType.TYPE_CLASS_TEXT);
+
+        bOK = view.findViewById(R.id.bOK);
+        bOK.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                activityCallback.onBackPressed();
+            }
+        });
 
         tvTxxlaToKey.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -327,6 +338,7 @@ public class TxFragment extends Fragment {
 
         void setSubtitle(String subtitle);
 
+        void onBackPressed();
     }
 
     @Override
