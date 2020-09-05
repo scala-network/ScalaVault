@@ -79,8 +79,6 @@ public class WalletFragment extends Fragment
 
     private Spinner sCurrency;
 
-    private String _walletName, _walletAddress;
-
     private List<String> dismissedTransactions = new ArrayList<>();
 
     public void resetDismissedTransactions() {
@@ -393,14 +391,12 @@ public class WalletFragment extends Fragment
 
     public void onLoaded() {
         walletLoaded = true;
-        showReceive();
+        updateSendReceiveButtons();
     }
 
-    private void showReceive() {
-        if (walletLoaded) {
-            //bReceive.setVisibility(View.VISIBLE);
-            bReceive.setEnabled(true);
-        }
+    private void updateSendReceiveButtons() {
+        bSend.setEnabled(walletLoaded);
+        bReceive.setEnabled(walletLoaded);
     }
 
     private String syncText = null;
@@ -524,6 +520,7 @@ public class WalletFragment extends Fragment
         }
 
         updateWalletInfo(wallet);
+        updateSendReceiveButtons();
     }
 
     Listener activityCallback;
@@ -588,7 +585,7 @@ public class WalletFragment extends Fragment
 
         setProgress(syncProgress);
         setProgress(syncText);
-        showReceive();
+        updateSendReceiveButtons();
 
         if (activityCallback.isSynced()) {
             enableAccountsList(true);
