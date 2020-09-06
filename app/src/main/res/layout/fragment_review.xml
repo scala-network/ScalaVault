@@ -135,7 +135,7 @@
             android:id="@+id/bAccept"
             style="@style/ScalaButton.Blue"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="55dp"
             android:layout_marginTop="@dimen/section_top"
             android:text="@string/generate_button_accept"
             android:visibility="visible" />
@@ -144,7 +144,7 @@
             android:id="@+id/bAdvancedInfo"
             style="@style/ScalaButton.Grey"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="55dp"
             android:layout_gravity="center"
             android:background="?android:selectableItemBackground"
             android:drawablePadding="4dp"

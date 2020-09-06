@@ -70,7 +70,7 @@
             <Button
                 android:id="@+id/bSubaddress"
                 style="@style/ScalaText.Button.Small"
-                android:layout_width="56dp"
+                android:layout_width="55dp"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:layout_marginStart="8dp"

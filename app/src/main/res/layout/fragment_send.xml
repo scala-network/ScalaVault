@@ -76,7 +76,7 @@
         android:id="@+id/bDone"
         style="@style/ScalaButton.Blue"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="55dp"
         android:layout_alignParentBottom="true"
         android:layout_gravity="bottom"
         android:text="@string/label_send_done"

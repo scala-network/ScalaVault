@@ -359,7 +359,7 @@
             android:id="@+id/bOK"
             style="@style/ScalaButton.Blue"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="55dp"
             android:layout_marginTop="8dp"
             android:text="@string/label_ok"
             android:visibility="visible" />
