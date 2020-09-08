@@ -385,9 +385,9 @@
     <string name="node_wrong_net" translatable="false">Node scanning only for mainnet!</string>
 
     <string name="info_xlato">OBSOLETE</string>
-    <string name="info_mobile_miner">Start mining on your mobile device with Scala Miner!</string>
+    <string name="info_mobile_miner">Start mining on your mobile device with Scala Miner. Tap here to download.</string>
     <string name="info_nodes_enabled">OBSOLETE</string>
-    <string name="info_nodes_enabled_2">Scala Vault scans for the best available nodes, tap for more info.</string>
+    <string name="info_nodes_enabled_2">Scala Vault scans for the best available nodes. Tap here for more info.</string>
     <string name="node_height">Last block updated: %1$s</string>
     <string name="label_nodes">Nodes</string>
     <string name="node_name_hint">Node Name (Optional)</string>
