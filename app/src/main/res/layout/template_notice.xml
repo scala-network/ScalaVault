@@ -6,7 +6,7 @@
     android:layout_height="wrap_content"
     android:layout_marginTop="8dp"
     android:layout_marginBottom="8dp"
-    android:background="@color/bg_blue"
+    android:background="@drawable/corner_radius_blue"
     android:orientation="horizontal">
 
     <TextView

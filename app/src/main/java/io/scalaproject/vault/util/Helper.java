@@ -590,7 +590,7 @@ public class Helper {
                 } else {
                     etPassword.requestFocus();
                 }
-                Button posButton = ((AlertDialog) dialog).getButton(AlertDialog.BUTTON_POSITIVE);
+                Button posButton = openDialog.getButton(AlertDialog.BUTTON_POSITIVE);
                 posButton.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
