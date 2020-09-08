@@ -380,8 +380,7 @@ public class Helper {
     }
 
     static public boolean useCrazyPass(Context context) {
-        File flagFile = new File(getWalletRoot(context), NOCRAZYPASS_FLAGFILE);
-        return !flagFile.exists();
+        return false;
     }
 
     // try to figure out what the real wallet password is given the user password
