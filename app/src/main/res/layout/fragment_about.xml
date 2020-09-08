@@ -23,6 +23,8 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
             android:gravity="center"
+            android:textColor="@color/txt_headline"
+            android:textAllCaps="false"
             android:text="@string/about_whoami" />
 
         <TextView

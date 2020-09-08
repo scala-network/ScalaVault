@@ -499,7 +499,7 @@ public class NodeFragment extends Fragment
             editDialog.setOnShowListener(new DialogInterface.OnShowListener() {
                 @Override
                 public void onShow(final DialogInterface dialog) {
-                    Button testButton = ((AlertDialog) dialog).getButton(AlertDialog.BUTTON_NEUTRAL);
+                    Button testButton = editDialog.getButton(AlertDialog.BUTTON_NEUTRAL);
                     testButton.setOnClickListener(new View.OnClickListener() {
                         @Override
                         public void onClick(View view) {
@@ -507,7 +507,7 @@ public class NodeFragment extends Fragment
                         }
                     });
 
-                    Button button = ((AlertDialog) dialog).getButton(AlertDialog.BUTTON_POSITIVE);
+                    Button button = editDialog.getButton(AlertDialog.BUTTON_POSITIVE);
                     button.setOnClickListener(new View.OnClickListener() {
                         @Override
                         public void onClick(View view) {
