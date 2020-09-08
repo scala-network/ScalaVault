@@ -85,6 +85,7 @@ public class WalletActivity extends BaseActivity implements WalletFragment.Liste
         GenerateReviewFragment.ListenerWithWallet,
         GenerateReviewFragment.Listener,
         GenerateReviewFragment.PasswordChangedListener,
+        GenerateReviewFragment.AcceptListener,
         ScannerFragment.OnScannedListener, ReceiveFragment.Listener,
         SendAddressWizardFragment.OnScanListener,
         WalletFragment.DrawerLocker,
@@ -114,6 +115,11 @@ public class WalletActivity extends BaseActivity implements WalletFragment.Liste
     @Override
     public void onPasswordChanged(String newPassword) {
         password = newPassword;
+    }
+
+    @Override
+    public void onAccept(String name, String password) {
+        onBackPressed();
     }
 
     @Override

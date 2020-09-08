@@ -380,6 +380,9 @@ public class Helper {
     }
 
     static public boolean useCrazyPass(Context context) {
+        // Remove for now - sometimes it messes up the password
+        /*File flagFile = new File(getWalletRoot(context), NOCRAZYPASS_FLAGFILE);
+        return !flagFile.exists();*/
         return false;
     }
 
