@@ -21,7 +21,6 @@
 
 package io.scalaproject.vault;
 
-import android.app.AlertDialog;
 import android.app.PendingIntent;
 import android.content.BroadcastReceiver;
 import android.content.Context;
@@ -36,6 +35,7 @@ import android.media.MediaScannerConnection;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AlertDialog;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
@@ -51,6 +51,8 @@ import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import com.google.android.material.dialog.MaterialAlertDialogBuilder;
 
 import io.scalaproject.vault.data.Node;
 import io.scalaproject.vault.data.NodeInfo;
@@ -342,8 +344,8 @@ public class LoginActivity extends BaseActivity
             }
         };
 
-        AlertDialog.Builder builder = new AlertDialog.Builder(this, R.style.AlertDialogCustom);
-        AlertDialog dialog = builder.setMessage(getString(R.string.details_alert_message))
+        MaterialAlertDialogBuilder builder = new MaterialAlertDialogBuilder(this, R.style.MaterialAlertDialogCustom);
+        androidx.appcompat.app.AlertDialog dialog = builder.setMessage(getString(R.string.details_alert_message))
                 .setPositiveButton(getString(R.string.details_alert_yes), dialogClickListener)
                 .setNegativeButton(getString(R.string.details_alert_no), dialogClickListener)
                 .show();
@@ -352,7 +354,7 @@ public class LoginActivity extends BaseActivity
                 LinearLayout.LayoutParams.WRAP_CONTENT,
                 LinearLayout.LayoutParams.WRAP_CONTENT
         );
-        params.setMargins(20,0,0,0);
+        params.setMargins(20,20,50,10);
 
         Button posButton = dialog.getButton(DialogInterface.BUTTON_POSITIVE);
         if(posButton != null)
@@ -437,7 +439,7 @@ public class LoginActivity extends BaseActivity
         LayoutInflater li = LayoutInflater.from(this);
         View promptsView = li.inflate(R.layout.prompt_rename, null);
 
-        AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(this, R.style.AlertDialogCustom);
+        MaterialAlertDialogBuilder alertDialogBuilder = new MaterialAlertDialogBuilder(this, R.style.MaterialAlertDialogCustom);
         alertDialogBuilder.setView(promptsView);
 
         final EditText etRename = promptsView.findViewById(R.id.etRename);
@@ -464,7 +466,7 @@ public class LoginActivity extends BaseActivity
                             }
                         });
 
-        final AlertDialog dialog = alertDialogBuilder.create();
+        final androidx.appcompat.app.AlertDialog dialog = alertDialogBuilder.create();
         Helper.showKeyboard(dialog);
 
         // accept keyboard "ok"
@@ -488,7 +490,7 @@ public class LoginActivity extends BaseActivity
                 LinearLayout.LayoutParams.WRAP_CONTENT,
                 LinearLayout.LayoutParams.WRAP_CONTENT
         );
-        params.setMargins(20,0,0,0);
+        params.setMargins(20,20,50,10);
 
         Button posButton = dialog.getButton(DialogInterface.BUTTON_POSITIVE);
         if(posButton != null)
@@ -602,8 +604,8 @@ public class LoginActivity extends BaseActivity
             }
         };
 
-        AlertDialog.Builder builder = new AlertDialog.Builder(this, R.style.AlertDialogCustom);
-        AlertDialog dialog = builder.setMessage(getString(R.string.archive_alert_message))
+        MaterialAlertDialogBuilder builder = new MaterialAlertDialogBuilder(this, R.style.MaterialAlertDialogCustom);
+        androidx.appcompat.app.AlertDialog dialog = builder.setMessage(getString(R.string.archive_alert_message))
                 .setTitle(walletName)
                 .setPositiveButton(getString(R.string.archive_alert_yes), dialogClickListener)
                 .setNegativeButton(getString(R.string.archive_alert_no), dialogClickListener)
@@ -613,7 +615,7 @@ public class LoginActivity extends BaseActivity
                 LinearLayout.LayoutParams.WRAP_CONTENT,
                 LinearLayout.LayoutParams.WRAP_CONTENT
         );
-        params.setMargins(20,0,0,0);
+        params.setMargins(20,20,50,10);
 
         Button posButton = dialog.getButton(DialogInterface.BUTTON_POSITIVE);
         if(posButton != null)
@@ -1179,7 +1181,7 @@ public class LoginActivity extends BaseActivity
             currentLocaleIndex = Arrays.asList(localeDisplayName).indexOf(currentLocalizedString);
         }
 
-        AlertDialog.Builder builder = new AlertDialog.Builder(LoginActivity.this, R.style.AlertDialogCustom);
+        MaterialAlertDialogBuilder builder = new MaterialAlertDialogBuilder(LoginActivity.this, R.style.MaterialAlertDialogCustom);
         builder.setTitle(getString(R.string.menu_language));
         builder.setSingleChoiceItems(localeDisplayName, currentLocaleIndex, new DialogInterface.OnClickListener() {
             @Override
@@ -1192,13 +1194,13 @@ public class LoginActivity extends BaseActivity
             }
         });
 
-        AlertDialog dialog = builder.show();
+        androidx.appcompat.app.AlertDialog dialog = builder.show();
 
         LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(
                 LinearLayout.LayoutParams.WRAP_CONTENT,
                 LinearLayout.LayoutParams.WRAP_CONTENT
         );
-        params.setMargins(20,0,0,0);
+        params.setMargins(20,20,50,10);
 
         Button posButton = dialog.getButton(DialogInterface.BUTTON_POSITIVE);
         if(posButton != null)

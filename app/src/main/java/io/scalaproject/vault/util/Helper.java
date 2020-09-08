@@ -43,6 +43,8 @@ import android.os.Build;
 import android.os.CancellationSignal;
 import android.os.Environment;
 import android.os.StrictMode;
+
+import com.google.android.material.dialog.MaterialAlertDialogBuilder;
 import com.google.android.material.textfield.TextInputLayout;
 import androidx.core.content.ContextCompat;
 import android.system.ErrnoException;
@@ -422,7 +424,7 @@ public class Helper {
         return null;
     }
 
-    static AlertDialog openDialog = null; // for preventing opening of multiple dialogs
+    static androidx.appcompat.app.AlertDialog openDialog = null; // for preventing opening of multiple dialogs
     static AsyncTask<Void, Void, Boolean> loginTask = null;
 
     static public void promptPassword(final Context context, final String wallet, boolean fingerprintDisabled, final PasswordAction action) {
@@ -430,7 +432,7 @@ public class Helper {
         LayoutInflater li = LayoutInflater.from(context);
         final View promptsView = li.inflate(R.layout.prompt_password, null);
 
-        AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(context, R.style.AlertDialogCustom);
+        MaterialAlertDialogBuilder alertDialogBuilder = new MaterialAlertDialogBuilder(context, R.style.MaterialAlertDialogCustom);
         alertDialogBuilder.setView(promptsView);
 
         final TextInputLayout etPassword = promptsView.findViewById(R.id.etPassword);
@@ -535,6 +537,7 @@ public class Helper {
                                 openDialog = null;
                             }
                         });
+
         openDialog = alertDialogBuilder.create();
 
         final FingerprintManager.AuthenticationCallback fingerprintAuthCallback;
@@ -603,7 +606,7 @@ public class Helper {
                         LinearLayout.LayoutParams.WRAP_CONTENT,
                         LinearLayout.LayoutParams.WRAP_CONTENT
                 );
-                params.setMargins(20,0,0,0);
+                params.setMargins(20,20,50,10);
                 posButton.setLayoutParams(params);
             }
         });

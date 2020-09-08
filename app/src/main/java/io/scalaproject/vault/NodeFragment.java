@@ -27,6 +27,8 @@ import android.content.DialogInterface;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import androidx.annotation.Nullable;
+
+import com.google.android.material.dialog.MaterialAlertDialogBuilder;
 import com.google.android.material.textfield.TextInputLayout;
 import androidx.fragment.app.Fragment;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
@@ -416,7 +418,7 @@ public class NodeFragment extends Fragment
                     LinearLayout.LayoutParams.WRAP_CONTENT,
                     LinearLayout.LayoutParams.WRAP_CONTENT
             );
-            params.setMargins(20,0,0,0);
+            params.setMargins(20,20,50,10);
 
             Button posButton = editDialog.getButton(DialogInterface.BUTTON_POSITIVE);
             if(posButton != null)
@@ -432,7 +434,7 @@ public class NodeFragment extends Fragment
             Helper.showKeyboard(editDialog);
         }
 
-        AlertDialog editDialog = null;
+        androidx.appcompat.app.AlertDialog editDialog = null;
 
         TextInputLayout etNodeName;
         TextInputLayout etNodeHost;
@@ -452,7 +454,7 @@ public class NodeFragment extends Fragment
         }
 
         EditDialog(final NodeInfo nodeInfo) {
-            AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(getActivity(), R.style.AlertDialogCustom);
+            MaterialAlertDialogBuilder alertDialogBuilder = new MaterialAlertDialogBuilder(getActivity(), R.style.MaterialAlertDialogCustom);
             LayoutInflater li = LayoutInflater.from(alertDialogBuilder.getContext());
             View promptsView = li.inflate(R.layout.prompt_editnode, null);
             alertDialogBuilder.setView(promptsView);

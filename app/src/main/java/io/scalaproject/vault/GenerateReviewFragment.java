@@ -27,6 +27,8 @@ import android.content.DialogInterface;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import androidx.annotation.Nullable;
+
+import com.google.android.material.dialog.MaterialAlertDialogBuilder;
 import com.google.android.material.textfield.TextInputLayout;
 import androidx.fragment.app.Fragment;
 import android.text.Editable;
@@ -486,14 +488,14 @@ public class GenerateReviewFragment extends Fragment {
         }
     }
 
-    AlertDialog openDialog = null; // for preventing opening of multiple dialogs
+    androidx.appcompat.app.AlertDialog openDialog = null; // for preventing opening of multiple dialogs
 
-    public AlertDialog createChangePasswordDialog() {
+    public androidx.appcompat.app.AlertDialog createChangePasswordDialog() {
         if (openDialog != null) return null; // we are already open
         LayoutInflater li = LayoutInflater.from(getActivity());
         View promptsView = li.inflate(R.layout.prompt_changepw, null);
 
-        AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(getActivity(), R.style.AlertDialogCustom);
+        MaterialAlertDialogBuilder alertDialogBuilder = new MaterialAlertDialogBuilder(getActivity(), R.style.MaterialAlertDialogCustom);
         alertDialogBuilder.setView(promptsView);
 
         final TextInputLayout etPasswordA = promptsView.findViewById(R.id.etWalletPasswordA);
@@ -512,7 +514,7 @@ public class GenerateReviewFragment extends Fragment {
                 public void onClick(View view) {
                     if (!swFingerprintAllowed.isChecked()) return;
 
-                    AlertDialog.Builder builder = new AlertDialog.Builder(getActivity(), R.style.AlertDialogCustom);
+                    MaterialAlertDialogBuilder builder = new MaterialAlertDialogBuilder(getActivity(), R.style.MaterialAlertDialogCustom);
                     builder.setMessage(Html.fromHtml(getString(R.string.generate_fingerprint_warn)))
                             .setCancelable(false)
                             .setPositiveButton(getString(R.string.label_ok), null)
@@ -614,7 +616,7 @@ public class GenerateReviewFragment extends Fragment {
                         LinearLayout.LayoutParams.WRAP_CONTENT,
                         LinearLayout.LayoutParams.WRAP_CONTENT
                 );
-                params.setMargins(20,0,0,0);
+                params.setMargins(20,20,50,10);
                 posButton.setLayoutParams(params);
             }
         });

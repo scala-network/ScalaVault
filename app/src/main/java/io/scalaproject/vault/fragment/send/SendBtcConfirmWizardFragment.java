@@ -26,6 +26,8 @@ import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.os.Bundle;
 import android.os.Handler;
+
+import com.google.android.material.dialog.MaterialAlertDialogBuilder;
 import com.google.android.material.textfield.TextInputLayout;
 import android.text.Editable;
 import android.text.TextWatcher;
@@ -354,7 +356,7 @@ public class SendBtcConfirmWizardFragment extends SendWizardFragment implements 
     public void preSend() {
         final Activity activity = getActivity();
         View promptsView = getLayoutInflater().inflate(R.layout.prompt_password, null);
-        android.app.AlertDialog.Builder alertDialogBuilder = new android.app.AlertDialog.Builder(activity, R.style.AlertDialogCustom);
+        MaterialAlertDialogBuilder alertDialogBuilder = new MaterialAlertDialogBuilder(activity, R.style.MaterialAlertDialogCustom);
         alertDialogBuilder.setView(promptsView);
 
         final TextInputLayout etPassword = promptsView.findViewById(R.id.etPassword);
@@ -402,7 +404,7 @@ public class SendBtcConfirmWizardFragment extends SendWizardFragment implements 
                             }
                         });
 
-        final android.app.AlertDialog passwordDialog = alertDialogBuilder.create();
+        final androidx.appcompat.app.AlertDialog passwordDialog = alertDialogBuilder.create();
         passwordDialog.setOnShowListener(new DialogInterface.OnShowListener() {
             @Override
             public void onShow(DialogInterface dialog) {
@@ -452,9 +454,9 @@ public class SendBtcConfirmWizardFragment extends SendWizardFragment implements 
                 LinearLayout.LayoutParams.WRAP_CONTENT,
                 LinearLayout.LayoutParams.WRAP_CONTENT
         );
-        params.setMargins(20,0,0,0);
+        params.setMargins(20,20,50,10);
 
-        Button posButton = ((AlertDialog) passwordDialog).getButton(DialogInterface.BUTTON_POSITIVE);
+        Button posButton = passwordDialog.getButton(DialogInterface.BUTTON_POSITIVE);
         posButton.setLayoutParams(params);
 
         passwordDialog.show();

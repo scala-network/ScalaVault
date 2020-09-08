@@ -24,6 +24,8 @@ package io.scalaproject.vault.fragment.send;
 import android.app.Activity;
 import android.content.DialogInterface;
 import android.os.Bundle;
+
+import com.google.android.material.dialog.MaterialAlertDialogBuilder;
 import com.google.android.material.textfield.TextInputLayout;
 import androidx.appcompat.app.AlertDialog;
 import android.text.Editable;
@@ -162,7 +164,7 @@ public class SendConfirmWizardFragment extends SendWizardFragment implements Sen
     }
 
     private void showAlert(String title, String message) {
-        AlertDialog.Builder builder = new AlertDialog.Builder(getActivity(), R.style.AlertDialogCustom);
+        MaterialAlertDialogBuilder builder = new MaterialAlertDialogBuilder(getActivity(), R.style.MaterialAlertDialogCustom);
         builder.setCancelable(true).
                 setTitle(title).
                 setMessage(message).
@@ -232,7 +234,7 @@ public class SendConfirmWizardFragment extends SendWizardFragment implements Sen
     public void preSend() {
         final Activity activity = getActivity();
         View promptsView = getLayoutInflater().inflate(R.layout.prompt_password, null);
-        android.app.AlertDialog.Builder alertDialogBuilder = new android.app.AlertDialog.Builder(activity, R.style.AlertDialogCustom);
+        MaterialAlertDialogBuilder alertDialogBuilder = new MaterialAlertDialogBuilder(activity, R.style.MaterialAlertDialogCustom);
         alertDialogBuilder.setView(promptsView);
 
         final TextInputLayout etPassword = promptsView.findViewById(R.id.etPassword);
@@ -280,7 +282,7 @@ public class SendConfirmWizardFragment extends SendWizardFragment implements Sen
                             }
                         });
 
-        final android.app.AlertDialog passwordDialog = alertDialogBuilder.create();
+        final AlertDialog passwordDialog = alertDialogBuilder.create();
         passwordDialog.setOnShowListener(new DialogInterface.OnShowListener() {
             @Override
             public void onShow(DialogInterface dialog) {
@@ -332,9 +334,9 @@ public class SendConfirmWizardFragment extends SendWizardFragment implements Sen
                 LinearLayout.LayoutParams.WRAP_CONTENT,
                 LinearLayout.LayoutParams.WRAP_CONTENT
         );
-        params.setMargins(20,0,0,0);
+        params.setMargins(20,20,50,10);
 
-        Button posButton = ((android.app.AlertDialog) passwordDialog).getButton(DialogInterface.BUTTON_POSITIVE);
+        Button posButton = passwordDialog.getButton(DialogInterface.BUTTON_POSITIVE);
         posButton.setLayoutParams(params);
     }
 

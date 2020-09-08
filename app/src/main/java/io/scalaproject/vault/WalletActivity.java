@@ -21,7 +21,6 @@
 
 package io.scalaproject.vault;
 
-import android.app.AlertDialog;
 import android.content.ComponentName;
 import android.content.Context;
 import android.content.DialogInterface;
@@ -36,7 +35,11 @@ import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.IBinder;
 import androidx.annotation.NonNull;
+
+import com.google.android.material.dialog.MaterialAlertDialogBuilder;
 import com.google.android.material.navigation.NavigationView;
+
+import androidx.appcompat.app.AlertDialog;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
@@ -892,7 +895,7 @@ public class WalletActivity extends BaseActivity implements WalletFragment.Liste
             }
         };
 
-        AlertDialog.Builder builder = new AlertDialog.Builder(this, R.style.AlertDialogCustom);
+        MaterialAlertDialogBuilder builder = new MaterialAlertDialogBuilder(this, R.style.MaterialAlertDialogCustom);
         builder.setMessage(getString(R.string.details_alert_message))
                 .setPositiveButton(getString(R.string.details_alert_yes), dialogClickListener)
                 .setNegativeButton(getString(R.string.details_alert_no), dialogClickListener)
@@ -1122,7 +1125,7 @@ public class WalletActivity extends BaseActivity implements WalletFragment.Liste
         final LayoutInflater li = LayoutInflater.from(this);
         final View promptsView = li.inflate(R.layout.prompt_rename, null);
 
-        final AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(this, R.style.AlertDialogCustom);
+        final MaterialAlertDialogBuilder alertDialogBuilder = new MaterialAlertDialogBuilder(this, R.style.MaterialAlertDialogCustom);
         alertDialogBuilder.setView(promptsView);
 
         final EditText etRename = promptsView.findViewById(R.id.etRename);
@@ -1150,7 +1153,7 @@ public class WalletActivity extends BaseActivity implements WalletFragment.Liste
                             }
                         });
 
-        final AlertDialog dialog = alertDialogBuilder.create();
+        final androidx.appcompat.app.AlertDialog dialog = alertDialogBuilder.create();
         Helper.showKeyboard(dialog);
 
         // accept keyboard "ok"
@@ -1173,7 +1176,7 @@ public class WalletActivity extends BaseActivity implements WalletFragment.Liste
                 LinearLayout.LayoutParams.WRAP_CONTENT,
                 LinearLayout.LayoutParams.WRAP_CONTENT
         );
-        params.setMargins(20,0,0,0);
+        params.setMargins(20,20,50,10);
 
         Button posButton = dialog.getButton(DialogInterface.BUTTON_POSITIVE);
 

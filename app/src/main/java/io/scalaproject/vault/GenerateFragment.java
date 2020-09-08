@@ -27,6 +27,8 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.os.Bundle;
 import androidx.annotation.Nullable;
+
+import com.google.android.material.dialog.MaterialAlertDialogBuilder;
 import com.google.android.material.textfield.TextInputLayout;
 import androidx.fragment.app.Fragment;
 import android.text.Editable;
@@ -214,7 +216,7 @@ public class GenerateFragment extends Fragment {
                 public void onClick(View view) {
                     if (!sFingerprintAuth.isChecked()) return;
 
-                    AlertDialog.Builder builder = new AlertDialog.Builder(getActivity(), R.style.AlertDialogCustom);
+                    MaterialAlertDialogBuilder builder = new MaterialAlertDialogBuilder(getActivity(), R.style.MaterialAlertDialogCustom);
                     builder.setMessage(Html.fromHtml(getString(R.string.generate_fingerprint_warn)))
                             .setCancelable(false)
                             .setPositiveButton(getString(R.string.label_ok), null)
@@ -646,13 +648,13 @@ public class GenerateFragment extends Fragment {
         super.onCreateOptionsMenu(menu, inflater);
     }
 
-    AlertDialog ledgerDialog = null;
+    androidx.appcompat.app.AlertDialog ledgerDialog = null;
 
     public void convertLedgerSeed() {
         if (ledgerDialog != null) return;
         final Activity activity = getActivity();
         View promptsView = getLayoutInflater().inflate(R.layout.prompt_ledger_seed, null);
-        android.app.AlertDialog.Builder alertDialogBuilder = new android.app.AlertDialog.Builder(activity, R.style.AlertDialogCustom);
+        MaterialAlertDialogBuilder alertDialogBuilder = new MaterialAlertDialogBuilder(activity, R.style.MaterialAlertDialogCustom);
         alertDialogBuilder.setView(promptsView);
 
         final TextInputLayout etSeed = promptsView.findViewById(R.id.etSeed);
@@ -724,9 +726,9 @@ public class GenerateFragment extends Fragment {
                 LinearLayout.LayoutParams.WRAP_CONTENT,
                 LinearLayout.LayoutParams.WRAP_CONTENT
         );
-        params.setMargins(20,0,0,0);
+        params.setMargins(20,20,50,10);
 
-        Button posButton = ((AlertDialog) ledgerDialog).getButton(DialogInterface.BUTTON_POSITIVE);
+        Button posButton = ledgerDialog.getButton(DialogInterface.BUTTON_POSITIVE);
         posButton.setLayoutParams(params);
     }
 }

@@ -34,6 +34,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.TextView;
 
+import com.google.android.material.dialog.MaterialAlertDialogBuilder;
+
 import io.scalaproject.vault.R;
 
 public class HelpFragment extends DialogFragment {
@@ -70,7 +72,7 @@ public class HelpFragment extends DialogFragment {
         if (helpId > 0)
             ((TextView) view.findViewById(R.id.tvHelp)).setText(Html.fromHtml(getString(helpId)));
 
-        AlertDialog.Builder builder = new AlertDialog.Builder(getActivity(), R.style.AlertDialogCustom);
+        MaterialAlertDialogBuilder builder = new MaterialAlertDialogBuilder(getActivity(), R.style.MaterialAlertDialogCustom);
         builder.setView(view);
         builder.setNegativeButton(R.string.help_ok,
                 new DialogInterface.OnClickListener() {

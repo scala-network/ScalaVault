@@ -4,16 +4,21 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:padding="8dp"
+    android:paddingTop="15dp"
+    android:paddingStart="20dp"
+    android:paddingBottom="10dp"
+    android:paddingEnd="20dp"
     android:background="@color/bg_lighter">
 
     <TextView
         android:id="@+id/tvRenameLabel"
-        style="@style/ScalaLabel"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginBottom="8dp"
         android:labelFor="@+id/etRename"
         android:text="@string/prompt_rename"
+        android:textSize="16sp"
+        android:textColor="@color/txt_button_filled"
         android:textAppearance="?android:attr/textAppearanceLarge" />
 
     <com.google.android.material.textfield.TextInputLayout

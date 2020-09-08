@@ -36,12 +36,13 @@
         <item name="android:spinnerStyle">@style/ScalaSpinner</item>
 
         <item name="actionMenuTextColor">@color/txt_main</item>
+
+        <item name="android:itemTextAppearance">@style/ItemMenuTextAppearance</item>
         <item name="android:itemBackground">@color/bg_lighter</item>
 
         <item name="android:colorControlActivated">@color/bg_blue</item>
 
-        <item name="android:itemTextAppearance">@style/ItemMenuTextAppearance</item>
-        <item name="android:alertDialogTheme">@style/AlertDialogCustom</item>
+        <item name="android:alertDialogTheme">@style/MaterialAlertDialogCustom</item>
     </style>
 
     <style name="AppTheme.NoActionBar">
@@ -356,13 +357,30 @@
         <item name="android:textSize">16sp</item>
     </style>
 
-    <style name="AlertDialogCustom" parent="Theme.AppCompat.Light.Dialog.Alert">
+    <style name="MaterialAlertDialogCustom" parent="@style/ThemeOverlay.MaterialComponents.MaterialAlertDialog">
         <item name="android:background">@color/bg_lighter</item>
-        <item name="android:textColor">@color/txt_main</item>
-        <item name="android:colorPrimaryDark">@color/txt_main</item>
-        <item name="android:textColorAlertDialogListItem">@color/txt_main</item>
-        <item name="android:textColorPrimary">@color/txt_main</item>
-        <item name="android:textColorSecondary">@color/txt_main</item>
+        <item name="shapeAppearanceOverlay">@style/MaterialAlertDialogCustom.Rounded</item>
+        <item name="buttonBarPositiveButtonStyle">@style/MaterialAlertDialogCustom.Button.Positive</item>
+        <item name="buttonBarNegativeButtonStyle">@style/MaterialAlertDialogCustom.Button.Negative</item>
+    </style>
+
+    <style name="MaterialAlertDialogCustom.Rounded" parent="">
+        <item name="cornerFamily">rounded</item>
+        <item name="cornerSize">6dp</item>
+    </style>
+
+    <style name="MaterialAlertDialogCustom.Button.Positive" parent="Widget.MaterialComponents.Button.TextButton.Dialog">
+        <item name="backgroundTint">@color/bg_blue</item>
+        <item name="android:textColor">@color/txt_button_filled</item>
+        <item name="android:textAllCaps">false</item>
+        <item name="android:textSize">14sp</item>
+    </style>
+
+    <style name="MaterialAlertDialogCustom.Button.Negative" parent="Widget.MaterialComponents.Button.TextButton.Dialog">
+        <item name="android:textColor">@color/txt_button_filled</item>
+        <item name="android:textAllCaps">false</item>
+        <item name="android:textSize">14sp</item>
+        <item name="android:layout_marginEnd">8dp</item>
     </style>
 
 </resources>
