@@ -221,10 +221,9 @@
 
     <string name="help_mobile_miner"><![CDATA[
         <h1>Scala Miner</h1>
-        <h2>TL;DR</h2>
         <p>Start mining on all latest Android devices safely and efficiently!</p>
         <p>Scala Miner provides useful information about your mining activities and prevents your device from overheating.</p>
-        <p>Download it here: <a href="https://github.com/scala-network/MobileMiner/releases">Scala Miner/</a>
+        <p>Download it here: <a href="https://github.com/scala-network/MobileMiner/releases">Scala Miner</a>
     ]]></string>
 
     <string name="help_node">OBSOLETE</string>
