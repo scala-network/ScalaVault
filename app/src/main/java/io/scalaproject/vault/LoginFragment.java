@@ -482,13 +482,14 @@ public class LoginFragment extends Fragment implements WalletInfoAdapter.OnInter
 
         @Override
         protected void onPostExecute(NodeInfo result) {
-            if (!isAdded()) return;
-
             activityCallback.hideProgressDialog();
+
+            if (!isAdded()) return;
 
             pbNode.setVisibility(View.INVISIBLE);
             llNode.setVisibility(View.VISIBLE);
             ibNode.setVisibility(View.VISIBLE);
+
             if (result != null) {
                 Timber.d("found a good node %s", result.toString());
                 showNode(result);

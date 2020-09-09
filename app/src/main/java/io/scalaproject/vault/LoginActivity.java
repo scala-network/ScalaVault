@@ -103,6 +103,9 @@ public class LoginActivity extends BaseActivity
     Set<NodeInfo> allNodes = new HashSet<>();
     Set<NodeInfo> userDefinedNodes = new HashSet<>();
 
+    private boolean startCreateWalletFragment = false;
+    private String generateFragmentType = "";
+
     @Override
     public NodeInfo getNode() {
         return node;
@@ -268,22 +271,25 @@ public class LoginActivity extends BaseActivity
 
         loadNodesWithNetwork();
 
-        if (Helper.getWritePermission(this)) {
-            if (savedInstanceState == null) startLoginFragment();
-        } else {
-            Timber.i("Waiting for permissions");
-        }
-
         // try intents
         Intent intent = getIntent();
 
         if (!processUsbIntent(intent))
             processUriIntent(intent);
 
+        if (Helper.getWritePermission(this)) {
+            if (savedInstanceState == null) {
+                startLoginFragment();
+            }
+        } else {
+            Timber.i("Waiting for permissions");
+        }
+
         // If activity is created from Home Wizard
-        String generateFragmentType = intent.getStringExtra("GenerateFragmentType");
-        if(generateFragmentType != null && !generateFragmentType.isEmpty()) {
-            onAddWallet(generateFragmentType);
+        String generateFragmentTypeTmp = intent.getStringExtra("GenerateFragmentType");
+        if(generateFragmentTypeTmp != null && !generateFragmentTypeTmp.isEmpty()) {
+            startCreateWalletFragment = true;
+            generateFragmentType = generateFragmentTypeTmp;
         }
     }
 
@@ -793,7 +799,7 @@ public class LoginActivity extends BaseActivity
             case Helper.PERMISSIONS_REQUEST_WRITE_EXTERNAL_STORAGE:
                 // If request is cancelled, the result arrays are empty.
                 if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-                    startLoginFragment = true;
+                    isPermissionGranted = true;
                 } else {
                     String msg = getString(R.string.message_strorage_not_permitted);
                     Timber.e(msg);
@@ -804,14 +810,22 @@ public class LoginActivity extends BaseActivity
         }
     }
 
-    private boolean startLoginFragment = false;
+    private boolean isPermissionGranted = false;
 
     @Override
     protected void onResumeFragments() {
         super.onResumeFragments();
-        if (startLoginFragment) {
+
+        if (isPermissionGranted) {
             startLoginFragment();
-            startLoginFragment = false;
+
+            if (startCreateWalletFragment && !generateFragmentType.isEmpty()) {
+                onAddWallet(generateFragmentType);
+                startCreateWalletFragment = false;
+                generateFragmentType = "";
+            }
+
+            isPermissionGranted = false;
         }
     }
 
