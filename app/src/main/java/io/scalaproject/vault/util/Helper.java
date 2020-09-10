@@ -671,7 +671,8 @@ public class Helper {
     }
 
     static public boolean preventScreenshot() {
-        return !(BuildConfig.DEBUG || BuildConfig.FLAVOR_type.equals("alpha"));
+        return false;
+        //return !(BuildConfig.DEBUG || BuildConfig.FLAVOR_type.equals("alpha"));
     }
 
     static public String getPrettyString(String text) {
