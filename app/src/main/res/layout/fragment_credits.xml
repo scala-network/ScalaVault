@@ -131,7 +131,7 @@
 
         <Button
             android:id="@+id/btnDownloadMM"
-            android:layout_width="140dp"
+            android:layout_width="wrap_content"
             android:layout_height="55dp"
             android:layout_gravity="center"
             android:layout_marginTop="8dp"
@@ -144,7 +144,7 @@
             android:textColor="@color/txt_button_filled"
             android:textAllCaps="false"
             app:cornerRadius="5dp"
-            app:iconPadding="0dp"
+            app:iconPadding="10dp"
             app:iconTint="@color/btn_icon_default"
             app:icon="@drawable/ic_download"/>
 
