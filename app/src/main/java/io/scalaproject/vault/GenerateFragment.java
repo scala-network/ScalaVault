@@ -428,7 +428,7 @@ public class GenerateFragment extends Fragment {
         long height = !type.equals(TYPE_NEW) ? getHeight() : 0;
         boolean ok = true;
         if (height < 0) {
-            if(etWalletRestoreHeight.getError().toString().isEmpty())
+            if(etWalletRestoreHeight.getError() == null || etWalletRestoreHeight.getError().toString().isEmpty())
                 etWalletRestoreHeight.setError(getString(R.string.generate_restoreheight_error));
             ok = false;
         }
@@ -454,7 +454,7 @@ public class GenerateFragment extends Fragment {
     }
 
     private long getHeight() {
-        long height = 0;
+        long height = -1;
 
         String restoreHeight = etWalletRestoreHeight.getEditText().getText().toString().trim();
 
@@ -472,7 +472,7 @@ public class GenerateFragment extends Fragment {
             height = RestoreHeight.getInstance().getHeight(date);
         } catch (ParseException ex) {
         }
-        if ((height <= 0) && (restoreHeight.length() == 8))
+        if ((height < 0) && (restoreHeight.length() == 8))
             try {
                 // is it a date without dashes?
                 SimpleDateFormat parser = new SimpleDateFormat("yyyyMMdd");
@@ -485,7 +485,7 @@ public class GenerateFragment extends Fragment {
                 height = RestoreHeight.getInstance().getHeight(date);
             } catch (ParseException ex) {
             }
-        if (height <= 0)
+        if (height < 0)
             try {
                 // or is it a height?
                 height = Long.parseLong(restoreHeight);
