@@ -33,10 +33,12 @@ import java.util.concurrent.TimeUnit;
 public class RestoreHeight {
     static private RestoreHeight Singleton = null;
 
-    static public final Integer RESTORE_DATE_YEAR = 2020;
-    static public final Integer RESTORE_DATE_MONTH = 7;
-    static public final String RESTORE_DATE_DEFAULT_START = "2020-07-31";
-    static private final String RESTORE_DATE_DEFAULT_END = "2020-08-07";
+    static public final Integer GENESISBLOCK_DATE_YEAR = 2020;
+    static public final Integer GENESISBLOCK_DATE_MONTH = 7;
+    static public final String GENESISBLOCK_DATE = "2020-07-31";
+
+    static private final String CHECKPOINT_DATE = "2020-08-07";
+    static private final Long CHECKPOINT_BLOCKHEIGHT = 4500L;
 
     static public RestoreHeight getInstance() {
         if (Singleton == null) {
@@ -52,8 +54,8 @@ public class RestoreHeight {
     private Map<String, Long> blockheight = new HashMap<>();
 
     RestoreHeight() {
-        blockheight.put(RESTORE_DATE_DEFAULT_START, 0L);
-        blockheight.put(RESTORE_DATE_DEFAULT_END, 4500L);
+        blockheight.put(GENESISBLOCK_DATE, 0L);
+        blockheight.put(CHECKPOINT_DATE, CHECKPOINT_BLOCKHEIGHT);
     }
 
     public long getHeight(String date) {
@@ -72,10 +74,10 @@ public class RestoreHeight {
         cal.set(Calendar.DST_OFFSET, 0);
         cal.setTime(date);
         cal.add(Calendar.DAY_OF_MONTH, -4); // give it some leeway
-        if (cal.get(Calendar.YEAR) < RESTORE_DATE_YEAR)
+        if (cal.get(Calendar.YEAR) < GENESISBLOCK_DATE_YEAR)
             return 0;
-        if ((cal.get(Calendar.YEAR) == RESTORE_DATE_YEAR) && (cal.get(Calendar.MONTH) <= RESTORE_DATE_MONTH))
-            // before January 2018
+        if ((cal.get(Calendar.YEAR) == GENESISBLOCK_DATE_YEAR) && (cal.get(Calendar.MONTH) <= GENESISBLOCK_DATE_MONTH))
+            // before July 2020
             return 0;
 
         Calendar query = (Calendar) cal.clone();
@@ -94,7 +96,7 @@ public class RestoreHeight {
             // if too recent, go back in time and find latest one we have
             while (prevBc == null) {
                 cal.add(Calendar.MONTH, -1);
-                if (cal.get(Calendar.YEAR) < RESTORE_DATE_YEAR) {
+                if (cal.get(Calendar.YEAR) < GENESISBLOCK_DATE_YEAR) {
                     throw new IllegalStateException("endless loop looking for blockheight");
                 }
                 prevTime = cal.getTimeInMillis();
