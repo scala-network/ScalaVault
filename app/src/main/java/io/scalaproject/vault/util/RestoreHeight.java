@@ -52,8 +52,8 @@ public class RestoreHeight {
     private Map<String, Long> blockheight = new HashMap<>();
 
     RestoreHeight() {
-        blockheight.put("2020-07-31", 0L);
-        blockheight.put("2020-08-07", 4500L);
+        blockheight.put(RESTORE_DATE_DEFAULT_START, 0L);
+        blockheight.put(RESTORE_DATE_DEFAULT_END, 4500L);
     }
 
     public long getHeight(String date) {
