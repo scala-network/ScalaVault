@@ -601,7 +601,19 @@ public class LoginActivity extends BaseActivity
             public void onClick(DialogInterface dialog, int which) {
                 switch (which) {
                     case DialogInterface.BUTTON_POSITIVE:
-                        new AsyncArchive().execute(walletName);
+                        Helper.promptPassword(LoginActivity.this, walletName, false, new Helper.PasswordAction() {
+                            @Override
+                            public void action(final String walletName, String password, boolean fingerprintUsed) {
+                                if (checkDevice(walletName, password)) {
+                                    runOnUiThread(new Runnable() {
+                                        public void run() {
+                                            new AsyncArchive().execute(walletName);
+                                        }
+                                    });
+                                }
+                            }
+                        });
+
                         break;
                     case DialogInterface.BUTTON_NEGATIVE:
                         // do nothing
@@ -619,9 +631,9 @@ public class LoginActivity extends BaseActivity
 
         LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(
                 LinearLayout.LayoutParams.WRAP_CONTENT,
-                LinearLayout.LayoutParams.WRAP_CONTENT
-        );
-        params.setMargins(20,20,50,10);
+                LinearLayout.LayoutParams.WRAP_CONTENT);
+
+        params.setMargins(20,20,30,10); // not enough space: keep 30 instead of 50 for the right margin
 
         Button posButton = dialog.getButton(DialogInterface.BUTTON_POSITIVE);
         if(posButton != null)
@@ -1286,12 +1298,6 @@ public class LoginActivity extends BaseActivity
                 return true;
             case R.id.action_nodes:
                 onNodePrefs();
-                return true;
-            case R.id.action_ledger_seed:
-                Fragment f = getSupportFragmentManager().findFragmentById(R.id.fragment_container);
-                if (f instanceof GenerateFragment) {
-                    ((GenerateFragment) f).convertLedgerSeed();
-                }
                 return true;
             default:
                 return super.onOptionsItemSelected(item);

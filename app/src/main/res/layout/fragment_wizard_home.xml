@@ -70,7 +70,7 @@
 		<Space
 			android:layout_width="0dp"
 			android:layout_height="0dp"
-			android:layout_weight="10" />
+			android:layout_weight="20" />
 
 		<Button
 			android:id="@+id/enterWalletAddress"
@@ -145,16 +145,14 @@
 			android:clickable="true"
 			android:focusable="true"/>
 
-	</LinearLayout>
-
-	<RelativeLayout
-		android:layout_width="match_parent"
-		android:layout_height="wrap_content"
-		android:layout_alignParentBottom="true">
+		<Space
+			android:layout_width="match_parent"
+			android:layout_height="0dp"
+			android:layout_weight="30"/>
 
 		<TextView
 			android:id="@+id/disclaimer"
-			android:layout_width="wrap_content"
+			android:layout_width="300dp"
 			android:layout_height="wrap_content"
 			android:layout_gravity="center"
 			android:layout_marginBottom="35dp"
@@ -165,6 +163,7 @@
 			android:textAlignment="center"
 			android:textSize="14sp" />
 
-	</RelativeLayout>
+	</LinearLayout>
+
 
 </RelativeLayout>

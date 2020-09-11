@@ -9,11 +9,4 @@
         android:title="@string/menu_help"
         app:showAsAction="ifRoom" />
 
-    <item
-        android:id="@+id/action_ledger_seed"
-        android:icon="@drawable/ic_ledger_restore"
-        android:orderInCategory="200"
-        android:title="@string/menu_ledger_seed"
-        app:showAsAction="never" />
-
 </menu>
