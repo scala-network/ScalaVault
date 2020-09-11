@@ -62,6 +62,9 @@ import com.nulabinc.zxcvbn.Zxcvbn;
 import java.io.File;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Date;
+import java.util.TimeZone;
 
 import timber.log.Timber;
 
@@ -425,7 +428,8 @@ public class GenerateFragment extends Fragment {
         long height = !type.equals(TYPE_NEW) ? getHeight() : 0;
         boolean ok = true;
         if (height < 0) {
-            etWalletRestoreHeight.setError(getString(R.string.generate_restoreheight_error));
+            if(etWalletRestoreHeight.getError().toString().isEmpty())
+                etWalletRestoreHeight.setError(getString(R.string.generate_restoreheight_error));
             ok = false;
         }
         if (ok) {
@@ -434,16 +438,39 @@ public class GenerateFragment extends Fragment {
         return ok;
     }
 
+    private boolean checkHeightDate(final Date date) {
+        Calendar cal = Calendar.getInstance(TimeZone.getTimeZone("UTC"));
+        cal.set(Calendar.DST_OFFSET, 0);
+        cal.setTime(date);
+
+        if (cal.get(Calendar.YEAR) < RestoreHeight.RESTORE_DATE_YEAR ||
+                (cal.get(Calendar.YEAR) == RestoreHeight.RESTORE_DATE_YEAR) && (cal.get(Calendar.MONTH) <= RestoreHeight.RESTORE_DATE_MONTH))
+        {
+            etWalletRestoreHeight.setError(getString(R.string.generate_restoreheight_min_error, RestoreHeight.RESTORE_DATE_DEFAULT_START));
+            return false;
+        }
+
+        etWalletRestoreHeight.setError(null);
+        return true;
+    }
+
     private long getHeight() {
         long height = 0;
 
         String restoreHeight = etWalletRestoreHeight.getEditText().getText().toString().trim();
+
         if (restoreHeight.isEmpty()) return -1;
+
         try {
             // is it a date?
             SimpleDateFormat parser = new SimpleDateFormat("yyyy-MM-dd");
             parser.setLenient(false);
-            height = RestoreHeight.getInstance().getHeight(parser.parse(restoreHeight));
+
+            Date date = parser.parse(restoreHeight);
+            if (!checkHeightDate(date))
+                return -1;
+
+            height = RestoreHeight.getInstance().getHeight(date);
         } catch (ParseException ex) {
         }
         if ((height <= 0) && (restoreHeight.length() == 8))
@@ -451,7 +478,12 @@ public class GenerateFragment extends Fragment {
                 // is it a date without dashes?
                 SimpleDateFormat parser = new SimpleDateFormat("yyyyMMdd");
                 parser.setLenient(false);
-                height = RestoreHeight.getInstance().getHeight(parser.parse(restoreHeight));
+
+                Date date = parser.parse(restoreHeight);
+                if (!checkHeightDate(date))
+                    return -1;
+
+                height = RestoreHeight.getInstance().getHeight(date);
             } catch (ParseException ex) {
             }
         if (height <= 0)

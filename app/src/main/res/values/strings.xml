@@ -192,6 +192,7 @@
     <string name="generate_wallet_created">Wallet created</string>
 
     <string name="generate_restoreheight_error">Enter Number or Date (YYYY-MM-DD)</string>
+    <string name="generate_restoreheight_min_error">Date must be greater than or equal to %1$s</string>
 
     <string name="generate_wallet_type_key">Keys</string>
     <string name="generate_wallet_type_new">New</string>

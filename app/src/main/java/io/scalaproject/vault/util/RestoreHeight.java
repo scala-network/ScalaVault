@@ -33,6 +33,11 @@ import java.util.concurrent.TimeUnit;
 public class RestoreHeight {
     static private RestoreHeight Singleton = null;
 
+    static public final Integer RESTORE_DATE_YEAR = 2020;
+    static public final Integer RESTORE_DATE_MONTH = 7;
+    static public final String RESTORE_DATE_DEFAULT_START = "2020-07-31";
+    static private final String RESTORE_DATE_DEFAULT_END = "2020-08-07";
+
     static public RestoreHeight getInstance() {
         if (Singleton == null) {
             synchronized (RestoreHeight.class) {
@@ -47,8 +52,8 @@ public class RestoreHeight {
     private Map<String, Long> blockheight = new HashMap<>();
 
     RestoreHeight() {
-        blockheight.put("2020-08-01", 0L);
-        blockheight.put("2020-08-08", 4500L);
+        blockheight.put("2020-07-31", 0L);
+        blockheight.put("2020-08-07", 4500L);
     }
 
     public long getHeight(String date) {
@@ -67,10 +72,10 @@ public class RestoreHeight {
         cal.set(Calendar.DST_OFFSET, 0);
         cal.setTime(date);
         cal.add(Calendar.DAY_OF_MONTH, -4); // give it some leeway
-        if (cal.get(Calendar.YEAR) < 2014)
+        if (cal.get(Calendar.YEAR) < RESTORE_DATE_YEAR)
             return 0;
-        if ((cal.get(Calendar.YEAR) == 2014) && (cal.get(Calendar.MONTH) <= 3))
-            // before May 2014
+        if ((cal.get(Calendar.YEAR) == RESTORE_DATE_YEAR) && (cal.get(Calendar.MONTH) <= RESTORE_DATE_MONTH))
+            // before January 2018
             return 0;
 
         Calendar query = (Calendar) cal.clone();
@@ -89,7 +94,7 @@ public class RestoreHeight {
             // if too recent, go back in time and find latest one we have
             while (prevBc == null) {
                 cal.add(Calendar.MONTH, -1);
-                if (cal.get(Calendar.YEAR) < 2014) {
+                if (cal.get(Calendar.YEAR) < RESTORE_DATE_YEAR) {
                     throw new IllegalStateException("endless loop looking for blockheight");
                 }
                 prevTime = cal.getTimeInMillis();
