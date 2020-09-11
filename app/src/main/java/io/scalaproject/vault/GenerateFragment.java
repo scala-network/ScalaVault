@@ -443,8 +443,7 @@ public class GenerateFragment extends Fragment {
         cal.set(Calendar.DST_OFFSET, 0);
         cal.setTime(date);
 
-        if (cal.get(Calendar.YEAR) < RestoreHeight.GENESISBLOCK_DATE_YEAR ||
-                (cal.get(Calendar.YEAR) == RestoreHeight.GENESISBLOCK_DATE_YEAR) && (cal.get(Calendar.MONTH) <= RestoreHeight.GENESISBLOCK_DATE_MONTH))
+        if (date.before(RestoreHeight.getGenesisBLockDate()))
         {
             etWalletRestoreHeight.setError(getString(R.string.generate_restoreheight_min_error, RestoreHeight.GENESISBLOCK_DATE));
             return false;

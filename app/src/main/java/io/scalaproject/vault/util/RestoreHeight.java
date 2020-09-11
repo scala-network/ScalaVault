@@ -34,7 +34,6 @@ public class RestoreHeight {
     static private RestoreHeight Singleton = null;
 
     static public final Integer GENESISBLOCK_DATE_YEAR = 2020;
-    static public final Integer GENESISBLOCK_DATE_MONTH = 7;
     static public final String GENESISBLOCK_DATE = "2020-07-31";
 
     static private final String CHECKPOINT_DATE = "2020-08-07";
@@ -58,6 +57,18 @@ public class RestoreHeight {
         blockheight.put(CHECKPOINT_DATE, CHECKPOINT_BLOCKHEIGHT);
     }
 
+    static public Date getGenesisBLockDate()
+    {
+        SimpleDateFormat parser = new SimpleDateFormat("yyyy-MM-dd");
+        parser.setTimeZone(TimeZone.getTimeZone("UTC"));
+        parser.setLenient(false);
+        try {
+            return parser.parse(GENESISBLOCK_DATE);
+        } catch (ParseException ex) {
+            throw new IllegalArgumentException(ex);
+        }
+    }
+
     public long getHeight(String date) {
         SimpleDateFormat parser = new SimpleDateFormat("yyyy-MM-dd");
         parser.setTimeZone(TimeZone.getTimeZone("UTC"));
@@ -74,10 +85,8 @@ public class RestoreHeight {
         cal.set(Calendar.DST_OFFSET, 0);
         cal.setTime(date);
         cal.add(Calendar.DAY_OF_MONTH, -4); // give it some leeway
-        if (cal.get(Calendar.YEAR) < GENESISBLOCK_DATE_YEAR)
-            return 0;
-        if ((cal.get(Calendar.YEAR) == GENESISBLOCK_DATE_YEAR) && (cal.get(Calendar.MONTH) <= GENESISBLOCK_DATE_MONTH))
-            // before July 2020
+
+        if(date.before(getGenesisBLockDate()))
             return 0;
 
         Calendar query = (Calendar) cal.clone();
