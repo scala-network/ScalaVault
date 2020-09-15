@@ -93,10 +93,6 @@ public class NodeFragment extends Fragment
         Set<NodeInfo> getAllNodes();
 
         void setUserDefinedNodes(Set<NodeInfo> userDefinedNodes);
-
-        void showProgressDialog(final Integer msg_id);
-
-        void hideProgressDialog();
     }
 
     @Override
@@ -117,8 +113,14 @@ public class NodeFragment extends Fragment
         if (asyncFindNodes != null)
             asyncFindNodes.cancel(true);
 
-        if (activityCallback != null)
+        if (activityCallback != null) {
+            /*for (NodeInfo node : allNodes) {
+                if (node.isUserDefined())
+                    userdefinedNodes.add(node);
+            }*/
+
             activityCallback.setUserDefinedNodes(userdefinedNodes);
+        }
 
         super.onPause();
     }
@@ -389,10 +391,13 @@ public class NodeFragment extends Fragment
         private void apply() {
             if (applyChanges()) {
                 closeDialog();
+
                 if (nodeBackup == null) { // this is a (FAB) new node
                     nodeInfo.setUserDefined(true);
                     allNodes.add(nodeInfo);
+                    userdefinedNodes.add(nodeInfo);
                 }
+
                 shutdown = true;
                 new AsyncTestNode().execute();
             }

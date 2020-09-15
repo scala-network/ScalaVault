@@ -120,6 +120,7 @@ public class LoginActivity extends BaseActivity
     }
 
     public Set<NodeInfo> getAllNodes() {
+        allNodes.addAll(userDefinedNodes);
         return allNodes;
     }
 
@@ -156,7 +157,7 @@ public class LoginActivity extends BaseActivity
         Map<String, ?> userdefinedNodes = getSharedPreferences(NODES_USERDEFINED_NAME, Context.MODE_PRIVATE).getAll();
         for (Map.Entry<String, ?> nodeEntry : userdefinedNodes.entrySet()) {
             if (nodeEntry != null) // just in case, ignore possible future errors
-                addNode((String) nodeEntry.getValue());
+                addNode((String) nodeEntry.getValue(), true);
         }
 
         // Load default nodes
@@ -165,6 +166,9 @@ public class LoginActivity extends BaseActivity
 
     private void saveUserDefinedNodes() {
         Timber.d("Save Userdefined nodes");
+
+        if(userDefinedNodes.isEmpty())
+            return;
 
         SharedPreferences.Editor editor = getSharedPreferences(NODES_USERDEFINED_NAME, Context.MODE_PRIVATE).edit();
         editor.clear();
@@ -177,12 +181,24 @@ public class LoginActivity extends BaseActivity
             i++;
         }
 
+        for (Node info : allNodes) {
+            if(info.isUserDefined()) {
+                String nodeString = info.toNodeString();
+                editor.putString(Integer.toString(i), nodeString);
+                Timber.d("saved %d:%s", i, nodeString);
+                i++;
+            }
+        }
+
         editor.apply();
     }
 
-    private void addNode(String nodeString) {
+    private void addNode(String nodeString) { addNode(nodeString, false); }
+
+    private void addNode(String nodeString, Boolean userdefined) {
         NodeInfo nodeInfo = NodeInfo.fromString(nodeString);
         if (nodeInfo != null) {
+            nodeInfo.setUserDefined(userdefined);
             allNodes.add(nodeInfo);
         } else
             Timber.w("nodeString invalid: %s", nodeString);
