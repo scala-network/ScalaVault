@@ -100,7 +100,7 @@ public class LoginActivity extends BaseActivity
 
     private NodeInfo node = null;
 
-    Set<NodeInfo> allNodes = new HashSet<>();
+    Set<NodeInfo> defaultNodes = new HashSet<>();
     Set<NodeInfo> userDefinedNodes = new HashSet<>();
 
     private boolean startCreateWalletFragment = false;
@@ -120,19 +120,21 @@ public class LoginActivity extends BaseActivity
     }
 
     public Set<NodeInfo> getAllNodes() {
-        allNodes.addAll(userDefinedNodes);
+        Set<NodeInfo> allNodes = new HashSet<>();
+
+        allNodes.addAll(defaultNodes);
+        defaultNodes.addAll(userDefinedNodes);
+
         return allNodes;
     }
 
     @Override
-    public void setUserDefinedNodes(Set<NodeInfo> nodes) {
+    public void addUserDefinedNodes(Set<NodeInfo> nodes) {
         Timber.d("adding %d nodes", nodes.size());
-
-        userDefinedNodes.clear();
 
         for (NodeInfo node : nodes) {
             Timber.d("adding %s %b", node, node.isUserDefined());
-            if (node.isUserDefined())
+            if (node.isUserDefined()) // just to be sure
                 userDefinedNodes.add(node);
         }
 
@@ -143,15 +145,21 @@ public class LoginActivity extends BaseActivity
         Helper.runWithNetwork(new Helper.Action() {
             @Override
             public boolean run() {
-                loadNodes();
+                loadAllNodes();
                 return true;
             }
         });
     }
 
-    private void loadNodes() {
-        Timber.d("loadUserDefinedNodes");
-        allNodes.clear();
+    private void loadAllNodes() {
+        Timber.d("loadAllNodes");
+
+        loadUserDefinedNodes();
+        loadDefaultNodes();
+    }
+
+    private void loadUserDefinedNodes() {
+        userDefinedNodes.clear();
 
         // Load Userdefined nodes
         Map<String, ?> userdefinedNodes = getSharedPreferences(NODES_USERDEFINED_NAME, Context.MODE_PRIVATE).getAll();
@@ -159,9 +167,6 @@ public class LoginActivity extends BaseActivity
             if (nodeEntry != null) // just in case, ignore possible future errors
                 addNode((String) nodeEntry.getValue(), true);
         }
-
-        // Load default nodes
-        loadDefaultNodes();
     }
 
     private void saveUserDefinedNodes() {
@@ -175,13 +180,6 @@ public class LoginActivity extends BaseActivity
 
         int i = 1;
         for (Node info : userDefinedNodes) {
-            String nodeString = info.toNodeString();
-            editor.putString(Integer.toString(i), nodeString);
-            Timber.d("saved %d:%s", i, nodeString);
-            i++;
-        }
-
-        for (Node info : allNodes) {
             if(info.isUserDefined()) {
                 String nodeString = info.toNodeString();
                 editor.putString(Integer.toString(i), nodeString);
@@ -199,7 +197,11 @@ public class LoginActivity extends BaseActivity
         NodeInfo nodeInfo = NodeInfo.fromString(nodeString);
         if (nodeInfo != null) {
             nodeInfo.setUserDefined(userdefined);
-            allNodes.add(nodeInfo);
+
+            if(userdefined)
+                userDefinedNodes.add(nodeInfo);
+            else
+                defaultNodes.add(nodeInfo);
         } else
             Timber.w("nodeString invalid: %s", nodeString);
     }
@@ -207,6 +209,8 @@ public class LoginActivity extends BaseActivity
     private void loadDefaultNodes() {
         if (DEFAULT_REMOTE_NODES == null)
             return;
+
+        defaultNodes.clear();
 
         final String[] nodeStrings = DEFAULT_REMOTE_NODES.split(";");
         for (final String nodeString : nodeStrings) {

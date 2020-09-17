@@ -92,7 +92,7 @@ public class NodeFragment extends Fragment
 
         Set<NodeInfo> getAllNodes();
 
-        void setUserDefinedNodes(Set<NodeInfo> userDefinedNodes);
+        void addUserDefinedNodes(Set<NodeInfo> userDefinedNodes);
     }
 
     @Override
@@ -114,12 +114,7 @@ public class NodeFragment extends Fragment
             asyncFindNodes.cancel(true);
 
         if (activityCallback != null) {
-            /*for (NodeInfo node : allNodes) {
-                if (node.isUserDefined())
-                    userdefinedNodes.add(node);
-            }*/
-
-            activityCallback.setUserDefinedNodes(userdefinedNodes);
+            activityCallback.addUserDefinedNodes(userdefinedNodes);
         }
 
         super.onPause();
@@ -395,7 +390,7 @@ public class NodeFragment extends Fragment
                 if (nodeBackup == null) { // this is a (FAB) new node
                     nodeInfo.setUserDefined(true);
                     allNodes.add(nodeInfo);
-                    userdefinedNodes.add(nodeInfo);
+                    userdefinedNodes.add(nodeInfo); // just used when saving
                 }
 
                 shutdown = true;
