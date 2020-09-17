@@ -1,22 +1,4 @@
 <resources>
-    <style name="ToolBarStyle.Base" parent="">
-        <item name="popupTheme">@style/ThemeOverlay.AppCompat.Light</item>
-        <item name="theme">@style/ThemeOverlay.AppCompat.Dark.ActionBar</item>
-    </style>
-
-    <style name="ToolBarStyle" parent="ToolBarStyle.Base" />
-
-    <style name="ToolBarStyle.Event" parent="ToolBarStyle">
-        <item name="titleTextAppearance">@style/TextAppearance.Widget.Event.Toolbar.Title</item>
-    </style>
-
-    <style name="ToolBarStyle.ActionButton" parent="Widget.AppCompat.ActionButton">
-        <item name="android:textAllCaps">true</item>
-        <item name="android:textSize">10sp</item>
-        <item name="android:textColor">@color/c_white</item>
-        <item name="android:textStyle">bold</item>
-    </style>
-
     <style name="TextAppearance.Widget.Event.Toolbar.Title" parent="TextAppearance.Widget.AppCompat.Toolbar.Title">
         <!-- Text styling can be done here-->
     </style>
@@ -37,12 +19,17 @@
 
         <item name="actionMenuTextColor">@color/txt_main</item>
 
-        <item name="android:itemTextAppearance">@style/ItemMenuTextAppearance</item>
-        <item name="android:itemBackground">@color/bg_lighter</item>
+        <item name="popupTheme">@style/ActionBarTheme</item>
 
         <item name="android:colorControlActivated">@color/bg_blue</item>
 
         <item name="android:alertDialogTheme">@style/MaterialAlertDialogCustom</item>
+    </style>
+
+    <style name="ActionBarTheme" parent="Theme.AppCompat.Light">
+        <item name="android:colorBackground">@color/bg_lighter</item>
+        <item name="android:textColor">@color/c_white</item>
+        <item name="android:textSize">14sp</item>
     </style>
 
     <style name="AppTheme.NoActionBar">
