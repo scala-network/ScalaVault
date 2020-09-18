@@ -212,13 +212,9 @@
     <string name="receive_amount_nan">XLA no es un número</string>
 
     <string name="details_alert_message">Se va a mostrar información delicada.\n¡Mira por encima del hombro!</string>
-    <string name="details_alert_yes">Estoy seguro</string>
-    <string name="details_alert_no">¡Llévame de vuelta!</string>
     <string name="details_title">Detalles</string>
 
     <string name="archive_alert_message">¡El monedero será copiada y después borrada!</string>
-    <string name="archive_alert_yes">¡Sí, haz eso!</string>
-    <string name="archive_alert_no">¡No gracias!</string>
 
     <string name="fab_create_new">Crear nuevo monedero</string>
     <string name="fab_restore_viewonly">Restaurar monedero de sólo vista</string>

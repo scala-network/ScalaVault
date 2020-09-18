@@ -273,13 +273,9 @@
     <string name="receive_amount_nan">XLA geen getal</string>
 
     <string name="details_alert_message">Nu worden vertrouwelijke gegevens getoond.\nKijk achter je!</string>
-    <string name="details_alert_yes">Het is veilig.</string>
-    <string name="details_alert_no">Ga terug!</string>
     <string name="details_title">Details</string>
 
     <string name="archive_alert_message">Er wordt een back-up gemaakt en daarna wordt de portemonnee verwijderd!</string>
-    <string name="archive_alert_yes">Ja, doe dat!</string>
-    <string name="archive_alert_no">Nee, niet doen!</string>
 
     <string name="fab_create_new">Nieuwe portemonnee</string>
     <string name="fab_restore_viewonly">Alleen-lezen portemonnee herstellen</string>

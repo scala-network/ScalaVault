@@ -223,8 +223,6 @@
     <string name="receive_amount_negative">下限 0</string>
     <string name="receive_amount_nan">请输入数字</string>
     <string name="details_alert_message">接下来将显示敏感数据。\n请确认周边环境是否安全。</string>
-    <string name="details_alert_yes">安全</string>
-    <string name="details_alert_no">返回上一步</string>
     <string name="details_title">详情</string>
     <string name="archive_alert_message">即将开始备份钱包，完成后将删除钱包！</string>
     <string name="archive_alert_yes">好的，开始吧！</string>

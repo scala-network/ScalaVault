@@ -277,13 +277,9 @@
     <string name="receive_amount_nan">Не числовое значение XLA</string>
 
     <string name="details_alert_message">Сейчас будут показаны конфиденциальные данные. Оглянись вокруг!</string>
-    <string name="details_alert_yes">Я в безопасности</string>
-    <string name="details_alert_no">Верните меня обратно!</string>
     <string name="details_title">Подробная информация</string>
 
     <string name="archive_alert_message">Этот кошелек будет скопирован, а затем удален!</string>
-    <string name="archive_alert_yes">Да, сделай это!</string>
-    <string name="archive_alert_no">Нет, спасибо!</string>
 
     <string name="fab_create_new">Создать новый кошелек</string>
     <string name="fab_restore_viewonly">Восстановить кошелек только для просмотра</string>

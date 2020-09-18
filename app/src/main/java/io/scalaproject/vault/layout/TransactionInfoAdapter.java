@@ -185,7 +185,7 @@ public class TransactionInfoAdapter extends RecyclerView.Adapter<TransactionInfo
                                 Helper.getPrettyString(infoItem.hash)) :
                         Helper.getPrettyString(infoItem.hash));
             } else {
-                this.tvPaymentId.setText(userNotes.note);
+                this.tvPaymentId.setText(Helper.getTruncatedString(userNotes.note, 20));
             }
 
             this.tvDateTime.setText(getDateTime(infoItem.timestamp));

@@ -274,13 +274,9 @@
     <string name="receive_amount_nan">XLA nie číslo</string>
 
     <string name="details_alert_message">Budú zobrazené citlivé dáta.\nPozri cez plece!</string>
-    <string name="details_alert_yes">Som v bezpečí</string>
-    <string name="details_alert_no">Naspäť!</string>
     <string name="details_title">Detaily</string>
 
     <string name="archive_alert_message">Peňaženka bude zálohovaná a následne zmazaná!</string>
-    <string name="archive_alert_yes">Áno, poďme na to!</string>
-    <string name="archive_alert_no">Nie, díky!</string>
 
     <string name="fab_create_new">Vytvor novú peňaženku</string>
     <string name="fab_restore_viewonly">Obnoviť prezeraciu peňaženku</string>

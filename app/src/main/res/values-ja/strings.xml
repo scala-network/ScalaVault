@@ -284,13 +284,9 @@
     <string name="receive_amount_nan">XLA が数字ではありません</string>
 
     <string name="details_alert_message">機密データは表示されません\n背後に人がいないことを確認してください!</string>
-    <string name="details_alert_yes">私は安全です</string>
-    <string name="details_alert_no">戻ります!</string>
     <string name="details_title">詳細</string>
 
     <string name="archive_alert_message">ウォレットはバックアップされてから削除されます!</string>
-    <string name="archive_alert_yes">はい、お願いします!</string>
-    <string name="archive_alert_no">いいえ、結構です!</string>
 
     <string name="fab_create_new">新しいウォレットの作成</string>
     <string name="fab_restore_viewonly">閲覧専用ウォレットを復元</string>

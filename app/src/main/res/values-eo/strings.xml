@@ -283,13 +283,9 @@
     <string name="receive_amount_nan">Bv. entajpu nombron</string>
 
     <string name="details_alert_message">Konfidencaj datumoj ne montriĝu.\nRigardu super via ŝultro!</string>
-    <string name="details_alert_yes">Mi sekuras.</string>
-    <string name="details_alert_no">Malantaŭen!</string>
     <string name="details_title">Detaloj</string>
 
     <string name="archive_alert_message">La monujo sekurkopiĝos kaj poste forviŝiĝos!</string>
-    <string name="archive_alert_yes">Jes, faru tion!</string>
-    <string name="archive_alert_no">Ne dankon!</string>
 
     <string name="fab_create_new">Krei novan monujon</string>
     <string name="fab_restore_viewonly">Restaŭri nurvidan monujon</string>

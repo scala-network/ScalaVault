@@ -257,13 +257,9 @@
     <string name="receive_amount_nan">XLA är inte ett tal</string>
 
     <string name="details_alert_message">Nu kommer känsliga data att visas.\nTitta över axeln!</string>
-    <string name="details_alert_yes">Det är OK</string>
-    <string name="details_alert_no">Ta mig tillbaka!</string>
     <string name="details_title">Detaljer</string>
 
     <string name="archive_alert_message">Plånboken kommer att säkerhetskopieras och sedan tas bort!</string>
-    <string name="archive_alert_yes">Ja, gör det!</string>
-    <string name="archive_alert_no">Nej tack!</string>
 
     <string name="fab_create_new">Skapa ny plånbok</string>
     <string name="fab_restore_viewonly">Återställ granskningsplånbok</string>

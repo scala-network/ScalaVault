@@ -277,13 +277,9 @@
     <string name="receive_amount_nan">XLA keine Nummer</string>
 
     <string name="details_alert_message">Sensible Daten werden angezeigt.\nSchau über deine Schulter!</string>
-    <string name="details_alert_yes">Ich bin sicher</string>
-    <string name="details_alert_no">Nein, doch nicht!</string>
     <string name="details_title">Details</string>
 
     <string name="archive_alert_message">Das Wallet wird archiviert und dann gelöscht!</string>
-    <string name="archive_alert_yes">Ja, mach das!</string>
-    <string name="archive_alert_no">Nein, danke!</string>
 
     <string name="fab_create_new">Neues Wallet erstellen</string>
     <string name="fab_restore_viewonly">View-Only-Wallet wiederherstellen</string>

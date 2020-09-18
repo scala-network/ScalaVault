@@ -251,13 +251,9 @@
     <string name="receive_amount_nan">XLA fără valoare</string>
 
     <string name="details_alert_message">Acum vor fi afișate date sensibile.\nUită-te peste umărul tău!</string>
-    <string name="details_alert_yes">Sunt în siguranță</string>
-    <string name="details_alert_no">Du-mă înapoi!</string>
     <string name="details_title">Detalii</string>
 
     <string name="archive_alert_message">Voi face o copie de siguranță a portofelului apoi va fi șters!</string>
-    <string name="archive_alert_yes">Da, fă asta!</string>
-    <string name="archive_alert_no">Nu mersi!</string>
 
     <string name="fab_create_new">Creeaza portofel nou</string>
     <string name="fab_restore_viewonly">Restaurează portofel-vizualizare</string>

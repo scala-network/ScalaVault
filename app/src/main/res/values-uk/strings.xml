@@ -277,13 +277,9 @@
     <string name="receive_amount_nan">Не числове значення XLA</string>
 
     <string name="details_alert_message">Зараз будуть показані конфіденційні дані. Озирнись навколо!</string>
-    <string name="details_alert_yes">Я в безпеці</string>
-    <string name="details_alert_no">Поверніть мене назад!</string>
     <string name="details_title">Детальна інформація</string>
 
     <string name="archive_alert_message">Цей гаманець буде скопійовано, а потім знищено!</string>
-    <string name="archive_alert_yes">Так, зроби це!</string>
-    <string name="archive_alert_no">Ні, дякую!</string>
 
     <string name="fab_create_new">Створити новий гаманець</string>
     <string name="fab_restore_viewonly">Відновити гаманець тільки для перегляду</string>

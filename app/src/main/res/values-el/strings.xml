@@ -251,13 +251,9 @@
     <string name="receive_amount_nan">XLA δεν υπάρχει αριθμός</string>
 
     <string name="details_alert_message">Θα εμφανιστούν τώρα ευαίσθητα δεδομένα. \nΠρόσεχε ποιος είναι πίσω σου!</string>
-    <string name="details_alert_yes">Είμαι ασφαλής</string>
-    <string name="details_alert_no">Πήγαινε με πίσω!</string>
     <string name="details_title">Λεπτομέρειες</string>
 
     <string name="archive_alert_message">Το πορτοφόλι θα δημιουργήσει αντίγραφο ασφαλείας και στη συνέχεια θα διαγραφεί!</string>
-    <string name="archive_alert_yes">Ναι, κάνε αυτό!</string>
-    <string name="archive_alert_no">Όχι ευχαριστώ!</string>
 
     <string name="fab_create_new">Δημιουργία νέου πορτοφολιού</string>
     <string name="fab_restore_viewonly">Επαναφορά πορτοφολιού προβολής-μόνο</string>

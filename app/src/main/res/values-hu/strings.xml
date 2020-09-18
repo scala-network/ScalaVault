@@ -271,13 +271,9 @@
     <string name="receive_amount_nan">XLA nem egy szám</string>
 
     <string name="details_alert_message">Bizalmas adatok kerülnek megjelenítésre.\nBizonyosodj meg róla, hogy más nem látja!</string>
-    <string name="details_alert_yes">Mehet</string>
-    <string name="details_alert_no">Inkább ne!</string>
     <string name="details_title">Részletek</string>
 
     <string name="archive_alert_message">A tárcáról biztonsági másolat készül, majd törlésre fog kerülni!</string>
-    <string name="archive_alert_yes">Igen, mehet!</string>
-    <string name="archive_alert_no">Inkább ne!</string>
 
     <string name="fab_create_new">Új tárca létrehozása</string>
     <string name="fab_restore_viewonly">Figyelőtárca visszaállítása</string>

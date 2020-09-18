@@ -275,13 +275,9 @@
     <string name="receive_amount_nan">輸入的 XLA 不是數字</string>
 
     <string name="details_alert_message">將會顯示敏感資訊。\n請注意周遭安全！</string>
-    <string name="details_alert_yes">我現在很安全</string>
-    <string name="details_alert_no">不看了！</string>
     <string name="details_title">詳細資訊</string>
 
     <string name="archive_alert_message">錢包檔案將會被備份並且於列表中刪除！</string>
-    <string name="archive_alert_yes">好的！</string>
-    <string name="archive_alert_no">不了！</string>
 
     <string name="fab_create_new">建立新錢包</string>
     <string name="fab_restore_viewonly">回復唯讀錢包</string>

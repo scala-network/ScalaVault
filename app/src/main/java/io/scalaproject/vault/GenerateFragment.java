@@ -728,7 +728,7 @@ public class GenerateFragment extends Fragment {
         ledgerDialog.setOnShowListener(new DialogInterface.OnShowListener() {
             @Override
             public void onShow(DialogInterface dialog) {
-                Button button = ((AlertDialog) dialog).getButton(AlertDialog.BUTTON_POSITIVE);
+                Button button = ledgerDialog.getButton(AlertDialog.BUTTON_POSITIVE);
                 button.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
@@ -752,14 +752,5 @@ public class GenerateFragment extends Fragment {
         }
 
         ledgerDialog.show();
-        
-        LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(
-                LinearLayout.LayoutParams.WRAP_CONTENT,
-                LinearLayout.LayoutParams.WRAP_CONTENT
-        );
-        params.setMargins(20,20,50,10);
-
-        Button posButton = ledgerDialog.getButton(DialogInterface.BUTTON_POSITIVE);
-        posButton.setLayoutParams(params);
     }
 }

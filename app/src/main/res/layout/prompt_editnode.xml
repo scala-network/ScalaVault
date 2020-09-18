@@ -135,12 +135,11 @@
 
             <TextView
                 android:id="@+id/tvResultLabel"
-                style="@style/ScalaLabel.Subtitle"
+                style="@style/ScalaLabel.Small"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignParentStart="true"
                 android:layout_alignParentTop="true"
-                android:layout_marginStart="8dp"
                 android:layout_marginEnd="4dp"
                 android:text="@string/node_result_label"
                 android:textAlignment="textStart" />

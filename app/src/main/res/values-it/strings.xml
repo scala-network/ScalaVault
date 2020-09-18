@@ -273,13 +273,9 @@
     <string name="receive_amount_nan">XLA non è un numero</string>
 
     <string name="details_alert_message">Verranno ora mostrati dati sensibili.\nGuardati alle spalle!</string>
-    <string name="details_alert_yes">Sono al sicuro</string>
-    <string name="details_alert_no">Torna indietro!</string>
     <string name="details_title">Dettagli</string>
 
     <string name="archive_alert_message">Il portafoglio verrà archiviato e poi eliminato!</string>
-    <string name="archive_alert_yes">Sì, procedi!</string>
-    <string name="archive_alert_no">No grazie!</string>
 
     <string name="fab_create_new">Crea un nuovo portafoglio</string>
     <string name="fab_restore_viewonly">Recupera un portafoglio solo-visualizzazione</string>

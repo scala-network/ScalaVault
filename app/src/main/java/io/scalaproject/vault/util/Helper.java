@@ -603,13 +603,6 @@ public class Helper {
                         }
                     }
                 });
-
-                LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(
-                        LinearLayout.LayoutParams.WRAP_CONTENT,
-                        LinearLayout.LayoutParams.WRAP_CONTENT
-                );
-                params.setMargins(20,20,50,10);
-                posButton.setLayoutParams(params);
             }
         });
 
@@ -677,5 +670,12 @@ public class Helper {
 
     static public String getPrettyString(String text) {
         return text.substring(0, 7) + "..." + text.substring(text.length() - 7);
+    }
+
+    static public String getTruncatedString(String text, Integer max) {
+        if(text.length() <= max)
+            return text;
+
+        return text.substring(0, 16).trim() + "...";
     }
 }

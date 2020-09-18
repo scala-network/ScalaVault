@@ -278,13 +278,9 @@
     <string name="receive_amount_nan">XLA pole arv</string>
 
     <string name="details_alert_message">Nüüd näidatakse tundlikku infot.\nPiilu oma seljataha!</string>
-    <string name="details_alert_yes">Olen turvalises kohas</string>
-    <string name="details_alert_no">Vii mind tagasi!</string>
     <string name="details_title">Lisainfo</string>
 
     <string name="archive_alert_message">Rahakotist tehakse tagavarakoopia ja siis see kustutatakse!</string>
-    <string name="archive_alert_yes">Täpselt nii!</string>
-    <string name="archive_alert_no">Ei, tänan!</string>
 
     <string name="fab_create_new">Loo uus rahakott</string>
     <string name="fab_restore_viewonly">Taasta rahakott vaatamiseks</string>

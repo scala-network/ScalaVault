@@ -275,13 +275,9 @@
     <string name="receive_amount_nan">XLA não é um número</string>
 
     <string name="details_alert_message">Dados sensíveis vão ser mostrados.\nOlha à tua volta!</string>
-    <string name="details_alert_yes">Estou seguro</string>
-    <string name="details_alert_no">Volta atrás!</string>
     <string name="details_title">Detalhes</string>
 
     <string name="archive_alert_message">Vai ser feita uma cópia de segurança da carteira e depois será apagada!</string>
-    <string name="archive_alert_yes">Sim, faz isso!</string>
-    <string name="archive_alert_no">Não obrigado!</string>
 
     <string name="fab_create_new">Criar nova carteira</string>
     <string name="fab_restore_viewonly">Restaurar carteira apenas de visualização</string>

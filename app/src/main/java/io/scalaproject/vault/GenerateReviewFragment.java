@@ -592,7 +592,7 @@ public class GenerateReviewFragment extends Fragment {
         openDialog.setOnShowListener(new DialogInterface.OnShowListener() {
             @Override
             public void onShow(final DialogInterface dialog) {
-                Button posButton = ((AlertDialog) dialog).getButton(AlertDialog.BUTTON_POSITIVE);
+                Button posButton = openDialog.getButton(AlertDialog.BUTTON_POSITIVE);
                 posButton.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
@@ -611,13 +611,6 @@ public class GenerateReviewFragment extends Fragment {
                         }
                     }
                 });
-
-                LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(
-                        LinearLayout.LayoutParams.WRAP_CONTENT,
-                        LinearLayout.LayoutParams.WRAP_CONTENT
-                );
-                params.setMargins(20,20,50,10);
-                posButton.setLayoutParams(params);
             }
         });
 

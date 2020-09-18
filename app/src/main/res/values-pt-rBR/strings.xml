@@ -275,13 +275,9 @@
     <string name="receive_amount_nan">O valor não é numérico</string>
 
     <string name="details_alert_message">Dados importantes serão exibidos.\nCertifique-se que ninguém está espiando!</string>
-    <string name="details_alert_yes">Estou seguro</string>
-    <string name="details_alert_no">Tire-me daqui!</string>
     <string name="details_title">Detalhes</string>
 
     <string name="archive_alert_message">Farei um backup da carteira e depois vou deletá-la!</string>
-    <string name="archive_alert_yes">Sim, pode fazer!</string>
-    <string name="archive_alert_no">Não, obrigado!</string>
 
     <string name="fab_create_new">Criar nova carteira</string>
     <string name="fab_restore_viewonly">Restaurar carteira \"Somente leitura\"</string>

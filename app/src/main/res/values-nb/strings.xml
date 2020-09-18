@@ -276,13 +276,9 @@
     <string name="receive_amount_nan">XLA ikke et tall</string>
 
     <string name="details_alert_message">Sensitive data vil nå bli vist.\nSe over skulderen din!</string>
-    <string name="details_alert_yes">Jeg er trygg</string>
-    <string name="details_alert_no">Ta meg tilbake!</string>
     <string name="details_title">Detaljer</string>
 
     <string name="archive_alert_message">Lommeboka vil bli backa opp og så sletta!</string>
-    <string name="archive_alert_yes">Ja, gjør det!</string>
-    <string name="archive_alert_no">Nei takk!</string>
 
     <string name="fab_create_new">Lag ny lommebok</string>
     <string name="fab_restore_viewonly">Gjenoprett bare-se lommebok</string>

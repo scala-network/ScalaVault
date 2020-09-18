@@ -285,13 +285,9 @@
     <string name="receive_amount_nan">XLA nije broj</string>
 
     <string name="details_alert_message">Osetljivi podaci će biti pokazani.\nLook over your shoulder!</string>
-    <string name="details_alert_yes">Siguran sam</string>
-    <string name="details_alert_no">Vrati me nazad!</string>
     <string name="details_title">Detalji</string>
 
     <string name="archive_alert_message">Novčanik će biti bekapovan a potom obrisan!</string>
-    <string name="archive_alert_yes">Da, uradi to!</string>
-    <string name="archive_alert_no">Ne, hvala!</string>
 
     <string name="fab_create_new">Kreiraj novi novčanik</string>
     <string name="fab_restore_viewonly">Obnovi novčanik za pregled</string>

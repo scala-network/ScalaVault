@@ -371,20 +371,10 @@ public class LoginActivity extends BaseActivity
         };
 
         MaterialAlertDialogBuilder builder = new MaterialAlertDialogBuilder(this, R.style.MaterialAlertDialogCustom);
-        androidx.appcompat.app.AlertDialog dialog = builder.setMessage(getString(R.string.details_alert_message))
+        builder.setMessage(getString(R.string.details_alert_message))
                 .setPositiveButton(getString(R.string.details_alert_yes), dialogClickListener)
                 .setNegativeButton(getString(R.string.details_alert_no), dialogClickListener)
                 .show();
-
-        LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(
-                LinearLayout.LayoutParams.WRAP_CONTENT,
-                LinearLayout.LayoutParams.WRAP_CONTENT
-        );
-        params.setMargins(20,20,50,10);
-
-        Button posButton = dialog.getButton(DialogInterface.BUTTON_POSITIVE);
-        if(posButton != null)
-            posButton.setLayoutParams(params);
     }
 
     @Override
@@ -511,16 +501,6 @@ public class LoginActivity extends BaseActivity
         });
 
         dialog.show();
-
-        LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(
-                LinearLayout.LayoutParams.WRAP_CONTENT,
-                LinearLayout.LayoutParams.WRAP_CONTENT
-        );
-        params.setMargins(20,20,50,10);
-
-        Button posButton = dialog.getButton(DialogInterface.BUTTON_POSITIVE);
-        if(posButton != null)
-            posButton.setLayoutParams(params);
     }
 
     private class AsyncBackup extends AsyncTask<String, Void, Boolean> {
@@ -643,21 +623,11 @@ public class LoginActivity extends BaseActivity
         };
 
         MaterialAlertDialogBuilder builder = new MaterialAlertDialogBuilder(this, R.style.MaterialAlertDialogCustom);
-        androidx.appcompat.app.AlertDialog dialog = builder.setMessage(getString(R.string.archive_alert_message))
+        builder.setMessage(getString(R.string.archive_alert_message))
                 .setTitle(walletName)
                 .setPositiveButton(getString(R.string.archive_alert_yes), dialogClickListener)
                 .setNegativeButton(getString(R.string.archive_alert_no), dialogClickListener)
                 .show();
-
-        LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(
-                LinearLayout.LayoutParams.WRAP_CONTENT,
-                LinearLayout.LayoutParams.WRAP_CONTENT);
-
-        params.setMargins(20,20,30,10); // not enough space: keep 30 instead of 50 for the right margin
-
-        Button posButton = dialog.getButton(DialogInterface.BUTTON_POSITIVE);
-        if(posButton != null)
-            posButton.setLayoutParams(params);
     }
 
     void reloadWalletList() {
@@ -1240,17 +1210,7 @@ public class LoginActivity extends BaseActivity
             }
         });
 
-        androidx.appcompat.app.AlertDialog dialog = builder.show();
-
-        LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(
-                LinearLayout.LayoutParams.WRAP_CONTENT,
-                LinearLayout.LayoutParams.WRAP_CONTENT
-        );
-        params.setMargins(20,20,50,10);
-
-        Button posButton = dialog.getButton(DialogInterface.BUTTON_POSITIVE);
-        if(posButton != null)
-            posButton.setLayoutParams(params);
+        builder.show();
     }
 
     @Override

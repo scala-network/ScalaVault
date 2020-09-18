@@ -450,15 +450,6 @@ public class SendBtcConfirmWizardFragment extends SendWizardFragment implements 
             passwordDialog.getWindow().setFlags(WindowManager.LayoutParams.FLAG_SECURE, WindowManager.LayoutParams.FLAG_SECURE);
         }
 
-        LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(
-                LinearLayout.LayoutParams.WRAP_CONTENT,
-                LinearLayout.LayoutParams.WRAP_CONTENT
-        );
-        params.setMargins(20,20,50,10);
-
-        Button posButton = passwordDialog.getButton(DialogInterface.BUTTON_POSITIVE);
-        posButton.setLayoutParams(params);
-
         passwordDialog.show();
     }
 

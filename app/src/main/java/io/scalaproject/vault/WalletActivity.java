@@ -1178,17 +1178,6 @@ public class WalletActivity extends BaseActivity implements WalletFragment.Liste
             }
         });
 
-        LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(
-                LinearLayout.LayoutParams.WRAP_CONTENT,
-                LinearLayout.LayoutParams.WRAP_CONTENT
-        );
-        params.setMargins(20,20,50,10);
-
-        Button posButton = dialog.getButton(DialogInterface.BUTTON_POSITIVE);
-
-        if(posButton != null)
-            posButton.setLayoutParams(params);
-
         dialog.show();
     }
 

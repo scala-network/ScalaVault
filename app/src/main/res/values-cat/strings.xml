@@ -283,13 +283,9 @@
     <string name="receive_amount_nan">XLA no és un número</string>
 
     <string name="details_alert_message">Ara es mostrarà informació delicada.\nEsteu a l\'aguait!</string>
-    <string name="details_alert_yes">Estic segur</string>
-    <string name="details_alert_no">Torna\'m enrere!</string>
     <string name="details_title">Detalls</string>
 
     <string name="archive_alert_message">Es farà una còpia de seguretat del portamonedes i s\'esborrarà.</string>
-    <string name="archive_alert_yes">Si, fes-ho!</string>
-    <string name="archive_alert_no">No gràcies!</string>
 
     <string name="fab_create_new">Crear un nou portamonedes</string>
     <string name="fab_restore_viewonly">Restablir portamonedes de només lectura</string>

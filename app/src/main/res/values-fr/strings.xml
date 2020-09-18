@@ -279,13 +279,9 @@
     <string name="receive_amount_nan">XLA pas un nombre</string>
 
     <string name="details_alert_message">Des données sensible vont être affichées.\nRegardez autour de vous !</string>
-    <string name="details_alert_yes">C\'est bon</string>
-    <string name="details_alert_no">Non merci !</string>
     <string name="details_title">Détails</string>
 
     <string name="archive_alert_message">Le portefeuille sera sauvegardé puis supprimé !</string>
-    <string name="archive_alert_yes">Oui, procéder !</string>
-    <string name="archive_alert_no">Non merci !</string>
 
     <string name="fab_create_new">Créer un nouveau portefeuille</string>
     <string name="fab_restore_viewonly">Restaurer un portefeuille d\'audit</string>

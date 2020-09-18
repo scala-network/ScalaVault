@@ -413,16 +413,6 @@ public class NodeFragment extends Fragment
 
         private void show() {
             editDialog.show();
-
-            LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(
-                    LinearLayout.LayoutParams.WRAP_CONTENT,
-                    LinearLayout.LayoutParams.WRAP_CONTENT
-            );
-            params.setMargins(20,20,50,10);
-
-            Button posButton = editDialog.getButton(DialogInterface.BUTTON_POSITIVE);
-            if(posButton != null)
-                posButton.setLayoutParams(params);
         }
 
         private void test() {
