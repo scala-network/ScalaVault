@@ -2,22 +2,21 @@
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="wrap_content"
+    android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:background="@color/bg_lighter">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/header_top"
         android:layout_marginStart="16dp"
-        android:layout_marginTop="16dp"
         android:layout_marginEnd="16dp"
         android:orientation="vertical">
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/header_top"
             android:orientation="horizontal"
             android:weightSum="10">
 
@@ -128,33 +127,22 @@
             </com.google.android.material.textfield.TextInputLayout>
         </LinearLayout>
 
-        <RelativeLayout
+        <TextView
+            android:id="@+id/tvResultLabel"
+            style="@style/ScalaLabel.Small"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:textStyle="bold"
+            android:text="@string/node_result_label" />
+
+        <TextView
+            android:id="@+id/tvResult"
+            style="@style/ScalaText.Small"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/header_top_first">
-
-            <TextView
-                android:id="@+id/tvResultLabel"
-                style="@style/ScalaLabel.Small"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentStart="true"
-                android:layout_alignParentTop="true"
-                android:layout_marginEnd="4dp"
-                android:text="@string/node_result_label"
-                android:textAlignment="textStart" />
-
-            <TextView
-                android:id="@+id/tvResult"
-                style="@style/ScalaText.Small"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_alignBaseline="@+id/tvResultLabel"
-                android:layout_marginStart="4dp"
-                android:layout_toEndOf="@+id/tvResultLabel"
-                android:textAlignment="textStart"
-                tools:text="Blockheight: 1710998 (v9), Ping: 187ms" />
-        </RelativeLayout>
+            android:layout_marginTop="4dp"
+            tools:text="Blockheight: 1710998 (v9), Ping: 187ms" />
 
     </LinearLayout>
 </FrameLayout>

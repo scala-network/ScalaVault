@@ -355,8 +355,8 @@ public class NodeFragment extends Fragment
                     }
                 });
                 // also seed with scala seed nodes (see p2p/net_node.inl:410 in scala src)
-                seedList.add(new NodeInfo(new InetSocketAddress("62.171.149.67", 11811)));
-                seedList.add(new NodeInfo(new InetSocketAddress("164.68.117.160", 11811)));
+                //seedList.add(new NodeInfo(new InetSocketAddress("62.171.149.67", 11811)));
+                //seedList.add(new NodeInfo(new InetSocketAddress("164.68.117.160", 11811)));
                 d.seedPeers(seedList);
                 d.awaitTermination(NODES_TO_FIND);
             }

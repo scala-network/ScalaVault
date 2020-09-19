@@ -81,12 +81,12 @@ public class Dispatcher implements PeerRetriever.OnGetPeers {
                         retrievePeers(retrievedPeer);
                     final NodeInfo nodeInfo = retrievedPeer.getNodeInfo();
                     Timber.d("Retrieved %s", nodeInfo);
-                    if ((nodeInfo.isValid() || nodeInfo.isUserDefined())) {
+                    //if ((nodeInfo.isValid() || nodeInfo.isUserDefined())) {
                         nodeInfo.setName();
                         rpcNodes.add(nodeInfo);
                         Timber.d("RPC: %s", nodeInfo);
                         // the following is not totally correct but it works (otherwise we need to
-                        // load much more before filtering - but we don't have time
+                        // load much more before filtering - but we don't have time)
                         if (listener != null) listener.onGet(nodeInfo);
                         if (rpcNodes.size() >= nodesToFind) {
                             Timber.d("are we done here?");
@@ -96,7 +96,7 @@ public class Dispatcher implements PeerRetriever.OnGetPeers {
                                 break;
                             }
                         }
-                    }
+                    //}
                     if (System.nanoTime() - t > MAX_TIME) break; // watchdog
                 } catch (ExecutionException ex) {
                     Timber.d(ex); // tell us about it and continue
@@ -113,6 +113,7 @@ public class Dispatcher implements PeerRetriever.OnGetPeers {
                 Timber.d(ex);
             }
         }
+
         filterRpcNodes();
     }
 
@@ -125,16 +126,22 @@ public class Dispatcher implements PeerRetriever.OnGetPeers {
 
     private long calcConsensusHeight() {
         Timber.d("Calc Consensus height from %d nodes", rpcNodes.size());
+
         final Map<Long, Integer> nodeHeights = new TreeMap<Long, Integer>();
+
         for (NodeInfo info : rpcNodes) {
             if (!info.isValid()) continue;
+
             Integer h = nodeHeights.get(info.getHeight());
             if (h == null)
                 h = 0;
+
             nodeHeights.put(info.getHeight(), h + 1);
         }
+
         long consensusHeight = 0;
         long consensusCount = 0;
+
         for (Map.Entry<Long, Integer> entry : nodeHeights.entrySet()) {
             final long entryHeight = entry.getKey();
             int count = 0;
@@ -144,17 +151,21 @@ public class Dispatcher implements PeerRetriever.OnGetPeers {
                     v = 0;
                 count += v;
             }
+
             if (count >= consensusCount) {
                 consensusCount = count;
                 consensusHeight = entryHeight;
             }
             Timber.d("%d - %d/%d", entryHeight, count, entry.getValue());
         }
+
         return consensusHeight;
     }
 
     private void filterRpcNodes() {
-        long consensus = calcConsensusHeight();
+        // Scala: Why filter the nodes? I would keep them all
+
+        /*long consensus = calcConsensusHeight();
         Timber.d("Consensus Height = %d for %d nodes", consensus, rpcNodes.size());
         for (Iterator<NodeInfo> iter = rpcNodes.iterator(); iter.hasNext(); ) {
             NodeInfo info = iter.next();
@@ -165,7 +176,7 @@ public class Dispatcher implements PeerRetriever.OnGetPeers {
                     Timber.d("Removed %s", info);
                 }
             }
-        }
+        }*/
     }
 
     // TODO: does this NEED to be a ConcurrentLinkedDeque?
@@ -174,6 +185,7 @@ public class Dispatcher implements PeerRetriever.OnGetPeers {
     private void retrievePeer(NodeInfo nodeInfo) {
         if (knownNodes.add(nodeInfo)) {
             Timber.d("\t%d:%s", knownNodes.size(), nodeInfo);
+
             jobs.add(exeService.submit(new PeerRetriever(nodeInfo, this)));
             peerCount++; // jobs.size() does not perform well
         }
@@ -191,10 +203,13 @@ public class Dispatcher implements PeerRetriever.OnGetPeers {
     public void seedPeers(Collection<NodeInfo> seedNodes) {
         for (NodeInfo node : seedNodes) {
             node.clear();
+
             if (node.isUserDefined()) {
                 rpcNodes.add(node);
+
                 if (listener != null) listener.onGet(node);
             }
+
             retrievePeer(node);
         }
     }

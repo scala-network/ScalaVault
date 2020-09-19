@@ -733,6 +733,7 @@ public class LoginActivity extends BaseActivity
             // and show a progress dialog, but only if there isn't one already
             new AsyncWaitForService().execute();
         }
+
         if (!Ledger.isConnected()) attachLedger();
     }
 
@@ -752,6 +753,7 @@ public class LoginActivity extends BaseActivity
             } catch (InterruptedException ex) {
                 // oh well ...
             }
+
             return null;
         }
 
@@ -761,6 +763,7 @@ public class LoginActivity extends BaseActivity
             if (isDestroyed()) {
                 return;
             }
+
             dismissProgressDialog();
         }
     }

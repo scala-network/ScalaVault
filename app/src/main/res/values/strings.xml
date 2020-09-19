@@ -133,7 +133,7 @@
     <string name="bad_password">Incorrect password!</string>
     <string name="bad_saved_password">Saved password is incorrect.\nPlease enter password manually.</string>
     <string name="bad_wallet">Wallet does not exist!</string>
-    <string name="prompt_daemon_missing">Node must be set!</string>
+    <string name="prompt_daemon_missing">Remote nodes unreachable. Make sure your are connected to the internet.</string>
     <string name="prompt_wrong_net">Wallet does not match selected net</string>
 
     <string name="label_watchonly">(Watch Only)</string>
