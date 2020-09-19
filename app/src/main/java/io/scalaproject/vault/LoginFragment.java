@@ -487,6 +487,7 @@ public class LoginFragment extends Fragment implements WalletInfoAdapter.OnInter
             }
             else {
                 NodeInfo nodeInfo = new NodeInfo(userSelectedNode);
+                nodeInfo.testRpcService();
 
                 if(nodeInfo.isValid()) {
                     activityCallback.setNode(nodeInfo);
