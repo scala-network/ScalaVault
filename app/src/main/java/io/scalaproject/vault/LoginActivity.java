@@ -115,7 +115,9 @@ public class LoginActivity extends BaseActivity
     public void setNode(NodeInfo node) {
         if ((node != null) && (node.getNetworkType() != WalletManager.getInstance().getNetworkType()))
             throw new IllegalArgumentException("network type does not match");
+
         this.node = node;
+
         WalletManager.getInstance().setDaemon(node);
     }
 
@@ -665,7 +667,9 @@ public class LoginActivity extends BaseActivity
     @Override
     public void onNodePrefs() {
         Timber.d("node prefs");
+
         if (checkServiceRunning()) return;
+
         startNodeFragment();
     }
 
@@ -832,34 +836,41 @@ public class LoginActivity extends BaseActivity
     }
 
     void startLoginFragment() {
-        // we set these here because we cannot be ceratin we have permissions for storage before
+        // we set these here because we cannot be certain we have permissions for storage before
         Helper.setScalaHome(this);
         Helper.initLogger(this);
+
         Fragment fragment = new LoginFragment();
         getSupportFragmentManager().beginTransaction()
                 .add(R.id.fragment_container, fragment).commit();
+
         Timber.d("LoginFragment added");
     }
 
     void startGenerateFragment(String type) {
         Bundle extras = new Bundle();
         extras.putString(GenerateFragment.TYPE, type);
+
         replaceFragment(new GenerateFragment(), GENERATE_STACK, extras);
+
         Timber.d("GenerateFragment placed");
     }
 
     void startReviewFragment(Bundle extras) {
         replaceFragment(new GenerateReviewFragment(), null, extras);
+
         Timber.d("GenerateReviewFragment placed");
     }
 
     void startNodeFragment() {
         replaceFragment(new NodeFragment(), null, null);
+
         Timber.d("NodeFragment placed");
     }
 
     void startReceiveFragment(Bundle extras) {
         replaceFragment(new ReceiveFragment(), null, extras);
+
         Timber.d("ReceiveFragment placed");
     }
 
@@ -867,6 +878,7 @@ public class LoginActivity extends BaseActivity
         if (extras != null) {
             newFragment.setArguments(extras);
         }
+
         FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
         transaction.replace(R.id.fragment_container, newFragment);
         transaction.addToBackStack(stackName);
@@ -926,6 +938,7 @@ public class LoginActivity extends BaseActivity
             }
 
             newWalletFile = new File(walletFolder, walletName);
+
             boolean success = walletCreator.createWallet(newWalletFile, walletPassword);
             if (success) {
                 return true;
@@ -942,7 +955,9 @@ public class LoginActivity extends BaseActivity
             if (isDestroyed()) {
                 return;
             }
+
             dismissProgressDialog();
+
             if (result) {
                 startDetails(newWalletFile, walletPassword, GenerateReviewFragment.VIEW_TYPE_ACCEPT);
             } else {
@@ -971,7 +986,6 @@ public class LoginActivity extends BaseActivity
         boolean createWallet(File aFile, String password);
 
         boolean isLedger();
-
     }
 
     boolean checkAndCloseWallet(Wallet aWallet) {
@@ -980,7 +994,9 @@ public class LoginActivity extends BaseActivity
             Timber.e(walletStatus.getErrorString());
             toast(walletStatus.getErrorString());
         }
+
         aWallet.close();
+
         return walletStatus.isOk();
     }
 
@@ -1286,11 +1302,6 @@ public class LoginActivity extends BaseActivity
 
     // an AsyncTask which tests the node before trying to open the wallet
     private class AsyncOpenWallet extends AsyncTask<Void, Void, Boolean> {
-        final static int OK = 0;
-        final static int TIMEOUT = 1;
-        final static int INVALID = 2;
-        final static int IOEX = 3;
-
         private final String walletName;
         private final String walletAddress;
         private final NodeInfo node;
@@ -1317,6 +1328,7 @@ public class LoginActivity extends BaseActivity
         @Override
         protected void onPostExecute(Boolean result) {
             super.onPostExecute(result);
+
             if (isDestroyed()) {
                 return;
             }

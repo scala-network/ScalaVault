@@ -110,7 +110,7 @@
     <string name="status_wallet_connecting">Connecting&#8230;</string>
     <string name="status_wallet_connect_failed">Node connection failed!\nCheck username/password</string>
     <string name="status_wallet_connect_wrongversion">Node version incompatible - please upgrade!</string>
-    <string name="status_wallet_node_invalid">Node invalid!\nTry another.</string>
+    <string name="status_wallet_node_invalid">Invalid node!\nTry another.</string>
     <string name="status_wallet_connect_ioex">Cannot reach node!\nTry again or another.</string>
 
     <string name="status_wallet_disconnected">Disconnected</string>
@@ -414,6 +414,9 @@
     <string name="node_scanning">Scanning network&#8230;</string>
     <string name="node_nobookmark">Automatically bookmarked best %1$d nodes</string>
     <string name="label_test">Test</string><!--note: as in "Test a network connection"-->
+
+    <string name="remote_nodes_subtitle">Pull down to scan and automatically select the best available node</string>
+    <string name="change_remote_node_conf">Change remote node to %1$s?</string>
 
     <string name="send_address_resolve_bip70">Resolving Payment URI&#8230;</string>
     <string name="send_address_not_bip70">Could not resolve Payment URI</string>

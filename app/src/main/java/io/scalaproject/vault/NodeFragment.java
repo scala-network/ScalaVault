@@ -33,6 +33,8 @@ import com.google.android.material.textfield.TextInputLayout;
 import androidx.fragment.app.Fragment;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 import androidx.recyclerview.widget.RecyclerView;
+
+import android.text.Html;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -43,6 +45,7 @@ import android.view.WindowManager;
 import android.view.inputmethod.EditorInfo;
 import android.widget.Button;
 import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -60,21 +63,24 @@ import java.io.File;
 import java.net.InetSocketAddress;
 import java.net.UnknownHostException;
 import java.text.NumberFormat;
+import java.util.Collection;
 import java.util.HashSet;
 import java.util.Iterator;
+import java.util.List;
 import java.util.Set;
 
 import timber.log.Timber;
 
 public class NodeFragment extends Fragment
-        implements NodeInfoAdapter.OnInteractionListener, View.OnClickListener {
+        implements NodeInfoAdapter.OnNodeSettingsListener, NodeInfoAdapter.OnSelectNodeListener, View.OnClickListener {
 
-    static private int NODES_TO_FIND = 10;
+    static private int NODES_TO_FIND = 15;
 
     static private NumberFormat FORMATTER = NumberFormat.getInstance();
 
     private SwipeRefreshLayout pullToRefresh;
     private View fabAddNode;
+    private RecyclerView rvNodes;
 
     private Set<NodeInfo> allNodes = new HashSet<>();
     private Set<NodeInfo> userdefinedNodes = new HashSet<>();
@@ -82,6 +88,11 @@ public class NodeFragment extends Fragment
     private NodeInfoAdapter nodesAdapter;
 
     private Listener activityCallback;
+
+    private View selectedNodeView = null;
+    private NodeInfo selectedNode = null;
+
+    public NodeInfo getNode() { return selectedNode; }
 
     public interface Listener {
         File getStorageRoot();
@@ -91,6 +102,10 @@ public class NodeFragment extends Fragment
         void setSubtitle(String title);
 
         Set<NodeInfo> getAllNodes();
+
+        NodeInfo getNode();
+
+        void setNode(NodeInfo node);
 
         void addUserDefinedNodes(Set<NodeInfo> userDefinedNodes);
     }
@@ -115,6 +130,7 @@ public class NodeFragment extends Fragment
 
         if (activityCallback != null) {
             activityCallback.addUserDefinedNodes(userdefinedNodes);
+            activityCallback.setNode(selectedNode);
         }
 
         super.onPause();
@@ -142,6 +158,40 @@ public class NodeFragment extends Fragment
         }
     }
 
+    private void updateSelectedNodeLayout() {
+        // If recycler view has not been rendered yet
+        if(rvNodes.getLayoutManager().getItemCount() <= 0)
+            return;
+
+        NodeInfo selectedNode = activityCallback.getNode();
+        if(selectedNode != null) {
+            List<NodeInfo> allNodes = nodesAdapter.getNodes();
+            for (int i = 0; i < allNodes.size(); i++ ) {
+                NodeInfo nodeInfo = allNodes.get(i);
+                Boolean bSelected = selectedNode.equals(nodeInfo);
+                View itemView = rvNodes.getChildAt(i);
+                setItemNodeLayout(itemView, bSelected);
+
+                if(bSelected) {
+                    selectedNodeView = itemView;
+                    selectedNode = nodeInfo;
+                }
+            }
+        }
+    }
+
+    private void setItemNodeLayout(View itemView, Boolean selected) {
+        if(itemView != null) {
+            RelativeLayout rlItemNode = (RelativeLayout) itemView;
+            int bottom = rlItemNode.getPaddingBottom();
+            int top = rlItemNode.getPaddingTop();
+            int right = rlItemNode.getPaddingRight();
+            int left = rlItemNode.getPaddingLeft();
+            rlItemNode.setBackgroundResource(selected ? R.drawable.corner_radius_lighter_border_blue : R.drawable.corner_radius_lighter);
+            rlItemNode.setPadding(left, top, right, bottom);
+        }
+    }
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -151,9 +201,16 @@ public class NodeFragment extends Fragment
         fabAddNode = view.findViewById(R.id.fabAddNode);
         fabAddNode.setOnClickListener(this);
 
-        RecyclerView recyclerView = view.findViewById(R.id.list);
-        nodesAdapter = new NodeInfoAdapter(getActivity(), this);
-        recyclerView.setAdapter(nodesAdapter);
+        rvNodes = view.findViewById(R.id.rvNodes);
+        nodesAdapter = new NodeInfoAdapter(getActivity(), this, this);
+        rvNodes.setAdapter(nodesAdapter);
+
+        rvNodes.post(new Runnable() {
+            @Override
+            public void run() {
+                updateSelectedNodeLayout();
+            }
+        });
 
         pullToRefresh = view.findViewById(R.id.pullToRefresh);
         pullToRefresh.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
@@ -183,6 +240,7 @@ public class NodeFragment extends Fragment
 
     private void refresh() {
         if (asyncFindNodes != null) return; // ignore refresh request as one is ongoing
+
         asyncFindNodes = new AsyncFindNodes();
         updateRefreshElements();
         asyncFindNodes.execute();
@@ -202,12 +260,44 @@ public class NodeFragment extends Fragment
 
     // Callbacks from NodeInfoAdapter
     @Override
-    public void onInteraction(final View view, final NodeInfo nodeItem) {
+    public void onSettingsNode(final View view, final NodeInfo nodeItem) {
         Timber.d("onInteraction");
         EditDialog diag = createEditDialog(nodeItem);
         if (diag != null) {
             diag.show();
         }
+    }
+
+    // Callbacks from NodeInfoAdapter
+    @Override
+    public void onSelectNode(final View view, final NodeInfo nodeInfo) {
+        Timber.d("onSelecteNode");
+
+        MaterialAlertDialogBuilder builder = new MaterialAlertDialogBuilder(getActivity(), R.style.MaterialAlertDialogCustom);
+        builder.setMessage(getString(R.string.change_remote_node_conf, nodeInfo.getName()))
+                .setCancelable(true)
+                .setPositiveButton(getString(R.string.details_alert_yes), new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+                        if(nodeInfo.isValid()) {
+                            setItemNodeLayout(selectedNodeView, false);
+                            selectedNodeView = view;
+                            selectedNode = nodeInfo;
+                            setItemNodeLayout(selectedNodeView, true);
+
+                            Config.write(Config.CONFIG_KEY_USER_SELECTED_NODE, nodeInfo.toNodeString());
+                        }
+                        else {
+                            MaterialAlertDialogBuilder builder = new MaterialAlertDialogBuilder(getActivity(), R.style.MaterialAlertDialogCustom);
+                            builder.setMessage(getString(R.string.status_wallet_node_invalid))
+                                    .setCancelable(true)
+                                    .setNegativeButton(getString(R.string.label_ok), null)
+                            .show();
+                        }
+                    }
+                })
+                .setNegativeButton(getString(R.string.details_alert_no), null)
+                .show();
     }
 
     @Override
@@ -227,9 +317,12 @@ public class NodeFragment extends Fragment
         @Override
         protected void onPreExecute() {
             super.onPreExecute();
+
             nodesAdapter.setNodes(null);
             nodesAdapter.allowClick(false);
-            //activityCallback.showProgressDialog(R.string.node_scanning);
+
+            setItemNodeLayout(selectedNodeView, false);
+            selectedNodeView = null;
         }
 
         @Override
@@ -238,6 +331,7 @@ public class NodeFragment extends Fragment
             Set<NodeInfo> seedList = new HashSet<>();
             seedList.addAll(allNodes);
             allNodes.clear();
+
             Timber.d("seed %d", seedList.size());
 
             Dispatcher d = new Dispatcher(new Dispatcher.Listener() {
@@ -266,8 +360,10 @@ public class NodeFragment extends Fragment
                 d.seedPeers(seedList);
                 d.awaitTermination(NODES_TO_FIND);
             }
+
             // final (filtered) result
             allNodes.addAll(d.getRpcNodes());
+
             return true;
         }
 
@@ -296,11 +392,18 @@ public class NodeFragment extends Fragment
         private void complete() {
             asyncFindNodes = null;
             if (!isAdded()) return;
-            //if (isCancelled()) return;
-            //activityCallback.hideProgressDialog();
+
             pullToRefresh.setRefreshing(false);
+
             nodesAdapter.setNodes(allNodes);
             nodesAdapter.allowClick(true);
+
+            selectedNodeView = rvNodes.getChildAt(0);;
+            selectedNode = nodesAdapter.getNodes().get(0);
+            setItemNodeLayout(selectedNodeView, true);
+
+            Config.write(Config.CONFIG_KEY_USER_SELECTED_NODE, "");
+
             updateRefreshElements();
         }
     }

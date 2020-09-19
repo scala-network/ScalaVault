@@ -15,24 +15,36 @@
         android:orientation="vertical"/>
 
     <TextView
-        android:id="@+id/tvPull"
+        android:id="@+id/tvTitle"
         style="@style/ScalaLabel.Heading"
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="8dp"
+        android:layout_marginBottom="4dp"
         android:gravity="start"
         android:paddingTop="8dp"
         android:text="@string/remote_nodes"
         android:layout_below="@+id/llNotice"
         android:visibility="visible"/>
 
+    <TextView
+        android:id="@+id/tvSwipe"
+        style="@style/ScalaLabel.Subtitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="8dp"
+        android:gravity="start"
+        android:text="@string/remote_nodes_subtitle"
+        android:layout_below="@+id/tvTitle"
+        android:visibility="visible"/>
+
     <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
         android:id="@+id/pullToRefresh"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/tvPull">
+        android:layout_below="@+id/tvSwipe">
 
         <LinearLayout
+            android:id="@+id/llNodes"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_marginTop="8dp"
@@ -40,7 +52,7 @@
             android:orientation="vertical">
 
             <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/list"
+                android:id="@+id/rvNodes"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:clipToPadding="false"

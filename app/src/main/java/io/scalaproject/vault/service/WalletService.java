@@ -492,8 +492,10 @@ public class WalletService extends Service {
             listener.start();
             showProgress(100);
         }
+
         showProgress(getString(R.string.status_wallet_connecting));
         showProgress(101);
+
         // if we try to refresh the history here we get occasional segfaults!
         // doesnt matter since we update as soon as we get a new block anyway
         Timber.d("start() done");
@@ -502,7 +504,9 @@ public class WalletService extends Service {
 
     public void stop() {
         Timber.d("stop()");
+
         setObserver(null); // in case it was not reset already
+
         if (listener != null) {
             listener.stop();
             Wallet myWallet = getWallet();
@@ -511,8 +515,10 @@ public class WalletService extends Service {
             Timber.d("stop() closed");
             listener = null;
         }
+
         stopForeground(true);
         stopSelf();
+
         Running = false;
     }
 
@@ -524,16 +530,22 @@ public class WalletService extends Service {
             wallet.init(0);
             showProgress(90);
         }
+
         return wallet;
     }
 
     private Wallet openWallet(String walletName, String walletPassword) {
         String path = Helper.getWalletFile(getApplicationContext(), walletName).getAbsolutePath();
+
         showProgress(20);
+
         Wallet wallet = null;
         WalletManager walletMgr = WalletManager.getInstance();
+
         Timber.d("WalletManager network=%s", walletMgr.getNetworkType().name());
+
         showProgress(30);
+
         if (walletMgr.walletExists(path)) {
             Timber.d("open wallet %s", path);
             Wallet.Device device = WalletManager.getInstance().queryWalletDevice(path + ".keys", walletPassword);
@@ -552,6 +564,7 @@ public class WalletService extends Service {
                 // this crashes in MyWalletListener(Wallet aWallet) as wallet == null
             }
         }
+
         return wallet;
     }
 
@@ -568,16 +581,19 @@ public class WalletService extends Service {
                 .setCategory(NotificationCompat.CATEGORY_SERVICE)
                 .setContentIntent(pendingIntent)
                 .build();
+
         startForeground(NOTIFICATION_ID, notification);
     }
 
     @RequiresApi(Build.VERSION_CODES.O)
     private String createNotificationChannel() {
         NotificationManager notificationManager = (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
-        NotificationChannel channel = new NotificationChannel(CHANNEL_ID, getString(R.string.service_description),
-                NotificationManager.IMPORTANCE_LOW);
+
+        NotificationChannel channel = new NotificationChannel(CHANNEL_ID, getString(R.string.service_description), NotificationManager.IMPORTANCE_LOW);
+
         channel.setLockscreenVisibility(Notification.VISIBILITY_PRIVATE);
         notificationManager.createNotificationChannel(channel);
+
         return CHANNEL_ID;
     }
 }

@@ -18,6 +18,7 @@ public class Config {
 
     public static final String CONFIG_KEY_CONFIG_VERSION = "config_version";
     public static final String CONFIG_KEY_HIDE_HOME_WIZARD = "hide_home_wizard";
+    public static final String CONFIG_KEY_USER_SELECTED_NODE = "user_selected_node";
 
     public static final String version = "1";
 

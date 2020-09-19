@@ -29,6 +29,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageButton;
 import android.widget.ImageView;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import io.scalaproject.vault.R;
@@ -47,18 +48,25 @@ import java.util.TimeZone;
 public class NodeInfoAdapter extends RecyclerView.Adapter<NodeInfoAdapter.ViewHolder> {
     private final SimpleDateFormat TS_FORMATTER = new SimpleDateFormat("yyyy-MM-dd HH:mm");
 
-    public interface OnInteractionListener {
-        void onInteraction(View view, NodeInfo item);
+    public interface OnNodeSettingsListener {
+        void onSettingsNode(View view, NodeInfo item);
+    }
+
+    public interface OnSelectNodeListener {
+        void onSelectNode(View view, NodeInfo item);
     }
 
     private final List<NodeInfo> nodeItems = new ArrayList<>();
-    private final OnInteractionListener listener;
+    private final OnNodeSettingsListener onNodeSettingsListener;
+    private final OnSelectNodeListener onSelectNodeListener;
 
     private Context context;
 
-    public NodeInfoAdapter(Context context, OnInteractionListener listener) {
+    public NodeInfoAdapter(Context context, OnNodeSettingsListener onNodeSettingsListener, OnSelectNodeListener onSelectNodeListener) {
         this.context = context;
-        this.listener = listener;
+        this.onNodeSettingsListener = onNodeSettingsListener;
+        this.onSelectNodeListener = onSelectNodeListener;
+
         Calendar cal = Calendar.getInstance();
         TimeZone tz = cal.getTimeZone(); //get the local time zone.
         TS_FORMATTER.setTimeZone(tz);
@@ -85,12 +93,17 @@ public class NodeInfoAdapter extends RecyclerView.Adapter<NodeInfoAdapter.ViewHo
     public void addNode(NodeInfo node) {
         if (!nodeItems.contains(node))
             nodeItems.add(node);
+
         dataSetChanged(); // in case the nodeinfo has changed
     }
 
     public void dataSetChanged() {
         Collections.sort(nodeItems, NodeInfo.BestNodeComparator);
         notifyDataSetChanged();
+    }
+
+    public List<NodeInfo> getNodes() {
+        return nodeItems;
     }
 
     public void setNodes(Collection<NodeInfo> data) {
@@ -101,6 +114,7 @@ public class NodeInfoAdapter extends RecyclerView.Adapter<NodeInfoAdapter.ViewHo
                     nodeItems.add(node);
             }
         }
+
         dataSetChanged();
     }
 
@@ -115,6 +129,7 @@ public class NodeInfoAdapter extends RecyclerView.Adapter<NodeInfoAdapter.ViewHo
         final TextView tvName;
         final TextView tvIp;
         final ImageView ivPing;
+        final ImageView ivSettings;
         NodeInfo nodeItem;
 
         ViewHolder(View itemView) {
@@ -122,37 +137,38 @@ public class NodeInfoAdapter extends RecyclerView.Adapter<NodeInfoAdapter.ViewHo
             tvName = itemView.findViewById(R.id.tvName);
             tvIp = itemView.findViewById(R.id.tvAddress);
             ivPing = itemView.findViewById(R.id.ivPing);
+            ivSettings = itemView.findViewById(R.id.ivSettings);
         }
 
-        private void showStar() {
-            /*if (nodeItem.isFavourite()) {
-                ibBookmark.setImageResource(R.drawable.ic_favorite_24dp);
-            } else {
-                ibBookmark.setImageResource(R.drawable.ic_favorite_border_24dp);
-            }*/
-        }
-
-        void bind(int position) {
+        void bind(final int position) {
             nodeItem = nodeItems.get(position);
+
             tvName.setText(nodeItem.getName());
             final String ts = TS_FORMATTER.format(new Date(nodeItem.getTimestamp() * 1000));
             ivPing.setImageResource(getPingIcon(nodeItem));
+
             if (nodeItem.isValid()) {
                 tvIp.setText(context.getString(R.string.node_height, ts));
             } else {
                 tvIp.setText(getResponseErrorText(context, nodeItem.getResponseCode()));
             }
+
             itemView.setOnClickListener(this);
             itemView.setClickable(itemsClickable);
-            showStar();
+
+            ivSettings.setOnClickListener(new View.OnClickListener() {
+                public void onClick(View v) {
+                    onNodeSettingsListener.onSettingsNode(v, nodeItems.get(position));
+                }
+            });
         }
 
         @Override
         public void onClick(View view) {
-            if (listener != null) {
+            if (onSelectNodeListener != null) {
                 int position = getAdapterPosition(); // gets item position
                 if (position != RecyclerView.NO_POSITION) { // Check if an item was deleted, but the user clicked it before the UI removed it
-                    listener.onInteraction(view, nodeItems.get(position));
+                    onSelectNodeListener.onSelectNode(view, nodeItems.get(position));
                 }
             }
         }
@@ -162,6 +178,7 @@ public class NodeInfoAdapter extends RecyclerView.Adapter<NodeInfoAdapter.ViewHo
         if (nodeInfo.isUnauthorized()) {
             return R.drawable.ic_wifi_lock_24dp;
         }
+
         if (nodeInfo.isValid()) {
             final double ping = nodeInfo.getResponseTime();
             if (ping < NodeInfo.PING_GOOD) {

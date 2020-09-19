@@ -463,20 +463,49 @@ public class LoginFragment extends Fragment implements WalletInfoAdapter.OnInter
         @Override
         protected NodeInfo doInBackground(Void... params) {
             List<NodeInfo> nodesToTest = new ArrayList<>(activityCallback.getAllNodes());
+
             Timber.d("testing best node from %d", nodesToTest.size());
+
             if (nodesToTest.isEmpty()) return null;
+
             for (NodeInfo node : nodesToTest) {
-                node.testRpcService(); // TODO: do this in parallel?
-                // no: it's better if it looks like it's doing something
+                node.testRpcService();
             }
-            Collections.sort(nodesToTest, NodeInfo.BestNodeComparator);
-            NodeInfo bestNode = nodesToTest.get(0);
-            if (bestNode.isValid()) {
-                activityCallback.setNode(bestNode);
-                return bestNode;
-            } else {
-                activityCallback.setNode(null);
-                return null;
+
+            String userSelectedNode = Config.read(Config.CONFIG_KEY_USER_SELECTED_NODE);
+            if(userSelectedNode.isEmpty()) {
+                Collections.sort(nodesToTest, NodeInfo.BestNodeComparator);
+                NodeInfo bestNode = nodesToTest.get(0);
+
+                if (bestNode.isValid()) {
+                    activityCallback.setNode(bestNode);
+                    return bestNode;
+                } else {
+                    activityCallback.setNode(null);
+                    return null;
+                }
+            }
+            else {
+                NodeInfo nodeInfo = new NodeInfo(userSelectedNode);
+
+                if(nodeInfo.isValid()) {
+                    activityCallback.setNode(nodeInfo);
+                    return nodeInfo;
+                }
+                else {
+                    Config.write(Config.CONFIG_KEY_USER_SELECTED_NODE, "");
+
+                    Collections.sort(nodesToTest, NodeInfo.BestNodeComparator);
+                    NodeInfo bestNode = nodesToTest.get(0);
+
+                    if (bestNode.isValid()) {
+                        activityCallback.setNode(bestNode);
+                        return bestNode;
+                    } else {
+                        activityCallback.setNode(null);
+                        return null;
+                    }
+                }
             }
         }
 
