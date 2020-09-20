@@ -295,17 +295,35 @@
             android:textStyle="bold"
             android:text="Transaction History" />
 
-        <TextView
-            android:id="@+id/tvNoTransaction"
-            android:layout_width="match_parent"
+
+        <LinearLayout
+            android:id="@+id/llNoTransaction"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_gravity="center"
             android:layout_weight="1"
-            android:layout_margin="8dp"
             android:gravity="center"
-            android:textColor="@color/txt_main"
-            android:textSize="12sp"
-            android:visibility="visible"
-            android:text="No transaction" />
+            android:orientation="vertical"
+            android:visibility="visible">
+
+            <ImageView
+                android:layout_width="48dp"
+                android:layout_height="48dp"
+                android:layout_gravity="center"
+                android:tint="@color/txt_main"
+                android:src="@drawable/ic_no_tx" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="8dp"
+                android:layout_gravity="center"
+                android:textColor="@color/txt_main"
+                android:textSize="16sp"
+                android:visibility="visible"
+                android:text="No transaction" />
+
+        </LinearLayout>
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/rvTransactions"

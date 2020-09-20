@@ -40,6 +40,7 @@ import android.view.animation.AnimationUtils;
 import android.widget.FrameLayout;
 import android.widget.ImageButton;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -77,7 +78,7 @@ public class LoginFragment extends Fragment implements WalletInfoAdapter.OnInter
     private View llNode;
 
     private RecyclerView recyclerView;
-    private TextView tvNoWallet;
+    private LinearLayout llNoWallet;
 
     private Listener activityCallback;
 
@@ -157,7 +158,6 @@ public class LoginFragment extends Fragment implements WalletInfoAdapter.OnInter
         Timber.d("onCreateView");
         View view = inflater.inflate(R.layout.fragment_login, container, false);
 
-        ivGunther = view.findViewById(R.id.ivGunther);
         fabScreen = view.findViewById(R.id.fabScreen);
         fab = view.findViewById(R.id.fab);
         fabNew = view.findViewById(R.id.fabNew);
@@ -187,7 +187,7 @@ public class LoginFragment extends Fragment implements WalletInfoAdapter.OnInter
         fabLedger.setOnClickListener(this);
         fabScreen.setOnClickListener(this);
 
-        tvNoWallet = view.findViewById(R.id.tvNoWallet);
+        llNoWallet = view.findViewById(R.id.llNoWallet);
 
         recyclerView = view.findViewById(R.id.listWallets);
         registerForContextMenu(recyclerView);
@@ -287,10 +287,10 @@ public class LoginFragment extends Fragment implements WalletInfoAdapter.OnInter
 
         if(walletInfos.isEmpty()) {
             recyclerView.setVisibility(View.GONE);
-            tvNoWallet.setVisibility(View.VISIBLE);
+            llNoWallet.setVisibility(View.VISIBLE);
         } else {
             recyclerView.setVisibility(View.VISIBLE);
-            tvNoWallet.setVisibility(View.GONE);
+            llNoWallet.setVisibility(View.GONE);
         }
 
         walletList.clear();
@@ -302,14 +302,8 @@ public class LoginFragment extends Fragment implements WalletInfoAdapter.OnInter
         // deal with Gunther & FAB animation
         if (displayedList.isEmpty()) {
             fab.startAnimation(fab_pulse);
-            if (ivGunther.getDrawable() == null) {
-                ivGunther.setImageResource(R.drawable.gunther_desaturated);
-            }
         } else {
             fab.clearAnimation();
-            if (ivGunther.getDrawable() != null) {
-                ivGunther.setImageDrawable(null);
-            }
         }
 
         // remove information of non-existent wallet

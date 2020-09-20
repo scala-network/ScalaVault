@@ -22,7 +22,6 @@
 package io.scalaproject.vault;
 
 import android.content.Context;
-import android.graphics.PorterDuff;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Looper;
@@ -74,7 +73,7 @@ public class WalletFragment extends Fragment
     private ImageView ivSynced, ivAddressType;
     private ProgressBar pbProgress;
     private Button bReceive, bSend;
-    private TextView tvNoTransaction;
+    private LinearLayout llNoTransaction;
     private RecyclerView rvTransactions;
 
     private Spinner sCurrency;
@@ -129,7 +128,7 @@ public class WalletFragment extends Fragment
         tvAddressType = view.findViewById(R.id.tvAddressType);
         ivAddressType = view.findViewById(R.id.ivAddressType);
 
-        tvNoTransaction = view.findViewById(R.id.tvNoTransaction);
+        llNoTransaction = view.findViewById(R.id.llNoTransaction);
         rvTransactions = view.findViewById(R.id.rvTransactions);
 
         sCurrency = view.findViewById(R.id.sCurrency);
@@ -513,10 +512,10 @@ public class WalletFragment extends Fragment
 
         if(txInfoAdapter.getItemCount() > 0) {
             rvTransactions.setVisibility(View.VISIBLE);
-            tvNoTransaction.setVisibility(View.GONE);
+            llNoTransaction.setVisibility(View.GONE);
         } else {
             rvTransactions.setVisibility(View.GONE);
-            tvNoTransaction.setVisibility(View.VISIBLE);
+            llNoTransaction.setVisibility(View.VISIBLE);
         }
 
         updateWalletInfo(wallet);

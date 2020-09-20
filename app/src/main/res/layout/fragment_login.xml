@@ -122,25 +122,33 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent">
 
-            <ImageView
-                android:id="@+id/ivGunther"
+            <LinearLayout
+                android:id="@+id/llNoWallet"
                 android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:adjustViewBounds="true"
+                android:layout_height="wrap_content"
                 android:layout_gravity="center"
-                android:padding="48dp" />
+                android:orientation="vertical"
+                android:visibility="gone">
 
-            <TextView
-                android:id="@+id/tvNoWallet"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:layout_margin="8dp"
-                android:gravity="center"
-                android:textColor="@color/txt_main"
-                android:textSize="12sp"
-                android:visibility="visible"
-                android:text="No wallet" />
+                <ImageView
+                    android:layout_width="48dp"
+                    android:layout_height="48dp"
+                    android:layout_gravity="center"
+                    android:tint="@color/txt_main"
+                    android:src="@drawable/ic_account_balance_wallet_24dp" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:layout_margin="8dp"
+                    android:layout_gravity="center"
+                    android:textColor="@color/txt_main"
+                    android:textSize="16sp"
+                    android:visibility="visible"
+                    android:text="No wallet" />
+
+            </LinearLayout>
 
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/listWallets"
