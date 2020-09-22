@@ -26,6 +26,9 @@ import android.nfc.NfcManager;
 import android.os.Bundle;
 import com.google.android.material.textfield.TextInputLayout;
 import androidx.cardview.widget.CardView;
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentTransaction;
+
 import android.text.Editable;
 import android.text.Html;
 import android.text.InputType;
@@ -41,6 +44,9 @@ import android.widget.ImageButton;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import io.scalaproject.vault.AddressBookFragment;
+import io.scalaproject.vault.Config;
+import io.scalaproject.vault.GenerateReviewFragment;
 import io.scalaproject.vault.R;
 import io.scalaproject.vault.data.BarcodeData;
 import io.scalaproject.vault.data.TxData;
@@ -94,6 +100,7 @@ public class SendAddressWizardFragment extends SendWizardFragment {
     private CardView cvScan;
     private View tvPaymentIdIntegrated;
     private ImageButton bPasteAddress;
+    private ImageButton bAddressBook;
 
     private boolean resolvingOA = false;
     private boolean resolvingPP = false;
@@ -201,6 +208,16 @@ public class SendAddressWizardFragment extends SendWizardFragment {
             }
         });
 
+        bAddressBook = view.findViewById(R.id.bAddressBook);
+        bAddressBook.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                final Bundle extras = new Bundle();
+                extras.putString(AddressBookFragment.REQUEST_MODE, AddressBookFragment.MODE_TYPE_READONLY);
+                replaceFragment(new AddressBookFragment(), null, extras);
+            }
+        });
+
         etNotes = view.findViewById(R.id.etNotes);
         etNotes.getEditText().setRawInputType(InputType.TYPE_CLASS_TEXT);
         etNotes.getEditText().setOnEditorActionListener(new TextView.OnEditorActionListener() {
@@ -232,6 +249,16 @@ public class SendAddressWizardFragment extends SendWizardFragment {
             tvNfc.setVisibility(View.VISIBLE);
 
         return view;
+    }
+
+    void replaceFragment(Fragment newFragment, String stackName, Bundle extras) {
+        if (extras != null) {
+            newFragment.setArguments(extras);
+        }
+        FragmentTransaction transaction = getActivity().getSupportFragmentManager().beginTransaction();
+        transaction.replace(R.id.fragment_container, newFragment);
+        transaction.addToBackStack(stackName);
+        transaction.commit();
     }
 
     private void setBtcMode() {
@@ -413,6 +440,12 @@ public class SendAddressWizardFragment extends SendWizardFragment {
         super.onResume();
         Timber.d("onResume");
         processScannedData();
+
+        String address = Config.read(Config.CONFIG_KEY_SELECTED_ADDRESS);
+        if(!address.isEmpty()) {
+            Config.write(Config.CONFIG_KEY_SELECTED_ADDRESS, "");
+            etAddress.getEditText().setText(address);
+        }
     }
 
     public void processScannedData(BarcodeData barcodeData) {

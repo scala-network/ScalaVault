@@ -33,6 +33,7 @@
             android:layout_alignParentEnd="true"
             android:paddingStart="12dp"
             android:paddingEnd="12dp"
+            android:tint="@color/btn_icon_default"
             android:src="@drawable/ic_all_inclusive_24dp"
             android:visibility="visible" />
     </RelativeLayout>

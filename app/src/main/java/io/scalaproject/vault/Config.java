@@ -19,7 +19,7 @@ public class Config {
     public static final String CONFIG_KEY_CONFIG_VERSION = "config_version";
     public static final String CONFIG_KEY_HIDE_HOME_WIZARD = "hide_home_wizard";
     public static final String CONFIG_KEY_USER_SELECTED_NODE = "user_selected_node";
-    public static final String CONFIG_KEY_CONTACT = "contact";
+    public static final String CONFIG_KEY_SELECTED_ADDRESS = "addressbook_selected";
 
     public static final String version = "1";
 
@@ -30,7 +30,7 @@ public class Config {
         mSettings.preferences = preferences;
     }
 
-    static void write(String key, String value) {
+    public static void write(String key, String value) {
         if(!key.startsWith("system:")) {
             mSettings.preferences.edit().putString(key, value).apply();
         }
@@ -42,7 +42,7 @@ public class Config {
         mSettings.mConfigs.put(key, value);
     }
 
-    static void clear() {
+    public static void clear() {
         mSettings.preferences.edit().clear().apply();
         mSettings.mConfigs.clear();
     }

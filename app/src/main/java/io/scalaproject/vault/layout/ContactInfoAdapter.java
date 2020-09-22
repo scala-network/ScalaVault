@@ -61,10 +61,12 @@ public class ContactInfoAdapter extends RecyclerView.Adapter<ContactInfoAdapter.
     private final OnSelectContactListener onSelectContactListener;
     private final OnDeleteContactListener onDeleteContactListener;
 
+    private Boolean readonly;
     private Context context;
 
-    public ContactInfoAdapter(Context context, OnSelectContactListener onSelectContactListener, OnDeleteContactListener onDeleteContactListener) {
+    public ContactInfoAdapter(Context context, Boolean readonly, OnSelectContactListener onSelectContactListener, OnDeleteContactListener onDeleteContactListener) {
         this.context = context;
+        this.readonly = readonly;
         this.onSelectContactListener = onSelectContactListener;
         this.onDeleteContactListener = onDeleteContactListener;
     }
@@ -132,7 +134,9 @@ public class ContactInfoAdapter extends RecyclerView.Adapter<ContactInfoAdapter.
             super(itemView);
             tvName = itemView.findViewById(R.id.tvName);
             tvAddress = itemView.findViewById(R.id.tvAddress);
+
             ivDelete = itemView.findViewById(R.id.ivDelete);
+            ivDelete.setVisibility(readonly ? View.GONE : View.VISIBLE);
         }
 
         void bind(final int position) {
@@ -143,11 +147,13 @@ public class ContactInfoAdapter extends RecyclerView.Adapter<ContactInfoAdapter.
 
             itemView.setOnClickListener(this);
 
-            ivDelete.setOnClickListener(new View.OnClickListener() {
-                public void onClick(View v) {
-                    onDeleteContactListener.onDeleteContact(v, contactItems.get(position));
-                }
-            });
+            if(!readonly) {
+                ivDelete.setOnClickListener(new View.OnClickListener() {
+                    public void onClick(View v) {
+                        onDeleteContactListener.onDeleteContact(v, contactItems.get(position));
+                    }
+                });
+            }
         }
 
         @Override

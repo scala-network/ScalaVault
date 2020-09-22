@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/bg_body">
@@ -38,7 +37,7 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_alignParentStart="true"
-                    android:layout_toStartOf="@+id/bPasteAddress"
+                    android:layout_toStartOf="@+id/bOptions"
                     app:counterEnabled="true"
                     app:errorEnabled="true">
 
@@ -53,15 +52,33 @@
                         android:textAlignment="textStart" />
                 </com.google.android.material.textfield.TextInputLayout>
 
-                <ImageButton
-                    android:id="@+id/bPasteAddress"
-                    style="@style/ScalaText.Button.Small"
-                    android:layout_width="56dp"
-                    android:layout_height="56dp"
-                    android:layout_alignParentEnd="true"
-                    android:layout_gravity="center"
-                    android:background="?android:selectableItemBackgroundBorderless"
-                    android:src="@drawable/ic_content_paste_24dp" />
+                <LinearLayout
+                    android:id="@+id/bOptions"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:layout_alignParentEnd="true" >
+
+                    <ImageButton
+                        android:id="@+id/bPasteAddress"
+                        style="@style/ScalaText.Button.Small"
+                        android:layout_width="wrap_content"
+                        android:layout_height="56dp"
+                        android:layout_marginStart="8dp"
+                        android:layout_gravity="center"
+                        android:background="?android:selectableItemBackgroundBorderless"
+                        android:src="@drawable/ic_content_paste_24dp" />
+
+                    <ImageButton
+                        android:id="@+id/bAddressBook"
+                        style="@style/ScalaText.Button.Small"
+                        android:layout_width="wrap_content"
+                        android:layout_height="56dp"
+                        android:layout_marginStart="8dp"
+                        android:layout_gravity="center"
+                        android:background="?android:selectableItemBackgroundBorderless"
+                        android:src="@drawable/ic_addressbook" />
+                </LinearLayout>
             </RelativeLayout>
 
             <TextView

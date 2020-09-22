@@ -58,6 +58,13 @@ import timber.log.Timber;
 public class AddressBookFragment extends Fragment
         implements ContactInfoAdapter.OnSelectContactListener, ContactInfoAdapter.OnDeleteContactListener, View.OnClickListener {
 
+    public static final String REQUEST_MODE = "mode";
+
+    static final public String MODE_TYPE_WRITE = "write";
+    static final public String MODE_TYPE_READONLY = "readonly";
+
+    private boolean readonly = false;
+
     private View fabAddContact;
     private RecyclerView rvContacts;
     private LinearLayout llNoContact;
@@ -76,6 +83,8 @@ public class AddressBookFragment extends Fragment
         Set<Contact> getContacts();
 
         void saveContacts(final List<Contact> contactItems);
+
+        void onBackPressed();
     }
 
     @Override
@@ -117,11 +126,16 @@ public class AddressBookFragment extends Fragment
 
         llNoContact = view.findViewById(R.id.llNoContact);
 
-        rvContacts = view.findViewById(R.id.listContacts);
-        LinearLayoutManager layoutManager = new LinearLayoutManager(getActivity(), LinearLayoutManager.VERTICAL, false);
-        rvContacts.setLayoutManager(layoutManager);
+        Bundle args = getArguments();
+        if(!args.isEmpty() && args.containsKey(REQUEST_MODE)) {
+            readonly = args.getString(REQUEST_MODE).equals(MODE_TYPE_READONLY);
+        }
 
-        contactsAdapter = new ContactInfoAdapter(getActivity(), this, this);
+        rvContacts = view.findViewById(R.id.listContacts);
+        //LinearLayoutManager layoutManager = new LinearLayoutManager(getActivity(), LinearLayoutManager.VERTICAL, false);
+        //rvContacts.setLayoutManager(layoutManager);
+
+        contactsAdapter = new ContactInfoAdapter(getActivity(), readonly, this, this);
         rvContacts.setAdapter(contactsAdapter);
 
         Helper.hideKeyboard(getActivity());
@@ -176,9 +190,15 @@ public class AddressBookFragment extends Fragment
     public void onSelectContact(final View view, final Contact contact) {
         Timber.d("onSelectContact");
 
-        EditDialog diag = createEditDialog(contact);
-        if (diag != null) {
-            diag.show();
+        if(readonly) {
+            Config.write(Config.CONFIG_KEY_SELECTED_ADDRESS, contact.getAddress());
+            activityCallback.onBackPressed();
+        }
+        else {
+            EditDialog diag = createEditDialog(contact);
+            if (diag != null) {
+                diag.show();
+            }
         }
     }
 
