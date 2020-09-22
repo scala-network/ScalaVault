@@ -4,9 +4,15 @@
 
     <item
         android:id="@+id/action_wallets"
-        android:orderInCategory="75"
+        android:orderInCategory="50"
         android:title="@string/label_login_wallets"
         app:showAsAction="never"/>
+
+    <item
+        android:id="@+id/action_addressbook"
+        android:orderInCategory="75"
+        android:title="@string/address_book"
+        app:showAsAction="never" />
 
     <item
         android:id="@+id/action_StealthMode"

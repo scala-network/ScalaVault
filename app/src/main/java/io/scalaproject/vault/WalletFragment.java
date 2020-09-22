@@ -429,7 +429,7 @@ public class WalletFragment extends Fragment
         tvAddressType.setText("Primary Address");
 
         tvWalletName.setText(walletName);
-        tvWalletAddress.setText(Helper.getPrettyString(walletAddress));
+        tvWalletAddress.setText(Helper.getPrettyAddress(walletAddress));
     }
 
     private void updateWalletInfo(Wallet wallet) {
@@ -445,7 +445,7 @@ public class WalletFragment extends Fragment
             tvAddressType.setText("Subaddress");
         }
 
-        tvWalletAddress.setText(Helper.getPrettyString(wallet.getAddress()));
+        tvWalletAddress.setText(Helper.getPrettyAddress(wallet.getAddress()));
     }
 
     public void setActivityTitle(Wallet wallet) {

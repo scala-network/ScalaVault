@@ -451,4 +451,7 @@
     <string name="mm_url">https://github.com/scala-network/MobileMiner/releases</string>
     <string name="connection_remote_daemon">Connecting to remote node...</string>
     <string name="remote_nodes">Remote Nodes</string>
+    <string name="address_book">Address Book</string>
+    <string name="delete_contact_conf">Delete contact %1$s?</string>
+    <string name="contact_value_empty">We need this!</string>
 </resources>

@@ -125,7 +125,7 @@ public class LoginActivity extends BaseActivity
         Set<NodeInfo> allNodes = new HashSet<>();
 
         allNodes.addAll(defaultNodes);
-        defaultNodes.addAll(userDefinedNodes);
+        allNodes.addAll(userDefinedNodes);
 
         return allNodes;
     }

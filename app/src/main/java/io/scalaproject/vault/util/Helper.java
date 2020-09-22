@@ -668,7 +668,7 @@ public class Helper {
         //return !(BuildConfig.DEBUG || BuildConfig.FLAVOR_type.equals("alpha"));
     }
 
-    static public String getPrettyString(String text) {
+    static public String getPrettyAddress(String text) {
         return text.substring(0, 7) + "..." + text.substring(text.length() - 7);
     }
 

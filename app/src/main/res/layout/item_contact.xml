@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:card_view="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content"
+    android:layout_gravity="center"
+    android:layout_marginTop="4dp"
+    android:layout_marginBottom="4dp"
+    card_view:cardCornerRadius="5dp"
+    card_view:cardElevation="8dp">
+
+    <RelativeLayout
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/corner_radius_lighter_small">
+
+        <ImageButton
+            android:id="@+id/ibWallet"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentStart="true"
+            android:layout_centerInParent="true"
+            android:background="?android:attr/selectableItemBackgroundBorderless"
+            android:gravity="center"
+            android:padding="12dp"
+            android:src="@drawable/ic_contact" />
+
+        <TextView
+            android:id="@+id/tvName"
+            style="@style/ScalaText.ItemTitle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="48dp"
+            android:layout_marginTop="16dp"
+            android:layout_toStartOf="@+id/ibOptions"
+            tools:text="Jean Tremblay" />
+
+        <TextView
+            android:id="@+id/tvAddress"
+            style="@style/ScalaText.ItemSubtitle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/tvName"
+            android:layout_marginBottom="16dp"
+            android:layout_marginStart="48dp"
+            android:layout_toStartOf="@+id/ivDelete"
+            android:textColor="@color/txt_secondary"
+            tools:text="SvjVucMW...tdwy4dnf" />
+
+        <ImageView
+            android:id="@+id/ivDelete"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginEnd="12dp"
+            android:layout_alignParentEnd="true"
+            android:layout_centerInParent="true"
+            android:background="?android:attr/selectableItemBackgroundBorderless"
+            android:tint="@color/btn_icon_default"
+            android:src="@drawable/ic_close_white_24dp"/>
+    </RelativeLayout>
+</androidx.cardview.widget.CardView>

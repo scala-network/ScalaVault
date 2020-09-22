@@ -59,6 +59,9 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import io.scalaproject.vault.data.BarcodeData;
+import io.scalaproject.vault.data.Contact;
+import io.scalaproject.vault.data.Node;
+import io.scalaproject.vault.data.NodeInfo;
 import io.scalaproject.vault.data.TxData;
 import io.scalaproject.vault.data.UserNotes;
 import io.scalaproject.vault.dialog.CreditsFragment;
@@ -76,12 +79,15 @@ import io.scalaproject.vault.util.ScalaThreadPoolExecutor;
 import io.scalaproject.vault.widget.Toolbar;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Map;
+import java.util.Set;
 
 import timber.log.Timber;
 
 public class WalletActivity extends BaseActivity implements WalletFragment.Listener,
-        WalletService.Observer, SendFragment.Listener, TxFragment.Listener,
+        WalletService.Observer, SendFragment.Listener, TxFragment.Listener, AddressBookFragment.Listener,
         GenerateReviewFragment.ListenerWithWallet,
         GenerateReviewFragment.Listener,
         GenerateReviewFragment.PasswordChangedListener,
@@ -111,6 +117,9 @@ public class WalletActivity extends BaseActivity implements WalletFragment.Liste
     private String uri = null;
 
     private long stealthMode = 0;
+
+    private static final String CONTACTS_NAME = "contacts";
+    Set<Contact> allContacts = new HashSet<>();
 
     @Override
     public void onPasswordChanged(String newPassword) {
@@ -304,6 +313,9 @@ public class WalletActivity extends BaseActivity implements WalletFragment.Liste
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
+            case R.id.action_addressbook:
+                onAddressBook();
+                return true;
             case R.id.action_wallets:
                 showLoginFragment();
                 return true;
@@ -337,7 +349,7 @@ public class WalletActivity extends BaseActivity implements WalletFragment.Liste
             case R.id.action_rename:
                 onAccountRename();
                 return true;
-            case R.id.action_StealthMode:
+            case R.id.action_stealthmode:
                 if (isStealthMode()) { // disable stealthMode
                     item.setIcon(R.drawable.ic_stealth_mode_on);
                     onDisableStealthMode();
@@ -355,10 +367,65 @@ public class WalletActivity extends BaseActivity implements WalletFragment.Liste
         Timber.d("showLoginFragment()");
         try {
             onBackPressed();
-            /*Fragment f = getSupportFragmentManager().findFragmentById(R.id.fragment_container);
-            if (f instanceof LoginFragment) {
-                onBackPressed();
-            }*/
+        } catch (ClassCastException ex) {
+        }
+    }
+
+    private void loadContacts() {
+        allContacts.clear();
+
+        // Load Userdefined nodes
+        Map<String, ?> contacts = getSharedPreferences(CONTACTS_NAME, Context.MODE_PRIVATE).getAll();
+        for (Map.Entry<String, ?> contactEntry : contacts.entrySet()) {
+            if (contactEntry != null) // just in case, ignore possible future errors
+                addContact((String) contactEntry.getValue());
+        }
+    }
+
+    private void addContact(String contactString) {
+        Contact contact = Contact.fromString(contactString);
+        if (contact != null) {
+            allContacts.add(contact);
+        } else
+            Timber.w("contactString invalid: %s", contactString);
+    }
+
+    public Set<Contact> getContacts() {
+        Set<Contact> contacts = new HashSet<>();
+
+        contacts.addAll(allContacts);
+
+        return contacts;
+    }
+
+    public void saveContacts(final List<Contact> contactItems) {
+        Timber.d("Save contacts");
+
+        if(contactItems.isEmpty())
+            return;
+
+        allContacts.clear();
+        allContacts.addAll(contactItems);
+
+        SharedPreferences.Editor editor = getSharedPreferences(CONTACTS_NAME, Context.MODE_PRIVATE).edit();
+        editor.clear();
+
+        int i = 1;
+        for (Contact contact : contactItems) {
+            String contactString = contact.toContactString();
+            editor.putString(Integer.toString(i), contactString);
+            Timber.d("saved %d:%s", i, contactString);
+            i++;
+        }
+
+        editor.apply();
+    }
+
+    private void onAddressBook() {
+        Timber.d("onAddressBook()");
+        try {
+            Bundle extras = new Bundle();
+            replaceFragment(new AddressBookFragment(), null, extras);
         } catch (ClassCastException ex) {
         }
     }
@@ -450,6 +517,8 @@ public class WalletActivity extends BaseActivity implements WalletFragment.Liste
         getSupportFragmentManager().beginTransaction()
                 .add(R.id.fragment_container, walletFragment, WalletFragment.class.getName()).commit();
         Timber.d("fragment added");
+
+        loadContacts();
 
         startWalletService();
 
@@ -811,6 +880,7 @@ public class WalletActivity extends BaseActivity implements WalletFragment.Liste
         }
     }
 
+
 ///////////////////////////
 // SendFragment.Listener
 ///////////////////////////
@@ -826,7 +896,6 @@ public class WalletActivity extends BaseActivity implements WalletFragment.Liste
         } else {
             Timber.e("Service not bound");
         }
-
     }
 
     @Override

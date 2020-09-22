@@ -2,7 +2,7 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
 
     <item
-        android:id="@+id/action_StealthMode"
+        android:id="@+id/action_stealthmode"
         android:orderInCategory="50"
         android:title="@string/menu_StealthMode" />
 

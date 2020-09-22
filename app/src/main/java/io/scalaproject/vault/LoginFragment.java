@@ -280,10 +280,10 @@ public class LoginFragment extends Fragment implements WalletInfoAdapter.OnInter
     }
 
     public void loadList() {
-        Timber.d("loadList()");
+        Timber.d("loadList");
+
         WalletManager mgr = WalletManager.getInstance();
-        List<WalletManager.WalletInfo> walletInfos =
-                mgr.findWallets(activityCallback.getStorageRoot());
+        List<WalletManager.WalletInfo> walletInfos = mgr.findWallets(activityCallback.getStorageRoot());
 
         if(walletInfos.isEmpty()) {
             recyclerView.setVisibility(View.GONE);
