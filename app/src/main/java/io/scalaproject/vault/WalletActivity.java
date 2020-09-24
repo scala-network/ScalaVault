@@ -653,6 +653,16 @@ public class WalletActivity extends BaseActivity implements WalletFragment.Liste
     }
 
     @Override
+    public Contact onFindContactRequest(String address) {
+        for (Contact contact : allContacts) {
+            if(contact.getAddress().equals(address))
+                return contact;
+        }
+
+        return null;
+    }
+
+    @Override
     public void forceUpdate() {
         try {
             onRefreshed(getWallet(), true);
@@ -896,6 +906,17 @@ public class WalletActivity extends BaseActivity implements WalletFragment.Liste
         } else {
             Timber.e("Service not bound");
         }
+    }
+
+    public void onSaveContact(String name, String address) {
+        Contact contact = new Contact(name, address);
+        if (contact != null) {
+            allContacts.add(contact);
+            List<Contact> contactItems = new ArrayList<>();
+            contactItems.addAll(allContacts);
+            saveContacts(contactItems);
+        } else
+            Timber.w("contact invalid");
     }
 
     @Override

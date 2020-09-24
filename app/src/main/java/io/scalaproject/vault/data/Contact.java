@@ -62,7 +62,15 @@ public class Contact {
         }
     }
 
-    Contact(String contactString) {
+    public Contact(String name, String address) {
+        if ((name.isEmpty()) || address.isEmpty())
+            throw new IllegalArgumentException("contact name or address is empty");
+
+        this.name = name;
+        this.address = address;
+    }
+
+    public Contact(String contactString) {
         if ((contactString == null) || contactString.isEmpty())
             throw new IllegalArgumentException("contact is empty");
 

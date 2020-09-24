@@ -44,6 +44,8 @@ import android.widget.Spinner;
 import android.widget.TextView;
 
 import com.github.brnunes.swipeablerecyclerview.SwipeableRecyclerViewTouchListener;
+
+import io.scalaproject.vault.data.Contact;
 import io.scalaproject.vault.layout.TransactionInfoAdapter;
 import io.scalaproject.vault.model.TransactionInfo;
 import io.scalaproject.vault.model.Wallet;
@@ -61,7 +63,7 @@ import java.util.List;
 import timber.log.Timber;
 
 public class WalletFragment extends Fragment
-        implements TransactionInfoAdapter.OnInteractionListener {
+        implements TransactionInfoAdapter.OnInteractionListener, TransactionInfoAdapter.OnFindContactListener {
     private TransactionInfoAdapter txInfoAdapter;
     private NumberFormat formatter = NumberFormat.getInstance();
 
@@ -142,7 +144,7 @@ public class WalletFragment extends Fragment
         bSend = view.findViewById(R.id.bSend);
         bReceive = view.findViewById(R.id.bReceive);
 
-        txInfoAdapter = new TransactionInfoAdapter(getActivity(), this);
+        txInfoAdapter = new TransactionInfoAdapter(getActivity(), this, this);
         rvTransactions.setAdapter(txInfoAdapter);
 
         SwipeableRecyclerViewTouchListener swipeTouchListener =
@@ -336,6 +338,7 @@ public class WalletFragment extends Fragment
             balanceCurrency = exchangeRate.getQuoteCurrency();
             balanceRate = exchangeRate.getRate();
         }
+
         updateBalance();
     }
 
@@ -343,6 +346,12 @@ public class WalletFragment extends Fragment
     @Override
     public void onInteraction(final View view, final TransactionInfo infoItem) {
         activityCallback.onTxDetailsRequest(infoItem);
+    }
+
+    // Callbacks from TransactionInfoAdapter
+    @Override
+    public Contact onFindContactRequest(final String address) {
+        return activityCallback.onFindContactRequest(address);
     }
 
     // called from activity
@@ -537,6 +546,8 @@ public class WalletFragment extends Fragment
         void onSendRequest();
 
         void onTxDetailsRequest(TransactionInfo info);
+
+        Contact onFindContactRequest(String address);
 
         boolean isSynced();
 

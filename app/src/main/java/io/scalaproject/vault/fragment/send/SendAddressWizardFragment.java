@@ -39,6 +39,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.inputmethod.EditorInfo;
+import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.TextView;
@@ -92,6 +93,8 @@ public class SendAddressWizardFragment extends SendWizardFragment {
         void setMode(SendFragment.Mode mode);
 
         TxData getTxData();
+
+        void saveContact(String name);
     }
 
     private EditText etDummy;
@@ -101,6 +104,8 @@ public class SendAddressWizardFragment extends SendWizardFragment {
     private View tvPaymentIdIntegrated;
     private ImageButton bPasteAddress;
     private ImageButton bAddressBook;
+    private CheckBox ckSaveAddress;
+    private TextInputLayout etContactName;
 
     private boolean resolvingOA = false;
     private boolean resolvingPP = false;
@@ -218,6 +223,16 @@ public class SendAddressWizardFragment extends SendWizardFragment {
             }
         });
 
+        etContactName = view.findViewById(R.id.etContactName);
+
+        ckSaveAddress = view.findViewById(R.id.ckSaveAddress);
+        ckSaveAddress.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                etContactName.setVisibility(ckSaveAddress.isChecked() ? View.VISIBLE : View.GONE);
+            }
+        });
+
         etNotes = view.findViewById(R.id.etNotes);
         etNotes.getEditText().setRawInputType(InputType.TYPE_CLASS_TEXT);
         etNotes.getEditText().setOnEditorActionListener(new TextView.OnEditorActionListener() {
@@ -255,6 +270,7 @@ public class SendAddressWizardFragment extends SendWizardFragment {
         if (extras != null) {
             newFragment.setArguments(extras);
         }
+
         FragmentTransaction transaction = getActivity().getSupportFragmentManager().beginTransaction();
         transaction.replace(R.id.fragment_container, newFragment);
         transaction.addToBackStack(stackName);
@@ -415,10 +431,21 @@ public class SendAddressWizardFragment extends SendWizardFragment {
             } else {
                 txData.setDestinationAddress(etAddress.getEditText().getText().toString());
             }
+
             txData.setUserNotes(new UserNotes(etNotes.getEditText().getText().toString()));
             txData.setPriority(PendingTransaction.Priority.Priority_Default);
             txData.setMixin(SendFragment.MIXIN);
         }
+
+        String contactName = etContactName.getEditText().getText().toString().trim();
+        if(ckSaveAddress.isChecked() && contactName.isEmpty()) {
+            etContactName.setError(getString(R.string.contact_name_empty_error));
+            return false;
+        } else {
+            sendListener.saveContact(contactName);
+            etContactName.setError(null);
+        }
+
         return true;
     }
 

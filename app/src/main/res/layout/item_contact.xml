@@ -33,7 +33,6 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="48dp"
             android:layout_marginTop="16dp"
-            android:layout_toStartOf="@+id/ibOptions"
             tools:text="Jean Tremblay" />
 
         <TextView

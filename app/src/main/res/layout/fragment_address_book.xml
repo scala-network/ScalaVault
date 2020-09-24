@@ -57,7 +57,7 @@
                     android:textColor="@color/txt_inactive"
                     android:textSize="14sp"
                     android:visibility="visible"
-                    android:text="No contact" />
+                    android:text="@string/no_entry" />
 
             </LinearLayout>
 

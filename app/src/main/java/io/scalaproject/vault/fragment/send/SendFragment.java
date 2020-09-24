@@ -84,6 +84,8 @@ public class SendFragment extends Fragment
 
         void onSend(UserNotes notes);
 
+        void onSaveContact(String name, String address);
+
         void onDisposeRequest();
 
         void onFragmentDone();
@@ -443,6 +445,11 @@ public class SendFragment extends Fragment
     private TxData txData = new TxData();
 
     private BarcodeData barcodeData;
+
+    @Override
+    public void saveContact(String name) {
+        activityCallback.onSaveContact(name, txData.getDestinationAddress());
+    }
 
     // Listeners
     @Override

@@ -121,20 +121,18 @@ public class AddressBookFragment extends Fragment
         Timber.d("onCreateView");
         View view = inflater.inflate(R.layout.fragment_address_book, container, false);
 
-        fabAddContact = view.findViewById(R.id.fabAddContact);
-        fabAddContact.setOnClickListener(this);
-
-        llNoContact = view.findViewById(R.id.llNoContact);
-
         Bundle args = getArguments();
         if(!args.isEmpty() && args.containsKey(REQUEST_MODE)) {
             readonly = args.getString(REQUEST_MODE).equals(MODE_TYPE_READONLY);
         }
 
-        rvContacts = view.findViewById(R.id.listContacts);
-        //LinearLayoutManager layoutManager = new LinearLayoutManager(getActivity(), LinearLayoutManager.VERTICAL, false);
-        //rvContacts.setLayoutManager(layoutManager);
+        llNoContact = view.findViewById(R.id.llNoContact);
 
+        fabAddContact = view.findViewById(R.id.fabAddContact);
+        fabAddContact.setOnClickListener(this);
+        fabAddContact.setVisibility(readonly ? View.GONE : View.VISIBLE);
+
+        rvContacts = view.findViewById(R.id.listContacts);
         contactsAdapter = new ContactInfoAdapter(getActivity(), readonly, this, this);
         rvContacts.setAdapter(contactsAdapter);
 

@@ -452,6 +452,10 @@
     <string name="connection_remote_daemon">Connecting to remote node...</string>
     <string name="remote_nodes">Remote Nodes</string>
     <string name="address_book">Address Book</string>
-    <string name="delete_contact_conf">Delete contact %1$s?</string>
+    <string name="delete_contact_conf">Delete entry %1$s?</string>
     <string name="contact_value_empty">We need this!</string>
+    <string name="no_entry">No entry</string>
+    <string name="save_to_address_book">Save to address book</string>
+    <string name="contact_name_empty_error">Name cannot be empty!</string>
+    <string name="entry_name">Entry Name</string>
 </resources>

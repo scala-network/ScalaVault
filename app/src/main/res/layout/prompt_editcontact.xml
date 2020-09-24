@@ -25,7 +25,7 @@
                 style="@style/ScalaEdit"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:hint="Contact Name"
+                android:hint="@string/entry_name"
                 android:imeOptions="actionNext"
                 android:textAlignment="textStart" />
         </com.google.android.material.textfield.TextInputLayout>

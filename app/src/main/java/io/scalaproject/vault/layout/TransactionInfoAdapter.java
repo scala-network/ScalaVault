@@ -31,6 +31,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import io.scalaproject.vault.R;
+import io.scalaproject.vault.data.Contact;
 import io.scalaproject.vault.model.TransactionInfo;
 import io.scalaproject.vault.util.Helper;
 import io.scalaproject.vault.data.UserNotes;
@@ -58,19 +59,28 @@ public class TransactionInfoAdapter extends RecyclerView.Adapter<TransactionInfo
         void onInteraction(View view, TransactionInfo item);
     }
 
+    public interface OnFindContactListener {
+        Contact onFindContactRequest(final String address);
+    }
+
     private final List<TransactionInfo> infoItems;
-    private final OnInteractionListener listener;
+    private final OnInteractionListener onInteractionListener;
+    private final OnFindContactListener onFindContactListener;
 
     private Context context;
 
-    public TransactionInfoAdapter(Context context, OnInteractionListener listener) {
+    public TransactionInfoAdapter(Context context, OnInteractionListener onInteractionListener, OnFindContactListener onFindContactListener) {
         this.context = context;
         inboundColour = ContextCompat.getColor(context, R.color.tx_green);
         outboundColour = ContextCompat.getColor(context, R.color.tx_red);
         pendingColour = ContextCompat.getColor(context, R.color.tx_pending);
         failedColour = ContextCompat.getColor(context, R.color.tx_failed);
+
         infoItems = new ArrayList<>();
-        this.listener = listener;
+
+        this.onInteractionListener = onInteractionListener;
+        this.onFindContactListener = onFindContactListener;
+
         Calendar cal = Calendar.getInstance();
         TimeZone tz = cal.getTimeZone(); //get the local time zone.
         DATETIME_FORMATTER.setTimeZone(tz);
@@ -80,6 +90,7 @@ public class TransactionInfoAdapter extends RecyclerView.Adapter<TransactionInfo
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext())
                 .inflate(R.layout.item_transaction, parent, false);
+
         return new ViewHolder(view);
     }
 
@@ -104,6 +115,7 @@ public class TransactionInfoAdapter extends RecyclerView.Adapter<TransactionInfo
         } else {
             Timber.d("setInfos null");
         }
+
         notifyDataSetChanged();
     }
 
@@ -178,14 +190,24 @@ public class TransactionInfoAdapter extends RecyclerView.Adapter<TransactionInfo
                 setTxColour(outboundColour);
             }
 
-            if ((userNotes.note.isEmpty())) {
-                this.tvPaymentId.setText(infoItem.paymentId.equals("0000000000000000") ?
-                        (infoItem.subaddress != 0 ?
-                                (context.getString(R.string.tx_subaddress, infoItem.subaddress)) :
-                                Helper.getPrettyAddress(infoItem.hash)) :
-                        Helper.getPrettyAddress(infoItem.hash));
-            } else {
-                this.tvPaymentId.setText(Helper.getTruncatedString(userNotes.note, 20));
+            // Check if this address is associated to a contact in address book
+            Contact contact = null;
+            if (infoItem.direction == TransactionInfo.Direction.Direction_Out)
+                contact = onFindContactListener.onFindContactRequest(infoItem.address);
+
+            if(contact == null) {
+                if ((userNotes.note.isEmpty())) {
+                    this.tvPaymentId.setText(infoItem.paymentId.equals("0000000000000000") ?
+                            (infoItem.subaddress != 0 ?
+                                    (context.getString(R.string.tx_subaddress, infoItem.subaddress)) :
+                                    Helper.getPrettyAddress(infoItem.hash)) :
+                            Helper.getPrettyAddress(infoItem.hash));
+                } else {
+                    this.tvPaymentId.setText(Helper.getTruncatedString(userNotes.note, 20));
+                }
+            }
+            else {
+                this.tvPaymentId.setText(Helper.getTruncatedString(contact.getName(), 20));
             }
 
             this.tvDateTime.setText(getDateTime(infoItem.timestamp));
@@ -195,10 +217,10 @@ public class TransactionInfoAdapter extends RecyclerView.Adapter<TransactionInfo
 
         @Override
         public void onClick(View view) {
-            if (listener != null) {
+            if (onInteractionListener != null) {
                 int position = getAdapterPosition(); // gets item position
                 if (position != RecyclerView.NO_POSITION) { // Check if an item was deleted, but the user clicked it before the UI removed it
-                    listener.onInteraction(view, infoItems.get(position));
+                    onInteractionListener.onInteraction(view, infoItems.get(position));
                 }
             }
         }
