@@ -458,7 +458,7 @@ public class GenerateFragment extends Fragment {
 
         String restoreHeight = etWalletRestoreHeight.getEditText().getText().toString().trim();
 
-        if (restoreHeight.isEmpty()) return -1;
+        if (restoreHeight.isEmpty()) return 0;
 
         try {
             // is it a date?

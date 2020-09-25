@@ -174,7 +174,8 @@
                 android:hint="@string/generate_restoreheight_hint"
                 android:imeOptions="actionDone"
                 android:inputType="date"
-                android:textAlignment="textStart" />
+                android:textAlignment="textStart"
+                android:text="0"/>
         </com.google.android.material.textfield.TextInputLayout>
 
         <com.google.android.material.button.MaterialButton

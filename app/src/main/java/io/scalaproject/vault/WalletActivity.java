@@ -646,17 +646,22 @@ public class WalletActivity extends BaseActivity implements WalletFragment.Liste
     }
 
     @Override
-    public void onTxDetailsRequest(TransactionInfo info) {
+    public void onTxDetailsRequest(TransactionInfo txInfo) {
         Bundle args = new Bundle();
-        args.putParcelable(TxFragment.ARG_INFO, info);
+        args.putParcelable(TxFragment.ARG_INFO, txInfo);
         replaceFragment(new TxFragment(), null, args);
     }
 
     @Override
-    public Contact onFindContactRequest(String address) {
-        for (Contact contact : allContacts) {
-            if(contact.getAddress().equals(address))
-                return contact;
+    public Contact onFindContactRequest(TransactionInfo txInfo) {
+        if(txInfo.direction == TransactionInfo.Direction.Direction_Out) { // just in case
+            for (Contact contact : allContacts) {
+                // assume there is only one recipient address
+                if(txInfo.transfers != null && !txInfo.transfers.isEmpty()) {
+                    if (contact.getAddress().equals(txInfo.transfers.get(0).address))
+                        return contact;
+                }
+            }
         }
 
         return null;

@@ -350,8 +350,8 @@ public class WalletFragment extends Fragment
 
     // Callbacks from TransactionInfoAdapter
     @Override
-    public Contact onFindContactRequest(final String address) {
-        return activityCallback.onFindContactRequest(address);
+    public Contact onFindContact(final TransactionInfo txInfo) {
+        return activityCallback.onFindContactRequest(txInfo);
     }
 
     // called from activity
@@ -545,9 +545,9 @@ public class WalletFragment extends Fragment
 
         void onSendRequest();
 
-        void onTxDetailsRequest(TransactionInfo info);
+        void onTxDetailsRequest(TransactionInfo txInfo);
 
-        Contact onFindContactRequest(String address);
+        Contact onFindContactRequest(TransactionInfo txInfo);
 
         boolean isSynced();
 

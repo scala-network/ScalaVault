@@ -60,7 +60,7 @@ public class TransactionInfoAdapter extends RecyclerView.Adapter<TransactionInfo
     }
 
     public interface OnFindContactListener {
-        Contact onFindContactRequest(final String address);
+        Contact onFindContact(final TransactionInfo txInfo);
     }
 
     private final List<TransactionInfo> infoItems;
@@ -69,7 +69,8 @@ public class TransactionInfoAdapter extends RecyclerView.Adapter<TransactionInfo
 
     private Context context;
 
-    public TransactionInfoAdapter(Context context, OnInteractionListener onInteractionListener, OnFindContactListener onFindContactListener) {
+    public TransactionInfoAdapter(Context context, OnInteractionListener onInteractionListener,
+                                  OnFindContactListener onFindContactListener) {
         this.context = context;
         inboundColour = ContextCompat.getColor(context, R.color.tx_green);
         outboundColour = ContextCompat.getColor(context, R.color.tx_red);
@@ -193,7 +194,7 @@ public class TransactionInfoAdapter extends RecyclerView.Adapter<TransactionInfo
             // Check if this address is associated to a contact in address book
             Contact contact = null;
             if (infoItem.direction == TransactionInfo.Direction.Direction_Out)
-                contact = onFindContactListener.onFindContactRequest(infoItem.address);
+                contact = onFindContactListener.onFindContact(infoItem);
 
             if(contact == null) {
                 if ((userNotes.note.isEmpty())) {
