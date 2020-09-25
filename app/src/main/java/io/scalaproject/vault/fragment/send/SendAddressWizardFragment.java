@@ -94,7 +94,7 @@ public class SendAddressWizardFragment extends SendWizardFragment {
 
         TxData getTxData();
 
-        void saveContact(String name);
+        void saveContact(String name, String address);
     }
 
     private EditText etDummy;
@@ -437,13 +437,17 @@ public class SendAddressWizardFragment extends SendWizardFragment {
             txData.setMixin(SendFragment.MIXIN);
         }
 
-        String contactName = etContactName.getEditText().getText().toString().trim();
-        if(ckSaveAddress.isChecked() && contactName.isEmpty()) {
-            etContactName.setError(getString(R.string.contact_name_empty_error));
-            return false;
-        } else {
-            sendListener.saveContact(contactName);
-            etContactName.setError(null);
+        if(ckSaveAddress.isChecked()) {
+            String contactName = etContactName.getEditText().getText().toString().trim();
+            String destinationAddress = etAddress.getEditText().getText().toString().trim();
+
+            if (contactName.isEmpty()) {
+                etContactName.setError(getString(R.string.contact_name_empty_error));
+                return false;
+            } else {
+                sendListener.saveContact(contactName, destinationAddress);
+                etContactName.setError(null);
+            }
         }
 
         return true;

@@ -447,8 +447,8 @@ public class SendFragment extends Fragment
     private BarcodeData barcodeData;
 
     @Override
-    public void saveContact(String name) {
-        activityCallback.onSaveContact(name, txData.getDestinationAddress());
+    public void saveContact(String name, String address) {
+        activityCallback.onSaveContact(name, address);
     }
 
     // Listeners
