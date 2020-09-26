@@ -22,12 +22,15 @@
 package io.scalaproject.vault;
 
 import android.content.Context;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Looper;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.RecyclerView;
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
+
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -49,6 +52,7 @@ import io.scalaproject.vault.data.Contact;
 import io.scalaproject.vault.layout.TransactionInfoAdapter;
 import io.scalaproject.vault.model.TransactionInfo;
 import io.scalaproject.vault.model.Wallet;
+import io.scalaproject.vault.model.WalletManager;
 import io.scalaproject.vault.service.exchange.api.ExchangeApi;
 import io.scalaproject.vault.service.exchange.api.ExchangeCallback;
 import io.scalaproject.vault.service.exchange.api.ExchangeRate;
@@ -77,6 +81,8 @@ public class WalletFragment extends Fragment
     private Button bReceive, bSend;
     private LinearLayout llNoTransaction;
     private RecyclerView rvTransactions;
+
+    private SwipeRefreshLayout pullToRefresh;
 
     private Spinner sCurrency;
 
@@ -143,6 +149,14 @@ public class WalletFragment extends Fragment
 
         bSend = view.findViewById(R.id.bSend);
         bReceive = view.findViewById(R.id.bReceive);
+
+        pullToRefresh = view.findViewById(R.id.pullToRefresh);
+        pullToRefresh.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                refresh();
+            }
+        });
 
         txInfoAdapter = new TransactionInfoAdapter(getActivity(), this, this);
         rvTransactions.setAdapter(txInfoAdapter);
@@ -213,6 +227,47 @@ public class WalletFragment extends Fragment
         activityCallback.forceUpdate();
 
         return view;
+    }
+
+    private AsyncRefreshWallet asyncRefreshWallet = null;
+
+    private void refresh() {
+        if (asyncRefreshWallet != null) return; // ignore refresh request as one is ongoing
+
+        asyncRefreshWallet = new AsyncRefreshWallet();
+        asyncRefreshWallet.execute();
+    }
+
+    private class AsyncRefreshWallet extends AsyncTask<Void, WalletManager.WalletInfo, Boolean> {
+        @Override
+        protected void onPreExecute() {
+            super.onPreExecute();
+        }
+
+        @Override
+        protected Boolean doInBackground(Void... params) {
+            Timber.d("refreshing");
+            activityCallback.forceUpdate();
+
+            return true;
+        }
+
+        @Override
+        protected void onPostExecute(Boolean result) {
+            Timber.d("done scanning");
+            complete();
+        }
+
+        @Override
+        protected void onCancelled(Boolean result) {
+            Timber.d("cancelled scanning");
+            complete();
+        }
+
+        private void complete() {
+            asyncRefreshWallet = null;
+            pullToRefresh.setRefreshing(false);
+        }
     }
 
     void showBalance(String balance) {
