@@ -458,4 +458,10 @@
     <string name="save_to_address_book">Save to address book</string>
     <string name="contact_name_empty_error">Name cannot be empty!</string>
     <string name="entry_name">Entry Name</string>
+    <string name="start_mining">Start mining on your Android device safely and efficiently with the Scala Mobile Miner.</string>
+    <string name="mobile_miner">Mobile Miner</string>
+    <string name="download">Download</string>
+    <string name="select_image">Select Image</string>
+    <string name="contact_avatar_hint">An image that represents this address book entry.</string>
+    <string name="upload">Upload</string>
 </resources>

@@ -21,19 +21,22 @@
 
 package io.scalaproject.vault;
 
+import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.content.Intent;
+import android.graphics.Bitmap;
 import android.os.Bundle;
 import androidx.annotation.Nullable;
 
 import com.google.android.material.dialog.MaterialAlertDialogBuilder;
 import com.google.android.material.textfield.TextInputLayout;
 import androidx.fragment.app.Fragment;
-import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 
+import android.provider.MediaStore;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -41,6 +44,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.WindowManager;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 
 import io.scalaproject.vault.data.Contact;
@@ -232,14 +236,28 @@ public class AddressBookFragment extends Fragment
     private EditDialog editDialog = null; // for preventing opening of multiple dialogs
 
     private EditDialog createEditDialog(final Contact contact) {
-        if (editDialog != null) return null; // we are already open
+        if(contactEditTmp != null) {
+            if(editDialog != null) {
+                editDialog.closeDialog();
+                editDialog = null;
+            }
+
+            return new EditDialog(contact);
+        }
+
+        if (editDialog != null)
+            return null; // we are already open
+
         editDialog = new EditDialog(contact);
+
         return editDialog;
     }
 
+    private Contact contactEditTmp = null;
+
     class EditDialog {
-        Contact contactEdit = null;
-        Contact contactEditBackup = null;
+        Contact contactEdit;
+        Contact contactEditBackup;
 
         private boolean applyChanges() {
             final String contactName = etContactName.getEditText().getText().toString().trim();
@@ -247,7 +265,7 @@ public class AddressBookFragment extends Fragment
                 etContactName.setError(getString(R.string.contact_value_empty));
                 return false;
             } else {
-                contactEdit.setName(etContactName.getEditText().getText().toString().trim());
+                contactEdit.setName(contactName);
             }
 
             final String walletAddress = etWalletAddress.getEditText().getText().toString().trim();
@@ -258,8 +276,20 @@ public class AddressBookFragment extends Fragment
                 etWalletAddress.setError(getString(R.string.generate_check_address));
                 return false;
             } else {
-                contactEdit.setAddress(etWalletAddress.getEditText().getText().toString().trim());
+                contactEdit.setAddress(walletAddress);
             }
+
+            return true;
+        }
+
+        private boolean applyChangesTmp() {
+            contactEditTmp = new Contact();
+
+            final String contactName = etContactName.getEditText().getText().toString().trim();
+            contactEditTmp.setName(contactName);
+
+            final String walletAddress = etWalletAddress.getEditText().getText().toString().trim();
+            contactEditTmp.setAddress(walletAddress);
 
             return true;
         }
@@ -306,6 +336,9 @@ public class AddressBookFragment extends Fragment
 
         TextInputLayout etContactName;
         TextInputLayout etWalletAddress;
+        ImageView ivAvatar;
+
+        public static final int GET_FROM_GALLERY = 1;
 
         EditDialog(final Contact contact) {
             MaterialAlertDialogBuilder alertDialogBuilder = new MaterialAlertDialogBuilder(getActivity(), R.style.MaterialAlertDialogCustom);
@@ -315,15 +348,33 @@ public class AddressBookFragment extends Fragment
 
             etContactName = promptsView.findViewById(R.id.etContactName);
             etWalletAddress = promptsView.findViewById(R.id.etWalletAddress);
+            ivAvatar = promptsView.findViewById(R.id.ivAvatar);
+
+            Button btnSelectImage = promptsView.findViewById(R.id.btnSelectImage);
+            btnSelectImage.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    applyChangesTmp();
+                    pickImage();
+                }
+            });
 
             if (contact != null) {
                 contactEdit = contact;
                 contactEditBackup = new Contact(contact);
                 etContactName.getEditText().setText(contact.getName());
                 etWalletAddress.getEditText().setText(contact.getAddress());
+
+                Bitmap avatar = contact.getAvatar();
+                if(avatar != null)
+                    ivAvatar.setImageBitmap(contact.getAvatar());
+                else {
+                    ivAvatar.setImageBitmap(Helper.getBitmap(getContext(), R.drawable.ic_contact_avatar));
+                }
             } else {
                 contactEdit = new Contact();
                 contactEditBackup = null;
+                ivAvatar.setImageBitmap(Helper.getBitmap(getContext(), R.drawable.ic_contact_avatar));
             }
 
             // set dialog message
@@ -340,6 +391,7 @@ public class AddressBookFragment extends Fragment
                             });
 
             editDialog = alertDialogBuilder.create();
+
             // these need to be here, since we don't always close the dialog
             editDialog.setOnShowListener(new DialogInterface.OnShowListener() {
                 @Override
@@ -359,6 +411,36 @@ public class AddressBookFragment extends Fragment
             }
 
             refreshContacts();
+        }
+
+        public void pickImage() {
+            Intent intent = new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.INTERNAL_CONTENT_URI);
+            intent.setType("image/*");
+            intent.putExtra("crop", "true");
+            intent.putExtra("scale", true);
+            intent.putExtra("outputX", 256);
+            intent.putExtra("outputY", 256);
+            intent.putExtra("aspectX", 1);
+            intent.putExtra("aspectY", 1);
+            intent.putExtra("return-data", true);
+
+            startActivityForResult(intent, 1);
+        }
+    }
+
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        if(requestCode== EditDialog.GET_FROM_GALLERY & resultCode== Activity.RESULT_OK) {
+            Timber.d("AddressBook.onActivityResult");
+
+            // Already save the cropped image
+            Bitmap bitmap = Helper.getCroppedBitmap((Bitmap) data.getExtras().get("data"));
+
+            contactEditTmp.setAvatar(bitmap);
+
+            EditDialog diag = createEditDialog(contactEditTmp);
+            if (diag != null) {
+                diag.show();
+            }
         }
     }
 }

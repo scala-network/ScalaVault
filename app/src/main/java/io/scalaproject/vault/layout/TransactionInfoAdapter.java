@@ -24,6 +24,9 @@ package io.scalaproject.vault.layout;
 import android.content.Context;
 import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.RecyclerView;
+
+import android.graphics.Bitmap;
+import android.util.TypedValue;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -159,6 +162,11 @@ public class TransactionInfoAdapter extends RecyclerView.Adapter<TransactionInfo
 
             UserNotes userNotes = new UserNotes(infoItem.notes);
 
+            // just in case
+            int dim = (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 24, itemView.getResources().getDisplayMetrics());
+            ivTxType.getLayoutParams().height = dim;
+            ivTxType.getLayoutParams().width = dim;
+
             String displayAmount = Helper.getDisplayAmount(infoItem.amount, Helper.DISPLAY_DIGITS_INFO);
             if (infoItem.direction == TransactionInfo.Direction.Direction_Out) {
                 ivTxType.setImageDrawable(itemView.getResources().getDrawable(R.drawable.ic_tx_out));
@@ -209,6 +217,15 @@ public class TransactionInfoAdapter extends RecyclerView.Adapter<TransactionInfo
             }
             else {
                 this.tvPaymentId.setText(Helper.getTruncatedString(contact.getName(), 20));
+
+                Bitmap avatar = contact.getAvatar();
+                if(avatar != null) {
+                    dim = (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 32, itemView.getResources().getDisplayMetrics());
+                    ivTxType.getLayoutParams().height = dim;
+                    ivTxType.getLayoutParams().width = dim;
+
+                    ivTxType.setImageBitmap(avatar);
+                }
             }
 
             this.tvDateTime.setText(getDateTime(infoItem.timestamp));

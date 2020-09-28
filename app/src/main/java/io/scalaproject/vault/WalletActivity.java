@@ -430,6 +430,10 @@ public class WalletActivity extends BaseActivity implements WalletFragment.Liste
         }
     }
 
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+    }
+
     private void onEnableStealthMode() {
         enableStealthMode(true);
     }

@@ -113,7 +113,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginBottom="5dp"
-            android:text="Mobile Miner"
+            android:text="@string/mobile_miner"
             android:layout_gravity="center"
             android:textSize="16sp"
             android:textColor="@color/c_white"
@@ -125,7 +125,7 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:gravity="center"
-            android:text="Start mining on your Android device safely and efficiently with the Scala Mobile Miner."
+            android:text="@string/start_mining"
             android:textColor="@color/txt_main"
             android:textSize="14sp"/>
 
@@ -138,8 +138,7 @@
             android:backgroundTint="@color/btn_bg_default"
             android:insetLeft="2dp"
             android:insetRight="2dp"
-            android:text="Download"
-            android:onClick="OnDownloadMM"
+            android:text="@string/download"
             android:textSize="14sp"
             android:textColor="@color/txt_button_filled"
             android:textAllCaps="false"

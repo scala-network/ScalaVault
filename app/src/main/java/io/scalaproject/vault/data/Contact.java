@@ -21,23 +21,20 @@
 
 package io.scalaproject.vault.data;
 
-import io.scalaproject.levin.scanner.Dispatcher;
-import io.scalaproject.vault.model.NetworkType;
-import io.scalaproject.vault.model.WalletManager;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.util.Base64;
 
-import java.io.UnsupportedEncodingException;
-import java.net.InetAddress;
-import java.net.InetSocketAddress;
-import java.net.URLDecoder;
-import java.net.URLEncoder;
-import java.net.UnknownHostException;
+import java.io.ByteArrayOutputStream;
 import java.util.Comparator;
 
+import io.scalaproject.vault.util.Helper;
 import timber.log.Timber;
 
 public class Contact {
     private String name = "";
     private String address = "";
+    private Bitmap avatar = null;
 
     @Override
     public int hashCode() {
@@ -77,9 +74,16 @@ public class Contact {
         String a[] = contactString.split(":");
         if (a.length == 2) {
             this.name = a[0];
-            this.address = a[1];
+
+            String av[] = a[1].split("@");
+            this.address = av[0];
+
+            if(av.length == 2) { // there is an avatar
+                byte[] b = Base64.decode(av[1], Base64.DEFAULT);
+                this.avatar = Helper.getCroppedBitmap(BitmapFactory.decodeByteArray(b, 0, b.length));
+            }
         } else {
-            throw new IllegalArgumentException("Too many @");
+            throw new IllegalArgumentException("Too many :");
         }
     }
 
@@ -94,13 +98,21 @@ public class Contact {
             sb.append(name).append(":").append(address);
         }
 
+        if(avatar != null) {
+            ByteArrayOutputStream baos = new ByteArrayOutputStream();
+            avatar.compress(Bitmap.CompressFormat.JPEG, 100, baos);
+
+            byte[] compressImage = baos.toByteArray();
+            String sEncodedImage = Base64.encodeToString(compressImage, Base64.DEFAULT);
+            sb.append("@").append(sEncodedImage);
+        }
+
         return sb.toString();
     }
 
     public String getName() {
         return this.name;
     }
-
     public void setName(String name) {
         this.name = name;
     }
@@ -108,14 +120,21 @@ public class Contact {
     public String getAddress() {
         return address;
     }
-
     public void setAddress(String address) {
         this.address = address;
+    }
+
+    public Bitmap getAvatar() {
+        return this.avatar;
+    }
+    public void setAvatar(Bitmap avatar) {
+        this.avatar = avatar;
     }
 
     public Contact() {
         this.name = "";
         this.address = "";
+        this.avatar = null;
     }
 
     public Contact(Contact anotherContact) {
@@ -125,6 +144,7 @@ public class Contact {
     public void overwriteWith(Contact anotherContact) {
         name = anotherContact.name;
         address = anotherContact.address;
+        avatar = anotherContact.avatar;
     }
 
     static public Comparator<Contact> ContactComparator = new Comparator<Contact>() {

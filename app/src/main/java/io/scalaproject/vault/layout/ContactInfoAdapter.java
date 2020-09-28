@@ -24,28 +24,22 @@ package io.scalaproject.vault.layout;
 import android.content.Context;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
+
+import android.graphics.Bitmap;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageButton;
 import android.widget.ImageView;
-import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import io.scalaproject.vault.R;
 import io.scalaproject.vault.data.Contact;
-import io.scalaproject.vault.data.NodeInfo;
 import io.scalaproject.vault.util.Helper;
 
-import java.net.HttpURLConnection;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Calendar;
 import java.util.Collection;
 import java.util.Collections;
-import java.util.Date;
 import java.util.List;
-import java.util.TimeZone;
 
 public class ContactInfoAdapter extends RecyclerView.Adapter<ContactInfoAdapter.ViewHolder> {
 
@@ -127,6 +121,7 @@ public class ContactInfoAdapter extends RecyclerView.Adapter<ContactInfoAdapter.
         final TextView tvName;
         final TextView tvAddress;
         final ImageView ivDelete;
+        final ImageView ivAvatar;
 
         Contact contactItem;
 
@@ -137,6 +132,8 @@ public class ContactInfoAdapter extends RecyclerView.Adapter<ContactInfoAdapter.
 
             ivDelete = itemView.findViewById(R.id.ivDelete);
             ivDelete.setVisibility(readonly ? View.GONE : View.VISIBLE);
+
+            ivAvatar = itemView.findViewById(R.id.ivAvatar);
         }
 
         void bind(final int position) {
@@ -154,6 +151,12 @@ public class ContactInfoAdapter extends RecyclerView.Adapter<ContactInfoAdapter.
                     }
                 });
             }
+
+            Bitmap avatar = contactItem.getAvatar();
+            if(avatar != null)
+                ivAvatar.setImageBitmap(contactItem.getAvatar());
+            else
+                ivAvatar.setImageBitmap(Helper.getBitmap(context, R.drawable.ic_contact_avatar));
         }
 
         @Override
