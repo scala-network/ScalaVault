@@ -30,21 +30,41 @@
                 android:textAlignment="textStart" />
         </com.google.android.material.textfield.TextInputLayout>
 
-        <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/etWalletAddress"
-            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"
-            android:layout_width="match_parent"
+        <RelativeLayout
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            app:errorEnabled="true">
+            android:orientation="horizontal">
 
-            <com.google.android.material.textfield.TextInputEditText
-                style="@style/ScalaEdit"
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/etWalletAddress"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:hint="Wallet Address"
-                android:imeOptions="actionDone"
-                android:textAlignment="textStart" />
-        </com.google.android.material.textfield.TextInputLayout>
+                android:layout_height="wrap_content"
+                android:layout_alignParentStart="true"
+                android:layout_toStartOf="@+id/bPasteAddress"
+                app:errorEnabled="true">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    style="@style/ScalaEdit"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:hint="Wallet Address"
+                    android:imeOptions="actionDone"
+                    android:textAlignment="textStart" />
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <ImageButton
+                android:id="@+id/bPasteAddress"
+                style="@style/ScalaText.Button.Small"
+                android:layout_width="wrap_content"
+                android:layout_height="56dp"
+                android:layout_marginStart="8dp"
+                android:layout_gravity="center"
+                android:layout_alignParentEnd="true"
+                android:background="?android:selectableItemBackgroundBorderless"
+                android:src="@drawable/ic_content_paste_24dp" />
+
+        </RelativeLayout>
 
         <LinearLayout
             android:layout_width="wrap_content"

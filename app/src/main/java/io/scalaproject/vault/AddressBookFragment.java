@@ -44,6 +44,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.WindowManager;
 import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 
@@ -187,10 +188,14 @@ public class AddressBookFragment extends Fragment
                 .show();
     }
 
+    private boolean newContact = false;
+
     // Callbacks from NodeInfoAdapter
     @Override
     public void onSelectContact(final View view, final Contact contact) {
         Timber.d("onSelectContact");
+
+        newContact = false;
 
         if(readonly) {
             Config.write(Config.CONFIG_KEY_SELECTED_ADDRESS, contact.getAddress());
@@ -208,6 +213,8 @@ public class AddressBookFragment extends Fragment
     public void onClick(View v) {
         int id = v.getId();
         if (id == R.id.fabAddContact) {
+            newContact = true;
+
             EditDialog diag = createEditDialog(null);
             if (diag != null) {
                 diag.show();
@@ -236,29 +243,20 @@ public class AddressBookFragment extends Fragment
     private EditDialog editDialog = null; // for preventing opening of multiple dialogs
 
     private EditDialog createEditDialog(final Contact contact) {
-        if(contactEditTmp != null) {
-            if(editDialog != null) {
-                editDialog.closeDialog();
-                editDialog = null;
-            }
-
-            return new EditDialog(contact);
+        if (editDialog != null) {
+            editDialog.closeDialog();
+            editDialog = null;
         }
-
-        if (editDialog != null)
-            return null; // we are already open
 
         editDialog = new EditDialog(contact);
 
         return editDialog;
     }
 
-    private Contact contactEditTmp = null;
+    private Contact contactEdit = null;
+    private Contact contactEditBackup = null;
 
     class EditDialog {
-        Contact contactEdit;
-        Contact contactEditBackup;
-
         private boolean applyChanges() {
             final String contactName = etContactName.getEditText().getText().toString().trim();
             if (contactName.isEmpty()) {
@@ -272,7 +270,7 @@ public class AddressBookFragment extends Fragment
             if (walletAddress.isEmpty()) {
                 etWalletAddress.setError(getString(R.string.contact_value_empty));
                 return false;
-            } else if (!Wallet.isAddressValid(walletAddress)){
+            } else if (!Wallet.isAddressValid(walletAddress)) {
                 etWalletAddress.setError(getString(R.string.generate_check_address));
                 return false;
             } else {
@@ -283,26 +281,23 @@ public class AddressBookFragment extends Fragment
         }
 
         private boolean applyChangesTmp() {
-            contactEditTmp = new Contact();
-
             final String contactName = etContactName.getEditText().getText().toString().trim();
-            contactEditTmp.setName(contactName);
+            contactEdit.setName(contactName);
 
             final String walletAddress = etWalletAddress.getEditText().getText().toString().trim();
-            contactEditTmp.setAddress(walletAddress);
+            contactEdit.setAddress(walletAddress);
 
             return true;
         }
-
-        private boolean shutdown = false;
 
         private void apply() {
             if (applyChanges()) {
                 closeDialog();
 
-                contactsAdapter.addContact(contactEdit);
+                if (newContact)
+                    contactsAdapter.addContact(contactEdit);
 
-                shutdown = true;
+                contactsAdapter.dataSetChanged();
 
                 refreshContacts();
             }
@@ -328,10 +323,6 @@ public class AddressBookFragment extends Fragment
             editDialog.show();
         }
 
-        private void showKeyboard() {
-            Helper.showKeyboard(editDialog);
-        }
-
         androidx.appcompat.app.AlertDialog editDialog = null;
 
         TextInputLayout etContactName;
@@ -350,6 +341,17 @@ public class AddressBookFragment extends Fragment
             etWalletAddress = promptsView.findViewById(R.id.etWalletAddress);
             ivAvatar = promptsView.findViewById(R.id.ivAvatar);
 
+            ImageButton bPasteAddress = promptsView.findViewById(R.id.bPasteAddress);
+            bPasteAddress.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    final String clip = Helper.getClipBoardText(getActivity());
+                    if (clip == null) return;
+
+                    etWalletAddress.getEditText().setText(clip);
+                }
+            });
+
             Button btnSelectImage = promptsView.findViewById(R.id.btnSelectImage);
             btnSelectImage.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -361,7 +363,10 @@ public class AddressBookFragment extends Fragment
 
             if (contact != null) {
                 contactEdit = contact;
-                contactEditBackup = new Contact(contact);
+
+                if(contactEditBackup == null)
+                    contactEditBackup = new Contact(contact);
+
                 etContactName.getEditText().setText(contact.getName());
                 etWalletAddress.getEditText().setText(contact.getAddress());
 
@@ -435,9 +440,9 @@ public class AddressBookFragment extends Fragment
             // Already save the cropped image
             Bitmap bitmap = Helper.getCroppedBitmap((Bitmap) data.getExtras().get("data"));
 
-            contactEditTmp.setAvatar(bitmap);
+            contactEdit.setAvatar(bitmap);
 
-            EditDialog diag = createEditDialog(contactEditTmp);
+            EditDialog diag = createEditDialog(contactEdit);
             if (diag != null) {
                 diag.show();
             }
