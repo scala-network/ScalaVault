@@ -31,6 +31,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import io.scalaproject.vault.R;
@@ -162,7 +163,11 @@ public class TransactionInfoAdapter extends RecyclerView.Adapter<TransactionInfo
 
             UserNotes userNotes = new UserNotes(infoItem.notes);
 
+            LinearLayout llTxType = itemView.findViewById(R.id.llTxType);
+
             // just in case
+            llTxType.setBackgroundTintList(itemView.getResources().getColorStateList(R.color.bg_grey));
+
             int dim = (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 24, itemView.getResources().getDisplayMetrics());
             ivTxType.getLayoutParams().height = dim;
             ivTxType.getLayoutParams().width = dim;
@@ -218,6 +223,8 @@ public class TransactionInfoAdapter extends RecyclerView.Adapter<TransactionInfo
             else {
                 this.tvPaymentId.setText(Helper.getTruncatedString(contact.getName(), 20));
 
+                llTxType.setBackgroundTintList(itemView.getResources().getColorStateList(R.color.bg_lighter));
+
                 Bitmap avatar = contact.getAvatar();
                 if(avatar != null) {
                     dim = (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 32, itemView.getResources().getDisplayMetrics());
@@ -225,6 +232,13 @@ public class TransactionInfoAdapter extends RecyclerView.Adapter<TransactionInfo
                     ivTxType.getLayoutParams().width = dim;
 
                     ivTxType.setImageBitmap(avatar);
+                }
+                else {
+                    dim = (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 36, itemView.getResources().getDisplayMetrics());
+                    ivTxType.getLayoutParams().height = dim;
+                    ivTxType.getLayoutParams().width = dim;
+
+                    ivTxType.setImageBitmap(Helper.getBitmap(itemView.getContext(), R.drawable.ic_contact_avatar));
                 }
             }
 

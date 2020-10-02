@@ -346,6 +346,9 @@ public class WalletActivity extends BaseActivity implements WalletFragment.Liste
             case R.id.action_help_send:
                 HelpFragment.display(getSupportFragmentManager(), R.string.help_send);
                 return true;
+            case R.id.action_help_address_book:
+                HelpFragment.display(getSupportFragmentManager(), R.string.help_address_book);
+                return true;
             case R.id.action_rename:
                 onAccountRename();
                 return true;

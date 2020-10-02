@@ -149,6 +149,13 @@
         This was the block your transaction was included in.
     ]]></string>
 
+    <string name="help_address_book"><![CDATA[
+        <h1>Address Book</h1>
+        <p>The Address Book allows you to store the wallet address and other contact information of addresses you frequently use.</p>
+        <p>You can specify the name, wallet address, and image for each of your contact.</p>
+        <p>The Address Book is stored locally on your device and is shared between all your wallets.</p>
+    ]]></string>
+
     <string name="help_send"><![CDATA[
         <h1>Send</h1>
         <h2>Receiver’s address</h2>

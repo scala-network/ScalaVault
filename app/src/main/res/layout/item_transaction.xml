@@ -26,6 +26,7 @@
             android:orientation="horizontal">
 
             <LinearLayout
+                android:id="@+id/llTxType"
                 android:layout_width="32dp"
                 android:layout_height="32dp"
                 android:layout_gravity="center"

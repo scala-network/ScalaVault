@@ -26,6 +26,7 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.graphics.Bitmap;
+import android.util.TypedValue;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -153,10 +154,20 @@ public class ContactInfoAdapter extends RecyclerView.Adapter<ContactInfoAdapter.
             }
 
             Bitmap avatar = contactItem.getAvatar();
-            if(avatar != null)
+            if(avatar != null) {
+                int dim = (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 32, itemView.getResources().getDisplayMetrics());
+                ivAvatar.getLayoutParams().height = dim;
+                ivAvatar.getLayoutParams().width = dim;
+
                 ivAvatar.setImageBitmap(contactItem.getAvatar());
-            else
+            }
+            else {
+                int dim = (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 36, itemView.getResources().getDisplayMetrics());
+                ivAvatar.getLayoutParams().height = dim;
+                ivAvatar.getLayoutParams().width = dim;
+
                 ivAvatar.setImageBitmap(Helper.getBitmap(context, R.drawable.ic_contact_avatar));
+            }
         }
 
         @Override
