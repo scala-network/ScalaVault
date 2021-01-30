@@ -2,6 +2,7 @@
     <string name="app_name" translatable="false">Scala Vault</string>
     <string name="wallet_activity_name">Wallet</string>
 
+    <string name="menu_mobileminer">Mobile Miner</string>
     <string name="menu_about">About</string>
     <string name="menu_privacy">Privacy Policy</string>
 

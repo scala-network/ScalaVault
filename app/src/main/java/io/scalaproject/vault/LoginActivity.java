@@ -1298,6 +1298,9 @@ public class LoginActivity extends BaseActivity
             case R.id.action_nodes:
                 onNodePrefs();
                 return true;
+            case R.id.action_mobile_miner:
+                startActivity(new Intent(this, MobileMinerActivity.class));
+                return true;
             default:
                 return super.onOptionsItemSelected(item);
         }

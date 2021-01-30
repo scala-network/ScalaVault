@@ -22,6 +22,7 @@
 package io.scalaproject.vault;
 
 import android.content.Context;
+import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import androidx.annotation.NonNull;
@@ -195,7 +196,13 @@ public class LoginFragment extends Fragment implements WalletInfoAdapter.OnInter
         recyclerView.setAdapter(adapter);
 
         ViewGroup llNotice = view.findViewById(R.id.llNotice);
-        Notice.showAll(llNotice, "notice_miner");
+        llNotice.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(getActivity(), MobileMinerActivity.class));
+            }
+        });
+        Notice.showAll(llNotice, "notice_miner", false);
 
         pbNode = view.findViewById(R.id.pbNode);
         llNode = view.findViewById(R.id.llNode);

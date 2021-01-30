@@ -352,6 +352,9 @@ public class WalletActivity extends BaseActivity implements WalletFragment.Liste
             case R.id.action_rename:
                 onAccountRename();
                 return true;
+            case R.id.action_mobile_miner:
+                startActivity(new Intent(this, MobileMinerActivity.class));
+                return true;
             case R.id.action_stealthmode:
                 if (isStealthMode()) { // disable stealthMode
                     item.setIcon(R.drawable.ic_stealth_mode_on);

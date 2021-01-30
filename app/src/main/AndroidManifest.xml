@@ -76,6 +76,12 @@
                 android:resource="@xml/usb_device_filter" />
         </activity>
 
+        <activity
+            android:name=".MobileMinerActivity"
+            android:configChanges="orientation|keyboardHidden"
+            android:label="Mobile Miner"
+            android:launchMode="singleTask"
+            android:screenOrientation="behind" />
 
         <service
             android:name=".service.WalletService"

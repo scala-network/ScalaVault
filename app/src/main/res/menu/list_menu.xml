@@ -15,6 +15,12 @@
         app:showAsAction="never" />
 
     <item
+        android:id="@+id/action_mobile_miner"
+        android:orderInCategory="250"
+        android:title="@string/menu_mobileminer"
+        app:showAsAction="never" />
+
+    <item
         android:id="@+id/action_license_info"
         android:orderInCategory="300"
         android:title="@string/menu_about"

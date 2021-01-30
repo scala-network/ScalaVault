@@ -42,11 +42,10 @@ public class Notice {
     private static final String PREFS_NAME = "notice";
     private static List<Notice> notices = null;
 
-    private static final String NOTICE_SHOW_XLATO_ENABLED_LOGIN = "notice_xlato_enabled_login";
-    private static final String NOTICE_SHOW_XLATO_ENABLED_SEND = "notice_xlato_enabled_send";
-    private static final String NOTICE_SHOW_LEDGER = "notice_ledger_enabled_login";
     private static final String NOTICE_SHOW_NODES = "notice_nodes";
     private static final String NOTICE_SHOW_MINER = "notice_miner";
+
+    private static boolean bHandleOnClick = true;
 
     private static void init() {
         synchronized (Notice.class) {
@@ -66,31 +65,12 @@ public class Notice {
                             R.string.help_mobile_miner,
                             1)
             );
-
-            /*
-            notices.add(
-                    new Notice(NOTICE_SHOW_XLATO_ENABLED_SEND,
-                            R.string.info_xlato_enabled,
-                            R.string.help_xlato,
-                            1)
-            );
-
-            notices.add(
-                    new Notice(NOTICE_SHOW_XLATO_ENABLED_LOGIN,
-                            R.string.info_xlato_enabled,
-                            R.string.help_xlato,
-                            1)
-            );
-
-            notices.add(
-                    new Notice(NOTICE_SHOW_LEDGER,
-                            R.string.info_ledger_enabled,
-                            R.string.help_create_ledger,
-                            1)
-            );
-
-             */
         }
+    }
+
+    public static void showAll(ViewGroup parent, String selector, boolean handleOnClick) {
+        bHandleOnClick = handleOnClick;
+        showAll(parent, selector);
     }
 
     public static void showAll(ViewGroup parent, String selector) {
@@ -120,20 +100,19 @@ public class Notice {
         final Context context = parent.getContext();
         if (getCount(context) <= 0) return; // don't add it
 
-        final LinearLayout ll =
-                (LinearLayout) LayoutInflater.from(context)
-                        .inflate(R.layout.template_notice, parent, false);
+        final LinearLayout ll = (LinearLayout) LayoutInflater.from(context).inflate(R.layout.template_notice, parent, false);
 
         ((TextView) ll.findViewById(R.id.tvNotice)).setText(textResId);
 
-        final FragmentManager fragmentManager =
-                ((FragmentActivity) context).getSupportFragmentManager();
-        ll.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                HelpFragment.display(fragmentManager, helpResId);
-            }
-        });
+        if(bHandleOnClick) {
+            final FragmentManager fragmentManager = ((FragmentActivity) context).getSupportFragmentManager();
+            ll.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    HelpFragment.display(fragmentManager, helpResId);
+                }
+            });
+        }
 
         ImageButton ib = ll.findViewById(R.id.ibClose);
         ib.setOnClickListener(new View.OnClickListener() {
@@ -147,8 +126,7 @@ public class Notice {
     }
 
     private int getCount(final Context context) {
-        count = context.getSharedPreferences(PREFS_NAME, Context.MODE_PRIVATE)
-                .getInt(id, defaultCount);
+        count = context.getSharedPreferences(PREFS_NAME, Context.MODE_PRIVATE).getInt(id, defaultCount);
         return count;
     }
 
