@@ -37,6 +37,7 @@ import android.widget.TextView;
 import io.scalaproject.vault.R;
 import io.scalaproject.vault.data.Contact;
 import io.scalaproject.vault.model.TransactionInfo;
+import io.scalaproject.vault.model.Wallet;
 import io.scalaproject.vault.util.Helper;
 import io.scalaproject.vault.data.UserNotes;
 
@@ -172,7 +173,7 @@ public class TransactionInfoAdapter extends RecyclerView.Adapter<TransactionInfo
             ivTxType.getLayoutParams().height = dim;
             ivTxType.getLayoutParams().width = dim;
 
-            String displayAmount = Helper.getDisplayAmount(infoItem.amount, Helper.DISPLAY_DIGITS_INFO);
+            String displayAmount = Wallet.getDisplayAmount(infoItem.amount);
             if (infoItem.direction == TransactionInfo.Direction.Direction_Out) {
                 ivTxType.setImageDrawable(itemView.getResources().getDrawable(R.drawable.ic_tx_out));
                 tvAmount.setText(displayAmount.startsWith("-") ? context.getString(R.string.tx_list_amount_negative, displayAmount) : "-" + context.getString(R.string.tx_list_amount_negative, displayAmount));
@@ -184,7 +185,7 @@ public class TransactionInfoAdapter extends RecyclerView.Adapter<TransactionInfo
             }
 
             if ((infoItem.fee > 0)) {
-                String fee = Helper.getDisplayAmount(infoItem.fee, Helper.DISPLAY_DIGITS_INFO);
+                String fee = Wallet.getDisplayAmount(infoItem.fee);
                 tvFee.setText(context.getString(R.string.tx_list_fee, fee));
                 tvFee.setVisibility(View.VISIBLE);
             } else {
