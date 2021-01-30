@@ -73,11 +73,12 @@ public class ExchangeEditText extends LinearLayout {
         }
         boolean ok = true;
         String nativeAmount = getNativeAmount();
-        if (nativeAmount == null) {
+        if (nativeAmount == null || nativeAmount.isEmpty()) {
             ok = false;
         } else {
             try {
                 double amount = Double.parseDouble(nativeAmount);
+                double amount = Double.parseDouble(nativeAmount.replaceAll(",",""));
                 if ((amount < min) || (amount > max)) {
                     ok = false;
                 }
@@ -357,7 +358,7 @@ public class ExchangeEditText extends LinearLayout {
         try {
             double amount = Double.parseDouble(enteredAmount);
             if (amount >= 0) {
-                return String.format(Locale.US, "%,.12f", amount);
+                return String.format(Locale.US, "%,.2f", amount);
             } else {
                 return null;
             }

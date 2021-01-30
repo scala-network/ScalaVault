@@ -24,6 +24,7 @@ package io.scalaproject.vault;
 
 import android.app.Application;
 import android.content.Context;
+import android.content.SharedPreferences;
 import android.content.res.Configuration;
 
 import io.scalaproject.vault.model.NetworkType;
@@ -35,6 +36,8 @@ public class ScalaVaultApplication extends Application {
     @Override
     public void onCreate() {
         super.onCreate();
+        SharedPreferences preferences = getSharedPreferences(getPackageName() + "_preferences", MODE_PRIVATE);
+        Config.initialize(preferences);
 
         if (BuildConfig.DEBUG) {
             Timber.plant(new Timber.DebugTree());
