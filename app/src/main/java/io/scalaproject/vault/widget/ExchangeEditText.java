@@ -73,15 +73,23 @@ public class ExchangeEditText extends LinearLayout {
             return false;
         }
         boolean ok = true;
-        double enteredAmount = getEnteredAmount();
-        try {
-            if ((enteredAmount < min) || (enteredAmount > max)) {
+        String nativeAmount = getNativeAmount();
+
+        if (nativeAmount == null || nativeAmount.isEmpty()) {
+            ok = false;
+        } else {
+            try {
+
+                double amount = Double.parseDouble(nativeAmount);
+
+                if ((amount < min) || (amount > max)) {
+                    ok = false;
+                }
+            } catch (NumberFormatException ex) {
+                // this cannot be
+                Timber.e(ex.getLocalizedMessage());
                 ok = false;
             }
-        } catch (NumberFormatException ex) {
-            // this cannot be
-            Timber.e(ex.getLocalizedMessage());
-            ok = false;
         }
         if (!ok) {
             shakeAmountField();
@@ -353,7 +361,7 @@ public class ExchangeEditText extends LinearLayout {
         try {
             double amount = Double.parseDouble(enteredAmount);
             if (amount >= 0) {
-                return String.format(Locale.US, "%,.2f", amount);
+                return String.format(Locale.US, "%.2f", amount);
             } else {
                 return null;
             }
