@@ -29,6 +29,7 @@ import android.os.Looper;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.util.AttributeSet;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.AdapterView;
@@ -72,20 +73,15 @@ public class ExchangeEditText extends LinearLayout {
             return false;
         }
         boolean ok = true;
-        String enteredAmount = getEnteredAmount();
-        if (enteredAmount == null || enteredAmount.isEmpty()) {
-            ok = false;
-        } else {
-            try {
-                double amount = Double.parseDouble(enteredAmount);
-                if ((amount < min) || (amount > max)) {
-                    ok = false;
-                }
-            } catch (NumberFormatException ex) {
-                // this cannot be
-                Timber.e(ex.getLocalizedMessage());
+        double enteredAmount = getEnteredAmount();
+        try {
+            if ((enteredAmount < min) || (enteredAmount > max)) {
                 ok = false;
             }
+        } catch (NumberFormatException ex) {
+            // this cannot be
+            Timber.e(ex.getLocalizedMessage());
+            ok = false;
         }
         if (!ok) {
             shakeAmountField();
