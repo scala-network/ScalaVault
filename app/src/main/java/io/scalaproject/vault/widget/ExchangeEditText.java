@@ -72,13 +72,12 @@ public class ExchangeEditText extends LinearLayout {
             return false;
         }
         boolean ok = true;
-        String nativeAmount = getNativeAmount();
-        if (nativeAmount == null || nativeAmount.isEmpty()) {
+        String enteredAmount = getEnteredAmount();
+        if (enteredAmount == null || enteredAmount.isEmpty()) {
             ok = false;
         } else {
             try {
-                double amount = Double.parseDouble(nativeAmount);
-                double amount = Double.parseDouble(nativeAmount.replaceAll(",",""));
+                double amount = Double.parseDouble(enteredAmount);
                 if ((amount < min) || (amount > max)) {
                     ok = false;
                 }
