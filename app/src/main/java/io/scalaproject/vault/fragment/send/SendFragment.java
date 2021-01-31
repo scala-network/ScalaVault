@@ -40,6 +40,7 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 
+import io.scalaproject.vault.Config;
 import io.scalaproject.vault.OnBackPressedListener;
 import io.scalaproject.vault.OnUriScannedListener;
 import io.scalaproject.vault.R;
@@ -67,7 +68,7 @@ public class SendFragment extends Fragment
         SendSuccessWizardFragment.Listener,
         OnBackPressedListener, OnUriScannedListener {
 
-    final static public int MIXIN = 10;
+    final static public int MIXIN = 11;
 
     private Listener activityCallback;
 
@@ -586,15 +587,13 @@ public class SendFragment extends Fragment
     boolean showxlatoEnabled = true;
 
     void loadPrefs() {
-        SharedPreferences sharedPref = activityCallback.getPrefs();
-        showxlatoEnabled = sharedPref.getBoolean(PREF_SHOW_XLATO_ENABLED, false);
+        String enabled = Config.read("PREF_SHOW_XLATO_ENABLED");
+        showxlatoEnabled = !(enabled.isEmpty() || enabled == "0");
+
     }
 
     void savexlaToPrefs() {
-        SharedPreferences sharedPref = activityCallback.getPrefs();
-        SharedPreferences.Editor editor = sharedPref.edit();
-        editor.putBoolean(PREF_SHOW_XLATO_ENABLED, showxlatoEnabled);
-        editor.apply();
+        Config.write("PREF_SHOW_XLATO_ENABLED", showxlatoEnabled ? "1" : "0");
     }
 
 }
