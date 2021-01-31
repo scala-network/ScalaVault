@@ -254,7 +254,7 @@ public class LoginFragment extends Fragment implements WalletInfoAdapter.OnInter
     @Override
     public boolean onContextInteraction(MenuItem item, WalletManager.WalletInfo listItem) {
         switch (item.getItemId()) {
-            case R.id.action_StealthMode:
+            case R.id.action_stealthmode:
                 openWallet(listItem.name, listItem.address, true);
                 break;
             case R.id.action_info:

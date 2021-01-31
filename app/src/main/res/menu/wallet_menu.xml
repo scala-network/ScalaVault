@@ -15,7 +15,7 @@
         app:showAsAction="never" />
 
     <item
-        android:id="@+id/action_StealthMode"
+        android:id="@+id/action_stealthmode"
         android:checkable="true"
         android:icon="@drawable/ic_stealth_mode_on"
         android:orderInCategory="100"
