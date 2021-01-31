@@ -261,7 +261,9 @@ public class Wallet {
         return isSynchronizedJ() && (getBlockChainHeight() == daemonHeight);
     }
 
-    public static native String getDisplayAmount(long amount);
+    public static String getDisplayAmount(long amount) {
+        return String.format(Locale.US, "%,.2f", (1.0 * amount / 100L));
+    }
 
     public static native long getAmountFromString(String amount);
 

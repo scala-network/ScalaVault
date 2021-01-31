@@ -13,8 +13,7 @@ import android.os.Handler;
 public class SplashActivity extends Activity {
     @Override
     public void onCreate(Bundle savedInstanceState) {
-        SharedPreferences preferences = getSharedPreferences(getPackageName() + "_preferences", MODE_PRIVATE);
-        Config.initialize(preferences);
+
 
         String configversion = Config.read(Config.CONFIG_KEY_CONFIG_VERSION);
         if(!configversion.equals(Config.version)) {
