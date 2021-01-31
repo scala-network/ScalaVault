@@ -21,13 +21,32 @@
 
 package io.scalaproject.vault.fragment.send;
 
+import android.Manifest;
+import android.content.Intent;
+import android.content.pm.PackageManager;
+import android.graphics.pdf.PdfDocument;
+import android.graphics.pdf.PdfDocument.Page;
+import android.graphics.pdf.PdfDocument.PageInfo;
+import android.net.Uri;
 import android.os.Bundle;
+import android.os.Environment;
+import android.os.StrictMode;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import androidx.core.app.ActivityCompat;
+import androidx.core.content.ContextCompat;
+
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
 
 import io.scalaproject.vault.R;
 import io.scalaproject.vault.data.PendingTx;
@@ -70,6 +89,7 @@ public class SendSuccessWizardFragment extends SendWizardFragment {
     private TextView tvTxPaymentId;
     private TextView tvTxAmount;
     private TextView tvTxFee;
+    private Button btnReceipt;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -77,7 +97,7 @@ public class SendSuccessWizardFragment extends SendWizardFragment {
 
         Timber.d("onCreateView() %s", (String.valueOf(savedInstanceState)));
 
-        View view = inflater.inflate(
+        final View view = inflater.inflate(
                 R.layout.fragment_send_success, container, false);
 
         bCopyTxId = view.findViewById(R.id.bCopyTxId);
@@ -94,6 +114,73 @@ public class SendSuccessWizardFragment extends SendWizardFragment {
         tvTxPaymentId = view.findViewById(R.id.tvTxPaymentId);
         tvTxAmount = view.findViewById(R.id.tvTxAmount);
         tvTxFee = view.findViewById(R.id.tvTxFee);
+        btnReceipt = view.findViewById(R.id.btnReceipt);
+
+        btnReceipt.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                btnReceipt.setVisibility(View.GONE);
+
+                // create a new document
+                PdfDocument document = new PdfDocument();
+                FileOutputStream fOut = null;
+                Log.d("XLA", "Download Clicked");
+                try {
+
+                    // create a page description
+                    PageInfo pageInfo = new PageInfo.Builder(view.getWidth(), view.getHeight(), 1).create();
+
+                    // start a page
+                    Page page = document.startPage(pageInfo);
+                    view.draw(page.getCanvas());
+
+                    // finish the page
+                    document.finishPage(page);
+                    // add more pages
+                    // write the document content
+                    String path = Environment.getExternalStorageDirectory().getAbsolutePath() + "/txs";
+
+                    File dir = new File(path);
+
+                    if (!dir.exists())
+                        dir.mkdirs();
+
+                    File file = new File(dir, "receipt.pdf");
+
+                    fOut = new FileOutputStream(file);
+
+                    document.writeTo(fOut);
+                    fOut.flush();
+                    fOut.close();
+
+                    Intent intentShareFile = new Intent(Intent.ACTION_SEND);
+
+                    if(file.exists()) {
+                        StrictMode.VmPolicy.Builder builder = new StrictMode.VmPolicy.Builder();
+                        StrictMode.setVmPolicy(builder.build());
+
+                        intentShareFile.setType("application/pdf");
+                        intentShareFile.putExtra(Intent.EXTRA_STREAM, Uri.parse("file://"+file.getAbsolutePath()));
+                        intentShareFile.putExtra(Intent.EXTRA_SUBJECT, "Sharing File...");
+                        intentShareFile.putExtra(Intent.EXTRA_TEXT, file.getName());
+                        intentShareFile.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
+                        startActivity(Intent.createChooser(intentShareFile, "Share File"));
+                    }
+
+
+                } catch (FileNotFoundException de) {
+                    Log.e("XLA", "DocumentException:" + de);
+                } catch (IOException e) {
+                    Log.e("XLA", "ioException:" + e);
+                }
+                finally {
+                    document.close();
+                }
+
+                btnReceipt.setVisibility(View.VISIBLE);
+
+            }
+        });
 
         return view;
     }

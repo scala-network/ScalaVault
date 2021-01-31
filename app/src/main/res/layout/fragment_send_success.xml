@@ -45,7 +45,7 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="2"
                     android:textAlignment="textEnd"
-                    tools:text="143.008000 XLA" />
+                    tools:text="14300.08 XLA" />
 
                 <TextView
                     android:id="@+id/tvTxFee"
@@ -116,6 +116,12 @@
             android:layout_marginEnd="8dp"
             android:textAlignment="textStart"
             tools:text="4AdkPJoxn7JCvAby9szgnt93MSEwdnxdhaASxbTBm6x5dCwmsDep2UYN4FhStDn5i11nsJbpU7oj59ahg8gXb1Mg3viqCuk" />
+
+        <Button
+            android:id="@+id/btnReceipt"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/download" />
 
     </LinearLayout>
 </ScrollView>
