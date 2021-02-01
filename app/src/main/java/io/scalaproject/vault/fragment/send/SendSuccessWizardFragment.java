@@ -21,6 +21,9 @@
 
 package io.scalaproject.vault.fragment.send;
 
+import android.content.Intent;
+import android.graphics.Paint;
+import android.net.Uri;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -120,6 +123,18 @@ public class SendSuccessWizardFragment extends SendWizardFragment {
         final PendingTx committedTx = sendListener.getCommittedTx();
         if (committedTx != null) {
             tvTxId.setText(committedTx.txId);
+            tvTxId.setTextColor(getResources().getColor(R.color.c_blue));
+            tvTxId.setPaintFlags(tvTxId.getPaintFlags() | Paint.UNDERLINE_TEXT_FLAG);
+
+            tvTxId.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    String paymentURL = "https://explorer.scalaproject.io/tx?tx_info=" + tvTxId.getText();
+                    Uri uri = Uri.parse(paymentURL);
+                    startActivity(new Intent(Intent.ACTION_VIEW, uri));
+                }
+            });
+
             bCopyTxId.setEnabled(true);
             bCopyTxId.setImageResource(R.drawable.ic_content_copy_24dp);
 

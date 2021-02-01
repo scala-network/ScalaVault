@@ -294,7 +294,6 @@
                     style="@style/ScalaText"
                     android:gravity="start"
                     android:padding="8dp"
-                    android:selectAllOnFocus="true"
                     android:textIsSelectable="true" />
             </TableRow>
 

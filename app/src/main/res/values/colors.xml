@@ -44,8 +44,8 @@
 
     <!--Legacy Colors-->
 
-    <color name="tx_green">#2ee584</color>
-    <color name="tx_red">#e85238</color>
+    <color name="tx_green">@color/c_green</color>
+    <color name="tx_red">@color/c_red</color>
     <color name="tx_pending">@color/c_light_grey</color>
     <color name="tx_failed">@color/c_yellow</color>
 

@@ -23,11 +23,16 @@ package io.scalaproject.vault;
 
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Paint;
+import android.net.Uri;
 import android.os.Bundle;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.core.content.ContextCompat;
+
+import android.text.Html;
 import android.text.InputType;
+import android.text.method.LinkMovementMethod;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -238,6 +243,18 @@ public class TxFragment extends Fragment {
             tvTxBlockheight.setText("" + info.blockheight);
         }
         String sign = (info.direction == TransactionInfo.Direction.Direction_In ? "+" : "-");
+
+        tvTxId.setTextColor(getResources().getColor(R.color.c_blue));
+        tvTxId.setPaintFlags(tvTxId.getPaintFlags() | Paint.UNDERLINE_TEXT_FLAG);
+
+        tvTxId.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                String paymentURL = "https://explorer.scalaproject.io/tx?tx_info=" + tvTxId.getText();
+                Uri uri = Uri.parse(paymentURL);
+                startActivity(new Intent(Intent.ACTION_VIEW, uri));
+            }
+        });
 
         long realAmount = info.amount;
         tvTxAmount.setText(sign + Wallet.getDisplayAmount(realAmount));
