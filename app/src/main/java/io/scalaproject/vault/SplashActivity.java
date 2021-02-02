@@ -14,7 +14,6 @@ public class SplashActivity extends Activity {
     @Override
     public void onCreate(Bundle savedInstanceState) {
 
-
         String configversion = Config.read(Config.CONFIG_KEY_CONFIG_VERSION);
         if(!configversion.equals(Config.version)) {
             Config.clear();
@@ -35,8 +34,6 @@ public class SplashActivity extends Activity {
         new Handler().postDelayed(new Runnable() {
             public void run() {
                 String hide_setup_wizard = Config.read(Config.CONFIG_KEY_HIDE_HOME_WIZARD);
-
-                startActivity(new Intent(SplashActivity.this, WizardHomeActivity.class));
 
                 if (hide_setup_wizard.equals("")) {
                     startActivity(new Intent(SplashActivity.this, WizardHomeActivity.class));

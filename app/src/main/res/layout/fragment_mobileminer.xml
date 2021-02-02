@@ -78,7 +78,7 @@
 			android:layout_weight="1"
 			android:layout_marginTop="15dp"
 			android:layout_gravity="center"
-			android:src="@drawable/mobile_minerv2_crop"/>
+			android:src="@drawable/mobile_miner"/>
 
 		<Button
 			android:id="@+id/btnDownloadMM"
