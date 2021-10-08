@@ -76,14 +76,14 @@ public class NodeFragment extends Fragment
 
     static private int NODES_TO_FIND = 15;
 
-    static private NumberFormat FORMATTER = NumberFormat.getInstance();
+    static private final NumberFormat FORMATTER = NumberFormat.getInstance();
 
     private SwipeRefreshLayout pullToRefresh;
     private View fabAddNode;
     private RecyclerView rvNodes;
 
     private Set<NodeInfo> allNodes = new HashSet<>();
-    private Set<NodeInfo> userdefinedNodes = new HashSet<>();
+    private final Set<NodeInfo> userdefinedNodes = new HashSet<>();
 
     private NodeInfoAdapter nodesAdapter;
 
