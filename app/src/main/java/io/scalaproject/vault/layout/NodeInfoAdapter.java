@@ -23,8 +23,10 @@ package io.scalaproject.vault.layout;
 
 import android.content.Context;
 import androidx.annotation.NonNull;
+import androidx.appcompat.widget.PopupMenu;
 import androidx.recyclerview.widget.RecyclerView;
 import android.view.LayoutInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageButton;
@@ -48,8 +50,8 @@ import java.util.TimeZone;
 public class NodeInfoAdapter extends RecyclerView.Adapter<NodeInfoAdapter.ViewHolder> {
     private final SimpleDateFormat TS_FORMATTER = new SimpleDateFormat("yyyy-MM-dd HH:mm");
 
-    public interface OnNodeSettingsListener {
-        void onSettingsNode(View view, NodeInfo item);
+    public interface OnMenuNodeListener {
+        boolean onContextInteraction(MenuItem item, NodeInfo nodeInfo);
     }
 
     public interface OnSelectNodeListener {
@@ -57,14 +59,14 @@ public class NodeInfoAdapter extends RecyclerView.Adapter<NodeInfoAdapter.ViewHo
     }
 
     private final List<NodeInfo> nodeItems = new ArrayList<>();
-    private final OnNodeSettingsListener onNodeSettingsListener;
+    private final OnMenuNodeListener onMenuNodeListener;
     private final OnSelectNodeListener onSelectNodeListener;
 
     private Context context;
 
-    public NodeInfoAdapter(Context context, OnNodeSettingsListener onNodeSettingsListener, OnSelectNodeListener onSelectNodeListener) {
+    public NodeInfoAdapter(Context context, OnMenuNodeListener onMenuNodeListener, OnSelectNodeListener onSelectNodeListener) {
         this.context = context;
-        this.onNodeSettingsListener = onNodeSettingsListener;
+        this.onMenuNodeListener = onMenuNodeListener;
         this.onSelectNodeListener = onSelectNodeListener;
 
         Calendar cal = Calendar.getInstance();
@@ -94,7 +96,18 @@ public class NodeInfoAdapter extends RecyclerView.Adapter<NodeInfoAdapter.ViewHo
         if (!nodeItems.contains(node))
             nodeItems.add(node);
 
-        dataSetChanged(); // in case the nodeinfo has changed
+        dataSetChanged();
+    }
+
+    public void deleteNode(NodeInfo node) {
+        for (NodeInfo nodeCmp : nodeItems) {
+            if(node.equals(nodeCmp)) {
+                nodeItems.remove(nodeCmp);
+                break;
+            }
+        }
+
+        dataSetChanged();
     }
 
     public void dataSetChanged() {
@@ -129,15 +142,54 @@ public class NodeInfoAdapter extends RecyclerView.Adapter<NodeInfoAdapter.ViewHo
         final TextView tvName;
         final TextView tvIp;
         final ImageView ivPing;
-        final ImageView ivSettings;
+        final ImageButton ibOptions;
+
         NodeInfo nodeItem;
+
+        boolean popupOpen = false;
 
         ViewHolder(View itemView) {
             super(itemView);
             tvName = itemView.findViewById(R.id.tvName);
             tvIp = itemView.findViewById(R.id.tvAddress);
             ivPing = itemView.findViewById(R.id.ivPing);
-            ivSettings = itemView.findViewById(R.id.ivSettings);
+
+            ibOptions = itemView.findViewById(R.id.ibOptions);
+            ibOptions.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    if (popupOpen)
+                        return;
+
+                    PopupMenu popup = new PopupMenu(context, ibOptions);
+                    popup.inflate(R.menu.node_context_menu);
+                    popupOpen = true;
+
+                    MenuItem itemEdit = popup.getMenu().findItem(R.id.action_edit_node);
+                    itemEdit.setTitle(context.getResources().getString(R.string.edit));
+
+                    MenuItem itemDelete = popup.getMenu().findItem(R.id.action_delete_node);
+                    itemDelete.setVisible(nodeItem.isUserDefined());
+
+                    popup.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
+                        @Override
+                        public boolean onMenuItemClick(MenuItem item) {
+                            if (onMenuNodeListener != null) {
+                                return onMenuNodeListener.onContextInteraction(item, nodeItem);
+                            }
+                            return false;
+                        }
+                    });
+
+                    popup.show();
+                    popup.setOnDismissListener(new PopupMenu.OnDismissListener() {
+                        @Override
+                        public void onDismiss(PopupMenu menu) {
+                            popupOpen = false;
+                        }
+                    });
+                }
+            });
         }
 
         void bind(final int position) {
@@ -156,11 +208,11 @@ public class NodeInfoAdapter extends RecyclerView.Adapter<NodeInfoAdapter.ViewHo
             itemView.setOnClickListener(this);
             itemView.setClickable(itemsClickable);
 
-            ivSettings.setOnClickListener(new View.OnClickListener() {
+            /*ivSettings.setOnClickListener(new View.OnClickListener() {
                 public void onClick(View v) {
                     onNodeSettingsListener.onSettingsNode(v, nodeItems.get(position));
                 }
-            });
+            });*/
         }
 
         @Override

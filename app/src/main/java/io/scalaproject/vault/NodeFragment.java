@@ -21,6 +21,7 @@
 
 package io.scalaproject.vault;
 
+import android.annotation.SuppressLint;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
@@ -39,6 +40,7 @@ import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.WindowManager;
@@ -72,7 +74,7 @@ import java.util.Set;
 import timber.log.Timber;
 
 public class NodeFragment extends Fragment
-        implements NodeInfoAdapter.OnNodeSettingsListener, NodeInfoAdapter.OnSelectNodeListener, View.OnClickListener {
+        implements NodeInfoAdapter.OnMenuNodeListener, NodeInfoAdapter.OnSelectNodeListener, View.OnClickListener {
 
     static private int NODES_TO_FIND = 15;
 
@@ -108,6 +110,8 @@ public class NodeFragment extends Fragment
         void setNode(NodeInfo node);
 
         void addUserDefinedNodes(Set<NodeInfo> userDefinedNodes);
+
+        void deleteUserDefinedNode(NodeInfo nodeInfo);
     }
 
     @Override
@@ -259,12 +263,64 @@ public class NodeFragment extends Fragment
     }
 
     // Callbacks from NodeInfoAdapter
+    @SuppressLint("NonConstantResourceId")
     @Override
-    public void onSettingsNode(final View view, final NodeInfo nodeItem) {
-        Timber.d("onInteraction");
-        EditDialog diag = createEditDialog(nodeItem);
-        if (diag != null) {
-            diag.show();
+    public boolean onContextInteraction(MenuItem item, NodeInfo nodeInfo) {
+        switch (item.getItemId()) {
+            case R.id.action_edit_node:
+                EditDialog diag = createEditDialog(nodeInfo);
+                if (diag != null) {
+                    diag.show();
+                }
+
+                break;
+            case R.id.action_delete_node:
+                onDeleteNode(nodeInfo);
+                break;
+            default:
+                return super.onContextItemSelected(item);
+        }
+
+        return true;
+    }
+
+    public void onDeleteNode(final NodeInfo nodeInfo) {
+        DialogInterface.OnClickListener dialogClickListener = new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int action) {
+                switch (action) {
+                    case DialogInterface.BUTTON_POSITIVE:
+                        if(nodeInfo.isUserDefined()) {
+                            nodesAdapter.deleteNode(nodeInfo);
+                            allNodes.remove(nodeInfo);
+                            userdefinedNodes.remove(nodeInfo);
+
+                            activityCallback.deleteUserDefinedNode(nodeInfo);
+
+                            refresh();
+                        }
+
+                        break;
+                    case DialogInterface.BUTTON_NEGATIVE:
+                        // do nothing
+                        break;
+                }
+            }
+        };
+
+        if(!nodeInfo.isUserDefined()) {
+            MaterialAlertDialogBuilder builder = new MaterialAlertDialogBuilder(getContext(), R.style.MaterialAlertDialogCustom);
+            builder.setMessage("Default nodes cannot be deleted.")
+                    .setTitle(nodeInfo.getName())
+                    .setPositiveButton(getString(R.string.label_ok), dialogClickListener)
+                    .show();
+        } else {
+            MaterialAlertDialogBuilder builder = new MaterialAlertDialogBuilder(getContext(), R.style.MaterialAlertDialogCustom);
+            builder.setMessage("Do you really want to delete this node?")
+                    .setTitle(nodeInfo.getName())
+                    .setPositiveButton(getString(R.string.details_alert_yes), dialogClickListener)
+                    .setNegativeButton(getString(R.string.details_alert_no), dialogClickListener)
+                    .show();
         }
     }
 
@@ -303,13 +359,11 @@ public class NodeFragment extends Fragment
     @Override
     public void onClick(View v) {
         int id = v.getId();
-        switch (id) {
-            case R.id.fabAddNode:
-                EditDialog diag = createEditDialog(null);
-                if (diag != null) {
-                    diag.show();
-                }
-                break;
+        if (id == R.id.fabAddNode) {
+            EditDialog diag = createEditDialog(null);
+            if (diag != null) {
+                diag.show();
+            }
         }
     }
 
@@ -328,8 +382,7 @@ public class NodeFragment extends Fragment
         @Override
         protected Boolean doInBackground(Void... params) {
             Timber.d("scanning");
-            Set<NodeInfo> seedList = new HashSet<>();
-            seedList.addAll(allNodes);
+            Set<NodeInfo> seedList = new HashSet<>(allNodes);
             allNodes.clear();
 
             Timber.d("seed %d", seedList.size());
@@ -479,8 +532,10 @@ public class NodeFragment extends Fragment
                     return true;
                 }
             });
+
             nodeInfo.setUsername(etNodeUser.getEditText().getText().toString().trim());
             nodeInfo.setPassword(etNodePass.getEditText().getText().toString()); // no trim for pw
+
             return true;
         }
 
@@ -523,10 +578,6 @@ public class NodeFragment extends Fragment
                 new AsyncTestNode().execute();
         }
 
-        private void showKeyboard() {
-            Helper.showKeyboard(editDialog);
-        }
-
         androidx.appcompat.app.AlertDialog editDialog = null;
 
         TextInputLayout etNodeName;
@@ -560,6 +611,13 @@ public class NodeFragment extends Fragment
             tvResult = promptsView.findViewById(R.id.tvResult);
 
             if (nodeInfo != null) {
+                boolean isUserDefined = nodeInfo.isUserDefined();
+                etNodeName.setEnabled(isUserDefined);
+                etNodeHost.setEnabled(isUserDefined);
+                etNodePort.setEnabled(isUserDefined);
+                etNodeUser.setEnabled(isUserDefined);
+                etNodePass.setEnabled(isUserDefined);
+
                 this.nodeInfo = nodeInfo;
                 nodeBackup = new NodeInfo(nodeInfo);
                 etNodeName.getEditText().setText(nodeInfo.getName());
@@ -648,6 +706,7 @@ public class NodeFragment extends Fragment
                 if (shutdown) {
                     if (nodeBackup == null) {
                         nodesAdapter.addNode(nodeInfo);
+                        activityCallback.addUserDefinedNodes(userdefinedNodes);
                     } else {
                         nodesAdapter.dataSetChanged();
                     }

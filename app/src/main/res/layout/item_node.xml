@@ -46,14 +46,13 @@
             tools:text="nodes.scalapay.io:11812" />
     </LinearLayout>
 
-    <ImageView
-        android:id="@+id/ivSettings"
+    <ImageButton
+        android:id="@+id/ibOptions"
+        style="?android:attr/actionOverflowButtonStyle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
         android:layout_marginEnd="12dp"
         android:layout_alignParentEnd="true"
-        android:layout_centerInParent="true"
-        android:background="?android:attr/selectableItemBackgroundBorderless"
-        android:src="@drawable/ic_settings_gray_24dp"/>
+        android:layout_centerInParent="true" />
 </RelativeLayout>

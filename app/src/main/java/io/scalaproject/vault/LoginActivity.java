@@ -143,6 +143,16 @@ public class LoginActivity extends BaseActivity
         saveUserDefinedNodes();
     }
 
+    @Override
+    public void deleteUserDefinedNode(NodeInfo node) {
+        Timber.d("deleting %s node", node.getName());
+
+        if (node.isUserDefined()) // just to be sure
+            userDefinedNodes.remove(node);
+
+        saveUserDefinedNodes();
+    }
+
     private void loadNodesWithNetwork() {
         Helper.runWithNetwork(new Helper.Action() {
             @Override
