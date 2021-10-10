@@ -40,22 +40,26 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
-import android.os.StrictMode;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
-import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.inputmethod.EditorInfo;
-import android.widget.Button;
 import android.widget.EditText;
-import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
 
 import com.google.android.material.dialog.MaterialAlertDialogBuilder;
 
 import org.acra.ACRA;
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import io.scalaproject.vault.data.Node;
 import io.scalaproject.vault.data.NodeInfo;
@@ -111,7 +115,17 @@ public class LoginActivity extends BaseActivity
             "https://cloudflare-ipfs.com/ipns/"
     };
 
+    static private final String DEFAULT_NODE = "{\n" +
+            "\"nodes\": [\n" +
+            "{\n" +
+            "\"host\": \"remote.one.scalaproject.io\",\n" +
+            "\"port\": \"11812\"\n" +
+            "} ]\n" +
+            "}";
+
     private static final String NODES_USERDEFINED_NAME = "userdefined_nodes";
+
+    static public boolean useDefaultNode = false;
 
     private NodeInfo node = null;
 
@@ -233,16 +247,50 @@ public class LoginActivity extends BaseActivity
             Timber.w("nodeString invalid: %s", nodeString);
     }
 
-    private void loadDefaultNodes() {
-        /*if (DEFAULT_REMOTE_NODES == null)
-            return;
-
+    public void loadDefaultNodes() {
         defaultNodes.clear();
 
-        final String[] nodeStrings = DEFAULT_REMOTE_NODES.split(";");
-        for (final String nodeString : nodeStrings) {
-            addNode(nodeString);
-        }*/
+        String jsonString = "";
+
+        // Load Pools data from repository
+        if(Helper.isURLReachable(DEFAULT_NODES_REPOSITORY))
+            jsonString  = Helper.fetchJSON(DEFAULT_NODES_REPOSITORY);
+
+        // If GitHub is not available or is blocked by firewalls, use IPFS gateways
+        if(jsonString.isEmpty()) {
+            for (String strNodeURLDir : NODES_REPOSITORY_IPNS_GATEWAYS) {
+                String strNodeURL = strNodeURLDir + IPNS_NAME;
+                if(Helper.isURLReachable(strNodeURL)) {
+                    jsonString = Helper.fetchJSON(strNodeURL);
+                    if (!jsonString.isEmpty())
+                        break;
+                }
+            }
+        }
+
+        // None of the URL can be reached. Load default data but don't cache it.
+        if(jsonString.isEmpty()) {
+            useDefaultNode = true;
+            jsonString = DEFAULT_NODE;
+        } else {
+            useDefaultNode = false;
+        }
+
+        try {
+            JSONObject data = new JSONObject(jsonString);
+            JSONArray pools = data.getJSONArray("nodes");
+
+            for(int i = 0; i < pools.length(); i++) {
+                JSONObject node = pools.getJSONObject(i);
+
+                ArrayList<String> listPort = new ArrayList<>();
+                if(node.has("host") && node.has("port")) {
+                    addNode(node.getString("host") + ":" + node.getString("port"));
+                }
+            }
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
     }
 
     private Toolbar toolbar;

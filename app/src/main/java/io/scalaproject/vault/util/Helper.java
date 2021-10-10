@@ -55,6 +55,7 @@ import android.system.ErrnoException;
 import android.system.Os;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.util.Log;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -72,8 +73,10 @@ import io.scalaproject.vault.model.NetworkType;
 import io.scalaproject.vault.model.WalletManager;
 import io.scalaproject.vault.service.exchange.api.ExchangeApi;
 
+import java.io.BufferedReader;
 import java.io.File;
 import java.io.IOException;
+import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.math.BigDecimal;
 import java.math.BigInteger;
@@ -710,5 +713,25 @@ public class Helper {
             e.printStackTrace();
             return false;
         }
+    }
+
+    public static String fetchJSON(String url) {
+
+        StringBuilder data = new StringBuilder();
+        try {
+            URL urlFetch = new URL(url);
+            HttpURLConnection httpURLConnection = (HttpURLConnection) urlFetch.openConnection();
+            InputStream inputStream = httpURLConnection.getInputStream();
+            BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(inputStream));
+            String line;
+            while ((line = bufferedReader.readLine()) != null) {
+                data.append(line);
+            }
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        return data.toString();
     }
 }
