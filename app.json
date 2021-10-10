@@ -1,0 +1,27 @@
+{
+    "nodes": [{
+            "host": "remote.one.scalaproject.io",
+            "port": "11812"
+        },
+        {
+            "host": "mine.scalaproject.io",
+            "port": "8000"
+        },
+        {
+            "host": "scalanode.com",
+            "port": "11812"
+        },
+        {
+            "host": "XLAnode.com",
+            "port": "11812"
+        },
+        {
+            "host": "scala.ethospool.org",
+            "port": "11812"
+        },
+        {
+            "host": "daemon.pool.gntl.co.uk",
+            "port": "11812"
+        }
+    ]
+}

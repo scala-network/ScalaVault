@@ -98,8 +98,20 @@ public class LoginActivity extends BaseActivity
         ReceiveFragment.Listener, NodeFragment.Listener {
     private static final String GENERATE_STACK = "gen";
 
+    static private final String DEFAULT_NODES_REPOSITORY = "https://raw.githubusercontent.com/scala-network/ScalaVault/master/app.json";
+
+    // USAGE: When the DEFAULT_NODES_REPOSITORY file is modified, we need to upload the new file
+    //        to the IPNS gateway as well. This is to avoid having to release a new version of the app
+    //        every time the data changes.
+    static private final String IPNS_NAME = "node-list.scalaproject.io";
+    static private final String[] NODES_REPOSITORY_IPNS_GATEWAYS = {
+            "https://dweb.link/ipns/",
+            "https://ipfs.io/ipns/",
+            "https://gateway.ipfs.io/ipns/",
+            "https://cloudflare-ipfs.com/ipns/"
+    };
+
     private static final String NODES_USERDEFINED_NAME = "userdefined_nodes";
-    private static final String DEFAULT_REMOTE_NODES = "nodes.scalapay.io:11812;scalanode.com:20189;xlanode.com:20189;mine.scalaproject.io:8000;scala.ethospool.org:11812;daemon.pool.gntl.co.uk:11812";
 
     private NodeInfo node = null;
 
@@ -222,7 +234,7 @@ public class LoginActivity extends BaseActivity
     }
 
     private void loadDefaultNodes() {
-        if (DEFAULT_REMOTE_NODES == null)
+        /*if (DEFAULT_REMOTE_NODES == null)
             return;
 
         defaultNodes.clear();
@@ -230,7 +242,7 @@ public class LoginActivity extends BaseActivity
         final String[] nodeStrings = DEFAULT_REMOTE_NODES.split(";");
         for (final String nodeString : nodeStrings) {
             addNode(nodeString);
-        }
+        }*/
     }
 
     private Toolbar toolbar;
