@@ -351,7 +351,7 @@ public class LoginFragment extends Fragment implements WalletInfoAdapter.OnInter
     }
 
     public void updateDebugMenu() {
-        boolean sendDebugInfo = Config.read(Config.CONFIG_SEND_DEBUG_INFO, "0").equals("1");
+        boolean sendDebugInfo = Config.read(Config.CONFIG_SEND_DEBUG_INFO, "1").equals("1");
 
         if(sendDebugInfo) {
             loginMenu.findItem(R.id.action_debug).setTitle(R.string.disable_debug_info);

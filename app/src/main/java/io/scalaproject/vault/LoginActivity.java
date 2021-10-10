@@ -1384,7 +1384,7 @@ public class LoginActivity extends BaseActivity
     }
 
     private void toggleDebugInfo() {
-        boolean sendDebugInfo = Config.read(Config.CONFIG_SEND_DEBUG_INFO, "0").equals("1");
+        boolean sendDebugInfo = Config.read(Config.CONFIG_SEND_DEBUG_INFO, "1").equals("1");
 
         if(sendDebugInfo) {
             Config.write(Config.CONFIG_SEND_DEBUG_INFO, "0");
