@@ -130,4 +130,8 @@ dependencies {
     testImplementation "com.squareup.okhttp3:mockwebserver:$rootProject.ext.okHttpVersion"
     testImplementation 'org.json:json:20180813'
     testImplementation 'net.jodah:concurrentunit:0.4.4'
+
+    def acraVersion = '5.7.0'
+    implementation "ch.acra:acra-core:$acraVersion"
+    implementation "ch.acra:acra-mail:$acraVersion"
 }

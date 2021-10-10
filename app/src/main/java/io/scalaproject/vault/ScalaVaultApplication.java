@@ -30,8 +30,14 @@ import android.content.res.Configuration;
 import io.scalaproject.vault.model.NetworkType;
 import io.scalaproject.vault.util.LocaleHelper;
 
+import org.acra.ACRA;
+import org.acra.annotation.AcraCore;
+import org.acra.annotation.AcraMailSender;
+
 import timber.log.Timber;
 
+@AcraCore(buildConfigClass = BuildConfig.class)
+@AcraMailSender(mailTo = "hello@scalaproject.io")
 public class ScalaVaultApplication extends Application {
     @Override
     public void onCreate() {
@@ -47,6 +53,14 @@ public class ScalaVaultApplication extends Application {
     @Override
     protected void attachBaseContext(Context context) {
         super.attachBaseContext(LocaleHelper.setLocale(context, LocaleHelper.getLocale(context)));
+
+        ACRA.init(this);
+
+        SharedPreferences preferences = getSharedPreferences(getPackageName() + "_preferences", MODE_PRIVATE);
+        Config.initialize(preferences);
+
+        // Enable Debug info by default
+        ACRA.getErrorReporter().setEnabled(Config.read(Config.CONFIG_SEND_DEBUG_INFO, "1").equals("1"));
     }
 
     @Override

@@ -15,6 +15,12 @@
         app:showAsAction="never" />
 
     <item
+        android:id="@+id/action_debug"
+        android:orderInCategory="225"
+        android:title="@string/enable_debug_info"
+        app:showAsAction="never" />
+
+    <item
         android:id="@+id/action_mobile_miner"
         android:orderInCategory="250"
         android:title="@string/menu_mobileminer"

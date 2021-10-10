@@ -83,6 +83,8 @@ public class LoginFragment extends Fragment implements WalletInfoAdapter.OnInter
 
     private Listener activityCallback;
 
+    private Menu loginMenu;
+
     // Container Activity must implement this interface
     public interface Listener {
         File getStorageRoot();
@@ -343,6 +345,19 @@ public class LoginFragment extends Fragment implements WalletInfoAdapter.OnInter
     public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
         inflater.inflate(R.menu.list_menu, menu);
         super.onCreateOptionsMenu(menu, inflater);
+
+        loginMenu = menu;
+        updateDebugMenu();
+    }
+
+    public void updateDebugMenu() {
+        boolean sendDebugInfo = Config.read(Config.CONFIG_SEND_DEBUG_INFO, "0").equals("1");
+
+        if(sendDebugInfo) {
+            loginMenu.findItem(R.id.action_debug).setTitle(R.string.disable_debug_info);
+        } else {
+            loginMenu.findItem(R.id.action_debug).setTitle(R.string.enable_debug_info);
+        }
     }
 
     private boolean isFabOpen = false;

@@ -11,6 +11,7 @@ package io.scalaproject.vault;
 import android.content.SharedPreferences;
 
 import java.util.HashMap;
+import java.util.Objects;
 
 public class Config {
     private static Config mSettings;
@@ -20,6 +21,7 @@ public class Config {
     public static final String CONFIG_KEY_HIDE_HOME_WIZARD = "hide_home_wizard";
     public static final String CONFIG_KEY_USER_SELECTED_NODE = "user_selected_node";
     public static final String CONFIG_KEY_SELECTED_ADDRESS = "addressbook_selected";
+    public static final String CONFIG_SEND_DEBUG_INFO = "send_debug_info";
 
     public static final String version = "1";
 
@@ -48,12 +50,18 @@ public class Config {
     }
 
     public static String read(String key) {
+        return read(key, "");
+    }
+
+    public static String read(String key, String fallback) {
         if(!key.startsWith("system:")) {
-            return mSettings.preferences.getString(key, "");
+            return mSettings.preferences.getString(key, fallback);
         }
-        if(!mSettings.mConfigs.containsKey(key)) {
-            return "";
+
+        if(!mSettings.mConfigs.containsKey(key) || Objects.requireNonNull(mSettings.mConfigs.get(key)).isEmpty()) {
+            return fallback;
         }
+
         return mSettings.mConfigs.get(key);
     }
 

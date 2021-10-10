@@ -43,6 +43,7 @@ import androidx.fragment.app.FragmentTransaction;
 import android.os.StrictMode;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
+import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.inputmethod.EditorInfo;
@@ -53,6 +54,8 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.material.dialog.MaterialAlertDialogBuilder;
+
+import org.acra.ACRA;
 
 import io.scalaproject.vault.data.Node;
 import io.scalaproject.vault.data.NodeInfo;
@@ -1309,10 +1312,34 @@ public class LoginActivity extends BaseActivity
                 onNodePrefs();
                 return true;
             case R.id.action_mobile_miner:
-                startActivity(new Intent(this, MobileMinerActivity.class));
+                //startActivity(new Intent(this, MobileMinerActivity.class));
+                int i = 1/0;
+                return true;
+            case R.id.action_debug:
+                toggleDebugInfo();
                 return true;
             default:
                 return super.onOptionsItemSelected(item);
+        }
+    }
+
+    private void toggleDebugInfo() {
+        boolean sendDebugInfo = Config.read(Config.CONFIG_SEND_DEBUG_INFO, "0").equals("1");
+
+        if(sendDebugInfo) {
+            Config.write(Config.CONFIG_SEND_DEBUG_INFO, "0");
+            ACRA.getErrorReporter().setEnabled(false);
+        } else {
+            Config.write(Config.CONFIG_SEND_DEBUG_INFO, "1");
+            ACRA.getErrorReporter().setEnabled(true);
+        }
+
+        try {
+            LoginFragment loginFragment = (LoginFragment)getSupportFragmentManager().findFragmentById(R.id.fragment_container);
+            if (loginFragment != null) {
+                loginFragment.updateDebugMenu();
+            }
+        } catch (ClassCastException ignored) {
         }
     }
 
