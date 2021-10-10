@@ -1372,8 +1372,7 @@ public class LoginActivity extends BaseActivity
                 onNodePrefs();
                 return true;
             case R.id.action_mobile_miner:
-                //startActivity(new Intent(this, MobileMinerActivity.class));
-                int i = 1/0;
+                startActivity(new Intent(this, MobileMinerActivity.class));
                 return true;
             case R.id.action_debug:
                 toggleDebugInfo();
