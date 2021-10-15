@@ -179,7 +179,12 @@ public class Helper {
     }
 
     static public void showKeyboard(Activity act) {
+        if (act == null) return;
+        if (act.getCurrentFocus() == null) return;
+
         InputMethodManager imm = (InputMethodManager) act.getSystemService(Context.INPUT_METHOD_SERVICE);
+
+        if (imm == null) return;
         imm.showSoftInput(act.getCurrentFocus(), InputMethodManager.SHOW_IMPLICIT);
     }
 
@@ -189,6 +194,8 @@ public class Helper {
             act.getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_HIDDEN);
         } else {
             InputMethodManager imm = (InputMethodManager) act.getSystemService(Context.INPUT_METHOD_SERVICE);
+            if (imm == null) return;
+
             imm.hideSoftInputFromWindow((null == act.getCurrentFocus()) ? null : act.getCurrentFocus().getWindowToken(),
                     InputMethodManager.HIDE_NOT_ALWAYS);
         }
