@@ -110,7 +110,8 @@ public class RestoreHeight {
             while (prevBc == null) {
                 cal.add(Calendar.MONTH, -1);
                 if (cal.get(Calendar.YEAR) < GENESISBLOCK_DATE_YEAR) {
-                    throw new IllegalStateException("endless loop looking for blockheight");
+                    //throw new IllegalStateException("endless loop looking for blockheight");
+                    return 0;
                 }
                 prevTime = cal.getTimeInMillis();
                 prevDate = formatter.format(prevTime);
