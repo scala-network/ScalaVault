@@ -209,8 +209,10 @@ public class SendFragment extends Fragment
             String uri = args.getString(WalletActivity.REQUEST_URI);
             Timber.d("URI: %s", uri);
             if (uri != null) {
-                barcodeData = BarcodeData.fromQrCode(uri);
-                Timber.d("barcodeData: %s", barcodeData != null ? barcodeData.toString() : "null");
+                BarcodeData.fromString(uri, (data) -> {
+                    barcodeData = data;
+                    Timber.d("barcodeData: %s", barcodeData != null ? barcodeData.toString() : "null");
+                });
             }
         }
 

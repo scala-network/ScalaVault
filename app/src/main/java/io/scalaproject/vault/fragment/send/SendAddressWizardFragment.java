@@ -30,7 +30,6 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
 
 import android.text.Editable;
-import android.text.Html;
 import android.text.InputType;
 import android.text.TextWatcher;
 import android.util.Patterns;
@@ -45,9 +44,13 @@ import android.widget.ImageButton;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.unstoppabledomains.exceptions.ns.NamingServiceException;
+import com.unstoppabledomains.resolution.DomainResolution;
+import com.unstoppabledomains.resolution.Resolution;
+import com.unstoppabledomains.resolution.naming.service.NamingServiceType;
+
 import io.scalaproject.vault.AddressBookFragment;
 import io.scalaproject.vault.Config;
-import io.scalaproject.vault.GenerateReviewFragment;
 import io.scalaproject.vault.R;
 import io.scalaproject.vault.data.BarcodeData;
 import io.scalaproject.vault.data.TxData;
@@ -140,19 +143,7 @@ public class SendAddressWizardFragment extends SendWizardFragment {
                 if (!hasFocus) {
                     View next = etAddress;
                     String enteredAddress = etAddress.getEditText().getText().toString().trim();
-                    String dnsOA = dnsFromOpenAlias(enteredAddress);
-                    Timber.d("OpenAlias is %s", dnsOA);
-                    if (dnsOA != null) {
-                        processOpenAlias(dnsOA);
-                        next = null;
-                    } else {
-                        // maybe a bip72 or 70 URI
-                        final String bip70 = PaymentProtocolHelper.getBip70(enteredAddress);
-                        if (bip70 != null) {
-                            // looks good - resolve through xla.to
-                            processBip70(bip70);
-                        }
-                    }
+                    goToOpenAlias(enteredAddress);
                 }
             }
         });
@@ -266,6 +257,19 @@ public class SendAddressWizardFragment extends SendWizardFragment {
         return view;
     }
 
+    private void goToOpenAlias(String enteredAddress) {
+        String dnsOA = dnsFromOpenAlias(enteredAddress);
+        Timber.d("OpenAlias is %s", dnsOA);
+        if (dnsOA != null) {
+            processOpenAlias(dnsOA);
+        } else if (enteredAddress.length() == 0 || checkAddressNoError()) {
+            etAddress.setErrorEnabled(false);
+        } else {
+            // Not all UD address match Patterns.DOMAIN_NAME (eg. .888, .x)
+            processUD(enteredAddress);
+        }
+    }
+
     void replaceFragment(Fragment newFragment, String stackName, Bundle extras) {
         if (extras != null) {
             newFragment.setArguments(extras);
@@ -286,32 +290,67 @@ public class SendAddressWizardFragment extends SendWizardFragment {
     private void processOpenAlias(String dnsOA) {
         if (resolvingOA) return; // already resolving - just wait
         sendListener.popBarcodeData();
-        if (dnsOA != null) {
-            resolvingOA = true;
-            etAddress.setError(getString(R.string.send_address_resolve_openalias));
-            OpenAliasHelper.resolve(dnsOA, new OpenAliasHelper.OnResolvedListener() {
-                @Override
-                public void onResolved(Map<BarcodeData.Asset, BarcodeData> dataMap) {
-                    resolvingOA = false;
-                    BarcodeData barcodeData = dataMap.get(BarcodeData.Asset.XLA);
-                    if (barcodeData == null) barcodeData = dataMap.get(BarcodeData.Asset.BTC);
-                    if (barcodeData != null) {
-                        Timber.d("Security=%s, %s", barcodeData.security.toString(), barcodeData.address);
-                        processScannedData(barcodeData);
-                    } else {
-                        etAddress.setError(getString(R.string.send_address_not_openalias));
-                        Timber.d("NO XLA OPENALIAS TXT FOUND");
+        resolvingOA = true;
+        etAddress.setError(getString(R.string.send_address_resolve_openalias));
+        OpenAliasHelper.resolve(dnsOA, new OpenAliasHelper.OnResolvedListener() {
+            @Override
+            public void onResolved(BarcodeData barcodeData) {
+                resolvingOA = false;
+                if (barcodeData != null) {
+                    Timber.d("Security=%s, %s", barcodeData.security.toString(), barcodeData.address);
+                    processScannedData(barcodeData);
+                } else {
+                    Timber.d("NO XLA OPENALIAS TXT FOUND");
+                    processUD(dnsOA);
+                }
+            }
+
+            @Override
+            public void onFailure() {
+                resolvingOA = false;
+                Timber.e("OA FAILED");
+                processUD(dnsOA);
+            }
+        });
+    }
+
+    private void processUD(String udString) {
+        sendListener.popBarcodeData();
+
+        DomainResolution resolution = Resolution.builder()
+                .providerUrl(NamingServiceType.ENS, "https://cloudflare-eth.com")
+                .build();
+        final boolean[] domainIsUD = {false};
+        final String[] address = {""};
+        etAddress.setError(getString(R.string.send_address_resolve_ud));
+        new Thread(() -> {
+                try {
+                    address[0] = resolution.getAddress(udString, "xmr");
+                    domainIsUD[0] = true;
+                } catch (NamingServiceException e) {
+                    Timber.d(e.getLocalizedMessage());
+                    switch (e.getCode()) {
+                        case UnknownCurrency:
+                        case RecordNotFound:
+                            domainIsUD[0] = true;
+                            break;
+                        default:
+                            domainIsUD[0] = false;
+                            break;
                     }
                 }
 
-                @Override
-                public void onFailure() {
-                    resolvingOA = false;
-                    etAddress.setError(getString(R.string.send_address_not_openalias));
-                    Timber.e("OA FAILED");
+            requireActivity().runOnUiThread(() -> {
+                if (domainIsUD[0]) {
+                    BarcodeData barcodeData = new BarcodeData(BarcodeData.Asset.XLA, address[0], udString,
+                            null, null, BarcodeData.Security.NORMAL);
+                    processScannedData(barcodeData);
+                } else {
+                        Timber.d("Non ENS / UD address %s", udString);
+                        etAddress.setError(getString(R.string.send_address_not_openalias));
                 }
             });
-        } // else ignore
+        }).start();
     }
 
     private void processBip70(final String bip70) {
@@ -399,19 +438,11 @@ public class SendAddressWizardFragment extends SendWizardFragment {
 
     @Override
     public boolean onValidateFields() {
-        if (!checkAddressNoError()) {
+        if (!checkAddress()) {
             shakeAddress();
             String enteredAddress = etAddress.getEditText().getText().toString().trim();
-            String dnsOA = dnsFromOpenAlias(enteredAddress);
-            Timber.d("OpenAlias is %s", dnsOA);
-            if (dnsOA != null) {
-                processOpenAlias(dnsOA);
-            } else {
-                String bip70 = PaymentProtocolHelper.getBip70(enteredAddress);
-                if (bip70 != null) {
-                    processBip70(bip70);
-                }
-            }
+            goToOpenAlias(enteredAddress);
+
             return false;
         }
 

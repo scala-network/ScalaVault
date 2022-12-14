@@ -469,4 +469,6 @@
     <string name="edit">Edit</string>
     <string name="enable_debug_info">Enable Debug Info</string>
     <string name="disable_debug_info">Disable Debug Info</string>
+    <string name="send_address_resolve_ud">Resolving ENS / UD&#8230;</string>
+    <string name="send_address_no_ud_records">No address found for ENS / UD domain</string>
 </resources>

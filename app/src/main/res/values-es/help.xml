@@ -162,43 +162,14 @@
         comprobarla varias veces para confirmar que no estás enviando Scala a la dirección equivocada.</p>
         <p>In addition to using an XLA address, you can also use
         <ul>
-            <li>an OpenAlias for XLA or BTC</li>
-            <li>a BTC address</li>
-            <li>a bitcoin: URI (including BIP70 like bitpay)</li>
+            <li>an ENS domain</li>
+            <li>an Unstoppable Domains domain</li>
         </u>
-        Please note, that sending BTC is processed through the XLA.TO service (see https://xla.to
-        for details). See the section on sending BTC below.</p>
-        <h2>ID de Pago</h2>
-        Al ser Scala ofuscado por naturaleza, puedes usar un ID de Pago para identificar un envío de Scala entre
-        dos partes. Esto es completamente opcional y privado. Por ejemplo, esto permitiría que un
-        negocio pueda asociar inequívocamente tu transacción con un producto que has comprado.</p>
-        <h1>Enviar BTC</h1>
-        <h2>XLA.TO</h2>
-        <p>XLA.TO es un servicio de terceros que actúa como casa de cambio de Scala a Bitcoin.
-        Usamos la API de XLA.TO para integrar pagos de Bitcoin dentro de Scala Vault. Por favor revisa
-        https://xla.to y decide por ti mismo si es un servicio que quieres usar. El equipo de Scala Vault
-        no está asociado con XLA.TO y no puede ayudarte con su servicio.</p>
-        <h2>Tipo de cambio XLA.TO<h2>
-        <p>En la pantalla de \"Monto\" se te mostrará las condiciones actuales del servicio XLA.TO.
-        Estas incluyen el tipo de cambio del momento así como también los límites mínimo y máximo de BTC.
-        Toma nota de que el tipo de cambio aún no está garantizado en esa instancia. También verás el
-        monto tope hasta el cual la transacción será ejecutada instantáneamente sin esperar a
-        confirmaciones de XLA (revisa el FAQ de XLA.TO para más detalles). Por favor observa que
-        XLA.TO no cobra comisiones extra - increíble, verdad?</p>
-        <h2>Orden XLA.TO<h2>
-        <p> En la pantalla \"Confirmar\" verás la orden XLA.TO final. Esta orden es válida por un
-        tiempo limitado - notarás una cuenta atrás en el botón de \"Gastar\". El tipo de cambio a
-        esta altura puede ser distinto al aproximado que era mostrado en pantallas anteriores.</p>
-        <h2>Clave secreta XLA.TO<h2>
-        <p>Dado que Scala Vault sólo administra la parte en Scala de tu transacción, puedes usar tu
-        clave secreta XLA.TO para rastrear la parte en Bitcoin de tu orden en la página de XLA.TO.</p>
-        <p>Por favor ten en cuenta que esta clave secreta sólo es válida por 24 horas a partir de
-        iniciada la transacción!</p>
-        <h2>Cuenta atrás XLA.TO!</h2>
-        <p>Una vez que la cuenta atrás alcanza el cero, necesitarás pedir una nueva cotización de
-        parte de XLA.TO, esto se logra dando un paso atrás y luego volviendo a la pantalla de
-        \"Confirmar\".</p>
-    ]]></string>
+        <h2>Payment ID</h2>
+        <p>You can use a Payment ID to identify the reason you sent Scala between two parties. This
+        is fully optional and private. For example it can allow a business to reconcile your
+        transaction with an item you bought.</p>
+]]></string>
 
     <string name="help_xlato"><![CDATA[
         <h1>Enviar BTC</h1>

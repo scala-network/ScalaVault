@@ -1179,13 +1179,17 @@ public class LoginActivity extends BaseActivity
     @Override
     public void onAccept(final String name, final String password) {
         File walletFolder = getStorageRoot();
+        if(walletFolder == null) {
+            Toast.makeText(LoginActivity.this, "Error while creating wallet", Toast.LENGTH_SHORT).show();
+            return;
+        }
+
         File walletFile = new File(walletFolder, name);
         Timber.d("New Wallet %s", walletFile.getAbsolutePath());
         walletFile.delete(); // when recovering wallets, the cache seems corrupt
 
         popFragmentStack(GENERATE_STACK);
-        Toast.makeText(LoginActivity.this,
-                getString(R.string.generate_wallet_created), Toast.LENGTH_SHORT).show();
+        Toast.makeText(LoginActivity.this, getString(R.string.generate_wallet_created), Toast.LENGTH_SHORT).show();
     }
 
     boolean walletExists(File walletFile, boolean any) {

@@ -368,4 +368,29 @@
     <string name="toast_ledger_start_app">Start Scala App on %1$s</string>
 
     <string name="menu_rescan">Rescan!</string>
+    <string name="privacy_policy_intro">We care about your privacy. To learn more, please read our Privacy Policy.</string>
+    <string name="privacy_policy_label">Privacy Policy</string>
+    <string name="primary_address">Primary Address</string>
+    <string name="mm_url">https://github.com/scala-network/MobileMiner/releases</string>
+    <string name="connection_remote_daemon">Connecting to remote node...</string>
+    <string name="remote_nodes">Remote Nodes</string>
+    <string name="address_book">Address Book</string>
+    <string name="delete_contact_conf">Delete entry %1$s?</string>
+    <string name="contact_value_empty">We need this!</string>
+    <string name="no_entry">No entry</string>
+    <string name="save_to_address_book">Save to address book</string>
+    <string name="contact_name_empty_error">Name cannot be empty!</string>
+    <string name="entry_name">Entry Name</string>
+    <string name="start_mining">Start mining on your Android device safely and efficiently with the Scala Mobile Miner.</string>
+    <string name="mobile_miner">Mobile Miner</string>
+    <string name="download">Download</string>
+    <string name="select_image">Select Image</string>
+    <string name="contact_avatar_hint">An image that represents this address book entry.</string>
+    <string name="upload">Upload</string>
+    <string name="delete">Delete</string>
+    <string name="edit">Edit</string>
+    <string name="enable_debug_info">Enable Debug Info</string>
+    <string name="disable_debug_info">Disable Debug Info</string>
+    <string name="send_address_resolve_ud">Resolving ENS / UD&#8230;</string>
+    <string name="send_address_no_ud_records">No address found for ENS / UD domain</string>
 </resources>

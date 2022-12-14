@@ -197,11 +197,12 @@ public class BaseActivity extends SecureActivity implements GenerateReviewFragme
                 if (uri == null) {
                     Toast.makeText(this, getString(R.string.nfc_tag_read_undef), Toast.LENGTH_LONG).show();
                 } else {
-                    BarcodeData bc = BarcodeData.fromQrCode(uri.toString());
-                    if (bc == null)
-                        Toast.makeText(this, getString(R.string.nfc_tag_read_undef), Toast.LENGTH_LONG).show();
-                    else
-                        onUriScanned(bc);
+                    BarcodeData.fromString(uri.toString(), data -> runOnUiThread(() -> {
+                        if (data == null)
+                            Toast.makeText(BaseActivity.this, getString(R.string.nfc_tag_read_undef), Toast.LENGTH_LONG).show();
+                        else
+                            onUriScanned(data);
+                    }));
                 }
             }
         }

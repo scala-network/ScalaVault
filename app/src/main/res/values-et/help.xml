@@ -157,54 +157,14 @@
         ensure you aren’t sending coins to the wrong address.</p>
         <p>In addition to using an XLA address, you can also use
         <ul>
-            <li>an OpenAlias for XLA or BTC</li>
-            <li>a BTC address</li>
-            <li>a bitcoin: URI (including BIP70 like bitpay)</li>
-        </u>
-        Please note, that sending BTC is processed through the XLA.TO service (see https://xla.to
-        for details). See the section on sending BTC below.</p>
-        <h2>Makse ID</h2>
+            <li>an ENS domain</li>
+            <li>an Unstoppable Domains domain</li>
+        </u></p>
+        <h2>Payment ID</h2>
         <p>You can use a Payment ID to identify the reason you sent Scala between two parties. This
         is fully optional and private. For example it can allow a business to reconcile your
-        transaction with an item you bought.<p>
-        <h2><em>Ring<em>\'i suurus</h2>
-        <p>There are a number of ring sizes to choose from in Scala Vault. If you are a beginner user
-        we recommend you stick with a ring size of 7. Increasing the ring size above 7 increases
-        the amount of signers in a ring signature, theoretically providing increased plausible
-        deniability. However setting high ring sizes can also make your transaction stand out on
-        the blockchain.</p>
-        <h2>Tähtsus</h2>
-        <p>This setting determines the speed at which your transaction will be included in the
-        blockchain. A high priority setting will correlate directly with a higher transaction fee
-        and the inverse is true for a low priority. Please note that if you set your transaction to
-        a low priority it can be hours before it is included on the blockchain. The default priority
-        is \"Medium\".</p>
-        <h1>Bitcoini (BTC) saatmine</h1>
-        <h2>XLA.TO</h2>
-        <p>XLA.TO is a third party service which acts as an exchange from Scala to Bitcoin.
-        We use the XLA.TO API to integrate Bitcoin payments into Scala Vault. Please check out
-        https://xla.to and decide for yourself if this is something you want to use. The Scala Vault
-        Team is not associated with XLA.TO and cannot help you with their service.</p>
-        <h2>XLA.TO vahetuskurss<h2>
-        <p>On the \"Amount\" screen you will be shown the current parameters of the XLA.TO service. These
-        include the current exchange rate as well as upper and lower BTC limits. Note that this
-        rate is not guaranteed at this point. You will also see
-        the amount up to which the BTC transaction will be executed instantly without waiting for
-        XLA confirmations (see the XLA.TO FAQ for more details). Please note, that XLA.TO does
-        not charge extra fees - how cool is that?</p>
-        <h2>XLA.TO tellimus<h2>
-        <p>On the \"Confirm\" screen, you will see the actual XLA.TO order. This order is valid for
-        a limited time - you may notice a countdown on the \"Spend\" button. The exchange rate may
-        be different to the indicative one shown on previous screens.</p>
-        <h2>XLA.TO privaatvõti<h2>
-        <p>Since Scala Vault only handles the Scala part of your transaction your XLA.TO secret key
-        can be used to track the Bitcoin part of your order on the XLA.TO homepage.</p>
-        <p>Please note, that this secret key is only valid for 24 hours after the transaction is
-        started!</p>
-        <h2>XLA.TO loendur</h2>
-        <p>Once the countdown reaches zero, you need to get a new quote from XLA.TO by going back to the
-        previous step and then coming back to the \"Confirm\" screen.</p>
-    ]]></string>
+        transaction with an item you bought.</p>
+]]></string>
 
     <string name="help_xlato"><![CDATA[
         <h1>Bitcoini (BTC) saatmine</h1>

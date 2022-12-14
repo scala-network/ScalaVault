@@ -164,16 +164,13 @@
         ensure you aren’t sending coins to the wrong address.</p>
         <p>In addition to using an XLA address, you can also use
         <ul>
-            <li>an OpenAlias for XLA or BTC</li>
-            <li>a BTC address</li>
-            <li>a bitcoin: URI (including BIP70 like bitpay)</li>
-        </u>
-        Please note, that sending BTC is processed through the XLA.TO service (see https://xla.to
-        for details). See the section on sending BTC below.</p>
+            <li>an ENS domain</li>
+            <li>an Unstoppable Domains domain</li>
+        </u></p>
         <h2>Payment ID</h2>
         <p>You can use a Payment ID to identify the reason you sent Scala between two parties. This
         is fully optional and private. For example it can allow a business to reconcile your
-        transaction with an item you bought.<p>
+        transaction with an item you bought.</p>
     ]]></string>
 
     <string name="help_xlato"><![CDATA[

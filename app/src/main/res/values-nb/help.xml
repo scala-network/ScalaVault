@@ -145,42 +145,14 @@
         for å forsikre deg om at du ikke sender Scala til feil adresse.</p>
         <p>In addition to using an XLA address, you can also use
         <ul>
-            <li>an OpenAlias for XLA or BTC</li>
-            <li>a BTC address</li>
-            <li>a bitcoin: URI (including BIP70 like bitpay)</li>
+            <li>an ENS domain</li>
+            <li>an Unstoppable Domains domain</li>
         </u>
-        Please note, that sending BTC is processed through the XLA.TO service (see https://xla.to
-        for details). See the section on sending BTC below.</p>
-        <h2>Betalings-ID</h2>
-        <p>Du kan bruke betalings-ID til å identifisere hvorfor du sendte Scala mellom to parter. Dette er
-        helt frivillig og privat. For eksempel lar det en bedrift tilknytte transaksjonen din med
-		en vare du har kjøpt.<p>
-        <h1>Å sende BTC</h1>
-        <h2>XLA.TO</h2>
-        <p>XLA.TO er en tredjepartstjeneste som lar deg veksle Scala til Bitcoin.
-        Vi bruker XLA.TO-APIen til å integrere BTC-betalinger i Scala Vault. Sjekk ut
-        https://xla.to og bestem for deg selv om dette er noe du vil bruke. Scala Vault-utviklerne
-        er ikke assosierte med XLA.TO og kan ikke hjelpe deg med deres tjeneste.</p>
-        <h2>XLA.TO vekslingskurs<h2>
-        <p>På \"Mengde\" skjermen vil du bli vist de nåværende parametrene til XLA.TO-tjenesten. Disse
-        inkluderer den nåværende vekslingskursen så vel som nedre og øvre BTC-grenser. Vær oppmerksom på at
-        kursen ikke er garantert på dette punktet. Du vil også se
-        den øvre grensa for at BTC-transaksjonen skal gå igjennom uten å vente på
-        XLA-bekreftelser (se XLA.TO-FAQen for fler detaljer). Legg merke til at XLA.TO
-        ikke har noen ekstra avgifter - hvor kult er ikke det?</p>
-        <h2>XLA.TO ordre<h2>
-        <p>På \"Bekreft\" skjermen, vil du se den faktiske XLA.TO ordren. Denne ordren er gyldig for
-        en begrensa tid - du legger kanskje til en nedtelling på \"Bruk\" knappen. Veklingskursen kan være
-        enn den veiledende kursen vist på de tidligere skjermene.</p>
-        <h2>XLA.TO hemmelig nøkkel<h2>
-        <p>Fordi Scala Vault bare håndterer XLA delen av transaksjonen din, kan din XLA.TO hemmelige nøkkel
-        bli brukt til å spore BTC-transaksjonen på XLA.TO sine hjemmesider.</p>
-        <p>Vær oppmerksom på at denne nøkkelen kun er tilgjengelig for 24-timer etter transaksjonen
-		har blitt utført!</p>
-        <h2>XLA.TO nedtelling!</h2>
-        <p>Når nedtellinga når null, må du få en ny kvote fra XLA.TO ved å gå tilbake til
-        det tidligere steget og komme tilbake til \"Bekreft\" skjermen.</p>
-    ]]></string>
+        <h2>Payment ID</h2>
+        <p>You can use a Payment ID to identify the reason you sent Scala between two parties. This
+        is fully optional and private. For example it can allow a business to reconcile your
+        transaction with an item you bought.</p>
+]]></string>
 
     <string name="help_xlato"><![CDATA[
         <h1>Å sende BTC</h1>

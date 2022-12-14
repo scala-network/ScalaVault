@@ -133,41 +133,14 @@
         vara säker på att du inte skickar pengar till fel adress.</p>
         <p>In addition to using an XLA address, you can also use
         <ul>
-            <li>an OpenAlias for XLA or BTC</li>
-            <li>a BTC address</li>
-            <li>a bitcoin: URI (including BIP70 like bitpay)</li>
-        </u>
-        Please note, that sending BTC is processed through the XLA.TO service (see https://xla.to
-        for details). See the section on sending BTC below.</p>
-        <h2>Betalnings-ID</h2>
-        <p>Du kan använda ett Betalnings-ID för att identifiera anledningen du skickat Scala till någon,
-        det är valfritt och privat. Till exempel tillåter det en affär att förknippa din transaktion
-        med något du köpt.<p>
-        <h1>Skicka BTC</h1>
-        <h2>XLA.TO</h2>
-        <p>XLA.TO är en tredjeparts tjänst som byter ut Scala mot Bitcoin. Vi använder XLA.TO API:n
-        för att integrera Bitcoin betalningar i Scala Vault. Vänligen besök https://xla.to och bestäm
-        för dig själv om det är någonting du vill använda. Scala Vault laget är inte associerad med
-        XLA.TO och kan inte hjälpa dig med deras tjänst.</p>
-        <h2>XLA.TO Växelkurs<h2>
-        <p>På \"Mängd\"skärmen ser du de nuvarande parametrarna av XLA.TO tjänsten. Dessa innehåller den
-        nuvarande växelkursen samt de övre och lägre BTC gränserna. Vänligen notera att denna kursen
-        inte är garanterad just nu. Du kommer även att se gränsen över då BTC transaktioner utförs
-        omedelbart utan att vänta på XLA bekräftningar (se XLA.TO FAQ:n för mer detaljer). Vänligen
-        notera att XLA.TO inte tar en extra avgift - hur coolt är inte det?</p>
-        <h2>XLA.TO Beställning<h2>
-        <p>På \"Bekräfta\" skärmen, kommer du att se den faktiska XLA.TO beställningen. Den här beställningen
-        är giltig under en begränsad tid - du kan se en nedräkning på \"Spendera\" knappen. Växelkursen
-        kan vara annorlunda från den indikativa, visad på tidigare skärmar..</p>
-        <h2>XLA.TO Privatnyckel<h2>
-        <p>Eftersom att Scala Vault bara tar hand om Scala delen av din transaktion, kan din XLA.TO
-        privatnyckel användas för att spåra Bitcoin delen av din beställning på XLA.TO sidan.</p>
-        <p>Vänligen notera att denna privatnyckeln bara är giltig i 24 timmar efter att transaktionen
-        är påbörjad!</p>
-        <h2>XLA.TO Nedräkning!</h2>
-        <p>När nedräkningen når noll, behöver du skaffa ett nytt kostnadsförslag från XLA.TO genom att gå
-        tillbaka till den tidigare skärmen och sedan gå till \"Bekräfta\"skärmen.</p>
-    ]]></string>
+            <li>an ENS domain</li>
+            <li>an Unstoppable Domains domain</li>
+        </u></p>
+        <h2>Payment ID</h2>
+        <p>You can use a Payment ID to identify the reason you sent Scala between two parties. This
+        is fully optional and private. For example it can allow a business to reconcile your
+        transaction with an item you bought.</p>
+        ]]></string>
 
     <string name="help_xlato"><![CDATA[
       <p>XLA.TO är en tredjeparts tjänst som byter ut Scala mot Bitcoin. Vi använder XLA.TO API:n

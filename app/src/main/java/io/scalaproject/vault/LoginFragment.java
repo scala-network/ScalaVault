@@ -284,7 +284,8 @@ public class LoginFragment extends Fragment implements WalletInfoAdapter.OnInter
         displayedList.clear();
         String addressPrefix = WalletManager.getInstance().addressPrefix();
         for (WalletManager.WalletInfo s : walletList) {
-            if (addressPrefix.indexOf(s.address.charAt(0)) >= 0) displayedList.add(s);
+            if(s != null && s.address != null && !s.address.isEmpty())
+                if (addressPrefix.indexOf(s.address.charAt(0)) >= 0) displayedList.add(s);
         }
     }
 

@@ -28,6 +28,11 @@ import io.scalaproject.vault.util.BitcoinAddressValidator;
 import io.scalaproject.vault.util.OpenAliasHelper;
 import io.scalaproject.vault.util.PaymentProtocolHelper;
 
+import com.unstoppabledomains.exceptions.ns.NamingServiceException;
+import com.unstoppabledomains.resolution.DomainResolution;
+import com.unstoppabledomains.resolution.Resolution;
+import com.unstoppabledomains.resolution.naming.service.NamingServiceType;
+
 import java.net.URI;
 import java.net.URISyntaxException;
 import java.util.HashMap;
@@ -59,6 +64,10 @@ public class BarcodeData {
         OA_NO_DNSSEC,
         OA_DNSSEC,
         BIP70
+    }
+
+    public interface Listener {
+        void onParseComplete(BarcodeData data);
     }
 
     final public Asset asset;
@@ -99,7 +108,6 @@ public class BarcodeData {
         this.security = security;
     }
 
-
     public Uri getUri() {
         return Uri.parse(getUriString());
     }
@@ -121,30 +129,22 @@ public class BarcodeData {
         return sb.toString();
     }
 
-    static public BarcodeData fromQrCode(String qrCode) {
-        // check for scala uri
+    static public void fromString(String qrCode, Listener listener) {
         BarcodeData bcData = parseScalaUri(qrCode);
-        // check for naked scala address / integrated address
         if (bcData == null) {
+            // maybe it's naked?
             bcData = parseScalaNaked(qrCode);
         }
-        // check for btc uri
         if (bcData == null) {
-            bcData = parseBitcoinUri(qrCode);
-        }
-        // check for btc payment uri (like bitpay)
-        if (bcData == null) {
-            bcData = parseBitcoinPaymentUrl(qrCode);
-        }
-        // check for naked btc address
-        if (bcData == null) {
-            bcData = parseBitcoinNaked(qrCode);
-        }
-        // check for OpenAlias
-        if (bcData == null) {
+            // check for OpenAlias
             bcData = parseOpenAlias(qrCode, false);
         }
-        return bcData;
+        if (bcData == null) {
+            // Check for UD domain (async)
+            parseUD(qrCode, listener);
+        } else {
+            listener.onParseComplete(bcData);
+        }
     }
 
     /**
@@ -214,6 +214,58 @@ public class BarcodeData {
         }
 
         return new BarcodeData(Asset.XLA, address);
+    }
+
+    static public BarcodeData fromQrCode(String qrCode) {
+        // check for scala uri
+        BarcodeData bcData = parseScalaUri(qrCode);
+        // check for naked scala address / integrated address
+        if (bcData == null) {
+            bcData = parseScalaNaked(qrCode);
+        }
+        // check for btc uri
+        if (bcData == null) {
+            bcData = parseBitcoinUri(qrCode);
+        }
+        // check for btc payment uri (like bitpay)
+        if (bcData == null) {
+            bcData = parseBitcoinPaymentUrl(qrCode);
+        }
+        // check for naked btc address
+        if (bcData == null) {
+            bcData = parseBitcoinNaked(qrCode);
+        }
+        // check for OpenAlias
+        if (bcData == null) {
+            bcData = parseOpenAlias(qrCode, false);
+        }
+        return bcData;
+    }
+
+    static public void parseUD(String udString, Listener listener) {
+        Timber.d("parseUD=%s", udString);
+        if (udString == null) listener.onParseComplete(null);
+
+        new Thread(() -> {
+            DomainResolution resolution = Resolution.builder()
+                    .providerUrl(NamingServiceType.ENS, "https://cloudflare-eth.com")
+                    .build();
+
+            String address = null;
+            try {
+                address = resolution.getAddress(udString, "xmr");
+
+                if (!Wallet.isAddressValid(address)) {
+                    Timber.d("XLA address invalid");
+                    listener.onParseComplete(null);
+                } else {
+                    listener.onParseComplete(new BarcodeData(Asset.XLA, address, udString, null, null, Security.NORMAL));
+                }
+            } catch (NamingServiceException e) {
+                Timber.d("Unsupported UD address %s", udString);
+                listener.onParseComplete(null);
+            }
+        }).start();
     }
 
     // bitcoin:mpQ84J43EURZHkCnXbyQ4PpNDLLBqdsMW2?amount=0.01

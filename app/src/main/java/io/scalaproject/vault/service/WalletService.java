@@ -302,13 +302,17 @@ public class WalletService extends Service {
                         }
                     } else if (cmd.equals(REQUEST_CMD_STORE)) {
                         Wallet myWallet = getWallet();
-                        Timber.d("STORE wallet: %s", myWallet.getName());
-                        boolean rc = myWallet.store();
-                        Timber.d("wallet stored: %s with rc=%b", myWallet.getName(), rc);
-                        if (!rc) {
-                            Timber.w("Wallet store failed: %s", myWallet.getStatus().getErrorString());
+                        if(myWallet != null) {
+                            Timber.d("STORE wallet: %s", myWallet.getName());
+                            boolean rc = myWallet.store();
+                            Timber.d("wallet stored: %s with rc=%b", myWallet.getName(), rc);
+                            if (!rc) {
+                                Timber.w("Wallet store failed: %s", myWallet.getStatus().getErrorString());
+                            }
+                            if (observer != null) observer.onWalletStored(rc);
+                        } else {
+                            Timber.d("Wallet is NULL");
                         }
-                        if (observer != null) observer.onWalletStored(rc);
                     } else if (cmd.equals(REQUEST_CMD_TX)) {
                         Wallet myWallet = getWallet();
                         Timber.d("CREATE TX for wallet: %s", myWallet.getName());

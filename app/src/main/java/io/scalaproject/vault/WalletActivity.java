@@ -21,6 +21,7 @@
 
 package io.scalaproject.vault;
 
+import android.annotation.SuppressLint;
 import android.content.ComponentName;
 import android.content.Context;
 import android.content.DialogInterface;
@@ -275,10 +276,10 @@ public class WalletActivity extends BaseActivity implements WalletFragment.Liste
     @Override
     protected void onDestroy() {
         Timber.d("onDestroy()");
-        if ((mBoundService != null) && (getWallet() != null)) {
+        /*if ((mBoundService != null) && (getWallet() != null)) {
             saveWallet();
         }
-        stopWalletService();
+        stopWalletService();*/
         if (drawer != null) drawer.removeDrawerListener(drawerToggle);
         super.onDestroy();
     }
@@ -701,6 +702,10 @@ public class WalletActivity extends BaseActivity implements WalletFragment.Liste
                 updateAccountsBalance();
             }
         });
+
+        if(wallet == null)
+            return false;
+
         if (numAccounts != wallet.getNumAccounts()) {
             numAccounts = wallet.getNumAccounts();
             runOnUiThread(new Runnable() {
@@ -1059,17 +1064,18 @@ public class WalletActivity extends BaseActivity implements WalletFragment.Liste
     }
 
     @Override
-    public boolean onScanned(String qrCode) {
+    public void onScanned(String qrCode, ScannedCallbackListener listener) {
         // #gurke
-        BarcodeData bcData = BarcodeData.fromQrCode(qrCode);
-        if (bcData != null) {
-            popFragmentStack(null);
-            Timber.d("AAA");
-            onUriScanned(bcData);
-            return true;
-        } else {
-            return false;
-        }
+        BarcodeData.fromString(qrCode, (bcData) -> {
+            if (bcData != null) {
+                popFragmentStack(null);
+                Timber.d("AAA");
+                onUriScanned(bcData);
+                listener.onScanned(true);
+            } else {
+                listener.onScanned(false);
+            }
+        });
     }
 
     OnUriScannedListener onUriScannedListener = null;
@@ -1091,6 +1097,7 @@ public class WalletActivity extends BaseActivity implements WalletFragment.Liste
         }
     }
 
+    @SuppressLint("MissingSuperCall")
     @Override
     public void onRequestPermissionsResult(int requestCode, @NonNull String permissions[],
                                            @NonNull int[] grantResults) {
@@ -1182,8 +1189,10 @@ public class WalletActivity extends BaseActivity implements WalletFragment.Liste
     void updateAccountsBalance() {
         final TextView tvBalance = accountsView.getHeaderView(0).findViewById(R.id.tvBalance);
         if (!isStealthMode()) {
-            tvBalance.setText(getString(R.string.accounts_balance,
-                    Helper.getDisplayAmount(getWallet().getBalanceAll(), 5)));
+            Wallet w = getWallet();
+            if(w != null) {
+                tvBalance.setText(getString(R.string.accounts_balance, Helper.getDisplayAmount(w.getBalanceAll(), 5)));
+            }
         } else {
             tvBalance.setText(null);
         }
