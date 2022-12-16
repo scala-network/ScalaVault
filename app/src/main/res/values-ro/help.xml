@@ -200,7 +200,6 @@
         Nu te panica! În momentul în care trimițo fonduri din portofelul tău, o parte din balanța
 		va fi arătată ca și neconfirmată. Acest lucru se întâmplă ca urmare a modului în care este
 		schimbat Scala în baza de date distribuită și modul în care se face schimbul.
-		Citește mai multe despre schimb la adresa https://getscala.org/resources/scalapedia/change.html
         <h2>Lista tranzacțiilor</h2>
         <p>O listă a tranzacțiilor portofelului. În portofele create folosind cheia de vizualizare,
 		doar tranzacțiile primite vor fi afișate.</p>

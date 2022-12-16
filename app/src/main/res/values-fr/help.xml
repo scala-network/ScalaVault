@@ -255,7 +255,6 @@
         solde sera temporairement affichée comme non confirmée.
         Cela se produit à cause de la façon dont Scala est échangé sur la chaîne de blocs et du
         fonctionnement de la monnaie dans Scala. Apprenez-en plus à propos de la monnaie dans Scala
-        sur https://getscala.org/fr/resources/scalapedia/change.html
         <h2>Liste des Transactions</h2>
         <p>Une listes des transactions du portefeuille. Dans un portefeuille d’Audit, seules les
         transactions entrantes sont affichées.</p>

@@ -242,7 +242,6 @@
         Não entres em pânico! Quando envias fundos da tua carteira, algum do teu saldo aparece temporariamente
         como não confirmado.
         Isto acontece como resultado da forma como os Scala são trocados na blockchain.
-        Podes ler mais sobre iston em https://getscala.org/resources/scalapedia/change.html
         <h2>Lista de Transacções</h2>
         <p>Uma lista de transacções da carteira. Em carteiras de visualização, apenas são mostradas transacções
         de depósito.</p>

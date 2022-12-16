@@ -317,9 +317,8 @@ public class SendAddressWizardFragment extends SendWizardFragment {
     private void processUD(String udString) {
         sendListener.popBarcodeData();
 
-        DomainResolution resolution = Resolution.builder()
-                .providerUrl(NamingServiceType.ENS, "https://cloudflare-eth.com")
-                .build();
+        DomainResolution resolution = new Resolution();
+
         final boolean[] domainIsUD = {false};
         final String[] address = {""};
         etAddress.setError(getString(R.string.send_address_resolve_ud));

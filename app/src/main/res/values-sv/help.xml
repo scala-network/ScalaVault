@@ -195,7 +195,6 @@
         Få inte panik! När du skickar pengar från din plånbok, visas en del av ditt saldo temporärt
         som obekräftat.
         Det här händer på grund av hur Scala är skickat på blockkedjan och hur växel fungerar.
-        Läs mer om växel på https://getscala.org/resources/scalapedia/change.html
         <h2>Transaktionlista</h2>
         <p>En lista av plånbokens transaktioner. I vis-plånböcker, visas bara inkommande transaktioner.</p>
     ]]></string>

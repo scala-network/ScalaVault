@@ -234,7 +234,6 @@
         <p><b>Hilfe! Mein Wallet-Guthaben ist verschwunden oder ist unbestätigt!</b><br/>
         Keine Panik! Wenn du Gelder von deinem Wallet sendest, wird ein Teil deines Guthabens kurzzeitig als unbestätigt angezeigt.
         Dies geschieht aufgrund der zugrunde liegenden Technologie und wie Scala auf der Blockchain bewegt werden.
-        Lies mehr darüber auf https://getscala.org/resources/scalapedia/change.html
         <h2>Transaktionsliste</h2>
         <p>Eine Liste deiner Transaktionen. In View-Wallets werden nur die eingehenden Transaktionen angezeigt.</p>
     ]]></string>

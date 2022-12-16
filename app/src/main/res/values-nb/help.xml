@@ -211,7 +211,6 @@
         Ikke få panikk! Når du sender penger fra lommeboka di, vil noe av saldoen din bli
 		vist som ubekrefta en liten periode.
         Dette er et resultat av hvordan Scala veksles på blokkjeden og hvordan vekslepenger funker.
-        Les mer om vekslepenger på https://getscala.org/resources/scalapedia/change.html
         <h2>Transaksjonsliste</h2>
         <p>En liste over lommeboktransaksjonene. In view lommebøker, kan man bare se innkommende transaksjoner.</p>
     ]]></string>

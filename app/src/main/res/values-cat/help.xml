@@ -175,7 +175,6 @@
         <p><b>Ajuda! El balanç del meu portamonedes ha desaparegut o consta com a no confirmat!</b><br/>
         No patiu! Quan envieu fons desde el vostre portamonedes part del balanç apareixerà com a no confirmat de forma temporal.        
 	Això succeeix pel fet de com Scala és intercanviat a través de la blockchain i com es produeix el canvi.
-        Podeu llegir més sobre el canvi a https://getscala.org/resources/scalapedia/change.html
         <h2>Llista de Transacció</h2>
         <p>Llistat de les transaccions del portamonedes. Els portamonedes de visualització només mostraran les transaccions entrants.</p>
     ]]></string>

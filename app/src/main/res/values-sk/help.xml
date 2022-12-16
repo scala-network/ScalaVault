@@ -223,8 +223,6 @@
         Nestresuj! Keď odosielaš prostriedky zo svojej peňaženky, časť zostatku sa dočasne ukáže ako nepotvrdená.
 
         Súvisí to s tým, ako je Scala navrhnuté a ako funguje zmena v blockchain.
-
-		Viac o zmenách sa dočítaš (anglicky) na https://getscala.org/resources/scalapedia/change.html
         <h2>Zoznam Transakcií</h2>
         <p>Zoznam transakcií v peňaženke. V prípade prezeracej peňaženky budú zobrazené iba prichádzajúce transakcie.</p>
     ]]></string>

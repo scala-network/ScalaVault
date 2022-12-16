@@ -152,7 +152,6 @@
         <p><b>Help! Het saldo van mijn portemonnee is verdwenen of niet bevestigd!</b><br/>
         Geen paniek! Wanneer je geld uit je portemonnee verzend, wordt een deel van je saldo tijdelijk aangegeven als onbevestigd.
         Dit is het gevolg van hoe Scala wordt gemengd op de blockchain en hoe wisselgeld werkt.
-        Lees meer over wisselgeld op https://getscala.org/resources/scalapedia/change.html
         <h2>Transactielijst</h2>
         <p>Een lijst van de transacties van de portemonnee. In een alleen-lezen portemonnee worden alleen binnenkomende transacties weergegeven.</p>
 

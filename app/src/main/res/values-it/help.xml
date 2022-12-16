@@ -182,7 +182,6 @@
         Nessuna paura! Quando invii fondi dal tuo portafoglio, parte del tuo saldo viene temporaneamente visualizzato come non-confermato.
 		Questo è un effetto di come Scala viene scambiato sulla blockchain e di come funzionano i resti.
         Ulteriori informazioni sui resti su
-        https://getscala.org/it/resources/scalapedia/change.html
         <h2>Lista delle transazioni</h2>
 	<p>Una lista delle transazioni relative al portafoglio. Nei portafogli solo-visualizzazione, vengono visualizzate solo
 		le transazioni in ingresso.</p>

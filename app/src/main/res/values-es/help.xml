@@ -229,7 +229,6 @@
         ¡No entres en pánico! Cuando envias fondos a tu monedero, parte de tu saldo se mostrará
         temporalmente como sin confirmar.
         Esto es debido a como funcionan las transacciones y su cambio en Scala. Todo está bien.
-        Puedes leer más al respecto en https://getscala.org/resources/scalapedia/change.html
         <h2>Lista de transacciones</h2>
         <p>Es una lista con las transacciones del monedero. Ten en cuenta que en monederos de solo vista, únicamente se
         mostrarán las transacciones entrantes y no las salientes, por lo tanto la suma no es indicativa de los fondos disponibles.</p>

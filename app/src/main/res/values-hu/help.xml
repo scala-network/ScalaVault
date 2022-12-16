@@ -177,7 +177,6 @@
         Ne pánikolj! Amikor pénzt küldesz a tárcádból, az egyenleged egy része átmenetileg függőként
         fog megjelenni.
         Ez a Scala blokkláncon való kicserélődési módjának és a visszajáró kezelésének eredményeképp van.
-        Erről részletesen a https://getscala.org/resources/scalapedia/change.html weboldalon olvashatsz.
         <h2>Tranzakciólista</h2>
         <p>A tárcához tartozó tranzakciók listája. A csak megtekintésre szolgáló tárcák esetében kizárólag
         a bejövő tranzakciók kerülnek megjelenítésre.</p>

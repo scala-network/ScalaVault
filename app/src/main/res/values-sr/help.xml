@@ -211,7 +211,6 @@
         Don’t panic! When you send funds from your wallet, some of your balance will temporarily show
         as unconfirmed.
         This happens as a result of how Scala is exchanged on the blockchain and how change works.
-        Read more about change at https://getscala.org/resources/scalapedia/change.html
         <h2>Transaction List</h2>
         <p>A list of the wallet transactions. In view wallets, only incoming transactions are shown.</p>
     ]]></string>

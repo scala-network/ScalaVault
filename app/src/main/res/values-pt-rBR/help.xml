@@ -234,7 +234,6 @@
         Não entre em pânico! Quando você envia uma transação, parte do seu saldo temporariamente é marcado
         como não-confirmado.
         Isso acontece devido a maneira como o Scala é trocado no blockchain, e como a noção de \"troco\" funciona.
-        Você pode ler mais sobre o assunto aqui: https://getscala.org/resources/scalapedia/change.html
         <h2>Lista de transações</h2>
         <p>Lista de transações da carteira. Nas carteiras \"somente leitura\", somente as transações de entrada aparecem.</p>
     ]]></string>
