@@ -253,7 +253,7 @@ public class BarcodeData {
 
             String address = null;
             try {
-                address = resolution.getAddress(udString, "xmr");
+                address = resolution.getAddress(udString, "xla");
 
                 if (!Wallet.isAddressValid(address)) {
                     Timber.d("XLA address invalid");

@@ -141,9 +141,10 @@ public class SendAddressWizardFragment extends SendWizardFragment {
             @Override
             public void onFocusChange(View v, boolean hasFocus) {
                 if (!hasFocus) {
-                    View next = etAddress;
+                    /*View next = etAddress;
                     String enteredAddress = etAddress.getEditText().getText().toString().trim();
-                    goToOpenAlias(enteredAddress);
+                    processUD(enteredAddress);
+                */
                 }
             }
         });
@@ -197,7 +198,7 @@ public class SendAddressWizardFragment extends SendWizardFragment {
                         final EditText et = etAddress.getEditText();
                         et.setText(clip);
                         et.setSelection(et.getText().length());
-                        processBip70(bip70);
+                        //processBip70(bip70);
                     } else
                         Toast.makeText(getActivity(), getString(R.string.send_address_invalid), Toast.LENGTH_SHORT).show();
                 }
@@ -257,7 +258,7 @@ public class SendAddressWizardFragment extends SendWizardFragment {
         return view;
     }
 
-    private void goToOpenAlias(String enteredAddress) {
+    /*private void goToOpenAlias(String enteredAddress) {
         String dnsOA = dnsFromOpenAlias(enteredAddress);
         Timber.d("OpenAlias is %s", dnsOA);
         if (dnsOA != null) {
@@ -268,7 +269,7 @@ public class SendAddressWizardFragment extends SendWizardFragment {
             // Not all UD address match Patterns.DOMAIN_NAME (eg. .888, .x)
             processUD(enteredAddress);
         }
-    }
+    }*/
 
     void replaceFragment(Fragment newFragment, String stackName, Bundle extras) {
         if (extras != null) {
@@ -287,11 +288,14 @@ public class SendAddressWizardFragment extends SendWizardFragment {
         sendListener.setMode(SendFragment.Mode.BTC);
     }
 
-    private void processOpenAlias(String dnsOA) {
+    /*private void processOpenAlias(String dnsOA) {
         if (resolvingOA) return; // already resolving - just wait
         sendListener.popBarcodeData();
         resolvingOA = true;
+        int nErrorBK = etAddress.getErrorCurrentTextColors();
+        etAddress.setErrorTextColor(getResources().getColorStateList(R.color.c_light_blue));
         etAddress.setError(getString(R.string.send_address_resolve_openalias));
+        etAddress.setErrorTextColor(ColorStateList.valueOf(nErrorBK));
         OpenAliasHelper.resolve(dnsOA, new OpenAliasHelper.OnResolvedListener() {
             @Override
             public void onResolved(BarcodeData barcodeData) {
@@ -312,7 +316,7 @@ public class SendAddressWizardFragment extends SendWizardFragment {
                 processUD(dnsOA);
             }
         });
-    }
+    }*/
 
     private void processUD(String udString) {
         sendListener.popBarcodeData();
@@ -321,10 +325,11 @@ public class SendAddressWizardFragment extends SendWizardFragment {
 
         final boolean[] domainIsUD = {false};
         final String[] address = {""};
+        etAddress.setErrorTextColor(getResources().getColorStateList(R.color.c_light_blue));
         etAddress.setError(getString(R.string.send_address_resolve_ud));
         new Thread(() -> {
                 try {
-                    address[0] = resolution.getAddress(udString, "xmr");
+                    address[0] = resolution.getAddress(udString, "xla");
                     domainIsUD[0] = true;
                 } catch (NamingServiceException e) {
                     Timber.d(e.getLocalizedMessage());
@@ -345,14 +350,16 @@ public class SendAddressWizardFragment extends SendWizardFragment {
                             null, null, BarcodeData.Security.NORMAL);
                     processScannedData(barcodeData);
                 } else {
+                        shakeAddress();
                         Timber.d("Non ENS / UD address %s", udString);
-                        etAddress.setError(getString(R.string.send_address_not_openalias));
+                    etAddress.setErrorTextColor(getResources().getColorStateList(R.color.c_light_blue));
+                        etAddress.setError(getString(R.string.send_address_invalid));
                 }
             });
         }).start();
     }
 
-    private void processBip70(final String bip70) {
+    /*private void processBip70(final String bip70) {
         Timber.d("RESOLVED PP: %s", resolvedPP);
         if (resolvingPP) return; // already resolving - just wait
         resolvingPP = true;
@@ -401,7 +408,7 @@ public class SendAddressWizardFragment extends SendWizardFragment {
                 Timber.d("PP FAILED");
             }
         });
-    }
+    }*/
 
     private boolean checkAddressNoError() {
         String address = etAddress.getEditText().getText().toString();
@@ -411,6 +418,7 @@ public class SendAddressWizardFragment extends SendWizardFragment {
     }
 
     private boolean checkAddress() {
+        etAddress.setErrorTextColor(getResources().getColorStateList(R.color.c_red));
         boolean ok = checkAddressNoError();
         if (!ok) {
             etAddress.setError(getString(R.string.send_address_invalid));
@@ -438,10 +446,8 @@ public class SendAddressWizardFragment extends SendWizardFragment {
     @Override
     public boolean onValidateFields() {
         if (!checkAddress()) {
-            shakeAddress();
             String enteredAddress = etAddress.getEditText().getText().toString().trim();
-            goToOpenAlias(enteredAddress);
-
+            processUD(enteredAddress);
             return false;
         }
 
@@ -527,7 +533,7 @@ public class SendAddressWizardFragment extends SendWizardFragment {
                     resolvedPP = barcodeData.bip70;
                     etAddress.setError(getString(R.string.send_address_bip70));
                 } else {
-                    processBip70(barcodeData.bip70);
+                    //processBip70(barcodeData.bip70);
                 }
                 etAddress.getEditText().setText(barcodeData.bip70);
             } else if (barcodeData.address != null) {
