@@ -492,14 +492,15 @@ public class WalletFragment extends Fragment
         ivAddressType.setImageDrawable(getResources().getDrawable(R.drawable.ic_primary_address));
         tvAddressType.setText("Primary Address");
 
-        tvWalletName.setText(walletName);
+        _walletName = walletName;
+        tvWalletName.setText(_walletName);
         tvWalletAddress.setText(Helper.getPrettyAddress(walletAddress));
     }
 
     private void updateWalletInfo(Wallet wallet) {
         llWalletAddress.setVisibility(View.VISIBLE);
 
-        tvWalletName.setText(walletTitle);
+        tvWalletName.setText(_walletName);
 
         if(accountIdx <= 0) { // Primary Address
             ivAddressType.setImageDrawable(getResources().getDrawable(R.drawable.ic_primary_address));
@@ -522,6 +523,7 @@ public class WalletFragment extends Fragment
     }
 
     private long firstBlock = 0;
+    private String _walletName = null;
     private String walletTitle = null;
     private String walletSubtitle = null;
     private long unlockedBalance = 0;

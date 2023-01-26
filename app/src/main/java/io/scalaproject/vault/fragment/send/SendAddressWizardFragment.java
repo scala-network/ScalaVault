@@ -352,7 +352,7 @@ public class SendAddressWizardFragment extends SendWizardFragment {
                 } else {
                         shakeAddress();
                         Timber.d("Non ENS / UD address %s", udString);
-                    etAddress.setErrorTextColor(getResources().getColorStateList(R.color.c_light_blue));
+                    etAddress.setErrorTextColor(getResources().getColorStateList(R.color.c_red));
                         etAddress.setError(getString(R.string.send_address_invalid));
                 }
             });
