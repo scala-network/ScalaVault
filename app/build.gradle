@@ -16,6 +16,8 @@ android {
                 arguments '-DANDROID_STL=c++_shared'
             }
         }
+
+        resConfigs "en", "fr", "de", "el", "eo", "es", "et", "hu", "it", "ja", "nb", "nl", "pt", "pt-rBR", "ro", "ru", "sk", "sr", "sv", "uk", "zh-rCN", "zh-rTW"
     }
 
     flavorDimensions 'type', 'net'
@@ -51,6 +53,18 @@ android {
     externalNativeBuild {
         cmake {
             path "CMakeLists.txt"
+        }
+    }
+
+    bundle {
+        language {
+            enableSplit = true
+        }
+        density {
+            enableSplit = true
+        }
+        abi {
+            enableSplit = true
         }
     }
 
