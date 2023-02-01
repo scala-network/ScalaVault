@@ -57,9 +57,6 @@ import org.json.JSONObject;
 import com.google.android.material.dialog.MaterialAlertDialogBuilder;
 
 import org.acra.ACRA;
-import org.json.JSONArray;
-import org.json.JSONException;
-import org.json.JSONObject;
 
 import io.scalaproject.vault.data.Node;
 import io.scalaproject.vault.data.NodeInfo;
@@ -78,6 +75,7 @@ import io.scalaproject.vault.util.KeyStoreHelper;
 import io.scalaproject.vault.util.LocaleHelper;
 import io.scalaproject.vault.util.ScalaThreadPoolExecutor;
 import io.scalaproject.vault.widget.Toolbar;
+import io.scalaproject.vault.util.LegacyStorageHelper;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -372,7 +370,7 @@ public class LoginActivity extends BaseActivity
         if (!processUsbIntent(intent))
             processUriIntent(intent);
 
-        if (Helper.getWritePermission(this)) {
+        if (LegacyStorageHelper.getReadPermission(this)) {
             if (savedInstanceState == null) {
                 startLoginFragment();
             }
@@ -385,6 +383,26 @@ public class LoginActivity extends BaseActivity
         if(generateFragmentTypeTmp != null && !generateFragmentTypeTmp.isEmpty()) {
             startCreateWalletFragment = true;
             generateFragmentType = generateFragmentTypeTmp;
+        }
+    }
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull String permissions[],
+                                           @NonNull int[] grantResults) {
+        Timber.d("onRequestPermissionsResult()");
+        switch (requestCode) {
+            case LegacyStorageHelper.PERMISSIONS_REQUEST_READ_EXTERNAL_STORAGE:
+
+                // If request is cancelled, the result arrays are empty.
+                if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                    isPermissionGranted = true;
+                } else {
+                    String msg = getString(R.string.message_strorage_not_permitted);
+                    Timber.e(msg);
+                    Toast.makeText(this, msg, Toast.LENGTH_LONG).show();
+                }
+                break;
+            default:
         }
     }
 
@@ -871,25 +889,6 @@ public class LoginActivity extends BaseActivity
         b.putString("path", walletFile.getAbsolutePath());
         b.putString("password", password);
         startReceiveFragment(b);
-    }
-
-    @Override
-    public void onRequestPermissionsResult(int requestCode, @NonNull String permissions[],
-                                           @NonNull int[] grantResults) {
-        Timber.d("onRequestPermissionsResult()");
-        switch (requestCode) {
-            case Helper.PERMISSIONS_REQUEST_WRITE_EXTERNAL_STORAGE:
-                // If request is cancelled, the result arrays are empty.
-                if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-                    isPermissionGranted = true;
-                } else {
-                    String msg = getString(R.string.message_strorage_not_permitted);
-                    Timber.e(msg);
-                    Toast.makeText(this, msg, Toast.LENGTH_LONG).show();
-                }
-                break;
-            default:
-        }
     }
 
     private boolean isPermissionGranted = false;

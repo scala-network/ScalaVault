@@ -52,6 +52,7 @@ import io.scalaproject.vault.layout.WalletInfoAdapter;
 import io.scalaproject.vault.model.WalletManager;
 import io.scalaproject.vault.util.Helper;
 import io.scalaproject.vault.util.KeyStoreHelper;
+import io.scalaproject.vault.util.LegacyStorageHelper;
 import io.scalaproject.vault.util.Notice;
 import io.scalaproject.vault.widget.Toolbar;
 
@@ -291,6 +292,8 @@ public class LoginFragment extends Fragment implements WalletInfoAdapter.OnInter
 
     public void loadList() {
         Timber.d("loadList");
+
+        LegacyStorageHelper.migrateWallets(getContext());
 
         WalletManager mgr = WalletManager.getInstance();
         List<WalletManager.WalletInfo> walletInfos = mgr.findWallets(activityCallback.getStorageRoot());
