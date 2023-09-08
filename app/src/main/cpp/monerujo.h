@@ -59,7 +59,7 @@ extern "C"
 {
 #endif
 
-extern const char* const SCALA_VERSION; // the actual scala core version
+extern const char* const scala_VERSION; // the actual scala core version
 
 // from scala-core crypto/hash-ops.h - avoid #including scala code here
 enum {

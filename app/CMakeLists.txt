@@ -7,6 +7,7 @@ add_library( monerujo
 
 set(EXTERNAL_LIBS_DIR ${CMAKE_SOURCE_DIR}/../external-libs)
 
+
 ############
 # libsodium
 ############
@@ -159,6 +160,10 @@ add_library(hardforks STATIC IMPORTED)
 set_target_properties(hardforks PROPERTIES IMPORTED_LOCATION
         ${EXTERNAL_LIBS_DIR}/scala/lib/${ANDROID_ABI}/libhardforks.a)
 
+add_library(felidae STATIC IMPORTED)
+set_target_properties(felidae PROPERTIES IMPORTED_LOCATION
+        ${EXTERNAL_LIBS_DIR}/scala/lib/${ANDROID_ABI}/libfelidae.a)
+
 add_library(randomx STATIC IMPORTED)
 set_target_properties(randomx PROPERTIES IMPORTED_LOCATION
         ${EXTERNAL_LIBS_DIR}/scala/lib/${ANDROID_ABI}/librandomx.a)
@@ -166,6 +171,14 @@ set_target_properties(randomx PROPERTIES IMPORTED_LOCATION
 add_library(rpc_base STATIC IMPORTED)
 set_target_properties(rpc_base PROPERTIES IMPORTED_LOCATION
         ${EXTERNAL_LIBS_DIR}/scala/lib/${ANDROID_ABI}/librpc_base.a)
+
+add_library(wallet-crypto STATIC IMPORTED)
+set_target_properties(wallet-crypto PROPERTIES IMPORTED_LOCATION
+        ${EXTERNAL_LIBS_DIR}/scala/lib/${ANDROID_ABI}/libwallet-crypto.a)
+
+add_library(cryptonote_format_utils_basic STATIC IMPORTED)
+set_target_properties(cryptonote_format_utils_basic PROPERTIES IMPORTED_LOCATION
+        ${EXTERNAL_LIBS_DIR}/scala/lib/${ANDROID_ABI}/libcryptonote_format_utils_basic.a)
 
 #############
 # System
@@ -177,12 +190,19 @@ include_directories( ${EXTERNAL_LIBS_DIR}/scala/include )
 
 message(STATUS EXTERNAL_LIBS_DIR :  ${EXTERNAL_LIBS_DIR})
 
+if(${ANDROID_ABI} STREQUAL "x86_64")
+    set(EXTRA_LIBS "wallet-crypto")
+else()
+    set(EXTRA_LIBS "")
+endif()
+
 target_link_libraries(  monerujo
 
                         wallet_api
                         wallet
                         cryptonote_core
                         cryptonote_basic
+                        cryptonote_format_utils_basic
                         mnemonics
                         ringct
                         ringct_basic
@@ -201,8 +221,10 @@ target_link_libraries(  monerujo
                         multisig
                         version
                         randomx
+                        felidae
                         hardforks
                         rpc_base
+                        ${EXTRA_LIBS}
 
                         boost_chrono
                         boost_date_time
