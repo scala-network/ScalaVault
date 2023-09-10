@@ -17,6 +17,10 @@ android {
             }
         }
 
+        ndk {
+            abiFilters 'arm64-v8a', 'x86_64', 'armeabi-v7a'
+        }
+
         resConfigs "en", "fr", "de", "el", "eo", "es", "et", "hu", "it", "ja", "nb", "nl", "pt", "pt-rBR", "ro", "ru", "sk", "sr", "sv", "uk", "zh-rCN", "zh-rTW"
     }
 
