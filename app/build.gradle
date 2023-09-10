@@ -1,13 +1,14 @@
 apply plugin: 'com.android.application'
 
 android {
-    compileSdkVersion 32
     defaultConfig {
         applicationId "io.scalaproject.vault"
+        buildToolsVersion = '34.0.0'
+        compileSdk 33
         minSdkVersion 21
-        targetSdkVersion 32
-        versionCode 10
-        versionName "1.0.9"
+        targetSdkVersion 33
+        versionCode 11
+        versionName "1.1.0"
 
         testInstrumentationRunner 'androidx.test.runner.AndroidJUnitRunner'
         externalNativeBuild {
@@ -18,10 +19,11 @@ android {
         }
 
         ndk {
+            //noinspection ChromeOsAbiSupport
             abiFilters 'arm64-v8a', 'x86_64', 'armeabi-v7a'
         }
+        resourceConfigurations += ['en', 'fr', 'de', 'el', 'eo', 'es', 'et', 'hu', 'it', 'ja', 'nb', 'nl', 'pt', 'pt-rBR', 'ro', 'ru', 'sk', 'sr', 'sv', 'uk', 'zh-rCN', 'zh-rTW']
 
-        resConfigs "en", "fr", "de", "el", "eo", "es", "et", "hu", "it", "ja", "nb", "nl", "pt", "pt-rBR", "ro", "ru", "sk", "sr", "sv", "uk", "zh-rCN", "zh-rTW"
     }
 
     flavorDimensions 'type', 'net'
@@ -86,6 +88,7 @@ android {
 
     // Enumerate translated locales
     def availableLocales = ["en"]
+    namespace 'io.scalaproject.vault'
     new File("app/src/main/res/").eachFileMatch(~/^values-.*/) { file ->
         def languageTag = file.name.substring(7).replace("-r", "-")
         availableLocales.add(languageTag)

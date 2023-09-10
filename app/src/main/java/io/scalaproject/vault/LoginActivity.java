@@ -1503,7 +1503,7 @@ public class LoginActivity extends BaseActivity
                 registerReceiver(usbPermissionReceiver, new IntentFilter(ACTION_USB_PERMISSION));
                 usbManager.requestPermission(device,
                         PendingIntent.getBroadcast(this, 0,
-                                new Intent(ACTION_USB_PERMISSION), 0));
+                                new Intent(ACTION_USB_PERMISSION), PendingIntent.FLAG_IMMUTABLE));
             }
         } else {
             Timber.d("no ledger device found");
