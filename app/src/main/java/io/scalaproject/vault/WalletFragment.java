@@ -486,14 +486,17 @@ public class WalletFragment extends Fragment
         }
     }
 
-    public void initWalletText(String walletName, String walletAddress) {
+    public void initWalletName(String walletName) {
+        _walletName = walletName;
+        tvWalletName.setText(_walletName);
+    }
+
+    public void initWalletAddress(String walletAddress) {
         llWalletAddress.setVisibility(View.VISIBLE);
 
         ivAddressType.setImageDrawable(getResources().getDrawable(R.drawable.ic_primary_address));
         tvAddressType.setText("Primary Address");
 
-        _walletName = walletName;
-        tvWalletName.setText(_walletName);
         tvWalletAddress.setText(Helper.getPrettyAddress(walletAddress));
     }
 
@@ -659,7 +662,6 @@ public class WalletFragment extends Fragment
             activityCallback.setToolbarButton(Toolbar.BUTTON_NONE);
         }
     }
-
 
     @Override
     public void onPause() {

@@ -918,7 +918,7 @@ Java_io_scalaproject_vault_model_Wallet_refreshAsync(JNIEnv *env, jobject instan
 
 //virtual void rescanBlockchainAsync() = 0;
 JNIEXPORT void JNICALL
-Java_io_scalaproject_vault_model_Wallet_rescanBlockchainAsync(JNIEnv *env, jobject instance) {
+Java_io_scalaproject_vault_model_Wallet_rescanBlockchainAsyncJ(JNIEnv *env, jobject instance) {
     scala::Wallet *wallet = getHandle<scala::Wallet>(env, instance);
     wallet->rescanBlockchainAsync();
 }

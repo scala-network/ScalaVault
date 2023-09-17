@@ -24,6 +24,8 @@ package io.scalaproject.vault.model;
 import android.os.Parcel;
 import android.os.Parcelable;
 
+import androidx.annotation.NonNull;
+
 import java.util.List;
 
 // this is not the TransactionInfo from the API as that is owned by the TransactionHistory
@@ -49,7 +51,7 @@ public class TransactionInfo implements Parcelable, Comparable<TransactionInfo> 
             return value;
         }
 
-        private int value;
+        private final int value;
 
         Direction(int value) {
             this.value = value;
@@ -106,6 +108,7 @@ public class TransactionInfo implements Parcelable, Comparable<TransactionInfo> 
         this.transfers = transfers;
     }
 
+    @NonNull
     public String toString() {
         return direction + "@" + blockheight + " " + amount;
     }

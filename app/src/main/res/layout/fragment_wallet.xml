@@ -30,7 +30,7 @@
                         android:layout_gravity="start"
                         android:gravity="center"
                         android:textStyle="bold"
-                        android:text="My wallet" />
+                        android:text="" />
 
                     <Space
                         android:layout_width="wrap_content"

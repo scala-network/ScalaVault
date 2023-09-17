@@ -159,7 +159,8 @@ public class WalletInfoAdapter extends RecyclerView.Adapter<WalletInfoAdapter.Vi
         void bind(int position) {
             infoItem = infoItems.get(position);
             tvName.setText(infoItem.name);
-            tvAddress.setText(Helper.getPrettyAddress(infoItem.address));
+            //tvAddress.setText(Helper.getPrettyAddress(infoItem.address));
+            tvAddress.setText("HELLO");
         }
 
         @Override

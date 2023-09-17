@@ -21,6 +21,7 @@
 
 package io.scalaproject.vault;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
 import android.os.AsyncTask;
@@ -40,11 +41,9 @@ import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.FrameLayout;
 import android.widget.ImageButton;
-import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import io.scalaproject.vault.data.NodeInfo;
 import io.scalaproject.vault.layout.NodeInfoAdapter;
@@ -70,9 +69,6 @@ public class LoginFragment extends Fragment implements WalletInfoAdapter.OnInter
     private WalletInfoAdapter adapter;
 
     private List<WalletManager.WalletInfo> walletList = new ArrayList<>();
-    private List<WalletManager.WalletInfo> displayedList = new ArrayList<>();
-
-    private ImageView ivGunther;
     private ImageButton ibNode;
     private TextView tvNodeName;
     private TextView tvNodeAddress;
@@ -90,7 +86,7 @@ public class LoginFragment extends Fragment implements WalletInfoAdapter.OnInter
     public interface Listener {
         File getStorageRoot();
 
-        boolean onWalletSelected(String wallet, String walletAddress, boolean stealthMode);
+        void onWalletSelected(String wallet, boolean stealthMode);
 
         void onWalletDetails(String wallet);
 
@@ -126,7 +122,7 @@ public class LoginFragment extends Fragment implements WalletInfoAdapter.OnInter
     }
 
     @Override
-    public void onAttach(Context context) {
+    public void onAttach(@NonNull Context context) {
         super.onAttach(context);
         if (context instanceof Listener) {
             this.activityCallback = (Listener) context;
@@ -223,12 +219,7 @@ public class LoginFragment extends Fragment implements WalletInfoAdapter.OnInter
         tvNodeName = view.findViewById(R.id.tvNodeName);
         tvNodeAddress = view.findViewById(R.id.tvNodeAddress);
 
-        view.findViewById(R.id.ibOption).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                startNodePrefs();
-            }
-        });
+        view.findViewById(R.id.ibOption).setOnClickListener(v -> startNodePrefs());
 
         Helper.hideKeyboard(getActivity());
 
@@ -242,23 +233,18 @@ public class LoginFragment extends Fragment implements WalletInfoAdapter.OnInter
     // Wallet touched
     @Override
     public void onInteraction(final View view, final WalletManager.WalletInfo infoItem) {
-        String addressPrefix = WalletManager.getInstance().addressPrefix();
-        if (addressPrefix.indexOf(infoItem.address.charAt(0)) < 0) {
-            Toast.makeText(getActivity(), getString(R.string.prompt_wrong_net), Toast.LENGTH_LONG).show();
-            return;
-        }
-        openWallet(infoItem.name, infoItem.address, false);
+        openWallet(infoItem.name, false);
     }
 
-    private void openWallet(String name, String address, boolean stealthMode) {
-        activityCallback.onWalletSelected(name, address, stealthMode);
+    private void openWallet(String name, boolean stealthMode) {
+        activityCallback.onWalletSelected(name, stealthMode);
     }
 
     @Override
     public boolean onContextInteraction(MenuItem item, WalletManager.WalletInfo listItem) {
         switch (item.getItemId()) {
             case R.id.action_stealthmode:
-                openWallet(listItem.name, listItem.address, true);
+                openWallet(listItem.name, true);
                 break;
             case R.id.action_info:
                 showInfo(listItem.name);
@@ -281,15 +267,6 @@ public class LoginFragment extends Fragment implements WalletInfoAdapter.OnInter
         return true;
     }
 
-    private void filterList() {
-        displayedList.clear();
-        String addressPrefix = WalletManager.getInstance().addressPrefix();
-        for (WalletManager.WalletInfo s : walletList) {
-            if(s != null && s.address != null && !s.address.isEmpty())
-                if (addressPrefix.indexOf(s.address.charAt(0)) >= 0) displayedList.add(s);
-        }
-    }
-
     public void loadList() {
         Timber.d("loadList");
 
@@ -308,12 +285,11 @@ public class LoginFragment extends Fragment implements WalletInfoAdapter.OnInter
 
         walletList.clear();
         walletList.addAll(walletInfos);
-        filterList();
-        adapter.setInfos(displayedList);
+        adapter.setInfos(walletInfos);
         adapter.notifyDataSetChanged();
 
         // deal with Gunther & FAB animation
-        if (displayedList.isEmpty()) {
+        if (walletInfos.isEmpty()) {
             fab.startAnimation(fab_pulse);
         } else {
             fab.clearAnimation();
@@ -323,11 +299,14 @@ public class LoginFragment extends Fragment implements WalletInfoAdapter.OnInter
         Set<String> removedWallets = getActivity()
                 .getSharedPreferences(KeyStoreHelper.SecurityConstants.WALLET_PASS_PREFS_NAME, Context.MODE_PRIVATE)
                 .getAll().keySet();
-        for (WalletManager.WalletInfo s : walletList) {
-            removedWallets.remove(s.name);
-        }
-        for (String name : removedWallets) {
-            KeyStoreHelper.removeWalletUserPass(getActivity(), name);
+
+        if(!removedWallets.isEmpty()) {
+            for (WalletManager.WalletInfo s : walletList) {
+                removedWallets.remove(s.name);
+            }
+            for (String name : removedWallets) {
+                KeyStoreHelper.removeWalletUserPass(getActivity(), name);
+            }
         }
     }
 
@@ -346,7 +325,7 @@ public class LoginFragment extends Fragment implements WalletInfoAdapter.OnInter
     }
 
     @Override
-    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
+    public void onCreateOptionsMenu(@NonNull Menu menu, MenuInflater inflater) {
         inflater.inflate(R.menu.list_menu, menu);
         super.onCreateOptionsMenu(menu, inflater);
 
@@ -467,6 +446,7 @@ public class LoginFragment extends Fragment implements WalletInfoAdapter.OnInter
         new AsyncFindBestNode().execute();
     }
 
+    @SuppressLint("StaticFieldLeak")
     private class AsyncFindBestNode extends AsyncTask<Void, Void, NodeInfo> {
         @Override
         protected void onPreExecute() {

@@ -129,7 +129,6 @@ public class LegacyStorageHelper {
         final String dstName = getUniqueName(dstDir, walletName);
         copyFile(new File(srcDir, walletName), new File(dstDir, dstName));
         copyFile(new File(srcDir, walletName + ".keys"), new File(dstDir, dstName + ".keys"));
-        copyFile(new File(srcDir, walletName + ".address.txt"), new File(dstDir, dstName + ".address.txt"));
     }
 
     private void deleteDst(String walletName) {

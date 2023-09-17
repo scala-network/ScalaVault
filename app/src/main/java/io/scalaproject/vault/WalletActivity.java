@@ -29,9 +29,6 @@ import android.content.Intent;
 import android.content.ServiceConnection;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
-import android.graphics.PorterDuff;
-import android.graphics.drawable.Drawable;
-import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.IBinder;
@@ -261,10 +258,16 @@ public class WalletActivity extends BaseActivity implements WalletFragment.Liste
         }
     }
 
-    private void initWalletFragmentAddress(String walletName, String walletAddress) {
+    private void initWalletFragmentName(String walletName) {
         final WalletFragment walletFragment = (WalletFragment)
                 getSupportFragmentManager().findFragmentByTag(WalletFragment.class.getName());
-        walletFragment.initWalletText(walletName, walletAddress);
+        walletFragment.initWalletName(walletName);
+    }
+
+    private void initWalletFragmentAddress(String walletAddress) {
+        final WalletFragment walletFragment = (WalletFragment)
+                getSupportFragmentManager().findFragmentByTag(WalletFragment.class.getName());
+        walletFragment.initWalletAddress(walletAddress);
     }
 
     @Override
@@ -558,12 +561,11 @@ public class WalletActivity extends BaseActivity implements WalletFragment.Liste
             if (extras != null) {
                 String walletName = extras.getString(REQUEST_ID);
                 if (walletName != null) {
-                    setTitle(walletName, getString(R.string.status_wallet_connecting));
-                }
-
-                String walletAddress = extras.getString(REQUEST_ADDRESS);
-                if (walletName != null && walletAddress != null) {
-                    initWalletFragmentAddress(walletName, walletAddress);
+                    runOnUiThread(new Runnable() {
+                        public void run() {
+                            initWalletFragmentName(walletName);
+                        }
+                    });
                 }
             }
 
@@ -578,7 +580,6 @@ public class WalletActivity extends BaseActivity implements WalletFragment.Liste
             // Because it is running in our same process, we should never
             // see this happen.
             mBoundService = null;
-            setTitle(getString(R.string.wallet_activity_name), getString(R.string.status_wallet_disconnected));
             Timber.d("DISCONNECTED");
         }
     };
@@ -804,6 +805,16 @@ public class WalletActivity extends BaseActivity implements WalletFragment.Liste
                     if (walletFragment != null) {
                         walletFragment.onLoaded();
                     }
+                }
+            });
+        }
+
+        Wallet wal = getWallet();
+        String walletAddress = wal.getAddress();
+        if (walletAddress != null) {
+            runOnUiThread(new Runnable() {
+                public void run() {
+                    initWalletFragmentAddress(walletAddress);
                 }
             });
         }

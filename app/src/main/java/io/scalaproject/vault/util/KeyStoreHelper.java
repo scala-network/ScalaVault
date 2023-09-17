@@ -167,6 +167,11 @@ public class KeyStoreHelper {
                 .remove(wallet).apply();
     }
 
+    public static void copyWalletUserPass(Context context, String srcWallet, String dstWallet) throws BrokenPasswordStoreException {
+        final String pass = loadWalletUserPass(context, srcWallet);
+        saveWalletUserPass(context, dstWallet, pass);
+    }
+
     /**
      * Creates a public and private key and stores it using the Android Key
      * Store, so that only this application will be able to access the keys.
