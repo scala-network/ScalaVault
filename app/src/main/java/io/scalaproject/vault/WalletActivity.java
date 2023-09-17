@@ -510,7 +510,7 @@ public class WalletActivity extends BaseActivity implements WalletFragment.Liste
                         finish();
                         break;
                     case Toolbar.BUTTON_CREDITS:
-                        Toast.makeText(WalletActivity.this, getString(R.string.label_credits), Toast.LENGTH_SHORT).show();
+                        CreditsFragment.display(getSupportFragmentManager());
                     case Toolbar.BUTTON_NONE:
                     default:
                         Timber.e("Button " + type + "pressed - how can this be?");
