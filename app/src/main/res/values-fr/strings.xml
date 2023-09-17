@@ -145,7 +145,7 @@
     <string name="service_description">Service Scala Vault</string>
 
     <string name="status_synced">Synchronisé :</string>
-    <string name="status_remaining">Blocs restant</string>
+    <string name="status_remaining">blocs restants</string>
     <string name="status_syncing">Analyse :</string>
 
     <string name="message_strorage_not_writable">Stockage Externe non inscriptible ! Panique !</string>
