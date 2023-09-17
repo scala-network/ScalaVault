@@ -101,9 +101,9 @@ public class LoginActivity extends BaseActivity
 
     static private final String DEFAULT_NODES_REPOSITORY = "https://raw.githubusercontent.com/scala-network/ScalaVault/master/app.json";
 
-    // USAGE: When the DEFAULT_NODES_REPOSITORY file is modified, we need to upload the new file
-    //        to the IPNS gateway as well. This is to avoid having to release a new version of the app
-    //        every time the data changes.
+    // USAGE: The GitHub raw file might not be available in some countries, so the IPFS option
+    //        is a fallback. When the DEFAULT_NODES_REPOSITORY file is modified, we need to upload the new file
+    //        to the IPNS gateway as well.
     static private final String IPNS_NAME = "node-list.scalaproject.io";
     static private final String[] NODES_REPOSITORY_IPNS_GATEWAYS = {
             "https://dweb.link/ipns/",
