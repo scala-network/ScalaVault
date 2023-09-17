@@ -106,7 +106,6 @@ public class WalletInfoAdapter extends RecyclerView.Adapter<WalletInfoAdapter.Vi
 
     class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
         final TextView tvName;
-        final TextView tvAddress;
         final ImageButton ibOptions;
         WalletManager.WalletInfo infoItem;
         boolean popupOpen = false;
@@ -115,7 +114,6 @@ public class WalletInfoAdapter extends RecyclerView.Adapter<WalletInfoAdapter.Vi
             super(itemView);
 
             tvName = itemView.findViewById(R.id.tvName);
-            tvAddress = itemView.findViewById(R.id.tvAddress);
 
             ibOptions = itemView.findViewById(R.id.ibOptions);
             ibOptions.setOnClickListener(new View.OnClickListener() {
@@ -145,7 +143,6 @@ public class WalletInfoAdapter extends RecyclerView.Adapter<WalletInfoAdapter.Vi
                             popupOpen = false;
                         }
                     });
-
                 }
             });
 
@@ -160,7 +157,6 @@ public class WalletInfoAdapter extends RecyclerView.Adapter<WalletInfoAdapter.Vi
             infoItem = infoItems.get(position);
             tvName.setText(infoItem.name);
             //tvAddress.setText(Helper.getPrettyAddress(infoItem.address));
-            tvAddress.setText("HELLO");
         }
 
         @Override
