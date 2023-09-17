@@ -831,8 +831,6 @@ public class LoginActivity extends BaseActivity
         Timber.d("startWallet()");
         Intent intent = new Intent(getApplicationContext(), WalletActivity.class);
         intent.putExtra(WalletActivity.REQUEST_ID, walletName);
-        //intent.putExtra(WalletActivity.REQUEST_ADDRESS, walletAddress);
-        //intent.putExtra(WalletActivity.REQUEST_ADDRESS, "SvjVucMW4PA968WJP7rXRr1fkRVch5q6rLnh86LkZCWFPJiDEB2vizX6VjMezJaKiCN2K1kVvAHDbUmiB1tPjZJP2hety4dnf");
         intent.putExtra(WalletActivity.REQUEST_PW, walletPassword);
         intent.putExtra(WalletActivity.REQUEST_FINGERPRINT_USED, fingerprintUsed);
         intent.putExtra(WalletActivity.REQUEST_STEALTHMODE, stealthMode);
