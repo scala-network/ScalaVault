@@ -657,9 +657,10 @@ public class WalletFragment extends Fragment
         setProgress(syncText);
         updateSendReceiveButtons();
 
-        if (activityCallback.isSynced()) {
+        if(activityCallback.isSynced()) {
             enableAccountsList(true);
-            activityCallback.setToolbarButton(Toolbar.BUTTON_NONE);
+        } else if (activityCallback.hasBoundService()) {
+            activityCallback.setToolbarButton(Toolbar.BUTTON_CREDITS);
         }
     }
 
