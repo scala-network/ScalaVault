@@ -32,7 +32,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginStart="48dp"
-            android:layout_marginTop="16dp"
+            android:layout_marginTop="13.5dp"
             android:layout_toStartOf="@+id/ibOptions"
             tools:text="My Wallet" />
 
