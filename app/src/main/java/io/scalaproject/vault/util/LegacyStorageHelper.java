@@ -173,7 +173,7 @@ public class LegacyStorageHelper {
     static public final int PERMISSIONS_REQUEST_READ_EXTERNAL_STORAGE = 1;
 
     static public boolean getReadPermission(Activity context) {
-        if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.M) {
+        if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.M && android.os.Build.VERSION.SDK_INT < android.os.Build.VERSION_CODES.TIRAMISU) {
             if (context.checkSelfPermission(Manifest.permission.READ_EXTERNAL_STORAGE) == PackageManager.PERMISSION_DENIED) {
                 Timber.w("Permission denied to READ_EXTERNAL_STORAGE - requesting it");
                 String[] permissions = {Manifest.permission.READ_EXTERNAL_STORAGE};
