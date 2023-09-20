@@ -110,6 +110,7 @@ public class WalletActivity extends BaseActivity implements WalletFragment.Liste
     private boolean needVerifyIdentity;
     private boolean requestStealthMode = false;
 
+    private String walletName;
     private String password;
 
     private String uri = null;
@@ -226,13 +227,13 @@ public class WalletActivity extends BaseActivity implements WalletFragment.Liste
         Bundle extras = getIntent().getExtras();
         if (extras != null) {
             acquireWakeLock();
-            String walletName = extras.getString(REQUEST_ID);
+            walletName = extras.getString(REQUEST_ID);
             needVerifyIdentity = extras.getBoolean(REQUEST_FINGERPRINT_USED);
             // we can set the stealthMode height AFTER opening the wallet
             requestStealthMode = extras.getBoolean(REQUEST_STEALTHMODE);
             password = extras.getString(REQUEST_PW);
             uri = extras.getString(REQUEST_URI);
-            connectWalletService(walletName, password);
+            connectWalletService();
         } else {
             finish();
             //throw new IllegalStateException("No extras passed! Panic!");
@@ -584,7 +585,7 @@ public class WalletActivity extends BaseActivity implements WalletFragment.Liste
         }
     };
 
-    void connectWalletService(String walletName, String walletPassword) {
+    void connectWalletService() {
         // Establish a connection with the service.  We use an explicit
         // class name because we want a specific service implementation that
         // we know will be running in our own process (and thus won't be
@@ -592,7 +593,7 @@ public class WalletActivity extends BaseActivity implements WalletFragment.Liste
         Intent intent = new Intent(getApplicationContext(), WalletService.class);
         intent.putExtra(WalletService.REQUEST_WALLET, walletName);
         intent.putExtra(WalletService.REQUEST, WalletService.REQUEST_CMD_LOAD);
-        intent.putExtra(WalletService.REQUEST_CMD_LOAD_PW, walletPassword);
+        intent.putExtra(WalletService.REQUEST_CMD_LOAD_PW, password);
         startService(intent);
         bindService(intent, mConnection, Context.BIND_AUTO_CREATE);
         mIsBound = true;
@@ -613,12 +614,16 @@ public class WalletActivity extends BaseActivity implements WalletFragment.Liste
     protected void onPause() {
         Timber.d("onPause()");
         super.onPause();
+
+        disconnectWalletService();
     }
 
     @Override
     protected void onResume() {
         super.onResume();
         Timber.d("onResume()");
+
+        connectWalletService();
     }
 
     public void saveWallet() {
