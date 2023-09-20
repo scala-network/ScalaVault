@@ -601,7 +601,7 @@ public class WalletActivity extends BaseActivity implements WalletFragment.Liste
     }
 
     void disconnectWalletService() {
-        if (mIsBound) {
+        if (mIsBound && mConnection != null) {
             // Detach our existing connection.
             mBoundService.setObserver(null);
             unbindService(mConnection);
