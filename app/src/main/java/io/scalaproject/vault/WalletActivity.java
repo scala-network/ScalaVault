@@ -280,11 +280,8 @@ public class WalletActivity extends BaseActivity implements WalletFragment.Liste
     @Override
     protected void onDestroy() {
         Timber.d("onDestroy()");
-        /*if ((mBoundService != null) && (getWallet() != null)) {
-            saveWallet();
-        }
-        stopWalletService();*/
         if (drawer != null) drawer.removeDrawerListener(drawerToggle);
+
         super.onDestroy();
     }
 
@@ -614,16 +611,12 @@ public class WalletActivity extends BaseActivity implements WalletFragment.Liste
     protected void onPause() {
         Timber.d("onPause()");
         super.onPause();
-
-        disconnectWalletService();
     }
 
     @Override
     protected void onResume() {
-        super.onResume();
         Timber.d("onResume()");
-
-        connectWalletService();
+        super.onResume();
     }
 
     public void saveWallet() {

@@ -513,7 +513,8 @@ public class WalletFragment extends Fragment
             tvAddressType.setText("Subaddress");
         }
 
-        tvWalletAddress.setText(Helper.getPrettyAddress(wallet.getAddress()));
+        if(wallet == null)
+            tvWalletAddress.setText(Helper.getPrettyAddress(wallet.getAddress()));
     }
 
     public void setActivityTitle(Wallet wallet) {
@@ -650,8 +651,9 @@ public class WalletFragment extends Fragment
         activityCallback.setTitle(walletTitle, walletSubtitle);
         //activityCallback.setToolbarButton(Toolbar.BUTTON_CLOSE); // TODO: Close button somewhere else
 
-        if(activityCallback.hasBoundService())
+        if(activityCallback.hasBoundService()) {
             updateWalletInfo(activityCallback.getWallet());
+        }
 
         setProgress(syncProgress);
         setProgress(syncText);
