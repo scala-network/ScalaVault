@@ -411,18 +411,34 @@ public class WalletFragment extends Fragment
 
     // called from activity
 
-    public void onRefreshed(final Wallet wallet, final boolean full) {
+    public void onRefreshed(final Wallet wallet, boolean full) {
         Timber.d("onRefreshed(%b)", full);
+
+        if (txInfoAdapter.needsTransactionUpdateOnNewBlock()) {
+            wallet.getHistory().refresh();
+            full = true;
+        }
+
         if (full) {
             List<TransactionInfo> list = new ArrayList<>();
             final long streetHeight = activityCallback.getStealthModeHeight();
             Timber.d("StreetHeight=%d", streetHeight);
+            wallet.getHistory().refresh();
+
+            int count = 0;
             for (TransactionInfo info : wallet.getHistory().getAll()) {
                 Timber.d("TxHeight=%d", info.blockheight);
-                if ((info.isPending || (info.blockheight >= streetHeight))
-                        && !dismissedTransactions.contains(info.hash))
+                if ((info.isPending || (info.blockheight >= streetHeight)) && !dismissedTransactions.contains(info.hash)) {
                     list.add(info);
+                    count++;
+                }
+
+                if(count > 100) { // only keep the 100 latest transactions for better performances
+                    list.remove(0);
+                    count--;
+                }
             }
+
             txInfoAdapter.setInfos(list);
             txInfoAdapter.notifyDataSetChanged();
         }

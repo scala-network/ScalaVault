@@ -249,20 +249,21 @@ public class LoginActivity extends BaseActivity
 
         String jsonString = "";
 
-        // Load Pools data from repository
-        if(Helper.isURLReachable(DEFAULT_NODES_REPOSITORY))
-            jsonString  = Helper.fetchJSON(DEFAULT_NODES_REPOSITORY);
-
-        // If GitHub is not available or is blocked by firewalls, use IPFS gateways
-        if(jsonString.isEmpty()) {
-            for (String strNodeURLDir : NODES_REPOSITORY_IPNS_GATEWAYS) {
-                String strNodeURL = strNodeURLDir + IPNS_NAME;
-                if(Helper.isURLReachable(strNodeURL)) {
-                    jsonString = Helper.fetchJSON(strNodeURL);
-                    if (!jsonString.isEmpty())
-                        break;
-                }
+        // Load Pools data from IPFS gateways
+        for (String strNodeURLDir : NODES_REPOSITORY_IPNS_GATEWAYS) {
+            String strNodeURL = strNodeURLDir + IPNS_NAME;
+            if(Helper.isURLReachable(strNodeURL)) {
+                jsonString = Helper.fetchJSON(strNodeURL);
+                if (!jsonString.isEmpty())
+                    break;
             }
+        }
+
+        // If IPFS is not available or is blocked by firewalls, use GitHub raw file
+        if(jsonString.isEmpty()) {
+            // Load Pools data from repository
+            if(Helper.isURLReachable(DEFAULT_NODES_REPOSITORY))
+                jsonString  = Helper.fetchJSON(DEFAULT_NODES_REPOSITORY);
         }
 
         // None of the URL can be reached. Load default data but don't cache it.

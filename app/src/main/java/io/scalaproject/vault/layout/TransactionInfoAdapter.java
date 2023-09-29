@@ -23,6 +23,8 @@ package io.scalaproject.vault.layout;
 
 import android.content.Context;
 import androidx.core.content.ContextCompat;
+
+import androidx.recyclerview.widget.DiffUtil;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.graphics.Bitmap;
@@ -53,7 +55,8 @@ import timber.log.Timber;
 
 public class TransactionInfoAdapter extends RecyclerView.Adapter<TransactionInfoAdapter.ViewHolder> {
 
-    private final SimpleDateFormat DATETIME_FORMATTER = new SimpleDateFormat("yyyy-MM-dd HH:mm");
+    private final static int MAX_CONFIRMATIONS = 10;
+    private final static SimpleDateFormat DATETIME_FORMATTER = new SimpleDateFormat("yyyy-MM-dd HH:mm");
 
     private int outboundColour;
     private int inboundColour;
@@ -90,6 +93,10 @@ public class TransactionInfoAdapter extends RecyclerView.Adapter<TransactionInfo
         Calendar cal = Calendar.getInstance();
         TimeZone tz = cal.getTimeZone(); //get the local time zone.
         DATETIME_FORMATTER.setTimeZone(tz);
+    }
+
+    public boolean needsTransactionUpdateOnNewBlock() {
+        return (infoItems.size() > 0) && !infoItems.get(0).isConfirmed();
     }
 
     @Override

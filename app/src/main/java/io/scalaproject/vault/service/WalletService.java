@@ -120,8 +120,8 @@ public class WalletService extends Service {
             if (wallet == null) throw new IllegalStateException("No wallet!");
             // don't flood with an update for every block ...
             if (lastBlockTime < System.currentTimeMillis() - 2000) {
-                Timber.d("newBlock() @ %d with observer %s", height, observer);
                 lastBlockTime = System.currentTimeMillis();
+                Timber.d("newBlock() @ %d with observer %s", height, observer);
                 if (observer != null) {
                     boolean fullRefresh = false;
                     updateDaemonState(wallet, wallet.isSynchronized() ? height : 0);

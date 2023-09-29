@@ -31,7 +31,7 @@ import java.util.List;
 // this is not the TransactionInfo from the API as that is owned by the TransactionHistory
 // this is a POJO for the TransactionInfoAdapter
 public class TransactionInfo implements Parcelable, Comparable<TransactionInfo> {
-    static final String TAG = "TransactionInfo";
+    public static final int CONFIRMATION = 10; // blocks
 
     public enum Direction {
         Direction_In(0),
@@ -106,6 +106,10 @@ public class TransactionInfo implements Parcelable, Comparable<TransactionInfo> 
         this.confirmations = confirmations;
         this.subaddressLabel = subaddressLabel;
         this.transfers = transfers;
+    }
+
+    public boolean isConfirmed() {
+        return confirmations >= CONFIRMATION;
     }
 
     @NonNull
