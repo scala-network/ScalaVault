@@ -101,7 +101,7 @@ void detachJVM(JNIEnv *jenv, int envStat) {
     }
 }
 
-struct MyWalletListener : Bitscala::WalletListener {
+struct MyWalletListener : scala::WalletListener {
     jobject jlistener;
 
     MyWalletListener(JNIEnv *env, jobject aListener) {
@@ -268,10 +268,10 @@ Java_io_scalaproject_vault_model_WalletManager_createWalletJ(JNIEnv *env, jobjec
     const char *_path = env->GetStringUTFChars(path, NULL);
     const char *_password = env->GetStringUTFChars(password, NULL);
     const char *_language = env->GetStringUTFChars(language, NULL);
-    Scala::NetworkType _networkType = static_cast<Scala::NetworkType>(networkType);
+    scala::NetworkType _networkType = static_cast<scala::NetworkType>(networkType);
 
-    Bitscala::Wallet *wallet =
-            Bitscala::WalletManagerFactory::getWalletManager()->createWallet(
+    scala::Wallet *wallet =
+            scala::WalletManagerFactory::getWalletManager()->createWallet(
                     std::string(_path),
                     std::string(_password),
                     std::string(_language),
@@ -289,10 +289,10 @@ Java_io_scalaproject_vault_model_WalletManager_openWalletJ(JNIEnv *env, jobject 
                                                           jint networkType) {
     const char *_path = env->GetStringUTFChars(path, NULL);
     const char *_password = env->GetStringUTFChars(password, NULL);
-    Scala::NetworkType _networkType = static_cast<Scala::NetworkType>(networkType);
+    scala::NetworkType _networkType = static_cast<scala::NetworkType>(networkType);
 
-    Bitscala::Wallet *wallet =
-            Bitscala::WalletManagerFactory::getWalletManager()->openWallet(
+    scala::Wallet *wallet =
+            scala::WalletManagerFactory::getWalletManager()->openWallet(
                     std::string(_path),
                     std::string(_password),
                     _networkType);
@@ -311,10 +311,10 @@ Java_io_scalaproject_vault_model_WalletManager_recoveryWalletJ(JNIEnv *env, jobj
     const char *_path = env->GetStringUTFChars(path, NULL);
     const char *_password = env->GetStringUTFChars(password, NULL);
     const char *_mnemonic = env->GetStringUTFChars(mnemonic, NULL);
-    Scala::NetworkType _networkType = static_cast<Scala::NetworkType>(networkType);
+    scala::NetworkType _networkType = static_cast<scala::NetworkType>(networkType);
 
-    Bitscala::Wallet *wallet =
-            Bitscala::WalletManagerFactory::getWalletManager()->recoveryWallet(
+    scala::Wallet *wallet =
+            scala::WalletManagerFactory::getWalletManager()->recoveryWallet(
                     std::string(_path),
                     std::string(_password),
                     std::string(_mnemonic),
@@ -339,13 +339,13 @@ Java_io_scalaproject_vault_model_WalletManager_createWalletFromKeysJ(JNIEnv *env
     const char *_path = env->GetStringUTFChars(path, NULL);
     const char *_password = env->GetStringUTFChars(password, NULL);
     const char *_language = env->GetStringUTFChars(language, NULL);
-    Scala::NetworkType _networkType = static_cast<Scala::NetworkType>(networkType);
+    scala::NetworkType _networkType = static_cast<scala::NetworkType>(networkType);
     const char *_addressString = env->GetStringUTFChars(addressString, NULL);
     const char *_viewKeyString = env->GetStringUTFChars(viewKeyString, NULL);
     const char *_spendKeyString = env->GetStringUTFChars(spendKeyString, NULL);
 
-    Bitscala::Wallet *wallet =
-            Bitscala::WalletManagerFactory::getWalletManager()->createWalletFromKeys(
+    scala::Wallet *wallet =
+            scala::WalletManagerFactory::getWalletManager()->createWalletFromKeys(
                     std::string(_path),
                     std::string(_password),
                     std::string(_language),
@@ -377,12 +377,12 @@ Java_io_scalaproject_vault_model_WalletManager_createWalletFromDeviceJ(JNIEnv *e
                                                                       jstring subaddressLookahead) {
     const char *_path = env->GetStringUTFChars(path, NULL);
     const char *_password = env->GetStringUTFChars(password, NULL);
-    Scala::NetworkType _networkType = static_cast<Scala::NetworkType>(networkType);
+    scala::NetworkType _networkType = static_cast<scala::NetworkType>(networkType);
     const char *_deviceName = env->GetStringUTFChars(deviceName, NULL);
     const char *_subaddressLookahead = env->GetStringUTFChars(subaddressLookahead, NULL);
 
-    Bitscala::Wallet *wallet =
-            Bitscala::WalletManagerFactory::getWalletManager()->createWalletFromDevice(
+    scala::Wallet *wallet =
+            scala::WalletManagerFactory::getWalletManager()->createWalletFromDevice(
                     std::string(_path),
                     std::string(_password),
                     _networkType,
@@ -402,7 +402,7 @@ Java_io_scalaproject_vault_model_WalletManager_walletExists(JNIEnv *env, jobject
                                                            jstring path) {
     const char *_path = env->GetStringUTFChars(path, NULL);
     bool exists =
-            Bitscala::WalletManagerFactory::getWalletManager()->walletExists(std::string(_path));
+            scala::WalletManagerFactory::getWalletManager()->walletExists(std::string(_path));
     env->ReleaseStringUTFChars(path, _path);
     return static_cast<jboolean>(exists);
 }
@@ -415,7 +415,7 @@ Java_io_scalaproject_vault_model_WalletManager_verifyWalletPassword(JNIEnv *env,
     const char *_keys_file_name = env->GetStringUTFChars(keys_file_name, NULL);
     const char *_password = env->GetStringUTFChars(password, NULL);
     bool passwordOk =
-            Bitscala::WalletManagerFactory::getWalletManager()->verifyWalletPassword(
+            scala::WalletManagerFactory::getWalletManager()->verifyWalletPassword(
                     std::string(_keys_file_name), std::string(_password), watch_only);
     env->ReleaseStringUTFChars(keys_file_name, _keys_file_name);
     env->ReleaseStringUTFChars(password, _password);
@@ -429,8 +429,8 @@ Java_io_scalaproject_vault_model_WalletManager_queryWalletDeviceJ(JNIEnv *env, j
                                                                  jstring password) {
     const char *_keys_file_name = env->GetStringUTFChars(keys_file_name, NULL);
     const char *_password = env->GetStringUTFChars(password, NULL);
-    Bitscala::Wallet::Device device_type;
-    bool ok = Bitscala::WalletManagerFactory::getWalletManager()->
+    scala::Wallet::Device device_type;
+    bool ok = scala::WalletManagerFactory::getWalletManager()->
             queryWalletDevice(device_type, std::string(_keys_file_name), std::string(_password));
     env->ReleaseStringUTFChars(keys_file_name, _keys_file_name);
     env->ReleaseStringUTFChars(password, _password);
@@ -445,7 +445,7 @@ Java_io_scalaproject_vault_model_WalletManager_findWallets(JNIEnv *env, jobject 
                                                           jstring path) {
     const char *_path = env->GetStringUTFChars(path, NULL);
     std::vector<std::string> walletPaths =
-            Bitscala::WalletManagerFactory::getWalletManager()->findWallets(std::string(_path));
+            scala::WalletManagerFactory::getWalletManager()->findWallets(std::string(_path));
     env->ReleaseStringUTFChars(path, _path);
     return cpp2java(env, walletPaths);
 }
@@ -456,7 +456,7 @@ JNIEXPORT void JNICALL
 Java_io_scalaproject_vault_model_WalletManager_setDaemonAddressJ(JNIEnv *env, jobject instance,
                                                                 jstring address) {
     const char *_address = env->GetStringUTFChars(address, NULL);
-    Bitscala::WalletManagerFactory::getWalletManager()->setDaemonAddress(std::string(_address));
+    scala::WalletManagerFactory::getWalletManager()->setDaemonAddress(std::string(_address));
     env->ReleaseStringUTFChars(address, _address);
 }
 
@@ -466,40 +466,40 @@ Java_io_scalaproject_vault_model_WalletManager_getDaemonVersion(JNIEnv *env,
                                                                jobject instance) {
     uint32_t version;
     bool isConnected =
-            Bitscala::WalletManagerFactory::getWalletManager()->connected(&version);
+            scala::WalletManagerFactory::getWalletManager()->connected(&version);
     if (!isConnected) version = 0;
     return version;
 }
 
 JNIEXPORT jlong JNICALL
 Java_io_scalaproject_vault_model_WalletManager_getBlockchainHeight(JNIEnv *env, jobject instance) {
-    return Bitscala::WalletManagerFactory::getWalletManager()->blockchainHeight();
+    return scala::WalletManagerFactory::getWalletManager()->blockchainHeight();
 }
 
 JNIEXPORT jlong JNICALL
 Java_io_scalaproject_vault_model_WalletManager_getBlockchainTargetHeight(JNIEnv *env,
                                                                         jobject instance) {
-    return Bitscala::WalletManagerFactory::getWalletManager()->blockchainTargetHeight();
+    return scala::WalletManagerFactory::getWalletManager()->blockchainTargetHeight();
 }
 
 JNIEXPORT jlong JNICALL
 Java_io_scalaproject_vault_model_WalletManager_getNetworkDifficulty(JNIEnv *env, jobject instance) {
-    return Bitscala::WalletManagerFactory::getWalletManager()->networkDifficulty();
+    return scala::WalletManagerFactory::getWalletManager()->networkDifficulty();
 }
 
 JNIEXPORT jdouble JNICALL
 Java_io_scalaproject_vault_model_WalletManager_getMiningHashRate(JNIEnv *env, jobject instance) {
-    return Bitscala::WalletManagerFactory::getWalletManager()->miningHashRate();
+    return scala::WalletManagerFactory::getWalletManager()->miningHashRate();
 }
 
 JNIEXPORT jlong JNICALL
 Java_io_scalaproject_vault_model_WalletManager_getBlockTarget(JNIEnv *env, jobject instance) {
-    return Bitscala::WalletManagerFactory::getWalletManager()->blockTarget();
+    return scala::WalletManagerFactory::getWalletManager()->blockTarget();
 }
 
 JNIEXPORT jboolean JNICALL
 Java_io_scalaproject_vault_model_WalletManager_isMining(JNIEnv *env, jobject instance) {
-    return static_cast<jboolean>(Bitscala::WalletManagerFactory::getWalletManager()->isMining());
+    return static_cast<jboolean>(scala::WalletManagerFactory::getWalletManager()->isMining());
 }
 
 JNIEXPORT jboolean JNICALL
@@ -509,7 +509,7 @@ Java_io_scalaproject_vault_model_WalletManager_startMining(JNIEnv *env, jobject 
                                                           jboolean ignore_battery) {
     const char *_address = env->GetStringUTFChars(address, NULL);
     bool success =
-            Bitscala::WalletManagerFactory::getWalletManager()->startMining(std::string(_address),
+            scala::WalletManagerFactory::getWalletManager()->startMining(std::string(_address),
                                                                              background_mining,
                                                                              ignore_battery);
     env->ReleaseStringUTFChars(address, _address);
@@ -518,7 +518,7 @@ Java_io_scalaproject_vault_model_WalletManager_startMining(JNIEnv *env, jobject 
 
 JNIEXPORT jboolean JNICALL
 Java_io_scalaproject_vault_model_WalletManager_stopMining(JNIEnv *env, jobject instance) {
-    return static_cast<jboolean>(Bitscala::WalletManagerFactory::getWalletManager()->stopMining());
+    return static_cast<jboolean>(scala::WalletManagerFactory::getWalletManager()->stopMining());
 }
 
 JNIEXPORT jstring JNICALL
@@ -528,7 +528,7 @@ Java_io_scalaproject_vault_model_WalletManager_resolveOpenAlias(JNIEnv *env, job
     const char *_address = env->GetStringUTFChars(address, NULL);
     bool _dnssec_valid = (bool) dnssec_valid;
     std::string resolvedAlias =
-            Bitscala::WalletManagerFactory::getWalletManager()->resolveOpenAlias(
+            scala::WalletManagerFactory::getWalletManager()->resolveOpenAlias(
                     std::string(_address),
                     _dnssec_valid);
     env->ReleaseStringUTFChars(address, _address);
@@ -540,8 +540,8 @@ Java_io_scalaproject_vault_model_WalletManager_resolveOpenAlias(JNIEnv *env, job
 JNIEXPORT jboolean JNICALL
 Java_io_scalaproject_vault_model_WalletManager_closeJ(JNIEnv *env, jobject instance,
                                                      jobject walletInstance) {
-    Bitscala::Wallet *wallet = getHandle<Bitscala::Wallet>(env, walletInstance);
-    bool closeSuccess = Bitscala::WalletManagerFactory::getWalletManager()->closeWallet(wallet,
+    scala::Wallet *wallet = getHandle<scala::Wallet>(env, walletInstance);
+    bool closeSuccess = scala::WalletManagerFactory::getWalletManager()->closeWallet(wallet,
                                                                                          false);
     if (closeSuccess) {
         MyWalletListener *walletListener = getHandle<MyWalletListener>(env, walletInstance,
@@ -564,13 +564,13 @@ Java_io_scalaproject_vault_model_WalletManager_closeJ(JNIEnv *env, jobject insta
 
 JNIEXPORT jstring JNICALL
 Java_io_scalaproject_vault_model_Wallet_getSeed(JNIEnv *env, jobject instance) {
-    Bitscala::Wallet *wallet = getHandle<Bitscala::Wallet>(env, instance);
+    scala::Wallet *wallet = getHandle<scala::Wallet>(env, instance);
     return env->NewStringUTF(wallet->seed().c_str());
 }
 
 JNIEXPORT jstring JNICALL
 Java_io_scalaproject_vault_model_Wallet_getSeedLanguage(JNIEnv *env, jobject instance) {
-    Bitscala::Wallet *wallet = getHandle<Bitscala::Wallet>(env, instance);
+    scala::Wallet *wallet = getHandle<scala::Wallet>(env, instance);
     return env->NewStringUTF(wallet->getSeedLanguage().c_str());
 }
 
@@ -578,14 +578,14 @@ JNIEXPORT void JNICALL
 Java_io_scalaproject_vault_model_Wallet_setSeedLanguage(JNIEnv *env, jobject instance,
                                                        jstring language) {
     const char *_language = env->GetStringUTFChars(language, NULL);
-    Bitscala::Wallet *wallet = getHandle<Bitscala::Wallet>(env, instance);
+    scala::Wallet *wallet = getHandle<scala::Wallet>(env, instance);
     wallet->setSeedLanguage(std::string(_language));
     env->ReleaseStringUTFChars(language, _language);
 }
 
 JNIEXPORT jint JNICALL
 Java_io_scalaproject_vault_model_Wallet_getStatusJ(JNIEnv *env, jobject instance) {
-    Bitscala::Wallet *wallet = getHandle<Bitscala::Wallet>(env, instance);
+    scala::Wallet *wallet = getHandle<scala::Wallet>(env, instance);
     return wallet->status();
 }
 
@@ -601,7 +601,7 @@ jobject newWalletStatusInstance(JNIEnv *env, int status, const std::string &erro
 
 JNIEXPORT jobject JNICALL
 Java_io_scalaproject_vault_model_Wallet_statusWithErrorString(JNIEnv *env, jobject instance) {
-    Bitscala::Wallet *wallet = getHandle<Bitscala::Wallet>(env, instance);
+    scala::Wallet *wallet = getHandle<scala::Wallet>(env, instance);
 
     int status;
     std::string errorString;
@@ -614,7 +614,7 @@ JNIEXPORT jboolean JNICALL
 Java_io_scalaproject_vault_model_Wallet_setPassword(JNIEnv *env, jobject instance,
                                                    jstring password) {
     const char *_password = env->GetStringUTFChars(password, NULL);
-    Bitscala::Wallet *wallet = getHandle<Bitscala::Wallet>(env, instance);
+    scala::Wallet *wallet = getHandle<scala::Wallet>(env, instance);
     bool success = wallet->setPassword(std::string(_password));
     env->ReleaseStringUTFChars(password, _password);
     return static_cast<jboolean>(success);
@@ -624,20 +624,20 @@ JNIEXPORT jstring JNICALL
 Java_io_scalaproject_vault_model_Wallet_getAddressJ(JNIEnv *env, jobject instance,
                                                    jint accountIndex,
                                                    jint addressIndex) {
-    Bitscala::Wallet *wallet = getHandle<Bitscala::Wallet>(env, instance);
+    scala::Wallet *wallet = getHandle<scala::Wallet>(env, instance);
     return env->NewStringUTF(
             wallet->address((uint32_t) accountIndex, (uint32_t) addressIndex).c_str());
 }
 
 JNIEXPORT jstring JNICALL
 Java_io_scalaproject_vault_model_Wallet_getPath(JNIEnv *env, jobject instance) {
-    Bitscala::Wallet *wallet = getHandle<Bitscala::Wallet>(env, instance);
+    scala::Wallet *wallet = getHandle<scala::Wallet>(env, instance);
     return env->NewStringUTF(wallet->path().c_str());
 }
 
 JNIEXPORT jint JNICALL
 Java_io_scalaproject_vault_model_Wallet_nettype(JNIEnv *env, jobject instance) {
-    Bitscala::Wallet *wallet = getHandle<Bitscala::Wallet>(env, instance);
+    scala::Wallet *wallet = getHandle<scala::Wallet>(env, instance);
     return wallet->nettype();
 }
 
@@ -648,7 +648,7 @@ JNIEXPORT jstring JNICALL
 Java_io_scalaproject_vault_model_Wallet_getIntegratedAddress(JNIEnv *env, jobject instance,
                                                             jstring payment_id) {
     const char *_payment_id = env->GetStringUTFChars(payment_id, NULL);
-    Bitscala::Wallet *wallet = getHandle<Bitscala::Wallet>(env, instance);
+    scala::Wallet *wallet = getHandle<scala::Wallet>(env, instance);
     std::string address = wallet->integratedAddress(_payment_id);
     env->ReleaseStringUTFChars(payment_id, _payment_id);
     return env->NewStringUTF(address.c_str());
@@ -656,13 +656,13 @@ Java_io_scalaproject_vault_model_Wallet_getIntegratedAddress(JNIEnv *env, jobjec
 
 JNIEXPORT jstring JNICALL
 Java_io_scalaproject_vault_model_Wallet_getSecretViewKey(JNIEnv *env, jobject instance) {
-    Bitscala::Wallet *wallet = getHandle<Bitscala::Wallet>(env, instance);
+    scala::Wallet *wallet = getHandle<scala::Wallet>(env, instance);
     return env->NewStringUTF(wallet->secretViewKey().c_str());
 }
 
 JNIEXPORT jstring JNICALL
 Java_io_scalaproject_vault_model_Wallet_getSecretSpendKey(JNIEnv *env, jobject instance) {
-    Bitscala::Wallet *wallet = getHandle<Bitscala::Wallet>(env, instance);
+    scala::Wallet *wallet = getHandle<scala::Wallet>(env, instance);
     return env->NewStringUTF(wallet->secretSpendKey().c_str());
 }
 
@@ -670,7 +670,7 @@ JNIEXPORT jboolean JNICALL
 Java_io_scalaproject_vault_model_Wallet_store(JNIEnv *env, jobject instance,
                                              jstring path) {
     const char *_path = env->GetStringUTFChars(path, NULL);
-    Bitscala::Wallet *wallet = getHandle<Bitscala::Wallet>(env, instance);
+    scala::Wallet *wallet = getHandle<scala::Wallet>(env, instance);
     bool success = wallet->store(std::string(_path));
     if (!success) {
         LOGE("store() %s", wallet->errorString().c_str());
@@ -681,7 +681,7 @@ Java_io_scalaproject_vault_model_Wallet_store(JNIEnv *env, jobject instance,
 
 JNIEXPORT jstring JNICALL
 Java_io_scalaproject_vault_model_Wallet_getFilename(JNIEnv *env, jobject instance) {
-    Bitscala::Wallet *wallet = getHandle<Bitscala::Wallet>(env, instance);
+    scala::Wallet *wallet = getHandle<scala::Wallet>(env, instance);
     return env->NewStringUTF(wallet->filename().c_str());
 }
 
@@ -695,7 +695,7 @@ Java_io_scalaproject_vault_model_Wallet_initJ(JNIEnv *env, jobject instance,
     const char *_daemon_address = env->GetStringUTFChars(daemon_address, NULL);
     const char *_daemon_username = env->GetStringUTFChars(daemon_username, NULL);
     const char *_daemon_password = env->GetStringUTFChars(daemon_password, NULL);
-    Bitscala::Wallet *wallet = getHandle<Bitscala::Wallet>(env, instance);
+    scala::Wallet *wallet = getHandle<scala::Wallet>(env, instance);
     bool status = wallet->init(_daemon_address, (uint64_t) upper_transaction_size_limit,
                                _daemon_username,
                                _daemon_password);
@@ -710,13 +710,13 @@ Java_io_scalaproject_vault_model_Wallet_initJ(JNIEnv *env, jobject instance,
 JNIEXPORT void JNICALL
 Java_io_scalaproject_vault_model_Wallet_setRestoreHeight(JNIEnv *env, jobject instance,
                                                         jlong height) {
-    Bitscala::Wallet *wallet = getHandle<Bitscala::Wallet>(env, instance);
+    scala::Wallet *wallet = getHandle<scala::Wallet>(env, instance);
     wallet->setRefreshFromBlockHeight((uint64_t) height);
 }
 
 JNIEXPORT jlong JNICALL
 Java_io_scalaproject_vault_model_Wallet_getRestoreHeight(JNIEnv *env, jobject instance) {
-    Bitscala::Wallet *wallet = getHandle<Bitscala::Wallet>(env, instance);
+    scala::Wallet *wallet = getHandle<scala::Wallet>(env, instance);
     return wallet->getRefreshFromBlockHeight();
 }
 
@@ -725,7 +725,7 @@ Java_io_scalaproject_vault_model_Wallet_getRestoreHeight(JNIEnv *env, jobject in
 
 JNIEXPORT jint JNICALL
 Java_io_scalaproject_vault_model_Wallet_getConnectionStatusJ(JNIEnv *env, jobject instance) {
-    Bitscala::Wallet *wallet = getHandle<Bitscala::Wallet>(env, instance);
+    scala::Wallet *wallet = getHandle<scala::Wallet>(env, instance);
     return wallet->connected();
 }
 //TODO virtual void setTrustedDaemon(bool arg) = 0;
@@ -734,71 +734,71 @@ Java_io_scalaproject_vault_model_Wallet_getConnectionStatusJ(JNIEnv *env, jobjec
 JNIEXPORT jlong JNICALL
 Java_io_scalaproject_vault_model_Wallet_getBalance(JNIEnv *env, jobject instance,
                                                   jint accountIndex) {
-    Bitscala::Wallet *wallet = getHandle<Bitscala::Wallet>(env, instance);
+    scala::Wallet *wallet = getHandle<scala::Wallet>(env, instance);
     return wallet->balance((uint32_t) accountIndex);
 }
 
 JNIEXPORT jlong JNICALL
 Java_io_scalaproject_vault_model_Wallet_getBalanceAll(JNIEnv *env, jobject instance) {
-    Bitscala::Wallet *wallet = getHandle<Bitscala::Wallet>(env, instance);
+    scala::Wallet *wallet = getHandle<scala::Wallet>(env, instance);
     return wallet->balanceAll();
 }
 
 JNIEXPORT jlong JNICALL
 Java_io_scalaproject_vault_model_Wallet_getUnlockedBalance(JNIEnv *env, jobject instance,
                                                           jint accountIndex) {
-    Bitscala::Wallet *wallet = getHandle<Bitscala::Wallet>(env, instance);
+    scala::Wallet *wallet = getHandle<scala::Wallet>(env, instance);
     return wallet->unlockedBalance((uint32_t) accountIndex);
 }
 
 JNIEXPORT jlong JNICALL
 Java_io_scalaproject_vault_model_Wallet_getUnlockedBalanceAll(JNIEnv *env, jobject instance) {
-    Bitscala::Wallet *wallet = getHandle<Bitscala::Wallet>(env, instance);
+    scala::Wallet *wallet = getHandle<scala::Wallet>(env, instance);
     return wallet->unlockedBalanceAll();
 }
 
 JNIEXPORT jboolean JNICALL
 Java_io_scalaproject_vault_model_Wallet_isWatchOnly(JNIEnv *env, jobject instance) {
-    Bitscala::Wallet *wallet = getHandle<Bitscala::Wallet>(env, instance);
+    scala::Wallet *wallet = getHandle<scala::Wallet>(env, instance);
     return static_cast<jboolean>(wallet->watchOnly());
 }
 
 JNIEXPORT jlong JNICALL
 Java_io_scalaproject_vault_model_Wallet_getBlockChainHeight(JNIEnv *env, jobject instance) {
-    Bitscala::Wallet *wallet = getHandle<Bitscala::Wallet>(env, instance);
+    scala::Wallet *wallet = getHandle<scala::Wallet>(env, instance);
     return wallet->blockChainHeight();
 }
 
 JNIEXPORT jlong JNICALL
 Java_io_scalaproject_vault_model_Wallet_getApproximateBlockChainHeight(JNIEnv *env,
                                                                       jobject instance) {
-    Bitscala::Wallet *wallet = getHandle<Bitscala::Wallet>(env, instance);
+    scala::Wallet *wallet = getHandle<scala::Wallet>(env, instance);
     return wallet->approximateBlockChainHeight();
 }
 
 JNIEXPORT jlong JNICALL
 Java_io_scalaproject_vault_model_Wallet_getDaemonBlockChainHeight(JNIEnv *env, jobject instance) {
-    Bitscala::Wallet *wallet = getHandle<Bitscala::Wallet>(env, instance);
+    scala::Wallet *wallet = getHandle<scala::Wallet>(env, instance);
     return wallet->daemonBlockChainHeight();
 }
 
 JNIEXPORT jlong JNICALL
 Java_io_scalaproject_vault_model_Wallet_getDaemonBlockChainTargetHeight(JNIEnv *env,
                                                                        jobject instance) {
-    Bitscala::Wallet *wallet = getHandle<Bitscala::Wallet>(env, instance);
+    scala::Wallet *wallet = getHandle<scala::Wallet>(env, instance);
     return wallet->daemonBlockChainTargetHeight();
 }
 
 JNIEXPORT jboolean JNICALL
 Java_io_scalaproject_vault_model_Wallet_isSynchronizedJ(JNIEnv *env, jobject instance) {
-    Bitscala::Wallet *wallet = getHandle<Bitscala::Wallet>(env, instance);
+    scala::Wallet *wallet = getHandle<scala::Wallet>(env, instance);
     return static_cast<jboolean>(wallet->synchronized());
 }
 
 JNIEXPORT jint JNICALL
 Java_io_scalaproject_vault_model_Wallet_getDeviceTypeJ(JNIEnv *env, jobject instance) {
-    Bitscala::Wallet *wallet = getHandle<Bitscala::Wallet>(env, instance);
-    Bitscala::Wallet::Device device_type = wallet->getDeviceType();
+    scala::Wallet *wallet = getHandle<scala::Wallet>(env, instance);
+    scala::Wallet::Device device_type = wallet->getDeviceType();
     return static_cast<jint>(device_type);
 }
 
@@ -832,14 +832,14 @@ Java_io_scalaproject_vault_util_KeyStoreHelper_slowHash(JNIEnv *env, jclass claz
 JNIEXPORT jstring JNICALL
 Java_io_scalaproject_vault_model_Wallet_getDisplayAmount(JNIEnv *env, jclass clazz,
                                                         jlong amount) {
-    return env->NewStringUTF(Bitscala::Wallet::displayAmount(amount).c_str());
+    return env->NewStringUTF(scala::Wallet::displayAmount(amount).c_str());
 }
 
 JNIEXPORT jlong JNICALL
 Java_io_scalaproject_vault_model_Wallet_getAmountFromString(JNIEnv *env, jclass clazz,
                                                            jstring amount) {
     const char *_amount = env->GetStringUTFChars(amount, NULL);
-    uint64_t x = Bitscala::Wallet::amountFromString(_amount);
+    uint64_t x = scala::Wallet::amountFromString(_amount);
     env->ReleaseStringUTFChars(amount, _amount);
     return x;
 }
@@ -847,19 +847,19 @@ Java_io_scalaproject_vault_model_Wallet_getAmountFromString(JNIEnv *env, jclass 
 JNIEXPORT jlong JNICALL
 Java_io_scalaproject_vault_model_Wallet_getAmountFromDouble(JNIEnv *env, jclass clazz,
                                                            jdouble amount) {
-    return Bitscala::Wallet::amountFromDouble(amount);
+    return scala::Wallet::amountFromDouble(amount);
 }
 
 JNIEXPORT jstring JNICALL
 Java_io_scalaproject_vault_model_Wallet_generatePaymentId(JNIEnv *env, jclass clazz) {
-    return env->NewStringUTF(Bitscala::Wallet::genPaymentId().c_str());
+    return env->NewStringUTF(scala::Wallet::genPaymentId().c_str());
 }
 
 JNIEXPORT jboolean JNICALL
 Java_io_scalaproject_vault_model_Wallet_isPaymentIdValid(JNIEnv *env, jclass clazz,
                                                         jstring payment_id) {
     const char *_payment_id = env->GetStringUTFChars(payment_id, NULL);
-    bool isValid = Bitscala::Wallet::paymentIdValid(_payment_id);
+    bool isValid = scala::Wallet::paymentIdValid(_payment_id);
     env->ReleaseStringUTFChars(payment_id, _payment_id);
     return static_cast<jboolean>(isValid);
 }
@@ -868,8 +868,8 @@ JNIEXPORT jboolean JNICALL
 Java_io_scalaproject_vault_model_Wallet_isAddressValid(JNIEnv *env, jclass clazz,
                                                       jstring address, jint networkType) {
     const char *_address = env->GetStringUTFChars(address, NULL);
-    Scala::NetworkType _networkType = static_cast<Scala::NetworkType>(networkType);
-    bool isValid = Bitscala::Wallet::addressValid(_address, _networkType);
+    scala::NetworkType _networkType = static_cast<scala::NetworkType>(networkType);
+    bool isValid = scala::Wallet::addressValid(_address, _networkType);
     env->ReleaseStringUTFChars(address, _address);
     return static_cast<jboolean>(isValid);
 }
@@ -878,39 +878,39 @@ JNIEXPORT jstring JNICALL
 Java_io_scalaproject_vault_model_Wallet_getPaymentIdFromAddress(JNIEnv *env, jclass clazz,
                                                                jstring address,
                                                                jint networkType) {
-    Scala::NetworkType _networkType = static_cast<Scala::NetworkType>(networkType);
+    scala::NetworkType _networkType = static_cast<scala::NetworkType>(networkType);
     const char *_address = env->GetStringUTFChars(address, NULL);
-    std::string payment_id = Bitscala::Wallet::paymentIdFromAddress(_address, _networkType);
+    std::string payment_id = scala::Wallet::paymentIdFromAddress(_address, _networkType);
     env->ReleaseStringUTFChars(address, _address);
     return env->NewStringUTF(payment_id.c_str());
 }
 
 JNIEXPORT jlong JNICALL
 Java_io_scalaproject_vault_model_Wallet_getMaximumAllowedAmount(JNIEnv *env, jclass clazz) {
-    return Bitscala::Wallet::maximumAllowedAmount();
+    return scala::Wallet::maximumAllowedAmount();
 }
 
 JNIEXPORT void JNICALL
 Java_io_scalaproject_vault_model_Wallet_startRefresh(JNIEnv *env, jobject instance) {
-    Bitscala::Wallet *wallet = getHandle<Bitscala::Wallet>(env, instance);
+    scala::Wallet *wallet = getHandle<scala::Wallet>(env, instance);
     wallet->startRefresh();
 }
 
 JNIEXPORT void JNICALL
 Java_io_scalaproject_vault_model_Wallet_pauseRefresh(JNIEnv *env, jobject instance) {
-    Bitscala::Wallet *wallet = getHandle<Bitscala::Wallet>(env, instance);
+    scala::Wallet *wallet = getHandle<scala::Wallet>(env, instance);
     wallet->pauseRefresh();
 }
 
 JNIEXPORT jboolean JNICALL
 Java_io_scalaproject_vault_model_Wallet_refresh(JNIEnv *env, jobject instance) {
-    Bitscala::Wallet *wallet = getHandle<Bitscala::Wallet>(env, instance);
+    scala::Wallet *wallet = getHandle<scala::Wallet>(env, instance);
     return static_cast<jboolean>(wallet->refresh());
 }
 
 JNIEXPORT void JNICALL
 Java_io_scalaproject_vault_model_Wallet_refreshAsync(JNIEnv *env, jobject instance) {
-    Bitscala::Wallet *wallet = getHandle<Bitscala::Wallet>(env, instance);
+    scala::Wallet *wallet = getHandle<scala::Wallet>(env, instance);
     wallet->refreshAsync();
 }
 
@@ -918,8 +918,8 @@ Java_io_scalaproject_vault_model_Wallet_refreshAsync(JNIEnv *env, jobject instan
 
 //virtual void rescanBlockchainAsync() = 0;
 JNIEXPORT void JNICALL
-Java_io_scalaproject_vault_model_Wallet_rescanBlockchainAsync(JNIEnv *env, jobject instance) {
-    Bitscala::Wallet *wallet = getHandle<Bitscala::Wallet>(env, instance);
+Java_io_scalaproject_vault_model_Wallet_rescanBlockchainAsyncJ(JNIEnv *env, jobject instance) {
+    scala::Wallet *wallet = getHandle<scala::Wallet>(env, instance);
     wallet->rescanBlockchainAsync();
 }
 
@@ -936,11 +936,11 @@ Java_io_scalaproject_vault_model_Wallet_createTransactionJ(JNIEnv *env, jobject 
 
     const char *_dst_addr = env->GetStringUTFChars(dst_addr, NULL);
     const char *_payment_id = env->GetStringUTFChars(payment_id, NULL);
-    Bitscala::PendingTransaction::Priority _priority =
-            static_cast<Bitscala::PendingTransaction::Priority>(priority);
-    Bitscala::Wallet *wallet = getHandle<Bitscala::Wallet>(env, instance);
+    scala::PendingTransaction::Priority _priority =
+            static_cast<scala::PendingTransaction::Priority>(priority);
+    scala::Wallet *wallet = getHandle<scala::Wallet>(env, instance);
 
-    Bitscala::PendingTransaction *tx = wallet->createTransaction(_dst_addr, _payment_id,
+    scala::PendingTransaction *tx = wallet->createTransaction(_dst_addr, _payment_id,
                                                                   amount, (uint32_t) mixin_count,
                                                                   _priority,
                                                                   (uint32_t) accountIndex);
@@ -959,13 +959,13 @@ Java_io_scalaproject_vault_model_Wallet_createSweepTransaction(JNIEnv *env, jobj
 
     const char *_dst_addr = env->GetStringUTFChars(dst_addr, NULL);
     const char *_payment_id = env->GetStringUTFChars(payment_id, NULL);
-    Bitscala::PendingTransaction::Priority _priority =
-            static_cast<Bitscala::PendingTransaction::Priority>(priority);
-    Bitscala::Wallet *wallet = getHandle<Bitscala::Wallet>(env, instance);
+    scala::PendingTransaction::Priority _priority =
+            static_cast<scala::PendingTransaction::Priority>(priority);
+    scala::Wallet *wallet = getHandle<scala::Wallet>(env, instance);
 
-    Scala::optional<uint64_t> empty;
+    scala::optional<uint64_t> empty;
 
-    Bitscala::PendingTransaction *tx = wallet->createTransaction(_dst_addr, _payment_id,
+    scala::PendingTransaction *tx = wallet->createTransaction(_dst_addr, _payment_id,
                                                                   empty, (uint32_t) mixin_count,
                                                                   _priority,
                                                                   (uint32_t) accountIndex);
@@ -978,8 +978,8 @@ Java_io_scalaproject_vault_model_Wallet_createSweepTransaction(JNIEnv *env, jobj
 JNIEXPORT jlong JNICALL
 Java_io_scalaproject_vault_model_Wallet_createSweepUnmixableTransactionJ(JNIEnv *env,
                                                                         jobject instance) {
-    Bitscala::Wallet *wallet = getHandle<Bitscala::Wallet>(env, instance);
-    Bitscala::PendingTransaction *tx = wallet->createSweepUnmixableTransaction();
+    scala::Wallet *wallet = getHandle<scala::Wallet>(env, instance);
+    scala::PendingTransaction *tx = wallet->createSweepUnmixableTransaction();
     return reinterpret_cast<jlong>(tx);
 }
 
@@ -989,9 +989,9 @@ Java_io_scalaproject_vault_model_Wallet_createSweepUnmixableTransactionJ(JNIEnv 
 JNIEXPORT void JNICALL
 Java_io_scalaproject_vault_model_Wallet_disposeTransaction(JNIEnv *env, jobject instance,
                                                           jobject pendingTransaction) {
-    Bitscala::Wallet *wallet = getHandle<Bitscala::Wallet>(env, instance);
-    Bitscala::PendingTransaction *_pendingTransaction =
-            getHandle<Bitscala::PendingTransaction>(env, pendingTransaction);
+    scala::Wallet *wallet = getHandle<scala::Wallet>(env, instance);
+    scala::PendingTransaction *_pendingTransaction =
+            getHandle<scala::PendingTransaction>(env, pendingTransaction);
     wallet->disposeTransaction(_pendingTransaction);
 }
 
@@ -1002,7 +1002,7 @@ Java_io_scalaproject_vault_model_Wallet_disposeTransaction(JNIEnv *env, jobject 
 //virtual TransactionHistory * history() const = 0;
 JNIEXPORT jlong JNICALL
 Java_io_scalaproject_vault_model_Wallet_getHistoryJ(JNIEnv *env, jobject instance) {
-    Bitscala::Wallet *wallet = getHandle<Bitscala::Wallet>(env, instance);
+    scala::Wallet *wallet = getHandle<scala::Wallet>(env, instance);
     return reinterpret_cast<jlong>(wallet->history());
 }
 
@@ -1011,7 +1011,7 @@ Java_io_scalaproject_vault_model_Wallet_getHistoryJ(JNIEnv *env, jobject instanc
 JNIEXPORT jlong JNICALL
 Java_io_scalaproject_vault_model_Wallet_setListenerJ(JNIEnv *env, jobject instance,
                                                     jobject javaListener) {
-    Bitscala::Wallet *wallet = getHandle<Bitscala::Wallet>(env, instance);
+    scala::Wallet *wallet = getHandle<scala::Wallet>(env, instance);
     wallet->setListener(nullptr); // clear old listener
     // delete old listener
     MyWalletListener *oldListener = getHandle<MyWalletListener>(env, instance,
@@ -1032,13 +1032,13 @@ Java_io_scalaproject_vault_model_Wallet_setListenerJ(JNIEnv *env, jobject instan
 
 JNIEXPORT jint JNICALL
 Java_io_scalaproject_vault_model_Wallet_getDefaultMixin(JNIEnv *env, jobject instance) {
-    Bitscala::Wallet *wallet = getHandle<Bitscala::Wallet>(env, instance);
+    scala::Wallet *wallet = getHandle<scala::Wallet>(env, instance);
     return wallet->defaultMixin();
 }
 
 JNIEXPORT void JNICALL
 Java_io_scalaproject_vault_model_Wallet_setDefaultMixin(JNIEnv *env, jobject instance, jint mixin) {
-    Bitscala::Wallet *wallet = getHandle<Bitscala::Wallet>(env, instance);
+    scala::Wallet *wallet = getHandle<scala::Wallet>(env, instance);
     return wallet->setDefaultMixin(mixin);
 }
 
@@ -1049,7 +1049,7 @@ Java_io_scalaproject_vault_model_Wallet_setUserNote(JNIEnv *env, jobject instanc
     const char *_txid = env->GetStringUTFChars(txid, NULL);
     const char *_note = env->GetStringUTFChars(note, NULL);
 
-    Bitscala::Wallet *wallet = getHandle<Bitscala::Wallet>(env, instance);
+    scala::Wallet *wallet = getHandle<scala::Wallet>(env, instance);
 
     bool success = wallet->setUserNote(_txid, _note);
 
@@ -1065,7 +1065,7 @@ Java_io_scalaproject_vault_model_Wallet_getUserNote(JNIEnv *env, jobject instanc
 
     const char *_txid = env->GetStringUTFChars(txid, NULL);
 
-    Bitscala::Wallet *wallet = getHandle<Bitscala::Wallet>(env, instance);
+    scala::Wallet *wallet = getHandle<scala::Wallet>(env, instance);
 
     std::string note = wallet->getUserNote(_txid);
 
@@ -1079,7 +1079,7 @@ Java_io_scalaproject_vault_model_Wallet_getTxKey(JNIEnv *env, jobject instance,
 
     const char *_txid = env->GetStringUTFChars(txid, NULL);
 
-    Bitscala::Wallet *wallet = getHandle<Bitscala::Wallet>(env, instance);
+    scala::Wallet *wallet = getHandle<scala::Wallet>(env, instance);
 
     std::string txKey = wallet->getTxKey(_txid);
 
@@ -1094,7 +1094,7 @@ Java_io_scalaproject_vault_model_Wallet_addAccount(JNIEnv *env, jobject instance
 
     const char *_label = env->GetStringUTFChars(label, NULL);
 
-    Bitscala::Wallet *wallet = getHandle<Bitscala::Wallet>(env, instance);
+    scala::Wallet *wallet = getHandle<scala::Wallet>(env, instance);
     wallet->addSubaddressAccount(_label);
 
     env->ReleaseStringUTFChars(label, _label);
@@ -1105,7 +1105,7 @@ JNIEXPORT jstring JNICALL
 Java_io_scalaproject_vault_model_Wallet_getSubaddressLabel(JNIEnv *env, jobject instance,
                                                           jint accountIndex, jint addressIndex) {
 
-    Bitscala::Wallet *wallet = getHandle<Bitscala::Wallet>(env, instance);
+    scala::Wallet *wallet = getHandle<scala::Wallet>(env, instance);
 
     std::string label = wallet->getSubaddressLabel((uint32_t) accountIndex,
                                                    (uint32_t) addressIndex);
@@ -1121,7 +1121,7 @@ Java_io_scalaproject_vault_model_Wallet_setSubaddressLabel(JNIEnv *env, jobject 
 
     const char *_label = env->GetStringUTFChars(label, NULL);
 
-    Bitscala::Wallet *wallet = getHandle<Bitscala::Wallet>(env, instance);
+    scala::Wallet *wallet = getHandle<scala::Wallet>(env, instance);
     wallet->setSubaddressLabel(accountIndex, addressIndex, _label);
 
     env->ReleaseStringUTFChars(label, _label);
@@ -1130,7 +1130,7 @@ Java_io_scalaproject_vault_model_Wallet_setSubaddressLabel(JNIEnv *env, jobject 
 // virtual size_t numSubaddressAccounts() const = 0;
 JNIEXPORT jint JNICALL
 Java_io_scalaproject_vault_model_Wallet_getNumAccounts(JNIEnv *env, jobject instance) {
-    Bitscala::Wallet *wallet = getHandle<Bitscala::Wallet>(env, instance);
+    scala::Wallet *wallet = getHandle<scala::Wallet>(env, instance);
     return static_cast<jint>(wallet->numSubaddressAccounts());
 }
 
@@ -1138,7 +1138,7 @@ Java_io_scalaproject_vault_model_Wallet_getNumAccounts(JNIEnv *env, jobject inst
 JNIEXPORT jint JNICALL
 Java_io_scalaproject_vault_model_Wallet_getNumSubaddresses(JNIEnv *env, jobject instance,
                                                           jint accountIndex) {
-    Bitscala::Wallet *wallet = getHandle<Bitscala::Wallet>(env, instance);
+    scala::Wallet *wallet = getHandle<scala::Wallet>(env, instance);
     return static_cast<jint>(wallet->numSubaddresses(accountIndex));
 }
 
@@ -1149,7 +1149,7 @@ Java_io_scalaproject_vault_model_Wallet_addSubaddress(JNIEnv *env, jobject insta
                                                      jstring label) {
 
     const char *_label = env->GetStringUTFChars(label, NULL);
-    Bitscala::Wallet *wallet = getHandle<Bitscala::Wallet>(env, instance);
+    scala::Wallet *wallet = getHandle<scala::Wallet>(env, instance);
     wallet->addSubaddress(accountIndex, _label);
     env->ReleaseStringUTFChars(label, _label);
 }
@@ -1158,12 +1158,12 @@ Java_io_scalaproject_vault_model_Wallet_addSubaddress(JNIEnv *env, jobject insta
 Java_io_scalaproject_vault_model_Wallet_getLastSubaddress(JNIEnv *env, jobject instance,
                                                          jint accountIndex) {
 
-    Bitscala::Wallet *wallet = getHandle<Bitscala::Wallet>(env, instance);
+    scala::Wallet *wallet = getHandle<scala::Wallet>(env, instance);
     size_t num = wallet->numSubaddresses(accountIndex);
     //wallet->subaddress()->getAll()[num]->getAddress().c_str()
-    Scala::Subaddress *s = wallet->subaddress();
+    scala::Subaddress *s = wallet->subaddress();
     s->refresh(accountIndex);
-    std::vector<Scala::SubaddressRow *> v = s->getAll();
+    std::vector<scala::SubaddressRow *> v = s->getAll();
     return env->NewStringUTF(v[num - 1]->getAddress().c_str());
 }
 */
@@ -1177,7 +1177,7 @@ Java_io_scalaproject_vault_model_Wallet_getLastSubaddress(JNIEnv *env, jobject i
 // TransactionHistory
 JNIEXPORT jint JNICALL
 Java_io_scalaproject_vault_model_TransactionHistory_getCount(JNIEnv *env, jobject instance) {
-    Bitscala::TransactionHistory *history = getHandle<Bitscala::TransactionHistory>(env,
+    scala::TransactionHistory *history = getHandle<scala::TransactionHistory>(env,
                                                                                       instance);
     return history->count();
 }
@@ -1191,8 +1191,8 @@ jobject newTransferInstance(JNIEnv *env, uint64_t amount, const std::string &add
     return transfer;
 }
 
-jobject newTransferList(JNIEnv *env, Bitscala::TransactionInfo *info) {
-    const std::vector<Bitscala::TransactionInfo::Transfer> &transfers = info->transfers();
+jobject newTransferList(JNIEnv *env, scala::TransactionInfo *info) {
+    const std::vector<scala::TransactionInfo::Transfer> &transfers = info->transfers();
     if (transfers.size() == 0) { // don't create empty Lists
         return nullptr;
     }
@@ -1202,7 +1202,7 @@ jobject newTransferList(JNIEnv *env, Bitscala::TransactionInfo *info) {
                                                          "(Ljava/lang/Object;)Z");
     jobject result = env->NewObject(class_ArrayList, java_util_ArrayList_, transfers.size());
     // create Transfer objects and stick them in the List
-    for (const Bitscala::TransactionInfo::Transfer &s: transfers) {
+    for (const scala::TransactionInfo::Transfer &s: transfers) {
         jobject element = newTransferInstance(env, s.amount, s.address);
         env->CallBooleanMethod(result, java_util_ArrayList_add, element);
         env->DeleteLocalRef(element);
@@ -1210,7 +1210,7 @@ jobject newTransferList(JNIEnv *env, Bitscala::TransactionInfo *info) {
     return result;
 }
 
-jobject newTransactionInfo(JNIEnv *env, Bitscala::TransactionInfo *info) {
+jobject newTransactionInfo(JNIEnv *env, scala::TransactionInfo *info) {
     jmethodID c = env->GetMethodID(class_TransactionInfo, "<init>",
                                    "(IZZJJJLjava/lang/String;JLjava/lang/String;IIJLjava/lang/String;Ljava/util/List;)V");
     jobject transfers = newTransferList(env, info);
@@ -1218,7 +1218,7 @@ jobject newTransactionInfo(JNIEnv *env, Bitscala::TransactionInfo *info) {
     jstring _paymentId = env->NewStringUTF(info->paymentId().c_str());
     jstring _label = env->NewStringUTF(info->label().c_str());
     uint32_t subaddrIndex = 0;
-    if (info->direction() == Bitscala::TransactionInfo::Direction_In)
+    if (info->direction() == scala::TransactionInfo::Direction_In)
         subaddrIndex = *(info->subaddrIndex().begin());
     jobject result = env->NewObject(class_TransactionInfo, c,
                                     info->direction(),
@@ -1244,14 +1244,14 @@ jobject newTransactionInfo(JNIEnv *env, Bitscala::TransactionInfo *info) {
 #include <stdio.h>
 #include <stdlib.h>
 
-jobject cpp2java(JNIEnv *env, std::vector<Bitscala::TransactionInfo *> vector) {
+jobject cpp2java(JNIEnv *env, std::vector<scala::TransactionInfo *> vector) {
 
     jmethodID java_util_ArrayList_ = env->GetMethodID(class_ArrayList, "<init>", "(I)V");
     jmethodID java_util_ArrayList_add = env->GetMethodID(class_ArrayList, "add",
                                                          "(Ljava/lang/Object;)Z");
 
     jobject arrayList = env->NewObject(class_ArrayList, java_util_ArrayList_, vector.size());
-    for (Bitscala::TransactionInfo *s: vector) {
+    for (scala::TransactionInfo *s: vector) {
         jobject info = newTransactionInfo(env, s);
         env->CallBooleanMethod(arrayList, java_util_ArrayList_add, info);
         env->DeleteLocalRef(info);
@@ -1261,7 +1261,7 @@ jobject cpp2java(JNIEnv *env, std::vector<Bitscala::TransactionInfo *> vector) {
 
 JNIEXPORT jobject JNICALL
 Java_io_scalaproject_vault_model_TransactionHistory_refreshJ(JNIEnv *env, jobject instance) {
-    Bitscala::TransactionHistory *history = getHandle<Bitscala::TransactionHistory>(env,
+    scala::TransactionHistory *history = getHandle<scala::TransactionHistory>(env,
                                                                                       instance);
     history->refresh();
     return cpp2java(env, history->getAll());
@@ -1271,13 +1271,13 @@ Java_io_scalaproject_vault_model_TransactionHistory_refreshJ(JNIEnv *env, jobjec
 
 JNIEXPORT jint JNICALL
 Java_io_scalaproject_vault_model_PendingTransaction_getStatusJ(JNIEnv *env, jobject instance) {
-    Bitscala::PendingTransaction *tx = getHandle<Bitscala::PendingTransaction>(env, instance);
+    scala::PendingTransaction *tx = getHandle<scala::PendingTransaction>(env, instance);
     return tx->status();
 }
 
 JNIEXPORT jstring JNICALL
 Java_io_scalaproject_vault_model_PendingTransaction_getErrorString(JNIEnv *env, jobject instance) {
-    Bitscala::PendingTransaction *tx = getHandle<Bitscala::PendingTransaction>(env, instance);
+    scala::PendingTransaction *tx = getHandle<scala::PendingTransaction>(env, instance);
     return env->NewStringUTF(tx->errorString().c_str());
 }
 
@@ -1288,7 +1288,7 @@ Java_io_scalaproject_vault_model_PendingTransaction_commit(JNIEnv *env, jobject 
 
     const char *_filename = env->GetStringUTFChars(filename, NULL);
 
-    Bitscala::PendingTransaction *tx = getHandle<Bitscala::PendingTransaction>(env, instance);
+    scala::PendingTransaction *tx = getHandle<scala::PendingTransaction>(env, instance);
     bool success = tx->commit(_filename, overwrite);
 
     env->ReleaseStringUTFChars(filename, _filename);
@@ -1298,26 +1298,26 @@ Java_io_scalaproject_vault_model_PendingTransaction_commit(JNIEnv *env, jobject 
 
 JNIEXPORT jlong JNICALL
 Java_io_scalaproject_vault_model_PendingTransaction_getAmount(JNIEnv *env, jobject instance) {
-    Bitscala::PendingTransaction *tx = getHandle<Bitscala::PendingTransaction>(env, instance);
+    scala::PendingTransaction *tx = getHandle<scala::PendingTransaction>(env, instance);
     return tx->amount();
 }
 
 JNIEXPORT jlong JNICALL
 Java_io_scalaproject_vault_model_PendingTransaction_getDust(JNIEnv *env, jobject instance) {
-    Bitscala::PendingTransaction *tx = getHandle<Bitscala::PendingTransaction>(env, instance);
+    scala::PendingTransaction *tx = getHandle<scala::PendingTransaction>(env, instance);
     return tx->dust();
 }
 
 JNIEXPORT jlong JNICALL
 Java_io_scalaproject_vault_model_PendingTransaction_getFee(JNIEnv *env, jobject instance) {
-    Bitscala::PendingTransaction *tx = getHandle<Bitscala::PendingTransaction>(env, instance);
+    scala::PendingTransaction *tx = getHandle<scala::PendingTransaction>(env, instance);
     return tx->fee();
 }
 
 // TODO this returns a vector of strings - deal with this later - for now return first one
 JNIEXPORT jstring JNICALL
 Java_io_scalaproject_vault_model_PendingTransaction_getFirstTxIdJ(JNIEnv *env, jobject instance) {
-    Bitscala::PendingTransaction *tx = getHandle<Bitscala::PendingTransaction>(env, instance);
+    scala::PendingTransaction *tx = getHandle<scala::PendingTransaction>(env, instance);
     std::vector<std::string> txids = tx->txid();
     if (!txids.empty())
         return env->NewStringUTF(txids.front().c_str());
@@ -1327,12 +1327,12 @@ Java_io_scalaproject_vault_model_PendingTransaction_getFirstTxIdJ(JNIEnv *env, j
 
 JNIEXPORT jlong JNICALL
 Java_io_scalaproject_vault_model_PendingTransaction_getTxCount(JNIEnv *env, jobject instance) {
-    Bitscala::PendingTransaction *tx = getHandle<Bitscala::PendingTransaction>(env, instance);
+    scala::PendingTransaction *tx = getHandle<scala::PendingTransaction>(env, instance);
     return tx->txCount();
 }
 
 
-// these are all in Bitscala::Wallet - which I find wrong, so they are here!
+// these are all in scala::Wallet - which I find wrong, so they are here!
 //static void init(const char *argv0, const char *default_log_base_name);
 //static void debug(const std::string &category, const std::string &str);
 //static void info(const std::string &category, const std::string &str);
@@ -1346,7 +1346,7 @@ Java_io_scalaproject_vault_model_WalletManager_initLogger(JNIEnv *env, jclass cl
     const char *_argv0 = env->GetStringUTFChars(argv0, NULL);
     const char *_default_log_base_name = env->GetStringUTFChars(default_log_base_name, NULL);
 
-    Bitscala::Wallet::init(_argv0, _default_log_base_name);
+    scala::Wallet::init(_argv0, _default_log_base_name);
 
     env->ReleaseStringUTFChars(argv0, _argv0);
     env->ReleaseStringUTFChars(default_log_base_name, _default_log_base_name);
@@ -1359,7 +1359,7 @@ Java_io_scalaproject_vault_model_WalletManager_logDebug(JNIEnv *env, jclass claz
     const char *_category = env->GetStringUTFChars(category, NULL);
     const char *_message = env->GetStringUTFChars(message, NULL);
 
-    Bitscala::Wallet::debug(_category, _message);
+    scala::Wallet::debug(_category, _message);
 
     env->ReleaseStringUTFChars(category, _category);
     env->ReleaseStringUTFChars(message, _message);
@@ -1372,7 +1372,7 @@ Java_io_scalaproject_vault_model_WalletManager_logInfo(JNIEnv *env, jclass clazz
     const char *_category = env->GetStringUTFChars(category, NULL);
     const char *_message = env->GetStringUTFChars(message, NULL);
 
-    Bitscala::Wallet::info(_category, _message);
+    scala::Wallet::info(_category, _message);
 
     env->ReleaseStringUTFChars(category, _category);
     env->ReleaseStringUTFChars(message, _message);
@@ -1385,7 +1385,7 @@ Java_io_scalaproject_vault_model_WalletManager_logWarning(JNIEnv *env, jclass cl
     const char *_category = env->GetStringUTFChars(category, NULL);
     const char *_message = env->GetStringUTFChars(message, NULL);
 
-    Bitscala::Wallet::warning(_category, _message);
+    scala::Wallet::warning(_category, _message);
 
     env->ReleaseStringUTFChars(category, _category);
     env->ReleaseStringUTFChars(message, _message);
@@ -1398,7 +1398,7 @@ Java_io_scalaproject_vault_model_WalletManager_logError(JNIEnv *env, jclass claz
     const char *_category = env->GetStringUTFChars(category, NULL);
     const char *_message = env->GetStringUTFChars(message, NULL);
 
-    Bitscala::Wallet::error(_category, _message);
+    scala::Wallet::error(_category, _message);
 
     env->ReleaseStringUTFChars(category, _category);
     env->ReleaseStringUTFChars(message, _message);
@@ -1407,12 +1407,12 @@ Java_io_scalaproject_vault_model_WalletManager_logError(JNIEnv *env, jclass claz
 JNIEXPORT void JNICALL
 Java_io_scalaproject_vault_model_WalletManager_setLogLevel(JNIEnv *env, jclass clazz,
                                                           jint level) {
-    Bitscala::WalletManagerFactory::setLogLevel(level);
+    scala::WalletManagerFactory::setLogLevel(level);
 }
 
 JNIEXPORT jstring JNICALL
 Java_io_scalaproject_vault_model_WalletManager_scalaVersion(JNIEnv *env, jclass clazz) {
-    return env->NewStringUTF(SCALA_VERSION);
+    return env->NewStringUTF(scala_VERSION);
 }
 
 //

@@ -129,7 +129,6 @@ public class LegacyStorageHelper {
         final String dstName = getUniqueName(dstDir, walletName);
         copyFile(new File(srcDir, walletName), new File(dstDir, dstName));
         copyFile(new File(srcDir, walletName + ".keys"), new File(dstDir, dstName + ".keys"));
-        copyFile(new File(srcDir, walletName + ".address.txt"), new File(dstDir, dstName + ".address.txt"));
     }
 
     private void deleteDst(String walletName) {
@@ -174,7 +173,7 @@ public class LegacyStorageHelper {
     static public final int PERMISSIONS_REQUEST_READ_EXTERNAL_STORAGE = 1;
 
     static public boolean getReadPermission(Activity context) {
-        if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.M) {
+        if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.M && android.os.Build.VERSION.SDK_INT < android.os.Build.VERSION_CODES.TIRAMISU) {
             if (context.checkSelfPermission(Manifest.permission.READ_EXTERNAL_STORAGE) == PackageManager.PERMISSION_DENIED) {
                 Timber.w("Permission denied to READ_EXTERNAL_STORAGE - requesting it");
                 String[] permissions = {Manifest.permission.READ_EXTERNAL_STORAGE};

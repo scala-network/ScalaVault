@@ -126,7 +126,7 @@
 
     <string name="prompt_changepw">New Passphrase for %1$s</string>
     <string name="prompt_changepwB">Repeat Passphrase for %1$s</string>
-    <string name="prompt_password">Password for %1$s</string>
+    <string name="prompt_password">Password for %1$s (optional)</string>
     <string name="prompt_fingerprint_auth">You can also open wallet using fingerprint.\nPlease touch sensor.</string>
     <string name="prompt_send_password">Confirm Password</string>
     <string name="prompt_open_wallet">Opening the wallet&#8230;</string>
@@ -147,7 +147,7 @@
     <string name="service_description">Scala Vault</string>
 
     <string name="status_synced">Synced:</string>
-    <string name="status_remaining">Blocks remaining</string>
+    <string name="status_remaining">blocks remaining</string>
     <string name="status_syncing">Scanning:</string>
 
     <string name="message_strorage_not_writable">External Storage is not writable! Panic!</string>
@@ -167,7 +167,8 @@
 
     <string name="generate_title">Create Wallet</string>
     <string name="generate_name_hint">Wallet Name</string>
-    <string name="generate_password_hint">Wallet Passphrase</string>
+    <string name="generate_password_hint">Password (optional)</string>
+    <string name="prompt_password_hint" translatable="false">Password (Leave empty if none)</string>
     <string name="generate_fingerprint_hint">Allow to open wallet using fingerprint</string>
     <string name="generate_fingerprint_warn"><![CDATA[
         <strong>Fingerprint Authentication</strong>

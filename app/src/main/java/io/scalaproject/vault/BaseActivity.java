@@ -161,17 +161,9 @@ public class BaseActivity extends SecureActivity implements GenerateReviewFragme
         if (nfcAdapter == null) // no NFC support
             return;
 
-        if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.S) {
-            nfcPendingIntent = PendingIntent.getActivity(this, 0,
-                    new Intent(this, getClass()).addFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP),
-                    PendingIntent.FLAG_MUTABLE);
-        }
-        else
-        {
-            nfcPendingIntent = PendingIntent.getActivity(this, 0,
-                    new Intent(this, getClass()).addFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP),
-                    PendingIntent.FLAG_ONE_SHOT);
-        }
+        nfcPendingIntent = PendingIntent.getActivity(this, 0,
+                new Intent(this, getClass()).addFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP),
+                PendingIntent.FLAG_IMMUTABLE);
     }
 
     private void processNfcIntent(Intent intent) {

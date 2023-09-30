@@ -411,18 +411,34 @@ public class WalletFragment extends Fragment
 
     // called from activity
 
-    public void onRefreshed(final Wallet wallet, final boolean full) {
+    public void onRefreshed(final Wallet wallet, boolean full) {
         Timber.d("onRefreshed(%b)", full);
+
+        if (txInfoAdapter.needsTransactionUpdateOnNewBlock()) {
+            wallet.getHistory().refresh();
+            full = true;
+        }
+
         if (full) {
             List<TransactionInfo> list = new ArrayList<>();
             final long streetHeight = activityCallback.getStealthModeHeight();
             Timber.d("StreetHeight=%d", streetHeight);
+            wallet.getHistory().refresh();
+
+            int count = 0;
             for (TransactionInfo info : wallet.getHistory().getAll()) {
                 Timber.d("TxHeight=%d", info.blockheight);
-                if ((info.isPending || (info.blockheight >= streetHeight))
-                        && !dismissedTransactions.contains(info.hash))
+                if ((info.isPending || (info.blockheight >= streetHeight)) && !dismissedTransactions.contains(info.hash)) {
                     list.add(info);
+                    count++;
+                }
+
+                if(count > 100) { // only keep the 100 latest transactions for better performances
+                    list.remove(0);
+                    count--;
+                }
             }
+
             txInfoAdapter.setInfos(list);
             txInfoAdapter.notifyDataSetChanged();
         }
@@ -486,14 +502,17 @@ public class WalletFragment extends Fragment
         }
     }
 
-    public void initWalletText(String walletName, String walletAddress) {
+    public void initWalletName(String walletName) {
+        _walletName = walletName;
+        tvWalletName.setText(_walletName);
+    }
+
+    public void initWalletAddress(String walletAddress) {
         llWalletAddress.setVisibility(View.VISIBLE);
 
         ivAddressType.setImageDrawable(getResources().getDrawable(R.drawable.ic_primary_address));
         tvAddressType.setText("Primary Address");
 
-        _walletName = walletName;
-        tvWalletName.setText(_walletName);
         tvWalletAddress.setText(Helper.getPrettyAddress(walletAddress));
     }
 
@@ -510,7 +529,8 @@ public class WalletFragment extends Fragment
             tvAddressType.setText("Subaddress");
         }
 
-        tvWalletAddress.setText(Helper.getPrettyAddress(wallet.getAddress()));
+        if(wallet == null)
+            tvWalletAddress.setText(Helper.getPrettyAddress(wallet.getAddress()));
     }
 
     public void setActivityTitle(Wallet wallet) {
@@ -647,19 +667,20 @@ public class WalletFragment extends Fragment
         activityCallback.setTitle(walletTitle, walletSubtitle);
         //activityCallback.setToolbarButton(Toolbar.BUTTON_CLOSE); // TODO: Close button somewhere else
 
-        if(activityCallback.hasBoundService())
+        if(activityCallback.hasBoundService()) {
             updateWalletInfo(activityCallback.getWallet());
+        }
 
         setProgress(syncProgress);
         setProgress(syncText);
         updateSendReceiveButtons();
 
-        if (activityCallback.isSynced()) {
+        if(activityCallback.isSynced()) {
             enableAccountsList(true);
-            activityCallback.setToolbarButton(Toolbar.BUTTON_NONE);
+        } else if (activityCallback.hasBoundService()) {
+            activityCallback.setToolbarButton(Toolbar.BUTTON_CREDITS);
         }
     }
-
 
     @Override
     public void onPause() {

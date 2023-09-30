@@ -116,12 +116,12 @@ public class WalletService extends Service {
         int lastTxCount = 0;
 
         public void newBlock(long height) {
-            Wallet wallet = getWallet();
+            final Wallet wallet = getWallet();
             if (wallet == null) throw new IllegalStateException("No wallet!");
             // don't flood with an update for every block ...
             if (lastBlockTime < System.currentTimeMillis() - 2000) {
-                Timber.d("newBlock() @ %d with observer %s", height, observer);
                 lastBlockTime = System.currentTimeMillis();
+                Timber.d("newBlock() @ %d with observer %s", height, observer);
                 if (observer != null) {
                     boolean fullRefresh = false;
                     updateDaemonState(wallet, wallet.isSynchronized() ? height : 0);
@@ -149,14 +149,15 @@ public class WalletService extends Service {
             updated = true;
         }
 
-        public void refreshed() {
+        public void refreshed() { // this means it's synced
             Timber.d("refreshed()");
-            Wallet wallet = getWallet();
+            final Wallet wallet = getWallet();
             if (wallet == null) throw new IllegalStateException("No wallet!");
+            wallet.setSynchronized();
             if (updated) {
+                updateDaemonState(wallet, wallet.getBlockChainHeight());
+                wallet.getHistory().refreshWithNotes(wallet);
                 if (observer != null) {
-                    updateDaemonState(wallet, 0);
-                    wallet.getHistory().refreshWithNotes(wallet);
                     if (observer != null) {
                         updated = !observer.onRefreshed(wallet, true);
                     }
@@ -575,13 +576,8 @@ public class WalletService extends Service {
     private void startNotfication() {
         Intent notificationIntent = new Intent(this, WalletActivity.class);
         PendingIntent pendingIntent = null;
-        if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.S) {
-            pendingIntent = PendingIntent.getActivity(this, 0, notificationIntent, PendingIntent.FLAG_MUTABLE);
-        }
-        else
-        {
-            pendingIntent = PendingIntent.getActivity(this, 0, notificationIntent, PendingIntent.FLAG_ONE_SHOT);
-        }
+
+        pendingIntent = PendingIntent.getActivity(this, 0, notificationIntent, PendingIntent.FLAG_IMMUTABLE);
 
         String channelId = Build.VERSION.SDK_INT >= Build.VERSION_CODES.O ? createNotificationChannel() : "";
         Notification notification = new NotificationCompat.Builder(this, channelId)

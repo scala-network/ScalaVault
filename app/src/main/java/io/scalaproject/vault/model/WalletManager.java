@@ -212,45 +212,21 @@ public class WalletManager {
 
     private native int queryWalletDeviceJ(String keys_file_name, String password);
 
-    //public native List<String> findWallets(String path); // this does not work - some error in boost
+
 
     public class WalletInfo implements Comparable<WalletInfo> {
         public File path;
         public String name;
-        public String address;
+
+        public WalletInfo(File wallet) {
+            path = wallet.getParentFile();
+            name = wallet.getName();
+        }
 
         @Override
         public int compareTo(WalletInfo another) {
-            int n = name.toLowerCase().compareTo(another.name.toLowerCase());
-            if (n != 0) {
-                return n;
-            } else { // wallet names are the same
-                return address.compareTo(another.address);
-            }
+            return name.toLowerCase().compareTo(another.name.toLowerCase());
         }
-    }
-
-    public WalletInfo getWalletInfo(File wallet) {
-        WalletInfo info = new WalletInfo();
-        info.path = wallet.getParentFile();
-        info.name = wallet.getName();
-        File addressFile = new File(info.path, info.name + ".address.txt");
-        info.address = "??????";
-        BufferedReader addressReader = null;
-        try {
-            addressReader = new BufferedReader(new FileReader(addressFile));
-            info.address = addressReader.readLine();
-        } catch (IOException ex) {
-            Timber.d(ex.getLocalizedMessage());
-        } finally {
-            if (addressReader != null) {
-                try {
-                    addressReader.close();
-                } catch (IOException ex) {
-                }
-            }
-        }
-        return info;
     }
 
     public List<WalletInfo> findWallets(File path) {
@@ -261,15 +237,15 @@ public class WalletManager {
                 return filename.endsWith(".keys");
             }
         });
-        for (int i = 0; i < found.length; i++) {
-            String filename = found[i].getName();
-            File f = new File(found[i].getParent(), filename.substring(0, filename.length() - 5)); // 5 is length of ".keys"+1
-            wallets.add(getWalletInfo(f));
+
+        assert found != null;
+        for (File file : found) {
+            String filename = file.getName();
+            File f = new File(file.getParent(), filename.substring(0, filename.length() - 5)); // 5 is length of ".keys"+1
+            wallets.add(new WalletInfo(f));
         }
         return wallets;
     }
-
-//TODO virtual bool checkPayment(const std::string &address, const std::string &txid, const std::string &txkey, const std::string &daemon_address, uint64_t &received, uint64_t &height, std::string &error) const = 0;
 
     private String daemonAddress = null;
     private final NetworkType networkType = ScalaVaultApplication.getNetworkType();
@@ -290,8 +266,6 @@ public class WalletManager {
             this.daemonAddress = null;
             this.daemonUsername = "";
             this.daemonPassword = "";
-            //setDaemonAddressJ(""); // don't disconnect as scala code blocks for many seconds!
-            //TODO: need to do something about that later
         }
     }
 
@@ -316,27 +290,8 @@ public class WalletManager {
         return daemonPassword;
     }
 
-    public native int getDaemonVersion();
-
-    public native long getBlockchainHeight();
-
-    public native long getBlockchainTargetHeight();
-
-    public native long getNetworkDifficulty();
-
-    public native double getMiningHashRate();
-
-    public native long getBlockTarget();
-
     public native boolean isMining();
 
-    public native boolean startMining(String address, boolean background_mining, boolean ignore_battery);
-
-    public native boolean stopMining();
-
-    public native String resolveOpenAlias(String address, boolean dnssec_valid);
-
-//TODO static std::tuple<bool, std::string, std::string, std::string, std::string> checkUpdates(const std::string &software, const std::string &subdir);
 
     static public native void initLogger(String argv0, String defaultLogBaseName);
 
@@ -350,13 +305,6 @@ public class WalletManager {
 
     static public native void setLogLevel(int level);
 
-    static public native void logDebug(String category, String message);
-
-    static public native void logInfo(String category, String message);
-
-    static public native void logWarning(String category, String message);
-
-    static public native void logError(String category, String message);
 
     static public native String scalaVersion();
 }

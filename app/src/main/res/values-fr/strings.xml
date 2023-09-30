@@ -59,7 +59,7 @@
 
     <string name="send_available_btc">Solde : %2$s BTC (%1$s XLA)</string>
 
-    <string name="info_paymentid_integrated">&#x2714; ID de Paiement intégré</string>
+    <string name="info_paymentid_integrated">&#x2714; ID de paiement intégré</string>
     <string name="info_prepare_tx">Préparation de votre transaction</string>
 
     <string name="label_send_progress_xlato_create">Création de l\'ordre XLA.TO</string>
@@ -79,14 +79,14 @@
     <string name="text_send_btc_rate">(Taux : %1$s BTC/XLA)</string>
 
     <string name="label_send_btc_xlato_info">Visitez xla.to pour l\'assistance &amp; le suivi</string>
-    <string name="label_send_btc_xlato_key_lb">Clef Secrète\nXLA.TO</string>
-    <string name="label_send_btc_xlato_key">Clef Secrète XLA.TO</string>
-    <string name="label_send_btc_address">Adresse BTC Destination</string>
+    <string name="label_send_btc_xlato_key_lb">Clef secrète\nXLA.TO</string>
+    <string name="label_send_btc_xlato_key">Clef secrète XLA.TO</string>
+    <string name="label_send_btc_address">Adresse BTC de destination</string>
     <string name="label_send_btc_amount">Montant</string>
 
-    <string name="label_send_txid">ID de Transaction</string>
-    <string name="label_send_address">Adresse Destination</string>
-    <string name="label_send_payment_id">ID de Paiement</string>
+    <string name="label_send_txid">ID de transaction</string>
+    <string name="label_send_address">Adresse de destination</string>
+    <string name="label_send_payment_id">ID de paiement</string>
     <string name="label_send_notes">Notes</string>
 
     <string name="backup_progress">Sauvegarde en cours</string>
@@ -97,16 +97,16 @@
     <string name="service_progress">Remise en ordre &#8230;\nCela peut prendre un moment !</string>
 
     <string name="backup_success">Sauvegarde réussie</string>
-    <string name="backup_failed">Sauvegarde Échouée !</string>
-    <string name="archive_failed">Archivage Échouée !</string>
-    <string name="rename_failed">Renommage Échoué !</string>
-    <string name="changepw_failed">Modification du mot de passe Échouée !</string>
+    <string name="backup_failed">Sauvegarde échouée !</string>
+    <string name="archive_failed">Archivage échouée !</string>
+    <string name="rename_failed">Renommage échoué !</string>
+    <string name="changepw_failed">Échec de modification du mot de passe !</string>
     <string name="changepw_success">Modification du mot de passe réussie</string>
 
     <string name="label_daemon">Nœud</string>
-    <string name="status_wallet_loading">Chargement du Portefeuille &#8230;</string>
-    <string name="status_wallet_unloaded">Portefeuille Sauvegardé</string>
-    <string name="status_wallet_unload_failed">Sauvegarde du Portefeuille Échouée !</string>
+    <string name="status_wallet_loading">Chargement du portefeuille &#8230;</string>
+    <string name="status_wallet_unloaded">Portefeuille sauvegardé</string>
+    <string name="status_wallet_unload_failed">Échec de sauvegarde du portefeuille !</string>
     <string name="status_wallet_connecting">Connexion&#8230;</string>
     <string name="status_wallet_connect_failed">Connexion au nœud échouée !\nVérifiez utilisateur/mot de passe</string>
     <string name="status_wallet_node_invalid">Nœud invalide !\nEssayez un autre.</string>
@@ -124,7 +124,7 @@
 
     <string name="prompt_changepw">Nouvelle Phase secrète pour %1$s</string>
     <string name="prompt_changepwB">Répéter la Phase secrète pour %1$s</string>
-    <string name="prompt_password">Mot de passe pour %1$s</string>
+    <string name="prompt_password">Mot de passe pour %1$s (optionnel)</string>
     <string name="prompt_fingerprint_auth">Vous pouvez également ouvrir le portefeuille avec votre empreinte digitale.\nMerci de toucher le capteur.</string>
     <string name="prompt_send_password">Confirmez le mot de passe</string>
     <string name="prompt_open_wallet">Ouverture du portefeuille &#8230;</string>
@@ -145,7 +145,7 @@
     <string name="service_description">Service Scala Vault</string>
 
     <string name="status_synced">Synchronisé :</string>
-    <string name="status_remaining">Blocs restant</string>
+    <string name="status_remaining">blocs restants</string>
     <string name="status_syncing">Analyse :</string>
 
     <string name="message_strorage_not_writable">Stockage Externe non inscriptible ! Panique !</string>
@@ -163,9 +163,9 @@
 
     <string name="message_exchange_failed">Taux de change introuvable !\nUtilisez XLA/XLA ou essayez à nouveau</string>
 
-    <string name="generate_title">Créer un Portefeuille</string>
-    <string name="generate_name_hint">Nom du Portefeuille</string>
-    <string name="generate_password_hint">Mot de Passe du Portefeuille</string>
+    <string name="generate_title">Créer un portefeuille</string>
+    <string name="generate_name_hint">Nom du portefeuille</string>
+    <string name="generate_password_hint">Mot de passe du portefeuille (optionnel)</string>
     <string name="generate_fingerprint_hint">Allow to open wallet using fingerprint</string>
     <string name="generate_fingerprint_warn"><![CDATA[
         <strong>Authentification par empreinte dgitale</strong>
@@ -186,39 +186,39 @@
     <string name="generate_button_accept">J\'ai noté ces 25 mots !</string>
 
     <string name="generate_wallet_name">Donnez-moi un nom !</string>
-    <string name="generate_wallet_exists">Le Portefeuille existe !</string>
+    <string name="generate_wallet_exists">Le portefeuille existe !</string>
     <string name="generate_wallet_dot">Ne peut pas commencer par .</string>
-    <string name="generate_wallet_creating">Création du Portefeuille</string>
+    <string name="generate_wallet_creating">Création du portefeuille</string>
     <string name="generate_wallet_created">Portefeuille créé</string>
 
     <string name="generate_restoreheight_error">Entrer un nombre ou une date (YYYY-MM-DD)</string>
 
     <string name="generate_wallet_type_key">Clefs</string>
     <string name="generate_wallet_type_new">Nouveau</string>
-    <string name="generate_wallet_type_seed">Phrase Mnémonique</string>
+    <string name="generate_wallet_type_seed">Phrase mnémonique</string>
     <string name="generate_wallet_type_view">Audit</string>
 
-    <string name="generate_address_hint">Adresse Publique</string>
+    <string name="generate_address_hint">Adresse publique</string>
     <string name="generate_viewkey_hint">Clef d\'audit</string>
     <string name="generate_spendkey_hint">Clef de dépense</string>
-    <string name="generate_mnemonic_hint">Phrase Mnémonique</string>
+    <string name="generate_mnemonic_hint">Phrase mnémonique</string>
     <string name="generate_restoreheight_hint">Hauteur ou date de restauration (YYYY-MM-DD)</string>
 
     <string name="generate_address_label">Adresse publique</string>
     <string name="generate_viewkey_label">Clef d\'audit</string>
     <string name="generate_spendkey_label">Clef de dépense</string>
-    <string name="generate_mnemonic_label">Phrase Mnémonique</string>
+    <string name="generate_mnemonic_label">Phrase mnémonique</string>
     <string name="generate_crazypass_label">Mdp de restauration des fichiers Portefeuille</string>
 
     <string name="generate_check_key">Entrez une clef valide</string>
-    <string name="generate_check_address">Entrez une Adresse valide</string>
-    <string name="generate_check_mnemonic">Entrez votre phrase Mnémonique</string>
+    <string name="generate_check_address">Entrez une adresse valide</string>
+    <string name="generate_check_mnemonic">Entrez votre phrase mnémonique</string>
 
     <string name="send_amount_btc_xla">%1$s (indicatif)</string>
 
-    <string name="send_paymentid_hint">ID de Paiement (optionnel)</string>
+    <string name="send_paymentid_hint">ID de paiement (optionnel)</string>
     <string name="send_amount_hint">0.00</string>
-    <string name="send_notes_hint">Notes Privées (optionnelles)</string>
+    <string name="send_notes_hint">Notes privées (optionnelles)</string>
     <string name="send_generate_paymentid_hint">Générer</string>
     <string name="send_send_label">Dépenser mes beaux Scala</string>
     <string name="send_send_timed_label">Dépenser mes beaux Scala (%1$s)</string>
@@ -241,7 +241,7 @@
     <string name="send_amount">%1$s XLA</string>
     <string name="send_fee">+%1$s Frais</string>
 
-    <string name="send_create_tx_error_title">Erreur de Création de Transaction</string>
+    <string name="send_create_tx_error_title">Erreur de création de transaction</string>
 
     <string name="tx_list_fee">- Frais %1$s</string>
     <string name="tx_list_amount_failed">(%1$s)</string>
@@ -288,7 +288,7 @@
     <string name="fab_restore_key">Restaurer depuis la clef privée</string>
     <string name="fab_restore_seed">Restaurer depuis la phrase mnémonique</string>
 
-    <string name="accounts_drawer_new">Créer un Compte</string>
+    <string name="accounts_drawer_new">Créer un compte</string>
     <string name="accounts_new">Nouveau Compte #%1$d ajouté</string>
     <string name="tx_account">Compte #</string>
 

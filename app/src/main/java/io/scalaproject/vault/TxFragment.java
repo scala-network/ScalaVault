@@ -250,7 +250,7 @@ public class TxFragment extends Fragment {
         tvTxId.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                String paymentURL = "https://explorer.scalaproject.io/tx.html?hash=" + tvTxId.getText();
+                String paymentURL = "https://explorer.scalaproject.io/tx/" + tvTxId.getText();
                 Uri uri = Uri.parse(paymentURL);
                 startActivity(new Intent(Intent.ACTION_VIEW, uri));
             }

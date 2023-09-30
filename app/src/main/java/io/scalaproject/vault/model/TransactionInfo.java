@@ -24,12 +24,14 @@ package io.scalaproject.vault.model;
 import android.os.Parcel;
 import android.os.Parcelable;
 
+import androidx.annotation.NonNull;
+
 import java.util.List;
 
 // this is not the TransactionInfo from the API as that is owned by the TransactionHistory
 // this is a POJO for the TransactionInfoAdapter
 public class TransactionInfo implements Parcelable, Comparable<TransactionInfo> {
-    static final String TAG = "TransactionInfo";
+    public static final int CONFIRMATION = 10; // blocks
 
     public enum Direction {
         Direction_In(0),
@@ -49,7 +51,7 @@ public class TransactionInfo implements Parcelable, Comparable<TransactionInfo> 
             return value;
         }
 
-        private int value;
+        private final int value;
 
         Direction(int value) {
             this.value = value;
@@ -106,6 +108,11 @@ public class TransactionInfo implements Parcelable, Comparable<TransactionInfo> 
         this.transfers = transfers;
     }
 
+    public boolean isConfirmed() {
+        return confirmations >= CONFIRMATION;
+    }
+
+    @NonNull
     public String toString() {
         return direction + "@" + blockheight + " " + amount;
     }

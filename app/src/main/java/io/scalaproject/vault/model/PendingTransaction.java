@@ -63,7 +63,7 @@ public class PendingTransaction {
             return value;
         }
 
-        private int value;
+        private final int value;
 
         Priority(int value) {
             this.value = value;

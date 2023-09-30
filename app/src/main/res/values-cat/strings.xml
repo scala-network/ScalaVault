@@ -145,7 +145,7 @@
     <string name="service_description">Servei de Scala Vault</string>
 
     <string name="status_synced">Sincronitzat:</string>
-    <string name="status_remaining">Blocs restants</string>
+    <string name="status_remaining">blocs restants</string>
     <string name="status_syncing">Escanejant:</string>
 
     <string name="message_strorage_not_writable">L’emmagatzematge extern no es pot escriure! Pànic!</string>

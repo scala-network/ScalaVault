@@ -4,23 +4,15 @@
             "port": "11812"
         },
         {
-            "host": "mine.scalaproject.io",
-            "port": "8000"
-        },
-        {
-            "host": "scalanode.com",
+            "host": "remote.two.scalaproject.io",
             "port": "11812"
         },
         {
-            "host": "XLAnode.com",
+            "host": "scala.fastnode.eu",
             "port": "11812"
         },
         {
-            "host": "scala.ethospool.org",
-            "port": "11812"
-        },
-        {
-            "host": "daemon.pool.gntl.co.uk",
+            "host": "164.68.115.234",
             "port": "11812"
         }
     ]

@@ -87,7 +87,6 @@ import java.util.Arrays;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.HashSet;
-import java.util.List;
 import java.util.Locale;
 import java.util.Map;
 import java.util.Set;
@@ -102,9 +101,9 @@ public class LoginActivity extends BaseActivity
 
     static private final String DEFAULT_NODES_REPOSITORY = "https://raw.githubusercontent.com/scala-network/ScalaVault/master/app.json";
 
-    // USAGE: When the DEFAULT_NODES_REPOSITORY file is modified, we need to upload the new file
-    //        to the IPNS gateway as well. This is to avoid having to release a new version of the app
-    //        every time the data changes.
+    // USAGE: The GitHub raw file might not be available in some countries, so the IPFS option
+    //        is a fallback. When the DEFAULT_NODES_REPOSITORY file is modified, we need to upload the new file
+    //        to the IPNS gateway as well.
     static private final String IPNS_NAME = "node-list.scalaproject.io";
     static private final String[] NODES_REPOSITORY_IPNS_GATEWAYS = {
             "https://dweb.link/ipns/",
@@ -250,20 +249,21 @@ public class LoginActivity extends BaseActivity
 
         String jsonString = "";
 
-        // Load Pools data from repository
-        if(Helper.isURLReachable(DEFAULT_NODES_REPOSITORY))
-            jsonString  = Helper.fetchJSON(DEFAULT_NODES_REPOSITORY);
-
-        // If GitHub is not available or is blocked by firewalls, use IPFS gateways
-        if(jsonString.isEmpty()) {
-            for (String strNodeURLDir : NODES_REPOSITORY_IPNS_GATEWAYS) {
-                String strNodeURL = strNodeURLDir + IPNS_NAME;
-                if(Helper.isURLReachable(strNodeURL)) {
-                    jsonString = Helper.fetchJSON(strNodeURL);
-                    if (!jsonString.isEmpty())
-                        break;
-                }
+        // Load Pools data from IPFS gateways
+        for (String strNodeURLDir : NODES_REPOSITORY_IPNS_GATEWAYS) {
+            String strNodeURL = strNodeURLDir + IPNS_NAME;
+            if(Helper.isURLReachable(strNodeURL)) {
+                jsonString = Helper.fetchJSON(strNodeURL);
+                if (!jsonString.isEmpty())
+                    break;
             }
+        }
+
+        // If IPFS is not available or is blocked by firewalls, use GitHub raw file
+        if(jsonString.isEmpty()) {
+            // Load Pools data from repository
+            if(Helper.isURLReachable(DEFAULT_NODES_REPOSITORY))
+                jsonString  = Helper.fetchJSON(DEFAULT_NODES_REPOSITORY);
         }
 
         // None of the URL can be reached. Load default data but don't cache it.
@@ -281,7 +281,6 @@ public class LoginActivity extends BaseActivity
             for(int i = 0; i < pools.length(); i++) {
                 JSONObject node = pools.getJSONObject(i);
 
-                ArrayList<String> listPort = new ArrayList<>();
                 if(node.has("host") && node.has("port")) {
                     addNode(node.getString("host") + ":" + node.getString("port"));
                 }
@@ -416,20 +415,18 @@ public class LoginActivity extends BaseActivity
     }
 
     @Override
-    public boolean onWalletSelected(String walletName, String walletAddress, boolean stealthMode) {
+    public void onWalletSelected(String walletName, boolean stealthMode) {
         if (node == null) {
             Toast.makeText(this, getString(R.string.prompt_daemon_missing), Toast.LENGTH_SHORT).show();
-            return false;
+            return;
         }
-        if (checkServiceRunning()) return false;
+        if (checkServiceRunning()) return;
         try {
-            new AsyncOpenWallet(walletName, walletAddress, node, stealthMode).execute();
+            new AsyncOpenWallet(walletName, node, stealthMode).execute();
         } catch (IllegalArgumentException ex) {
             Timber.e(ex.getLocalizedMessage());
             Toast.makeText(this, ex.getLocalizedMessage(), Toast.LENGTH_SHORT).show();
-            return false;
         }
-        return true;
     }
 
     @Override
@@ -488,53 +485,25 @@ public class LoginActivity extends BaseActivity
         }
     }
 
-    private class AsyncRename extends AsyncTask<String, Void, Boolean> {
-        @Override
-        protected void onPreExecute() {
-            super.onPreExecute();
-            showProgressDialog(R.string.rename_progress);
-        }
-
-        @Override
-        protected Boolean doInBackground(String... params) {
-            if (params.length != 2) return false;
-            String oldName = params[0];
-            String newName = params[1];
-            File walletFile = Helper.getWalletFile(LoginActivity.this, oldName);
-            boolean success = renameWallet(walletFile, newName);
-            try {
-                if (success) {
-                    String savedPass = KeyStoreHelper.loadWalletUserPass(LoginActivity.this, oldName);
-                    KeyStoreHelper.saveWalletUserPass(LoginActivity.this, newName, savedPass);
-                }
-            } catch (KeyStoreHelper.BrokenPasswordStoreException ex) {
-                Timber.w(ex);
-            } finally {
-                // we have either set a new password or it is broken - kill the old one either way
-                KeyStoreHelper.removeWalletUserPass(LoginActivity.this, oldName);
-            }
-            return success;
-        }
-
-        @Override
-        protected void onPostExecute(Boolean result) {
-            super.onPostExecute(result);
-            if (isDestroyed()) {
-                return;
-            }
-            dismissProgressDialog();
-            if (result) {
-                reloadWalletList();
-            } else {
-                Toast.makeText(LoginActivity.this, getString(R.string.rename_failed), Toast.LENGTH_LONG).show();
-            }
+    private void renameWallet(String oldName, String newName) {
+        File walletFile = Helper.getWalletFile(this, oldName);
+        boolean success = renameWallet(walletFile, newName);
+        if (success) {
+            reloadWalletList();
+        } else {
+            Toast.makeText(LoginActivity.this, getString(R.string.rename_failed), Toast.LENGTH_LONG).show();
         }
     }
 
-    // copy + delete seems safer than rename because we call rollback easily
+    // copy + delete seems safer than rename because we can rollback easily
     boolean renameWallet(File walletFile, String newName) {
         if (copyWallet(walletFile, new File(walletFile.getParentFile(), newName), false, true)) {
-            deleteWallet(walletFile);
+            try {
+                KeyStoreHelper.copyWalletUserPass(this, walletFile.getName(), newName);
+            } catch (KeyStoreHelper.BrokenPasswordStoreException ex) {
+                Timber.w(ex);
+            }
+            deleteWallet(walletFile); // also deletes the keystore entry
             return true;
         } else {
             return false;
@@ -564,7 +533,7 @@ public class LoginActivity extends BaseActivity
                             public void onClick(DialogInterface dialog, int id) {
                                 Helper.hideKeyboardAlways(LoginActivity.this);
                                 String newName = etRename.getText().toString();
-                                new AsyncRename().execute(walletName, newName);
+                                renameWallet(walletName, newName);
                             }
                         })
                 .setNegativeButton(getString(R.string.label_cancel),
@@ -586,7 +555,7 @@ public class LoginActivity extends BaseActivity
                     Helper.hideKeyboardAlways(LoginActivity.this);
                     String newName = etRename.getText().toString();
                     dialog.cancel();
-                    new AsyncRename().execute(walletName, newName);
+                    renameWallet(walletName, newName);
                     return false;
                 }
                 return false;
@@ -859,11 +828,10 @@ public class LoginActivity extends BaseActivity
         }
     }
 
-    void startWallet(String walletName, String walletAddress, String walletPassword, boolean fingerprintUsed, boolean stealthMode) {
+    void startWallet(String walletName, String walletPassword, boolean fingerprintUsed, boolean stealthMode) {
         Timber.d("startWallet()");
         Intent intent = new Intent(getApplicationContext(), WalletActivity.class);
         intent.putExtra(WalletActivity.REQUEST_ID, walletName);
-        intent.putExtra(WalletActivity.REQUEST_ADDRESS, walletAddress);
         intent.putExtra(WalletActivity.REQUEST_PW, walletPassword);
         intent.putExtra(WalletActivity.REQUEST_FINGERPRINT_USED, fingerprintUsed);
         intent.putExtra(WalletActivity.REQUEST_STEALTHMODE, stealthMode);
@@ -1196,12 +1164,10 @@ public class LoginActivity extends BaseActivity
         String name = walletFile.getName();
         if (any) {
             return new File(dir, name).exists()
-                    || new File(dir, name + ".keys").exists()
-                    || new File(dir, name + ".address.txt").exists();
+                    || new File(dir, name + ".keys").exists();
         } else {
             return new File(dir, name).exists()
-                    && new File(dir, name + ".keys").exists()
-                    && new File(dir, name + ".address.txt").exists();
+                    && new File(dir, name + ".keys").exists();
         }
     }
 
@@ -1223,7 +1189,6 @@ public class LoginActivity extends BaseActivity
                 }
             }
             copyFile(new File(srcDir, srcName + ".keys"), new File(dstDir, dstName + ".keys"));
-            copyFile(new File(srcDir, srcName + ".address.txt"), new File(dstDir, dstName + ".address.txt"));
             success = true;
         } catch (IOException ex) {
             Timber.e("wallet copy failed: %s", ex.getMessage());
@@ -1408,13 +1373,13 @@ public class LoginActivity extends BaseActivity
     // an AsyncTask which tests the node before trying to open the wallet
     private class AsyncOpenWallet extends AsyncTask<Void, Void, Boolean> {
         private final String walletName;
-        private final String walletAddress;
+        //private final String walletAddress;
         private final NodeInfo node;
         private final boolean stealthMode;
 
-        AsyncOpenWallet(String walletName, String walletAddress, NodeInfo node, boolean stealthMode) {
+        AsyncOpenWallet(String walletName, NodeInfo node, boolean stealthMode) {
             this.walletName = walletName;
-            this.walletAddress = walletAddress;
+            //this.walletAddress = walletAddress;
             this.node = node;
             this.stealthMode = stealthMode;
         }
@@ -1440,7 +1405,7 @@ public class LoginActivity extends BaseActivity
             if (result) {
                 Timber.d("selected wallet is .%s.", node.getName());
                 // now it's getting real, onValidateFields if wallet exists
-                promptAndStart(walletName, walletAddress, node, stealthMode);
+                promptAndStart(walletName, node, stealthMode);
             } else {
                 if (node.getResponseCode() == 0) { // IOException
                     Toast.makeText(LoginActivity.this, getString(R.string.status_wallet_node_invalid), Toast.LENGTH_LONG).show();
@@ -1473,7 +1438,7 @@ public class LoginActivity extends BaseActivity
         return false;
     }
 
-    void promptAndStart(String walletName, final String walletAddress, Node node, final boolean stealthMode) {
+    void promptAndStart(String walletName, Node node, final boolean stealthMode) {
         File walletFile = Helper.getWalletFile(this, walletName);
         if (WalletManager.getInstance().walletExists(walletFile)) {
             Helper.promptPassword(LoginActivity.this, walletName, false,
@@ -1481,7 +1446,7 @@ public class LoginActivity extends BaseActivity
                         @Override
                         public void action(String walletName, String password, boolean fingerprintUsed) {
                             if (checkDevice(walletName, password))
-                                startWallet(walletName, walletAddress, password, fingerprintUsed, stealthMode);
+                                startWallet(walletName, password, fingerprintUsed, stealthMode);
                         }
                     });
         } else { // this cannot really happen as we prefilter choices
@@ -1503,7 +1468,7 @@ public class LoginActivity extends BaseActivity
                 registerReceiver(usbPermissionReceiver, new IntentFilter(ACTION_USB_PERMISSION));
                 usbManager.requestPermission(device,
                         PendingIntent.getBroadcast(this, 0,
-                                new Intent(ACTION_USB_PERMISSION), 0));
+                                new Intent(ACTION_USB_PERMISSION), PendingIntent.FLAG_IMMUTABLE));
             }
         } else {
             Timber.d("no ledger device found");

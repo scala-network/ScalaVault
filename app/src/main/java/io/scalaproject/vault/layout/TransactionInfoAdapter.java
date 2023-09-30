@@ -22,7 +22,11 @@
 package io.scalaproject.vault.layout;
 
 import android.content.Context;
+
+import androidx.annotation.NonNull;
 import androidx.core.content.ContextCompat;
+
+import androidx.recyclerview.widget.DiffUtil;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.graphics.Bitmap;
@@ -52,13 +56,12 @@ import java.util.TimeZone;
 import timber.log.Timber;
 
 public class TransactionInfoAdapter extends RecyclerView.Adapter<TransactionInfoAdapter.ViewHolder> {
+    private final static SimpleDateFormat DATETIME_FORMATTER = new SimpleDateFormat("yyyy-MM-dd HH:mm");
 
-    private final SimpleDateFormat DATETIME_FORMATTER = new SimpleDateFormat("yyyy-MM-dd HH:mm");
-
-    private int outboundColour;
-    private int inboundColour;
-    private int pendingColour;
-    private int failedColour;
+    private final int outboundColour;
+    private final int inboundColour;
+    private final int pendingColour;
+    private final int failedColour;
 
     public interface OnInteractionListener {
         void onInteraction(View view, TransactionInfo item);
@@ -72,7 +75,7 @@ public class TransactionInfoAdapter extends RecyclerView.Adapter<TransactionInfo
     private final OnInteractionListener onInteractionListener;
     private final OnFindContactListener onFindContactListener;
 
-    private Context context;
+    private final Context context;
 
     public TransactionInfoAdapter(Context context, OnInteractionListener onInteractionListener,
                                   OnFindContactListener onFindContactListener) {
@@ -92,6 +95,11 @@ public class TransactionInfoAdapter extends RecyclerView.Adapter<TransactionInfo
         DATETIME_FORMATTER.setTimeZone(tz);
     }
 
+    public boolean needsTransactionUpdateOnNewBlock() {
+        return (infoItems.size() > 0) && !infoItems.get(0).isConfirmed();
+    }
+
+    @NonNull
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext())
