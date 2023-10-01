@@ -27,7 +27,6 @@ import android.graphics.Bitmap;
 import android.graphics.Canvas;
 import android.graphics.drawable.BitmapDrawable;
 import android.net.Uri;
-import android.nfc.NfcManager;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import androidx.annotation.Nullable;
@@ -236,11 +235,6 @@ public class ReceiveFragment extends Fragment {
                 throw new IllegalStateException("no wallet info");
             }
         }
-
-        View tvNfc = view.findViewById(R.id.tvNfc);
-        NfcManager manager = (NfcManager) getContext().getSystemService(Context.NFC_SERVICE);
-        if ((manager != null) && (manager.getDefaultAdapter() != null))
-            tvNfc.setVisibility(View.VISIBLE);
 
         return view;
     }

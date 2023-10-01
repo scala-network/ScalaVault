@@ -162,18 +162,6 @@
                     android:text="@string/send_qr_hint"
                     android:textSize="20dp" />
             </androidx.cardview.widget.CardView>
-
-            <TextView
-                android:id="@+id/tvNfc"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:layout_marginTop="8dp"
-                android:drawableStart="@drawable/ic_nfc_black_24dp"
-                android:drawablePadding="8dp"
-                android:gravity="center"
-                android:text="@string/nfc_tag_tap"
-                android:visibility="visible" />
         </LinearLayout>
     </LinearLayout>
 </ScrollView>

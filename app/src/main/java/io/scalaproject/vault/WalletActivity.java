@@ -1097,12 +1097,9 @@ public class WalletActivity extends BaseActivity implements WalletFragment.Liste
     @Override
     void onUriScanned(BarcodeData barcodeData) {
         super.onUriScanned(barcodeData);
-        boolean processed = false;
+
         if (onUriScannedListener != null) {
-            processed = onUriScannedListener.onUriScanned(barcodeData);
-        }
-        if (!processed || (onUriScannedListener == null)) {
-            Toast.makeText(this, getString(R.string.nfc_tag_read_what), Toast.LENGTH_LONG).show();
+            onUriScannedListener.onUriScanned(barcodeData);
         }
     }
 
