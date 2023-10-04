@@ -230,7 +230,11 @@ public class NodeInfo extends Node {
             Request request = OkHttpHelper.getPostRequest(url, reqBody);
             long ta = System.nanoTime();
             try (Response response = client.newCall(request).execute()) {
-                responseTime = (System.nanoTime() - ta) / 1000000.0;
+                if(getHost().contains("remote.") && getHost().contains("scala")) // always prioritize Scala nodes
+                    responseTime = 0;
+                else
+                    responseTime = (System.nanoTime() - ta) / 1000000.0;
+
                 responseCode = response.code();
                 if (response.isSuccessful()) {
                     ResponseBody respBody = response.body(); // closed through Response object
