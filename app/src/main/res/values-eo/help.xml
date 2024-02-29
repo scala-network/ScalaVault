@@ -119,7 +119,7 @@
         <h2>Nodo</h2>
         <p>Scala Vault uzas foran nodon por komuniki kun la Scala-Reto sen elŝuti kaj konservi kopion
         de la tuta blokĉeno. Vi povas trovi liston de popularaj foraj nodoj, aŭ lerni kiel starigi
-        vian propran foran nodon, tie : https://scalaproject.io/</p>
+        vian propran foran nodon, tie : https://scala.network/</p>
         <p>Scala Vault estas jam antaŭagordita por kelkaj foraj nodoj. Ĝi memoros la kvin laste uzitajn
         nodojn. </p>
 
@@ -160,7 +160,7 @@
 
         <h2>Transakcia ID</h2>
         Tio identigas vian transakcion, vi povas uzi ĝin por sekvi vian tro daŭran transakction ĉe
-        Monera blokĉen-esplorilo, kiel <a href="https://explorer.scalaproject.io/">https://explorer.scalaproject.io/</a>
+        Monera blokĉen-esplorilo, kiel <a href="https://explorer.scala.network/">https://explorer.scala.network/</a>
 
         <h2>Transakcia ŝlosilo</h2>
         Tio estas la privata ŝlosilo de la transakcio, vi konservu ĝin sekrete. Se iu triulo vidos

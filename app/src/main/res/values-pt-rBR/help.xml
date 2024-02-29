@@ -106,7 +106,7 @@
         <h2>Nó</h2>
         <p>O Scala Vault usa nós remotos para se comunicar com a rede Scala sem precisar fazer o
         download do blockchain inteiro. Você pode consultar uma lista de nós remotos populares
-        e aprender a como usar seu próprio nó em https://scalaproject.io/<p>
+        e aprender a como usar seu próprio nó em https://scala.network/<p>
         <p>O Scala Vault já possui alguns nós remotos pré-definidos. Os últimos 5 nós usados ficam salvos.</p>
         <h2>Carteiras</h2>
         <p>Aqui ficam suas carteiras. Elas estão numa pasta chamada <tt>scala vault</tt> no armazenamento
@@ -140,7 +140,7 @@
         o produto que você comprou.
         <h2>ID TX</h2>
         O ID da transação pode ser usado em exploradores de Blockchain do Scala como o
-        <a href="https://explorer.scalaproject.io/">https://explorer.scalaproject.io/</a> para identificar a transação (ofuscada).
+        <a href="https://explorer.scala.network/">https://explorer.scala.network/</a> para identificar a transação (ofuscada).
         <h2>Chave TX (chave da transação)</h2>
         Essa é a chava privada da sua transação. Matenha-a segura, pois ao divulgá-la para um terceiro permitirá que ele identifique
         qual das assinaturas é a sua, transformando sua transação em transparente para essa pessoa ou entidade.

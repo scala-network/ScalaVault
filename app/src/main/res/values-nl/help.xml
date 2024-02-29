@@ -75,7 +75,7 @@
     <string name="help_list"><![CDATA[
         <h1>Portemonneelijst</h1>
         <h2>Node</h2>
-        <p>Scala Vault gebruikt een externe node om te communiceren met het Scala-netwerk zonder zelf een exemplaar van de hele blockchain te hoeven downloaden en opslaan. Hier vind je een lijst met populaire externe nodes, of kun je leren hoe je er zelf een draait: https://scalaproject.io/<p>
+        <p>Scala Vault gebruikt een externe node om te communiceren met het Scala-netwerk zonder zelf een exemplaar van de hele blockchain te hoeven downloaden en opslaan. Hier vind je een lijst met populaire externe nodes, of kun je leren hoe je er zelf een draait: https://scala.network/<p>
         <p>Bepaalde externe nodes zijn vooraf ingesteld in Scala Vault. De laatste vijf gebruikte nodes worden onthouden.</p>
         <h2>Portemonnees</h2>
         <p>Hier worden je portemonnees weergegeven. Ze zijn opgeslagen in de map <tt>scala vault</tt> in de interne opslag van je apparaat. Je kunt ze vinden in een bestandenverkenner-app.
@@ -101,7 +101,7 @@
         <h2>Betalings-ID</h2>
         Je kunt een Betalings-ID gebruiken om aan te geven waarom je Scala verzendt. Dit is volledig optioneel en blijft vertrouwelijk tussen beide partijen. Een bedrijf kan bijvoorbeeld jouw transactie koppelen aan een artikel dat je hebt gekocht.
         <h2>Transactie-ID</h2>
-        Met je transactie-ID kun je de versleutelde transactie vinden in een Scala-blockexplorer, bijvoorbeeld <a href="https://explorer.scalaproject.io/">https://explorer.scalaproject.io/</a>
+        Met je transactie-ID kun je de versleutelde transactie vinden in een Scala-blockexplorer, bijvoorbeeld <a href="https://explorer.scala.network/">https://explorer.scala.network/</a>
         <h2>Transactiesleutel</h2>
         Dit is de geheime sleutel van je transactie. Bewaar deze veilig, want als iemand bekendmaakt welke handtekening in een ring van jou is, wordt je transactie openbaar.
         <h2>Blok</h2>

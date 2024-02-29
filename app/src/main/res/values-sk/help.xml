@@ -102,7 +102,7 @@
         <h2>Uzol</h2>
         <p>Scala Vault používa vzdialené uzly na komunikáciu so sieťou Scala. Nie je tak potrebné sťahovať
 		a ukladať celú blockchain ako takú. Zoznam populárnych uzlov spolu s návodmi ako ich rozbehať môžeš nájsť na 
-		https://scalaproject.io/<p>
+		https://scala.network/<p>
         <p>Scala Vault prichádza s niekoľkými prednastavenými uzlami. Pamätá si posledných 5 použitých uzlov.</p>
         <h2>Peňaženky</h2>
         <p>Tu vidíš svoje peňaženky. Sú umiestnené v adresári <tt>scala vault</tt> na internom úložisku Tvojho zariadenia.
@@ -134,7 +134,7 @@
         Môžeš použiť ID Platby na identifikáciu platby medzi dvoma stranami. Nie je to síce povinný, ale je to súkromný údaj.
 		Tak napríklad s týmto môžeš zosúladiť svoj biznis s kúpenou položkou. Táto funkcia bude v Scala nahradená podadresami.
         <h2>TX ID</h2>
-        Toto je ID transakcie, ktoré slúži na identifikáciu transakcie v Scala blockchain exploreri, ako napr. <a href="https://explorer.scalaproject.io/">https://explorer.scalaproject.io/</a>
+        Toto je ID transakcie, ktoré slúži na identifikáciu transakcie v Scala blockchain exploreri, ako napr. <a href="https://explorer.scala.network/">https://explorer.scala.network/</a>
         <h2>TX KĽÚČ (Transaction Key)</h2>
         Toto je Tvoj súkromný kľúč transakcie, uchovaj ho bezpečne a neposkytuj ho tretím stranám,
 		aby nemohli identifikovať tvoj podpis v kruhovom podpise a spraviť tak transakciu verejnú a transparentnú.		

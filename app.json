@@ -1,10 +1,10 @@
 {
     "nodes": [{
-            "host": "remote.one.scalaproject.io",
+            "host": "remote.one.scala.network",
             "port": "11812"
         },
         {
-            "host": "remote.two.scalaproject.io",
+            "host": "remote.two.scala.network",
             "port": "11812"
         },
         {

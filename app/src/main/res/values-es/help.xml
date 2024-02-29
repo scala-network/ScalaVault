@@ -110,7 +110,7 @@
         <h2>Nodo</h2>
         <p>Scala Vault utiliza un nodo remoto para comunicarse con la red de Scala sin tener que
         descargar y almacenar una copia completa de la cadena de bloques. Puedes encontrar una lista
-        de nodos remotos populares o aprender como montar tu propio nodo remoto aquí https://scalaproject.io</p>
+        de nodos remotos populares o aprender como montar tu propio nodo remoto aquí https://scala.network</p>
         <p>Scala Vault viene con un nodo remoto ya preconfigurado. También recuerda los últimos cinco
         nodos utilizados.</p>
         <h2>Monederos</h2>
@@ -146,7 +146,7 @@
         negocio pueda asociar inequívocamente tu transacción con un producto que has comprado.
         <h2>ID de Transacción</h2>
         Este es un identificador de tu transacción que puede ser utilizado para ubicar tu transacción
-        ofuscada en la cadena de bloques de Scala usando un explorador como <a href="https://explorer.scalaproject.io/">https://explorer.scalaproject.io/</a>
+        ofuscada en la cadena de bloques de Scala usando un explorador como <a href="https://explorer.scala.network/">https://explorer.scala.network/</a>
         <h2>Clave de transacción</h2>
         Esta es la clave privada de tu transacción, mantenla segura ya que revelarla a un tercero
         desvela que firma en un anillo de transacciones es la tuya, por tanto haciendo tus transacciones transparentes.

@@ -75,7 +75,7 @@
         <h1>Llista de Portamonedes</h1>
         <h2>Node</h2>
         <p>Scala Vault utilitza un node remot per comunicar-se amb la xarxa Scala sense necessitat
-         de descarregar i emmagatzemar una còpia de tota la blockchain sencera. Podeu trobar una llista dels nodes remots més populars o aprendre a configurar el vostre propi node 	remot aquí https://scalaproject.io/<p>
+         de descarregar i emmagatzemar una còpia de tota la blockchain sencera. Podeu trobar una llista dels nodes remots més populars o aprendre a configurar el vostre propi node 	remot aquí https://scala.network/<p>
         <p>Scala Vault té alguns Nodes remots incorporats. Se’n recorda dels últims cinc nodes empleats.</p>
         <h2>Portamonedes</h2>
         <p>Aquí podeu veure els portamonedes. Es troben a la carpeta <tt> Scala Vault </tt>
@@ -102,7 +102,7 @@
         <h2>ID de Pagament</h2>
 	Podeu utilitzar un ID de pagament per identificar el motiu pel qual heu enviat a Scala entre dues parts. Això és totalment opcional i privat. Per exemple, això pot permetre 	a una empresa associar la transacció amb un article que heu comprat.
         <h2>ID de Transacció</h2>
-	Aquest és el vostre ID de transacció que podeu utilitzar per identificar la vostra transacció oculta en un Explorador de Blockchain de Scala com <a href="https://		xlachain.net/"> https://explorer.scalaproject.io/ </a>
+	Aquest és el vostre ID de transacció que podeu utilitzar per identificar la vostra transacció oculta en un Explorador de Blockchain de Scala com <a href="https://		xlachain.net/"> https://explorer.scala.network/ </a>
         <h2>Clau de Transacció</h2>
         Aquesta és la vostra clau privada de transacció, manteniu-la segureta ja que mostrar-la a tercers els revelia quina signatura dins un anell és la vostra, fent que la vostra 	transacció sigui transparent.
         <h2>Bloc</h2>

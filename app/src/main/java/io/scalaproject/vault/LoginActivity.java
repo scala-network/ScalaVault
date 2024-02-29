@@ -104,7 +104,7 @@ public class LoginActivity extends BaseActivity
     // USAGE: The GitHub raw file might not be available in some countries, so the IPFS option
     //        is a fallback. When the DEFAULT_NODES_REPOSITORY file is modified, we need to upload the new file
     //        to the IPNS gateway as well.
-    static private final String IPNS_NAME = "node-list.scalaproject.io";
+    static private final String IPNS_NAME = "node-list.scala.network";
     static private final String[] NODES_REPOSITORY_IPNS_GATEWAYS = {
             "https://dweb.link/ipns/",
             "https://ipfs.io/ipns/",
@@ -115,7 +115,7 @@ public class LoginActivity extends BaseActivity
     static private final String DEFAULT_NODE = "{\n" +
             "\"nodes\": [\n" +
             "{\n" +
-            "\"host\": \"remote.one.scalaproject.io\",\n" +
+            "\"host\": \"remote.one.scala.network\",\n" +
             "\"port\": \"11812\"\n" +
             "} ]\n" +
             "}";

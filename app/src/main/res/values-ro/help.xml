@@ -81,7 +81,7 @@
         <p>Scala Vault folosește un dispozitiv la distanță (remote node) pentru a comunica cu Rețeaua Scala
 		fără a descărca și a stoca o copie a întregii baze de date distribuite (blockchain). Poți găsi o listă
 		populară de noduri de asamblare aflate la distanța, sau despre cum să creezi un nod de asamblare personal,
-		la adresa https://scalaproject.io/<p>
+		la adresa https://scala.network/<p>
         <p>Scala Vault vine cu o listă presetată de noduri de asamblare aflate la distanță (remote nodes).
 		De asemenea Scala Vault reține ultimele cinci noduri folosite.</p>
         <h2>Portofele</h2>
@@ -118,7 +118,7 @@
         <h2>TX ID</h2>
         Acesta este ID-ul Tranzacției și poate fi folosit pentru a identifica tranzacția ta obfuscată
 		pe un explorator al bazei de date distribuită (Blockchain) a Scala, ca cel
-		aflat la acest link <a href="https://explorer.scalaproject.io/">https://explorer.scalaproject.io/</a>
+		aflat la acest link <a href="https://explorer.scala.network/">https://explorer.scala.network/</a>
         <h2>TX KEY (Cheia Tranzacției)</h2>
         Aceasta este cheia privată a tranzacției, aceasta este privată și trebuie păstrată ca atare,
 		această cheie permite unei terțe părți să dezvăluie care din semnăturile formate într-un inel

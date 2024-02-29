@@ -9,7 +9,7 @@
         <br/>
         Scala Team
         <br/><br/>
-        <a href="https://scalaproject.io/">scalaproject.io</a>
+        <a href="https://scala.network/">scala.network</a>
         ]]></string>
 
     <string name="privacy_policy"><![CDATA[
@@ -43,14 +43,14 @@
         </ul>
         <h2>Az adatvédelmi irányelvek módosításai</h2>
         <p>Az adatvédelmi irányelveket időnként frissíthetjük. Bármiféle módosításról
-        értesíteni fogunk az új adatvédelmi irányelvek applikációban és weboldalon (www.scalaproject.io)
+        értesíteni fogunk az új adatvédelmi irányelvek applikációban és weboldalon (www.scala.network)
         történő közzétételével.
         Javasolt az adatvédelmi irányelvek időközönkénti átolvasása a változásokról való értesülés céljából.
         <p>Az adatvédelmi irányelvek legutolsó frissítése: 2017. november 10.
         </p>
         <h2>Lépj kapcsolatba velünk</h2>
         <p>Ha bármilyen kérdésed merül fel az adatvédelmi irányelveinkkel vagy az adatok
-        gyűjtésével és feldolgozásával kapcsolatban, úgy kérlek, írj e-mailt a hello@scalaproject.io címre.
+        gyűjtésével és feldolgozásával kapcsolatban, úgy kérlek, írj e-mailt a hello@scala.network címre.
         </p>
         ]]></string>
 </resources>

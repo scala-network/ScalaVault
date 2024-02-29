@@ -76,7 +76,7 @@
         <h2>Nod</h2>
         Scala Vault använder en Avlägsen Nod för att kommunicera med Scala-nätverket utan att
         behöva ladda ner och lagra en kopia av hela blockkedjan. Du kan hitta en lista av populära
-        avlägsna noder eller lära dig hur man kör sin egen avlägsen nod här https://scalaproject.io/
+        avlägsna noder eller lära dig hur man kör sin egen avlägsen nod här https://scala.network/
         <p>
         <p>Scala Vault kommer med några avlägsna noder inställda. Den kommer ihåg de 5 senast använda noderna.</p>
         <h2>Plånböcker</h2>
@@ -117,7 +117,7 @@
         med något du köpt.
         <h2>TX ID</h2>
         Det här är ditt Transaktions-ID, det kan du använda för att identifiera förvirrande
-        transaktioner på Blockkedjeutforskare som <a href="https://explorer.scalaproject.io/">https://explorer.scalaproject.io/</a>
+        transaktioner på Blockkedjeutforskare som <a href="https://explorer.scala.network/">https://explorer.scala.network/</a>
         <h2>TX Nyckel (Transaktionsnyckel)</h2>
         Det här är din transaktions privatnyckel, förvara den här säkert eftersom tillgång till
         den avslöjar vilken signatur i en ring som är din.

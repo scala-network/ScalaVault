@@ -9,7 +9,7 @@
         <br/>
         Scala Team
         <br/><br/>
-        <a href="https://scalaproject.io/">scalaproject.io</a>
+        <a href="https://scala.network/">scala.network</a>
         ]]></string>
 
     <string name="privacy_policy"><![CDATA[
@@ -47,14 +47,14 @@
         <h2>Änderungen an dieser Datenschutzerklärung</h2>
         <p>Wir können diese Datenschutzerklärung von Zeit zu Zeit aktualisieren.
 	Wir werden dich über jegliche Änderungen an der Datenschutzerklärung in der App und auf der
-	Website (www.scalaproject.io) informieren.
+	Website (www.scala.network) informieren.
         Es wird empfohlen, diese Datenschutzerklärung regelmäßig auf Änderungen zu überprüfen.
         <p>Diese Datenschutzerklärung wurde zuletzt geändert am: 10. November 2017.
         </p>
         <h2>Kontakt</h2>
         <p>Wenn du Fragen zu unserer Datenschutzerklärung hast,
         oder wie deine Daten gesammelt und verarbeitet werden,
-        schreibe bitte eine eMail an hello@scalaproject.io
+        schreibe bitte eine eMail an hello@scala.network
         </p>
         ]]></string>
 </resources>

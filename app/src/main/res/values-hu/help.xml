@@ -94,7 +94,7 @@
         <h2>Csomópont</h2>
         <p>A Scala Vault távoli csomópontot használ a Scala-hálózattal való kommunikációhoz, így nem
         kell az egész blokklánc egy másolatát letölteni és tárolni. A népszerű távoli csomópontokról
-        és a saját csomópont futtatásáról a https://scalaproject.io weboldalon olvashatsz.<p>
+        és a saját csomópont futtatásáról a https://scala.network weboldalon olvashatsz.<p>
         <p>A Scala Vault tartalmaz néhány előbeállított távoli csomópontot. Megjegyzésre az utolsó öt
         használt csomópont kerül.</p>
         <h2>Tárcák</h2>
@@ -129,7 +129,7 @@
         lehetővé teszi egy üzlet számára a tranzakciód és a megvásárolt tételed összeegyeztetését.
         <h2>Tranzakcióazonosító</h2>
         A tranzakcióazonosítód (TX ID) szolgál arra, hogy a titkosított tranzakciódat azonosítani tudd
-        egy blokkkeresőben, mint például a <a href="https://explorer.scalaproject.io/">https://explorer.scalaproject.io/</a>.
+        egy blokkkeresőben, mint például a <a href="https://explorer.scala.network/">https://explorer.scala.network/</a>.
         <h2>Tranzakciókulcs</h2>
         Ez a tranzakciós privát kulcsod (TX KEY). Tartsd biztonságban, ugyanis harmadik félnek való megmutatása
         felfedi, hogy egy gyűrűn belül melyik aláírás a tiéd, ezáltal nyílttá téve a tranzakciódat.

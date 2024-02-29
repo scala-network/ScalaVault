@@ -9,7 +9,7 @@
         <br/>
         Scala Team
         <br/><br/>
-        <a href="https://scalaproject.io/">scalaproject.io</a>
+        <a href="https://scala.network/">scala.network</a>
         ]]></string>
 
     <string name="privacy_policy"><![CDATA[
@@ -50,7 +50,7 @@
         <h2>Contact Us</h2>
         <p>If you have any questions about our privacy policy,
         or how your data is being collected and processed,
-        please e-mail <a href="mailto:hello@scalaproject.io">hello@scalaproject.io</a>.
+        please e-mail <a href="mailto:hello@scala.network">hello@scala.network</a>.
         </p>
         ]]></string>
 </resources>

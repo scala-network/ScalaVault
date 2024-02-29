@@ -97,7 +97,7 @@
         <h2>Node</h2>
         <p>Scala Vault benutzt einen Drittanbieter-Node, um mit dem Scala-Netzwerk zu kommunizieren, ohne
         die gesamte Blockchain herunterladen zu müssen. Eine Liste bekannter Drittanbieter-Nodes
-	oder eine Anleitung zum Betreiben eines eigenen Drittanbieter-Nodes findest du unter https://scalaproject.io/<p>
+	oder eine Anleitung zum Betreiben eines eigenen Drittanbieter-Nodes findest du unter https://scala.network/<p>
         <p>Scala Vault besitzt einige voreingestellte Drittanbieter-Nodes. Es erinnert sich an die letzten 5 benutzten Nodes.</p>
         <h2>Wallets</h2>
         <p>Hier siehst du deine Wallets. Sie befinden sich im <tt>scala vault</tt> Ordner
@@ -130,7 +130,7 @@
 		Zum Beispiel kann ein Unternehmen damit Zahlungen und Verkäufe miteinander verbinden.
         <h2>TX-ID</h2>
         Dies ist deine Transaktions-ID, die du benutzen kannst, um verschleierte Transaktionen mit einem Scala-
-        Blockchain-Explorer wie <a href="https://explorer.scalaproject.io/">https://explorer.scalaproject.io/</a> zu identifizieren.
+        Blockchain-Explorer wie <a href="https://explorer.scala.network/">https://explorer.scala.network/</a> zu identifizieren.
         <h2>TX-Schlüssel (Transaktionsschlüssel)</h2>
         Dies ist dein geheimer Transaktionsschlüssel. Bewahre ihn sicher auf, da er Dritten deine Signatur in einem Ring offenbart 
 	und deshalb deine Transaktionen transparent macht.

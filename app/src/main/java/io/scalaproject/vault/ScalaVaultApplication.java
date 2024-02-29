@@ -37,17 +37,13 @@ import org.acra.annotation.AcraMailSender;
 import timber.log.Timber;
 
 @AcraCore(buildConfigClass = BuildConfig.class)
-@AcraMailSender(mailTo = "hello@scalaproject.io")
+@AcraMailSender(mailTo = "support@scala.network")
 public class ScalaVaultApplication extends Application {
     @Override
     public void onCreate() {
         super.onCreate();
         SharedPreferences preferences = getSharedPreferences(getPackageName() + "_preferences", MODE_PRIVATE);
         Config.initialize(preferences);
-
-        if (BuildConfig.DEBUG) {
-            Timber.plant(new Timber.DebugTree());
-        }
     }
 
     @Override

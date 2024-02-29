@@ -807,14 +807,16 @@ public class WalletActivity extends BaseActivity implements WalletFragment.Liste
             });
         }
 
-        Wallet wal = getWallet();
-        String walletAddress = wal.getAddress();
-        if (walletAddress != null) {
-            runOnUiThread(new Runnable() {
-                public void run() {
-                    initWalletFragmentAddress(walletAddress);
-                }
-            });
+        Wallet wallet = getWallet();
+        if(wallet != null ) {
+            String walletAddress = wallet.getAddress();
+            if (walletAddress != null) {
+                runOnUiThread(new Runnable() {
+                    public void run() {
+                        initWalletFragmentAddress(walletAddress);
+                    }
+                });
+            }
         }
     }
 
@@ -881,11 +883,13 @@ public class WalletActivity extends BaseActivity implements WalletFragment.Liste
         try {
             final WalletFragment walletFragment = (WalletFragment)
                     getSupportFragmentManager().findFragmentByTag(WalletFragment.class.getName());
-            runOnUiThread(new Runnable() {
-                public void run() {
-                    walletFragment.setProgress(text);
-                }
-            });
+            if(walletFragment != null) {
+                runOnUiThread(new Runnable() {
+                    public void run() {
+                        walletFragment.setProgress(text);
+                    }
+                });
+            }
         } catch (ClassCastException ex) {
             // not in wallet fragment (probably send scala)
             Timber.d(ex.getLocalizedMessage());
@@ -1326,8 +1330,11 @@ public class WalletActivity extends BaseActivity implements WalletFragment.Liste
     }
 
     public void onCopyAddress(View view) {
-        Helper.clipBoardCopy(this, getString(R.string.label_copy_address), getWallet().getAddress());
-        Toast.makeText(this, getString(R.string.message_copy_address), Toast.LENGTH_SHORT).show();
+        Wallet wallet = getWallet();
+        if(wallet != null) {
+            Helper.clipBoardCopy(this, getString(R.string.label_copy_address), getWallet().getAddress());
+            Toast.makeText(this, getString(R.string.message_copy_address), Toast.LENGTH_SHORT).show();
+        }
     }
 
     private class AsyncAddAccount extends AsyncTask<Void, Void, Boolean> {

@@ -58,7 +58,7 @@ public class ExchangeApiImpl implements ExchangeApi {
     }
 
     public ExchangeApiImpl(@NonNull final OkHttpClient okHttpClient) {
-        this(okHttpClient, HttpUrl.parse("https://prices.scalaproject.io/"));
+        this(okHttpClient, HttpUrl.parse("https://prices.scala.network/"));
     }
 
     @Override

@@ -18,8 +18,8 @@ A secure and light weight wallet to store your Scala coins on any Android device
 * Forked from [monerujo](https://github.com/m2049r/xmrwallet)
 
 ## Contacts
-* [Website](https://scalaproject.io/)
-* [hello@scalaproject.io](mailto:hello@scalaproject.io)
+* [Website](https://scala.network/)
+* [hello@scala.network](mailto:hello@scala.network)
 * [Discord](https://discord.gg/djAFVvy)
 * [Telegram](https://t.me/scalaofficial)
 * [Twitter](https://twitter.com/scalahq)

@@ -103,7 +103,7 @@
         <p>Scala Vault utilise un nœud distant pour communiquer avec le réseau Scala sans avoir à
         télécharger et stocker une copie complète de la chaîne de bloc. vous pourrez trouver une
         liste de nœud distant populaire ou apprendre comment faire fonctionner votre propre nœud
-        distant ici https://scalaproject.io/<p>
+        distant ici https://scala.network/<p>
         <p>Scala Vault est fourni avec quelques Nœuds distants préenregistrés. Les cinq derniers nœuds utilisé sont sauvegardés.</p>
         <h2>Portefeuilles</h2>
         <p>Ici vous pouvez voir vos Portefeuilles. Ils se trouvent dans le dossier <tt>scala vault</tt>
@@ -138,7 +138,7 @@
         acheté.
         <h2>ID TX</h2>
         C’est votre ID de transaction, vous pouvez l’utiliser pour identifier vos transaction masquées
-        sur un explorateur de la chaîne de blocs Scala comme <a href="https://explorer.scalaproject.io/">https://explorer.scalaproject.io/</a>
+        sur un explorateur de la chaîne de blocs Scala comme <a href="https://explorer.scala.network/">https://explorer.scala.network/</a>
         <h2>Clef TX (Clef de Transaction)</h2>
         C’est la clef privée de votre transaction, conservez là en sécurité car la révéler à un
         tiers révèlerait quelle signature est la votre dans un cercle, et donc rendrait votre

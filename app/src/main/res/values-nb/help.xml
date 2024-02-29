@@ -95,7 +95,7 @@
         <h2>Node</h2>
         <p>Scala Vault bruker en ekstern node for å kommunisere med Scala-nettverket, uten å måtte
         laste ned og oppbevare en kopi av blokkjeden selv. Du kan finne en liste over populære
-        eksterne noder eller lære hvordan du driver din egen eksterne node her: https://scalaproject.io/<p>
+        eksterne noder eller lære hvordan du driver din egen eksterne node her: https://scala.network/<p>
         <p>Scala Vault kommer med noen eksterne noder lagt inn. Den husker de fem siste nodene du har brukt.</p>
         <h2>Lommebøker</h2>
         <p>Her ser du lommebøkene dine. De ligger i <tt>scala vault</tt> mappa
@@ -129,7 +129,7 @@
 		en vare du har kjøpt.
         <h2>TX-ID</h2>
         Dette er transaksjons-IDen din, som du kan bruke til å identifisere transaksjonen din på den obfuskerte Scala blokkjeden, ved å bruke en
-        blokkjedeutforsker som <a href="https://explorer.scalaproject.io/">https://explorer.scalaproject.io/</a>
+        blokkjedeutforsker som <a href="https://explorer.scala.network/">https://explorer.scala.network/</a>
         <h2>TX-nøkkel (Transaksjonsnøkkel)</h2>
         Dette er din private transaksjonsnøkkel. Hold den privat, siden å gi den til en tredjepart
         avslører hvilken signatur i ringen som er din, og gjør derfor transaksjonen din gjennomsiktig.

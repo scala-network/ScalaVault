@@ -89,7 +89,7 @@
         <h1>钱包列表</h1>
         <h2>节点</h2>
         <p>Scala Vault使用远程节点连接至Scala网络，且不需要下载与储存整个区块链。
-        你可以在这个网站中找到几个热门的公共远程节点或是学习如何自行架设节点 https://scalaproject.io/ </p>
+        你可以在这个网站中找到几个热门的公共远程节点或是学习如何自行架设节点 https://scala.network/ </p>
         <p>Scala Vault 会预设数个远程节点以供使用，并且自动记忆最近五个使用过的节点。</p>
         <h2>钱包</h2>
         <p>在这里你可以看到你的钱包。他们被储存在位于设备內部存储空间的<tt>scala vault</tt>资料夹中。
@@ -116,7 +116,7 @@
         你可以使用支付ID来查看交易的原因，该ID为非必填项，且其中信息不会对外公开。
         举例来说，这可以让商业机构对照你的交易和你购买的物品。
         <h2>交易ID</h2>
-        你可以使用交易ID来在Scala区块链浏览器上查看被隐藏的交易。如：<a href="https://explorer.scalaproject.io/">https://explorer.scalaproject.io/</a>
+        你可以使用交易ID来在Scala区块链浏览器上查看被隐藏的交易。如：<a href="https://explorer.scala.network/">https://explorer.scala.network/</a>
         <h2>交易密钥</h2>
         这是你的交易私钥，请妥善保存，因为泄露该私钥会暴露你在环中真正的签名，从而导致交易等信息可被他人知晓。        
 	<h2>区块</h2>

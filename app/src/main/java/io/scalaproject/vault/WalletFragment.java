@@ -529,7 +529,7 @@ public class WalletFragment extends Fragment
             tvAddressType.setText("Subaddress");
         }
 
-        if(wallet == null)
+        if(wallet != null)
             tvWalletAddress.setText(Helper.getPrettyAddress(wallet.getAddress()));
     }
 
