@@ -452,7 +452,8 @@ public class NodeFragment extends Fragment
             nodesAdapter.allowClick(true);
 
             selectedNodeView = rvNodes.getChildAt(0);;
-            selectedNode = nodesAdapter.getNodes().get(0);
+            if(!nodesAdapter.getNodes().isEmpty())
+                selectedNode = nodesAdapter.getNodes().get(0);
             setItemNodeLayout(selectedNodeView, true);
 
             Config.write(Config.CONFIG_KEY_USER_SELECTED_NODE, "");

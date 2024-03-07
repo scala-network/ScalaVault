@@ -106,10 +106,10 @@ public class LoginActivity extends BaseActivity
     //        to the IPNS gateway as well.
     static private final String IPNS_NAME = "node-list.scala.network";
     static private final String[] NODES_REPOSITORY_IPNS_GATEWAYS = {
-            "https://dweb.link/ipns/",
+            "https://cloudflare-ipfs.com/ipns/",
             "https://ipfs.io/ipns/",
             "https://gateway.ipfs.io/ipns/",
-            "https://cloudflare-ipfs.com/ipns/"
+            "https://dweb.link/ipns/"
     };
 
     static private final String DEFAULT_NODE = "{\n" +
@@ -249,21 +249,20 @@ public class LoginActivity extends BaseActivity
 
         String jsonString = "";
 
-        // Load Pools data from IPFS gateways
-        for (String strNodeURLDir : NODES_REPOSITORY_IPNS_GATEWAYS) {
-            String strNodeURL = strNodeURLDir + IPNS_NAME;
-            if(Helper.isURLReachable(strNodeURL)) {
-                jsonString = Helper.fetchJSON(strNodeURL);
-                if (!jsonString.isEmpty())
-                    break;
-            }
-        }
+        // Load Pools data from the GitHub repository by default
+        if(Helper.isURLReachable(DEFAULT_NODES_REPOSITORY))
+            jsonString  = Helper.fetchJSON(DEFAULT_NODES_REPOSITORY);
 
-        // If IPFS is not available or is blocked by firewalls, use GitHub raw file
+        // If GitHub file is not available or is blocked by firewalls, use IPFS
         if(jsonString.isEmpty()) {
-            // Load Pools data from repository
-            if(Helper.isURLReachable(DEFAULT_NODES_REPOSITORY))
-                jsonString  = Helper.fetchJSON(DEFAULT_NODES_REPOSITORY);
+            for (String strNodeURLDir : NODES_REPOSITORY_IPNS_GATEWAYS) {
+                String strNodeURL = strNodeURLDir + IPNS_NAME;
+                if(Helper.isURLReachable(strNodeURL)) {
+                    jsonString = Helper.fetchJSON(strNodeURL);
+                    if (!jsonString.isEmpty())
+                        break;
+                }
+            }
         }
 
         // None of the URL can be reached. Load default data but don't cache it.

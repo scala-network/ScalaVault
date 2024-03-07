@@ -682,7 +682,10 @@ public class Helper {
         try {
             URL url = new URL(strURL);
             HttpURLConnection connection = (HttpURLConnection) url.openConnection();
+            connection.setReadTimeout(2000);
             return connection.getResponseCode() == 200;
+        } catch (java.net.SocketTimeoutException e) {
+            return false;
         } catch (IOException e) {
             e.printStackTrace();
             return false;

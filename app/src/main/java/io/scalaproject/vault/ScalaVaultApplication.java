@@ -44,6 +44,10 @@ public class ScalaVaultApplication extends Application {
         super.onCreate();
         SharedPreferences preferences = getSharedPreferences(getPackageName() + "_preferences", MODE_PRIVATE);
         Config.initialize(preferences);
+
+        /*if (BuildConfig.DEBUG) {
+            Timber.plant(new Timber.DebugTree());
+        }*/
     }
 
     @Override
