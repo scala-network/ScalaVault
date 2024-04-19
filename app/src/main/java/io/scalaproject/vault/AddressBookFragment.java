@@ -27,11 +27,18 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Bitmap;
+import android.net.Uri;
 import android.os.Bundle;
+
+import androidx.activity.result.ActivityResult;
+import androidx.activity.result.ActivityResultLauncher;
+import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.annotation.Nullable;
 
 import com.google.android.material.dialog.MaterialAlertDialogBuilder;
 import com.google.android.material.textfield.TextInputLayout;
+import com.yalantis.ucrop.UCrop;
+
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -54,6 +61,8 @@ import io.scalaproject.vault.model.Wallet;
 import io.scalaproject.vault.util.Helper;
 import io.scalaproject.vault.widget.Toolbar;
 
+import java.io.File;
+import java.io.IOException;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -79,6 +88,9 @@ public class AddressBookFragment extends Fragment
     private ContactInfoAdapter contactsAdapter;
 
     private AddressBookFragment.Listener activityCallback;
+
+    private ActivityResultLauncher<String> mGetContentLauncher;
+    private ActivityResultLauncher<Intent> mCropImageLauncher;
 
     public interface Listener {
         void setToolbarButton(int type);
@@ -160,6 +172,46 @@ public class AddressBookFragment extends Fragment
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setHasOptionsMenu(true);
+        initLaunchers();
+    }
+
+    private void initLaunchers() {
+        mGetContentLauncher = registerForActivityResult(
+                new ActivityResultContracts.GetContent(),
+                this::startCropActivity
+        );
+
+        mCropImageLauncher = registerForActivityResult(
+                new ActivityResultContracts.StartActivityForResult(),
+                this::handleCropResult
+        );
+    }
+
+    private void startCropActivity(Uri uri) {
+        Uri destinationUri = Uri.fromFile(new File(getContext().getCacheDir(), "cropped.jpg"));
+        UCrop uCrop = UCrop.of(uri, destinationUri);
+        uCrop.withAspectRatio(1, 1);
+        uCrop.withMaxResultSize(256, 256);
+        mCropImageLauncher.launch(uCrop.getIntent(getContext()));
+    }
+
+    private void handleCropResult(ActivityResult result) {
+        if (result.getResultCode() == Activity.RESULT_OK && result.getData() != null) {
+            Uri resultUri = UCrop.getOutput(result.getData());
+            if (resultUri != null) {
+                try {
+                    Bitmap bitmap = MediaStore.Images.Media.getBitmap(getContext().getContentResolver(), resultUri);
+                    contactEdit.setAvatar(bitmap);
+                    if (editDialog.isShowing()) {
+                        editDialog.updateAvatar(bitmap);
+                    }
+                } catch (IOException e) {
+                    Timber.e(e, "Failed to load image from UCrop result");
+                }
+            } else {
+                Timber.e("Result URI from UCrop is null");
+            }
+        }
     }
 
     @Override
@@ -419,33 +471,17 @@ public class AddressBookFragment extends Fragment
         }
 
         public void pickImage() {
-            Intent intent = new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.INTERNAL_CONTENT_URI);
-            intent.setType("image/*");
-            intent.putExtra("crop", "true");
-            intent.putExtra("scale", true);
-            intent.putExtra("outputX", 256);
-            intent.putExtra("outputY", 256);
-            intent.putExtra("aspectX", 1);
-            intent.putExtra("aspectY", 1);
-            intent.putExtra("return-data", true);
-
-            startActivityForResult(intent, 1);
+            mGetContentLauncher.launch("image/*");
         }
-    }
 
-    public void onActivityResult(int requestCode, int resultCode, Intent data) {
-        if(requestCode== EditDialog.GET_FROM_GALLERY & resultCode== Activity.RESULT_OK) {
-            Timber.d("AddressBook.onActivityResult");
-
-            // Already save the cropped image
-            Bitmap bitmap = Helper.getCroppedBitmap((Bitmap) data.getExtras().get("data"));
-
-            contactEdit.setAvatar(bitmap);
-
-            EditDialog diag = createEditDialog(contactEdit);
-            if (diag != null) {
-                diag.show();
+        public void updateAvatar(Bitmap bitmap) {
+            if (ivAvatar != null) {
+                ivAvatar.setImageBitmap(bitmap);
             }
+        }
+
+        public boolean isShowing() {
+            return editDialog.isShowing();
         }
     }
 }

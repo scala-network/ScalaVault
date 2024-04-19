@@ -19,6 +19,9 @@ allprojects {
         maven {
             url "https://repository.mulesoft.org/nexus/content/repositories/public/"
         }
+        maven {
+            url "https://jitpack.io"
+        }
         google()
     }
 }
