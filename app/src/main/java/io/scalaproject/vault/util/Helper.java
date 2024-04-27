@@ -50,6 +50,8 @@ import android.os.StrictMode;
 
 import com.google.android.material.dialog.MaterialAlertDialogBuilder;
 import com.google.android.material.textfield.TextInputLayout;
+
+import androidx.annotation.RequiresApi;
 import androidx.core.content.ContextCompat;
 import android.system.ErrnoException;
 import android.system.Os;
@@ -85,6 +87,7 @@ import java.net.MalformedURLException;
 import java.net.SocketTimeoutException;
 import java.net.URL;
 import java.util.Locale;
+import java.util.Objects;
 import java.util.concurrent.atomic.AtomicBoolean;
 
 import javax.net.ssl.HttpsURLConnection;
@@ -121,11 +124,11 @@ public class Helper {
     }
 
     static public final int PERMISSIONS_REQUEST_CAMERA = 7;
+    static public final int PERMISSIONS_REQUEST_READ_IMAGES = 8;
 
     static public boolean getCameraPermission(Activity context) {
         if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.M) {
-            if (context.checkSelfPermission(Manifest.permission.CAMERA)
-                    == PackageManager.PERMISSION_DENIED) {
+            if (context.checkSelfPermission(Manifest.permission.CAMERA) == PackageManager.PERMISSION_DENIED) {
                 Timber.w("Permission denied for CAMERA - requesting it");
                 String[] permissions = {Manifest.permission.CAMERA};
                 context.requestPermissions(permissions, PERMISSIONS_REQUEST_CAMERA);
@@ -135,6 +138,22 @@ public class Helper {
             }
         } else {
             return true;
+        }
+    }
+
+    static public boolean getReadExternalStoragePermission(Activity context) {
+        String perm = Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU ? Manifest.permission.READ_MEDIA_IMAGES : Manifest.permission.READ_EXTERNAL_STORAGE;
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+            if (context.checkSelfPermission(perm) == PackageManager.PERMISSION_DENIED) {
+                Timber.w("Permission denied for READ_EXTERNAL_STORAGE - requesting it");
+                String[] permissions = {perm};
+                context.requestPermissions(permissions, PERMISSIONS_REQUEST_READ_IMAGES);
+                return false;
+            } else {
+                return true;
+            }
+        } else {
+            return false;
         }
     }
 
@@ -169,7 +188,7 @@ public class Helper {
     }
 
     static public void showKeyboard(Dialog dialog) {
-        dialog.getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_VISIBLE);
+        Objects.requireNonNull(dialog.getWindow()).setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_VISIBLE);
     }
 
     static public void hideKeyboardAlways(Activity act) {

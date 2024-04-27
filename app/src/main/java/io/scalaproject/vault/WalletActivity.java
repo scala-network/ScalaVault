@@ -1113,7 +1113,7 @@ public class WalletActivity extends BaseActivity implements WalletFragment.Liste
                                            @NonNull int[] grantResults) {
         Timber.d("onRequestPermissionsResult()");
         switch (requestCode) {
-            case Helper.PERMISSIONS_REQUEST_CAMERA:
+            case Helper.PERMISSIONS_REQUEST_CAMERA: {
                 // If request is cancelled, the result arrays are empty.
                 if (grantResults.length > 0
                         && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
@@ -1124,7 +1124,15 @@ public class WalletActivity extends BaseActivity implements WalletFragment.Liste
                     Toast.makeText(this, msg, Toast.LENGTH_LONG).show();
                 }
                 break;
+            }
+            case Helper.PERMISSIONS_REQUEST_READ_IMAGES:
+            {
+                AddressBookFragment.pickImageImpl();
+            }
             default:
+            {
+                // nothing
+            }
         }
     }
 
