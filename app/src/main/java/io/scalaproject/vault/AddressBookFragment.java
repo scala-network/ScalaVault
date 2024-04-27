@@ -33,6 +33,7 @@ import android.os.Bundle;
 import androidx.activity.result.ActivityResult;
 import androidx.activity.result.ActivityResultLauncher;
 import androidx.activity.result.contract.ActivityResultContracts;
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
 import com.google.android.material.dialog.MaterialAlertDialogBuilder;
@@ -65,6 +66,7 @@ import java.io.File;
 import java.io.IOException;
 import java.util.HashSet;
 import java.util.List;
+import java.util.Objects;
 import java.util.Set;
 
 import timber.log.Timber;
@@ -74,22 +76,18 @@ public class AddressBookFragment extends Fragment
 
     public static final String REQUEST_MODE = "mode";
 
-    static final public String MODE_TYPE_WRITE = "write";
     static final public String MODE_TYPE_READONLY = "readonly";
 
     private boolean readonly = false;
 
-    private View fabAddContact;
     private RecyclerView rvContacts;
     private LinearLayout llNoContact;
-
-    private Set<Contact> contacts = new HashSet<>();
 
     private ContactInfoAdapter contactsAdapter;
 
     private AddressBookFragment.Listener activityCallback;
 
-    private ActivityResultLauncher<String> mGetContentLauncher;
+    private static ActivityResultLauncher<String> mGetContentLauncher;
     private ActivityResultLauncher<Intent> mCropImageLauncher;
 
     public interface Listener {
@@ -105,13 +103,13 @@ public class AddressBookFragment extends Fragment
     }
 
     @Override
-    public void onAttach(Context context) {
+    public void onAttach(@NonNull Context context) {
         super.onAttach(context);
+
         if (context instanceof AddressBookFragment.Listener) {
             this.activityCallback = (Listener) context;
         } else {
-            throw new ClassCastException(context.toString()
-                    + " must implement Listener");
+            throw new ClassCastException(context.toString() + " must implement Listener");
         }
     }
 
@@ -139,13 +137,14 @@ public class AddressBookFragment extends Fragment
         View view = inflater.inflate(R.layout.fragment_address_book, container, false);
 
         Bundle args = getArguments();
+        assert args != null;
         if(!args.isEmpty() && args.containsKey(REQUEST_MODE)) {
-            readonly = args.getString(REQUEST_MODE).equals(MODE_TYPE_READONLY);
+            readonly = Objects.equals(args.getString(REQUEST_MODE), MODE_TYPE_READONLY);
         }
 
         llNoContact = view.findViewById(R.id.llNoContact);
 
-        fabAddContact = view.findViewById(R.id.fabAddContact);
+        View fabAddContact = view.findViewById(R.id.fabAddContact);
         fabAddContact.setOnClickListener(this);
         fabAddContact.setVisibility(readonly ? View.GONE : View.VISIBLE);
 
@@ -155,7 +154,7 @@ public class AddressBookFragment extends Fragment
 
         Helper.hideKeyboard(getActivity());
 
-        contacts = new HashSet<>(activityCallback.getContacts());
+        Set<Contact> contacts = new HashSet<>(activityCallback.getContacts());
         contactsAdapter.setContacts(contacts);
 
         ViewGroup llNotice = view.findViewById(R.id.llNotice);
@@ -188,11 +187,11 @@ public class AddressBookFragment extends Fragment
     }
 
     private void startCropActivity(Uri uri) {
-        Uri destinationUri = Uri.fromFile(new File(getContext().getCacheDir(), "cropped.jpg"));
+        Uri destinationUri = Uri.fromFile(new File(requireContext().getCacheDir(), "cropped.jpg"));
         UCrop uCrop = UCrop.of(uri, destinationUri);
         uCrop.withAspectRatio(1, 1);
         uCrop.withMaxResultSize(256, 256);
-        mCropImageLauncher.launch(uCrop.getIntent(getContext()));
+        mCropImageLauncher.launch(uCrop.getIntent(requireContext()));
     }
 
     private void handleCropResult(ActivityResult result) {
@@ -200,7 +199,7 @@ public class AddressBookFragment extends Fragment
             Uri resultUri = UCrop.getOutput(result.getData());
             if (resultUri != null) {
                 try {
-                    Bitmap bitmap = MediaStore.Images.Media.getBitmap(getContext().getContentResolver(), resultUri);
+                    Bitmap bitmap = MediaStore.Images.Media.getBitmap(requireContext().getContentResolver(), resultUri);
                     contactEdit.setAvatar(bitmap);
                     if (editDialog.isShowing()) {
                         editDialog.updateAvatar(bitmap);
@@ -215,7 +214,7 @@ public class AddressBookFragment extends Fragment
     }
 
     @Override
-    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
+    public void onCreateOptionsMenu(@NonNull Menu menu, MenuInflater inflater) {
         inflater.inflate(R.menu.address_book_menu, menu);
         super.onCreateOptionsMenu(menu, inflater);
     }
@@ -226,7 +225,7 @@ public class AddressBookFragment extends Fragment
     public void onDeleteContact(final View view, final Contact contact) {
         Timber.d("onDeleteContact");
 
-        MaterialAlertDialogBuilder builder = new MaterialAlertDialogBuilder(getActivity(), R.style.MaterialAlertDialogCustom);
+        MaterialAlertDialogBuilder builder = new MaterialAlertDialogBuilder(requireActivity(), R.style.MaterialAlertDialogCustom);
         builder.setMessage(getString(R.string.delete_contact_conf, contact.getName()))
                 .setCancelable(true)
                 .setPositiveButton(getString(R.string.details_alert_yes), new DialogInterface.OnClickListener() {
@@ -310,7 +309,7 @@ public class AddressBookFragment extends Fragment
 
     class EditDialog {
         private boolean applyChanges() {
-            final String contactName = etContactName.getEditText().getText().toString().trim();
+            final String contactName = Objects.requireNonNull(etContactName.getEditText()).getText().toString().trim();
             if (contactName.isEmpty()) {
                 etContactName.setError(getString(R.string.contact_value_empty));
                 return false;
@@ -318,7 +317,7 @@ public class AddressBookFragment extends Fragment
                 contactEdit.setName(contactName);
             }
 
-            final String walletAddress = etWalletAddress.getEditText().getText().toString().trim();
+            final String walletAddress = Objects.requireNonNull(etWalletAddress.getEditText()).getText().toString().trim();
             if (walletAddress.isEmpty()) {
                 etWalletAddress.setError(getString(R.string.contact_value_empty));
                 return false;
@@ -332,14 +331,12 @@ public class AddressBookFragment extends Fragment
             return true;
         }
 
-        private boolean applyChangesTmp() {
-            final String contactName = etContactName.getEditText().getText().toString().trim();
+        private void applyChangesTmp() {
+            final String contactName = Objects.requireNonNull(etContactName.getEditText()).getText().toString().trim();
             contactEdit.setName(contactName);
 
-            final String walletAddress = etWalletAddress.getEditText().getText().toString().trim();
+            final String walletAddress = Objects.requireNonNull(etWalletAddress.getEditText()).getText().toString().trim();
             contactEdit.setAddress(walletAddress);
-
-            return true;
         }
 
         private void apply() {
@@ -358,7 +355,7 @@ public class AddressBookFragment extends Fragment
         private void closeDialog() {
             if (editDialog == null) throw new IllegalStateException();
 
-            Helper.hideKeyboardAlways(getActivity());
+            Helper.hideKeyboardAlways(requireActivity());
 
             editDialog.dismiss();
             editDialog = null;
@@ -384,7 +381,7 @@ public class AddressBookFragment extends Fragment
         public static final int GET_FROM_GALLERY = 1;
 
         EditDialog(final Contact contact) {
-            MaterialAlertDialogBuilder alertDialogBuilder = new MaterialAlertDialogBuilder(getActivity(), R.style.MaterialAlertDialogCustom);
+            MaterialAlertDialogBuilder alertDialogBuilder = new MaterialAlertDialogBuilder(requireActivity(), R.style.MaterialAlertDialogCustom);
             LayoutInflater li = LayoutInflater.from(alertDialogBuilder.getContext());
             View promptsView = li.inflate(R.layout.prompt_editcontact, null);
             alertDialogBuilder.setView(promptsView);
@@ -394,23 +391,17 @@ public class AddressBookFragment extends Fragment
             ivAvatar = promptsView.findViewById(R.id.ivAvatar);
 
             ImageButton bPasteAddress = promptsView.findViewById(R.id.bPasteAddress);
-            bPasteAddress.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
-                    final String clip = Helper.getClipBoardText(getActivity());
-                    if (clip == null) return;
+            bPasteAddress.setOnClickListener(view -> {
+                final String clip = Helper.getClipBoardText(requireActivity());
+                if (clip == null) return;
 
-                    etWalletAddress.getEditText().setText(clip);
-                }
+                Objects.requireNonNull(etWalletAddress.getEditText()).setText(clip);
             });
 
             Button btnSelectImage = promptsView.findViewById(R.id.btnSelectImage);
-            btnSelectImage.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
-                    applyChangesTmp();
-                    pickImage();
-                }
+            btnSelectImage.setOnClickListener(view -> {
+                applyChangesTmp();
+                pickImage();
             });
 
             if (contact != null) {
@@ -419,8 +410,8 @@ public class AddressBookFragment extends Fragment
                 if(contactEditBackup == null)
                     contactEditBackup = new Contact(contact);
 
-                etContactName.getEditText().setText(contact.getName());
-                etWalletAddress.getEditText().setText(contact.getAddress());
+                Objects.requireNonNull(etContactName.getEditText()).setText(contact.getName());
+                Objects.requireNonNull(etWalletAddress.getEditText()).setText(contact.getAddress());
 
                 Bitmap avatar = contact.getAvatar();
                 if(avatar != null)
@@ -464,14 +455,15 @@ public class AddressBookFragment extends Fragment
             });
 
             if (Helper.preventScreenshot()) {
-                editDialog.getWindow().setFlags(WindowManager.LayoutParams.FLAG_SECURE, WindowManager.LayoutParams.FLAG_SECURE);
+                Objects.requireNonNull(editDialog.getWindow()).setFlags(WindowManager.LayoutParams.FLAG_SECURE, WindowManager.LayoutParams.FLAG_SECURE);
             }
 
             refreshContacts();
         }
 
         public void pickImage() {
-            mGetContentLauncher.launch("image/*");
+            if(Helper.getReadExternalStoragePermission(requireActivity()))
+                mGetContentLauncher.launch("image/*");
         }
 
         public void updateAvatar(Bitmap bitmap) {
@@ -483,5 +475,9 @@ public class AddressBookFragment extends Fragment
         public boolean isShowing() {
             return editDialog.isShowing();
         }
+    }
+
+    public static void pickImageImpl() {
+        mGetContentLauncher.launch("image/*");
     }
 }
