@@ -387,6 +387,8 @@ public class LoginActivity extends BaseActivity
     @Override
     public void onRequestPermissionsResult(int requestCode, @NonNull String permissions[],
                                            @NonNull int[] grantResults) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+
         Timber.d("onRequestPermissionsResult()");
         switch (requestCode) {
             case LegacyStorageHelper.PERMISSIONS_REQUEST_READ_EXTERNAL_STORAGE:
