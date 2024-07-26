@@ -24,7 +24,12 @@ A secure and light weight wallet to store your Scala coins on any Android device
 * [Telegram](https://t.me/scalaofficial)
 * [Twitter](https://twitter.com/scalahq)
 
-
 # License
 
 See [LICENSE](https://github.com/scala-network/ScalaVault/blob/master/LICENSE).
+
+# Sponsors
+
+Core development funding and/or some supporting services are also graciously provided by sponsors:
+
+[<img width="150" src="https://resources.jetbrains.com/storage/products/company/brand/logos/jb_beam.png"/>](https://www.jetbrains.com/)
