@@ -5,8 +5,8 @@ android {
         applicationId "io.scalaproject.vault"
         buildToolsVersion = '34.0.0'
         compileSdk 34
-        minSdkVersion 21
-        targetSdkVersion 34
+        minSdk 21
+        targetSdk 33
         versionCode 16
         versionName "1.1.5"
 
@@ -23,6 +23,8 @@ android {
             abiFilters 'arm64-v8a', 'x86_64', 'armeabi-v7a'
         }
         resourceConfigurations += ['en', 'fr', 'de', 'el', 'eo', 'es', 'et', 'hu', 'it', 'ja', 'nb', 'nl', 'pt', 'pt-rBR', 'ro', 'ru', 'sk', 'sr', 'sv', 'uk', 'zh-rCN', 'zh-rTW']
+        signingConfig signingConfigs.debug
+        proguardFiles 'proguard-rules.pro'
     }
 
     flavorDimensions 'type', 'net'
@@ -89,6 +91,17 @@ android {
     // Enumerate translated locales
     def availableLocales = ["en"]
     namespace 'io.scalaproject.vault'
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+    dependenciesInfo {
+        includeInApk false
+        includeInBundle false
+    }
+    compileSdk 34
+    buildToolsVersion '34.0.0'
+    ndkVersion '25.1.8937393'
     new File("app/src/main/res/").eachFileMatch(~/^values-.*/) { file ->
         def languageTag = file.name.substring(7).replace("-r", "-")
         availableLocales.add(languageTag)
@@ -116,22 +129,23 @@ android {
 }
 
 dependencies {
-
-    implementation 'com.google.android.material:material:1.11.0' // keep version 1.0.0 as it fixes a bug with Material Button
+    // where is 1.0 loaded?
+    implementation 'com.google.android.material:material:1.12.0' // keep version 1.0.0 as it fixes a bug with Material Button
     implementation "com.android.support:support-v4"
     implementation "com.android.support:recyclerview-v7"
     implementation 'androidx.cardview:cardview:1.0.0'
     implementation 'androidx.swiperefreshlayout:swiperefreshlayout:1.1.0'
 
-    implementation 'com.google.android.material:material:1.11.0'  // keep version 1.1.0 as it fixes a bug with Material Button
-    implementation 'androidx.appcompat:appcompat:1.6.1'  // keep version 1.1.0 as it fixes a bug with Material Button
+    // where is 1.0 loaded?
+    implementation 'com.google.android.material:material:1.12.0'  // keep version 1.1.0 as it fixes a bug with Material Button
+    implementation 'androidx.appcompat:appcompat:1.7.0'  // keep version 1.1.0 as it fixes a bug with Material Button
     implementation 'androidx.legacy:legacy-support-v4:1.0.0'
 
     implementation 'me.dm7.barcodescanner:zxing:1.9.8'
 
     //noinspection GradleDependency
     implementation 'com.squareup.okhttp3:okhttp:3.0.1' // keep version 3.0.1 to avoid errors
-    implementation "com.burgstaller:okhttp-digest:1.18"
+    implementation 'io.github.rburgst:okhttp-digest:3.1.1'// This dependency was removed what you do?
     implementation "com.jakewharton.timber:timber:5.0.1"
 
     implementation 'com.nulab-inc:zxcvbn:1.5.2'
