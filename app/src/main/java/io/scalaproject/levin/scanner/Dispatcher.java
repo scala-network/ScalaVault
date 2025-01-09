@@ -52,7 +52,7 @@ public class Dispatcher implements PeerRetriever.OnGetPeers {
         void onGet(NodeInfo nodeInfo);
     }
 
-    private Listener listener;
+    private final Listener listener;
 
     public Dispatcher(Listener listener) {
         this.listener = listener;

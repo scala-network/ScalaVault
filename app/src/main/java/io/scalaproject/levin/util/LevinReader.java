@@ -33,7 +33,7 @@ import java.util.List;
 // Full Levin reader as seen on epee
 
 public class LevinReader {
-    private DataInput in;
+    private final DataInput in;
 
     private LevinReader(byte[] buffer) {
         ByteArrayInputStream bis = new ByteArrayInputStream(buffer);
@@ -80,29 +80,18 @@ public class LevinReader {
     }
 
     private Object read(int type) throws IOException {
-        switch (type) {
-            case Section.SERIALIZE_TYPE_UINT64:
-            case Section.SERIALIZE_TYPE_INT64:
-                return in.readLong();
-            case Section.SERIALIZE_TYPE_UINT32:
-            case Section.SERIALIZE_TYPE_INT32:
-                return in.readInt();
-            case Section.SERIALIZE_TYPE_UINT16:
-                return in.readUnsignedShort();
-            case Section.SERIALIZE_TYPE_INT16:
-                return in.readShort();
-            case Section.SERIALIZE_TYPE_UINT8:
-                return in.readUnsignedByte();
-            case Section.SERIALIZE_TYPE_INT8:
-                return in.readByte();
-            case Section.SERIALIZE_TYPE_OBJECT:
-                return readSection();
-            case Section.SERIALIZE_TYPE_STRING:
-                return readByteArray();
-            default:
-                throw new IllegalArgumentException("type " + type
-                        + " not supported");
-        }
+        return switch (type) {
+            case Section.SERIALIZE_TYPE_UINT64, Section.SERIALIZE_TYPE_INT64 -> in.readLong();
+            case Section.SERIALIZE_TYPE_UINT32, Section.SERIALIZE_TYPE_INT32 -> in.readInt();
+            case Section.SERIALIZE_TYPE_UINT16 -> in.readUnsignedShort();
+            case Section.SERIALIZE_TYPE_INT16 -> in.readShort();
+            case Section.SERIALIZE_TYPE_UINT8 -> in.readUnsignedByte();
+            case Section.SERIALIZE_TYPE_INT8 -> in.readByte();
+            case Section.SERIALIZE_TYPE_OBJECT -> readSection();
+            case Section.SERIALIZE_TYPE_STRING -> readByteArray();
+            default -> throw new IllegalArgumentException("type " + type
+                    + " not supported");
+        };
     }
 
     private Object loadStorageEntry() throws IOException {
@@ -135,7 +124,7 @@ public class LevinReader {
         if (count > Integer.MAX_VALUE)
             throw new IllegalArgumentException();
         int len = (int) count;
-        final byte buffer[] = new byte[len];
+        final byte[] buffer = new byte[len];
         in.readFully(buffer);
         return buffer;
     }
@@ -157,22 +146,13 @@ public class LevinReader {
         long v = 0;
         int b = in.readUnsignedByte();
         int sizeMask = b & Section.PORTABLE_RAW_SIZE_MARK_MASK;
-        switch (sizeMask) {
-            case Section.PORTABLE_RAW_SIZE_MARK_BYTE:
-                v = b >>> 2;
-                break;
-            case Section.PORTABLE_RAW_SIZE_MARK_WORD:
-                v = readRest(b, 1) >>> 2;
-                break;
-            case Section.PORTABLE_RAW_SIZE_MARK_DWORD:
-                v = readRest(b, 3) >>> 2;
-                break;
-            case Section.PORTABLE_RAW_SIZE_MARK_INT64:
-                v = readRest(b, 7) >>> 2;
-                break;
-            default:
-                throw new IllegalStateException();
-        }
+        v = switch (sizeMask) {
+            case Section.PORTABLE_RAW_SIZE_MARK_BYTE -> b >>> 2;
+            case Section.PORTABLE_RAW_SIZE_MARK_WORD -> readRest(b, 1) >>> 2;
+            case Section.PORTABLE_RAW_SIZE_MARK_DWORD -> readRest(b, 3) >>> 2;
+            case Section.PORTABLE_RAW_SIZE_MARK_INT64 -> readRest(b, 7) >>> 2;
+            default -> throw new IllegalStateException();
+        };
         return v;
     }
 

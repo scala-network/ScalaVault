@@ -29,9 +29,10 @@
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true"
         android:requestLegacyExternalStorage="true"
-        tools:targetApi="s"
+        tools:targetApi="tiramisu"
         android:dataExtractionRules="@xml/data_extraction_rules"
-        tools:ignore="DataExtractionRules">
+        tools:ignore="DataExtractionRules"
+        android:enableOnBackInvokedCallback="true">
 
         <activity
             android:name="com.yalantis.ucrop.UCropActivity"

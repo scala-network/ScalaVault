@@ -21,6 +21,8 @@
 
 package io.scalaproject.levin.util;
 
+import android.annotation.SuppressLint;
+
 import java.math.BigInteger;
 import java.net.InetAddress;
 import java.net.UnknownHostException;
@@ -37,7 +39,7 @@ public class HexHelper {
 
     static public InetAddress toInetAddress(int ip) {
         try {
-            String ipAddress = String.format("%d.%d.%d.%d", (ip & 0xff),
+            @SuppressLint("DefaultLocale") String ipAddress = String.format("%d.%d.%d.%d", (ip & 0xff),
                     (ip >> 8 & 0xff), (ip >> 16 & 0xff), (ip >> 24 & 0xff));
             return InetAddress.getByName(ipAddress);
         } catch (UnknownHostException ex) {

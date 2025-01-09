@@ -23,6 +23,8 @@ package io.scalaproject.vault.data;
 
 import android.os.Parcel;
 
+import androidx.annotation.NonNull;
+
 public class TxDataBtc extends TxData {
 
     private String xlatoUuid;
@@ -98,6 +100,7 @@ public class TxDataBtc extends TxData {
         btcAmount = in.readDouble();
     }
 
+    @NonNull
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder();

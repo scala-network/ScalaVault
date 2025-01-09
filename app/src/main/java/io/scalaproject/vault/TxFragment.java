@@ -21,18 +21,19 @@
 
 package io.scalaproject.vault;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Paint;
 import android.net.Uri;
 import android.os.Bundle;
+
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.core.content.ContextCompat;
 
-import android.text.Html;
 import android.text.InputType;
-import android.text.method.LinkMovementMethod;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -60,6 +61,7 @@ public class TxFragment extends Fragment {
 
     static public final String ARG_INFO = "info";
 
+    @SuppressLint("SimpleDateFormat")
     private final SimpleDateFormat TS_FORMATTER = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss Z");
 
     public TxFragment() {
@@ -133,14 +135,16 @@ public class TxFragment extends Fragment {
         });
 
         Bundle args = getArguments();
+        assert args != null;
         TransactionInfo info = args.getParcelable(ARG_INFO);
+        assert info != null;
         show(info);
         return view;
     }
 
     void shareTxInfo() {
         if (this.info == null) return;
-        StringBuffer sb = new StringBuffer();
+        StringBuilder sb = new StringBuilder();
 
         sb.append(getString(R.string.tx_timestamp)).append(":\n");
         sb.append(TS_FORMATTER.format(new Date(info.timestamp * 1000))).append("\n\n");
@@ -216,6 +220,7 @@ public class TxFragment extends Fragment {
         tvTxFee.setTextColor(clr);
     }
 
+    @SuppressLint("SetTextI18n")
     private void show(TransactionInfo info) {
         if (info.txKey == null) {
             info.txKey = activityCallback.getTxKey(info.hash);
@@ -315,6 +320,7 @@ public class TxFragment extends Fragment {
         showBtcInfo();
     }
 
+    @SuppressLint("SetTextI18n")
     void showBtcInfo() {
         if (userNotes.xlatoKey != null) {
             cvxlaTo.setVisibility(View.VISIBLE);
@@ -333,7 +339,7 @@ public class TxFragment extends Fragment {
     }
 
     @Override
-    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
+    public void onCreateOptionsMenu(@NonNull Menu menu, MenuInflater inflater) {
         inflater.inflate(R.menu.tx_info_menu, menu);
         super.onCreateOptionsMenu(menu, inflater);
     }
@@ -347,7 +353,7 @@ public class TxFragment extends Fragment {
 
         String getTxNotes(String hash);
 
-        boolean setTxNotes(String txId, String txNotes);
+        void setTxNotes(String txId, String txNotes);
 
         String getTxAddress(int major, int minor);
 
@@ -359,7 +365,7 @@ public class TxFragment extends Fragment {
     }
 
     @Override
-    public void onAttach(Context context) {
+    public void onAttach(@NonNull Context context) {
         super.onAttach(context);
         if (context instanceof TxFragment.Listener) {
             this.activityCallback = (TxFragment.Listener) context;

@@ -21,6 +21,8 @@
 
 package io.scalaproject.levin.data;
 
+import androidx.annotation.NonNull;
+
 import io.scalaproject.levin.util.HexHelper;
 import io.scalaproject.levin.util.LevinReader;
 
@@ -134,17 +136,16 @@ public class Bucket {
         out.write(payload);
     }
 
+    @NonNull
     public String toString() {
-        StringBuilder sb = new StringBuilder();
-        sb.append("sig:  ").append(signature).append("\n");
-        sb.append("cb:   ").append(cb).append("\n");
-        sb.append("call: ").append(haveToReturnData).append("\n");
-        sb.append("cmd:  ").append(command).append("\n");
-        sb.append("rc:   ").append(returnCode).append("\n");
-        sb.append("flags:").append(flags).append("\n");
-        sb.append("proto:").append(protcolVersion).append("\n");
-        sb.append(HexHelper.bytesToHex(payload)).append("\n");
-        sb.append(payloadSection.toString());
-        return sb.toString();
+        return "sig:  " + signature + "\n" +
+                "cb:   " + cb + "\n" +
+                "call: " + haveToReturnData + "\n" +
+                "cmd:  " + command + "\n" +
+                "rc:   " + returnCode + "\n" +
+                "flags:" + flags + "\n" +
+                "proto:" + protcolVersion + "\n" +
+                HexHelper.bytesToHex(payload) + "\n" +
+                payloadSection.toString();
     }
 }

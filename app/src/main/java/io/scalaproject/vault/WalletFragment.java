@@ -21,11 +21,14 @@
 
 package io.scalaproject.vault;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Looper;
+
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.RecyclerView;
@@ -69,7 +72,7 @@ import timber.log.Timber;
 public class WalletFragment extends Fragment
         implements TransactionInfoAdapter.OnInteractionListener, TransactionInfoAdapter.OnFindContactListener {
     private TransactionInfoAdapter txInfoAdapter;
-    private NumberFormat formatter = NumberFormat.getInstance();
+    private final NumberFormat formatter = NumberFormat.getInstance();
 
     private TextView tvStealthMode;
     private LinearLayout llBalance, llWalletAddress;
@@ -86,7 +89,7 @@ public class WalletFragment extends Fragment
 
     private Spinner sCurrency;
 
-    private List<String> dismissedTransactions = new ArrayList<>();
+    private final List<String> dismissedTransactions = new ArrayList<>();
 
     public void resetDismissedTransactions() {
         dismissedTransactions.clear();
@@ -99,7 +102,7 @@ public class WalletFragment extends Fragment
     }
 
     @Override
-    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
+    public void onCreateOptionsMenu(@NonNull Menu menu, @NonNull MenuInflater inflater) {
         if (activityCallback.hasWallet()) {
             inflater.inflate(R.menu.wallet_menu, menu);
         }
@@ -174,6 +177,7 @@ public class WalletFragment extends Fragment
                                 return activityCallback.isStealthMode();
                             }
 
+                            @SuppressLint("NotifyDataSetChanged")
                             @Override
                             public void onDismissedBySwipeLeft(RecyclerView recyclerView, int[] reverseSortedPositions) {
                                 for (int position : reverseSortedPositions) {
@@ -183,6 +187,7 @@ public class WalletFragment extends Fragment
                                 txInfoAdapter.notifyDataSetChanged();
                             }
 
+                            @SuppressLint("NotifyDataSetChanged")
                             @Override
                             public void onDismissedBySwipeRight(RecyclerView recyclerView, int[] reverseSortedPositions) {
                                 for (int position : reverseSortedPositions) {
@@ -238,6 +243,7 @@ public class WalletFragment extends Fragment
         asyncRefreshWallet.execute();
     }
 
+    @SuppressLint("StaticFieldLeak")
     private class AsyncRefreshWallet extends AsyncTask<Void, WalletManager.WalletInfo, Boolean> {
         @Override
         protected void onPreExecute() {
@@ -411,6 +417,7 @@ public class WalletFragment extends Fragment
 
     // called from activity
 
+    @SuppressLint("NotifyDataSetChanged")
     public void onRefreshed(final Wallet wallet, boolean full) {
         Timber.d("onRefreshed(%b)", full);
 
@@ -507,6 +514,7 @@ public class WalletFragment extends Fragment
         tvWalletName.setText(_walletName);
     }
 
+    @SuppressLint({"UseCompatLoadingForDrawables", "SetTextI18n"})
     public void initWalletAddress(String walletAddress) {
         llWalletAddress.setVisibility(View.VISIBLE);
 
@@ -516,6 +524,7 @@ public class WalletFragment extends Fragment
         tvWalletAddress.setText(Helper.getPrettyAddress(walletAddress));
     }
 
+    @SuppressLint({"UseCompatLoadingForDrawables", "SetTextI18n"})
     private void updateWalletInfo(Wallet wallet) {
         llWalletAddress.setVisibility(View.VISIBLE);
 
@@ -545,7 +554,7 @@ public class WalletFragment extends Fragment
     private long firstBlock = 0;
     private String _walletName = null;
     private String walletTitle = null;
-    private String walletSubtitle = null;
+    private final String walletSubtitle = null;
     private long unlockedBalance = 0;
     private long balance = 0;
 
@@ -650,7 +659,7 @@ public class WalletFragment extends Fragment
     }
 
     @Override
-    public void onAttach(Context context) {
+    public void onAttach(@NonNull Context context) {
         super.onAttach(context);
         if (context instanceof Listener) {
             this.activityCallback = (Listener) context;
@@ -664,7 +673,7 @@ public class WalletFragment extends Fragment
     public void onResume() {
         super.onResume();
         Timber.d("onResume()");
-        activityCallback.setTitle(walletTitle, walletSubtitle);
+        activityCallback.setTitle(walletTitle, null);
         //activityCallback.setToolbarButton(Toolbar.BUTTON_CLOSE); // TODO: Close button somewhere else
 
         if(activityCallback.hasBoundService()) {

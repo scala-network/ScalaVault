@@ -21,6 +21,8 @@
 
 package io.scalaproject.vault.data;
 
+import androidx.annotation.NonNull;
+
 import com.burgstaller.okhttp.AuthenticationCacheInterceptor;
 import com.burgstaller.okhttp.CachingAuthenticatorDecorator;
 import com.burgstaller.okhttp.digest.CachingAuthenticator;
@@ -179,10 +181,7 @@ public class NodeInfo extends Node {
         responseCode = anotherNode.responseCode;
     }
 
-    public String toNodeString() {
-        return super.toString();
-    }
-
+    @NonNull
     public String toString() {
         StringBuilder sb = new StringBuilder();
         sb.append(super.toString());
@@ -197,7 +196,7 @@ public class NodeInfo extends Node {
     }
 
     private static final int HTTP_TIMEOUT = OkHttpHelper.HTTP_TIMEOUT;
-    public static final double PING_GOOD = HTTP_TIMEOUT / 3; //ms
+    public static final double PING_GOOD = (double) HTTP_TIMEOUT / 3; //ms
     public static final double PING_MEDIUM = 2 * PING_GOOD; //ms
     public static final double PING_BAD = HTTP_TIMEOUT;
 
@@ -257,23 +256,25 @@ public class NodeInfo extends Node {
             }
         } catch (IOException | JSONException ex) {
             // failure
-            Timber.d(ex.getMessage());
+            Timber.d(ex);
         }
         return false;
     }
 
     static final private int[] TEST_PORTS = {18089}; // check only opt-in port
 
-    public boolean findRpcService() {
+    public void findRpcService() {
         // if already have an rpcPort, use that
-        if (rpcPort > 0) return testRpcService(rpcPort);
+        if (rpcPort > 0) {
+            testRpcService(rpcPort);
+            return;
+        }
         // otherwise try to find one
         for (int port : TEST_PORTS) {
             if (testRpcService(port)) { // found a service
                 this.rpcPort = port;
-                return true;
+                return;
             }
         }
-        return false;
     }
 }

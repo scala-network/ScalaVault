@@ -1,4 +1,4 @@
-package com.theromus.utils;
+package io.theromus.utils;
 
 
 import java.io.ByteArrayOutputStream;
