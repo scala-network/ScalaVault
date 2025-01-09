@@ -69,14 +69,13 @@ import java.util.Collection;
 import java.util.HashSet;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Objects;
 import java.util.Set;
 
 import timber.log.Timber;
 
 public class NodeFragment extends Fragment
         implements NodeInfoAdapter.OnMenuNodeListener, NodeInfoAdapter.OnSelectNodeListener, View.OnClickListener {
-
-    static private int NODES_TO_FIND = 15;
 
     static private final NumberFormat FORMATTER = NumberFormat.getInstance();
 
@@ -395,6 +394,7 @@ public class NodeFragment extends Fragment
                 }
             });
             d.seedPeers(seedList);
+            int NODES_TO_FIND = 15;
             d.awaitTermination(NODES_TO_FIND);
 
             // we didn't find enough because we didn't ask around enough? ask more!
@@ -452,7 +452,7 @@ public class NodeFragment extends Fragment
             nodesAdapter.setNodes(allNodes);
             nodesAdapter.allowClick(true);
 
-            selectedNodeView = rvNodes.getChildAt(0);;
+            selectedNodeView = rvNodes.getChildAt(0);
             if(!nodesAdapter.getNodes().isEmpty())
                 selectedNode = nodesAdapter.getNodes().get(0);
             setItemNodeLayout(selectedNodeView, true);
@@ -485,7 +485,7 @@ public class NodeFragment extends Fragment
             nodeInfo.clear();
             showTestResult();
 
-            final String portString = etNodePort.getEditText().getText().toString().trim();
+            final String portString = Objects.requireNonNull(etNodePort.getEditText()).getText().toString().trim();
             int port;
             if (portString.isEmpty()) {
                 port = Node.getDefaultRpcPort();
@@ -503,7 +503,7 @@ public class NodeFragment extends Fragment
                 return false;
             }
 
-            final String host = etNodeHost.getEditText().getText().toString().trim();
+            final String host = Objects.requireNonNull(etNodeHost.getEditText()).getText().toString().trim();
             if (host.isEmpty()) {
                 etNodeHost.setError(getString(R.string.node_host_empty));
                 return false;
@@ -530,13 +530,13 @@ public class NodeFragment extends Fragment
             Helper.runWithNetwork(new Helper.Action() {
                 @Override
                 public boolean run() {
-                    nodeInfo.setName(etNodeName.getEditText().getText().toString().trim());
+                    nodeInfo.setName(Objects.requireNonNull(etNodeName.getEditText()).getText().toString().trim());
                     return true;
                 }
             });
 
-            nodeInfo.setUsername(etNodeUser.getEditText().getText().toString().trim());
-            nodeInfo.setPassword(etNodePass.getEditText().getText().toString()); // no trim for pw
+            nodeInfo.setUsername(Objects.requireNonNull(etNodeUser.getEditText()).getText().toString().trim());
+            nodeInfo.setPassword(Objects.requireNonNull(etNodePass.getEditText()).getText().toString()); // no trim for pw
 
             return true;
         }
@@ -560,7 +560,7 @@ public class NodeFragment extends Fragment
 
         private void closeDialog() {
             if (editDialog == null) throw new IllegalStateException();
-            Helper.hideKeyboardAlways(getActivity());
+            Helper.hideKeyboardAlways(requireActivity());
             editDialog.dismiss();
             editDialog = null;
             NodeFragment.this.editDialog = null;
@@ -599,8 +599,9 @@ public class NodeFragment extends Fragment
             }
         }
 
+        @SuppressLint("SetTextI18n")
         EditDialog(final NodeInfo nodeInfo) {
-            MaterialAlertDialogBuilder alertDialogBuilder = new MaterialAlertDialogBuilder(getActivity(), R.style.MaterialAlertDialogCustom);
+            MaterialAlertDialogBuilder alertDialogBuilder = new MaterialAlertDialogBuilder(requireActivity(), R.style.MaterialAlertDialogCustom);
             LayoutInflater li = LayoutInflater.from(alertDialogBuilder.getContext());
             View promptsView = li.inflate(R.layout.prompt_editnode, null);
             alertDialogBuilder.setView(promptsView);
@@ -622,11 +623,11 @@ public class NodeFragment extends Fragment
 
                 this.nodeInfo = nodeInfo;
                 nodeBackup = new NodeInfo(nodeInfo);
-                etNodeName.getEditText().setText(nodeInfo.getName());
-                etNodeHost.getEditText().setText(nodeInfo.getHost());
-                etNodePort.getEditText().setText(Integer.toString(nodeInfo.getRpcPort()));
-                etNodeUser.getEditText().setText(nodeInfo.getUsername());
-                etNodePass.getEditText().setText(nodeInfo.getPassword());
+                Objects.requireNonNull(etNodeName.getEditText()).setText(nodeInfo.getName());
+                Objects.requireNonNull(etNodeHost.getEditText()).setText(nodeInfo.getHost());
+                Objects.requireNonNull(etNodePort.getEditText()).setText(Integer.toString(nodeInfo.getRpcPort()));
+                Objects.requireNonNull(etNodeUser.getEditText()).setText(nodeInfo.getUsername());
+                Objects.requireNonNull(etNodePass.getEditText()).setText(nodeInfo.getPassword());
                 showTestResult();
             } else {
                 this.nodeInfo = new NodeInfo();
@@ -671,10 +672,10 @@ public class NodeFragment extends Fragment
             });
 
             if (Helper.preventScreenshot()) {
-                editDialog.getWindow().setFlags(WindowManager.LayoutParams.FLAG_SECURE, WindowManager.LayoutParams.FLAG_SECURE);
+                Objects.requireNonNull(editDialog.getWindow()).setFlags(WindowManager.LayoutParams.FLAG_SECURE, WindowManager.LayoutParams.FLAG_SECURE);
             }
 
-            etNodePass.getEditText().setOnEditorActionListener(new TextView.OnEditorActionListener() {
+            Objects.requireNonNull(etNodePass.getEditText()).setOnEditorActionListener(new TextView.OnEditorActionListener() {
                 public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
                     if (actionId == EditorInfo.IME_ACTION_DONE) {
                         editDialog.getButton(DialogInterface.BUTTON_NEUTRAL).requestFocus();

@@ -103,15 +103,13 @@ public class TxDataBtc extends TxData {
     @NonNull
     @Override
     public String toString() {
-        StringBuilder sb = new StringBuilder();
-        sb.append(",xlatoUuid:");
-        sb.append(xlatoUuid);
-        sb.append(",btcAddress:");
-        sb.append(btcAddress);
-        sb.append(",bip70:");
-        sb.append(bip70);
-        sb.append(",btcAmount:");
-        sb.append(btcAmount);
-        return sb.toString();
+        return ",xlatoUuid:" +
+                xlatoUuid +
+                ",btcAddress:" +
+                btcAddress +
+                ",bip70:" +
+                bip70 +
+                ",btcAmount:" +
+                btcAmount;
     }
 }

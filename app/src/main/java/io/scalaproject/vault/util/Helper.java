@@ -22,6 +22,7 @@
 package io.scalaproject.vault.util;
 
 import android.Manifest;
+import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.Dialog;
@@ -346,6 +347,8 @@ public class Helper {
         return ShakeAnimation;
     }
 
+    // Domain xla.to don't exist can be register
+    // TODO Fix this function
     static public HttpUrl getxlaToBaseUrl() {
         if ((WalletManager.getInstance() == null)
                 || (WalletManager.getInstance().getNetworkType() != NetworkType.NetworkType_Mainnet)) {
@@ -459,8 +462,11 @@ public class Helper {
         etPassword.setHint(context.getString(R.string.prompt_password, wallet));
 
         final TextView tvOpenPrompt = promptsView.findViewById(R.id.tvOpenPrompt);
+        @SuppressLint("UseCompatLoadingForDrawables")
         final Drawable icFingerprint = context.getDrawable(R.drawable.ic_fingerprint);
+        @SuppressLint("UseCompatLoadingForDrawables")
         final Drawable icError = context.getDrawable(R.drawable.ic_error_red_36dp);
+        @SuppressLint("UseCompatLoadingForDrawables")
         final Drawable icInfo = context.getDrawable(R.drawable.ic_info_green);
 
         final boolean fingerprintAuthCheck = FingerprintHelper.isFingerPassValid(context, wallet);
@@ -471,8 +477,8 @@ public class Helper {
         final AtomicBoolean incorrectSavedPass = new AtomicBoolean(false);
 
         class LoginWalletTask extends AsyncTask<Void, Void, Boolean> {
-            private String pass;
-            private boolean fingerprintUsed;
+            private final String pass;
+            private final boolean fingerprintUsed;
 
             LoginWalletTask(String pass, boolean fingerprintUsed) {
                 this.pass = pass;
@@ -520,7 +526,7 @@ public class Helper {
             }
         }
 
-        etPassword.getEditText().addTextChangedListener(new TextWatcher() {
+        Objects.requireNonNull(etPassword.getEditText()).addTextChangedListener(new TextWatcher() {
 
             @Override
             public void afterTextChanged(Editable s) {
@@ -641,7 +647,7 @@ public class Helper {
         });
 
         if (Helper.preventScreenshot()) {
-            openDialog.getWindow().setFlags(WindowManager.LayoutParams.FLAG_SECURE, WindowManager.LayoutParams.FLAG_SECURE);
+            Objects.requireNonNull(openDialog.getWindow()).setFlags(WindowManager.LayoutParams.FLAG_SECURE, WindowManager.LayoutParams.FLAG_SECURE);
         }
 
         Helper.showKeyboard(openDialog);

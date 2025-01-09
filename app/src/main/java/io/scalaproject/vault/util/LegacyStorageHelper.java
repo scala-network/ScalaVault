@@ -39,6 +39,7 @@ import java.io.FileOutputStream;
 import java.io.FileReader;
 import java.io.IOException;
 import java.nio.channels.FileChannel;
+import java.util.Objects;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -197,9 +198,10 @@ public class LegacyStorageHelper {
                 (dir, filename) -> {
                     Matcher m = WALLET_PATTERN.matcher(filename);
                     if (m.find())
-                        return m.group(1).equals(name);
+                        return Objects.equals(m.group(1), name);
                     else return false;
                 });
+        assert wallets != null;
         if (wallets.length == 0) return name + " (1)";
         int maxIndex = 0;
         for (File wallet : wallets) {

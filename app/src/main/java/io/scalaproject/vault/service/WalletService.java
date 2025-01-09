@@ -158,9 +158,7 @@ public class WalletService extends Service {
                 updateDaemonState(wallet, wallet.getBlockChainHeight());
                 wallet.getHistory().refreshWithNotes(wallet);
                 if (observer != null) {
-                    if (observer != null) {
-                        updated = !observer.onRefreshed(wallet, true);
-                    }
+                    updated = !observer.onRefreshed(wallet, true);
                 }
             }
         }
@@ -320,6 +318,7 @@ public class WalletService extends Service {
                         myWallet.disposePendingTransaction(); // remove any old pending tx
                         TxData txData = extras.getParcelable(REQUEST_CMD_TX_DATA);
                         String txTag = extras.getString(REQUEST_CMD_TX_TAG);
+                        assert txData != null;
                         PendingTransaction pendingTransaction = myWallet.createTransaction(txData);
                         PendingTransaction.Status status = pendingTransaction.getStatus();
                         Timber.d("transaction status %s", status);

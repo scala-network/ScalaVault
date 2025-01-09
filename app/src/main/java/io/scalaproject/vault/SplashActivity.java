@@ -4,12 +4,14 @@
 
 package io.scalaproject.vault;
 
+import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.os.Handler;
 
+@SuppressLint("CustomSplashScreen")
 public class SplashActivity extends Activity {
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -35,7 +37,7 @@ public class SplashActivity extends Activity {
             public void run() {
                 String hide_setup_wizard = Config.read(Config.CONFIG_KEY_HIDE_HOME_WIZARD);
 
-                if (hide_setup_wizard.equals("")) {
+                if (hide_setup_wizard.isEmpty()) {
                     startActivity(new Intent(SplashActivity.this, WizardHomeActivity.class));
                 } else {
                     startActivity(new Intent(SplashActivity.this, LoginActivity.class));

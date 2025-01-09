@@ -21,6 +21,7 @@
 
 package io.scalaproject.vault;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
@@ -29,6 +30,8 @@ import android.graphics.drawable.BitmapDrawable;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
+
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import com.google.android.material.textfield.TextInputLayout;
 import androidx.fragment.app.Fragment;
@@ -74,6 +77,7 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Objects;
 
 import timber.log.Timber;
 
@@ -220,6 +224,7 @@ public class ReceiveFragment extends Fragment {
         clearQR();
 
         Bundle b = getArguments();
+        assert b != null;
         String address = b.getString("address");
         String walletName = b.getString("name");
         Timber.d("%s/%s", address, walletName);
@@ -248,7 +253,7 @@ public class ReceiveFragment extends Fragment {
     private ShareActionProvider shareActionProvider;
 
     @Override
-    public void onCreateOptionsMenu(Menu menu, final MenuInflater inflater) {
+    public void onCreateOptionsMenu(@NonNull Menu menu, final MenuInflater inflater) {
         inflater.inflate(R.menu.receive_menu, menu);
         super.onCreateOptionsMenu(menu, inflater);
 
@@ -258,6 +263,7 @@ public class ReceiveFragment extends Fragment {
         // Fetch and store ShareActionProvider
         shareActionProvider = (ShareActionProvider) MenuItemCompat.getActionProvider(item);
 
+        assert shareActionProvider != null;
         shareActionProvider.setOnShareTargetSelectedListener(new ShareActionProvider.OnShareTargetSelectedListener() {
             @Override
             public boolean onShareTargetSelected(ShareActionProvider shareActionProvider, Intent intent) {
@@ -280,7 +286,7 @@ public class ReceiveFragment extends Fragment {
     private void saveQrCode() {
         if (!qrValid) throw new IllegalStateException("trying to save null qr code!");
 
-        File cachePath = new File(getActivity().getCacheDir(), "images");
+        File cachePath = new File(requireActivity().getCacheDir(), "images");
         if (!cachePath.exists())
             if (!cachePath.mkdirs()) throw new IllegalStateException("cannot create images folder");
         File png = new File(cachePath, "QR.png");
@@ -298,15 +304,15 @@ public class ReceiveFragment extends Fragment {
     }
 
     private Intent getShareIntent() {
-        File imagePath = new File(getActivity().getCacheDir(), "images");
+        File imagePath = new File(requireActivity().getCacheDir(), "images");
         File png = new File(imagePath, "QR.png");
-        Uri contentUri = FileProvider.getUriForFile(getActivity(),
+        Uri contentUri = FileProvider.getUriForFile(requireActivity(),
                 BuildConfig.APPLICATION_ID + ".fileprovider", png);
         if (contentUri != null) {
             Intent shareIntent = new Intent();
             shareIntent.setAction(Intent.ACTION_SEND);
             shareIntent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION); // temp permission for receiving app to read this file
-            shareIntent.setDataAndType(contentUri, getActivity().getContentResolver().getType(contentUri));
+            shareIntent.setDataAndType(contentUri, requireActivity().getContentResolver().getType(contentUri));
             shareIntent.putExtra(Intent.EXTRA_STREAM, contentUri);
             shareIntent.putExtra(Intent.EXTRA_TEXT, bcData.getUriString());
             return shareIntent;
@@ -324,7 +330,7 @@ public class ReceiveFragment extends Fragment {
     }
 
     void copyAddress() {
-        Helper.clipBoardCopy(getActivity(), getString(R.string.label_copy_address), tvAddress.getText().toString());
+        Helper.clipBoardCopy(requireActivity(), getString(R.string.label_copy_address), tvAddress.getText().toString());
         Toast.makeText(getActivity(), getString(R.string.message_copy_address), Toast.LENGTH_SHORT).show();
     }
 
@@ -388,6 +394,7 @@ public class ReceiveFragment extends Fragment {
 
     GenerateReviewFragment.ProgressListener progressCallback = null;
 
+    @SuppressLint("StaticFieldLeak")
     private class AsyncShow extends AsyncTask<Void, Void, Boolean> {
         final private String walletPath;
         final private String password;
@@ -441,6 +448,7 @@ public class ReceiveFragment extends Fragment {
         new AsyncStore().executeOnExecutor(ScalaThreadPoolExecutor.SCALA_THREAD_POOL_EXECUTOR);
     }
 
+    @SuppressLint("StaticFieldLeak")
     private class AsyncStore extends AsyncTask<String, Void, Boolean> {
 
         @Override
@@ -469,7 +477,7 @@ public class ReceiveFragment extends Fragment {
     private void generateQr() {
         Timber.d("GENQR");
         String address = tvAddress.getText().toString();
-        String notes = etNotes.getEditText().getText().toString();
+        String notes = Objects.requireNonNull(etNotes.getEditText()).getText().toString();
         String xlaAmount = evAmount.getAmount();
         Timber.d("%s/%s/%s", xlaAmount, notes, address);
         if ((xlaAmount == null) || !Wallet.isAddressValid(address)) {
@@ -557,7 +565,7 @@ public class ReceiveFragment extends Fragment {
     Listener listenerCallback = null;
 
     @Override
-    public void onAttach(Context context) {
+    public void onAttach(@NonNull Context context) {
         super.onAttach(context);
         if (context instanceof Listener) {
             this.listenerCallback = (Listener) context;
@@ -592,6 +600,7 @@ public class ReceiveFragment extends Fragment {
         new AsyncSubaddress().executeOnExecutor(ScalaThreadPoolExecutor.SCALA_THREAD_POOL_EXECUTOR);
     }
 
+    @SuppressLint("StaticFieldLeak")
     private class AsyncSubaddress extends AsyncTask<Void, Void, Boolean> {
         private String newSubaddress;
 

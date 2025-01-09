@@ -21,6 +21,10 @@
 
 package io.scalaproject.vault.data;
 
+import android.os.Build;
+
+import androidx.annotation.NonNull;
+
 import io.scalaproject.vault.model.NetworkType;
 import io.scalaproject.vault.model.WalletManager;
 
@@ -30,6 +34,7 @@ import java.net.InetSocketAddress;
 import java.net.URLDecoder;
 import java.net.URLEncoder;
 import java.net.UnknownHostException;
+import java.nio.charset.StandardCharsets;
 
 import timber.log.Timber;
 
@@ -54,8 +59,7 @@ public class Node {
     // Nodes are equal if they are the same host address & are on the same network
     @Override
     public boolean equals(Object other) {
-        if (!(other instanceof Node)) return false;
-        final Node anotherNode = (Node) other;
+        if (!(other instanceof Node anotherNode)) return false;
         return (hostAddress.equals(anotherNode.hostAddress) && (networkType == anotherNode.networkType));
     }
 
@@ -72,7 +76,7 @@ public class Node {
         if ((nodeString == null) || nodeString.isEmpty())
             throw new IllegalArgumentException("daemon is empty");
         String daemonAddress;
-        String a[] = nodeString.split("@");
+        String[] a = nodeString.split("@");
         if (a.length == 1) { // no credentials
             daemonAddress = a[0];
             username = "";
@@ -92,12 +96,12 @@ public class Node {
             throw new IllegalArgumentException("Too many @");
         }
 
-        String daParts[] = daemonAddress.split("/");
+        String[] daParts = daemonAddress.split("/");
         if ((daParts.length > 3) || (daParts.length < 1))
             throw new IllegalArgumentException("Too many '/' or too few");
 
         daemonAddress = daParts[0];
-        String da[] = daemonAddress.split(":");
+        String[] da = daemonAddress.split(":");
         if ((da.length > 2) || (da.length < 1))
             throw new IllegalArgumentException("Too many ':' or too few");
 
@@ -109,10 +113,9 @@ public class Node {
 
         String name = host;
         if (daParts.length == 3) {
-            try {
-                name = URLDecoder.decode(daParts[2], "UTF-8");
-            } catch (UnsupportedEncodingException ex) {
-                Timber.w(ex); // if we can't encode it, we don't use it
+
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
+                name = URLDecoder.decode(daParts[2], StandardCharsets.UTF_8);
             }
         }
         this.name = name;
@@ -140,6 +143,7 @@ public class Node {
         return toString();
     }
 
+    @NonNull
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder();
@@ -150,12 +154,11 @@ public class Node {
         sb.append("/");
         sb.append(MAINNET);
 
-        if (name != null)
-            try {
-                sb.append("/").append(URLEncoder.encode(name, "UTF-8"));
-            } catch (UnsupportedEncodingException ex) {
-                Timber.w(ex); // if we can't encode it, we don't store it
+        if (name != null) {
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
+                sb.append("/").append(URLEncoder.encode(name, StandardCharsets.UTF_8));
             }
+        }
 
         return sb.toString();
     }

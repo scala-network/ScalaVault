@@ -25,6 +25,8 @@ import android.app.AlertDialog;
 import android.app.Dialog;
 import android.content.DialogInterface;
 import android.os.Bundle;
+
+import androidx.annotation.NonNull;
 import androidx.fragment.app.DialogFragment;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
@@ -35,6 +37,8 @@ import android.view.View;
 import android.widget.TextView;
 
 import com.google.android.material.dialog.MaterialAlertDialogBuilder;
+
+import java.util.Objects;
 
 import io.scalaproject.vault.R;
 
@@ -55,13 +59,14 @@ public class PrivacyFragment extends DialogFragment {
         PrivacyFragment.newInstance().show(ft, TAG);
     }
 
+    @NonNull
     @Override
     public Dialog onCreateDialog(Bundle savedInstanceState) {
-        final View view = LayoutInflater.from(getActivity()).inflate(R.layout.fragment_privacy_policy, null);
+        final View view = getLayoutInflater().inflate(R.layout.fragment_privacy_policy, null);
 
         ((TextView) view.findViewById(R.id.tvCredits)).setText(Html.fromHtml(getString(R.string.privacy_policy)));
 
-        MaterialAlertDialogBuilder builder = new MaterialAlertDialogBuilder(getActivity(), R.style.MaterialAlertDialogCustom);
+        MaterialAlertDialogBuilder builder = new MaterialAlertDialogBuilder(requireActivity(), R.style.MaterialAlertDialogCustom);
         builder.setView(view);
         builder.setNegativeButton(R.string.about_close,
                 new DialogInterface.OnClickListener() {

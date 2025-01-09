@@ -36,7 +36,6 @@ import io.scalaproject.vault.data.TxDataBtc;
 import io.scalaproject.vault.model.Wallet;
 import io.scalaproject.vault.util.Helper;
 import io.scalaproject.vault.util.OkHttpHelper;
-import io.scalaproject.vault.widget.ExchangeEditText;
 import io.scalaproject.vault.widget.ExchangeOtherEditText;
 import io.scalaproject.vault.widget.SendProgressView;
 import io.scalaproject.vault.xlato.XlaToError;
@@ -61,9 +60,8 @@ public class SendBtcAmountWizardFragment extends SendWizardFragment {
 
     SendAmountWizardFragment.Listener sendListener;
 
-    public SendBtcAmountWizardFragment setSendListener(SendAmountWizardFragment.Listener listener) {
+    public void setSendListener(SendAmountWizardFragment.Listener listener) {
         this.sendListener = listener;
-        return this;
     }
 
     private TextView tvFunds;
@@ -169,7 +167,7 @@ public class SendBtcAmountWizardFragment extends SendWizardFragment {
 
     private void processOrderParms(final QueryOrderParameters orderParameters) {
         this.orderParameters = orderParameters;
-        getView().post(new Runnable() {
+        requireView().post(new Runnable() {
             @Override
             public void run() {
                 etAmount.setExchangeRate(1.0d / orderParameters.getPrice());
@@ -217,11 +215,10 @@ public class SendBtcAmountWizardFragment extends SendWizardFragment {
         maxBtc = 0;
         minBtc = 0;
         Timber.e(ex);
-        getView().post(new Runnable() {
+        requireView().post(new Runnable() {
             @Override
             public void run() {
-                if (ex instanceof XlaToException) {
-                    XlaToException xlaEx = (XlaToException) ex;
+                if (ex instanceof XlaToException xlaEx) {
                     XlaToError xlaErr = xlaEx.getError();
                     if (xlaErr != null) {
                         if (xlaErr.isRetryable()) {

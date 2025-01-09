@@ -23,6 +23,7 @@ package io.scalaproject.vault.data;
 
 import io.scalaproject.vault.xlato.api.QueryOrderStatus;
 
+import java.util.Objects;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -53,11 +54,7 @@ public class UserNotes {
     }
 
     public void setNote(String newNote) {
-        if (newNote != null) {
-            note = newNote;
-        } else {
-            note = "";
-        }
+        note = Objects.requireNonNullElse(newNote, "");
         txNotes = buildTxNote();
     }
 
@@ -75,7 +72,7 @@ public class UserNotes {
     }
 
     private String buildTxNote() {
-        StringBuffer sb = new StringBuffer();
+        StringBuilder sb = new StringBuilder();
         if (xlatoKey != null) {
             if ((xlatoAmount == null) || (xlatoDestination == null))
                 throw new IllegalArgumentException("Broken notes");

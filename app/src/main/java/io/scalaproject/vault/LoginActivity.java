@@ -21,6 +21,7 @@
 
 package io.scalaproject.vault;
 
+import android.annotation.SuppressLint;
 import android.app.PendingIntent;
 import android.content.BroadcastReceiver;
 import android.content.Context;
@@ -89,6 +90,7 @@ import java.util.Comparator;
 import java.util.HashSet;
 import java.util.Locale;
 import java.util.Map;
+import java.util.Objects;
 import java.util.Set;
 
 import timber.log.Timber;
@@ -390,19 +392,14 @@ public class LoginActivity extends BaseActivity
         super.onRequestPermissionsResult(requestCode, permissions, grantResults);
 
         Timber.d("onRequestPermissionsResult()");
-        switch (requestCode) {
-            case LegacyStorageHelper.PERMISSIONS_REQUEST_READ_EXTERNAL_STORAGE:
-
-                // If request is cancelled, the result arrays are empty.
-                if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-                    isPermissionGranted = true;
-                } else {
-                    String msg = getString(R.string.message_strorage_not_permitted);
-                    Timber.e(msg);
-                    Toast.makeText(this, msg, Toast.LENGTH_LONG).show();
-                }
-                break;
-            default:
+        if (requestCode == LegacyStorageHelper.PERMISSIONS_REQUEST_READ_EXTERNAL_STORAGE) {// If request is cancelled, the result arrays are empty.
+            if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                isPermissionGranted = true;
+            } else {
+                String msg = getString(R.string.message_strorage_not_permitted);
+                Timber.e(msg);
+                Toast.makeText(this, msg, Toast.LENGTH_LONG).show();
+            }
         }
     }
 
@@ -498,7 +495,7 @@ public class LoginActivity extends BaseActivity
 
     // copy + delete seems safer than rename because we can rollback easily
     boolean renameWallet(File walletFile, String newName) {
-        if (copyWallet(walletFile, new File(walletFile.getParentFile(), newName), false, true)) {
+        if (copyWallet(walletFile, new File(walletFile.getParentFile(), newName), false)) {
             try {
                 KeyStoreHelper.copyWalletUserPass(this, walletFile.getName(), newName);
             } catch (KeyStoreHelper.BrokenPasswordStoreException ex) {
@@ -566,6 +563,7 @@ public class LoginActivity extends BaseActivity
         dialog.show();
     }
 
+    @SuppressLint("StaticFieldLeak")
     private class AsyncBackup extends AsyncTask<String, Void, Boolean> {
         @Override
         protected void onPreExecute() {
@@ -610,7 +608,7 @@ public class LoginActivity extends BaseActivity
         // TODO probably better to copy to a new file and then rename
         // then if something fails we have the old backup at least
         // or just create a new backup every time and keep n old backups
-        boolean success = copyWallet(walletFile, backupFile, true, true);
+        boolean success = copyWallet(walletFile, backupFile, true);
         Timber.d("copyWallet is %s", success);
         return success;
     }
@@ -621,6 +619,7 @@ public class LoginActivity extends BaseActivity
         new AsyncBackup().execute(walletName);
     }
 
+    @SuppressLint("StaticFieldLeak")
     private class AsyncArchive extends AsyncTask<String, Void, Boolean> {
         @Override
         protected void onPreExecute() {
@@ -798,6 +797,7 @@ public class LoginActivity extends BaseActivity
         if (!Ledger.isConnected()) attachLedger();
     }
 
+    @SuppressLint("StaticFieldLeak")
     private class AsyncWaitForService extends AsyncTask<Void, Void, Void> {
         @Override
         protected void onPreExecute() {
@@ -938,6 +938,7 @@ public class LoginActivity extends BaseActivity
     //////////////////////////////////////////
     static final String MNEMONIC_LANGUAGE = "English"; // see mnemonics/electrum-words.cpp for more
 
+    @SuppressLint("StaticFieldLeak")
     private class AsyncCreateWallet extends AsyncTask<Void, Void, Boolean> {
         final String walletName;
         final String walletPassword;
@@ -1020,6 +1021,7 @@ public class LoginActivity extends BaseActivity
         try {
             GenerateFragment genFragment = (GenerateFragment)
                     getSupportFragmentManager().findFragmentById(R.id.fragment_container);
+            assert genFragment != null;
             genFragment.walletGenerateError();
         } catch (ClassCastException ex) {
             Timber.e("walletGenerateError() but not in GenerateFragment");
@@ -1172,8 +1174,7 @@ public class LoginActivity extends BaseActivity
         }
     }
 
-    boolean copyWallet(File srcWallet, File dstWallet, boolean overwrite,
-                       boolean ignoreCacheError) {
+    boolean copyWallet(File srcWallet, File dstWallet, boolean overwrite) {
         if (walletExists(dstWallet, true) && !overwrite) return false;
         boolean success = false;
         File srcDir = srcWallet.getParentFile();
@@ -1184,10 +1185,7 @@ public class LoginActivity extends BaseActivity
             try {
                 copyFile(new File(srcDir, srcName), new File(dstDir, dstName));
             } catch (IOException ex) {
-                Timber.d("CACHE %s", ignoreCacheError);
-                if (!ignoreCacheError) { // ignore cache backup error if backing up (can be resynced)
-                    throw ex;
-                }
+                Timber.d("CACHE %s", true);
             }
             copyFile(new File(srcDir, srcName + ".keys"), new File(dstDir, dstName + ".keys"));
             success = true;
@@ -1261,6 +1259,7 @@ public class LoginActivity extends BaseActivity
         MaterialAlertDialogBuilder builder = new MaterialAlertDialogBuilder(LoginActivity.this, R.style.MaterialAlertDialogCustom);
         builder.setTitle(getString(R.string.menu_language));
         builder.setSingleChoiceItems(localeDisplayName, currentLocaleIndex, new DialogInterface.OnClickListener() {
+            @SuppressLint("UnsafeIntentLaunch")
             @Override
             public void onClick(DialogInterface dialog, int i) {
                 dialog.dismiss();
@@ -1298,57 +1297,72 @@ public class LoginActivity extends BaseActivity
         }
     }
 
+    @SuppressLint("NonConstantResourceId")
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        switch (item.getItemId()) {
-            case R.id.action_create_help_new:
+        return switch (item.getItemId()) {
+            case R.id.action_create_help_new -> {
                 HelpFragment.display(getSupportFragmentManager(), R.string.help_create_new);
-                return true;
-            case R.id.action_create_help_keys:
+                yield true;
+            }
+            case R.id.action_create_help_keys -> {
                 HelpFragment.display(getSupportFragmentManager(), R.string.help_create_keys);
-                return true;
-            case R.id.action_create_help_view:
+                yield true;
+            }
+            case R.id.action_create_help_view -> {
                 HelpFragment.display(getSupportFragmentManager(), R.string.help_create_view);
-                return true;
-            case R.id.action_create_help_seed:
+                yield true;
+            }
+            case R.id.action_create_help_seed -> {
                 HelpFragment.display(getSupportFragmentManager(), R.string.help_create_seed);
-                return true;
-            case R.id.action_create_help_ledger:
+                yield true;
+            }
+            case R.id.action_create_help_ledger -> {
                 HelpFragment.display(getSupportFragmentManager(), R.string.help_create_ledger);
-                return true;
-            case R.id.action_details_help:
+                yield true;
+            }
+            case R.id.action_details_help -> {
                 HelpFragment.display(getSupportFragmentManager(), R.string.help_details);
-                return true;
-            case R.id.action_details_changepw:
+                yield true;
+            }
+            case R.id.action_details_changepw -> {
                 onWalletChangePassword();
-                return true;
-            case R.id.action_license_info:
+                yield true;
+            }
+            case R.id.action_license_info -> {
                 AboutFragment.display(getSupportFragmentManager());
-                return true;
-            case R.id.action_help_list:
+                yield true;
+            }
+            case R.id.action_help_list -> {
                 HelpFragment.display(getSupportFragmentManager(), R.string.help_list);
-                return true;
-            case R.id.action_help_node:
+                yield true;
+            }
+            case R.id.action_help_node -> {
                 HelpFragment.display(getSupportFragmentManager(), R.string.help_node_2);
-                return true;
-            case R.id.action_privacy_policy:
+                yield true;
+            }
+            case R.id.action_privacy_policy -> {
                 PrivacyFragment.display(getSupportFragmentManager());
-                return true;
-            case R.id.action_language:
+                yield true;
+            }
+            case R.id.action_language -> {
                 onChangeLocale();
-                return true;
-            case R.id.action_nodes:
+                yield true;
+            }
+            case R.id.action_nodes -> {
                 onNodePrefs();
-                return true;
-            case R.id.action_mobile_miner:
+                yield true;
+            }
+            case R.id.action_mobile_miner -> {
                 startActivity(new Intent(this, MobileMinerActivity.class));
-                return true;
-            case R.id.action_debug:
+                yield true;
+            }
+            case R.id.action_debug -> {
                 toggleDebugInfo();
-                return true;
-            default:
-                return super.onOptionsItemSelected(item);
-        }
+                yield true;
+            }
+            default -> super.onOptionsItemSelected(item);
+        };
     }
 
     private void toggleDebugInfo() {
@@ -1372,6 +1386,7 @@ public class LoginActivity extends BaseActivity
     }
 
     // an AsyncTask which tests the node before trying to open the wallet
+    @SuppressLint("StaticFieldLeak")
     private class AsyncOpenWallet extends AsyncTask<Void, Void, Boolean> {
         private final String walletName;
         //private final String walletAddress;
@@ -1423,18 +1438,15 @@ public class LoginActivity extends BaseActivity
         // check if we need connected hardware
         Wallet.Device device =
                 WalletManager.getInstance().queryWalletDevice(keyPath, password);
-        switch (device) {
-            case Device_Ledger:
-                if (!hasLedger()) {
-                    toast(R.string.open_wallet_ledger_missing);
-                } else {
-                    return true;
-                }
-                break;
-            default:
-                // device could be undefined meaning the password is wrong
-                // this gets dealt with later
+        if (Objects.requireNonNull(device) == Wallet.Device.Device_Ledger) {
+            if (!hasLedger()) {
+                toast(R.string.open_wallet_ledger_missing);
+            } else {
                 return true;
+            }
+        } else {// device could be undefined meaning the password is wrong
+            // this gets dealt with later
+            return true;
         }
         return false;
     }
@@ -1488,6 +1500,7 @@ public class LoginActivity extends BaseActivity
                             connectLedger(getUsbManager(), device);
                         }
                     } else {
+                        assert device != null;
                         Timber.w("User denied permission for device %s", device.getProductName());
                     }
                 }

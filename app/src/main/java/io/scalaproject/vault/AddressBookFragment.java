@@ -71,34 +71,23 @@ import java.util.Set;
 
 import timber.log.Timber;
 
-public class AddressBookFragment extends Fragment
-        implements ContactInfoAdapter.OnSelectContactListener, ContactInfoAdapter.OnDeleteContactListener, View.OnClickListener {
+public class AddressBookFragment extends Fragment implements ContactInfoAdapter.OnSelectContactListener, ContactInfoAdapter.OnDeleteContactListener, View.OnClickListener {
 
     public static final String REQUEST_MODE = "mode";
-
     static final public String MODE_TYPE_READONLY = "readonly";
-
     private boolean readonly = false;
-
     private RecyclerView rvContacts;
     private LinearLayout llNoContact;
-
     private ContactInfoAdapter contactsAdapter;
-
     private AddressBookFragment.Listener activityCallback;
-
     private static ActivityResultLauncher<String> mGetContentLauncher;
     private ActivityResultLauncher<Intent> mCropImageLauncher;
 
     public interface Listener {
         void setToolbarButton(int type);
-
         void setSubtitle(String title);
-
         Set<Contact> getContacts();
-
         void saveContacts(final List<Contact> contactItems);
-
         void onBackPressed();
     }
 
@@ -131,8 +120,7 @@ public class AddressBookFragment extends Fragment
     }
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         Timber.d("onCreateView");
         View view = inflater.inflate(R.layout.fragment_address_book, container, false);
 

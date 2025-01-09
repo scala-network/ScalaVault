@@ -118,7 +118,7 @@ public class BarcodeData {
         sb.append(BarcodeData.XLA_SCHEME).append(address);
         boolean first = true;
         if ((description != null) && !description.isEmpty()) {
-            sb.append(first ? "?" : "&");
+            sb.append("?");
             first = false;
             sb.append(BarcodeData.XLA_DESCRIPTION).append('=').append(Uri.encode(description));
         }

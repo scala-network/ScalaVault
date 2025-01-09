@@ -53,6 +53,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Locale;
+import java.util.Objects;
 
 import timber.log.Timber;
 
@@ -76,7 +77,7 @@ public class ExchangeView extends LinearLayout {
     public void setAmount(String xlaAmount) {
         if (xlaAmount != null) {
             setCurrencyA(0);
-            etAmount.getEditText().setText(xlaAmount);
+            Objects.requireNonNull(etAmount.getEditText()).setText(xlaAmount);
             setxla(xlaAmount);
             this.notxlaAmount = null;
             doExchange();
@@ -170,7 +171,7 @@ public class ExchangeView extends LinearLayout {
         etAmount = findViewById(R.id.etAmount);
         tvAmountB = findViewById(R.id.tvAmountB);
         sCurrencyA = findViewById(R.id.sCurrencyA);
-        ArrayAdapter adapter = ArrayAdapter.createFromResource(getContext(), R.array.currency, R.layout.item_spinner);
+        ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(getContext(), R.array.currency, R.layout.item_spinner);
         adapter.setDropDownViewResource(R.layout.item_spinner_dropdown_item);
         sCurrencyA.setAdapter(adapter);
         sCurrencyB = findViewById(R.id.sCurrencyB);
@@ -223,7 +224,7 @@ public class ExchangeView extends LinearLayout {
             }
         });
 
-        etAmount.getEditText().setOnFocusChangeListener(new OnFocusChangeListener() {
+        Objects.requireNonNull(etAmount.getEditText()).setOnFocusChangeListener(new OnFocusChangeListener() {
             @Override
             public void onFocusChange(View v, boolean hasFocus) {
                 if (!hasFocus) {
@@ -267,7 +268,7 @@ public class ExchangeView extends LinearLayout {
     public boolean checkEnteredAmount() {
         boolean ok = true;
         Timber.d("checkEnteredAmount");
-        String amountEntry = etAmount.getEditText().getText().toString();
+        String amountEntry = Objects.requireNonNull(etAmount.getEditText()).getText().toString();
         if (!amountEntry.isEmpty()) {
             try {
                 double a = Double.parseDouble(amountEntry);
@@ -384,7 +385,7 @@ public class ExchangeView extends LinearLayout {
     boolean prepareExchange() {
         Timber.d("prepareExchange()");
         if (checkEnteredAmount()) {
-            String enteredAmount = etAmount.getEditText().getText().toString();
+            String enteredAmount = Objects.requireNonNull(etAmount.getEditText()).getText().toString();
             if (!enteredAmount.isEmpty()) {
                 String cleanAmount = "";
                 if (getCurrencyA() == 0) {

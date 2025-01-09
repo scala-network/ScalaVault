@@ -19,7 +19,7 @@ public class BaseActivity extends SecureActivity implements GenerateReviewFragme
 
     ProgressDialog progressDialog = null;
 
-    private class SimpleProgressDialog extends ProgressDialog {
+    private static class SimpleProgressDialog extends ProgressDialog {
 
         SimpleProgressDialog(Context context, int msgId) {
             super(context);

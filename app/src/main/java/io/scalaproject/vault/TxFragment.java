@@ -54,6 +54,7 @@ import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.HashSet;
+import java.util.Objects;
 import java.util.Set;
 import java.util.TimeZone;
 
@@ -83,8 +84,6 @@ public class TxFragment extends Fragment {
     private TextView tvTxFee;
     private TextView tvTxTransfers;
     private TextView etTxNotes;
-
-    private Button bOK;
 
     // XLATO stuff
     private View cvxlaTo;
@@ -118,7 +117,7 @@ public class TxFragment extends Fragment {
 
         etTxNotes.setRawInputType(InputType.TYPE_CLASS_TEXT);
 
-        bOK = view.findViewById(R.id.bOK);
+        Button bOK = view.findViewById(R.id.bOK);
         bOK.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -129,7 +128,7 @@ public class TxFragment extends Fragment {
         tvTxxlaToKey.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Helper.clipBoardCopy(getActivity(), getString(R.string.label_copy_xlatokey), tvTxxlaToKey.getText().toString());
+                Helper.clipBoardCopy(requireActivity(), getString(R.string.label_copy_xlatokey), tvTxxlaToKey.getText().toString());
                 Toast.makeText(getActivity(), getString(R.string.message_copy_xlatokey), Toast.LENGTH_SHORT).show();
             }
         });
@@ -275,17 +274,17 @@ public class TxFragment extends Fragment {
         if (info.isFailed) {
             tvTxAmount.setText(getString(R.string.tx_list_amount_failed, Wallet.getDisplayAmount(info.amount)));
             tvTxFee.setText(getString(R.string.tx_list_failed_text));
-            setTxColour(ContextCompat.getColor(getContext(), R.color.tx_failed));
+            setTxColour(ContextCompat.getColor(requireContext(), R.color.tx_failed));
         } else if (info.isPending) {
-            setTxColour(ContextCompat.getColor(getContext(), R.color.tx_pending));
+            setTxColour(ContextCompat.getColor(requireContext(), R.color.tx_pending));
         } else if (info.direction == TransactionInfo.Direction.Direction_In) {
-            setTxColour(ContextCompat.getColor(getContext(), R.color.tx_green));
+            setTxColour(ContextCompat.getColor(requireContext(), R.color.tx_green));
         } else {
-            setTxColour(ContextCompat.getColor(getContext(), R.color.tx_red));
+            setTxColour(ContextCompat.getColor(requireContext(), R.color.tx_red));
         }
         Set<String> destinations = new HashSet<>();
-        StringBuffer sb = new StringBuffer();
-        StringBuffer dstSb = new StringBuffer();
+        StringBuilder sb = new StringBuilder();
+        StringBuilder dstSb = new StringBuilder();
         if (info.transfers != null) {
             boolean newline = false;
             for (Transfer transfer : info.transfers) {

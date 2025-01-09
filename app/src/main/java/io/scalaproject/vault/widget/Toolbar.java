@@ -23,6 +23,7 @@
 
 package io.scalaproject.vault.widget;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.os.Build;
 import android.util.AttributeSet;
@@ -128,6 +129,7 @@ public class Toolbar extends androidx.appcompat.widget.Toolbar {
 
     int buttonType = BUTTON_CREDITS;
 
+    @SuppressLint("UseCompatLoadingForDrawables")
     public void setButton(int type) {
         switch (type) {
             case BUTTON_BACK:
