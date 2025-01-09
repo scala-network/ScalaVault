@@ -1,4 +1,4 @@
-package com.theromus.sha;
+package io.theromus.sha;
 
 /**
  * The parameters defining the standard FIPS 202.

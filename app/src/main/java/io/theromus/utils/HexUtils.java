@@ -84,14 +84,14 @@ public class HexUtils {
      */
     public static String convertBytesToString(final byte[] data) {
         ByteArrayOutputStream buffer = new ByteArrayOutputStream();
-        for (int i = 0; i < data.length; i++) {
-            int uVal = data[i] & 0xFF;
+        for (byte datum : data) {
+            int uVal = datum & 0xFF;
 
             buffer.write(ENCODE_BYTE_TABLE[(uVal >>> 4)]);
             buffer.write(ENCODE_BYTE_TABLE[uVal & 0xF]);
         }
 
-        return new String(buffer.toByteArray());
+        return buffer.toString();
     }
 
 }

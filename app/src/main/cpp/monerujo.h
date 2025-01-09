@@ -50,7 +50,7 @@ void setHandleFromLong(JNIEnv *env, jobject obj, jlong handle) {
 
 template<typename T>
 void setHandle(JNIEnv *env, jobject obj, T *t) {
-    jlong handle = reinterpret_cast<jlong>(t);
+    auto handle = reinterpret_cast<jlong>(t);
     setHandleFromLong(env, obj, handle);
 }
 

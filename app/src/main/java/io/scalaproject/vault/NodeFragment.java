@@ -367,6 +367,7 @@ public class NodeFragment extends Fragment
         }
     }
 
+    @SuppressLint("StaticFieldLeak")
     private class AsyncFindNodes extends AsyncTask<Void, NodeInfo, Boolean> {
         @Override
         protected void onPreExecute() {
@@ -685,6 +686,7 @@ public class NodeFragment extends Fragment
             });
         }
 
+        @SuppressLint("StaticFieldLeak")
         private class AsyncTestNode extends AsyncTask<Void, Void, Boolean> {
             @Override
             protected void onPreExecute() {

@@ -25,8 +25,8 @@
 
 package io.scalaproject.vault.util.ledger;
 
-import com.theromus.sha.Keccak;
-import com.theromus.sha.Parameters;
+import io.theromus.sha.Keccak;
+import io.theromus.sha.Parameters;
 
 import java.math.BigInteger;
 import java.nio.ByteBuffer;

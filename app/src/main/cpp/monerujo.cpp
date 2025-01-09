@@ -19,7 +19,7 @@
  *
  * Please see the included LICENSE file for more information.*/
 
-#include <inttypes.h>
+#include <cinttypes>
 #include "monerujo.h"
 #include "wallet2_api.h"
 
