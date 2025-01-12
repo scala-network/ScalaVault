@@ -135,7 +135,7 @@
     <string name="generate_wallet_exists">¡El monedero ya existe!</string>
     <string name="generate_wallet_dot">No puede empezar con .</string>
     <string name="generate_wallet_creating">Creando monedero</string>
-    <string name="generate_wallet_created">Monedero creada</string>
+    <string name="generate_wallet_created">Monedero creado</string>
 
     <string name="generate_restoreheight_error">Introduce un número o una fecha (AAAA-MM-DD)</string>
     <string name="generate_restoreheight_min_error">La fecha debe ser mayor o igual a %1$s</string>
@@ -214,9 +214,13 @@
     <string name="receive_amount_nan">XLA no es un número</string>
 
     <string name="details_alert_message">Se va a mostrar información delicada.\n¡Mira por encima del hombro!</string>
+    <string name="details_alert_yes">Aceptar</string>
+    <string name="details_alert_no">Cancelar</string>
     <string name="details_title">Detalles</string>
 
     <string name="archive_alert_message">¡El monedero será copiada y después borrada!</string>
+    <string name="archive_alert_yes">Aceptar</string>
+    <string name="archive_alert_no">Cancelar</string>
 
     <string name="fab_create_new">Crear nuevo monedero</string>
     <string name="fab_restore_viewonly">Restaurar monedero de sólo vista</string>
@@ -285,6 +289,7 @@
 
     <string name="menu_language">Lenguaje</string>
     <string name="language_system_default">Usar Idioma del Sistema</string>
+    <string name="menu_nodes">Nodos remotos</string>
 
     <string name="fab_restore_ledger">Restaurar desde Ledger Nano S</string>
 
@@ -320,11 +325,13 @@
 
     <string name="status_wallet_connect_wrongversion">Versión de nodo incompatible - ¡por favor actualiza!</string>
 
-    <string name="menu_info">Detalles</string><!--Changed to: Show Secrets!-->
+    <string name="menu_info">¡Mostrar Secretos!</string><!--Changed to: Show Secrets!-->
 
-    <string name="menu_StealthMode">Modo Público</string>
+    <string name="menu_StealthMode">Modo Invisible</string>
 
-    <string name="info_nodes_enabled">Nodo-o-matiC habilitado, toque para más información.</string>
+    <string name="info_mobile_miner">Comienza a minar en tu dispositivo móvil con Scala Miner. Toca aquí para más información.</string>
+    <string name="info_nodes_enabled">OBSOLETO</string>
+    <string name="info_nodes_enabled_2">Scala Vault busca los mejores nodos disponibles. Toca aquí para más información.</string>
     <string name="node_height">Último bloque actualizado: %1$s</string>
     <string name="label_nodes">Nodos</string>
     <string name="node_name_hint">Nombre del Nodo (Opcional)</string>
@@ -338,8 +345,8 @@
     <string name="node_port_range">Debe ser 1&#8211;65535</string>
     <string name="node_fab_add">Agregar Nodo</string>
     <string name="node_refresh_hint">¡Toca para refrescar!</string>
-    <string name="node_test_error">ERROR DE CONECCIÓN %1$d</string>
-    <string name="node_general_error">ERROR DE CONECCIÓN</string>
+    <string name="node_test_error">ERROR DE CONEXIÓN %1$d</string>
+    <string name="node_general_error">ERROR DE CONEXIÓN</string>
     <string name="node_auth_error">AUTENTIFICACIÓN FALLIDA</string>
     <string name="node_result_label">Resultados de la prueba:</string>
     <string name="node_result">Altura: %1$s (v%2$d), Ping: %3$.0fms, IP: %4$s</string>
@@ -350,6 +357,9 @@
     <string name="node_scanning">Escaneando la red&#8230;</string>
     <string name="node_nobookmark">Mejores %1$d nodos marcados automáticamente</string>
     <string name="label_test">Probar</string><!--note: as in "Test a network connection"-->
+
+    <string name="remote_nodes_subtitle">Desliza hacia abajo para escanear y seleccionar automáticamente el mejor nodo disponible</string>
+    <string name="change_remote_node_conf">¿Cambiar nodo remoto a %1$s?</string>
 
     <string name="send_address_resolve_bip70">Resolviendo URI de pago&#8230;</string>
     <string name="send_address_not_bip70">No se pudo resolver el URI de pago</string>
@@ -382,9 +392,9 @@
     <string name="connection_remote_daemon">Conectando al nodo remoto…</string>
     <string name="remote_nodes">Nodos remotos</string>
     <string name="address_book">libreta de direcciones</string>
-    <string name="delete_contact_conf">Delete entry %1$s?</string>
-    <string name="contact_value_empty">We need this!</string>
-    <string name="no_entry">No entry</string>
+    <string name="delete_contact_conf">¿Eliminar la entrada %1$s?</string>
+    <string name="contact_value_empty">¡Necesitamos esto!</string>
+    <string name="no_entry">Sin entradas</string>
     <string name="save_to_address_book">Guardar en la libreta de direcciones</string>
     <string name="contact_name_empty_error">¡El nombre no puede estar vacío!</string>
     <string name="entry_name">Nombre de Registro</string>
@@ -396,8 +406,8 @@
     <string name="upload">Cargar</string>
     <string name="delete">Eliminar</string>
     <string name="edit">Editar</string>
-    <string name="enable_debug_info">Enable Debug Info</string>
-    <string name="disable_debug_info">Disable Debug Info</string>
-    <string name="send_address_resolve_ud">Resolving ENS / UD&#8230;</string>
-    <string name="send_address_no_ud_records">No address found for ENS / UD domain</string>
+    <string name="enable_debug_info">Activar depuración</string>
+    <string name="disable_debug_info">Desactivar depuración</string>
+    <string name="send_address_resolve_ud">Resolviendo ENS / UD&#8230;</string>
+    <string name="send_address_no_ud_records">No se encontró ninguna dirección para el dominio ENS / UD</string>
 </resources>

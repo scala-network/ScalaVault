@@ -451,7 +451,7 @@
     <string name="privacy_policy_label">Privacy Policy</string>
     <string name="primary_address">Primary Address</string>
     <string name="mm_url">https://github.com/scala-network/MobileMiner/releases</string>
-    <string name="connection_remote_daemon">Connecting to remote node...</string>
+    <string name="connection_remote_daemon">Connecting to remote node&#8230;</string>
     <string name="remote_nodes">Remote Nodes</string>
     <string name="address_book">Address Book</string>
     <string name="delete_contact_conf">Delete entry %1$s?</string>
@@ -470,6 +470,6 @@
     <string name="edit">Edit</string>
     <string name="enable_debug_info">Enable Debug Info</string>
     <string name="disable_debug_info">Disable Debug Info</string>
-    <string name="send_address_resolve_ud">Resolving Unstoppable Domains address...</string>
+    <string name="send_address_resolve_ud">Resolving Unstoppable Domains address&#8230;</string>
     <string name="send_address_no_ud_records">Invalid Unstoppable Domains address</string>
 </resources>
