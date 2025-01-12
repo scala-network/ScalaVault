@@ -1,5 +1,6 @@
 <resources>
     <string name="wallet_activity_name">Monedero</string>
+    <string name="menu_mobileminer">Minero Móvil</string>
 
     <string name="menu_about">Acerca De</string>
     <string name="menu_privacy">Política de Privacidad</string>
@@ -137,6 +138,7 @@
     <string name="generate_wallet_created">Monedero creada</string>
 
     <string name="generate_restoreheight_error">Introduce un número o una fecha (AAAA-MM-DD)</string>
+    <string name="generate_restoreheight_min_error">La fecha debe ser mayor o igual a %1$s</string>
 
     <string name="generate_wallet_type_key">Claves</string>
     <string name="generate_wallet_type_new">Nuevo</string>
@@ -349,28 +351,28 @@
     <string name="node_nobookmark">Mejores %1$d nodos marcados automáticamente</string>
     <string name="label_test">Probar</string><!--note: as in "Test a network connection"-->
 
-    <string name="send_address_resolve_bip70">Resolving Payment URI&#8230;</string>
-    <string name="send_address_not_bip70">Could not resolve Payment URI</string>
-    <string name="send_address_bip70">Resolved Payment URI &#x2714;</string>
+    <string name="send_address_resolve_bip70">Resolviendo URI de pago&#8230;</string>
+    <string name="send_address_not_bip70">No se pudo resolver el URI de pago</string>
+    <string name="send_address_bip70">URI de pago resuelto &#x2714;</string>
     <!-- please verify this means "Receiver" or "Recipient" as in "Receiver in the transaction" -->
     <string name="send_address_hint">Receptor</string>
 
-    <string name="xlato_error_001">XLA.TO offline - try again later</string>
-    <string name="xlato_error_004">BTC amount out of bounds</string>
+    <string name="xlato_error_001">XLA.TO está fuera de línea. Vuelve a intentarlo más tarde</string>
+    <string name="xlato_error_004">La cantidad de BTC está fuera del rango permitido</string>
     <string name="xlato_error_010">Invalid or outdated Payment URL</string>
-    <string name="xlato_error_012">Too many requests</string>
+    <string name="xlato_error_012">Demasiadas solicitudes</string>
 
-    <string name="street_sweep_amount">EVERYTHING!</string> <!-- as in: "everything in the account" = "all the money" -->
+    <string name="street_sweep_amount">¡TODO!</string> <!-- as in: "everything in the account" = "all the money" -->
 
-    <string name="menu_ledger_seed">Convert Ledger Seed</string>
-    <string name="prompt_ledger_seed">Ledger Seed Words</string>
-    <string name="prompt_ledger_phrase">Ledger Passphrase (optional)</string>
-    <string name="bad_ledger_seed">Invalid Ledger Seed!</string>
-    <string name="prompt_ledger_seed_warn">Entering your Ledger Seed here is a major security risk!</string>
+    <string name="menu_ledger_seed">Convertir Semilla de Ledger</string>
+    <string name="prompt_ledger_seed">Palabras Semilla de Ledger</string>
+    <string name="prompt_ledger_phrase">Frase de Paso Ledger (opcional)</string>
+    <string name="bad_ledger_seed">¡Semilla de Ledger inválida!</string>
+    <string name="prompt_ledger_seed_warn">¡Introducir su Semilla de Ledger en este lugar supone un importante riesgo para su seguridad!</string>
 
     <string name="label_restoreheight">Altura de Restauración</string> <!-- Restore Height -->
 
-    <string name="toast_ledger_start_app">Start Scala App on %1$s</string>
+    <string name="toast_ledger_start_app">Iniciar aplicación Scala en %1$s</string>
 
     <string name="menu_rescan">¡Reexplorar!</string>
     <string name="privacy_policy_intro">Nos preocupamos por su privacidad. Para obtener más información, lea nuestra Política de privacidad.</string>
@@ -383,16 +385,16 @@
     <string name="delete_contact_conf">Delete entry %1$s?</string>
     <string name="contact_value_empty">We need this!</string>
     <string name="no_entry">No entry</string>
-    <string name="save_to_address_book">Save to address book</string>
-    <string name="contact_name_empty_error">Name cannot be empty!</string>
-    <string name="entry_name">Entry Name</string>
-    <string name="start_mining">Start mining on your Android device safely and efficiently with the Scala Mobile Miner.</string>
+    <string name="save_to_address_book">Guardar en la libreta de direcciones</string>
+    <string name="contact_name_empty_error">¡El nombre no puede estar vacío!</string>
+    <string name="entry_name">Nombre de Registro</string>
+    <string name="start_mining">Comienza a minar en tu dispositivo Android de forma segura y eficiente con Scala Mobile Miner.</string>
     <string name="mobile_miner">Minero Móvil</string>
     <string name="download">Descargar</string>
     <string name="select_image">Seleccionar imagen</string>
-    <string name="contact_avatar_hint">Una imagen que represente esta entrada de la libreta de direcciones.</string>
-    <string name="upload">Upload</string>
-    <string name="delete">Delete</string>
+    <string name="contact_avatar_hint">Una imagen que represente esta entrada en la libreta de direcciones</string>
+    <string name="upload">Cargar</string>
+    <string name="delete">Eliminar</string>
     <string name="edit">Editar</string>
     <string name="enable_debug_info">Enable Debug Info</string>
     <string name="disable_debug_info">Disable Debug Info</string>
