@@ -472,4 +472,7 @@
     <string name="disable_debug_info">Disable Debug Info</string>
     <string name="send_address_resolve_ud">Resolving Unstoppable Domains address&#8230;</string>
     <string name="send_address_no_ud_records">Invalid Unstoppable Domains address</string>
+    <string name="transaction_history">Transaction History</string>
+    <string name="send">Send</string>
+    <string name="receive">Receive</string>
 </resources>

@@ -327,7 +327,7 @@
 
     <string name="menu_info">¡Mostrar Secretos!</string><!--Changed to: Show Secrets!-->
 
-    <string name="menu_StealthMode">Modo Invisible</string>
+    <string name="menu_StealthMode">Modo Público</string>
 
     <string name="info_mobile_miner">Comienza a minar en tu dispositivo móvil con Scala Miner. Toca aquí para más información.</string>
     <string name="info_nodes_enabled">OBSOLETO</string>
@@ -410,4 +410,7 @@
     <string name="disable_debug_info">Desactivar depuración</string>
     <string name="send_address_resolve_ud">Resolviendo ENS / UD&#8230;</string>
     <string name="send_address_no_ud_records">No se encontró ninguna dirección para el dominio ENS / UD</string>
+    <string name="transaction_history">Historial de transacciones</string>
+    <string name="send">Enviar</string>
+    <string name="receive">Recibir</string>
 </resources>
