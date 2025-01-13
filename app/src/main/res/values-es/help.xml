@@ -35,6 +35,18 @@
         Esto puede llevar <em>bastante</em> tiempo.</p>
     ]]></string>
 
+    <string name="help_create_ledger"><![CDATA[
+        <h1>Crear Monedero - Ledger</h1>
+        <p>Deseas recuperar tu monedero desde tu dispositivo Ledger Nano S.</p>
+        <p>Tus claves secretas nunca dejan el dispositivo Ledger, así que lo necesitas conectado cada
+        vez que deseas acceder a tu monedero.</p>
+        <p>Ingresa un nombre de monedero y contraseña únicos. La contraseña es usada para asegurar tu información del monedero en el dispositivo
+        Android. Usa una contraseña fuerte - o mejor aún, usa una frase de contraseña.</p>
+        <p>Ingresa el número del bloque de la primera transacción usada para esta dirección en el
+        campo \"Altura de restaurado\". También puedes usar una fecha en formato AAAA-MM-DD. Si no estás seguro,
+        ingresa una fecha o altura del bloque aproximada <em>anterior</em> a la primera vez que usaste esta dirección del monedero.</p>
+    ]]></string>
+
     <string name="help_create_keys"><![CDATA[
         <h1>Crear monedero con claves</h1>
         <p>¡Si vas a recuperar tu monedero usando tus claves!</p>
@@ -164,19 +176,20 @@
     <string name="help_send"><![CDATA[
         <h1>Enviar</h1>
         <h2>Dirección del receptor</h2>
-        <p>Esta es la dirección pública del monedero al que vas a enviar Scala. Puedes copiarla
-        desde tu portapapeles, escanear un código QR o introducirla manualmente. Asegúrate de
-        comprobarla varias veces para confirmar que no estás enviando Scala a la dirección equivocada.</p>
-        <p>In addition to using an XLA address, you can also use
+        <p>Esta es la dirección pública de la billetera a la que está enviando Scala. Puede copiarla desde su portapapeles,
+        escanear un código QR o ingresarla manualmente. Asegúrese de verificar esta dirección tres veces para
+        asegurarse de que no está enviando monedas a la dirección incorrecta.</p>
+        <p>Además de usar una dirección XLA, también puede usar
         <ul>
-            <li>an ENS domain</li>
-            <li>an Unstoppable Domains domain</li>
-        </u>
-        <h2>Payment ID</h2>
-        <p>You can use a Payment ID to identify the reason you sent Scala between two parties. This
-        is fully optional and private. For example it can allow a business to reconcile your
-        transaction with an item you bought.</p>
-]]></string>
+            <li>un dominio ENS</li>
+            <li>un dominio Unstoppable Domains</li>
+        </ul>
+        </p>
+        <h2>ID de pago</h2>
+        <p>Puede usar un ID de pago para identificar el motivo por el que envió Scala entre dos partes. Esto
+        es completamente opcional y privado. Por ejemplo, puede permitirle a una empresa conciliar su
+        transacción con un artículo que compró.</p>
+    ]]></string>
 
     <string name="help_xlato"><![CDATA[
         <h1>Enviar BTC</h1>
@@ -205,18 +218,6 @@
         <p>Una vez que la cuenta atrás alcanza el cero, necesitarás pedir una nueva cotización de
         parte de XLA.TO, esto se logra dando un paso atrás y luego volviendo a la pantalla de
         \"Confirmar\".</p>
-    ]]></string>
-
-    <string name="help_create_ledger"><![CDATA[
-        <h1>Crear Monedero - Ledger</h1>
-        <p>Deseas recuperar tu monedero desde tu dispositivo Ledger Nano S.</p>
-        <p>Tus claves secretas nunca dejan el dispositivo Ledger, así que lo necesitas conectado cada
-        vez que deseas acceder a tu monedero.</p>
-        <p>Ingresa un nombre de monedero y contraseña únicos. La contraseña es usada para asegurar tu información del monedero en el dispositivo
-        Android. Usa una contraseña fuerte - o mejor aún, usa una frase de contraseña.</p>
-        <p>Ingresa el número del bloque de la primera transacción usada para esta dirección en el
-        campo \"Altura de restaurado\". También puedes usar una fecha en formato AAAA-MM-DD. Si no estás seguro,
-        ingresa una fecha o altura del bloque aproximada <em>anterior</em> a la primera vez que usaste esta dirección del monedero.</p>
     ]]></string>
 
     <string name="help_wallet"><![CDATA[
@@ -248,66 +249,52 @@
         <p>Descárgalo aquí: <a href="https://github.com/scala-network/MobileMiner/releases">Scala Miner</a></p>
     ]]></string>
 
-    <string name="help_node"><![CDATA[
+    <string name="help_node">OBSOLETO</string>
+
+    <string name="help_node_2"><![CDATA[
         <h1>Nodos</h1>
         <h2>TL;DR</h2>
-        <p>Refresca la lista de nodos al mostrar los marcadores de nodos para permitir a Scala Vault
-        elegir el mejor para ti.</p>
-        <h2>¿Qué es un Nodo?h2>
-        <p>Scala Vault usa un Nodo Remoto (algunas veces también llamado Daemon) para comunicarse con
-        la red de Scala sin tener que descargar y almacenar una copia de la
-        cadena de bloques completa.<p>
+        <p>Actualiza la lista de nodos deslizando hacia abajo y Scala Vault se conectará automáticamente al mejor disponible.</p>
+        <h2>¿Qué es un Nodo?</h2>
+        <p>Scala Vault utiliza un Nodo Remoto (a veces también llamado Daemon) para comunicarse con la Red Scala
+        sin tener que descargar y almacenar una copia completa de la blockchain.</p>
         <h2>Lista de Nodos</h2>
         <p>Si la lista está vacía, puedes agregar nuevos nodos manualmente o dejar que Scala Vault
-        escanee la red por ti. O ambos.</p>
-        <p>La lista de nodos muestra todos los nodos actualmente conocidos. Adicionalmente, la marca de tiempo
-        del último bloque conocido para cada nodo se muestra bajo el nombre del nodo. Un icono
-        representando el comportamiento de respuesta del nodo
-        (el cual indica el nivel de conectividad esperado)
-        es mostrado seguido de cada nodo.</p>
-        <p>Cualquier nodo en la lista puede ser marcado para un posterior uso.
-        Nodos que no sean marcados serán olvidados.<p>
-        <p>Scala Vault elegirá el nodo marcado óptimo cada vez que lo uses.
-        Esto lo hace revisando la altura del bloque (¿qué tan al día
-        está el nodo?) así como el comportamiento de respuesta (¿qué tan rápido responde el nodo a solicitudes?).</p>
-        <p>La lista se ordena por estas características, por lo tanto el primer nodo en la lista sería el que Scala Vault
-        elegiría en ese momento. El final de la lista mostraría nodos muy lentos o no disponibles.</p>
+        elija el mejor nodo disponible para ti. O ambas cosas. Sigue leyendo &#8230;</p>
+        <p>La lista de nodos muestra todos los nodos conocidos actualmente. Además, se muestra la marca de tiempo
+        del último bloque conocido por cada nodo debajo del nombre del nodo. Un icono que representa el comportamiento
+        de respuesta del nodo (que indica el nivel de conectividad esperado) se muestra junto a cada nodo.</p>
+        <p>Scala Vault elegirá el nodo óptimo cada vez que lo uses.
+        Lo hace comprobando la altura del bloque (¿qué tan actualizado está el nodo?)
+        así como el comportamiento de respuesta (¿qué tan rápido responde el nodo a las solicitudes?).</p>
+        <p>La lista está ordenada por estas características, por lo que el nodo superior sería el que Scala Vault
+        elegiría ahora mismo. La parte inferior de la lista mostraría nodos muy lentos o no disponibles.</p>
         <h2>Agregar un Nodo</h2>
-        <p>Presionando en el botón &quot;Agregar Nodo&quot; en la parte inferior, se te pedirá que
-        ingreses los detalles del nodo en el siguiente cuadro de diálogo.
-        La &quot;Dirección&quot; es el nombre del host o dirección IP del nodo - esta es la única
-        entrada obligatoria.
-        Ingresa el &quot;Puerto&quot; si el nodo se ejecuta en un puerto que no es por defecto (e.g. 18089).
-        Puedes también nombrar el nodo opcionalmente, para que puedas identificarlo después fácilmente.
-        Algunos nodos requieren credenciales para usarlos. Ingresa el nombre de usuario provisto &amp;
-        contraseña en los campos apropiados. Ahora puedes &quot;Verificar&quot; estos ajustes.
-        Los &quot;Resultados de la Prueba&quot; mostrarán la altura del bloque, tiempo de respuesta y dirección IP real usados.
-        El resultado puede ser también un error - usualmente porque el nombre de host provisto no
-        es alcanzable en una sensible cantidad de tiempo o las credenciales son incorrectas.
-        O la combinación nombre de host/puerto no indican a un nodo de Scala real.
-        Una vez que la prueba sea exitosa (sin error) - estás listo para presionar &quot;OK&quot; para guardar &amp;
-        como marcador este nodo.</p>
-        <h2>Escanear por Nodos</h2>
-        <p>Adicionalmente, puedes escanear la red por nodos. Scala Vault empezará
-        escaneando la red por Nodos Remotos con puerto 18089. Comienza preguntando tus
-        nodos marcados por otros compañeros en la red P2P de Scala y después continúa
-        preguntando por nodos a ellos por sus compañeros, y así. Si no tienes nodos marcados
-        (o no nos comunican sobre sus compañeros),
-        Scala Vault irá directo a los nodos semilla de Scala codificados en Scala. El
-        escaneo parará cuando encuentre 10 nodos remotos en total.</p>
+        <p>Al tocar el botón "Agregar Nodo" en la parte inferior, se te pedirá que
+        ingreses los detalles del nodo en el siguiente diálogo.
+        La "Dirección" es el nombre de host o la dirección IP del nodo; esta es la única entrada obligatoria.
+        Ingresa el "Puerto" si el nodo se ejecuta en un puerto que no sea el predeterminado (por ejemplo, 18089).
+        También puedes nombrar opcionalmente el nodo para identificarlo más fácilmente más adelante.
+        Algunos nodos requieren credenciales para usarlos. Ingresa el nombre de usuario y la contraseña proporcionados
+        en los campos correspondientes. Ahora puedes "Probar" estos ajustes.
+        Los "Resultados de la prueba" mostrarán la altura del bloque, el tiempo de respuesta y la IP real utilizada.
+        El resultado también puede ser un error, generalmente porque el nombre de host proporcionado no es
+        alcanzable en un tiempo razonable o las credenciales son incorrectas.
+        ¡O la combinación de nombre de host/puerto no apunta a un Nodo Scala real!
+        Una vez que la prueba se complete correctamente (sin errores), puedes presionar "Aceptar" para guardar este nodo.</p>
     ]]></string>
 
     <!-- Note for translators: new/changed text also in help_send -->
 
     <string name="help_uri"><![CDATA[
-        <h1>Using a payment link</h1>
-        <p>You have started Scala Vault with a payment link. In order to send funds, please do the following:</p>
+        <h1>Usando un enlace de pago</h1>
+        <p>Has iniciado Scala Vault con un enlace de pago. Para enviar fondos, sigue estos pasos:</p>
         <p>
-        1. Open the wallet you want to spend from<br>
-        2. Wait until the wallet is synced &amp; the "Give" button appears<br>
-        3. Touch the "Give" button
+        1. Abre la billetera desde la que deseas enviar fondos<br>
+        2. Espera hasta que la billetera se sincronice y aparezca el botón "Dar"<br>
+        3. Toca el botón "Dar"
         </p>
-        <p>The payment details will be filled in. Check them and proceed like for any other transaction.</p>
+        <p>Los detalles del pago se completarán automáticamente. Revísalos y procede como en cualquier otra transacción.</p>
     ]]></string>
 
     <string name="help_ok">¡Entendido!</string> <!-- Note: "Got it" as in "I understand this" -->

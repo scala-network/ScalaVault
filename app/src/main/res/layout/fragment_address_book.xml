@@ -45,8 +45,9 @@
                     android:layout_width="42dp"
                     android:layout_height="42dp"
                     android:layout_gravity="center"
-                    android:tint="@color/txt_inactive"
-                    android:src="@drawable/ic_contact" />
+                    android:contentDescription="@null"
+                    android:src="@drawable/ic_contact"
+                    app:tint="@color/txt_inactive" />
 
                 <TextView
                     android:layout_width="wrap_content"
@@ -90,6 +91,7 @@
             android:layout_gravity="bottom|end"
             android:backgroundTint="@android:color/transparent"
             android:backgroundTintMode="src_in"
+            android:contentDescription="@null"
             app:tint="@color/btn_icon_default"
             android:src="@drawable/ic_add_white_24dp"
             app:borderWidth="0dp"

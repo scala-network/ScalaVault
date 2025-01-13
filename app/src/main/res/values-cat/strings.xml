@@ -13,7 +13,7 @@
     <string name="menu_changepw">Canvi de contrasenya</string>
 
     <string name="password_weak">Segueix escrivint &#8230;</string>
-    <string name="password_fair">Més o menys... &#8230;</string>
+    <string name="password_fair">Més o menys &#8230;</string>
     <string name="password_good">Vinga, ho pots fer millor!</string>
     <string name="password_strong">Força bé, pero millorbale &#8230;</string>
     <string name="password_very_strong">Genial, ets tot un hacker!</string>

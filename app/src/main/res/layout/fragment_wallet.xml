@@ -41,6 +41,7 @@
                         android:id="@+id/ivSynced"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:contentDescription="@null"
                         android:src="@drawable/ic_done_all"
                         android:visibility="gone" />
 
@@ -89,9 +90,10 @@
                         android:scaleType="fitStart"
                         android:layout_gravity="top|end"
                         android:background="?android:attr/selectableItemBackgroundBorderless"
-                        android:tint="@color/c_white"
                         android:src="@drawable/ic_content_copy_24dp"
-                        android:onClick="onCopyAddress" />
+                        android:onClick="onCopyAddress"
+                        android:contentDescription="@null"
+                        app:tint="@color/c_white" />
 
                     <androidx.legacy.widget.Space
                         android:layout_width="wrap_content"
@@ -105,7 +107,7 @@
                         android:layout_marginStart="@dimen/header_top_first"
                         android:gravity="start|bottom"
                         android:textColor="@color/c_white"
-                        android:text="Balance" />
+                        android:text="@string/balance" />
 
                     <FrameLayout
                         android:layout_width="match_parent"
@@ -144,6 +146,7 @@
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:layout_gravity="center"
+                                    android:contentDescription="@null"
                                     android:src="@drawable/ic_statsup" />
 
                                 <ProgressBar
@@ -206,6 +209,7 @@
                             android:id="@+id/ivAddressType"
                             android:layout_width="18dp"
                             android:layout_height="18dp"
+                            android:contentDescription="@null"
                             android:src="@drawable/ic_primary_address"
                             android:visibility="visible" />
 
@@ -216,7 +220,7 @@
                             android:layout_height="wrap_content"
                             android:layout_marginStart="5dp"
                             android:layout_gravity="center_vertical"
-                            android:text="Primary address" />
+                            android:text="@string/balance_primary_address" />
 
                         <Space
                             android:layout_width="wrap_content"
@@ -229,7 +233,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_gravity="center_vertical"
-                            android:text="Wallet Address" />
+                            android:text="@string/balance_wallet_address" />
 
                     </LinearLayout>
 
@@ -320,8 +324,9 @@
                 android:layout_width="42dp"
                 android:layout_height="42dp"
                 android:layout_gravity="center"
-                android:tint="@color/txt_inactive"
-                android:src="@drawable/ic_no_tx" />
+                android:src="@drawable/ic_no_tx"
+                android:contentDescription="@null"
+                app:tint="@color/txt_inactive" />
 
             <TextView
                 android:layout_width="wrap_content"
@@ -331,7 +336,7 @@
                 android:textColor="@color/txt_inactive"
                 android:textSize="14sp"
                 android:visibility="visible"
-                android:text="No transaction" />
+                android:text="@string/history_no_transaction" />
 
         </LinearLayout>
 

@@ -57,7 +57,7 @@
 
     <string name="label_daemon">Nodo</string>
     <string name="status_wallet_loading">Cargando monedero&#8230;</string>
-    <string name="status_wallet_unloaded">Monedero guardada</string>
+    <string name="status_wallet_unloaded">Monedero guardado</string>
     <string name="status_wallet_unload_failed">¡Guardado de monedero fallido!</string>
     <string name="status_wallet_connecting">Conectando&#8230;</string>
     <string name="status_wallet_connect_failed">¡Conexión con el nodo fallida!\nComprueba el usuario/contraseña</string>
@@ -148,14 +148,14 @@
     <string name="generate_address_hint">Dirección Pública</string>
     <string name="generate_viewkey_hint">Clave de Vista</string>
     <string name="generate_spendkey_hint">Clave de Gasto</string>
-    <string name="generate_mnemonic_hint">Semilla Mnemotécnica de 25 Palabras</string>
+    <string name="generate_mnemonic_hint">Semilla Mnemónica de 25 Palabras</string>
     <string name="generate_restoreheight_hint">Altura o Fecha (YYYY-MM-DD) de Restauración</string>
 
     <string name="generate_address_label">Dirección Pública</string>
     <string name="generate_viewkey_label">Clave de Vista</string>
     <string name="generate_spendkey_label">Clave de Gasto</string>
-    <string name="generate_mnemonic_label">Semilla Mnemotécnica</string>
-    <string name="generate_crazypass_label">Contraseña de restauración para el archivo del monedero</string>
+    <string name="generate_mnemonic_label">Semilla Mnemónica</string>
+    <string name="generate_crazypass_label">Contraseña de restauración para el monedero</string>
 
     <string name="generate_check_key">Introduce una clave válida</string>
     <string name="generate_check_address">Introduce una dirección válida</string>
@@ -385,7 +385,7 @@
     <string name="toast_ledger_start_app">Iniciar aplicación Scala en %1$s</string>
 
     <string name="menu_rescan">¡Reexplorar!</string>
-    <string name="privacy_policy_intro">Nos preocupamos por su privacidad. Para obtener más información, lea nuestra Política de privacidad.</string>
+    <string name="privacy_policy_intro">Nos preocupamos por su privacidad. Para obtener más información, lea nuestra Política de Privacidad.</string>
     <string name="privacy_policy_label">Política de Privacidad</string>
     <string name="primary_address">Dirección principal</string>
     <string name="mm_url">https://github.com/scala-network/MobileMiner/releases</string>
@@ -413,4 +413,26 @@
     <string name="transaction_history">Historial de transacciones</string>
     <string name="send">Enviar</string>
     <string name="receive">Recibir</string>
+    <string name="balance">Balance</string>
+    <string name="balance_primary_address">Dirección principal</string>
+    <string name="balance_wallet_address">Dirección del monedero</string>
+    <string name="history_no_transaction">Sin transacciones</string>
+    <string name="mobileminer_scala_miner">MINERO SCALA</string>
+    <string name="mobileminer_start_mining">Comienza a minar en tu dispositivo Android de forma segura y eficiente.</string>
+    <string name="close">Close</string>
+    <string name="scala_logo">Scala Logo</string>
+    <string name="credits">Creditos</string>
+    <string name="credits_made_with">Hecho con </string>
+    <string name="credits_by"> por </string>
+    <string name="credits_forked_from">Derivado de </string>
+    <string name="credits_heart">Icono de corazon</string>
+    <string name="wizard_home">Un monedero seguro y ligero para almacenar tus monedas Scala</string>
+    <string name="wizard_home_description">Scala Vault proporciona todo lo que necesitas para gestionar y utilizar monederos Scala en Android</string>
+    <string name="wizard_home_create_new_wallet">Crear nueva billetera</string>
+    <string name="wizard_home_import_from_seed">Importar desde semilla</string>
+    <string name="wizard_home_or">o</string>
+    <string name="wizard_home_skip">Saltar</string>
+    <string name="no_wallet">Sin monedero</string>
+    <string name="wallet_address">Dirección del monedero</string>
+    <string name="subaddresses">Subcuentas</string>
 </resources>

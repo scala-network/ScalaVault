@@ -66,6 +66,7 @@ import java.text.NumberFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Objects;
 
 import timber.log.Timber;
 
@@ -146,7 +147,7 @@ public class WalletFragment extends Fragment
         List<String> currencies = new ArrayList<>();
         currencies.add(Helper.BASE_CRYPTO);
         currencies.addAll(Arrays.asList(getResources().getStringArray(R.array.currency)));
-        ArrayAdapter<String> spinnerAdapter = new ArrayAdapter<>(getContext(), R.layout.item_spinner_balance, currencies);
+        ArrayAdapter<String> spinnerAdapter = new ArrayAdapter<>(requireContext(), R.layout.item_spinner_balance, currencies);
         spinnerAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         sCurrency.setAdapter(spinnerAdapter);
 

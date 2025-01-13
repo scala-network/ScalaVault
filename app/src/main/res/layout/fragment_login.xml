@@ -134,8 +134,8 @@
                     android:layout_width="42dp"
                     android:layout_height="42dp"
                     android:layout_gravity="center"
-                    android:tint="@color/txt_inactive"
-                    android:src="@drawable/ic_account_balance_wallet_24dp" />
+                    android:src="@drawable/ic_account_balance_wallet_24dp"
+                    app:tint="@color/txt_inactive" />
 
                 <TextView
                     android:layout_width="wrap_content"
@@ -146,7 +146,7 @@
                     android:textColor="@color/txt_inactive"
                     android:textSize="14sp"
                     android:visibility="visible"
-                    android:text="No wallet" />
+                    android:text="@string/no_wallet" />
 
             </LinearLayout>
 

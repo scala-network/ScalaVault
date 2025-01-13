@@ -247,7 +247,7 @@
     <string name="send_total_btc_label">Total (XLA)</string>
     <string name="send_total_label">Total</string>
 
-    <string name="send_amount">%1$s XLA</string>
+    <string name="send_amount" translatable="false">%1$s XLA</string>
     <string name="send_fee">+%1$s Fee</string>
 
     <string name="send_create_tx_error_title">Create Transaction Error</string>
@@ -475,4 +475,26 @@
     <string name="transaction_history">Transaction History</string>
     <string name="send">Send</string>
     <string name="receive">Receive</string>
+    <string name="balance">Balance</string>
+    <string name="balance_primary_address">Primary address</string>
+    <string name="balance_wallet_address">Wallet Address</string>
+    <string name="history_no_transaction">No transaction</string>
+    <string name="mobileminer_scala_miner">SCALA MINER</string>
+    <string name="mobileminer_start_mining">Start mining on your Android device safely and efficiently.</string>
+    <string name="close">Close</string>
+    <string name="scala_logo">Scala Logo</string>
+    <string name="credits">Credits</string>
+    <string name="credits_made_with">Made with </string>
+    <string name="credits_by"> by </string>
+    <string name="credits_forked_from">Forked from </string>
+    <string name="credits_heart">heart icon</string>
+    <string name="wizard_home">A secure and lightweight wallet to store your Scala coins</string>
+    <string name="wizard_home_description">Scala Vault provides everything you need for managing and using Scala wallets on Android</string>
+    <string name="wizard_home_create_new_wallet">Create new wallet</string>
+    <string name="wizard_home_import_from_seed">Import from seed</string>
+    <string name="wizard_home_or">or</string>
+    <string name="wizard_home_skip">Skip</string>
+    <string name="no_wallet">No wallet</string>
+    <string name="wallet_address">Wallet Address</string>
+    <string name="subaddresses">Subaddresses</string>
 </resources>
