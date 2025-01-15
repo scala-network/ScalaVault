@@ -56,6 +56,7 @@ import io.scalaproject.vault.layout.TransactionInfoAdapter;
 import io.scalaproject.vault.model.TransactionInfo;
 import io.scalaproject.vault.model.Wallet;
 import io.scalaproject.vault.model.WalletManager;
+import io.scalaproject.vault.service.WalletService;
 import io.scalaproject.vault.service.exchange.api.ExchangeApi;
 import io.scalaproject.vault.service.exchange.api.ExchangeCallback;
 import io.scalaproject.vault.service.exchange.api.ExchangeRate;
@@ -555,7 +556,7 @@ public class WalletFragment extends Fragment
 
     private long firstBlock = 0;
     private String _walletName = null;
-    private String walletTitle = null;
+    private final String walletTitle = null;
     private final String walletSubtitle = null;
     private long unlockedBalance = 0;
     private long balance = 0;
@@ -566,10 +567,8 @@ public class WalletFragment extends Fragment
         if (!isAdded()) return;
 
         Timber.d("updateStatus()");
-        if ((walletTitle == null) || (accountIdx != wallet.getAccountIndex())) {
-            accountIdx = wallet.getAccountIndex();
-            setActivityTitle(wallet);
-        }
+        accountIdx = wallet.getAccountIndex();
+        setActivityTitle(wallet);
 
         balance = wallet.getBalance();
         unlockedBalance = wallet.getUnlockedBalance();
@@ -597,6 +596,9 @@ public class WalletFragment extends Fragment
                 ivSynced.setVisibility(View.GONE);
             } else {
                 sync = getString(R.string.status_synced) + " " + formatter.format(wallet.getBlockChainHeight());
+                String newMessage = "Updating data...";
+                //show notification on finished?
+                Timber.d("newMessage=%s", newMessage);
                 ivSynced.setVisibility(View.VISIBLE);
                 setProgress(-1);
             }

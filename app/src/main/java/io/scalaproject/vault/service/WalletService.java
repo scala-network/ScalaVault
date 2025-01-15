@@ -21,6 +21,7 @@
 
 package io.scalaproject.vault.service;
 
+import android.Manifest;
 import android.app.Notification;
 import android.app.NotificationChannel;
 import android.app.NotificationManager;
@@ -28,6 +29,7 @@ import android.app.PendingIntent;
 import android.app.Service;
 import android.content.Context;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.os.Binder;
 import android.os.Build;
 import android.os.Bundle;
@@ -36,9 +38,12 @@ import android.os.IBinder;
 import android.os.Looper;
 import android.os.Message;
 import android.os.Process;
+
 import androidx.annotation.Nullable;
 import androidx.annotation.RequiresApi;
+import androidx.core.app.ActivityCompat;
 import androidx.core.app.NotificationCompat;
+import androidx.core.app.NotificationManagerCompat;
 
 import io.scalaproject.vault.R;
 import io.scalaproject.vault.WalletActivity;
@@ -301,7 +306,7 @@ public class WalletService extends Service {
                         }
                     } else if (cmd.equals(REQUEST_CMD_STORE)) {
                         Wallet myWallet = getWallet();
-                        if(myWallet != null) {
+                        if (myWallet != null) {
                             Timber.d("STORE wallet: %s", myWallet.getName());
                             boolean rc = myWallet.store();
                             Timber.d("wallet stored: %s with rc=%b", myWallet.getName(), rc);
@@ -479,6 +484,7 @@ public class WalletService extends Service {
         Timber.d("start()");
 
         // Remove notifications for now... we don't need it with the wallet.
+        // Suggestion notify on recieve money, notify when sync is completed and notify on going maintenance.
         //startNotfication();
 
         showProgress(getString(R.string.status_wallet_loading));
