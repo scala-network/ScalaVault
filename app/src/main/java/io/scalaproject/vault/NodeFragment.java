@@ -27,6 +27,8 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.os.AsyncTask;
 import android.os.Bundle;
+
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
 import com.google.android.material.dialog.MaterialAlertDialogBuilder;
@@ -114,7 +116,7 @@ public class NodeFragment extends Fragment
     }
 
     @Override
-    public void onAttach(Context context) {
+    public void onAttach(@NonNull Context context) {
         super.onAttach(context);
         if (context instanceof Listener) {
             this.activityCallback = (Listener) context;
@@ -163,7 +165,7 @@ public class NodeFragment extends Fragment
 
     private void updateSelectedNodeLayout() {
         // If recycler view has not been rendered yet
-        if(rvNodes.getLayoutManager().getItemCount() <= 0)
+        if(Objects.requireNonNull(rvNodes.getLayoutManager()).getItemCount() <= 0)
             return;
 
         NodeInfo selectedNode = activityCallback.getNode();
@@ -256,7 +258,7 @@ public class NodeFragment extends Fragment
     }
 
     @Override
-    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
+    public void onCreateOptionsMenu(@NonNull Menu menu, MenuInflater inflater) {
         inflater.inflate(R.menu.node_menu, menu);
         super.onCreateOptionsMenu(menu, inflater);
     }
@@ -308,13 +310,13 @@ public class NodeFragment extends Fragment
         };
 
         if(!nodeInfo.isUserDefined()) {
-            MaterialAlertDialogBuilder builder = new MaterialAlertDialogBuilder(getContext(), R.style.MaterialAlertDialogCustom);
+            MaterialAlertDialogBuilder builder = new MaterialAlertDialogBuilder(requireContext(), R.style.MaterialAlertDialogCustom);
             builder.setMessage("Default nodes cannot be deleted.")
                     .setTitle(nodeInfo.getName())
                     .setPositiveButton(getString(R.string.label_ok), dialogClickListener)
                     .show();
         } else {
-            MaterialAlertDialogBuilder builder = new MaterialAlertDialogBuilder(getContext(), R.style.MaterialAlertDialogCustom);
+            MaterialAlertDialogBuilder builder = new MaterialAlertDialogBuilder(requireContext(), R.style.MaterialAlertDialogCustom);
             builder.setMessage("Do you really want to delete this node?")
                     .setTitle(nodeInfo.getName())
                     .setPositiveButton(getString(R.string.details_alert_yes), dialogClickListener)
@@ -328,7 +330,7 @@ public class NodeFragment extends Fragment
     public void onSelectNode(final View view, final NodeInfo nodeInfo) {
         Timber.d("onSelecteNode");
 
-        MaterialAlertDialogBuilder builder = new MaterialAlertDialogBuilder(getActivity(), R.style.MaterialAlertDialogCustom);
+        MaterialAlertDialogBuilder builder = new MaterialAlertDialogBuilder(requireActivity(), R.style.MaterialAlertDialogCustom);
         builder.setMessage(getString(R.string.change_remote_node_conf, nodeInfo.getName()))
                 .setCancelable(true)
                 .setPositiveButton(getString(R.string.details_alert_yes), new DialogInterface.OnClickListener() {
@@ -343,7 +345,7 @@ public class NodeFragment extends Fragment
                             Config.write(Config.CONFIG_KEY_USER_SELECTED_NODE, nodeInfo.toNodeString());
                         }
                         else {
-                            MaterialAlertDialogBuilder builder = new MaterialAlertDialogBuilder(getActivity(), R.style.MaterialAlertDialogCustom);
+                            MaterialAlertDialogBuilder builder = new MaterialAlertDialogBuilder(requireActivity(), R.style.MaterialAlertDialogCustom);
                             builder.setMessage(getString(R.string.status_wallet_node_invalid))
                                     .setCancelable(true)
                                     .setNegativeButton(getString(R.string.label_ok), null)

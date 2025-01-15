@@ -83,6 +83,7 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.math.BigDecimal;
 import java.math.BigInteger;
+import java.math.RoundingMode;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.SocketTimeoutException;
@@ -208,10 +209,10 @@ public class Helper {
         // a Java bug does not strip zeros properly if the value is 0
         if (amount == 0) return "0.00";
         BigDecimal d = getDecimalAmount(amount)
-                .setScale(maxDecimals, BigDecimal.ROUND_HALF_UP)
+                .setScale(maxDecimals, RoundingMode.HALF_UP)
                 .stripTrailingZeros();
         if (d.scale() < 2)
-            d = d.setScale(2, BigDecimal.ROUND_UNNECESSARY);
+            d = d.setScale(2, RoundingMode.UNNECESSARY);
         return d.toPlainString();
     }
 
@@ -219,7 +220,7 @@ public class Helper {
         // at this point selection is XLA in case of error
         String displayB;
         if (isCrypto) {
-            if ((amount >= 0) || (amount == 0)) {
+            if (amount >= 0) {
                 displayB = String.format(Locale.US, "%,.2f", amount);
             } else {
                 displayB = null;
@@ -323,8 +324,8 @@ public class Helper {
         final ClipboardManager clipboardManager = (ClipboardManager) context.getSystemService(Context.CLIPBOARD_SERVICE);
         try {
             if (clipboardManager.hasPrimaryClip()
-                    && clipboardManager.getPrimaryClipDescription().hasMimeType(ClipDescription.MIMETYPE_TEXT_PLAIN)) {
-                final ClipData.Item item = clipboardManager.getPrimaryClip().getItemAt(0);
+                    && Objects.requireNonNull(clipboardManager.getPrimaryClipDescription()).hasMimeType(ClipDescription.MIMETYPE_TEXT_PLAIN)) {
+                final ClipData.Item item = Objects.requireNonNull(clipboardManager.getPrimaryClip()).getItemAt(0);
                 return item.getText().toString();
             }
         } catch (NullPointerException ex) {

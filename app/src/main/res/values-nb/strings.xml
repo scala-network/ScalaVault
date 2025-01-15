@@ -1,6 +1,6 @@
-<resources>
+<resources xmlns:tools="http://schemas.android.com/tools" tools:locale="nb">
     <string name="wallet_activity_name">Lommebok</string>
-
+    <string name="menu_mobileminer">Mobil Miner</string>
     <string name="menu_about">Om</string>
     <string name="menu_privacy">Personvernserklæring</string>
 
@@ -189,7 +189,7 @@
     <string name="generate_wallet_created">Lommebok lagd</string>
 
     <string name="generate_restoreheight_error">Skriv inn nummer eller dato (ÅÅÅÅ-MM-DD)</string>
-
+    <string name="generate_restoreheight_min_error">Dato må være større enn eller lik %1$s</string>
     <string name="generate_wallet_type_key">Nøkler</string>
     <string name="generate_wallet_type_new">Ny</string>
     <string name="generate_wallet_type_seed">Seed</string>
@@ -276,9 +276,13 @@
     <string name="receive_amount_nan">XLA ikke et tall</string>
 
     <string name="details_alert_message">Sensitive data vil nå bli vist.\nSe over skulderen din!</string>
+    <string name="details_alert_yes">Aksepter</string>
+    <string name="details_alert_no">Avbryt</string>
     <string name="details_title">Detaljer</string>
 
     <string name="archive_alert_message">Lommeboka vil bli backa opp og så sletta!</string>
+    <string name="archive_alert_yes">Aksepter</string>
+    <string name="archive_alert_no">Avbryt</string>
 
     <string name="fab_create_new">Lag ny lommebok</string>
     <string name="fab_restore_viewonly">Gjenoprett bare-se lommebok</string>
@@ -295,6 +299,7 @@
 
     <string name="menu_language">Language</string>
     <string name="language_system_default">Use System Language</string>
+    <string name="menu_nodes">Fjernnoder</string>
 
     <string name="fab_restore_ledger">Restore from Ledger Nano S</string>
 
@@ -360,6 +365,8 @@
     <string name="node_nobookmark">Automatically bookmarked best %1$d nodes</string>
     <string name="label_test">Test</string><!--note: as in "Test a network connection"-->
 
+    <string name="remote_nodes_subtitle">Dra nedover for å skanne og automatisk velge den beste tilgjengelige noden</string>
+    <string name="change_remote_node_conf">Endre fjernnode til %1$s?</string>
     <string name="send_address_resolve_bip70">Resolving Payment URI&#8230;</string>
     <string name="send_address_not_bip70">Could not resolve Payment URI</string>
     <string name="send_address_bip70">Resolved Payment URI &#x2714;</string>

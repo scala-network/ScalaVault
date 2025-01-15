@@ -24,5 +24,5 @@ package io.scalaproject.vault;
 import io.scalaproject.vault.data.BarcodeData;
 
 public interface OnUriScannedListener {
-    boolean onUriScanned(BarcodeData barcodeData);
+    void onUriScanned(BarcodeData barcodeData);
 }

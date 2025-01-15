@@ -1,7 +1,6 @@
-<?xml version="1.0"?>
-<resources>
+<resources xmlns:tools="http://schemas.android.com/tools" tools:locale="sv">
     <string name="wallet_activity_name">Plånbok</string>
-
+    <string name="menu_mobileminer">Mobil gruvarbetare</string>
     <string name="menu_about">Om</string>
     <string name="menu_privacy">Sekretesspolicy</string>
 
@@ -170,7 +169,7 @@
     <string name="generate_wallet_created">Plånboken skapades</string>
 
     <string name="generate_restoreheight_error">Ange ett tal eller ett datum (ÅÅÅÅ-MM-DD)</string>
-
+    <string name="generate_restoreheight_min_error">Datum måste vara större än eller lika med %1$s</string>
     <string name="generate_wallet_type_key">Nycklar</string>
     <string name="generate_wallet_type_new">Nytt</string>
     <string name="generate_wallet_type_seed">Startvärde</string>
@@ -257,9 +256,13 @@
     <string name="receive_amount_nan">XLA är inte ett tal</string>
 
     <string name="details_alert_message">Nu kommer känsliga data att visas.\nTitta över axeln!</string>
+    <string name="details_alert_yes">Acceptera</string>
+    <string name="details_alert_no">Avbryt</string>
     <string name="details_title">Detaljer</string>
 
     <string name="archive_alert_message">Plånboken kommer att säkerhetskopieras och sedan tas bort!</string>
+    <string name="archive_alert_yes">Acceptera</string>
+    <string name="archive_alert_no">Avbryt</string>
 
     <string name="fab_create_new">Skapa ny plånbok</string>
     <string name="fab_restore_viewonly">Återställ granskningsplånbok</string>
@@ -279,6 +282,7 @@
 
     <string name="menu_language">Språk</string>
     <string name="language_system_default">Använd systemets språk</string>
+    <string name="menu_nodes">Fjärrnoder</string>
 
     <string name="fab_restore_ledger">Återställ från Ledger Nano S</string>
 
@@ -344,6 +348,8 @@
     <string name="node_nobookmark">Automatically bookmarked best %1$d nodes</string>
     <string name="label_test">Test</string><!--note: as in "Test a network connection"-->
 
+    <string name="remote_nodes_subtitle">Dra ner för att skanna och automatiskt välja den bästa tillgängliga noden</string>
+    <string name="change_remote_node_conf">Ändra fjärrnod till %1$s?</string>
     <string name="send_address_resolve_bip70">Resolving Payment URI&#8230;</string>
     <string name="send_address_not_bip70">Could not resolve Payment URI</string>
     <string name="send_address_bip70">Resolved Payment URI &#x2714;</string>

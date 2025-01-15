@@ -1,4 +1,4 @@
-<resources>
+<resources xmlns:tools="http://schemas.android.com/tools" tools:locale="es">
     <string name="wallet_activity_name">Monedero</string>
     <string name="menu_mobileminer">Minero Móvil</string>
 

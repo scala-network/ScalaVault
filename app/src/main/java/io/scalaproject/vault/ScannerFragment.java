@@ -24,6 +24,8 @@ package io.scalaproject.vault;
 import android.content.Context;
 import android.os.Bundle;
 import android.os.Handler;
+
+import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -52,7 +54,7 @@ public class ScannerFragment extends Fragment implements ZXingScannerView.Result
     private ZXingScannerView mScannerView;
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+    public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         Timber.d("onCreateView");
         mScannerView = new ZXingScannerView(getActivity());
         return mScannerView;
@@ -101,7 +103,7 @@ public class ScannerFragment extends Fragment implements ZXingScannerView.Result
     }
 
     @Override
-    public void onAttach(Context context) {
+    public void onAttach(@NonNull Context context) {
         super.onAttach(context);
         if (context instanceof OnScannedListener) {
             this.onScannedListener = (OnScannedListener) context;

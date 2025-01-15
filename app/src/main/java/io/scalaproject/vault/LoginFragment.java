@@ -59,6 +59,7 @@ import java.io.File;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import java.util.Objects;
 import java.util.Set;
 
 import timber.log.Timber;
@@ -240,6 +241,7 @@ public class LoginFragment extends Fragment implements WalletInfoAdapter.OnInter
         activityCallback.onWalletSelected(name, stealthMode);
     }
 
+    @SuppressLint("NonConstantResourceId")
     @Override
     public boolean onContextInteraction(MenuItem item, WalletManager.WalletInfo listItem) {
         switch (item.getItemId()) {
@@ -267,6 +269,7 @@ public class LoginFragment extends Fragment implements WalletInfoAdapter.OnInter
         return true;
     }
 
+    @SuppressLint("NotifyDataSetChanged")
     public void loadList() {
         Timber.d("loadList");
 
@@ -296,7 +299,7 @@ public class LoginFragment extends Fragment implements WalletInfoAdapter.OnInter
         }
 
         // remove information of non-existent wallet
-        Set<String> removedWallets = getActivity()
+        Set<String> removedWallets = requireActivity()
                 .getSharedPreferences(KeyStoreHelper.SecurityConstants.WALLET_PASS_PREFS_NAME, Context.MODE_PRIVATE)
                 .getAll().keySet();
 
@@ -406,6 +409,7 @@ public class LoginFragment extends Fragment implements WalletInfoAdapter.OnInter
         }
     }
 
+    @SuppressLint("NonConstantResourceId")
     @Override
     public void onClick(View v) {
         int id = v.getId();
@@ -544,6 +548,7 @@ public class LoginFragment extends Fragment implements WalletInfoAdapter.OnInter
         }
     }
 
+    @SuppressLint("UseCompatLoadingForDrawables")
     private void showNode(NodeInfo nodeInfo) {
         tvNodeName.setText(nodeInfo.getName());
         ibNode.setVisibility(View.VISIBLE);

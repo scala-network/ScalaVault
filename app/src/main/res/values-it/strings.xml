@@ -1,6 +1,7 @@
-<resources>
+<resources xmlns:tools="http://schemas.android.com/tools" tools:locale="it">
     <string name="wallet_activity_name">Portafoglio</string>
 
+    <string name="menu_mobileminer">Mobile Miner</string>
     <string name="menu_about">Informazioni</string>
     <string name="menu_privacy">Politiche Privacy</string>
 
@@ -186,7 +187,7 @@
     <string name="generate_wallet_created">Portafoglio creato</string>
 
     <string name="generate_restoreheight_error">Inserisci un numero o una data (AAAA-MM-GG)</string>
-
+    <string name="generate_restoreheight_min_error">La data deve essere maggiore o uguale a %1$s</string>
     <string name="generate_wallet_type_key">Chiavi</string>
     <string name="generate_wallet_type_new">Nuovo</string>
     <string name="generate_wallet_type_seed">Seed</string>
@@ -273,9 +274,13 @@
     <string name="receive_amount_nan">XLA non è un numero</string>
 
     <string name="details_alert_message">Verranno ora mostrati dati sensibili.\nGuardati alle spalle!</string>
+    <string name="details_alert_yes">Accetta</string>
+    <string name="details_alert_no">Annulla</string>
     <string name="details_title">Dettagli</string>
 
     <string name="archive_alert_message">Il portafoglio verrà archiviato e poi eliminato!</string>
+    <string name="archive_alert_yes">Accetta</string>
+    <string name="archive_alert_no">Annulla</string>
 
     <string name="fab_create_new">Crea un nuovo portafoglio</string>
     <string name="fab_restore_viewonly">Recupera un portafoglio solo-visualizzazione</string>
@@ -292,6 +297,7 @@
 
     <string name="menu_language">Lingua</string>
     <string name="language_system_default">Usa lingua di sistema</string>
+    <string name="menu_nodes">Nodi Remoti</string>
 
     <string name="fab_restore_ledger">Ripristina da Ledger Nano S</string>
 
@@ -357,6 +363,8 @@
     <string name="node_nobookmark">Aggiunti automaticamente ai segnalibri i %1$d nodi migliori</string>
     <string name="label_test">Effettua Test</string><!--note: as in "Test a network connection"-->
 
+    <string name="remote_nodes_subtitle">Scorri verso il basso per eseguire la scansione e selezionare automaticamente il nodo migliore disponibile</string>
+    <string name="change_remote_node_conf">Cambiare nodo remoto a %1$s?</string>
     <string name="send_address_resolve_bip70">Risolvendo URI pagamento&#8230;</string>
     <string name="send_address_not_bip70">Impossibile risolvere pagamento URI</string>
     <string name="send_address_bip70">Risolto URI pagamento&#x2714;</string>

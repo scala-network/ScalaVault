@@ -153,6 +153,7 @@ public class ReceiveFragment extends Fragment {
         });
 
         final EditText notesEdit = etNotes.getEditText();
+        assert notesEdit != null;
         notesEdit.setRawInputType(InputType.TYPE_CLASS_TEXT);
         notesEdit.setOnEditorActionListener(new TextView.OnEditorActionListener() {
             public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {

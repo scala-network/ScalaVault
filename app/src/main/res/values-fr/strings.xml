@@ -1,6 +1,6 @@
-<resources>
+<resources xmlns:tools="http://schemas.android.com/tools" tools:locale="fr">
     <string name="wallet_activity_name">Portefeuille</string>
-
+    <string name="menu_mobileminer">Mineur mobile</string>
     <string name="menu_about">À Propos</string>
     <string name="menu_privacy">Politique de Confidentialité</string>
 
@@ -192,7 +192,7 @@
     <string name="generate_wallet_created">Portefeuille créé</string>
 
     <string name="generate_restoreheight_error">Entrer un nombre ou une date (YYYY-MM-DD)</string>
-
+    <string name="generate_restoreheight_min_error">La date doit être supérieure ou égale à %1$s</string>
     <string name="generate_wallet_type_key">Clefs</string>
     <string name="generate_wallet_type_new">Nouveau</string>
     <string name="generate_wallet_type_seed">Phrase mnémonique</string>
@@ -279,9 +279,13 @@
     <string name="receive_amount_nan">XLA pas un nombre</string>
 
     <string name="details_alert_message">Des données sensible vont être affichées.\nRegardez autour de vous !</string>
+    <string name="details_alert_yes">Accepter</string>
+    <string name="details_alert_no">Annuler</string>
     <string name="details_title">Détails</string>
 
     <string name="archive_alert_message">Le portefeuille sera sauvegardé puis supprimé !</string>
+    <string name="archive_alert_yes">Accepter</string>
+    <string name="archive_alert_no">Annuler</string>
 
     <string name="fab_create_new">Créer un nouveau portefeuille</string>
     <string name="fab_restore_viewonly">Restaurer un portefeuille d\'audit</string>
@@ -323,6 +327,7 @@
 
     <string name="menu_language">Langue</string>
     <string name="language_system_default">Utiliser la Langue du Système</string>
+    <string name="menu_nodes">Nœuds Distants</string>
 
     <string name="receive_desc_hint">Description (optionnelle)</string>
 
@@ -363,6 +368,8 @@
     <string name="node_nobookmark">%1$d meilleurs nœuds mis en favoris automatiquement</string>
     <string name="label_test">Tester</string><!--note: as in "Test a network connection"-->
 
+    <string name="remote_nodes_subtitle">Faites glisser vers le bas pour scanner et sélectionner automatiquement le meilleur nœud disponible</string>
+    <string name="change_remote_node_conf">Changer le nœud distant vers %1$s ?</string>
     <string name="send_address_resolve_bip70">Résolution de l\'URI de Paiement&#8230;</string>
     <string name="send_address_not_bip70">Résolution de l\'URI de Paiement impossible</string>
     <string name="send_address_bip70">URI de Paiement Résolue &#x2714;</string>

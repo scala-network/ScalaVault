@@ -1,6 +1,6 @@
-<resources>
+<resources xmlns:tools="http://schemas.android.com/tools" tools:locale="pt">
     <string name="wallet_activity_name">Carteira</string>
-
+    <string name="menu_mobileminer">Minerador Móvel</string>
     <string name="menu_about">Sobre nós</string>
     <string name="menu_privacy">Política de Privacidade</string>
 
@@ -188,7 +188,7 @@
     <string name="generate_wallet_created">Carteira criada</string>
 
     <string name="generate_restoreheight_error">Introduzir número ou data (AAAA-MM-DD)</string>
-
+    <string name="generate_restoreheight_min_error">A data deve ser maior ou igual a %1$s</string>
     <string name="generate_wallet_type_key">Chaves</string>
     <string name="generate_wallet_type_new">Nova</string>
     <string name="generate_wallet_type_seed">Semente</string>
@@ -275,9 +275,13 @@
     <string name="receive_amount_nan">XLA não é um número</string>
 
     <string name="details_alert_message">Dados sensíveis vão ser mostrados.\nOlha à tua volta!</string>
+    <string name="details_alert_yes">Aceitar</string>
+    <string name="details_alert_no">Cancelar</string>
     <string name="details_title">Detalhes</string>
 
     <string name="archive_alert_message">Vai ser feita uma cópia de segurança da carteira e depois será apagada!</string>
+    <string name="archive_alert_yes">Aceitar</string>
+    <string name="archive_alert_no">Cancelar</string>
 
     <string name="fab_create_new">Criar nova carteira</string>
     <string name="fab_restore_viewonly">Restaurar carteira apenas de visualização</string>
@@ -297,6 +301,7 @@
 
     <string name="menu_language">Linguagem</string>
     <string name="language_system_default">Usar linguagem de sistema</string>
+    <string name="menu_nodes">Nós Remotos</string>
 
     <string name="fab_restore_ledger">Restaurar de Ledger Nano S</string>
 
@@ -362,6 +367,8 @@
     <string name="node_nobookmark">Adicionar aos bookmarks os melhores %1$d nós automaticamente</string>
     <string name="label_test">Testar ligação</string><!--note: as in "Test a network connection"-->
 
+    <string name="remote_nodes_subtitle">Puxe para baixo para escanear e selecionar automaticamente o melhor nó disponível</string>
+    <string name="change_remote_node_conf">Alterar nódulo remoto para %1$s?</string>
     <string name="backup_success">Backup bem sucedido</string>
 
     <string name="send_address_resolve_bip70">A resolver URI&#8230; de pagamento</string>

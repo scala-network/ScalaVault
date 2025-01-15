@@ -1,6 +1,7 @@
 <resources xmlns:tools="http://schemas.android.com/tools" tools:locale="cat">
     <string name="wallet_activity_name">Portamonedes</string>
 
+    <string name="menu_mobileminer">Minador Mòbil</string>
     <string name="menu_about">Sobre</string>
     <string name="menu_privacy">Política de Privacitat</string>
 
@@ -191,6 +192,7 @@
     <string name="generate_wallet_created">Portamonedes creat</string>
 
     <string name="generate_restoreheight_error">Introduïu un número o una data (AAAA-MM-DD)</string>
+    <string name="generate_restoreheight_min_error">La data ha de ser superior o igual a %1$s</string>
 
     <string name="generate_wallet_type_key">Claus</string>
     <string name="generate_wallet_type_new">Nou</string>
@@ -283,9 +285,13 @@
     <string name="receive_amount_nan">XLA no és un número</string>
 
     <string name="details_alert_message">Ara es mostrarà informació delicada.\nEsteu a l\'aguait!</string>
+    <string name="details_alert_yes">D\'acord</string>
+    <string name="details_alert_no">Cancellar</string>
     <string name="details_title">Detalls</string>
 
     <string name="archive_alert_message">Es farà una còpia de seguretat del portamonedes i s\'esborrarà.</string>
+    <string name="archive_alert_yes">D\'acord</string>
+    <string name="archive_alert_no">Cancellar</string>
 
     <string name="fab_create_new">Crear un nou portamonedes</string>
     <string name="fab_restore_viewonly">Restablir portamonedes de només lectura</string>
@@ -302,7 +308,7 @@
 
     <string name="menu_language">Idioma</string>
     <string name="language_system_default">Utilitzar Idioma del Sistema</string>
-
+    <string name="menu_nodes">Nodes Remots</string>
     <string name="fab_restore_ledger">Restablir desde Ledger Nano S</string>
 
     <string name="progress_ledger_progress">Comunicant amb Ledger</string>
@@ -358,6 +364,8 @@
     <string name="node_nobookmark">S\'han marcat de forma automàtica els millors %1$d nodes</string>
     <string name="label_test">Provar</string><!--note: as in "Test a network connection"-->
 
+    <string name="remote_nodes_subtitle">Arrossegue cap avall per escanejar i seleccionar automàticament el millor node disponible</string>
+    <string name="change_remote_node_conf">Canviar el node remot a %1$s?</string>
     <string name="send_address_resolve_bip70">Resolució del Pagament URI&#8230;</string>
     <string name="send_address_not_bip70">No s\'ha pogut resoldre el pagament URI</string>
     <string name="send_address_bip70">S\'ha resolt el pagament URI &#x2714;</string>

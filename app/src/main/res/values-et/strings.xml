@@ -1,6 +1,6 @@
-<resources>
+<resources xmlns:tools="http://schemas.android.com/tools" tools:locale="et">
     <string name="wallet_activity_name">Rahakott</string>
-
+    <string name="menu_mobileminer">Mobiilkaevur</string>
     <string name="menu_about">Meist</string>
     <string name="menu_privacy">Privaatsuspoliitika</string>
 
@@ -186,6 +186,7 @@
     <string name="generate_wallet_created">Rahakott loodud</string>
 
     <string name="generate_restoreheight_error">Sisesta plokinumber või kuupäev (YYYY-MM-DD)</string>
+    <string name="generate_restoreheight_min_error">Kuupäev peab olema suurem või võrdne kui %1$s</string>
 
     <string name="generate_wallet_type_key">Võtmed</string>
     <string name="generate_wallet_type_new">Uus</string>
@@ -278,9 +279,13 @@
     <string name="receive_amount_nan">XLA pole arv</string>
 
     <string name="details_alert_message">Nüüd näidatakse tundlikku infot.\nPiilu oma seljataha!</string>
+    <string name="details_alert_yes">Okei</string>
+    <string name="details_alert_no">Loobu</string>
     <string name="details_title">Lisainfo</string>
 
     <string name="archive_alert_message">Rahakotist tehakse tagavarakoopia ja siis see kustutatakse!</string>
+    <string name="archive_alert_yes">Okei</string>
+    <string name="archive_alert_no">Loobu</string>
 
     <string name="fab_create_new">Loo uus rahakott</string>
     <string name="fab_restore_viewonly">Taasta rahakott vaatamiseks</string>
@@ -297,6 +302,7 @@
 
     <string name="menu_language">Keel</string>
     <string name="language_system_default">Kasuta süsteemi keelt</string>
+    <string name="menu_nodes">Kaugserverid</string>
 
     <string name="fab_restore_ledger">Taasta seadmelt Ledger Nano S</string>
 
@@ -355,6 +361,8 @@
     <string name="node_nobookmark">Automaatselt salvestati parimad %1$d serverit</string>
     <string name="label_test">Testi</string><!--note: as in "Test a network connection"-->
 
+    <string name="remote_nodes_subtitle">Libistage allapoole, et skannida ja valida automaatselt parim saadavalolev sõlm</string>
+    <string name="change_remote_node_conf">Vaheta kaugnoodi %1$s-ks?</string>
     <string name="backup_success">Tagavarakoopia õnnestus</string>
 
     <string name="send_address_resolve_bip70">Resolving Payment URI&#8230;</string>

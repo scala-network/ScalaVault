@@ -283,15 +283,13 @@ public class SendFragment extends Fragment
     }
 
     @Override
-    public boolean onUriScanned(BarcodeData barcodeData) {
+    public void onUriScanned(BarcodeData barcodeData) {
         if (spendViewPager.getCurrentItem() == SpendPagerAdapter.POS_ADDRESS) {
             final SendWizardFragment fragment = pagerAdapter.getFragment(SpendPagerAdapter.POS_ADDRESS);
             if (fragment instanceof SendAddressWizardFragment) {
                 ((SendAddressWizardFragment) fragment).processScannedData(barcodeData);
-                return true;
             }
         }
-        return false;
     }
 
     enum Mode {

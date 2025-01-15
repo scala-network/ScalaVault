@@ -1,5 +1,6 @@
 <resources xmlns:tools="http://schemas.android.com/tools" tools:locale="zh">
     <string name="wallet_activity_name">钱包</string>
+    <string name="menu_mobileminer">移动矿机</string>
     <string name="menu_about">关于我们</string>
     <string name="menu_privacy">隐私政策</string>
     <string name="menu_share">分享</string>

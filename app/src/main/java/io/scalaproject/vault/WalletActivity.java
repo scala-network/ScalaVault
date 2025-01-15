@@ -74,6 +74,7 @@ import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
+import java.util.Objects;
 import java.util.Set;
 
 import timber.log.Timber;
@@ -245,6 +246,7 @@ public class WalletActivity extends BaseActivity implements WalletFragment.Liste
                     getSupportFragmentManager().findFragmentByTag(WalletFragment.class.getName());
             getWallet().rescanBlockchainAsync();
             synced = false;
+            assert walletFragment != null;
             walletFragment.unsync();
             invalidateOptionsMenu();
         } catch (ClassCastException ex) {
@@ -256,6 +258,7 @@ public class WalletActivity extends BaseActivity implements WalletFragment.Liste
     private void initWalletFragmentName(String walletName) {
         final WalletFragment walletFragment = (WalletFragment)
                 getSupportFragmentManager().findFragmentByTag(WalletFragment.class.getName());
+        assert walletFragment != null;
         walletFragment.initWalletName(walletName);
     }
 
@@ -386,6 +389,7 @@ public class WalletActivity extends BaseActivity implements WalletFragment.Liste
         try {
             onBackPressed();
         } catch (ClassCastException ex) {
+            Timber.d(ex.getLocalizedMessage());
         }
     }
 
@@ -472,6 +476,7 @@ public class WalletActivity extends BaseActivity implements WalletFragment.Liste
         try {
             GenerateReviewFragment detailsFragment = (GenerateReviewFragment)
                     getSupportFragmentManager().findFragmentById(R.id.fragment_container);
+            assert detailsFragment != null;
             AlertDialog dialog = detailsFragment.createChangePasswordDialog();
             if (dialog != null) {
                 Helper.showKeyboard(dialog);
@@ -496,7 +501,7 @@ public class WalletActivity extends BaseActivity implements WalletFragment.Liste
         setContentView(R.layout.activity_wallet);
         toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-        getSupportActionBar().setDisplayShowTitleEnabled(false);
+        Objects.requireNonNull(getSupportActionBar()).setDisplayShowTitleEnabled(false);
 
         toolbar.setOnButtonListener(new Toolbar.OnButtonListener() {
             @Override
@@ -553,7 +558,7 @@ public class WalletActivity extends BaseActivity implements WalletFragment.Liste
     private WalletService mBoundService = null;
     private boolean mIsBound = false;
 
-    private ServiceConnection mConnection = new ServiceConnection() {
+    private final ServiceConnection mConnection = new ServiceConnection() {
         public void onServiceConnected(ComponentName className, IBinder service) {
             // This is called when the connection with the service has been
             // established, giving us the service object we can use to
@@ -770,13 +775,12 @@ public class WalletActivity extends BaseActivity implements WalletFragment.Liste
 
     @Override
     public void onWalletOpen(final Wallet.Device device) {
-        switch (device) {
-            case Device_Ledger:
-                runOnUiThread(new Runnable() {
-                    public void run() {
-                        showLedgerProgressDialog(LedgerProgressDialog.TYPE_RESTORE);
-                    }
-                });
+        if (Objects.requireNonNull(device) == Wallet.Device.Device_Ledger) {
+            runOnUiThread(new Runnable() {
+                public void run() {
+                    showLedgerProgressDialog(LedgerProgressDialog.TYPE_RESTORE);
+                }
+            });
         }
     }
 

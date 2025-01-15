@@ -1,6 +1,6 @@
-<resources>
+<resources xmlns:tools="http://schemas.android.com/tools" tools:locale="el">
     <string name="wallet_activity_name">Πορτοφόλι</string>
-
+    <string name="menu_mobileminer">Φορητός εξορυκτής</string>
     <string name="menu_about">Σχετικά</string>
     <string name="menu_privacy">Πολιτική Απορρήτου</string>
 
@@ -165,7 +165,7 @@
     <string name="generate_wallet_created">Το Πορτοφόλι δημιουργήθηκε</string>
 
     <string name="generate_restoreheight_error">Βάλε αριθμό ή ημερομηνία (YYYY-MM-DD δλδ χρονιά-μήνας-μέρα)</string>
-
+    <string name="generate_restoreheight_min_error">Ημερομηνία πρέπει να είναι μεγαλύτερη ή ίση με %1$s</string>
     <string name="generate_wallet_type_key">Κλειδιά</string>
     <string name="generate_wallet_type_new">Νέο</string>
     <string name="generate_wallet_type_seed">Σπόρος</string>
@@ -251,9 +251,13 @@
     <string name="receive_amount_nan">XLA δεν υπάρχει αριθμός</string>
 
     <string name="details_alert_message">Θα εμφανιστούν τώρα ευαίσθητα δεδομένα. \nΠρόσεχε ποιος είναι πίσω σου!</string>
+    <string name="details_alert_yes">Αποδοχή</string>
+    <string name="details_alert_no">Ακύρωση</string>
     <string name="details_title">Λεπτομέρειες</string>
 
     <string name="archive_alert_message">Το πορτοφόλι θα δημιουργήσει αντίγραφο ασφαλείας και στη συνέχεια θα διαγραφεί!</string>
+    <string name="archive_alert_yes">Αποδοχή</string>
+    <string name="archive_alert_no">Ακύρωση</string>
 
     <string name="fab_create_new">Δημιουργία νέου πορτοφολιού</string>
     <string name="fab_restore_viewonly">Επαναφορά πορτοφολιού προβολής-μόνο</string>
@@ -295,6 +299,7 @@
 
     <string name="menu_language">Language</string>
     <string name="language_system_default">Use System Language</string>
+    <string name="menu_nodes">Απομακρυσμένοι Κόμβοι</string>
 
     <string name="fab_restore_ledger">Restore from Ledger Nano S</string>
 
@@ -360,6 +365,8 @@
     <string name="node_nobookmark">Automatically bookmarked best %1$d nodes</string>
     <string name="label_test">Test</string><!--note: as in "Test a network connection"-->
 
+    <string name="remote_nodes_subtitle">Σύρετε προς τα κάτω για να σαρώσετε και να επιλέξετε αυτόματα τον καλύτερο διαθέσιμο κόμβο</string>
+    <string name="change_remote_node_conf">Αλλαγή απομακρυσμένου κόμβου σε %1$s;</string>
     <string name="send_address_resolve_bip70">Resolving Payment URI&#8230;</string>
     <string name="send_address_not_bip70">Could not resolve Payment URI</string>
     <string name="send_address_bip70">Resolved Payment URI &#x2714;</string>
@@ -387,7 +394,7 @@
     <string name="privacy_policy_label">Privacy Policy</string>
     <string name="primary_address">Primary Address</string>
     <string name="mm_url">https://github.com/scala-network/MobileMiner/releases</string>
-    <string name="connection_remote_daemon">Connecting to remote node...</string>
+    <string name="connection_remote_daemon">Connecting to remote node…</string>
     <string name="remote_nodes">Remote Nodes</string>
     <string name="address_book">Address Book</string>
     <string name="delete_contact_conf">Delete entry %1$s?</string>

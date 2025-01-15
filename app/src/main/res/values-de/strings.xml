@@ -1,6 +1,7 @@
-<resources>
+<resources xmlns:tools="http://schemas.android.com/tools" tools:locale="de">
     <string name="wallet_activity_name">Wallet</string>
 
+    <string name="menu_mobileminer">Mobiler Miner</string>
     <string name="menu_about">Über</string>
     <string name="menu_privacy">Datenschutzerklärung</string>
 
@@ -190,6 +191,7 @@
     <string name="generate_wallet_created">Wallet erstellt</string>
 
     <string name="generate_restoreheight_error">Gib eine Blocknummer oder ein Datum (JJJJ-MM-TT) ein</string>
+    <string name="generate_restoreheight_min_error">Datum muss größer oder gleich %1$s sein</string>
 
     <string name="generate_wallet_type_key">Schlüssel</string>
     <string name="generate_wallet_type_new">Neu</string>
@@ -277,9 +279,13 @@
     <string name="receive_amount_nan">XLA keine Nummer</string>
 
     <string name="details_alert_message">Sensible Daten werden angezeigt.\nSchau über deine Schulter!</string>
+    <string name="details_alert_yes">Akzeptieren</string>
+    <string name="details_alert_no">Abbrechen</string>
     <string name="details_title">Details</string>
 
     <string name="archive_alert_message">Das Wallet wird archiviert und dann gelöscht!</string>
+    <string name="archive_alert_yes">Akzeptieren</string>
+    <string name="archive_alert_no">Abbrechen</string>
 
     <string name="fab_create_new">Neues Wallet erstellen</string>
     <string name="fab_restore_viewonly">View-Only-Wallet wiederherstellen</string>
@@ -296,6 +302,7 @@
 
     <string name="menu_language">Sprache</string>
     <string name="language_system_default">Benutze Systemsprache</string>
+    <string name="menu_nodes">Remote-Knoten</string>
 
     <string name="fab_restore_ledger">Wallet mit Ledger Nano S wiederherstellen</string>
 
@@ -361,6 +368,8 @@
     <string name="node_nobookmark">Beste %1$d Nodes automatisch vorgemerkt</string>
     <string name="label_test">Testen</string><!--note: as in "Test a network connection"-->
 
+    <string name="remote_nodes_subtitle">Ziehen Sie nach unten, um zu scannen und automatisch den besten verfügbaren Knoten auszuwählen</string>
+    <string name="change_remote_node_conf">Fernknoten zu %1$s ändern?</string>
     <string name="send_address_resolve_bip70">Löse Zahlungs-URI auf&#8230;</string>
     <string name="send_address_not_bip70">Konnte Zahlungs-URI nicht auflösen</string>
     <string name="send_address_bip70">Zahlungs-URI aufgelöst &#x2714;</string>

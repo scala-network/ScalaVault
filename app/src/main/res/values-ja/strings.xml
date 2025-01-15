@@ -1,7 +1,7 @@
 <resources xmlns:tools="http://schemas.android.com/tools" tools:locale="ja">
     <string name="app_name" translatable="false">Scala Vault</string>
     <string name="wallet_activity_name">ウォレット</string>
-
+    <string name="menu_mobileminer">モバイルマイナー</string>
     <string name="menu_about">Scala Vaultについて</string>
     <string name="menu_privacy">プライバシーポリシー</string>
 
@@ -190,7 +190,7 @@
     <string name="generate_wallet_created">ウォレットが作成されました</string>
 
     <string name="generate_restoreheight_error">数字か日付（年4桁-月2桁-日2桁）を入力してください</string>
-
+    <string name="generate_restoreheight_min_error">日付は %1$s 以上である必要があります</string>
     <string name="generate_wallet_type_key">キー</string>
     <string name="generate_wallet_type_new">新規</string>
     <string name="generate_wallet_type_seed">シード</string>
@@ -284,9 +284,13 @@
     <string name="receive_amount_nan">XLA が数字ではありません</string>
 
     <string name="details_alert_message">機密データは表示されません\n背後に人がいないことを確認してください!</string>
+    <string name="details_alert_yes">受け入れる</string>
+    <string name="details_alert_no">キャンセル</string>
     <string name="details_title">詳細</string>
 
     <string name="archive_alert_message">ウォレットはバックアップされてから削除されます!</string>
+    <string name="archive_alert_yes">受け入れる</string>
+    <string name="archive_alert_no">キャンセル</string>
 
     <string name="fab_create_new">新しいウォレットの作成</string>
     <string name="fab_restore_viewonly">閲覧専用ウォレットを復元</string>
@@ -306,6 +310,7 @@
 
     <string name="menu_language">言語</string>
     <string name="language_system_default">システムの言語を使う</string>
+    <string name="menu_nodes">リモートノード</string>
 
     <string name="fab_restore_ledger">レッジャーナノSから復元</string>
 
@@ -366,6 +371,8 @@
     <string name="node_nobookmark">最良の %1$d ノードを自動でブックマークしました</string>
     <string name="label_test">テスト</string><!--note: as in "Test a network connection"-->
 
+    <string name="remote_nodes_subtitle">下にスワイプしてスキャンし、利用可能な中で最適なノードを自動的に選択します</string>
+    <string name="change_remote_node_conf">リモートノードを%1$sに変更しますか?</string>
     <string name="backup_success">バックアップ成功</string>
 
     <string name="send_address_resolve_bip70">ペイメントIDの名前解決中&#8230;</string>

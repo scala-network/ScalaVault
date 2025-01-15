@@ -1,6 +1,6 @@
-<resources>
+<resources xmlns:tools="http://schemas.android.com/tools" tools:locale="ru">
     <string name="wallet_activity_name">Кошелек</string>
-
+    <string name="menu_mobileminer">Мобильный Майнер</string>
     <string name="menu_about">О программе</string>
     <string name="menu_privacy">Политика конфиденциальности</string>
 
@@ -190,7 +190,7 @@
     <string name="generate_wallet_created">Кошелек создан</string>
 
     <string name="generate_restoreheight_error">Введите номер блока или дату (YYYY-MM-DD)</string>
-
+    <string name="generate_restoreheight_min_error">Дата должна быть больше или равна %1$s</string>
     <string name="generate_wallet_type_key">Ключ</string>
     <string name="generate_wallet_type_new">Новый</string>
     <string name="generate_wallet_type_seed">Фраза</string>
@@ -277,9 +277,13 @@
     <string name="receive_amount_nan">Не числовое значение XLA</string>
 
     <string name="details_alert_message">Сейчас будут показаны конфиденциальные данные. Оглянись вокруг!</string>
+    <string name="details_alert_yes">Принять</string>
+    <string name="details_alert_no">Отмена</string>
     <string name="details_title">Подробная информация</string>
 
     <string name="archive_alert_message">Этот кошелек будет скопирован, а затем удален!</string>
+    <string name="archive_alert_yes">Принять</string>
+    <string name="archive_alert_no">Отмена</string>
 
     <string name="fab_create_new">Создать новый кошелек</string>
     <string name="fab_restore_viewonly">Восстановить кошелек только для просмотра</string>
@@ -296,6 +300,7 @@
 
     <string name="menu_language">Язык</string>
     <string name="language_system_default">Использовать язык системы</string>
+    <string name="menu_nodes">Удаленные узлы</string>
 
     <string name="fab_restore_ledger">Восстановление из Ledger Nano S</string>
 
@@ -361,6 +366,8 @@
     <string name="node_nobookmark">Автоматически отмечены лучшие %1$d узлы</string>
     <string name="label_test">Проверка</string><!--note: as in "Test a network connection"-->
 
+    <string name="remote_nodes_subtitle">Потяните вниз, чтобы выполнить сканирование и автоматически выбрать лучший доступный узел</string>
+    <string name="change_remote_node_conf">Изменить удаленный узел на %1$s?</string>
     <string name="backup_success">Резервное копирование успешно</string>
 
     <string name="send_address_resolve_bip70">Размещение URI платежа&#8230;</string>

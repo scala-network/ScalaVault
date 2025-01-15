@@ -33,7 +33,7 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
-
+import androidx.recyclerview.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -382,6 +382,7 @@ public class WalletFragment extends Fragment
         hideExchanging();
     }
 
+    // Called from ExchangeApi
     public void exchange(final ExchangeRate exchangeRate) {
         hideExchanging();
         if (!Helper.BASE_CRYPTO.equals(exchangeRate.getBaseCurrency())) {

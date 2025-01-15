@@ -1,6 +1,7 @@
 <resources xmlns:tools="http://schemas.android.com/tools" tools:locale="sr">
 
     <string name="wallet_activity_name">Novčanik</string>
+    <string name="menu_mobileminer">Мобилни минер</string>
 
     <string name="menu_about">O nama</string>
     <string name="menu_privacy">Pravila privatnosti</string>
@@ -193,7 +194,7 @@
     <string name="generate_wallet_created">Novčanik kreiran</string>
 
     <string name="generate_restoreheight_error">Unesi broj datuma u formatu (YYYY-MM-DD)</string>
-
+    <string name="generate_restoreheight_min_error">Датум мора бити већи или једнак од %1$s</string>
     <string name="generate_wallet_type_key">Šifre</string>
     <string name="generate_wallet_type_new">Novo</string>
     <string name="generate_wallet_type_seed">Seme</string>
@@ -285,9 +286,13 @@
     <string name="receive_amount_nan">XLA nije broj</string>
 
     <string name="details_alert_message">Osetljivi podaci će biti pokazani.\nLook over your shoulder!</string>
+    <string name="details_alert_yes">Prihvati</string>
+    <string name="details_alert_no">Otkazati</string>
     <string name="details_title">Detalji</string>
 
     <string name="archive_alert_message">Novčanik će biti bekapovan a potom obrisan!</string>
+    <string name="archive_alert_yes">Prihvati</string>
+    <string name="archive_alert_no">Otkazati</string>
 
     <string name="fab_create_new">Kreiraj novi novčanik</string>
     <string name="fab_restore_viewonly">Obnovi novčanik za pregled</string>
@@ -304,6 +309,7 @@
 
     <string name="menu_language">Jezik</string>
     <string name="language_system_default">Koristi sistemski jezik</string>
+    <string name="menu_nodes">Udaljeni čvorovi</string>
 
     <string name="fab_restore_ledger">Povrati iz knjige računa nano S</string>
 
@@ -360,6 +366,8 @@
     <string name="node_nobookmark">Automatski označeni najbolji %1$d čvorovi</string>
     <string name="label_test">Testiranje</string><!--note: as in "Test a network connection"-->
 
+    <string name="remote_nodes_subtitle">Povucite prema dolje da biste skenirali i automatski odabrali najbolji dostupni čvor</string>
+    <string name="change_remote_node_conf">Promijeni udaljeni čvor na %1$s?</string>
     <string name="send_address_resolve_bip70">Rešavanje plaćanja URI&#8230;</string>
     <string name="send_address_not_bip70">Nemoguće rešavanje plaćanja URI</string>
     <string name="send_address_bip70">rešavanje plaćanja URI &#x2714;</string>

@@ -339,7 +339,7 @@ public class LoginActivity extends BaseActivity
         setContentView(R.layout.activity_login);
         toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-        getSupportActionBar().setDisplayShowTitleEnabled(false);
+        Objects.requireNonNull(getSupportActionBar()).setDisplayShowTitleEnabled(false);
 
         toolbar.setOnButtonListener(new Toolbar.OnButtonListener() {
             @Override
