@@ -23,6 +23,7 @@
 package io.scalaproject.vault.util;
 
 import android.Manifest;
+import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.Context;
 import android.content.pm.PackageManager;
@@ -49,6 +50,7 @@ public class LegacyStorageHelper {
     private final File srcDir;
     private final File dstDir;
 
+    @SuppressLint("StaticFieldLeak")
     static private Context ctx = null;
 
     LegacyStorageHelper(File src, File dest) {
@@ -152,6 +154,12 @@ public class LegacyStorageHelper {
     private static boolean isExternalStorageWritable() {
         String state = Environment.getExternalStorageState();
         return Environment.MEDIA_MOUNTED.equals(state);
+    }
+
+    // Checks if a volume containing external storage is available to at least read.
+    private boolean isExternalStorageReadable() {
+        return Environment.getExternalStorageState().equals(Environment.MEDIA_MOUNTED) ||
+                Environment.getExternalStorageState().equals(Environment.MEDIA_MOUNTED_READ_ONLY);
     }
 
     private static File getWalletRoot() {

@@ -372,7 +372,7 @@ public class SendFragment extends Fragment
         }
 
         public SendWizardFragment getFragment(int position) {
-            WeakReference ref = myFragments.get(position);
+            WeakReference<SendWizardFragment> ref = myFragments.get(position);
             if (ref != null)
                 return myFragments.get(position).get();
             else
@@ -548,7 +548,7 @@ public class SendFragment extends Fragment
     public void onTransactionSent(final String txId) {
         Timber.d("txid=%s", txId);
         pagerAdapter.addSuccess();
-        Timber.d("numPages=%d", spendViewPager.getAdapter().getCount());
+        Timber.d("numPages=%d", Objects.requireNonNull(spendViewPager.getAdapter()).getCount());
         activityCallback.setToolbarButton(Toolbar.BUTTON_NONE);
         spendViewPager.setCurrentItem(SpendPagerAdapter.POS_SUCCESS);
     }
@@ -570,7 +570,7 @@ public class SendFragment extends Fragment
     }
 
     @Override
-    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
+    public void onCreateOptionsMenu(@NonNull Menu menu, MenuInflater inflater) {
         inflater.inflate(R.menu.send_menu, menu);
         super.onCreateOptionsMenu(menu, inflater);
     }

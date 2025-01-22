@@ -423,7 +423,7 @@ public class Wallet {
             String address = getAddress(accountIndex);
             int len = address.length();
             label = address.substring(0, 6) +
-                    "\u2026" + address.substring(len - 6, len);
+                    "…" + address.substring(len - 6, len);
         }
         return label;
     }

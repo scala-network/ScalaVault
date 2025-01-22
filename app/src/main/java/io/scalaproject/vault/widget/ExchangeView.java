@@ -30,6 +30,7 @@ import com.google.android.material.textfield.TextInputLayout;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.util.AttributeSet;
+import android.util.Log;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -138,9 +139,7 @@ public class ExchangeView extends LinearLayout {
         initializeViews(context);
     }
 
-    public ExchangeView(Context context,
-                        AttributeSet attrs,
-                        int defStyle) {
+    public ExchangeView(Context context, AttributeSet attrs, int defStyle) {
         super(context, attrs, defStyle);
         initializeViews(context);
     }
@@ -151,8 +150,7 @@ public class ExchangeView extends LinearLayout {
      * @param context the current context for the view.
      */
     private void initializeViews(Context context) {
-        LayoutInflater inflater = (LayoutInflater) context
-                .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+        LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         inflater.inflate(R.layout.view_exchange, this);
     }
 
@@ -183,11 +181,7 @@ public class ExchangeView extends LinearLayout {
         setCurrencyAdapter(sCurrencyB);
 
         // make progress circle gray
-        pbExchange.getIndeterminateDrawable().
-                setColorFilter(getResources().getColor(R.color.trafficGray),
-                        android.graphics.PorterDuff.Mode.MULTIPLY);
-
-
+        pbExchange.getIndeterminateDrawable().setColorFilter(getResources().getColor(R.color.trafficGray), android.graphics.PorterDuff.Mode.MULTIPLY);
         sCurrencyA.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parentView, View selectedItemView, int position, long id) {
@@ -200,6 +194,7 @@ public class ExchangeView extends LinearLayout {
             @Override
             public void onNothingSelected(AdapterView<?> parentView) {
                 // nothing (yet?)
+                Log.d("ExchangeView", "onNothingSelected");
             }
         });
 
@@ -221,6 +216,7 @@ public class ExchangeView extends LinearLayout {
             @Override
             public void onNothingSelected(AdapterView<?> parentView) {
                 // nothing
+                Log.d("ExchangeView", "onNothingSelected");
             }
         });
 
@@ -254,10 +250,12 @@ public class ExchangeView extends LinearLayout {
 
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+                Log.d("ExchangeView", "beforeTextChanged");
             }
 
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
+                Log.d("ExchangeView", "onTextChanged");
             }
         });
     }
@@ -329,30 +327,19 @@ public class ExchangeView extends LinearLayout {
         String currencyA = (String) sCurrencyA.getSelectedItem();
         String currencyB = (String) sCurrencyB.getSelectedItem();
 
-        exchangeApi.queryExchangeRate(currencyA, currencyB,
-                new ExchangeCallback() {
-                    @Override
-                    public void onSuccess(final ExchangeRate exchangeRate) {
-                        if (isAttachedToWindow())
-                            new Handler(Looper.getMainLooper()).post(new Runnable() {
-                                @Override
-                                public void run() {
-                                    exchange(exchangeRate);
-                                }
-                            });
-                    }
+        exchangeApi.queryExchangeRate(currencyA, currencyB, new ExchangeCallback() {
+            @Override
+            public void onSuccess(final ExchangeRate exchangeRate) {
+                if (isAttachedToWindow())
+                    new Handler(Looper.getMainLooper()).post(() -> exchange(exchangeRate));
+            }
 
-                    @Override
-                    public void onError(final Exception e) {
-                        Timber.e(e.getLocalizedMessage());
-                        new Handler(Looper.getMainLooper()).post(new Runnable() {
-                            @Override
-                            public void run() {
-                                exchangeFailed();
-                            }
-                        });
-                    }
-                });
+            @Override
+            public void onError(final Exception e) {
+                Timber.e(e.getLocalizedMessage());
+                new Handler(Looper.getMainLooper()).post(() -> exchangeFailed());
+            }
+        });
     }
 
     public void exchange(double rate) {
@@ -383,6 +370,7 @@ public class ExchangeView extends LinearLayout {
     }
 
     boolean prepareExchange() {
+        Log.d("ExchangeView", "prepareExchange()");
         Timber.d("prepareExchange()");
         if (checkEnteredAmount()) {
             String enteredAmount = Objects.requireNonNull(etAmount.getEditText()).getText().toString();
@@ -424,6 +412,7 @@ public class ExchangeView extends LinearLayout {
         exchange(0);
         if (onFailedExchangeListener != null) {
             onFailedExchangeListener.onFailedExchange();
+            Log.d("ExchangeView", "onFailedExchange");
         }
     }
 

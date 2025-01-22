@@ -65,7 +65,7 @@
                 android:text="@string/generate_fingerprint_hint"
                 android:textSize="14sp" />
 
-            <Switch
+            <androidx.appcompat.widget.SwitchCompat
                 android:id="@+id/sFingerprintAuth"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent" />

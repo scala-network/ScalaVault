@@ -291,7 +291,7 @@ public class Helper {
             urlConnection.setConnectTimeout(HTTP_TIMEOUT);
             urlConnection.setReadTimeout(HTTP_TIMEOUT);
             InputStreamReader in = new InputStreamReader(urlConnection.getInputStream());
-            StringBuffer sb = new StringBuffer();
+            StringBuilder sb = new StringBuilder();
             final int BUFFER_SIZE = 512;
             char[] buffer = new char[BUFFER_SIZE];
             int length = in.read(buffer, 0, BUFFER_SIZE);
@@ -537,14 +537,10 @@ public class Helper {
             }
 
             @Override
-            public void beforeTextChanged(CharSequence s, int start,
-                                          int count, int after) {
-            }
+            public void beforeTextChanged(CharSequence s, int start,  int count, int after) { }
 
             @Override
-            public void onTextChanged(CharSequence s, int start,
-                                      int before, int count) {
-            }
+            public void onTextChanged(CharSequence s, int start, int before, int count) { }
         });
 
         // set dialog message
@@ -670,7 +666,9 @@ public class Helper {
     }
 
     static public ExchangeApi getExchangeApi() {
-        return new io.scalaproject.vault.service.exchange.krakenEcb.ExchangeApiImpl(OkHttpHelper.getOkHttpClient());
+        // This returns ecb first?
+        Log.w("HelperExchangeApi", "ExchangeApiImpl Started");
+        return new io.scalaproject.vault.service.exchange.main.ExchangeApiImpl(OkHttpHelper.getOkHttpClient());
     }
 
     public interface Action {

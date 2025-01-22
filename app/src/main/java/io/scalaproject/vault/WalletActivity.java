@@ -408,12 +408,12 @@ public class WalletActivity extends BaseActivity implements WalletFragment.Liste
         Contact contact = Contact.fromString(contactString);
         if (contact != null) {
             allContacts.add(contact);
-        } else
+        } else {
             Timber.w("contactString invalid: %s", contactString);
+        }
     }
 
     public Set<Contact> getContacts() {
-
         return new HashSet<>(allContacts);
     }
 
@@ -446,6 +446,7 @@ public class WalletActivity extends BaseActivity implements WalletFragment.Liste
             Bundle extras = new Bundle();
             replaceFragment(new AddressBookFragment(), extras);
         } catch (ClassCastException ignored) {
+            Timber.d("onAddressBook() called, but no AddressBookFragment active");
         }
     }
 
@@ -470,7 +471,6 @@ public class WalletActivity extends BaseActivity implements WalletFragment.Liste
             }
         });
     }
-
 
     public void onWalletChangePassword() {
         try {
@@ -538,14 +538,10 @@ public class WalletActivity extends BaseActivity implements WalletFragment.Liste
         accountsView.setNavigationItemSelectedListener(this);
 
         Fragment walletFragment = new WalletFragment();
-        getSupportFragmentManager().beginTransaction()
-                .add(R.id.fragment_container, walletFragment, WalletFragment.class.getName()).commit();
+        getSupportFragmentManager().beginTransaction().add(R.id.fragment_container, walletFragment, WalletFragment.class.getName()).commit();
         Timber.d("fragment added");
-
         loadContacts();
-
         startWalletService();
-
         Timber.d("onCreate() done.");
     }
 
@@ -758,6 +754,7 @@ public class WalletActivity extends BaseActivity implements WalletFragment.Liste
         return false;
     }
 
+    // Send toast message to user when wallet is stored successfully or not
     @Override
     public void onWalletStored(final boolean success) {
         runOnUiThread(new Runnable() {
@@ -1119,14 +1116,12 @@ public class WalletActivity extends BaseActivity implements WalletFragment.Liste
 
     @SuppressLint("MissingSuperCall")
     @Override
-    public void onRequestPermissionsResult(int requestCode, @NonNull String permissions[],
-                                           @NonNull int[] grantResults) {
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
         Timber.d("onRequestPermissionsResult()");
         switch (requestCode) {
             case Helper.PERMISSIONS_REQUEST_CAMERA: {
                 // If request is cancelled, the result arrays are empty.
-                if (grantResults.length > 0
-                        && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
                     startScanFragment = true;
                 } else {
                     String msg = getString(R.string.message_camera_not_permitted);
@@ -1181,6 +1176,7 @@ public class WalletActivity extends BaseActivity implements WalletFragment.Liste
             drawer.closeDrawer(GravityCompat.START);
             return;
         }
+
         final Fragment fragment = getSupportFragmentManager().findFragmentById(R.id.fragment_container);
         if (fragment instanceof OnBackPressedListener) {
             if (!((OnBackPressedListener) fragment).onBackPressed()) {

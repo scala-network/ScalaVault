@@ -45,6 +45,7 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.Locale;
 import java.util.Map;
+import java.util.Objects;
 import java.util.TimeZone;
 
 import javax.xml.parsers.DocumentBuilder;
@@ -72,18 +73,16 @@ public class ExchangeApiImpl implements ExchangeApi {
     }
 
     public ExchangeApiImpl(@NonNull final OkHttpClient okHttpClient) {
-        this(okHttpClient, HttpUrl.parse("https://www.ecb.europa.eu/stats/eurofxref/eurofxref-daily.xml"));
+        this(okHttpClient, Objects.requireNonNull(HttpUrl.parse("https://www.ecb.europa.eu/stats/eurofxref/eurofxref-daily.xml")));
         // data is daily and is refreshed around 16:00 CET every working day
     }
 
     public static boolean isSameDay(Calendar calendar, Calendar anotherCalendar) {
-        return (calendar.get(Calendar.YEAR) == anotherCalendar.get(Calendar.YEAR)) &&
-                (calendar.get(Calendar.DAY_OF_YEAR) == anotherCalendar.get(Calendar.DAY_OF_YEAR));
+        return (calendar.get(Calendar.YEAR) == anotherCalendar.get(Calendar.YEAR)) && (calendar.get(Calendar.DAY_OF_YEAR) == anotherCalendar.get(Calendar.DAY_OF_YEAR));
     }
 
     @Override
-    public void queryExchangeRate(@NonNull final String baseCurrency, @NonNull final String quoteCurrency,
-                                  @NonNull final ExchangeCallback callback) {
+    public void queryExchangeRate(@NonNull final String baseCurrency, @NonNull final String quoteCurrency, @NonNull final ExchangeCallback callback) {
         if (!baseCurrency.equals("EUR")) {
             callback.onError(new IllegalArgumentException("Only EUR supported as base"));
             return;
@@ -131,16 +130,17 @@ public class ExchangeApiImpl implements ExchangeApi {
 
         okHttpClient.newCall(httpRequest).enqueue(new okhttp3.Callback() {
             @Override
-            public void onFailure(final Call call, final IOException ex) {
+            public void onFailure(@NonNull final Call call, @NonNull final IOException ex) {
                 callback.onError(ex);
             }
 
             @Override
-            public void onResponse(final Call call, final Response response) throws IOException {
+            public void onResponse(@NonNull final Call call, @NonNull final Response response) throws IOException {
                 if (response.isSuccessful()) {
                     try {
                         DocumentBuilderFactory dbFactory = DocumentBuilderFactory.newInstance();
                         DocumentBuilder dBuilder = dbFactory.newDocumentBuilder();
+                        assert response.body() != null;
                         Document doc = dBuilder.parse(response.body().byteStream());
                         doc.getDocumentElement().normalize();
                         parse(doc);
@@ -199,7 +199,7 @@ public class ExchangeApiImpl implements ExchangeApi {
                     } else if (cube.hasAttribute("currency")
                             && cube.hasAttribute("rate")) { // a rate Cube
                         String currency = cube.getAttribute("currency");
-                        double rate = Double.valueOf(cube.getAttribute("rate"));
+                        double rate = Double.parseDouble(cube.getAttribute("rate"));
                         entries.put(currency, rate);
                     } // else an empty Cube - ignore
                 }
@@ -208,12 +208,10 @@ public class ExchangeApiImpl implements ExchangeApi {
             Timber.d(ex);
         }
         synchronized (this) {
-            if (date != null) {
-                fetchDate = Calendar.getInstance(TimeZone.getTimeZone("CET"));
-                fxDate = date;
-                fxEntries.clear();
-                fxEntries.putAll(entries);
-            }
+            fetchDate = Calendar.getInstance(TimeZone.getTimeZone("CET"));
+            fxDate = date;
+            fxEntries.clear();
+            fxEntries.putAll(entries);
             // else don't change what we have
         }
     }

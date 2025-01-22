@@ -19,7 +19,9 @@
  *
  * Please see the included LICENSE file for more information.*/
 
-package io.scalaproject.vault.service.exchange.kraken;
+package io.scalaproject.vault.service.exchange.main;
+
+import android.util.Log;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.VisibleForTesting;
@@ -37,6 +39,7 @@ import org.json.JSONObject;
 import java.io.IOException;
 import java.util.Objects;
 
+import io.scalaproject.vault.util.OkHttpHelper;
 import okhttp3.Call;
 import okhttp3.HttpUrl;
 import okhttp3.OkHttpClient;
@@ -56,14 +59,17 @@ public class ExchangeApiImpl implements ExchangeApi {
         this.baseUrl = baseUrl;
     }
 
+    // Scala Network API for prices no need any extra parameter in the url allways return the same value
     public ExchangeApiImpl(@NonNull final OkHttpClient okHttpClient) {
         this(okHttpClient, Objects.requireNonNull(HttpUrl.parse("https://prices.scala.network/")));
     }
 
     @Override
     public void queryExchangeRate(@NonNull final String baseCurrency, @NonNull final String quoteCurrency, @NonNull final ExchangeCallback callback) {
+        Log.w("MainExchangeApiImpl", "B=" + baseCurrency + " Q=" + quoteCurrency);
 
         if (baseCurrency.equals(quoteCurrency)) {
+            Log.w("MainExchangeApiImpl", "BASE=QUOTE=1");
             callback.onSuccess(new ExchangeRateImpl(baseCurrency, quoteCurrency, 1.0));
             return;
         }
@@ -75,35 +81,39 @@ public class ExchangeApiImpl implements ExchangeApi {
         else { callback.onError(new IllegalArgumentException("no crypto specified")); return; }
 
         Timber.d("queryExchangeRate: i %b, b %s, q %s", invertQuery, baseCurrency, quoteCurrency);
+        Log.w("MainExchangeApiImpl", "i=" + invertQuery + " b=" + baseCurrency + " q=" + quoteCurrency);
+
         final boolean invert = invertQuery;
         final String base = invert ? quoteCurrency : baseCurrency;
         final String quote = invert ? baseCurrency : quoteCurrency;
 
-        final HttpUrl url = baseUrl.newBuilder()
-                .addQueryParameter("pair", base + (quote.equals("BTC") ? "XBT" : quote))
-                .build();
+        // Add extra query parameters
+        final HttpUrl url = baseUrl.newBuilder().addQueryParameter("pair", base + (quote.equals("BTC") ? "XBT" : quote)).build();
         final Request httpRequest = createHttpRequest(url);
 
         okHttpClient.newCall(httpRequest).enqueue(new okhttp3.Callback() {
             @Override
             public void onFailure(@NonNull final Call call, @NonNull final IOException ex) {
-                callback.onError(ex);
+                // On failure we can call another api to convert currency price like a backup site1, site2, site3...
+                Log.w("MainExchangeApiImpl", "onFailure");
+               callback.onError(ex);
             }
 
             @Override
             public void onResponse(@NonNull final Call call, @NonNull final Response response) throws IOException {
+                Log.w("MainExchangeApiImpl", "onResponse");
                 if (response.isSuccessful()) {
+                    Log.w("MainExchangeApiImpl", "onResponse is successful");
                     try {
+                        assert response.body() != null;
                         final JSONObject json = new JSONObject(response.body().string());
-                        final JSONArray jsonError = json.getJSONArray("error");
-                        if (jsonError.length() > 0) {
-                            final String errorMsg = jsonError.getString(0);
-                            callback.onError(new ExchangeException(response.code(), errorMsg));
-                        } else {
-                            final JSONObject jsonResult = json.getJSONObject("result");
-                            reportSuccess(jsonResult, invert, callback);
-                        }
-                    } catch (JSONException ex) {
+                        Log.w("MainExchangeApiImpl", "onResponse get body is successful");
+                        if (!isValidJson(String.valueOf(json))) {
+                                callback.onError(new ExchangeException(response.code(), "Error parsing JSON"));
+                            } else {
+                                reportSuccess(json, invert, callback);
+                            }
+                        } catch (JSONException ex) {
                         callback.onError(new ExchangeException(ex.getLocalizedMessage()));
                     }
                 } else {
@@ -114,10 +124,13 @@ public class ExchangeApiImpl implements ExchangeApi {
     }
 
     void reportSuccess(JSONObject jsonObject, boolean swapAssets, ExchangeCallback callback) {
+        Log.w("MainExchangeApiImpl", "reportSuccess");
         try {
             final ExchangeRate exchangeRate = new ExchangeRateImpl(jsonObject, swapAssets);
             callback.onSuccess(exchangeRate);
+            Log.w("MainExchangeApiImpl", "report success: currency price updated");
         } catch (JSONException ex) {
+            Log.w("MainExchangeApiImpl", "reportError");
             callback.onError(new ExchangeException(ex.getLocalizedMessage()));
         } catch (ExchangeException ex) {
             callback.onError(ex);
@@ -125,9 +138,21 @@ public class ExchangeApiImpl implements ExchangeApi {
     }
 
     private Request createHttpRequest(final HttpUrl url) {
-        return new Request.Builder()
-                .url(url)
-                .get()
-                .build();
+        Log.w("MainExchangeApiImpl", "createHttpRequest");
+        return new Request.Builder().url(url).get().build();
     }
+
+    // Basic validation of JSON
+    public boolean isValidJson(String jsonString) {
+        if (jsonString == null || jsonString.isEmpty()) {
+            return false;
+        }
+        try {
+            new JSONObject(jsonString);
+            return true;
+        } catch (JSONException e) {
+            return false;
+        }
+    }
+
 }

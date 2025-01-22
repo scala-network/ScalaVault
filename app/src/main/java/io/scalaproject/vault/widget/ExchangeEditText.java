@@ -322,23 +322,13 @@ public class ExchangeEditText extends LinearLayout {
                     @Override
                     public void onSuccess(final ExchangeRate exchangeRate) {
                         if (isAttachedToWindow())
-                            new Handler(Looper.getMainLooper()).post(new Runnable() {
-                                @Override
-                                public void run() {
-                                    exchange(exchangeRate);
-                                }
-                            });
+                            new Handler(Looper.getMainLooper()).post(() -> exchange(exchangeRate));
                     }
 
                     @Override
                     public void onError(final Exception e) {
                         Timber.e(e.getLocalizedMessage());
-                        new Handler(Looper.getMainLooper()).post(new Runnable() {
-                            @Override
-                            public void run() {
-                                exchangeFailed();
-                            }
-                        });
+                        new Handler(Looper.getMainLooper()).post(() -> exchangeFailed());
                     }
                 });
     }
@@ -405,7 +395,6 @@ public class ExchangeEditText extends LinearLayout {
                     exchangeRate.getQuoteCurrency(), sCurrencyB.getSelectedItem());
             return;
         }
-
         exchangeRateCache = exchangeRate;
         if (prepareExchange()) {
             exchange(exchangeRate.getRate());

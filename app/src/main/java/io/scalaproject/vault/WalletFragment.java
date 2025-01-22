@@ -34,6 +34,8 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 import androidx.recyclerview.widget.RecyclerView;
+
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -48,7 +50,8 @@ import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.Spinner;
 import android.widget.TextView;
-
+import android.widget.Filterable;
+import android.widget.ThemedSpinnerAdapter;
 import com.github.brnunes.swipeablerecyclerview.SwipeableRecyclerViewTouchListener;
 
 import io.scalaproject.vault.data.Contact;
@@ -112,8 +115,7 @@ public class WalletFragment extends Fragment
     }
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_wallet, container, false);
 
         tvStealthMode = view.findViewById(R.id.tvStreetView);
@@ -166,39 +168,37 @@ public class WalletFragment extends Fragment
         txInfoAdapter = new TransactionInfoAdapter(getActivity(), this, this);
         rvTransactions.setAdapter(txInfoAdapter);
 
-        SwipeableRecyclerViewTouchListener swipeTouchListener =
-                new SwipeableRecyclerViewTouchListener(rvTransactions,
-                        new SwipeableRecyclerViewTouchListener.SwipeListener() {
-                            @Override
-                            public boolean canSwipeLeft(int position) {
-                                return activityCallback.isStealthMode();
-                            }
+        SwipeableRecyclerViewTouchListener swipeTouchListener = new SwipeableRecyclerViewTouchListener(rvTransactions, new SwipeableRecyclerViewTouchListener.SwipeListener() {
+            @Override
+            public boolean canSwipeLeft(int position) {
+                return activityCallback.isStealthMode();
+            }
 
-                            @Override
-                            public boolean canSwipeRight(int position) {
-                                return activityCallback.isStealthMode();
-                            }
+            @Override
+            public boolean canSwipeRight(int position) {
+                return activityCallback.isStealthMode();
+            }
 
-                            @SuppressLint("NotifyDataSetChanged")
-                            @Override
-                            public void onDismissedBySwipeLeft(RecyclerView recyclerView, int[] reverseSortedPositions) {
-                                for (int position : reverseSortedPositions) {
-                                    dismissedTransactions.add(txInfoAdapter.getItem(position).hash);
-                                    txInfoAdapter.removeItem(position);
-                                }
-                                txInfoAdapter.notifyDataSetChanged();
-                            }
+            @SuppressLint("NotifyDataSetChanged")
+            @Override
+            public void onDismissedBySwipeLeft(RecyclerView recyclerView, int[] reverseSortedPositions) {
+                for (int position : reverseSortedPositions) {
+                    dismissedTransactions.add(txInfoAdapter.getItem(position).hash);
+                    txInfoAdapter.removeItem(position);
+                }
+                txInfoAdapter.notifyDataSetChanged();
+            }
 
-                            @SuppressLint("NotifyDataSetChanged")
-                            @Override
-                            public void onDismissedBySwipeRight(RecyclerView recyclerView, int[] reverseSortedPositions) {
-                                for (int position : reverseSortedPositions) {
-                                    dismissedTransactions.add(txInfoAdapter.getItem(position).hash);
-                                    txInfoAdapter.removeItem(position);
-                                }
-                                txInfoAdapter.notifyDataSetChanged();
-                            }
-                        });
+            @SuppressLint("NotifyDataSetChanged")
+            @Override
+            public void onDismissedBySwipeRight(RecyclerView recyclerView, int[] reverseSortedPositions) {
+                for (int position : reverseSortedPositions) {
+                    dismissedTransactions.add(txInfoAdapter.getItem(position).hash);
+                    txInfoAdapter.removeItem(position);
+                }
+                txInfoAdapter.notifyDataSetChanged();
+            }
+        });
 
         rvTransactions.addOnItemTouchListener(swipeTouchListener);
 
@@ -334,24 +334,14 @@ public class WalletFragment extends Fragment
                             @Override
                             public void onSuccess(final ExchangeRate exchangeRate) {
                                 if (isAdded())
-                                    new Handler(Looper.getMainLooper()).post(new Runnable() {
-                                        @Override
-                                        public void run() {
-                                            exchange(exchangeRate);
-                                        }
-                                    });
+                                    new Handler(Looper.getMainLooper()).post(() -> exchange(exchangeRate));
                             }
 
                             @Override
                             public void onError(final Exception e) {
                                 Timber.e(e.getLocalizedMessage());
                                 if (isAdded())
-                                    new Handler(Looper.getMainLooper()).post(new Runnable() {
-                                        @Override
-                                        public void run() {
-                                            exchangeFailed();
-                                        }
-                                    });
+                                    new Handler(Looper.getMainLooper()).post(() -> exchangeFailed());
                             }
                         });
             } else {

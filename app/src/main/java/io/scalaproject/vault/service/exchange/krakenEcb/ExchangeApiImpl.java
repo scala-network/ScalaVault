@@ -23,6 +23,8 @@
 
 package io.scalaproject.vault.service.exchange.krakenEcb;
 
+import android.util.Log;
+
 import androidx.annotation.NonNull;
 
 import io.scalaproject.vault.service.exchange.api.ExchangeApi;
@@ -48,31 +50,34 @@ public class ExchangeApiImpl implements ExchangeApi {
     }
 
     @Override
-    public void queryExchangeRate(@NonNull final String baseCurrency, @NonNull final String quoteCurrency,
-                                  @NonNull final ExchangeCallback callback) {
+    public void queryExchangeRate(@NonNull final String baseCurrency, @NonNull final String quoteCurrency, @NonNull final ExchangeCallback callback) {
         Timber.d("B=%s Q=%s", baseCurrency, quoteCurrency);
+        Log.w("ExchangeApiImpl", "B=" + baseCurrency + " Q=" + quoteCurrency);
+
         if (baseCurrency.equals(quoteCurrency)) {
             Timber.d("BASE=QUOTE=1");
+            Log.w("ExchangeApiImpl", "BASE=QUOTE=1");
+
             callback.onSuccess(new ExchangeRateImpl(baseCurrency, quoteCurrency, 1.0));
             return;
         }
 
-        if (!Helper.BASE_CRYPTO.equals(baseCurrency)
-                && !Helper.BASE_CRYPTO.equals(quoteCurrency)) {
+        if (!Helper.BASE_CRYPTO.equals(baseCurrency) && !Helper.BASE_CRYPTO.equals(quoteCurrency)) {
             callback.onError(new IllegalArgumentException("no " + Helper.BASE_CRYPTO + " specified"));
             return;
         }
 
         final String quote = Helper.BASE_CRYPTO.equals(baseCurrency) ? quoteCurrency : baseCurrency;
+        final ExchangeApi krakenApi = new io.scalaproject.vault.service.exchange.kraken.ExchangeApiImpl(okHttpClient);
 
-        final ExchangeApi krakenApi =
-                new io.scalaproject.vault.service.exchange.kraken.ExchangeApiImpl(okHttpClient);
         krakenApi.queryExchangeRate(Helper.BASE_CRYPTO, BASE_FIAT, new ExchangeCallback() {
+
             @Override
             public void onSuccess(final ExchangeRate krakenRate) {
                 Timber.d("kraken = %f", krakenRate.getRate());
-                final ExchangeApi ecbApi =
-                        new io.scalaproject.vault.service.exchange.ecb.ExchangeApiImpl(okHttpClient);
+                Log.w("ExchangeApiImpl", "kraken = " + krakenRate.getRate());
+
+                final ExchangeApi ecbApi = new io.scalaproject.vault.service.exchange.ecb.ExchangeApiImpl(okHttpClient);
                 ecbApi.queryExchangeRate(BASE_FIAT, quote, new ExchangeCallback() {
                     @Override
                     public void onSuccess(final ExchangeRate ecbRate) {
