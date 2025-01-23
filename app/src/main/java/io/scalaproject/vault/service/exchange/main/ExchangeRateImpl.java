@@ -69,14 +69,13 @@ class ExchangeRateImpl implements ExchangeRate {
 
     ExchangeRateImpl(final JSONObject jsonObject, final boolean swapAssets) throws JSONException, ExchangeException {
         super();
-        Log.w("MainExchangeRateImpl", "jsonObject=" + jsonObject);
         try {
             // Current API provides BTC, LTC, USD, EUR
             // Uppercase provides general info, lowercase provides price
-            final String key = "USD"; //jsonObject.keys().next(); // we expect only one
+            final String key = "BTC"; //jsonObject.keys().next(); // we expect only one
             Log.w("MainExchangeRateImpl", "key=" + key);
             baseCurrency = "XLA";
-            quoteCurrency = "USD";
+            quoteCurrency = "EUR";
 
 /*
             Pattern pattern = Pattern.compile("^X(.*?)Z(.*?)$");
@@ -100,20 +99,16 @@ class ExchangeRateImpl implements ExchangeRate {
             }
 
             if (priceKey != null) {
-                Log.w("MainExchangeRateImpl", "priceKey=" + priceKey + " swapAssets=" + swapAssets);
                 try {
                     double rate = Double.parseDouble(priceKey);
                     this.rate = swapAssets ? (1 / rate) : rate;
                 } catch (NumberFormatException ex) {
-                    Log.w("MainExchangeRateImpl", "NumberFormatException");
                     throw new ExchangeException(ex.getLocalizedMessage());
                 }
             } else {
-                Log.w("MainExchangeRateImpl", "no price returned!");
                 throw new ExchangeException("no price returned!");
             }
         } catch (NoSuchElementException ex) {
-            Log.w("MainExchangeRateImpl", "NoSuchElementException");
             throw new ExchangeException(ex.getLocalizedMessage());
         }
     }

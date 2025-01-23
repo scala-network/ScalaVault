@@ -22,9 +22,7 @@
 package io.scalaproject.vault.service.exchange.main;
 
 import android.util.Log;
-
 import androidx.annotation.NonNull;
-import androidx.annotation.VisibleForTesting;
 
 import io.scalaproject.vault.service.exchange.api.ExchangeApi;
 import io.scalaproject.vault.service.exchange.api.ExchangeCallback;
@@ -39,7 +37,6 @@ import org.json.JSONObject;
 import java.io.IOException;
 import java.util.Objects;
 
-import io.scalaproject.vault.util.OkHttpHelper;
 import okhttp3.Call;
 import okhttp3.HttpUrl;
 import okhttp3.OkHttpClient;
@@ -48,6 +45,11 @@ import okhttp3.Response;
 import timber.log.Timber;
 
 public class ExchangeApiImpl implements ExchangeApi {
+    static public final String BASE_FIAT = "EUR";
+    static public final String BASE_CRYPTO = "XLA";
+    static public double rate = 1.0;
+    static public String baseCurrency = Helper.BASE_CRYPTO;
+    static public String quoteCurrency = "USD";
 
     @NonNull
     private final OkHttpClient okHttpClient;
@@ -66,11 +68,13 @@ public class ExchangeApiImpl implements ExchangeApi {
 
     @Override
     public void queryExchangeRate(@NonNull final String baseCurrency, @NonNull final String quoteCurrency, @NonNull final ExchangeCallback callback) {
-        Log.w("MainExchangeApiImpl", "B=" + baseCurrency + " Q=" + quoteCurrency);
+        Timber.tag("MainExchangeApiImpl").w("B=" + baseCurrency + " Q=" + quoteCurrency);
+        ExchangeApiImpl.baseCurrency = baseCurrency;
+        ExchangeApiImpl.quoteCurrency = quoteCurrency;
 
         if (baseCurrency.equals(quoteCurrency)) {
-            Log.w("MainExchangeApiImpl", "BASE=QUOTE=1");
-            callback.onSuccess(new ExchangeRateImpl(baseCurrency, quoteCurrency, 1.0));
+            Timber.d("BASE=QUOTE=1");
+            callback.onSuccess(new ExchangeRateImpl(baseCurrency, quoteCurrency, rate));
             return;
         }
 
@@ -81,37 +85,30 @@ public class ExchangeApiImpl implements ExchangeApi {
         else { callback.onError(new IllegalArgumentException("no crypto specified")); return; }
 
         Timber.d("queryExchangeRate: i %b, b %s, q %s", invertQuery, baseCurrency, quoteCurrency);
-        Log.w("MainExchangeApiImpl", "i=" + invertQuery + " b=" + baseCurrency + " q=" + quoteCurrency);
-
-        final boolean invert = invertQuery;
-        final String base = invert ? quoteCurrency : baseCurrency;
-        final String quote = invert ? baseCurrency : quoteCurrency;
 
         // Add extra query parameters
-        final HttpUrl url = baseUrl.newBuilder().addQueryParameter("pair", base + (quote.equals("BTC") ? "XBT" : quote)).build();
+        final HttpUrl url = baseUrl.newBuilder().addQueryParameter("pair", baseCurrency + (quoteCurrency.equals("BTC") ? "XBT" : quoteCurrency)).build();
         final Request httpRequest = createHttpRequest(url);
 
+        // Try to get XLA API for prices in format json
         okHttpClient.newCall(httpRequest).enqueue(new okhttp3.Callback() {
             @Override
             public void onFailure(@NonNull final Call call, @NonNull final IOException ex) {
                 // On failure we can call another api to convert currency price like a backup site1, site2, site3...
-                Log.w("MainExchangeApiImpl", "onFailure");
                callback.onError(ex);
             }
 
             @Override
             public void onResponse(@NonNull final Call call, @NonNull final Response response) throws IOException {
-                Log.w("MainExchangeApiImpl", "onResponse");
                 if (response.isSuccessful()) {
-                    Log.w("MainExchangeApiImpl", "onResponse is successful");
                     try {
                         assert response.body() != null;
                         final JSONObject json = new JSONObject(response.body().string());
-                        Log.w("MainExchangeApiImpl", "onResponse get body is successful");
+                        Timber.tag("MainExchangeApiImpl").w("onResponse get body is successful");
                         if (!isValidJson(String.valueOf(json))) {
                                 callback.onError(new ExchangeException(response.code(), "Error parsing JSON"));
                             } else {
-                                reportSuccess(json, invert, callback);
+                                reportSuccess(json, invertQuery, callback);
                             }
                         } catch (JSONException ex) {
                         callback.onError(new ExchangeException(ex.getLocalizedMessage()));
@@ -124,13 +121,38 @@ public class ExchangeApiImpl implements ExchangeApi {
     }
 
     void reportSuccess(JSONObject jsonObject, boolean swapAssets, ExchangeCallback callback) {
-        Log.w("MainExchangeApiImpl", "reportSuccess");
         try {
             final ExchangeRate exchangeRate = new ExchangeRateImpl(jsonObject, swapAssets);
             callback.onSuccess(exchangeRate);
-            Log.w("MainExchangeApiImpl", "report success: currency price updated");
+
+            final String quote = Helper.BASE_CRYPTO.equals(baseCurrency) ? quoteCurrency : baseCurrency;
+            // now we get from ecb the selected coin
+            final ExchangeApi ecbApi = new io.scalaproject.vault.service.exchange.ecb.ExchangeApiImpl(okHttpClient);
+            ecbApi.queryExchangeRate(BASE_FIAT, quote, new ExchangeCallback() {
+                @Override
+                public void onSuccess(final ExchangeRate ecbRate) {
+                    Timber.d("ECB = %f", ecbRate.getRate());
+                    Log.w("MainExchangeApiImpl", "ECB = " + ecbRate.getRate());
+                    double rate = ecbRate.getRate() * exchangeRate.getRate();
+                    Log.w("MainExchangeApiImpl", "exchangerate = " + exchangeRate.getRate());
+                    Log.w("MainExchangeApiImpl", "rateint = " + rate);
+                    if (!quote.equals(quoteCurrency)) rate = 1.0d / rate;
+                    Timber.d("rate = %f", rate);
+                    Log.w("MainExchangeApiImpl", "rate = " + rate);
+
+                    final ExchangeRate exchangeRate = new io.scalaproject.vault.service.exchange.main.ExchangeRateImpl(baseCurrency, quoteCurrency, rate);
+                    callback.onSuccess(exchangeRate);
+                }
+
+                @Override
+                public void onError(Exception ex) {
+                    Timber.d(ex);
+                    callback.onError(ex);
+                }
+            });
+
+            Timber.tag("MainExchangeApiImpl").w("Currency price updated");
         } catch (JSONException ex) {
-            Log.w("MainExchangeApiImpl", "reportError");
             callback.onError(new ExchangeException(ex.getLocalizedMessage()));
         } catch (ExchangeException ex) {
             callback.onError(ex);
@@ -138,7 +160,6 @@ public class ExchangeApiImpl implements ExchangeApi {
     }
 
     private Request createHttpRequest(final HttpUrl url) {
-        Log.w("MainExchangeApiImpl", "createHttpRequest");
         return new Request.Builder().url(url).get().build();
     }
 

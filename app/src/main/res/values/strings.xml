@@ -496,4 +496,5 @@
     <string name="no_wallet">No wallet</string>
     <string name="wallet_address">Wallet Address</string>
     <string name="subaddresses">Subaddresses</string>
+    <string name="message_exchange_success">Currency price updated</string>
 </resources>

@@ -52,12 +52,8 @@ public class ExchangeApiImpl implements ExchangeApi {
     @Override
     public void queryExchangeRate(@NonNull final String baseCurrency, @NonNull final String quoteCurrency, @NonNull final ExchangeCallback callback) {
         Timber.d("B=%s Q=%s", baseCurrency, quoteCurrency);
-        Log.w("ExchangeApiImpl", "B=" + baseCurrency + " Q=" + quoteCurrency);
-
         if (baseCurrency.equals(quoteCurrency)) {
             Timber.d("BASE=QUOTE=1");
-            Log.w("ExchangeApiImpl", "BASE=QUOTE=1");
-
             callback.onSuccess(new ExchangeRateImpl(baseCurrency, quoteCurrency, 1.0));
             return;
         }
@@ -75,7 +71,6 @@ public class ExchangeApiImpl implements ExchangeApi {
             @Override
             public void onSuccess(final ExchangeRate krakenRate) {
                 Timber.d("kraken = %f", krakenRate.getRate());
-                Log.w("ExchangeApiImpl", "kraken = " + krakenRate.getRate());
 
                 final ExchangeApi ecbApi = new io.scalaproject.vault.service.exchange.ecb.ExchangeApiImpl(okHttpClient);
                 ecbApi.queryExchangeRate(BASE_FIAT, quote, new ExchangeCallback() {

@@ -351,8 +351,7 @@ public class Helper {
     // Domain xla.to don't exist can be register
     // TODO Fix this function
     static public HttpUrl getxlaToBaseUrl() {
-        if ((WalletManager.getInstance() == null)
-                || (WalletManager.getInstance().getNetworkType() != NetworkType.NetworkType_Mainnet)) {
+        if ((WalletManager.getInstance() == null) || (WalletManager.getInstance().getNetworkType() != NetworkType.NetworkType_Mainnet)) {
             return HttpUrl.parse("https://test.xla.to/api/v3/xla2btc/");
         } else {
             return HttpUrl.parse("https://xla.to/api/v3/xla2btc/");
@@ -667,7 +666,6 @@ public class Helper {
 
     static public ExchangeApi getExchangeApi() {
         // This returns ecb first?
-        Log.w("HelperExchangeApi", "ExchangeApiImpl Started");
         return new io.scalaproject.vault.service.exchange.main.ExchangeApiImpl(OkHttpHelper.getOkHttpClient());
     }
 
