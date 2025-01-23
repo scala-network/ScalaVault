@@ -125,6 +125,7 @@ public class ExchangeApiImpl implements ExchangeApi {
             final ExchangeRate exchangeRate = new ExchangeRateImpl(jsonObject, swapAssets);
             callback.onSuccess(exchangeRate);
 
+            // This need clean and optimize --Vv - O.o
             final String quote = Helper.BASE_CRYPTO.equals(baseCurrency) ? quoteCurrency : baseCurrency;
             // now we get from ecb the selected coin
             final ExchangeApi ecbApi = new io.scalaproject.vault.service.exchange.ecb.ExchangeApiImpl(okHttpClient);

@@ -33,18 +33,16 @@ public class SplashActivity extends Activity {
         setContentView(R.layout.splashscreen);
 
         int millisecondsDelay = 2000;
-        new Handler().postDelayed(new Runnable() {
-            public void run() {
-                String hide_setup_wizard = Config.read(Config.CONFIG_KEY_HIDE_HOME_WIZARD);
+        new Handler().postDelayed(() -> {
+            String hide_setup_wizard = Config.read(Config.CONFIG_KEY_HIDE_HOME_WIZARD);
 
-                if (hide_setup_wizard.isEmpty()) {
-                    startActivity(new Intent(SplashActivity.this, WizardHomeActivity.class));
-                } else {
-                    startActivity(new Intent(SplashActivity.this, LoginActivity.class));
-                }
-
-                finish();
+            if (hide_setup_wizard.isEmpty()) {
+                startActivity(new Intent(SplashActivity.this, WizardHomeActivity.class));
+            } else {
+                startActivity(new Intent(SplashActivity.this, LoginActivity.class));
             }
+
+            finish();
         }, millisecondsDelay);
     }
 }
