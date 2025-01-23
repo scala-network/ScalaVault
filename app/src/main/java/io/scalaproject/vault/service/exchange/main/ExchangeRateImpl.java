@@ -76,6 +76,7 @@ class ExchangeRateImpl implements ExchangeRate {
             Log.w("MainExchangeRateImpl", "key=" + key);
             baseCurrency = "XLA";
             quoteCurrency = "EUR";
+            // for now is dirty fix... but works.
 
 /*
             Pattern pattern = Pattern.compile("^X(.*?)Z(.*?)$");
@@ -89,7 +90,7 @@ class ExchangeRateImpl implements ExchangeRate {
                 throw new ExchangeException("no pair returned!");
             }
 */
-            JSONObject pair = jsonObject.getJSONObject("usd");
+            JSONObject pair = jsonObject.getJSONObject("eur");
             String priceKey = "price";
             if (pair.has("c")) {
                 JSONArray close = pair.getJSONArray("c");
