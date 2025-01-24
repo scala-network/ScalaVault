@@ -98,7 +98,6 @@ import okhttp3.HttpUrl;
 import timber.log.Timber;
 
 public class Helper {
-    // Todo remove or reimplement OCRAZYPASS_FLAGFILE
     static public final String NOCRAZYPASS_FLAGFILE = ".nocrazypass";
 
     static public final String BASE_CRYPTO = "XLA";
@@ -106,7 +105,6 @@ public class Helper {
     static private final String WALLET_DIR = "wallets";
     static private final String SCALA_DIR = "scala";
 
-    // Todo remove or reimplement DISPLAY_DIGITS_INFO
     static public int DISPLAY_DIGITS_INFO = 5;
 
     static public File getWalletRoot(Context context) {
@@ -117,7 +115,7 @@ public class Helper {
         File dir = new File(context.getFilesDir(), folderName);
         if (!dir.exists()) {
             Timber.i("Creating %s", dir.getAbsolutePath());
-            //dir.mkdirs(); // try to make it -> Ignored
+            dir.mkdirs(); // try to make it
         }
         if (!dir.isDirectory()) {
             String msg = "Directory " + dir.getAbsolutePath() + " does not exist.";
@@ -165,30 +163,29 @@ public class Helper {
         File walletDir = getWalletRoot(context);
         File f = new File(walletDir, aWalletName);
         Timber.d("wallet=%s size= %d", f.getAbsolutePath(), f.length());
-        // Todo Check if we want backup to external device new implement.
-        //Log.w("Helper", "wallet absolute path: " + f.getAbsolutePath() + ", size: " + f.length());
         return f;
     }
 
     static public void showKeyboard(Activity act) {
-        if (act == null) { return; }
+        if (act == null) return;
         if (act.getCurrentFocus() == null) {
             act.getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_VISIBLE);
         } else {
             InputMethodManager imm = (InputMethodManager) act.getSystemService(Context.INPUT_METHOD_SERVICE);
-            if (imm == null) { return; }
+            if (imm == null) return;
             imm.showSoftInput(act.getCurrentFocus(), InputMethodManager.SHOW_IMPLICIT);
         }
     }
 
     static public void hideKeyboard(Activity act) {
-        if (act == null) { return; }
+        if (act == null) return;
         if (act.getCurrentFocus() == null) {
             act.getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_HIDDEN);
         } else {
             InputMethodManager imm = (InputMethodManager) act.getSystemService(Context.INPUT_METHOD_SERVICE);
-            if (imm == null) { return; }
-            imm.hideSoftInputFromWindow((null == act.getCurrentFocus()) ? null : act.getCurrentFocus().getWindowToken(), InputMethodManager.HIDE_NOT_ALWAYS);
+            if (imm == null) return;
+            imm.hideSoftInputFromWindow((null == act.getCurrentFocus()) ? null : act.getCurrentFocus().getWindowToken(),
+                    InputMethodManager.HIDE_NOT_ALWAYS);
         }
     }
 
@@ -210,11 +207,12 @@ public class Helper {
 
     static public String getDisplayAmount(long amount, int maxDecimals) {
         // a Java bug does not strip zeros properly if the value is 0
-        if (amount == 0) { return "0.00"; }
-        BigDecimal d = getDecimalAmount(amount).setScale(maxDecimals, RoundingMode.HALF_UP).stripTrailingZeros();
-        if (d.scale() < 2) {
+        if (amount == 0) return "0.00";
+        BigDecimal d = getDecimalAmount(amount)
+                .setScale(maxDecimals, RoundingMode.HALF_UP)
+                .stripTrailingZeros();
+        if (d.scale() < 2)
             d = d.setScale(2, RoundingMode.UNNECESSARY);
-        }
         return d.toPlainString();
     }
 
@@ -337,7 +335,7 @@ public class Helper {
         return null;
     }
 
-    static private volatile Animation ShakeAnimation;
+    static private Animation ShakeAnimation;
 
     static public Animation getShakeAnimation(Context context) {
         if (ShakeAnimation == null) {
@@ -549,15 +547,17 @@ public class Helper {
                 .setCancelable(false)
                 .setPositiveButton(context.getString(R.string.label_ok), null)
                 .setNegativeButton(context.getString(R.string.label_cancel),
-                        (dialog, id) -> {
-                            Helper.hideKeyboardAlways((Activity) context);
-                            cancelSignal.cancel();
-                            if (loginTask != null) {
-                                loginTask.cancel(true);
-                                loginTask = null;
+                        new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface dialog, int id) {
+                                Helper.hideKeyboardAlways((Activity) context);
+                                cancelSignal.cancel();
+                                if (loginTask != null) {
+                                    loginTask.cancel(true);
+                                    loginTask = null;
+                                }
+                                dialog.cancel();
+                                openDialog = null;
                             }
-                            dialog.cancel();
-                            openDialog = null;
                         });
 
         openDialog = alertDialogBuilder.create();
@@ -601,37 +601,45 @@ public class Helper {
             };
         }
 
-        openDialog.setOnShowListener(dialog -> {
-            if (fingerprintAuthAllowed && fingerprintAuthCallback != null) {
-                tvOpenPrompt.setCompoundDrawablesRelativeWithIntrinsicBounds(icFingerprint, null, null, null);
-                tvOpenPrompt.setText(context.getText(R.string.prompt_fingerprint_auth));
-                tvOpenPrompt.setVisibility(View.VISIBLE);
-                FingerprintHelper.authenticate(context, cancelSignal, fingerprintAuthCallback);
-            } else {
-                etPassword.requestFocus();
-            }
-            Button posButton = openDialog.getButton(AlertDialog.BUTTON_POSITIVE);
-            posButton.setOnClickListener(view -> {
-                String pass = etPassword.getEditText().getText().toString();
-                if (loginTask == null) {
-                    loginTask = new LoginWalletTask(pass, false);
-                    loginTask.execute();
+        openDialog.setOnShowListener(new DialogInterface.OnShowListener() {
+            @Override
+            public void onShow(DialogInterface dialog) {
+                if (fingerprintAuthAllowed && fingerprintAuthCallback != null) {
+                    tvOpenPrompt.setCompoundDrawablesRelativeWithIntrinsicBounds(icFingerprint, null, null, null);
+                    tvOpenPrompt.setText(context.getText(R.string.prompt_fingerprint_auth));
+                    tvOpenPrompt.setVisibility(View.VISIBLE);
+                    FingerprintHelper.authenticate(context, cancelSignal, fingerprintAuthCallback);
+                } else {
+                    etPassword.requestFocus();
                 }
-            });
+                Button posButton = openDialog.getButton(AlertDialog.BUTTON_POSITIVE);
+                posButton.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        String pass = etPassword.getEditText().getText().toString();
+                        if (loginTask == null) {
+                            loginTask = new LoginWalletTask(pass, false);
+                            loginTask.execute();
+                        }
+                    }
+                });
+            }
         });
 
         // accept keyboard "ok"
-        etPassword.getEditText().setOnEditorActionListener((v, actionId, event) -> {
-            if ((event != null && (event.getKeyCode() == KeyEvent.KEYCODE_ENTER) && (event.getAction() == KeyEvent.ACTION_DOWN))
-                    || (actionId == EditorInfo.IME_ACTION_DONE)) {
-                String pass = etPassword.getEditText().getText().toString();
-                if (loginTask == null) {
-                    loginTask = new LoginWalletTask(pass, false);
-                    loginTask.execute();
+        etPassword.getEditText().setOnEditorActionListener(new TextView.OnEditorActionListener() {
+            public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
+                if ((event != null && (event.getKeyCode() == KeyEvent.KEYCODE_ENTER) && (event.getAction() == KeyEvent.ACTION_DOWN))
+                        || (actionId == EditorInfo.IME_ACTION_DONE)) {
+                    String pass = etPassword.getEditText().getText().toString();
+                    if (loginTask == null) {
+                        loginTask = new LoginWalletTask(pass, false);
+                        loginTask.execute();
+                    }
+                    return true;
                 }
-                return true;
+                return false;
             }
-            return false;
         });
 
         if (Helper.preventScreenshot()) {
@@ -686,9 +694,8 @@ public class Helper {
     }
 
     static public String getTruncatedString(String text, Integer max) {
-        if(text.length() <= max) {
+        if(text.length() <= max)
             return text;
-        }
 
         return text.substring(0, 16).trim() + "...";
     }

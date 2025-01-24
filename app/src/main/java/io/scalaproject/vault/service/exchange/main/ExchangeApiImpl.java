@@ -133,13 +133,9 @@ public class ExchangeApiImpl implements ExchangeApi {
                 @Override
                 public void onSuccess(final ExchangeRate ecbRate) {
                     Timber.d("ECB = %f", ecbRate.getRate());
-                    Log.w("MainExchangeApiImpl", "ECB = " + ecbRate.getRate());
                     double rate = ecbRate.getRate() * exchangeRate.getRate();
-                    Log.w("MainExchangeApiImpl", "exchangerate = " + exchangeRate.getRate());
-                    Log.w("MainExchangeApiImpl", "rateint = " + rate);
                     if (!quote.equals(quoteCurrency)) rate = 1.0d / rate;
                     Timber.d("rate = %f", rate);
-                    Log.w("MainExchangeApiImpl", "rate = " + rate);
 
                     final ExchangeRate exchangeRate = new io.scalaproject.vault.service.exchange.main.ExchangeRateImpl(baseCurrency, quoteCurrency, rate);
                     callback.onSuccess(exchangeRate);

@@ -1,14 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
-
 <resources>
     <!-- Ledger Nano S HID: VID=0x2C97 PID=0x0001 -->
-    <usb-device
-        product-id="1"
-        vendor-id="11415" />
+    <usb-device product-id="1" vendor-id="11415" />
 
     <!-- Ledger Nano X HID: VID=0x2C97 PID=0x0004 -->
-    <usb-device
-        product-id="4"
-        vendor-id="11415" />
+    <usb-device product-id="4" vendor-id="11415" />
+
+    <!-- Ledger Nano Speculos: VID=0x2C97 PID=0x0002 -->
+    <usb-device product-id="2" vendor-id="11415" />
+
+    <!-- Ledger Ledger Stax: VID=0x2C97 PID=0x0003 -->
+    <usb-device product-id="3" vendor-id="11415" />
+
+    <!-- Ledger Ledger Flex: VID=0x2C97 PID=0x0005 -->
+    <usb-device product-id="5" vendor-id="11415" />
 
 </resources>

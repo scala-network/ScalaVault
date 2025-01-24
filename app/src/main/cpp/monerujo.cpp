@@ -240,7 +240,7 @@ jobject cpp2java(JNIEnv *env, std::vector<std::string> vector) {
     jmethodID java_util_ArrayList_add = env->GetMethodID(class_ArrayList, "add",
                                                          "(Ljava/lang/Object;)Z");
 
-    jobject result = env->NewObject(class_ArrayList, java_util_ArrayList_, vector.size());
+    jobject result = env->NewObject(class_ArrayList, java_util_ArrayList_, static_cast<jint> (vector.size()));
     for (std::string &s: vector) {
         jstring element = env->NewStringUTF(s.c_str());
         env->CallBooleanMethod(result, java_util_ArrayList_add, element);
@@ -1186,7 +1186,7 @@ jobject newTransferInstance(JNIEnv *env, uint64_t amount, const std::string &add
     jmethodID c = env->GetMethodID(class_Transfer, "<init>",
                                    "(JLjava/lang/String;)V");
     jstring _address = env->NewStringUTF(address.c_str());
-    jobject transfer = env->NewObject(class_Transfer, c, amount, _address);
+    jobject transfer = env->NewObject(class_Transfer, c, static_cast<jlong> (amount), _address);
     env->DeleteLocalRef(_address);
     return transfer;
 }
@@ -1200,7 +1200,7 @@ jobject newTransferList(JNIEnv *env, scala::TransactionInfo *info) {
     jmethodID java_util_ArrayList_ = env->GetMethodID(class_ArrayList, "<init>", "(I)V");
     jmethodID java_util_ArrayList_add = env->GetMethodID(class_ArrayList, "add",
                                                          "(Ljava/lang/Object;)Z");
-    jobject result = env->NewObject(class_ArrayList, java_util_ArrayList_, transfers.size());
+    jobject result = env->NewObject(class_ArrayList, java_util_ArrayList_, static_cast<jint> (transfers.size()));
     // create Transfer objects and stick them in the List
     for (const scala::TransactionInfo::Transfer &s: transfers) {
         jobject element = newTransferInstance(env, s.amount, s.address);
@@ -1224,15 +1224,15 @@ jobject newTransactionInfo(JNIEnv *env, scala::TransactionInfo *info) {
                                     info->direction(),
                                     info->isPending(),
                                     info->isFailed(),
-                                    info->amount(),
-                                    info->fee(),
-                                    info->blockHeight(),
+                                    static_cast<jlong> (info->amount()),
+                                    static_cast<jlong> (info->fee()),
+                                    static_cast<jlong> (info->blockHeight()),
                                     _hash,
                                     static_cast<jlong> (info->timestamp()),
                                     _paymentId,
-                                    info->subaddrAccount(),
-                                    subaddrIndex,
-                                    info->confirmations(),
+                                    static_cast<jint> (info->subaddrAccount()),
+                                    static_cast<jint> (subaddrIndex),
+                                    static_cast<jlong> (info->confirmations()),
                                     _label,
                                     transfers);
     env->DeleteLocalRef(transfers);
@@ -1250,7 +1250,7 @@ jobject cpp2java(JNIEnv *env, std::vector<scala::TransactionInfo *> vector) {
     jmethodID java_util_ArrayList_add = env->GetMethodID(class_ArrayList, "add",
                                                          "(Ljava/lang/Object;)Z");
 
-    jobject arrayList = env->NewObject(class_ArrayList, java_util_ArrayList_, vector.size());
+    jobject arrayList = env->NewObject(class_ArrayList, java_util_ArrayList_, static_cast<jint> (vector.size()));
     for (scala::TransactionInfo *s: vector) {
         jobject info = newTransactionInfo(env, s);
         env->CallBooleanMethod(arrayList, java_util_ArrayList_add, info);
@@ -1261,8 +1261,7 @@ jobject cpp2java(JNIEnv *env, std::vector<scala::TransactionInfo *> vector) {
 
 JNIEXPORT jobject JNICALL
 Java_io_scalaproject_vault_model_TransactionHistory_refreshJ(JNIEnv *env, jobject instance) {
-    scala::TransactionHistory *history = getHandle<scala::TransactionHistory>(env,
-                                                                                      instance);
+    scala::TransactionHistory *history = getHandle<scala::TransactionHistory>(env,instance);
     history->refresh();
     return cpp2java(env, history->getAll());
 }
