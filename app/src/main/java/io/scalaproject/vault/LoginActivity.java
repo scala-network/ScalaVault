@@ -46,6 +46,7 @@ import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.inputmethod.EditorInfo;
+import android.view.SurfaceControl;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -53,7 +54,6 @@ import android.widget.Toast;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
-
 
 import com.google.android.material.dialog.MaterialAlertDialogBuilder;
 
@@ -141,8 +141,9 @@ public class LoginActivity extends BaseActivity
 
     @Override
     public void setNode(NodeInfo node) {
-        if ((node != null) && (node.getNetworkType() != WalletManager.getInstance().getNetworkType()))
+        if ((node != null) && (node.getNetworkType() != WalletManager.getInstance().getNetworkType())) {
             throw new IllegalArgumentException("network type does not match");
+        }
 
         this.node = node;
 
