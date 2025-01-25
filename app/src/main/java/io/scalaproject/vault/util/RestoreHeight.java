@@ -21,6 +21,8 @@
 
 package io.scalaproject.vault.util;
 
+import android.annotation.SuppressLint;
+
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
@@ -60,7 +62,7 @@ public class RestoreHeight {
 
     static public Date getGenesisBLockDate()
     {
-        SimpleDateFormat parser = new SimpleDateFormat("yyyy-MM-dd");
+        @SuppressLint("SimpleDateFormat") SimpleDateFormat parser = new SimpleDateFormat("yyyy-MM-dd");
         parser.setTimeZone(TimeZone.getTimeZone("UTC"));
         parser.setLenient(false);
         try {
@@ -71,7 +73,7 @@ public class RestoreHeight {
     }
 
     public long getHeight(String date) {
-        SimpleDateFormat parser = new SimpleDateFormat("yyyy-MM-dd");
+        @SuppressLint("SimpleDateFormat") SimpleDateFormat parser = new SimpleDateFormat("yyyy-MM-dd");
         parser.setTimeZone(TimeZone.getTimeZone("UTC"));
         parser.setLenient(false);
         try {
@@ -95,7 +97,7 @@ public class RestoreHeight {
 
         Calendar query = (Calendar) cal.clone();
 
-        SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
+        @SuppressLint("SimpleDateFormat") SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
         formatter.setTimeZone(TimeZone.getTimeZone("UTC"));
 
         String queryDate = formatter.format(date);
@@ -135,7 +137,7 @@ public class RestoreHeight {
         } else {
             long days = TimeUnit.DAYS.convert(query.getTimeInMillis() - prevTime,
                     TimeUnit.MILLISECONDS);
-            height = Math.round(prevBc + 1.0 * days * (24 * 60 / 2));
+            height = Math.round(prevBc + 1.0 * days * ((double) (24 * 60) / 2));
         }
         return height;
     }

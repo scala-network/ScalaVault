@@ -30,6 +30,8 @@ import android.graphics.Paint;
 import android.util.AttributeSet;
 import android.view.View;
 
+import androidx.annotation.NonNull;
+
 import io.scalaproject.vault.R;
 
 import timber.log.Timber;
@@ -110,14 +112,14 @@ public class DotBar extends View {
     }
 
     @Override
-    protected void onDraw(Canvas canvas) {
+    protected void onDraw(@NonNull Canvas canvas) {
         super.onDraw(canvas);
 
         // Centering the dots in the middle of the canvas
         float singleDotSize = dotSpacing + dotSize;
         float combinedDotSize = singleDotSize * numDots - dotSpacing;
-        int startingX = (int) ((canvas.getWidth() - combinedDotSize) / 2);
-        int startingY = (int) ((canvas.getHeight() - dotSize) / 2);
+        int startingX = (int) ((getWidth() - combinedDotSize) / 2);
+        int startingY = (int) ((getHeight() - dotSize) / 2);
 
         for (int i = 0; i < numDots; i++) {
             int x = (int) (startingX + i * singleDotSize);

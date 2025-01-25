@@ -194,7 +194,7 @@ public class ExchangeView extends LinearLayout {
             @Override
             public void onNothingSelected(AdapterView<?> parentView) {
                 // nothing (yet?)
-                Log.d("ExchangeView", "onNothingSelected");
+                Timber.tag("ExchangeView").d("onNothingSelected");
             }
         });
 
@@ -204,40 +204,30 @@ public class ExchangeView extends LinearLayout {
                 if (position != 0) { // if not XLA, select XLA on other
                     sCurrencyA.setSelection(0, true);
                 }
-                parentView.post(new Runnable() {
-                    @Override
-                    public void run() {
-                        ((TextView) parentView.getChildAt(0)).setTextColor(getResources().getColor(R.color.scalaGray));
-                    }
-                });
+                parentView.post(() -> ((TextView) parentView.getChildAt(0)).setTextColor(getResources().getColor(R.color.scalaGray)));
                 doExchange();
             }
 
             @Override
             public void onNothingSelected(AdapterView<?> parentView) {
                 // nothing
-                Log.d("ExchangeView", "onNothingSelected");
+                Timber.tag("ExchangeView").d("onNothingSelected");
             }
         });
 
-        Objects.requireNonNull(etAmount.getEditText()).setOnFocusChangeListener(new OnFocusChangeListener() {
-            @Override
-            public void onFocusChange(View v, boolean hasFocus) {
-                if (!hasFocus) {
-                    doExchange();
-                }
+        Objects.requireNonNull(etAmount.getEditText()).setOnFocusChangeListener((v, hasFocus) -> {
+            if (!hasFocus) {
+                doExchange();
             }
         });
 
-        etAmount.getEditText().setOnEditorActionListener(new TextView.OnEditorActionListener() {
-            public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
-                if ((event != null && (event.getKeyCode() == KeyEvent.KEYCODE_ENTER) && (event.getAction() == KeyEvent.ACTION_DOWN))
-                        || (actionId == EditorInfo.IME_ACTION_DONE)) {
-                    doExchange();
-                    return true;
-                }
-                return false;
+        etAmount.getEditText().setOnEditorActionListener((v, actionId, event) -> {
+            if ((event != null && (event.getKeyCode() == KeyEvent.KEYCODE_ENTER) && (event.getAction() == KeyEvent.ACTION_DOWN))
+                    || (actionId == EditorInfo.IME_ACTION_DONE)) {
+                doExchange();
+                return true;
             }
+            return false;
         });
 
 
@@ -250,12 +240,12 @@ public class ExchangeView extends LinearLayout {
 
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-                Log.d("ExchangeView", "beforeTextChanged");
+                Timber.tag("ExchangeView").d("beforeTextChanged");
             }
 
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
-                Log.d("ExchangeView", "onTextChanged");
+                Timber.tag("ExchangeView").d("onTextChanged");
             }
         });
     }
@@ -370,7 +360,6 @@ public class ExchangeView extends LinearLayout {
     }
 
     boolean prepareExchange() {
-        Log.d("ExchangeView", "prepareExchange()");
         Timber.d("prepareExchange()");
         if (checkEnteredAmount()) {
             String enteredAmount = Objects.requireNonNull(etAmount.getEditText()).getText().toString();
@@ -412,7 +401,7 @@ public class ExchangeView extends LinearLayout {
         exchange(0);
         if (onFailedExchangeListener != null) {
             onFailedExchangeListener.onFailedExchange();
-            Log.d("ExchangeView", "onFailedExchange");
+            Timber.tag("ExchangeView").d("onFailedExchange");
         }
     }
 

@@ -369,8 +369,7 @@ public class TxFragment extends Fragment {
         if (context instanceof TxFragment.Listener) {
             this.activityCallback = (TxFragment.Listener) context;
         } else {
-            throw new ClassCastException(context.toString()
-                    + " must implement Listener");
+            throw new ClassCastException(context.toString() + " must implement Listener");
         }
     }
 

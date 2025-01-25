@@ -51,12 +51,7 @@ public class ExchangeOtherEditText extends ExchangeEditText {
 
     public void setExchangeRate(double rate) {
         exchangeRate = rate;
-        post(new Runnable() {
-            @Override
-            public void run() {
-                startExchange();
-            }
-        });
+        post(this::startExchange);
     }
 
     private void setBaseCurrency(Context context, AttributeSet attrs) {
@@ -157,44 +152,36 @@ public class ExchangeOtherEditText extends ExchangeEditText {
                     @Override
                     public void onSuccess(final ExchangeRate exchangeRate) {
                         if (isAttachedToWindow())
-                            new Handler(Looper.getMainLooper()).post(new Runnable() {
-                                @Override
-                                public void run() {
-                                    ExchangeRate xchange = new ExchangeRate() {
-                                        @Override
-                                        public String getServiceName() {
-                                            return exchangeRate.getServiceName() + "+" + baseCurrency;
-                                        }
+                            new Handler(Looper.getMainLooper()).post(() -> {
+                                ExchangeRate xchange = new ExchangeRate() {
+                                    @Override
+                                    public String getServiceName() {
+                                        return exchangeRate.getServiceName() + "+" + baseCurrency;
+                                    }
 
-                                        @Override
-                                        public String getBaseCurrency() {
-                                            return baseIsBaseCrypto ? baseCurrency : base;
-                                        }
+                                    @Override
+                                    public String getBaseCurrency() {
+                                        return baseIsBaseCrypto ? baseCurrency : base;
+                                    }
 
-                                        @Override
-                                        public String getQuoteCurrency() {
-                                            return baseIsBaseCrypto ? quote : baseCurrency;
-                                        }
+                                    @Override
+                                    public String getQuoteCurrency() {
+                                        return baseIsBaseCrypto ? quote : baseCurrency;
+                                    }
 
-                                        @Override
-                                        public double getRate() {
-                                            return exchangeRate.getRate() * factor;
-                                        }
-                                    };
-                                    exchange(xchange);
-                                }
+                                    @Override
+                                    public double getRate() {
+                                        return exchangeRate.getRate() * factor;
+                                    }
+                                };
+                                exchange(xchange);
                             });
                     }
 
                     @Override
                     public void onError(final Exception e) {
                         Timber.e(e.getLocalizedMessage());
-                        new Handler(Looper.getMainLooper()).post(new Runnable() {
-                            @Override
-                            public void run() {
-                                exchangeFailed();
-                            }
-                        });
+                        new Handler(Looper.getMainLooper()).post(() -> exchangeFailed());
                     }
                 });
     }

@@ -126,44 +126,31 @@ public class ReceiveFragment extends Fragment {
 
         etDummy.setRawInputType(InputType.TYPE_TEXT_FLAG_NO_SUGGESTIONS);
 
-        bCopyAddress.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                copyAddress();
-            }
-        });
+        bCopyAddress.setOnClickListener(v -> copyAddress());
         enableCopyAddress(false);
 
-        evAmount.setOnNewAmountListener(new ExchangeView.OnNewAmountListener() {
-            @Override
-            public void onNewAmount(String xla) {
-                Timber.d("new amount = %s", xla);
-                generateQr();
-            }
+        evAmount.setOnNewAmountListener(xla -> {
+            Timber.d("new amount = %s", xla);
+            generateQr();
         });
 
-        evAmount.setOnFailedExchangeListener(new ExchangeView.OnFailedExchangeListener() {
-            @Override
-            public void onFailedExchange() {
-                if (isAdded()) {
-                    clearQR();
-                    Toast.makeText(getActivity(), getString(R.string.message_exchange_failed), Toast.LENGTH_LONG).show();
-                }
+        evAmount.setOnFailedExchangeListener(() -> {
+            if (isAdded()) {
+                clearQR();
+                Toast.makeText(getActivity(), getString(R.string.message_exchange_failed), Toast.LENGTH_LONG).show();
             }
         });
 
         final EditText notesEdit = etNotes.getEditText();
         assert notesEdit != null;
         notesEdit.setRawInputType(InputType.TYPE_CLASS_TEXT);
-        notesEdit.setOnEditorActionListener(new TextView.OnEditorActionListener() {
-            public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
-                if ((event != null && (event.getKeyCode() == KeyEvent.KEYCODE_ENTER) && (event.getAction() == KeyEvent.ACTION_DOWN))
-                        || (actionId == EditorInfo.IME_ACTION_DONE)) {
-                    generateQr();
-                    return true;
-                }
-                return false;
+        notesEdit.setOnEditorActionListener((v, actionId, event) -> {
+            if ((event != null && (event.getKeyCode() == KeyEvent.KEYCODE_ENTER) && (event.getAction() == KeyEvent.ACTION_DOWN))
+                    || (actionId == EditorInfo.IME_ACTION_DONE)) {
+                generateQr();
+                return true;
             }
+            return false;
         });
         notesEdit.addTextChangedListener(new TextWatcher() {
             @Override
@@ -182,43 +169,30 @@ public class ReceiveFragment extends Fragment {
             }
         });
 
-        bSubaddress.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                enableSubaddressButton(false);
-                enableCopyAddress(false);
+        bSubaddress.setOnClickListener(v -> {
+            enableSubaddressButton(false);
+            enableCopyAddress(false);
 
-                final Runnable newAddress = new Runnable() {
-                    public void run() {
-                        getNewSubaddress();
-                    }
-                };
+            final Runnable newAddress = this::getNewSubaddress;
 
-                tvAddress.animate().alpha(0).setDuration(250)
-                        .withEndAction(newAddress).start();
+            tvAddress.animate().alpha(0).setDuration(250)
+                    .withEndAction(newAddress).start();
+        });
+
+        ivQrCode.setOnClickListener(v -> {
+            Helper.hideKeyboard(getActivity());
+            etDummy.requestFocus();
+            if (qrValid) {
+                ivQrCodeFull.setImageBitmap(((BitmapDrawable) ivQrCode.getDrawable()).getBitmap());
+                ivQrCodeFull.setVisibility(View.VISIBLE);
+            } else {
+                evAmount.doExchange();
             }
         });
 
-        ivQrCode.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Helper.hideKeyboard(getActivity());
-                etDummy.requestFocus();
-                if (qrValid) {
-                    ivQrCodeFull.setImageBitmap(((BitmapDrawable) ivQrCode.getDrawable()).getBitmap());
-                    ivQrCodeFull.setVisibility(View.VISIBLE);
-                } else {
-                    evAmount.doExchange();
-                }
-            }
-        });
-
-        ivQrCodeFull.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                ivQrCodeFull.setImageBitmap(null);
-                ivQrCodeFull.setVisibility(View.GONE);
-            }
+        ivQrCodeFull.setOnClickListener(v -> {
+            ivQrCodeFull.setImageBitmap(null);
+            ivQrCodeFull.setVisibility(View.GONE);
         });
 
         showProgress();
@@ -265,12 +239,9 @@ public class ReceiveFragment extends Fragment {
         shareActionProvider = (ShareActionProvider) MenuItemCompat.getActionProvider(item);
 
         assert shareActionProvider != null;
-        shareActionProvider.setOnShareTargetSelectedListener(new ShareActionProvider.OnShareTargetSelectedListener() {
-            @Override
-            public boolean onShareTargetSelected(ShareActionProvider shareActionProvider, Intent intent) {
-                saveQrCode(); // save it only if we need it
-                return false;
-            }
+        shareActionProvider.setOnShareTargetSelectedListener((shareActionProvider, intent) -> {
+            saveQrCode(); // save it only if we need it
+            return false;
         });
     }
 
@@ -634,11 +605,7 @@ public class ReceiveFragment extends Fragment {
                     wallet.getNumSubaddresses() - 1));
             generateQr();
             enableCopyAddress(true);
-            final Runnable resetSize = new Runnable() {
-                public void run() {
-                    tvAddress.animate().setDuration(125).scaleX(1).scaleY(1).start();
-                }
-            };
+            final Runnable resetSize = () -> tvAddress.animate().setDuration(125).scaleX(1).scaleY(1).start();
             tvAddress.animate().alpha(1).setDuration(125)
                     .scaleX(1.2f).scaleY(1.2f)
                     .withEndAction(resetSize).start();

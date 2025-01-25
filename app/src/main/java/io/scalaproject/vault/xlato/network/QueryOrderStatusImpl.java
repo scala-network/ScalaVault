@@ -21,6 +21,8 @@
 
 package io.scalaproject.vault.xlato.network;
 
+import android.annotation.SuppressLint;
+
 import androidx.annotation.NonNull;
 
 import io.scalaproject.vault.xlato.api.XlaToCallback;
@@ -36,16 +38,17 @@ import java.util.Date;
 import timber.log.Timber;
 
 class QueryOrderStatusImpl implements QueryOrderStatus {
+    @SuppressLint("SimpleDateFormat")
     public static final SimpleDateFormat DATETIME_FORMATTER = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ssZ");
 
     public static Date parseDate(String dateString) throws ParseException {
         return DATETIME_FORMATTER.parse(dateString.replaceAll("Z$", "+0000"));
     }
 
-    private QueryOrderStatus.State state; // "state": "<order_state_as_string>",
-    private double btcAmount; // "btc_amount": <requested_amount_in_btc_as_float>,
-    private String btcDestAddress; // "btc_dest_address": "<requested_destination_address_as_string>",
-    private String uuid; // "uuid": "<unique_order_identifier_as_12_character_string>"
+    private final QueryOrderStatus.State state; // "state": "<order_state_as_string>",
+    private final double btcAmount; // "btc_amount": <requested_amount_in_btc_as_float>,
+    private final String btcDestAddress; // "btc_dest_address": "<requested_destination_address_as_string>",
+    private final String uuid; // "uuid": "<unique_order_identifier_as_12_character_string>"
     // the following are only returned if the state is "after" TO_BE_CREATED
     //private int btcNumConfirmations; // "btc_num_confirmations": <btc_num_confirmations_as_integer>,
     private int btcNumConfirmationsThreshold; // "btc_num_confirmations_threshold": <btc_num_confirmations_threshold_as_integer>,

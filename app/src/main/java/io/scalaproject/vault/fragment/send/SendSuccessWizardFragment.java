@@ -21,6 +21,7 @@
 
 package io.scalaproject.vault.fragment.send;
 
+import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.graphics.Paint;
 import android.net.Uri;
@@ -31,6 +32,8 @@ import android.view.ViewGroup;
 import android.widget.ImageButton;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import java.util.Objects;
 
 import io.scalaproject.vault.R;
 import io.scalaproject.vault.data.PendingTx;
@@ -74,6 +77,7 @@ public class SendSuccessWizardFragment extends SendWizardFragment {
     private TextView tvTxAmount;
     private TextView tvTxFee;
 
+    @SuppressLint({"ResourceType", "MissingInflatedId"})
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -84,12 +88,9 @@ public class SendSuccessWizardFragment extends SendWizardFragment {
                 R.layout.fragment_send_success, container, false);
 
         bCopyTxId = view.findViewById(R.id.bCopyTxId);
-        bCopyTxId.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Helper.clipBoardCopy(getActivity(), getString(R.string.label_send_txid), tvTxId.getText().toString());
-                Toast.makeText(getActivity(), getString(R.string.message_copy_txid), Toast.LENGTH_SHORT).show();
-            }
+        bCopyTxId.setOnClickListener(v -> {
+            Helper.clipBoardCopy(requireActivity(), getString(R.string.label_send_txid), tvTxId.getText().toString());
+            Toast.makeText(getActivity(), getString(R.string.message_copy_txid), Toast.LENGTH_SHORT).show();
         });
 
         tvTxId = view.findViewById(R.id.tvTxId);
@@ -126,13 +127,10 @@ public class SendSuccessWizardFragment extends SendWizardFragment {
             tvTxId.setTextColor(getResources().getColor(R.color.c_blue));
             tvTxId.setPaintFlags(tvTxId.getPaintFlags() | Paint.UNDERLINE_TEXT_FLAG);
 
-            tvTxId.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    String paymentURL = "https://explorer.scala.network/tx/" + tvTxId.getText();
-                    Uri uri = Uri.parse(paymentURL);
-                    startActivity(new Intent(Intent.ACTION_VIEW, uri));
-                }
+            tvTxId.setOnClickListener(v -> {
+                String paymentURL = "https://explorer.scala.network/tx/" + tvTxId.getText();
+                Uri uri = Uri.parse(paymentURL);
+                startActivity(new Intent(Intent.ACTION_VIEW, uri));
             });
 
             bCopyTxId.setEnabled(true);

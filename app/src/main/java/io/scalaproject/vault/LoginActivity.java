@@ -183,12 +183,9 @@ public class LoginActivity extends BaseActivity
     }
 
     private void loadNodesWithNetwork() {
-        Helper.runWithNetwork(new Helper.Action() {
-            @Override
-            public boolean run() {
-                loadAllNodes();
-                return true;
-            }
+        Helper.runWithNetwork(() -> {
+            loadAllNodes();
+            return true;
         });
     }
 
@@ -342,24 +339,21 @@ public class LoginActivity extends BaseActivity
         setSupportActionBar(toolbar);
         Objects.requireNonNull(getSupportActionBar()).setDisplayShowTitleEnabled(false);
 
-        toolbar.setOnButtonListener(new Toolbar.OnButtonListener() {
-            @Override
-            public void onButton(int type) {
-                switch (type) {
-                    case Toolbar.BUTTON_BACK:
-                        onBackPressed();
-                        break;
-                    case Toolbar.BUTTON_CLOSE:
-                        finish();
-                        break;
-                    case Toolbar.BUTTON_CREDITS:
-                        CreditsFragment.display(getSupportFragmentManager());
-                        break;
-                    case Toolbar.BUTTON_NONE:
-                        break;
-                    default:
-                        Timber.e("Button " + type + "pressed - how can this be?");
-                }
+        toolbar.setOnButtonListener(type -> {
+            switch (type) {
+                case Toolbar.BUTTON_BACK:
+                    onBackPressed();
+                    break;
+                case Toolbar.BUTTON_CLOSE:
+                    finish();
+                    break;
+                case Toolbar.BUTTON_CREDITS:
+                    CreditsFragment.display(getSupportFragmentManager());
+                    break;
+                case Toolbar.BUTTON_NONE:
+                    break;
+                default:
+                    Timber.e("Button " + type + "pressed - how can this be?");
             }
         });
 
@@ -388,7 +382,7 @@ public class LoginActivity extends BaseActivity
     }
 
     @Override
-    public void onRequestPermissionsResult(int requestCode, @NonNull String permissions[],
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions,
                                            @NonNull int[] grantResults) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults);
 
@@ -432,30 +426,24 @@ public class LoginActivity extends BaseActivity
     public void onWalletDetails(final String walletName) {
         Timber.d("details for wallet .%s.", walletName);
         if (checkServiceRunning()) return;
-        DialogInterface.OnClickListener dialogClickListener = new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialog, int which) {
-                switch (which) {
-                    case DialogInterface.BUTTON_POSITIVE:
-                        final File walletFile = Helper.getWalletFile(LoginActivity.this, walletName);
-                        if (WalletManager.getInstance().walletExists(walletFile)) {
-                            Helper.promptPassword(LoginActivity.this, walletName, true, new Helper.PasswordAction() {
-                                @Override
-                                public void action(String walletName, String password, boolean fingerprintUsed) {
-                                    if (checkDevice(walletName, password))
-                                        startDetails(walletFile, password, GenerateReviewFragment.VIEW_TYPE_DETAILS);
-                                }
-                            });
-                        } else { // this cannot really happen as we prefilter choices
-                            Timber.e("Wallet missing: %s", walletName);
-                            Toast.makeText(LoginActivity.this, getString(R.string.bad_wallet), Toast.LENGTH_SHORT).show();
-                        }
-                        break;
+        DialogInterface.OnClickListener dialogClickListener = (dialog, which) -> {
+            switch (which) {
+                case DialogInterface.BUTTON_POSITIVE:
+                    final File walletFile = Helper.getWalletFile(LoginActivity.this, walletName);
+                    if (WalletManager.getInstance().walletExists(walletFile)) {
+                        Helper.promptPassword(LoginActivity.this, walletName, true, (walletName1, password, fingerprintUsed) -> {
+                            if (checkDevice(walletName1, password))
+                                startDetails(walletFile, password, GenerateReviewFragment.VIEW_TYPE_DETAILS);
+                        });
+                    } else { // this cannot really happen as we prefilter choices
+                        Timber.e("Wallet missing: %s", walletName);
+                        Toast.makeText(LoginActivity.this, getString(R.string.bad_wallet), Toast.LENGTH_SHORT).show();
+                    }
+                    break;
 
-                    case DialogInterface.BUTTON_NEGATIVE:
-                        // do nothing
-                        break;
-                }
+                case DialogInterface.BUTTON_NEGATIVE:
+                    // do nothing
+                    break;
             }
         };
 
@@ -472,12 +460,9 @@ public class LoginActivity extends BaseActivity
         if (checkServiceRunning()) return;
         final File walletFile = Helper.getWalletFile(this, walletName);
         if (WalletManager.getInstance().walletExists(walletFile)) {
-            Helper.promptPassword(LoginActivity.this, walletName, false, new Helper.PasswordAction() {
-                @Override
-                public void action(String walletName, String password, boolean fingerprintUsed) {
-                    if (checkDevice(walletName, password))
-                        startReceive(walletFile, password);
-                }
+            Helper.promptPassword(LoginActivity.this, walletName, false, (walletName1, password, fingerprintUsed) -> {
+                if (checkDevice(walletName1, password))
+                    startReceive(walletFile, password);
             });
         } else { // this cannot really happen as we prefilter choices
             Toast.makeText(this, getString(R.string.bad_wallet), Toast.LENGTH_SHORT).show();
@@ -528,37 +513,31 @@ public class LoginActivity extends BaseActivity
         alertDialogBuilder
                 .setCancelable(false)
                 .setPositiveButton(getString(R.string.label_ok),
-                        new DialogInterface.OnClickListener() {
-                            public void onClick(DialogInterface dialog, int id) {
-                                Helper.hideKeyboardAlways(LoginActivity.this);
-                                String newName = etRename.getText().toString();
-                                renameWallet(walletName, newName);
-                            }
+                        (dialog, id) -> {
+                            Helper.hideKeyboardAlways(LoginActivity.this);
+                            String newName = etRename.getText().toString();
+                            renameWallet(walletName, newName);
                         })
                 .setNegativeButton(getString(R.string.label_cancel),
-                        new DialogInterface.OnClickListener() {
-                            public void onClick(DialogInterface dialog, int id) {
-                                Helper.hideKeyboardAlways(LoginActivity.this);
-                                dialog.cancel();
-                            }
+                        (dialog, id) -> {
+                            Helper.hideKeyboardAlways(LoginActivity.this);
+                            dialog.cancel();
                         });
 
         final androidx.appcompat.app.AlertDialog dialog = alertDialogBuilder.create();
         Helper.showKeyboard(dialog);
 
         // accept keyboard "ok"
-        etRename.setOnEditorActionListener(new TextView.OnEditorActionListener() {
-            public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
-                if ((event != null && (event.getKeyCode() == KeyEvent.KEYCODE_ENTER) && (event.getAction() == KeyEvent.ACTION_DOWN))
-                        || (actionId == EditorInfo.IME_ACTION_DONE)) {
-                    Helper.hideKeyboardAlways(LoginActivity.this);
-                    String newName = etRename.getText().toString();
-                    dialog.cancel();
-                    renameWallet(walletName, newName);
-                    return false;
-                }
+        etRename.setOnEditorActionListener((v, actionId, event) -> {
+            if ((event != null && (event.getKeyCode() == KeyEvent.KEYCODE_ENTER) && (event.getAction() == KeyEvent.ACTION_DOWN))
+                    || (actionId == EditorInfo.IME_ACTION_DONE)) {
+                Helper.hideKeyboardAlways(LoginActivity.this);
+                String newName = etRename.getText().toString();
+                dialog.cancel();
+                renameWallet(walletName, newName);
                 return false;
             }
+            return false;
         });
 
         dialog.show();
@@ -659,29 +638,19 @@ public class LoginActivity extends BaseActivity
     public void onWalletArchive(final String walletName) {
         Timber.d("archive for wallet ." + walletName + ".");
         if (checkServiceRunning()) return;
-        DialogInterface.OnClickListener dialogClickListener = new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialog, int which) {
-                switch (which) {
-                    case DialogInterface.BUTTON_POSITIVE:
-                        Helper.promptPassword(LoginActivity.this, walletName, false, new Helper.PasswordAction() {
-                            @Override
-                            public void action(final String walletName, String password, boolean fingerprintUsed) {
-                                if (checkDevice(walletName, password)) {
-                                    runOnUiThread(new Runnable() {
-                                        public void run() {
-                                            new AsyncArchive().execute(walletName);
-                                        }
-                                    });
-                                }
-                            }
-                        });
+        DialogInterface.OnClickListener dialogClickListener = (dialog, which) -> {
+            switch (which) {
+                case DialogInterface.BUTTON_POSITIVE:
+                    Helper.promptPassword(LoginActivity.this, walletName, false, (walletName1, password, fingerprintUsed) -> {
+                        if (checkDevice(walletName1, password)) {
+                            runOnUiThread(() -> new AsyncArchive().execute(walletName1));
+                        }
+                    });
 
-                        break;
-                    case DialogInterface.BUTTON_NEGATIVE:
-                        // do nothing
-                        break;
-                }
+                    break;
+                case DialogInterface.BUTTON_NEGATIVE:
+                    // do nothing
+                    break;
             }
         };
 
@@ -709,6 +678,7 @@ public class LoginActivity extends BaseActivity
         try {
             GenerateReviewFragment detailsFragment = (GenerateReviewFragment)
                     getSupportFragmentManager().findFragmentById(R.id.fragment_container);
+            assert detailsFragment != null;
             AlertDialog dialog = detailsFragment.createChangePasswordDialog();
             if (dialog != null) {
                 Helper.showKeyboard(dialog);
@@ -1130,21 +1100,11 @@ public class LoginActivity extends BaseActivity
     }
 
     void toast(final String msg) {
-        runOnUiThread(new Runnable() {
-            @Override
-            public void run() {
-                Toast.makeText(LoginActivity.this, msg, Toast.LENGTH_LONG).show();
-            }
-        });
+        runOnUiThread(() -> Toast.makeText(LoginActivity.this, msg, Toast.LENGTH_LONG).show());
     }
 
     void toast(final int msgId) {
-        runOnUiThread(new Runnable() {
-            @Override
-            public void run() {
-                Toast.makeText(LoginActivity.this, getString(msgId), Toast.LENGTH_LONG).show();
-            }
-        });
+        runOnUiThread(() -> Toast.makeText(LoginActivity.this, getString(msgId), Toast.LENGTH_LONG).show());
     }
 
     @Override
@@ -1234,13 +1194,10 @@ public class LoginActivity extends BaseActivity
         final ArrayList<Locale> availableLocales = LocaleHelper.getAvailableLocales(LoginActivity.this);
         String[] localeDisplayName = new String[1 + availableLocales.size()];
 
-        Collections.sort(availableLocales, new Comparator<Locale>() {
-            @Override
-            public int compare(Locale locale1, Locale locale2) {
-                String localeString1 = LocaleHelper.getDisplayName(locale1, true);
-                String localeString2 = LocaleHelper.getDisplayName(locale2, true);
-                return localeString1.compareTo(localeString2);
-            }
+        Collections.sort(availableLocales, (locale1, locale2) -> {
+            String localeString1 = LocaleHelper.getDisplayName(locale1, true);
+            String localeString2 = LocaleHelper.getDisplayName(locale2, true);
+            return localeString1.compareTo(localeString2);
         });
 
         localeDisplayName[0] = getString(R.string.language_system_default);
@@ -1456,12 +1413,9 @@ public class LoginActivity extends BaseActivity
         File walletFile = Helper.getWalletFile(this, walletName);
         if (WalletManager.getInstance().walletExists(walletFile)) {
             Helper.promptPassword(LoginActivity.this, walletName, false,
-                    new Helper.PasswordAction() {
-                        @Override
-                        public void action(String walletName, String password, boolean fingerprintUsed) {
-                            if (checkDevice(walletName, password))
-                                startWallet(walletName, password, fingerprintUsed, stealthMode);
-                        }
+                    (walletName1, password, fingerprintUsed) -> {
+                        if (checkDevice(walletName1, password))
+                            startWallet(walletName1, password, fingerprintUsed, stealthMode);
                     });
         } else { // this cannot really happen as we prefilter choices
             Toast.makeText(this, getString(R.string.bad_wallet), Toast.LENGTH_SHORT).show();
@@ -1515,38 +1469,23 @@ public class LoginActivity extends BaseActivity
                 Ledger.connect(usbManager, usbDevice);
                 if (!Ledger.check()) {
                     Ledger.disconnect();
-                    runOnUiThread(new Runnable() {
-                        @Override
-                        public void run() {
-                            Toast.makeText(LoginActivity.this,
-                                    getString(R.string.toast_ledger_start_app, usbDevice.getProductName()),
-                                    Toast.LENGTH_SHORT)
-                                    .show();
-                        }
-                    });
+                    runOnUiThread(() -> Toast.makeText(LoginActivity.this,
+                            getString(R.string.toast_ledger_start_app, usbDevice.getProductName()),
+                            Toast.LENGTH_SHORT)
+                            .show());
                 } else {
                     registerDetachReceiver();
                     onLedgerAction();
-                    runOnUiThread(new Runnable() {
-                        @Override
-                        public void run() {
-                            Toast.makeText(LoginActivity.this,
-                                    getString(R.string.toast_ledger_attached, usbDevice.getProductName()),
-                                    Toast.LENGTH_SHORT)
-                                    .show();
-                        }
-                    });
+                    runOnUiThread(() -> Toast.makeText(LoginActivity.this,
+                            getString(R.string.toast_ledger_attached, usbDevice.getProductName()),
+                            Toast.LENGTH_SHORT)
+                            .show());
                 }
             } catch (IOException ex) {
-                runOnUiThread(new Runnable() {
-                    @Override
-                    public void run() {
-                        Toast.makeText(LoginActivity.this,
-                                getString(R.string.open_wallet_ledger_missing),
-                                Toast.LENGTH_SHORT)
-                                .show();
-                    }
-                });
+                runOnUiThread(() -> Toast.makeText(LoginActivity.this,
+                        getString(R.string.open_wallet_ledger_missing),
+                        Toast.LENGTH_SHORT)
+                        .show());
             }
     }
 
@@ -1599,20 +1538,15 @@ public class LoginActivity extends BaseActivity
     private void registerDetachReceiver() {
         detachReceiver = new BroadcastReceiver() {
             public void onReceive(Context context, Intent intent) {
-                if (intent.getAction().equals(UsbManager.ACTION_USB_DEVICE_DETACHED)) {
+                if (Objects.equals(intent.getAction(), UsbManager.ACTION_USB_DEVICE_DETACHED)) {
                     unregisterDetachReceiver();
                     final UsbDevice device = intent.getParcelableExtra(UsbManager.EXTRA_DEVICE);
                     Timber.i("Ledger detached!");
                     if (device != null)
-                        runOnUiThread(new Runnable() {
-                            @Override
-                            public void run() {
-                                Toast.makeText(LoginActivity.this,
-                                        getString(R.string.toast_ledger_detached, device.getProductName()),
-                                        Toast.LENGTH_SHORT)
-                                        .show();
-                            }
-                        });
+                        runOnUiThread(() -> Toast.makeText(LoginActivity.this,
+                                getString(R.string.toast_ledger_detached, device.getProductName()),
+                                Toast.LENGTH_SHORT)
+                                .show());
                     Ledger.disconnect();
                     onLedgerAction();
                 }

@@ -149,10 +149,5 @@ public class Contact {
         avatar = anotherContact.avatar;
     }
 
-    static public Comparator<Contact> ContactComparator = new Comparator<Contact>() {
-        @Override
-        public int compare(Contact o1, Contact o2) {
-            return o1.getName().compareToIgnoreCase(o2.getName());
-        }
-    };
+    static public Comparator<Contact> ContactComparator = (o1, o2) -> o1.getName().compareToIgnoreCase(o2.getName());
 }

@@ -216,12 +216,9 @@ public class AddressBookFragment extends Fragment implements ContactInfoAdapter.
         MaterialAlertDialogBuilder builder = new MaterialAlertDialogBuilder(requireActivity(), R.style.MaterialAlertDialogCustom);
         builder.setMessage(getString(R.string.delete_contact_conf, contact.getName()))
                 .setCancelable(true)
-                .setPositiveButton(getString(R.string.details_alert_yes), new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialogInterface, int i) {
-                        contactsAdapter.deleteContact(contact);
-                        refreshContacts();
-                    }
+                .setPositiveButton(getString(R.string.details_alert_yes), (dialogInterface, i) -> {
+                    contactsAdapter.deleteContact(contact);
+                    refreshContacts();
                 })
                 .setNegativeButton(getString(R.string.details_alert_no), null)
                 .show();
@@ -418,28 +415,18 @@ public class AddressBookFragment extends Fragment implements ContactInfoAdapter.
                     .setCancelable(false)
                     .setPositiveButton(getString(R.string.label_ok), null)
                     .setNegativeButton(getString(R.string.label_cancel),
-                            new DialogInterface.OnClickListener() {
-                                public void onClick(DialogInterface dialog, int id) {
-                                    undoChanges();
-                                    closeDialog();
-                                    contactsAdapter.dataSetChanged(); // to refresh test results
-                                }
+                            (dialog, id) -> {
+                                undoChanges();
+                                closeDialog();
+                                contactsAdapter.dataSetChanged(); // to refresh test results
                             });
 
             editDialog = alertDialogBuilder.create();
 
             // these need to be here, since we don't always close the dialog
-            editDialog.setOnShowListener(new DialogInterface.OnShowListener() {
-                @Override
-                public void onShow(final DialogInterface dialog) {
-                    Button button = editDialog.getButton(AlertDialog.BUTTON_POSITIVE);
-                    button.setOnClickListener(new View.OnClickListener() {
-                        @Override
-                        public void onClick(View view) {
-                            apply();
-                        }
-                    });
-                }
+            editDialog.setOnShowListener(dialog -> {
+                Button button = editDialog.getButton(AlertDialog.BUTTON_POSITIVE);
+                button.setOnClickListener(view -> apply());
             });
 
             if (Helper.preventScreenshot()) {

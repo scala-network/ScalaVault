@@ -158,12 +158,7 @@ public class WalletFragment extends Fragment
         bReceive = view.findViewById(R.id.bReceive);
 
         pullToRefresh = view.findViewById(R.id.pullToRefresh);
-        pullToRefresh.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
-            @Override
-            public void onRefresh() {
-                refresh();
-            }
-        });
+        pullToRefresh.setOnRefreshListener(this::refresh);
 
         txInfoAdapter = new TransactionInfoAdapter(getActivity(), this, this);
         rvTransactions.setAdapter(txInfoAdapter);
@@ -202,18 +197,8 @@ public class WalletFragment extends Fragment
 
         rvTransactions.addOnItemTouchListener(swipeTouchListener);
 
-        bSend.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                activityCallback.onSendRequest();
-            }
-        });
-        bReceive.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                activityCallback.onWalletReceive();
-            }
-        });
+        bSend.setOnClickListener(v -> activityCallback.onSendRequest());
+        bReceive.setOnClickListener(v -> activityCallback.onWalletReceive());
 
         sCurrency.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
