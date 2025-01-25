@@ -54,9 +54,9 @@ for arch in ${archs[@]}; do
     . ./setenv-android-mod.sh
 
     echo "CROSS COMPILE ENV : $CROSS_COMPILE"
-    cd openssl-OpenSSL_1_0_2l
+    cd openssl-OpenSSL_1.1.1w
 
-    xCFLAGS="-DSHARED_EXTENSION=.so -fPIC -DOPENSSL_PIC -DDSO_DLFCN -DHAVE_DLFCN_H -I$ANDROID_NDK_ROOT/sysroot/usr/include -I$ANDROID_NDK_ROOT/sysroot/usr/include/$_ANDROID_EABI_INC -I$ANDROID_DEV/include -B$ANDROID_DEV/$xLIB -O -fomit-frame-pointer -W"
+    xCFLAGS="-DSHARED_EXTENSION=.so -DOPENSSL_PIC -DDSO_DLFCN -DHAVE_DLFCN_H -I$ANDROID_NDK_ROOT/sysroot/usr/include -I$ANDROID_NDK_ROOT/sysroot/usr/include/$_ANDROID_EABI_INC -I$ANDROID_DEV/include -B$ANDROID_DEV/$xLIB -O -fomit-frame-pointer -W"
 
     perl -pi -e 's/install: all install_docs install_sw/install: install_docs install_sw/g' Makefile.org
     ./Configure shared no-threads no-asm no-zlib no-ssl2 no-ssl3 no-comp no-hw no-engine -D__ANDROID_API__=21 $configure_platform $xCFLAGS
@@ -78,7 +78,7 @@ for arch in ${archs[@]}; do
     cp libcrypto.a $TARGET_LIB_DIR
     cp libssl.a $TARGET_LIB_DIR
 
-    cp -aL $SRC_DIR/openssl-OpenSSL_1_0_2l/include/openssl/ $TARGET_DIR/include
+    cp -aL $SRC_DIR/openssl-OpenSSL_1.1.1w/include/openssl/ $TARGET_DIR/include
 #    ln -sf $TARGET_DIR/include $TARGET_DIR/arm/include
 
     cd ..

@@ -235,7 +235,6 @@
     <string name="send_total_btc_label">總計 (XLA)</string>
     <string name="send_total_label">總計</string>
 
-    <string name="send_amount">%1$s XLA</string>
     <string name="send_fee">+%1$s 手續費</string>
 
     <string name="send_create_tx_error_title">建立交易錯誤</string>

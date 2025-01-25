@@ -243,7 +243,6 @@
     <string name="send_total_btc_label">Total (XLA)</string>
     <string name="send_total_label">Total</string>
 
-    <string name="send_amount">%1$s XLA</string>
     <string name="send_fee">+%1$s Comissió</string>
 
     <string name="send_create_tx_error_title">Error creant la transacció</string>
@@ -414,4 +413,5 @@
     <string name="disable_debug_info">Disable Debug Info</string>
     <string name="send_address_resolve_ud">Resolving ENS / UD&#8230;</string>
     <string name="send_address_no_ud_records">No address found for ENS / UD domain</string>
+    <string name="wizard_home">Una cartera segura i lleugera per guardar les teves monedes Scala.</string>
 </resources>

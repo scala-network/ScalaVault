@@ -230,7 +230,6 @@
     <string name="send_total_btc_label">Összesen (XLA)</string>
     <string name="send_total_label">Összesen</string>
 
-    <string name="send_amount">%1$s XLA</string>
     <string name="send_fee">+%1$s díj</string>
 
     <string name="send_create_tx_error_title">Tranzakciólétrehozási hiba</string>

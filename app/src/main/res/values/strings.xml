@@ -168,7 +168,7 @@
     <string name="generate_title">Create Wallet</string>
     <string name="generate_name_hint">Wallet Name</string>
     <string name="generate_password_hint">Password (optional)</string>
-    <string name="prompt_password_hint" translatable="false">Password (Leave empty if none)</string>
+    <string name="prompt_password_hint">Password (Leave empty if none)</string>
     <string name="generate_fingerprint_hint">Allow to open wallet using fingerprint</string>
     <string name="generate_fingerprint_warn"><![CDATA[
         <strong>Fingerprint Authentication</strong>
@@ -224,7 +224,7 @@
     <string name="send_amount_hint">0.00</string>
     <string name="send_notes_hint">Private Notes (optional)</string>
     <string name="send_generate_paymentid_hint">Generate</string>
-    <string name="send_qr_hint" translatable="false">Scan</string>
+    <string name="send_qr_hint">Scan</string>
     <string name="send_send_label">Spend my sweet Scala</string>
     <string name="send_send_timed_label">Spend my sweet Scala (%1$s)</string>
     <string name="send_qr_invalid">Not a QR Code</string>
@@ -384,11 +384,11 @@
     <string name="menu_info">Show Secrets!</string>
     <string name="menu_StealthMode">Stealth Mode</string>
 
-    <string name="node_wrong_net" translatable="false">Node scanning only for mainnet!</string>
+    <string name="node_wrong_net">Node scanning only for mainnet!</string>
 
-    <string name="info_xlato">OBSOLETE</string>
+    <string name="info_xlato" translatable="false">OBSOLETE</string>
     <string name="info_mobile_miner">Start mining on your mobile device with Scala Miner. Tap here for more information.</string>
-    <string name="info_nodes_enabled">OBSOLETE</string>
+    <string name="info_nodes_enabled" translatable="false">OBSOLETE</string>
     <string name="info_nodes_enabled_2">Scala Vault scans for the best available nodes. Tap here for more information.</string>
     <string name="node_height">Last block updated: %1$s</string>
     <string name="label_nodes">Nodes</string>
@@ -429,7 +429,7 @@
     <string name="xlato_error_010">Invalid or outdated Payment URL</string>
     <string name="xlato_error_012">Too many requests</string>
 
-    <string name="xlato_error" translatable="false">XLA.TO Service Error</string>
+    <string name="xlato_error">XLA.TO Service Error</string>
 
     <string name="street_sweep_amount">EVERYTHING!</string>
 
@@ -449,7 +449,7 @@
     <string name="privacy_policy_intro">We care about your privacy. To learn more, please read our Privacy Policy.</string>
     <string name="privacy_policy_label">Privacy Policy</string>
     <string name="primary_address">Primary Address</string>
-    <string name="mm_url">https://github.com/scala-network/MobileMiner/releases</string>
+    <string name="mm_url" translatable="false">https://github.com/scala-network/MobileMiner/releases</string>
     <string name="connection_remote_daemon">Connecting to remote node&#8230;</string>
     <string name="remote_nodes">Remote Nodes</string>
     <string name="address_book">Address Book</string>

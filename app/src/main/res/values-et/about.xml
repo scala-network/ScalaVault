@@ -7,55 +7,51 @@
     <string name="credits_text"><![CDATA[
         <b>Autorid</b>
         <br/>
-        m2049r, baltsar777, anhdres, keejef,
-        rehrar, EarlOfEgo, ErCiccione jt
+        Scala meeskond
         <br/><br/>
         <a href="https://scala.network/">scala.network</a>
-        ]]></string>
+    ]]></string>
 
     <string name="privacy_policy"><![CDATA[
         <h1>Privaatsuspoliitika</h1>
-        <p>See leht informeerib sind personaalsete andmete kogumise, kasutamise ja
-        avaldamise osas, mida saame meie äpi (Scala Vault) kasutajatelt.
+        <p>See leht teavitab teid meie põhimõtetest, mis käsitlevad isikuandmete kogumist,
+        kasutamist ja avaldamist, mida me saame oma
+        rakenduse (Scala Vault) kasutajatelt.
         </p>
-        <p>Äppi kasutades nõustute teabe kogumise ja kasutamisega vastavalt sellele
-        poliitikale.
+        <p>Rakenduse kasutamisega nõustute teabe kogumise ja kasutamisega
+        vastavalt sellele põhimõttele.
         </p>
         <h2>Kogutud andmed</h2>
         <p>Isikuandmed on igasugused andmed, mis võivad isikut tuvastada.
         </p>
-        <p>Scala võtmeid ja avalikke aadresse kogutakse ja töödeldakse äpisiseselt
-        tehingute töötlemiseks ja edastatakse Scala võrku krüptitud kujul.
+        <p>Scala võtmed ja avalikud aadressid kogutakse ja töödeldakse rakenduse poolt kohapeal
+        tehingute töötlemise eesmärgil ning edastatakse Scala võrku
+        krüpteeritud kujul.
         </p>
         <p>Rakendus ei kogu muid isikuandmeid.</p>
-        <p>Kui kasutate vahetusfunktsiooni, kasutab Scala Vault selleks coinmarketcap.com\'i
-        avaliku API funktsiooni. Vaadake nende privaatsuspoliitikat aadressil
-        https://coinmarketcap.com/privacy, et saada üksikasju, kuidas teie päringute kohta
-        andmeid kogutakse.</p>
-        <p>Kui kasutate äppi BTC-aadressitele raha saatmiseks, siis kasutatakse selleks
-        XLA.TO teenust. Lisateabe saamiseks vaadake nende privaatsuspoliitikat aadressil
-        https://xla.to/. Scala Vault saadab neile BTC sihtkoha aadressi ja summa. Koguda
-        võidakse ka teie IP aadressi.</p>
-        <h2>Äpi õigused</h2>
+        <p>Kui kasutate vahetus (valikuline) funktsiooni, toob Scala Vault vahetuskursi
+        läbi coinmarketcap.com avaliku API.
+        Vaadake nende privaatsuspoliitikat aadressil https://coinmarketcap.com/privacy
+        üksikasjad selle kohta, kuidas teie päringute andmeid kogutakse.</p>
+        <h2>Rakenduse õigused</h2>
         <ul>
-        <li>INTERNET : Scala võrguga ühenduse loomine Scala Daemoni sõlmpunkti kaudu</li>
-        <li>READ_EXTERNAL_STORAGE : Seadmesse salvestatud rahakoti failide lugemiseks</li>
-        <li>WRITE_EXTERNAL_STORAGE : Rahakoti failide seadmesse salvestamiseks</li>
-        <li>WAKE_LOCK : Sünkroonimise ajal hoiab seadme ärkvel</li>
-        <li>CAMERA : QR-koodi lugemine Scala saamiseks</li>
+            <li>INTERNET: Ühendus Scala võrku Scala Deemon Node kaudu</li>
+            <li>READ_EXTERNAL_STORAGE: Rahakoti failide lugemine seadmel</li>
+            <li>WRITE_EXTERNAL_STORAGE: Rahakoti failide kirjutamine seadmel</li>
+            <li>WAKE_LOCK: Hoidke seade sünkroonimise ajal ärkvel</li>
+            <li>KAAMERA: QR-koodide skannimine Scala vastuvõtmiseks</li>
         </ul>
-        <h2>Privaatsuspoliitika muudatused</h2>
-        <p>Me võime aeg-ajalt seda privaatsuspoliitikat uuendada. Teatame teile kõigist
-        muudatustest, avaldades uued privaatsuseeskirjad äpis ja veebis (www.scala.network)
-        Soovitame teil seda privaatsuspoliitikat perioodiliselt üle vaadata juhuks,
-        kui vahepeal on toimunud muutusi.
-        </p>
-        <p>Seda privaatsuspoliitikat uuendati viimati: 10. november, 2017.
+        <h2>Muudatused selles privaatsuspoliitikas</h2>
+        <p>Me võime seda privaatsuspoliitikat aeg-ajalt ajakohastada. Me teavitame
+        teid kõigist muudatustest, postitades uue privaatsuspoliitika selles rakenduses.
+        Soovitame teil seda privaatsuspoliitikat perioodiliselt muudatuste osas üle vaadata.
+        <p>Seda privaatsuspoliitikat muudeti viimati 19. augustil 2020.
         </p>
         <h2>Võta meiega ühendust</h2>
-        <p>Kui teil on mingeid küsimusi meie privaatsuseeskirjade kohta või kuidas teie
-        andmeid kogutakse ja töödeldakse, siis palume saata e-post aadressile
-        hello@scala.network.
+        <p>Kui teil on küsimusi meie privaatsuspoliitika kohta
+        või selle kohta, kuidas teie andmeid kogutakse ja töödeldakse,
+        saatke e-kiri aadressile <a href="mailto:hello@scala.network">hello@scala.network</a>.
         </p>
-        ]]></string>
+    ]]></string>
+
 </resources>
