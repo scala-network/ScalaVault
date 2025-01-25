@@ -241,7 +241,6 @@
     <string name="send_total_btc_label">Sumo (XLA)</string>
     <string name="send_total_label">Sumo</string>
 
-    <string name="send_amount">%1$s XLA</string>
     <string name="send_fee">+%1$s Kosto</string>
 
     <string name="send_create_tx_error_title">Krei transakci-eraron</string>

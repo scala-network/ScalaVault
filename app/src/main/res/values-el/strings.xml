@@ -210,7 +210,6 @@
     <string name="send_total_btc_label">Σύνολο (XLA)</string>
     <string name="send_total_label">Σύνολο</string>
 
-    <string name="send_amount">%1$s XLA</string>
     <string name="send_fee">+%1$s Κόμιστρο</string>
 
     <string name="send_create_tx_error_title">Σφάλμα Δημιουργίας Συναλλαγής</string>

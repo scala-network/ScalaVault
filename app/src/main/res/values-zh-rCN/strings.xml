@@ -189,7 +189,6 @@
     <string name="send_fee_label">手续费</string>
     <string name="send_total_btc_label">合计 (XLA)</string>
     <string name="send_total_label">合计</string>
-    <string name="send_amount">%1$s XLA</string>
     <string name="send_fee">+%1$s 手续费</string>
     <string name="send_create_tx_error_title">创建交易发生错误</string>
     <string name="tx_list_fee">- 手续费 %1$s</string>
@@ -333,4 +332,5 @@
     <string name="disable_debug_info">Disable Debug Info</string>
     <string name="send_address_resolve_ud">Resolving ENS / UD&#8230;</string>
     <string name="send_address_no_ud_records">No address found for ENS / UD domain</string>
+    <string name="wizard_home">\"一个安全轻便的钱包，用于存储你的Scala币</string>
 </resources>

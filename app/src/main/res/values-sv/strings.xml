@@ -215,7 +215,6 @@
     <string name="send_total_btc_label">Summa (XLA)</string>
     <string name="send_total_label">Summa</string>
 
-    <string name="send_amount">%1$s XLA</string>
     <string name="send_fee">+%1$s avgift</string>
 
     <string name="send_create_tx_error_title">Ett fel uppstod när transaktion skapades</string>

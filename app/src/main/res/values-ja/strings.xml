@@ -1,5 +1,4 @@
 <resources xmlns:tools="http://schemas.android.com/tools" tools:locale="ja">
-    <string name="app_name" translatable="false">Scala Vault</string>
     <string name="wallet_activity_name">ウォレット</string>
     <string name="menu_mobileminer">モバイルマイナー</string>
     <string name="menu_about">Scala Vaultについて</string>
@@ -219,7 +218,6 @@
     <string name="send_amount_hint">0.00</string>
     <string name="send_notes_hint">プライベートノート (オプション)</string>
     <string name="send_generate_paymentid_hint">生成</string>
-    <string name="send_qr_hint" translatable="false">スキャン</string>
     <string name="send_send_label">モネロを送金する</string>
     <string name="send_send_timed_label">モネロを送金する (%1$s)</string>
     <string name="send_qr_invalid">QRコードではありません</string>
@@ -242,7 +240,6 @@
     <string name="send_total_btc_label">合計 (XLA)</string>
     <string name="send_total_label">合計</string>
 
-    <string name="send_amount">%1$s XLA</string>
     <string name="send_fee">+%1$s 手数料</string>
 
     <string name="send_create_tx_error_title">取引作成エラー</string>
@@ -297,9 +294,6 @@
     <string name="fab_restore_key">秘密鍵からウォレットを復元</string>
     <string name="fab_restore_seed">25単語のシードからウォレットを復元</string>
 
-    <string name="accounts_balance" translatable="false">%1$s XLA</string>
-    <string name="tx_account_formatted" translatable="false">(%1$d, %2$d)</string>
-
     <string name="accounts_drawer_new">アカウントを作成</string>
     <string name="accounts_new">新しいアカウントを追加 #%1$d</string>
     <string name="tx_account">アカウント #</string>
@@ -337,12 +331,8 @@
     <string name="nfc_tag_read_success">タグ読み込み成功</string>
     <string name="nfc_tag_tap">NFCが利用可能です!</string>
 
-    <string name="unknown_amount" translatable="false">\?\?\?</string>
-
     <string name="menu_info">シークレットを見せてください!</string>
     <string name="menu_StealthMode">ストリートモード</string>
-
-    <string name="node_wrong_net" translatable="false">ノードのスキャンはメインネット専用です!</string>
 
     <string name="info_nodes_enabled">ノードは有効です。詳細はタップしてください</string>
     <string name="node_height">最新のアップデートされたブロック: %1$s</string>

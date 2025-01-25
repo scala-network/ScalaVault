@@ -269,7 +269,6 @@
     <string name="send_address_invalid">No es una dirección válida</string>
     <string name="send_fee_btc_label">Comisión (XLA)</string>
     <string name="send_total_btc_label">Total (XLA)</string>
-    <string name="send_amount">%1$s XLA</string>
     <string name="send_fee">+%1$s Comisión</string>
     <string name="tx_destination_btc">Destino\n(BTC)</string>
     <string name="tx_amount_btc">Monto\n(BTC)</string>
@@ -420,12 +419,10 @@
     <string name="mobileminer_scala_miner">MINERO SCALA</string>
     <string name="mobileminer_start_mining">Comienza a minar en tu dispositivo Android de forma segura y eficiente.</string>
     <string name="close">Close</string>
-    <string name="scala_logo">Scala Logo</string>
     <string name="credits">Creditos</string>
     <string name="credits_made_with">Hecho con </string>
     <string name="credits_by"> por </string>
     <string name="credits_forked_from">Derivado de </string>
-    <string name="credits_heart">Icono de corazon</string>
     <string name="wizard_home">Un monedero seguro y ligero para almacenar tus monedas Scala</string>
     <string name="wizard_home_description">Scala Vault proporciona todo lo que necesitas para gestionar y utilizar monederos Scala en Android</string>
     <string name="wizard_home_create_new_wallet">Crear nueva billetera</string>

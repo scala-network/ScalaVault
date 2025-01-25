@@ -236,7 +236,6 @@
     <string name="send_total_btc_label">Всего (XLA)</string>
     <string name="send_total_label">Всего</string>
 
-    <string name="send_amount">%1$s XLA</string>
     <string name="send_fee">+%1$s Комиссия</string>
 
     <string name="send_create_tx_error_title">Ошибка создания транзакции</string>
