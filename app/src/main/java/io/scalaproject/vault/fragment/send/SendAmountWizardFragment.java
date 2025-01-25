@@ -79,21 +79,11 @@ public class SendAmountWizardFragment extends SendWizardFragment {
         etAmount = view.findViewById(R.id.etAmount);
         rlSweep = view.findViewById(R.id.rlSweep);
 
-        view.findViewById(R.id.ivSweep).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                sweepAll(false);
-            }
-        });
+        view.findViewById(R.id.ivSweep).setOnClickListener(v -> sweepAll(false));
 
         ibSweep = view.findViewById(R.id.ibSweep);
 
-        ibSweep.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                sweepAll(true);
-            }
-        });
+        ibSweep.setOnClickListener(v -> sweepAll(true));
 
         etAmount.requestFocus();
         return view;

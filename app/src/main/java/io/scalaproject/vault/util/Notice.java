@@ -106,21 +106,13 @@ public class Notice {
 
         if(bHandleOnClick) {
             final FragmentManager fragmentManager = ((FragmentActivity) context).getSupportFragmentManager();
-            ll.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    HelpFragment.display(fragmentManager, helpResId);
-                }
-            });
+            ll.setOnClickListener(v -> HelpFragment.display(fragmentManager, helpResId));
         }
 
         ImageButton ib = ll.findViewById(R.id.ibClose);
-        ib.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                ll.setVisibility(View.GONE);
-                decCount(context);
-            }
+        ib.setOnClickListener(v -> {
+            ll.setVisibility(View.GONE);
+            decCount(context);
         });
         parent.addView(ll);
     }

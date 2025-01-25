@@ -198,8 +198,8 @@ public class Wallet {
     public native String getFilename();
 
     //    virtual std::string keysFilename() const = 0;
-    public boolean init(long upper_transaction_size_limit) {
-        return initJ(WalletManager.getInstance().getDaemonAddress(), upper_transaction_size_limit,
+    public void init(long upper_transaction_size_limit) {
+        initJ(WalletManager.getInstance().getDaemonAddress(), upper_transaction_size_limit,
                 WalletManager.getInstance().getDaemonUsername(),
                 WalletManager.getInstance().getDaemonPassword());
     }

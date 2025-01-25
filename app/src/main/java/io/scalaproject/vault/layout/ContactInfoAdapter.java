@@ -148,11 +148,7 @@ public class ContactInfoAdapter extends RecyclerView.Adapter<ContactInfoAdapter.
             itemView.setOnClickListener(this);
 
             if(!readonly) {
-                ivDelete.setOnClickListener(new View.OnClickListener() {
-                    public void onClick(View v) {
-                        onDeleteContactListener.onDeleteContact(v, contactItems.get(position));
-                    }
-                });
+                ivDelete.setOnClickListener(v -> onDeleteContactListener.onDeleteContact(v, contactItems.get(position)));
             }
 
             Bitmap avatar = contactItem.getAvatar();

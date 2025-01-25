@@ -22,8 +22,8 @@
 package io.scalaproject.vault.xlato;
 
 public class XlaToException extends Exception {
-    private int code;
-    private XlaToError error;
+    private final int code;
+    private final XlaToError error;
 
     public XlaToException(final int code) {
         super();

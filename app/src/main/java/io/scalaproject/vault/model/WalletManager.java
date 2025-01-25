@@ -228,11 +228,7 @@ public class WalletManager {
     public List<WalletInfo> findWallets(File path) {
         List<WalletInfo> wallets = new ArrayList<>();
         Timber.d("Scanning: %s", path.getAbsolutePath());
-        File[] found = path.listFiles(new FilenameFilter() {
-            public boolean accept(File dir, String filename) {
-                return filename.endsWith(".keys");
-            }
-        });
+        File[] found = path.listFiles((dir, filename) -> filename.endsWith(".keys"));
 
         assert found != null;
         for (File file : found) {

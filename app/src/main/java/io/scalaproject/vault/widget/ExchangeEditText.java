@@ -221,13 +221,10 @@ public class ExchangeEditText extends LinearLayout {
         setCurrencyAdapter(sCurrencyA);
         setCurrencyAdapter(sCurrencyB);
 
-        post(new Runnable() {
-            @Override
-            public void run() {
-                setInitialSpinnerSelections(sCurrencyA, sCurrencyB);
-                isInitialized = true;
-                startExchange();
-            }
+        post(() -> {
+            setInitialSpinnerSelections(sCurrencyA, sCurrencyB);
+            isInitialized = true;
+            startExchange();
         });
 
         // make progress circle gray

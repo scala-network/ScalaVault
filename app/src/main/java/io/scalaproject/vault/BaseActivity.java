@@ -43,10 +43,8 @@ public class BaseActivity extends SecureActivity implements GenerateReviewFragme
         progressDialog = new SimpleProgressDialog(BaseActivity.this, msgId);
         if (delayMillis > 0) {
             Handler handler = new Handler();
-            handler.postDelayed(new Runnable() {
-                public void run() {
-                    if (progressDialog != null) progressDialog.show();
-                }
+            handler.postDelayed(() -> {
+                if (progressDialog != null) progressDialog.show();
             }, delayMillis);
         } else {
             progressDialog.show();
@@ -92,12 +90,7 @@ public class BaseActivity extends SecureActivity implements GenerateReviewFragme
 
     void releaseWakeLock(int delayMillis) {
         Handler handler = new Handler(Looper.getMainLooper());
-        handler.postDelayed(new Runnable() {
-            @Override
-            public void run() {
-                releaseWakeLock();
-            }
-        }, delayMillis);
+        handler.postDelayed(this::releaseWakeLock, delayMillis);
     }
 
     void releaseWakeLock() {

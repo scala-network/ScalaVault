@@ -19,8 +19,13 @@
 
 package io.btchip;
 
+import androidx.annotation.NonNull;
+
+import java.io.Serial;
+
 public class BTChipException extends Exception {
 
+    @Serial
     private static final long serialVersionUID = 5512803003827126405L;
 
     public BTChipException(String reason) {
@@ -40,6 +45,7 @@ public class BTChipException extends Exception {
         return sw;
     }
 
+    @NonNull
     public String toString() {
         if (sw == 0) {
             return "BTChip Exception : " + getMessage();

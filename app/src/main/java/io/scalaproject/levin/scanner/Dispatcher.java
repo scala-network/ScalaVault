@@ -27,6 +27,7 @@ import java.util.Collection;
 import java.util.HashSet;
 //import java.util.Iterator;
 import java.util.Map;
+import java.util.Objects;
 import java.util.Set;
 import java.util.TreeMap;
 import java.util.concurrent.ConcurrentLinkedDeque;
@@ -76,7 +77,7 @@ public class Dispatcher implements PeerRetriever.OnGetPeers {
             while (!jobs.isEmpty()) {
                 try {
                     Timber.d("Remaining jobs %d", jobs.size());
-                    final PeerRetriever retrievedPeer = jobs.poll().get();
+                    final PeerRetriever retrievedPeer = Objects.requireNonNull(jobs.poll()).get();
                     if (retrievedPeer.isGood() && getMorePeers())
                         retrievePeers(retrievedPeer);
                     final NodeInfo nodeInfo = retrievedPeer.getNodeInfo();
@@ -180,7 +181,7 @@ public class Dispatcher implements PeerRetriever.OnGetPeers {
     }
 
     // TODO: does this NEED to be a ConcurrentLinkedDeque?
-    private ConcurrentLinkedDeque<Future<PeerRetriever>> jobs = new ConcurrentLinkedDeque<>();
+    private final ConcurrentLinkedDeque<Future<PeerRetriever>> jobs = new ConcurrentLinkedDeque<>();
 
     private void retrievePeer(NodeInfo nodeInfo) {
         if (knownNodes.add(nodeInfo)) {

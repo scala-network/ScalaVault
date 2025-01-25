@@ -335,7 +335,7 @@ public class Helper {
         return null;
     }
 
-    static private Animation ShakeAnimation;
+    static private volatile Animation ShakeAnimation;
 
     static public Animation getShakeAnimation(Context context) {
         if (ShakeAnimation == null) {
@@ -547,17 +547,15 @@ public class Helper {
                 .setCancelable(false)
                 .setPositiveButton(context.getString(R.string.label_ok), null)
                 .setNegativeButton(context.getString(R.string.label_cancel),
-                        new DialogInterface.OnClickListener() {
-                            public void onClick(DialogInterface dialog, int id) {
-                                Helper.hideKeyboardAlways((Activity) context);
-                                cancelSignal.cancel();
-                                if (loginTask != null) {
-                                    loginTask.cancel(true);
-                                    loginTask = null;
-                                }
-                                dialog.cancel();
-                                openDialog = null;
+                        (dialog, id) -> {
+                            Helper.hideKeyboardAlways((Activity) context);
+                            cancelSignal.cancel();
+                            if (loginTask != null) {
+                                loginTask.cancel(true);
+                                loginTask = null;
                             }
+                            dialog.cancel();
+                            openDialog = null;
                         });
 
         openDialog = alertDialogBuilder.create();
@@ -601,45 +599,37 @@ public class Helper {
             };
         }
 
-        openDialog.setOnShowListener(new DialogInterface.OnShowListener() {
-            @Override
-            public void onShow(DialogInterface dialog) {
-                if (fingerprintAuthAllowed && fingerprintAuthCallback != null) {
-                    tvOpenPrompt.setCompoundDrawablesRelativeWithIntrinsicBounds(icFingerprint, null, null, null);
-                    tvOpenPrompt.setText(context.getText(R.string.prompt_fingerprint_auth));
-                    tvOpenPrompt.setVisibility(View.VISIBLE);
-                    FingerprintHelper.authenticate(context, cancelSignal, fingerprintAuthCallback);
-                } else {
-                    etPassword.requestFocus();
-                }
-                Button posButton = openDialog.getButton(AlertDialog.BUTTON_POSITIVE);
-                posButton.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View view) {
-                        String pass = etPassword.getEditText().getText().toString();
-                        if (loginTask == null) {
-                            loginTask = new LoginWalletTask(pass, false);
-                            loginTask.execute();
-                        }
-                    }
-                });
+        openDialog.setOnShowListener(dialog -> {
+            if (fingerprintAuthAllowed && fingerprintAuthCallback != null) {
+                tvOpenPrompt.setCompoundDrawablesRelativeWithIntrinsicBounds(icFingerprint, null, null, null);
+                tvOpenPrompt.setText(context.getText(R.string.prompt_fingerprint_auth));
+                tvOpenPrompt.setVisibility(View.VISIBLE);
+                FingerprintHelper.authenticate(context, cancelSignal, fingerprintAuthCallback);
+            } else {
+                etPassword.requestFocus();
             }
+            Button posButton = openDialog.getButton(AlertDialog.BUTTON_POSITIVE);
+            posButton.setOnClickListener(view -> {
+                String pass = etPassword.getEditText().getText().toString();
+                if (loginTask == null) {
+                    loginTask = new LoginWalletTask(pass, false);
+                    loginTask.execute();
+                }
+            });
         });
 
         // accept keyboard "ok"
-        etPassword.getEditText().setOnEditorActionListener(new TextView.OnEditorActionListener() {
-            public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
-                if ((event != null && (event.getKeyCode() == KeyEvent.KEYCODE_ENTER) && (event.getAction() == KeyEvent.ACTION_DOWN))
-                        || (actionId == EditorInfo.IME_ACTION_DONE)) {
-                    String pass = etPassword.getEditText().getText().toString();
-                    if (loginTask == null) {
-                        loginTask = new LoginWalletTask(pass, false);
-                        loginTask.execute();
-                    }
-                    return true;
+        etPassword.getEditText().setOnEditorActionListener((v, actionId, event) -> {
+            if ((event != null && (event.getKeyCode() == KeyEvent.KEYCODE_ENTER) && (event.getAction() == KeyEvent.ACTION_DOWN))
+                    || (actionId == EditorInfo.IME_ACTION_DONE)) {
+                String pass = etPassword.getEditText().getText().toString();
+                if (loginTask == null) {
+                    loginTask = new LoginWalletTask(pass, false);
+                    loginTask.execute();
                 }
-                return false;
+                return true;
             }
+            return false;
         });
 
         if (Helper.preventScreenshot()) {

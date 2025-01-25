@@ -183,23 +183,13 @@ public class SendFragment extends Fragment
             }
         });
 
-        bPrev.setOnClickListener(new View.OnClickListener() {
-            public void onClick(View v) {
-                spendViewPager.previous();
-            }
-        });
+        bPrev.setOnClickListener(v -> spendViewPager.previous());
 
-        bNext.setOnClickListener(new View.OnClickListener() {
-            public void onClick(View v) {
-                spendViewPager.next();
-            }
-        });
+        bNext.setOnClickListener(v -> spendViewPager.next());
 
-        bDone.setOnClickListener(new View.OnClickListener() {
-            public void onClick(View v) {
-                Timber.d("bDone.onClick");
-                activityCallback.onFragmentDone();
-            }
+        bDone.setOnClickListener(v -> {
+            Timber.d("bDone.onClick");
+            activityCallback.onFragmentDone();
         });
 
         updatePosition(0);
@@ -262,8 +252,7 @@ public class SendFragment extends Fragment
             activityCallback = (Listener) context;
             activityCallback.setOnUriScannedListener(this);
         } else {
-            throw new ClassCastException(context.toString()
-                    + " must implement Listener");
+            throw new ClassCastException(context.toString() + " must implement Listener");
         }
     }
 
@@ -317,12 +306,7 @@ public class SendFragment extends Fragment
                 default:
                     throw new IllegalArgumentException("Mode " + String.valueOf(aMode) + " unknown!");
             }
-            requireView().post(new Runnable() {
-                @Override
-                public void run() {
-                    pagerAdapter.notifyDataSetChanged();
-                }
-            });
+            requireView().post(() -> pagerAdapter.notifyDataSetChanged());
             Timber.d("New Mode = %s", mode.toString());
         }
     }
@@ -582,7 +566,7 @@ public class SendFragment extends Fragment
 
     void loadPrefs() {
         String enabled = Config.read("PREF_SHOW_XLATO_ENABLED");
-        showxlatoEnabled = !(enabled.isEmpty() || enabled == "0");
+        showxlatoEnabled = !(enabled.isEmpty() || enabled.equals("0"));
 
     }
 

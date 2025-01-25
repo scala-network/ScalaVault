@@ -159,40 +159,29 @@ public class NodeInfoAdapter extends RecyclerView.Adapter<NodeInfoAdapter.ViewHo
             ivPing = itemView.findViewById(R.id.ivPing);
 
             ibOptions = itemView.findViewById(R.id.ibOptions);
-            ibOptions.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
-                    if (popupOpen)
-                        return;
+            ibOptions.setOnClickListener(view -> {
+                if (popupOpen)
+                    return;
 
-                    PopupMenu popup = new PopupMenu(context, ibOptions);
-                    popup.inflate(R.menu.node_context_menu);
-                    popupOpen = true;
+                PopupMenu popup = new PopupMenu(context, ibOptions);
+                popup.inflate(R.menu.node_context_menu);
+                popupOpen = true;
 
-                    MenuItem itemEdit = popup.getMenu().findItem(R.id.action_edit_node);
-                    itemEdit.setTitle(context.getResources().getString(R.string.edit));
+                MenuItem itemEdit = popup.getMenu().findItem(R.id.action_edit_node);
+                itemEdit.setTitle(context.getResources().getString(R.string.edit));
 
-                    MenuItem itemDelete = popup.getMenu().findItem(R.id.action_delete_node);
-                    itemDelete.setVisible(nodeItem.isUserDefined());
+                MenuItem itemDelete = popup.getMenu().findItem(R.id.action_delete_node);
+                itemDelete.setVisible(nodeItem.isUserDefined());
 
-                    popup.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
-                        @Override
-                        public boolean onMenuItemClick(MenuItem item) {
-                            if (onMenuNodeListener != null) {
-                                return onMenuNodeListener.onContextInteraction(item, nodeItem);
-                            }
-                            return false;
-                        }
-                    });
+                popup.setOnMenuItemClickListener(item -> {
+                    if (onMenuNodeListener != null) {
+                        return onMenuNodeListener.onContextInteraction(item, nodeItem);
+                    }
+                    return false;
+                });
 
-                    popup.show();
-                    popup.setOnDismissListener(new PopupMenu.OnDismissListener() {
-                        @Override
-                        public void onDismiss(PopupMenu menu) {
-                            popupOpen = false;
-                        }
-                    });
-                }
+                popup.show();
+                popup.setOnDismissListener(menu -> popupOpen = false);
             });
         }
 

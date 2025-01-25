@@ -95,11 +95,9 @@ public class Toolbar extends androidx.appcompat.widget.Toolbar {
         //toolbarSubtitle = findViewById(R.id.toolbarSubtitle);
 
         bMainLogo = findViewById(R.id.bMainLogo);
-        bMainLogo.setOnClickListener(new View.OnClickListener() {
-            public void onClick(View v) {
-                if (onButtonListener != null) {
-                    onButtonListener.onButton(buttonType);
-                }
+        bMainLogo.setOnClickListener(v -> {
+            if (onButtonListener != null) {
+                onButtonListener.onButton(buttonType);
             }
         });
     }

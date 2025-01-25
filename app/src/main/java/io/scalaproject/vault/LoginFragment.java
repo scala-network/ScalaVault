@@ -69,7 +69,7 @@ public class LoginFragment extends Fragment implements WalletInfoAdapter.OnInter
 
     private WalletInfoAdapter adapter;
 
-    private List<WalletManager.WalletInfo> walletList = new ArrayList<>();
+    private final List<WalletManager.WalletInfo> walletList = new ArrayList<>();
     private ImageButton ibNode;
     private TextView tvNodeName;
     private TextView tvNodeAddress;
@@ -128,8 +128,7 @@ public class LoginFragment extends Fragment implements WalletInfoAdapter.OnInter
         if (context instanceof Listener) {
             this.activityCallback = (Listener) context;
         } else {
-            throw new ClassCastException(context.toString()
-                    + " must implement Listener");
+            throw new ClassCastException(context.toString() + " must implement Listener");
         }
     }
 
@@ -196,24 +195,16 @@ public class LoginFragment extends Fragment implements WalletInfoAdapter.OnInter
         recyclerView.setAdapter(adapter);
 
         ViewGroup llNotice = view.findViewById(R.id.llNotice);
-        llNotice.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                startActivity(new Intent(getActivity(), MobileMinerActivity.class));
-            }
-        });
+        llNotice.setOnClickListener(v -> startActivity(new Intent(getActivity(), MobileMinerActivity.class)));
         Notice.showAll(llNotice, "notice_miner", false);
 
         pbNode = view.findViewById(R.id.pbNode);
         llNode = view.findViewById(R.id.llNode);
-        llNode.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if (activityCallback.getAllNodes().isEmpty())
-                    startNodePrefs();
-                else
-                    findBestNode();
-            }
+        llNode.setOnClickListener(v -> {
+            if (activityCallback.getAllNodes().isEmpty())
+                startNodePrefs();
+            else
+                findBestNode();
         });
 
         ibNode = view.findViewById(R.id.ibNode);
@@ -514,6 +505,7 @@ public class LoginFragment extends Fragment implements WalletInfoAdapter.OnInter
             }
         }
 
+        @SuppressLint("UseCompatLoadingForDrawables")
         @Override
         protected void onPostExecute(NodeInfo result) {
             activityCallback.hideProgressDialog();

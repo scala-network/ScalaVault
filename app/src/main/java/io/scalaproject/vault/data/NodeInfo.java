@@ -152,23 +152,20 @@ public class NodeInfo extends Node {
         return isSuccessful() && (majorVersion >= MIN_MAJOR_VERSION) && (responseTime < Double.MAX_VALUE);
     }
 
-    static public Comparator<NodeInfo> BestNodeComparator = new Comparator<NodeInfo>() {
-        @Override
-        public int compare(NodeInfo o1, NodeInfo o2) {
-            if (o1.isValid()) {
-                if (o2.isValid()) { // both are valid
-                    // higher node wins
-                    int heightDiff = (int) (o2.height - o1.height);
-                    if (Math.abs(heightDiff) > Dispatcher.HEIGHT_WINDOW)
-                        return heightDiff;
-                    // if they are (nearly) equal, faster node wins
-                    return (int) Math.signum(o1.responseTime - o2.responseTime);
-                } else {
-                    return -1;
-                }
+    static public Comparator<NodeInfo> BestNodeComparator = (o1, o2) -> {
+        if (o1.isValid()) {
+            if (o2.isValid()) { // both are valid
+                // higher node wins
+                int heightDiff = (int) (o2.height - o1.height);
+                if (Math.abs(heightDiff) > Dispatcher.HEIGHT_WINDOW)
+                    return heightDiff;
+                // if they are (nearly) equal, faster node wins
+                return (int) Math.signum(o1.responseTime - o2.responseTime);
             } else {
-                return 1;
+                return -1;
             }
+        } else {
+            return 1;
         }
     };
 

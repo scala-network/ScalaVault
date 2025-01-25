@@ -82,7 +82,7 @@ public class Node {
             username = "";
             password = "";
         } else if (a.length == 2) { // credentials
-            String userPassword[] = a[0].split(":");
+            String[] userPassword = a[0].split(":");
             if (userPassword.length != 2)
                 throw new IllegalArgumentException("User:Password invalid");
             username = userPassword[0];

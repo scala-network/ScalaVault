@@ -21,6 +21,8 @@
 
 package io.scalaproject.vault.xlato;
 
+import androidx.annotation.NonNull;
+
 import io.scalaproject.vault.R;
 
 import org.json.JSONException;
@@ -94,20 +96,16 @@ public class XlaToError {
     }
 
     public int getErrorMsgId() {
-        switch (errorId) {
-            case XLATO_ERROR_001:
-                return R.string.xlato_error_001;
-            case XLATO_ERROR_004:
-                return R.string.xlato_error_004;
-            case XLATO_ERROR_010:
-                return R.string.xlato_error_010;
-            case XLATO_ERROR_012:
-                return R.string.xlato_error_012;
-            default:
-                return R.string.xlato_error;
-        }
+        return switch (errorId) {
+            case XLATO_ERROR_001 -> R.string.xlato_error_001;
+            case XLATO_ERROR_004 -> R.string.xlato_error_004;
+            case XLATO_ERROR_010 -> R.string.xlato_error_010;
+            case XLATO_ERROR_012 -> R.string.xlato_error_012;
+            default -> R.string.xlato_error;
+        };
     }
 
+    @NonNull
     @Override
     public String toString() {
         return getErrorIdString(getErrorId()) + ": " + getErrorMsg();
