@@ -536,12 +536,12 @@ public class ReceiveFragment extends Fragment {
         canvas.save();
         // figure out how to scale the logo
         float scaleSize = 1.0f;
-        while ((logoWidth / scaleSize) > (qrWidth / 5) || (logoHeight / scaleSize) > (qrHeight / 5)) {
+        while ((logoWidth / scaleSize) > ((float) qrWidth / 5) || (logoHeight / scaleSize) > ((float) qrHeight / 5)) {
             scaleSize *= 2;
         }
         float sx = 1.0f / scaleSize;
-        canvas.scale(sx, sx, qrWidth / 2, qrHeight / 2);
-        canvas.drawBitmap(logo, (qrWidth - logoWidth) / 2, (qrHeight - logoHeight) / 2, null);
+        canvas.scale(sx, sx, (float) qrWidth / 2, (float) qrHeight / 2);
+        canvas.drawBitmap(logo, (float) (qrWidth - logoWidth) / 2, (float) (qrHeight - logoHeight) / 2, null);
         canvas.restore();
         return logoBitmap;
     }

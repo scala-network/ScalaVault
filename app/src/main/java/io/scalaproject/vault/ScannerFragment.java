@@ -108,8 +108,7 @@ public class ScannerFragment extends Fragment implements ZXingScannerView.Result
         if (context instanceof OnScannedListener) {
             this.onScannedListener = (OnScannedListener) context;
         } else {
-            throw new ClassCastException(context.toString()
-                    + " must implement Listener");
+            throw new ClassCastException(context + " must implement Listener");
         }
     }
 }

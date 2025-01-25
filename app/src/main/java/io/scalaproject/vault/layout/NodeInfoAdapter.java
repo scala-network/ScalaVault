@@ -21,6 +21,7 @@
 
 package io.scalaproject.vault.layout;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import androidx.annotation.NonNull;
 import androidx.appcompat.widget.PopupMenu;
@@ -48,6 +49,7 @@ import java.util.List;
 import java.util.TimeZone;
 
 public class NodeInfoAdapter extends RecyclerView.Adapter<NodeInfoAdapter.ViewHolder> {
+    @SuppressLint("SimpleDateFormat")
     private final SimpleDateFormat TS_FORMATTER = new SimpleDateFormat("yyyy-MM-dd HH:mm");
 
     public interface OnMenuNodeListener {
@@ -62,7 +64,7 @@ public class NodeInfoAdapter extends RecyclerView.Adapter<NodeInfoAdapter.ViewHo
     private final OnMenuNodeListener onMenuNodeListener;
     private final OnSelectNodeListener onSelectNodeListener;
 
-    private Context context;
+    private final Context context;
 
     public NodeInfoAdapter(Context context, OnMenuNodeListener onMenuNodeListener, OnSelectNodeListener onSelectNodeListener) {
         this.context = context;
@@ -110,6 +112,7 @@ public class NodeInfoAdapter extends RecyclerView.Adapter<NodeInfoAdapter.ViewHo
         dataSetChanged();
     }
 
+    @SuppressLint("NotifyDataSetChanged")
     public void dataSetChanged() {
         Collections.sort(nodeItems, NodeInfo.BestNodeComparator);
         notifyDataSetChanged();
@@ -133,6 +136,7 @@ public class NodeInfoAdapter extends RecyclerView.Adapter<NodeInfoAdapter.ViewHo
 
     private boolean itemsClickable = true;
 
+    @SuppressLint("NotifyDataSetChanged")
     public void allowClick(boolean clickable) {
         itemsClickable = clickable;
         notifyDataSetChanged();
