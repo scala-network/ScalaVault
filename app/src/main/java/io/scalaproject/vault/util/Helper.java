@@ -30,7 +30,6 @@ import android.content.ClipData;
 import android.content.ClipDescription;
 import android.content.ClipboardManager;
 import android.content.Context;
-import android.content.DialogInterface;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -46,19 +45,16 @@ import android.hardware.fingerprint.FingerprintManager;
 import android.os.AsyncTask;
 import android.os.Build;
 import android.os.CancellationSignal;
-import android.os.Environment;
 import android.os.StrictMode;
 
 import com.google.android.material.dialog.MaterialAlertDialogBuilder;
 import com.google.android.material.textfield.TextInputLayout;
 
-import androidx.annotation.RequiresApi;
 import androidx.core.content.ContextCompat;
 import android.system.ErrnoException;
 import android.system.Os;
 import android.text.Editable;
 import android.text.TextWatcher;
-import android.util.Log;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -129,15 +125,11 @@ public class Helper {
     static public final int PERMISSIONS_REQUEST_READ_IMAGES = 8;
 
     static public boolean getCameraPermission(Activity context) {
-        if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.M) {
-            if (context.checkSelfPermission(Manifest.permission.CAMERA) == PackageManager.PERMISSION_DENIED) {
-                Timber.w("Permission denied for CAMERA - requesting it");
-                String[] permissions = {Manifest.permission.CAMERA};
-                context.requestPermissions(permissions, PERMISSIONS_REQUEST_CAMERA);
-                return false;
-            } else {
-                return true;
-            }
+        if (context.checkSelfPermission(Manifest.permission.CAMERA) == PackageManager.PERMISSION_DENIED) {
+            Timber.w("Permission denied for CAMERA - requesting it");
+            String[] permissions = {Manifest.permission.CAMERA};
+            context.requestPermissions(permissions, PERMISSIONS_REQUEST_CAMERA);
+            return false;
         } else {
             return true;
         }
@@ -145,17 +137,13 @@ public class Helper {
 
     static public boolean getReadExternalStoragePermission(Activity context) {
         String perm = Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU ? Manifest.permission.READ_MEDIA_IMAGES : Manifest.permission.READ_EXTERNAL_STORAGE;
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-            if (context.checkSelfPermission(perm) == PackageManager.PERMISSION_DENIED) {
-                Timber.w("Permission denied for READ_EXTERNAL_STORAGE - requesting it");
-                String[] permissions = {perm};
-                context.requestPermissions(permissions, PERMISSIONS_REQUEST_READ_IMAGES);
-                return false;
-            } else {
-                return true;
-            }
-        } else {
+        if (context.checkSelfPermission(perm) == PackageManager.PERMISSION_DENIED) {
+            Timber.w("Permission denied for READ_EXTERNAL_STORAGE - requesting it");
+            String[] permissions = {perm};
+            context.requestPermissions(permissions, PERMISSIONS_REQUEST_READ_IMAGES);
             return false;
+        } else {
+            return true;
         }
     }
 
@@ -239,9 +227,12 @@ public class Helper {
             int decimals = 1 - (int) Math.floor(Math.log10(amount));
             if (decimals < 2) decimals = 2;
             if (decimals > 12) decimals = 12;
-            return String.format(Locale.US, "%,." + decimals + "f", amount);
+            // Create the format string
+            String formatString = "%,." + decimals + "f";
+            return String.format(Locale.US, formatString, amount);
         }
     }
+
 
     static public Bitmap getBitmap(Context context, int drawableId) {
         Drawable drawable = ContextCompat.getDrawable(context, drawableId);
@@ -561,46 +552,42 @@ public class Helper {
         openDialog = alertDialogBuilder.create();
 
         final FingerprintManager.AuthenticationCallback fingerprintAuthCallback;
-        if (Build.VERSION.SDK_INT < Build.VERSION_CODES.M) {
-            fingerprintAuthCallback = null;
-        } else {
-            fingerprintAuthCallback = new FingerprintManager.AuthenticationCallback() {
-                @Override
-                public void onAuthenticationError(int errMsgId, CharSequence errString) {
-                    tvOpenPrompt.setCompoundDrawablesRelativeWithIntrinsicBounds(icError, null, null, null);
-                    tvOpenPrompt.setText(errString);
-                }
+        fingerprintAuthCallback = new FingerprintManager.AuthenticationCallback() {
+            @Override
+            public void onAuthenticationError(int errMsgId, CharSequence errString) {
+                tvOpenPrompt.setCompoundDrawablesRelativeWithIntrinsicBounds(icError, null, null, null);
+                tvOpenPrompt.setText(errString);
+            }
 
-                @Override
-                public void onAuthenticationHelp(int helpMsgId, CharSequence helpString) {
-                    tvOpenPrompt.setCompoundDrawablesRelativeWithIntrinsicBounds(icError, null, null, null);
-                    tvOpenPrompt.setText(helpString);
-                }
+            @Override
+            public void onAuthenticationHelp(int helpMsgId, CharSequence helpString) {
+                tvOpenPrompt.setCompoundDrawablesRelativeWithIntrinsicBounds(icError, null, null, null);
+                tvOpenPrompt.setText(helpString);
+            }
 
-                @Override
-                public void onAuthenticationSucceeded(FingerprintManager.AuthenticationResult result) {
-                    try {
-                        String userPass = KeyStoreHelper.loadWalletUserPass(context, wallet);
-                        if (loginTask == null) {
-                            loginTask = new LoginWalletTask(userPass, true);
-                            loginTask.execute();
-                        }
-                    } catch (KeyStoreHelper.BrokenPasswordStoreException ex) {
-                        etPassword.setError(context.getString(R.string.bad_password));
-                        // TODO: better error message here - what would it be?
+            @Override
+            public void onAuthenticationSucceeded(FingerprintManager.AuthenticationResult result) {
+                try {
+                    String userPass = KeyStoreHelper.loadWalletUserPass(context, wallet);
+                    if (loginTask == null) {
+                        loginTask = new LoginWalletTask(userPass, true);
+                        loginTask.execute();
                     }
+                } catch (KeyStoreHelper.BrokenPasswordStoreException ex) {
+                    etPassword.setError(context.getString(R.string.bad_password));
+                    // TODO: better error message here - what would it be?
                 }
+            }
 
-                @Override
-                public void onAuthenticationFailed() {
-                    tvOpenPrompt.setCompoundDrawablesRelativeWithIntrinsicBounds(icError, null, null, null);
-                    tvOpenPrompt.setText(context.getString(R.string.bad_fingerprint));
-                }
-            };
-        }
+            @Override
+            public void onAuthenticationFailed() {
+                tvOpenPrompt.setCompoundDrawablesRelativeWithIntrinsicBounds(icError, null, null, null);
+                tvOpenPrompt.setText(context.getString(R.string.bad_fingerprint));
+            }
+        };
 
         openDialog.setOnShowListener(dialog -> {
-            if (fingerprintAuthAllowed && fingerprintAuthCallback != null) {
+            if (fingerprintAuthAllowed) {
                 tvOpenPrompt.setCompoundDrawablesRelativeWithIntrinsicBounds(icFingerprint, null, null, null);
                 tvOpenPrompt.setText(context.getText(R.string.prompt_fingerprint_auth));
                 tvOpenPrompt.setVisibility(View.VISIBLE);
