@@ -199,7 +199,7 @@ public class Scala {
         String[] wordList = ENGLISH_WORDS;
         List<String> words = new ArrayList<>();
         for (int i = 0; i < spend_key.length / 4; i++) {
-            long val = ((long) (spend_key[i * 4 + 0] & 0xff) << 0) |
+            long val = ((long) (spend_key[i * 4 + 0] & 0xff)) |
                     ((long) (spend_key[i * 4 + 1] & 0xff) << 8) |
                     ((long) (spend_key[i * 4 + 2] & 0xff) << 16) |
                     ((long) (spend_key[i * 4 + 3] & 0xff) << 24);

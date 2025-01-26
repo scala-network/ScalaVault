@@ -384,7 +384,7 @@
     <string name="menu_info">Show Secrets!</string>
     <string name="menu_StealthMode">Stealth Mode</string>
 
-    <string name="node_wrong_net">Node scanning only for mainnet!</string>
+    <string name="node_wrong_net" translatable="false">Node scanning only for mainnet!</string>
 
     <string name="info_xlato" translatable="false">OBSOLETE</string>
     <string name="info_mobile_miner">Start mining on your mobile device with Scala Miner. Tap here for more information.</string>
@@ -429,7 +429,7 @@
     <string name="xlato_error_010">Invalid or outdated Payment URL</string>
     <string name="xlato_error_012">Too many requests</string>
 
-    <string name="xlato_error">XLA.TO Service Error</string>
+    <string name="xlato_error" translatable="false">XLA.TO Service Error</string>
 
     <string name="street_sweep_amount">EVERYTHING!</string>
 

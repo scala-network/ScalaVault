@@ -9,7 +9,7 @@ android {
         //noinspection OldTargetApi
         targetSdk 33
         versionCode 16
-        versionName "1.1.5"
+        versionName "1.1.6"
 
         testInstrumentationRunner 'androidx.test.runner.AndroidJUnitRunner'
         externalNativeBuild {
@@ -139,14 +139,12 @@ java {
 }
 
 dependencies {
-    // where is 1.0 loaded?
     implementation 'com.google.android.material:material:1.12.0' // keep version 1.0.0 as it fixes a bug with Material Button
     implementation "com.android.support:support-v4"
     implementation "com.android.support:recyclerview-v7"
     implementation 'androidx.cardview:cardview:1.0.0'
     implementation 'androidx.swiperefreshlayout:swiperefreshlayout:1.1.0'
 
-    // where is 1.0 loaded?
     implementation 'com.google.android.material:material:1.12.0'  // keep version 1.1.0 as it fixes a bug with Material Button
     implementation 'androidx.appcompat:appcompat:1.7.0'  // keep version 1.1.0 as it fixes a bug with Material Button
     implementation 'androidx.legacy:legacy-support-v4:1.0.0'
