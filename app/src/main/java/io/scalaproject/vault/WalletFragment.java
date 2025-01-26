@@ -33,9 +33,7 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
-import androidx.recyclerview.widget.RecyclerView;
 
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -50,8 +48,6 @@ import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.Spinner;
 import android.widget.TextView;
-import android.widget.Filterable;
-import android.widget.ThemedSpinnerAdapter;
 import com.github.brnunes.swipeablerecyclerview.SwipeableRecyclerViewTouchListener;
 
 import io.scalaproject.vault.data.Contact;
@@ -59,7 +55,6 @@ import io.scalaproject.vault.layout.TransactionInfoAdapter;
 import io.scalaproject.vault.model.TransactionInfo;
 import io.scalaproject.vault.model.Wallet;
 import io.scalaproject.vault.model.WalletManager;
-import io.scalaproject.vault.service.WalletService;
 import io.scalaproject.vault.service.exchange.api.ExchangeApi;
 import io.scalaproject.vault.service.exchange.api.ExchangeCallback;
 import io.scalaproject.vault.service.exchange.api.ExchangeRate;
@@ -70,7 +65,6 @@ import java.text.NumberFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
-import java.util.Objects;
 
 import timber.log.Timber;
 
@@ -643,8 +637,7 @@ public class WalletFragment extends Fragment
         if (context instanceof Listener) {
             this.activityCallback = (Listener) context;
         } else {
-            throw new ClassCastException(context.toString()
-                    + " must implement Listener");
+            throw new ClassCastException(context.toString() + " must implement Listener");
         }
     }
 

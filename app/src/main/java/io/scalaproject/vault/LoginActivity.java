@@ -34,6 +34,7 @@ import android.hardware.usb.UsbDevice;
 import android.hardware.usb.UsbManager;
 import android.media.MediaScannerConnection;
 import android.os.AsyncTask;
+import android.os.Build;
 import android.os.Bundle;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
@@ -46,7 +47,6 @@ import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.inputmethod.EditorInfo;
-import android.view.SurfaceControl;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -86,7 +86,6 @@ import java.nio.channels.FileChannel;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
-import java.util.Comparator;
 import java.util.HashSet;
 import java.util.Locale;
 import java.util.Map;
@@ -670,7 +669,7 @@ public class LoginActivity extends BaseActivity
             if (loginFragment != null) {
                 loginFragment.loadList();
             }
-        } catch (ClassCastException ex) {
+        } catch (ClassCastException ignored) {
         }
     }
 
@@ -1178,15 +1177,8 @@ public class LoginActivity extends BaseActivity
     }
 
     void copyFile(File src, File dst) throws IOException {
-        FileChannel inChannel = new FileInputStream(src).getChannel();
-        FileChannel outChannel = new FileOutputStream(dst).getChannel();
-        try {
+        try (FileChannel inChannel = new FileInputStream(src).getChannel(); FileChannel outChannel = new FileOutputStream(dst).getChannel()) {
             inChannel.transferTo(0, inChannel.size(), outChannel);
-        } finally {
-            if (inChannel != null)
-                inChannel.close();
-            if (outChannel != null)
-                outChannel.close();
         }
     }
 
@@ -1426,6 +1418,7 @@ public class LoginActivity extends BaseActivity
 
     private static final String ACTION_USB_PERMISSION = "io.scalaproject.vault.USB_PERMISSION";
 
+    @SuppressLint("UnspecifiedRegisterReceiverFlag")
     void attachLedger() {
         final UsbManager usbManager = getUsbManager();
         UsbDevice device = Ledger.findDevice(usbManager);
@@ -1433,7 +1426,9 @@ public class LoginActivity extends BaseActivity
             if (usbManager.hasPermission(device)) {
                 connectLedger(usbManager, device);
             } else {
-                registerReceiver(usbPermissionReceiver, new IntentFilter(ACTION_USB_PERMISSION));
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+                    registerReceiver(usbPermissionReceiver, new IntentFilter(ACTION_USB_PERMISSION));
+                }
                 usbManager.requestPermission(device,
                         PendingIntent.getBroadcast(this, 0,
                                 new Intent(ACTION_USB_PERMISSION), PendingIntent.FLAG_IMMUTABLE));

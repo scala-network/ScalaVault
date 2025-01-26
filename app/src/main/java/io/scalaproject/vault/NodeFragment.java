@@ -37,8 +37,6 @@ import androidx.fragment.app.Fragment;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 import androidx.recyclerview.widget.RecyclerView;
 
-import android.text.Html;
-import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -48,7 +46,6 @@ import android.view.ViewGroup;
 import android.view.WindowManager;
 import android.view.inputmethod.EditorInfo;
 import android.widget.Button;
-import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -64,12 +61,9 @@ import io.scalaproject.vault.util.Notice;
 import io.scalaproject.vault.widget.Toolbar;
 
 import java.io.File;
-import java.net.InetSocketAddress;
 import java.net.UnknownHostException;
 import java.text.NumberFormat;
-import java.util.Collection;
 import java.util.HashSet;
-import java.util.Iterator;
 import java.util.List;
 import java.util.Objects;
 import java.util.Set;
@@ -121,8 +115,7 @@ public class NodeFragment extends Fragment
         if (context instanceof Listener) {
             this.activityCallback = (Listener) context;
         } else {
-            throw new ClassCastException(context.toString()
-                    + " must implement Listener");
+            throw new ClassCastException(context.toString() + " must implement Listener");
         }
     }
 
@@ -385,12 +378,7 @@ public class NodeFragment extends Fragment
                     (d.getPeerCount() < NODES_TO_FIND + seedList.size())) {
                 // try again
                 publishProgress((NodeInfo[]) null);
-                d = new Dispatcher(new Dispatcher.Listener() {
-                    @Override
-                    public void onGet(NodeInfo info) {
-                        publishProgress(info);
-                    }
-                });
+                d = new Dispatcher(this::publishProgress);
                 // also seed with scala seed nodes (see p2p/net_node.inl:410 in scala src)
                 //seedList.add(new NodeInfo(new InetSocketAddress("62.171.149.67", 11811)));
                 //seedList.add(new NodeInfo(new InetSocketAddress("164.68.117.160", 11811)));

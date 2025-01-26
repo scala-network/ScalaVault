@@ -33,6 +33,7 @@
 
 
 #include <string>
+#include <utility>
 #include <vector>
 #include <list>
 #include <set>
@@ -220,11 +221,11 @@ struct TransactionHistory
  */
 struct AddressBookRow {
 public:
-    AddressBookRow(std::size_t _rowId, const std::string &_address, const std::string &_paymentId, const std::string &_description):
+    AddressBookRow(std::size_t _rowId, std::string _address, std::string _paymentId, std::string _description):
         m_rowId(_rowId),
-        m_address(_address),
-        m_paymentId(_paymentId), 
-        m_description(_description) {}
+        m_address(std::move(_address)),
+        m_paymentId(std::move(_paymentId)),
+        m_description(std::move(_description)) {}
  
 private:
     std::size_t m_rowId;
@@ -264,10 +265,10 @@ struct AddressBook
 
 struct SubaddressRow {
 public:
-    SubaddressRow(std::size_t _rowId, const std::string &_address, const std::string &_label):
+    SubaddressRow(std::size_t _rowId, std::string _address, std::string _label):
         m_rowId(_rowId),
-        m_address(_address),
-        m_label(_label) {}
+        m_address(std::move(_address)),
+        m_label(std::move(_label)) {}
  
 private:
     std::size_t m_rowId;
@@ -291,12 +292,12 @@ struct Subaddress
 
 struct SubaddressAccountRow {
 public:
-    SubaddressAccountRow(std::size_t _rowId, const std::string &_address, const std::string &_label, const std::string &_balance, const std::string &_unlockedBalance):
+    SubaddressAccountRow(std::size_t _rowId, std::string _address, std::string _label, std::string _balance, std::string _unlockedBalance):
         m_rowId(_rowId),
-        m_address(_address),
-        m_label(_label),
-        m_balance(_balance),
-        m_unlockedBalance(_unlockedBalance) {}
+        m_address(std::move(_address)),
+        m_label(std::move(_label)),
+        m_balance(std::move(_balance)),
+        m_unlockedBalance(std::move(_unlockedBalance)) {}
 
 private:
     std::size_t m_rowId;
@@ -1309,7 +1310,7 @@ struct WalletManager
     virtual void setDaemonAddress(const std::string &address) = 0;
 
     //! returns whether the daemon can be reached, and its version number
-    virtual bool connected(uint32_t *version = NULL) = 0;
+    virtual bool connected(uint32_t *version = nullptr) = 0;
 
     //! returns current blockchain height
     virtual uint64_t blockchainHeight() = 0;

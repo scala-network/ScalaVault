@@ -180,7 +180,7 @@ public class ExchangeApiImpl implements ExchangeApi {
 
     private final static SimpleDateFormat DATE_FORMAT = new SimpleDateFormat("yyyy-MM-dd", Locale.US);
 
-    {
+    static {
         DATE_FORMAT.setTimeZone(TimeZone.getTimeZone("UTC"));
     }
 
