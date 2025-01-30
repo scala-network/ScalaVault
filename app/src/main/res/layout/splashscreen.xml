@@ -11,6 +11,16 @@
 		android:id="@+id/splashscreen"
 		android:layout_width="wrap_content"
 		android:layout_height="100dp"
+		android:contentDescription="@string/scala_logo"
 		android:src="@mipmap/ic_logo_colors"/>
+
+	<TextView
+		android:id="@+id/textView"
+		android:layout_width="match_parent"
+		android:layout_height="wrap_content"
+		android:text="@string/splashcreen_check_network"
+		android:textAlignment="center"
+		android:translationY="20dp"
+		android:visibility="gone" />
 
 </LinearLayout>

@@ -201,7 +201,7 @@ public class GenerateFragment extends Fragment {
             return false;
         });
 
-        if (FingerprintHelper.isDeviceSupported(getContext())) {
+        if (FingerprintHelper.isDeviceSupported(requireContext())) {
             llFingerprintAuth.setVisibility(View.VISIBLE);
 
             sFingerprintAuth.setOnClickListener(view1 -> {

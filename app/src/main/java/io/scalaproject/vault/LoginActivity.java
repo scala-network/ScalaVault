@@ -42,10 +42,13 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
+import android.os.Handler;
+import android.util.Log;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.ViewGroup;
 import android.view.inputmethod.EditorInfo;
 import android.widget.EditText;
 import android.widget.TextView;
@@ -58,6 +61,8 @@ import org.json.JSONObject;
 import com.google.android.material.dialog.MaterialAlertDialogBuilder;
 
 import org.acra.ACRA;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import io.scalaproject.vault.data.Node;
 import io.scalaproject.vault.data.NodeInfo;
@@ -74,6 +79,7 @@ import io.scalaproject.vault.service.WalletService;
 import io.scalaproject.vault.util.Helper;
 import io.scalaproject.vault.util.KeyStoreHelper;
 import io.scalaproject.vault.util.LocaleHelper;
+import io.scalaproject.vault.util.Notice;
 import io.scalaproject.vault.util.ScalaThreadPoolExecutor;
 import io.scalaproject.vault.widget.Toolbar;
 import io.scalaproject.vault.util.LegacyStorageHelper;
@@ -122,6 +128,7 @@ public class LoginActivity extends BaseActivity
             "}";
 
     private static final String NODES_USERDEFINED_NAME = "userdefined_nodes";
+    private static final Logger log = LoggerFactory.getLogger(LoginActivity.class);
 
     static public boolean useDefaultNode = false;
 
@@ -132,6 +139,7 @@ public class LoginActivity extends BaseActivity
 
     private boolean startCreateWalletFragment = false;
     private String generateFragmentType = "";
+
 
     @Override
     public NodeInfo getNode() {
@@ -181,7 +189,7 @@ public class LoginActivity extends BaseActivity
         saveUserDefinedNodes();
     }
 
-    private void loadNodesWithNetwork() {
+    public void loadNodesWithNetwork() {
         Helper.runWithNetwork(() -> {
             loadAllNodes();
             return true;
@@ -245,18 +253,20 @@ public class LoginActivity extends BaseActivity
 
     public void loadDefaultNodes() {
         defaultNodes.clear();
-
+        showProgressDialog(R.string.about_version);
         String jsonString = "";
-
+        Timber.tag("loadDefaultNodes").d("loadDefaultNodes start");
         // Load Pools data from the GitHub repository by default
         if(Helper.isURLReachable(DEFAULT_NODES_REPOSITORY))
             jsonString  = Helper.fetchJSON(DEFAULT_NODES_REPOSITORY);
+        Timber.tag("loadDefaultNodes").d("loadDefaultNodes from GitHub");
 
         // If GitHub file is not available or is blocked by firewalls, use IPFS
         if(jsonString.isEmpty()) {
             for (String strNodeURLDir : NODES_REPOSITORY_IPNS_GATEWAYS) {
                 String strNodeURL = strNodeURLDir + IPNS_NAME;
                 if(Helper.isURLReachable(strNodeURL)) {
+                    Timber.tag("loadDefaultNodes").d("loadDefaultNodes from IPFS");
                     jsonString = Helper.fetchJSON(strNodeURL);
                     if (!jsonString.isEmpty())
                         break;
@@ -268,6 +278,7 @@ public class LoginActivity extends BaseActivity
         if(jsonString.isEmpty()) {
             useDefaultNode = true;
             jsonString = DEFAULT_NODE;
+            Timber.tag("loadDefaultNodes").d("loadDefaultNodes from default");
         } else {
             useDefaultNode = false;
         }
@@ -281,11 +292,13 @@ public class LoginActivity extends BaseActivity
 
                 if(node.has("host") && node.has("port")) {
                     addNode(node.getString("host") + ":" + node.getString("port"));
+                    //setNode(NodeInfo.fromString(node.getString("host") + ":" + node.getString("port")));
                 }
             }
         } catch (JSONException e) {
-            e.printStackTrace();
+            //e.printStackTrace();
         }
+        Timber.tag("loadDefaultNodes").d("loadDefaultNodes end");
     }
 
     private Toolbar toolbar;
@@ -352,14 +365,33 @@ public class LoginActivity extends BaseActivity
                 case Toolbar.BUTTON_NONE:
                     break;
                 default:
-                    Timber.e("Button " + type + "pressed - how can this be?");
+                    Timber.e("Button " + type + " pressed - how can this be?");
             }
         });
 
-        loadNodesWithNetwork();
-
         // try intents
         Intent intent = getIntent();
+
+        // Get the connection state
+        int connectionState = intent.getIntExtra("connection_state", -1);
+
+        // Use the connection state as needed
+        if (connectionState == 1) {
+            Timber.tag("LoginActivity").d("Connection available");
+            // Add logic for connection available
+            LoginFragment.setConnectionStatus(connectionState);
+        } else if (connectionState == 0) {
+            Timber.tag("LoginActivity").d("No connection");
+            // Add logic for no connection
+
+            // Notice to user we require internet to work properly
+            // Make the notice persistance...
+            LoginFragment.setConnectionStatus(connectionState);
+        } else {
+            Timber.tag("LoginActivity").d("Connection state unknown");
+            // Handle unknown connection state
+            LoginFragment.setConnectionStatus(connectionState);
+        }
 
         if (!processUsbIntent(intent))
             processUriIntent(intent);
@@ -374,15 +406,14 @@ public class LoginActivity extends BaseActivity
 
         // If activity is created from Home Wizard
         String generateFragmentTypeTmp = intent.getStringExtra("GenerateFragmentType");
-        if(generateFragmentTypeTmp != null && !generateFragmentTypeTmp.isEmpty()) {
+        if (generateFragmentTypeTmp != null && !generateFragmentTypeTmp.isEmpty()) {
             startCreateWalletFragment = true;
             generateFragmentType = generateFragmentTypeTmp;
         }
     }
 
     @Override
-    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions,
-                                           @NonNull int[] grantResults) {
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults);
 
         Timber.d("onRequestPermissionsResult()");
@@ -397,6 +428,7 @@ public class LoginActivity extends BaseActivity
         }
     }
 
+    // TODO check all reasons to call this.
     boolean checkServiceRunning() {
         if (WalletService.Running) {
             Toast.makeText(this, getString(R.string.service_busy), Toast.LENGTH_SHORT).show();
@@ -664,8 +696,7 @@ public class LoginActivity extends BaseActivity
     void reloadWalletList() {
         Timber.d("reloadWalletList()");
         try {
-            LoginFragment loginFragment = (LoginFragment)
-                    getSupportFragmentManager().findFragmentById(R.id.fragment_container);
+            LoginFragment loginFragment = (LoginFragment) getSupportFragmentManager().findFragmentById(R.id.fragment_container);
             if (loginFragment != null) {
                 loginFragment.loadList();
             }
@@ -675,8 +706,7 @@ public class LoginActivity extends BaseActivity
 
     public void onWalletChangePassword() {//final String walletName, final String walletPassword) {
         try {
-            GenerateReviewFragment detailsFragment = (GenerateReviewFragment)
-                    getSupportFragmentManager().findFragmentById(R.id.fragment_container);
+            GenerateReviewFragment detailsFragment = (GenerateReviewFragment) getSupportFragmentManager().findFragmentById(R.id.fragment_container);
             assert detailsFragment != null;
             AlertDialog dialog = detailsFragment.createChangePasswordDialog();
             if (dialog != null) {
@@ -855,8 +885,7 @@ public class LoginActivity extends BaseActivity
         Helper.initLogger(this);
 
         Fragment fragment = new LoginFragment();
-        getSupportFragmentManager().beginTransaction()
-                .add(R.id.fragment_container, fragment).commit();
+        getSupportFragmentManager().beginTransaction().add(R.id.fragment_container, fragment).commit();
 
         Timber.d("LoginFragment added");
     }
@@ -916,8 +945,7 @@ public class LoginActivity extends BaseActivity
 
         File newWalletFile;
 
-        AsyncCreateWallet(final String name, final String password,
-                          final WalletCreator walletCreator) {
+        AsyncCreateWallet(final String name, final String password, final WalletCreator walletCreator) {
             super();
             this.walletName = name;
             this.walletPassword = password;
@@ -981,16 +1009,13 @@ public class LoginActivity extends BaseActivity
         }
     }
 
-    public void createWallet(final String name, final String password,
-                             final WalletCreator walletCreator) {
-        new AsyncCreateWallet(name, password, walletCreator)
-                .executeOnExecutor(ScalaThreadPoolExecutor.SCALA_THREAD_POOL_EXECUTOR);
+    public void createWallet(final String name, final String password, final WalletCreator walletCreator) {
+        new AsyncCreateWallet(name, password, walletCreator).executeOnExecutor(ScalaThreadPoolExecutor.SCALA_THREAD_POOL_EXECUTOR);
     }
 
     void walletGenerateError() {
         try {
-            GenerateFragment genFragment = (GenerateFragment)
-                    getSupportFragmentManager().findFragmentById(R.id.fragment_container);
+            GenerateFragment genFragment = (GenerateFragment) getSupportFragmentManager().findFragmentById(R.id.fragment_container);
             assert genFragment != null;
             genFragment.walletGenerateError();
         } catch (ClassCastException ex) {
@@ -998,9 +1023,8 @@ public class LoginActivity extends BaseActivity
         }
     }
 
-    interface WalletCreator {
+    public interface WalletCreator {
         boolean createWallet(File aFile, String password);
-
         boolean isLedger();
     }
 
@@ -1012,7 +1036,6 @@ public class LoginActivity extends BaseActivity
         }
 
         aWallet.close();
-
         return walletStatus.isOk();
     }
 
@@ -1029,18 +1052,15 @@ public class LoginActivity extends BaseActivity
                     public boolean createWallet(File aFile, String password) {
                         NodeInfo currentNode = getNode();
                         // get it from the connected node if we have one, and go back ca. 4 days
-                        final long restoreHeight =
-                                (currentNode != null) ? currentNode.getHeight() - 2000 : -1;
-                        Wallet newWallet = WalletManager.getInstance()
-                                .createWallet(aFile, password, MNEMONIC_LANGUAGE, restoreHeight);
+                        final long restoreHeight = (currentNode != null) ? currentNode.getHeight() - 2000 : -1;
+                        Wallet newWallet = WalletManager.getInstance().createWallet(aFile, password, MNEMONIC_LANGUAGE, restoreHeight);
                         return checkAndCloseWallet(newWallet);
                     }
                 });
     }
 
     @Override
-    public void onGenerate(final String name, final String password, final String seed,
-                           final long restoreHeight) {
+    public void onGenerate(final String name, final String password, final String seed, final long restoreHeight) {
         createWallet(name, password,
                 new WalletCreator() {
                     @Override
@@ -1058,8 +1078,7 @@ public class LoginActivity extends BaseActivity
     }
 
     @Override
-    public void onGenerateLedger(final String name, final String password,
-                                 final long restoreHeight) {
+    public void onGenerateLedger(final String name, final String password, final long restoreHeight) {
         createWallet(name, password,
                 new WalletCreator() {
                     @Override
@@ -1126,11 +1145,9 @@ public class LoginActivity extends BaseActivity
         File dir = walletFile.getParentFile();
         String name = walletFile.getName();
         if (any) {
-            return new File(dir, name).exists()
-                    || new File(dir, name + ".keys").exists();
+            return new File(dir, name).exists() || new File(dir, name + ".keys").exists();
         } else {
-            return new File(dir, name).exists()
-                    && new File(dir, name + ".keys").exists();
+            return new File(dir, name).exists() && new File(dir, name + ".keys").exists();
         }
     }
 
@@ -1317,7 +1334,6 @@ public class LoginActivity extends BaseActivity
 
     private void toggleDebugInfo() {
         boolean sendDebugInfo = Config.read(Config.CONFIG_SEND_DEBUG_INFO, "1").equals("1");
-
         if(sendDebugInfo) {
             Config.write(Config.CONFIG_SEND_DEBUG_INFO, "0");
             ACRA.getErrorReporter().setEnabled(false);
@@ -1386,8 +1402,7 @@ public class LoginActivity extends BaseActivity
         String keyPath = new File(Helper.getWalletRoot(LoginActivity.this),
                 walletName + ".keys").getAbsolutePath();
         // check if we need connected hardware
-        Wallet.Device device =
-                WalletManager.getInstance().queryWalletDevice(keyPath, password);
+        Wallet.Device device = WalletManager.getInstance().queryWalletDevice(keyPath, password);
         if (Objects.requireNonNull(device) == Wallet.Device.Device_Ledger) {
             if (!hasLedger()) {
                 toast(R.string.open_wallet_ledger_missing);
@@ -1429,9 +1444,7 @@ public class LoginActivity extends BaseActivity
                 if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
                     registerReceiver(usbPermissionReceiver, new IntentFilter(ACTION_USB_PERMISSION));
                 }
-                usbManager.requestPermission(device,
-                        PendingIntent.getBroadcast(this, 0,
-                                new Intent(ACTION_USB_PERMISSION), PendingIntent.FLAG_IMMUTABLE));
+                usbManager.requestPermission(device, PendingIntent.getBroadcast(this, 0, new Intent(ACTION_USB_PERMISSION), PendingIntent.FLAG_IMMUTABLE));
             }
         } else {
             Timber.d("no ledger device found");
@@ -1464,23 +1477,14 @@ public class LoginActivity extends BaseActivity
                 Ledger.connect(usbManager, usbDevice);
                 if (!Ledger.check()) {
                     Ledger.disconnect();
-                    runOnUiThread(() -> Toast.makeText(LoginActivity.this,
-                            getString(R.string.toast_ledger_start_app, usbDevice.getProductName()),
-                            Toast.LENGTH_SHORT)
-                            .show());
+                    runOnUiThread(() -> Toast.makeText(LoginActivity.this, getString(R.string.toast_ledger_start_app, usbDevice.getProductName()), Toast.LENGTH_SHORT).show());
                 } else {
                     registerDetachReceiver();
                     onLedgerAction();
-                    runOnUiThread(() -> Toast.makeText(LoginActivity.this,
-                            getString(R.string.toast_ledger_attached, usbDevice.getProductName()),
-                            Toast.LENGTH_SHORT)
-                            .show());
+                    runOnUiThread(() -> Toast.makeText(LoginActivity.this, getString(R.string.toast_ledger_attached, usbDevice.getProductName()), Toast.LENGTH_SHORT).show());
                 }
             } catch (IOException ex) {
-                runOnUiThread(() -> Toast.makeText(LoginActivity.this,
-                        getString(R.string.open_wallet_ledger_missing),
-                        Toast.LENGTH_SHORT)
-                        .show());
+                runOnUiThread(() -> Toast.makeText(LoginActivity.this, getString(R.string.open_wallet_ledger_missing), Toast.LENGTH_SHORT).show());
             }
     }
 
@@ -1538,10 +1542,7 @@ public class LoginActivity extends BaseActivity
                     final UsbDevice device = intent.getParcelableExtra(UsbManager.EXTRA_DEVICE);
                     Timber.i("Ledger detached!");
                     if (device != null)
-                        runOnUiThread(() -> Toast.makeText(LoginActivity.this,
-                                getString(R.string.toast_ledger_detached, device.getProductName()),
-                                Toast.LENGTH_SHORT)
-                                .show());
+                        runOnUiThread(() -> Toast.makeText(LoginActivity.this, getString(R.string.toast_ledger_detached, device.getProductName()), Toast.LENGTH_SHORT).show());
                     Ledger.disconnect();
                     onLedgerAction();
                 }

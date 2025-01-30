@@ -72,12 +72,9 @@ class ExchangeRateImpl implements ExchangeRate {
         try {
             // Current API provides BTC, LTC, USD, EUR
             // Uppercase provides general info, lowercase provides price
-            final String key = "BTC"; //jsonObject.keys().next(); // we expect only one
-            Log.w("MainExchangeRateImpl", "key=" + key);
             baseCurrency = "XLA";
             quoteCurrency = "EUR";
             // for now is dirty fix... but works.
-
 /*
             Pattern pattern = Pattern.compile("^X(.*?)Z(.*?)$");
             Matcher matcher = pattern.matcher(key);

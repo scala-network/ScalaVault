@@ -686,7 +686,7 @@ public class Helper {
         } catch (java.net.SocketTimeoutException e) {
             return false;
         } catch (IOException e) {
-            e.printStackTrace();
+            //e.printStackTrace();
             return false;
         }
     }

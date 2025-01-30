@@ -76,8 +76,7 @@ public class WalletInfoAdapter extends RecyclerView.Adapter<WalletInfoAdapter.Vi
     @NonNull
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(parent.getContext())
-                .inflate(R.layout.item_wallet, parent, false);
+        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_wallet, parent, false);
         return new ViewHolder(view);
     }
 
@@ -110,7 +109,7 @@ public class WalletInfoAdapter extends RecyclerView.Adapter<WalletInfoAdapter.Vi
         notifyDataSetChanged();
     }
 
-    class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
+    public class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
         final TextView tvName;
         final ImageButton ibOptions;
         WalletManager.WalletInfo infoItem;

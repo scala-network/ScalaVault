@@ -185,11 +185,7 @@ public class KeyStoreHelper {
             throw new IllegalStateException("Could not load KeySotre", ex);
         }
         if (!keyStore.containsAlias(alias)) {
-            if (Build.VERSION.SDK_INT < Build.VERSION_CODES.M) {
-                createKeysJBMR2(context, alias);
-            } else {
-                createKeysM(alias);
-            }
+            createKeysM(alias);
         }
     }
 
@@ -215,7 +211,6 @@ public class KeyStoreHelper {
         }
     }
 
-    @TargetApi(Build.VERSION_CODES.JELLY_BEAN_MR2)
     private static void createKeysJBMR2(Context context, String alias) throws NoSuchProviderException,
             NoSuchAlgorithmException, InvalidAlgorithmParameterException {
 
@@ -238,7 +233,6 @@ public class KeyStoreHelper {
         Timber.d("preM Keys created");
     }
 
-    @TargetApi(Build.VERSION_CODES.M)
     private static void createKeysM(String alias) throws NoSuchProviderException,
             NoSuchAlgorithmException, InvalidAlgorithmParameterException {
         KeyPairGenerator keyPairGenerator = KeyPairGenerator.getInstance(
@@ -256,8 +250,7 @@ public class KeyStoreHelper {
 
     private static PrivateKey getPrivateKey(String alias) {
         try {
-            KeyStore ks = KeyStore
-                    .getInstance(SecurityConstants.KEYSTORE_PROVIDER_ANDROID_KEYSTORE);
+            KeyStore ks = KeyStore.getInstance(SecurityConstants.KEYSTORE_PROVIDER_ANDROID_KEYSTORE);
             ks.load(null);
             //KeyStore.Entry entry = ks.getEntry(alias, null);
             PrivateKey privateKey = (PrivateKey) ks.getKey(alias, null);
@@ -276,8 +269,7 @@ public class KeyStoreHelper {
 
     private static PublicKey getPublicKey(String alias) {
         try {
-            KeyStore ks = KeyStore
-                    .getInstance(SecurityConstants.KEYSTORE_PROVIDER_ANDROID_KEYSTORE);
+            KeyStore ks = KeyStore.getInstance(SecurityConstants.KEYSTORE_PROVIDER_ANDROID_KEYSTORE);
             ks.load(null);
 
             PublicKey publicKey = ks.getCertificate(alias).getPublicKey();
