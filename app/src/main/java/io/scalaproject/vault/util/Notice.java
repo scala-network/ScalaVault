@@ -44,6 +44,7 @@ public class Notice {
 
     private static final String NOTICE_SHOW_NODES = "notice_nodes";
     private static final String NOTICE_SHOW_MINER = "notice_miner";
+    private static final String NOTICE_SHOW_NETWORK = "notice_network";
 
     private static boolean bHandleOnClick = true;
 
@@ -62,6 +63,13 @@ public class Notice {
             notices.add(
                     new Notice(NOTICE_SHOW_MINER,
                             R.string.info_mobile_miner,
+                            R.string.help_mobile_miner,
+                            1)
+            );
+
+            notices.add(
+                    new Notice(NOTICE_SHOW_NETWORK,
+                            R.string.splashcreen_check_network_failure,
                             R.string.help_mobile_miner,
                             1)
             );
@@ -93,6 +101,7 @@ public class Notice {
         this.helpResId = helpResId;
         this.defaultCount = defaultCount;
     }
+
 
     // show this notice as a child of the given parent view
     // NB: it assumes the parent is in a Fragment

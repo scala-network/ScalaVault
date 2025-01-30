@@ -37,6 +37,7 @@ import androidx.fragment.app.Fragment;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 import androidx.recyclerview.widget.RecyclerView;
 
+
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -70,42 +71,28 @@ import java.util.Set;
 
 import timber.log.Timber;
 
-public class NodeFragment extends Fragment
-        implements NodeInfoAdapter.OnMenuNodeListener, NodeInfoAdapter.OnSelectNodeListener, View.OnClickListener {
+public class NodeFragment extends Fragment implements NodeInfoAdapter.OnMenuNodeListener, NodeInfoAdapter.OnSelectNodeListener, View.OnClickListener {
 
     static private final NumberFormat FORMATTER = NumberFormat.getInstance();
-
     private SwipeRefreshLayout pullToRefresh;
     private View fabAddNode;
     private RecyclerView rvNodes;
-
     private Set<NodeInfo> allNodes = new HashSet<>();
     private final Set<NodeInfo> userdefinedNodes = new HashSet<>();
-
     private NodeInfoAdapter nodesAdapter;
-
     private Listener activityCallback;
-
     private View selectedNodeView = null;
     private NodeInfo selectedNode = null;
-
     public NodeInfo getNode() { return selectedNode; }
 
     public interface Listener {
         File getStorageRoot();
-
         void setToolbarButton(int type);
-
         void setSubtitle(String title);
-
         Set<NodeInfo> getAllNodes();
-
         NodeInfo getNode();
-
         void setNode(NodeInfo node);
-
         void addUserDefinedNodes(Set<NodeInfo> userDefinedNodes);
-
         void deleteUserDefinedNode(NodeInfo nodeInfo);
     }
 
@@ -191,8 +178,7 @@ public class NodeFragment extends Fragment
     }
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         Timber.d("onCreateView");
         View view = inflater.inflate(R.layout.fragment_node, container, false);
 
@@ -641,7 +627,7 @@ public class NodeFragment extends Fragment
             protected void onPreExecute() {
                 super.onPreExecute();
                 nodeInfo.clear();
-                tvResult.setText(getString(R.string.node_testing, nodeInfo.getHostAddress()));
+                tvResult.setText( getString(R.string.node_testing, nodeInfo.getHostAddress()));
             }
 
             @Override

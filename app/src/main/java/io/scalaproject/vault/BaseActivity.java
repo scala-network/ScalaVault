@@ -4,6 +4,7 @@ import android.content.Context;
 import android.os.Handler;
 import android.os.Looper;
 import android.os.PowerManager;
+import android.util.Log;
 
 import androidx.annotation.CallSuper;
 
@@ -82,8 +83,10 @@ public class BaseActivity extends SecureActivity implements GenerateReviewFragme
         try {
             wl.acquire();
             Timber.d("WakeLock acquired");
+            Log.d("BaseActivity", "WakeLock acquired");
         } catch (SecurityException ex) {
             Timber.w("WakeLock NOT acquired: %s", ex.getLocalizedMessage());
+            Log.d("BaseActivity", "WakeLock NOT acquired: " + ex.getLocalizedMessage());
             wl = null;
         }
     }
@@ -98,6 +101,7 @@ public class BaseActivity extends SecureActivity implements GenerateReviewFragme
         wl.release();
         wl = null;
         Timber.d("WakeLock released");
+        Log.d("BaseActivity", "WakeLock released");
     }
 
     // this gets called only if we get data

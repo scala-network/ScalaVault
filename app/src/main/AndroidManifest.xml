@@ -62,6 +62,10 @@
             android:screenOrientation="behind" />
 
         <activity
+            android:name=".NetworkActivity"
+            android:exported="false" />
+
+        <activity
             android:name=".WalletActivity"
             android:configChanges="orientation|keyboardHidden"
             android:label="@string/wallet_activity_name"
