@@ -309,7 +309,7 @@ public class LoginFragment extends Fragment implements WalletInfoAdapter.OnInter
             handler.postDelayed(() -> {
                 activityCallback.loadNodesWithNetwork();
                 findBestNode();
-            }, 2000);
+            }, 500);
         }
     }
 

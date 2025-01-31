@@ -497,7 +497,7 @@
     <string name="wallet_address">Wallet Address</string>
     <string name="subaddresses">Subaddresses</string>
     <string name="message_exchange_success">Currency price updated</string>
-    <string name="splashcreen_check_network" translatable="false">Checking Network…</string>
-    <string name="splashcreen_check_network_success" translatable="false">Connected to the internet, accesing to Scala Vault</string>
-    <string name="splashcreen_check_network_failure" translatable="false">This app requires network connection to work. Please check your internet connection and try again…</string>
+    <string name="splashcreen_check_network">Checking Network…</string>
+    <string name="splashcreen_check_network_success">Connected to the internet, accesing to Scala Vault</string>
+    <string name="splashcreen_check_network_failure">This app requires network connection to work. Please check your internet connection and try again…</string>
 </resources>

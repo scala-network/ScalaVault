@@ -432,4 +432,8 @@
     <string name="no_wallet">Sin monedero</string>
     <string name="wallet_address">Dirección del monedero</string>
     <string name="subaddresses">Subcuentas</string>
+    <string name="message_exchange_success">Precio de la moneda actualizado</string>
+    <string name="splashcreen_check_network">Verificando la red…</string>
+    <string name="splashcreen_check_network_success">Conectado a internet, accediendo a Scala Vault</string>
+    <string name="splashcreen_check_network_failure">Esta aplicación requiere conexión a internet para funcionar. Por favor, verifica tu conexión a internet e inténtalo de nuevo…</string>
 </resources>

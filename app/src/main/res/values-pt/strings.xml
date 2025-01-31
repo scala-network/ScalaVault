@@ -447,5 +447,8 @@
     <string name="wallet_address">Endereço da Carteira</string>
     <string name="subaddresses">Subendereços</string>
     <string name="message_exchange_success">Preço da moeda atualizado</string>
+    <string name="splashcreen_check_network">Verificando a Rede…</string>
+    <string name="splashcreen_check_network_success">Conectado à internet, acessando o Scala Vault</string>
+    <string name="splashcreen_check_network_failure">Este aplicativo requer conexão com a internet para funcionar. Por favor, verifique sua conexão e tente novamente…</string>
 
 </resources>

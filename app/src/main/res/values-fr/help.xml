@@ -60,6 +60,13 @@
         n’ayez utilisé cette adresse de portefeuille pour la première fois.</p>
     ]]></string>
 
+    <string name="help_address_book"><![CDATA[
+        <h1>Carnet d\'adresses</h1>
+        <p>Le carnet d\'adresses vous permet de stocker l\'adresse du portefeuille et d\'autres informations de contact des adresses que vous utilisez fréquemment.</p>
+        <p>Vous pouvez spécifier le nom, l\'adresse du portefeuille et l\'image pour chacun de vos contacts.</p>
+        <p>Le carnet d\'adresses est stocké localement sur votre appareil et est partagé entre tous vos portefeuilles.</p>
+    ]]></string>
+
     <string name="help_details"><![CDATA[
         <h1>Détails du Portefeuille</h1>
         <h2>Adresse Publique</h2>
@@ -238,8 +245,8 @@
     <string name="help_wallet"><![CDATA[
         <h1>Le Portefeuille</h1>
         <h2>Mode Urbain</h2>
-        <p>Le mode urbain peut être activé / désactivé dans le menu ou l’icône de la tête de Gunther. Dans
-        ce mode, votre solde n’est visible sur aucun écran afin que vous puissiez utiliser votre
+        <p>Le mode urbain peut être activé / désactivé dans le menu ou l\’icône de la tête de Gunther. Dans
+        ce mode, votre solde n\’est visible sur aucun écran afin que vous puissiez utiliser votre
         portefeuille en toute sécurité dans la rue, un bar ou autre lieu public. Les transactions
         précédentes sont également masquées. Les nouvelles transactions seront affichées, afin que vous
         puissiez voir que vous avez envoyé ou reçu vos doux Scala !</p>
@@ -247,7 +254,7 @@
         Comme Scala aime garder les choses confidentielles, nous devons scanner la chaîne de blocs
         chaque fois que vous ouvrez un portefeuille Scala Vault pour voir si de nouveaux Scala ont été
         envoyés à votre portefeuille, cela ne stocke sur votre appareil que les informations appartenant
-        à votre portefeuille. Parfois cela peut prendre un moment si vous n’avez pas synchronisé depuis
+        à votre portefeuille. Parfois cela peut prendre un moment si vous n\’avez pas synchronisé depuis
         longtemps.
         <h2>Le Solde</h2>
         <p><b>Au secours ! Le solde de mon portefeuille a disparu ou est non confirmé !</b><br/>
@@ -256,57 +263,54 @@
         Cela se produit à cause de la façon dont Scala est échangé sur la chaîne de blocs et du
         fonctionnement de la monnaie dans Scala. Apprenez-en plus à propos de la monnaie dans Scala
         <h2>Liste des Transactions</h2>
-        <p>Une listes des transactions du portefeuille. Dans un portefeuille d’Audit, seules les
+        <p>Une listes des transactions du portefeuille. Dans un portefeuille d\’Audit, seules les
         transactions entrantes sont affichées.</p>
     ]]></string>
 
-    <string name="help_node"><![CDATA[
+    <string name="help_node">OBSOLÈTE</string>
+
+    <string name="help_node_2"><![CDATA[
         <h1>Nœuds</h1>
-        <h2>En résumé</h2>
-        <p>Rafraichit la liste de nœuds en faisant glisser vers le bas &amp; met en favoris 3 à 5 nœuds pour permettre à Scala Vault
-        de choisir le meilleur pour vous !</p>
-        <h2>Qu’est-ce qu’un Nœud ?</h2>
-        <p>Scala Vault utilise un Nœud distant (parfois appelé un Démon) pour communiquer avec
-        le réseau Scala sans avoir à télécharger et stocker une copie complète de la
-        chaîne de blocs elle-même.<p>
-        <h2>Liste de Nœuds</h2>
-        <p>Si la liste est vide, vous pouvez soit ajouter de nouveaux nœuds manuellement, ou laisser Scala Vault
-        scanner le réseau pour vous. Ou les deux. Lire la suite&#8230;</p>
-        <p>La liste des nœuds affiche tous les nœuds connus. De plus, l’horodatage
-        du dernier bloc connu par chaque nœud est indiqué en dessous du nom du nœud. Une icône
-        représenant le comportement de réponse du nœud
-        (qui indique le niveau de connectivité à escompter)
-        est affiché à coté de chaque nœud.</p>
-        <p>N’importe quel nœud de la liste peut être ajouté aux favoris pour un usage ultérieur.
-        Les nœuds qui ne sont pas en favoris seront oubliés.<p>
-        <p>Scala Vault choisira le nœud optimal parmi les favoris à chaque fois que vous l’utiliserez.
-        Ceci est fait en vérifiant la hauteur de bloc (à quel point le nœud
-        est à jour ?) de même que le comportement de réponse (à quelle vitesse le nœud répond aux requêtes ?).</p>
-        <p>La liste est triée selon ces caractéristiques, afin que le nœud le plus haut soit celui que Scala Vault
-        utilisera tout de suite. Le bas de la liste montrera des nœuds très lents ou indisponibles.</p>
-        <h2>Ajouter un Nœud</h2>
-        <p>En touchant le bouton &quot;Ajouter un Nœud&quot; en bas, il vous sera demandé
-        d’entrer les détails du nœud dans la boite de dialogue suivante.
-        L’&quot;Adresse&quot; est le nom d’hôte ou l’adresse IP du nœud - c’est le seul
-        champ obligatoire.
-        Entrer le &quot;Port&quot; si le nœud ne fonctionne pas sur un port par défaut (p.e. 18089).
-        Vous pouvez optionnellement donner un nom au nœud, afin que vous puissiez plus facilement l’identifier plus tard.
-        Certains nœud nécessitent des identifiants pour les utiliser. Entrer les nom d’utilisateur &amp;
-        mot de passe dans les champs appropriés. Maintenant vous pouvez &quot;Tester&quot; ces paramêtres.
-        Le &quot;Résultat du test&quot; indiquera la hauteur de bloc, le temps de réponse et l’adresse IP actuellement utilisée.
-        Le résultat pourrait également être une erreur - habituellement car le nom d’hôte fourni n’est
-        pas joignable pendant un temps non négligeable, ou que les identifiants sont incorrects.
-        Ou la combinaison nom d’hôte/port ne renvoie pas vers un nœud Scala réel !
-        Une fois que le test réussit (sans erreur) - vous êtes prêt à appuyer sur &quot;OK&quot; pour sauvegarder &amp;
-        mettre ce nœud en favori.</p>
-        <h2>Rechercher des Nœuds</h2>
-        <p>De plus, vous pouvez rechercher des nœuds sur le réseau. Scala Vault va commencer à
-        parcourir le réseau à la recherche de nœuds distants sur le port 18089. Il commence par demander à vos
-        nœuds en favoris d’autres homologues dans le réseau Scala P2P puis continue
-        en demandant leurs homologues à ceux-ci, et ainsi de suite. Si vous n’avez pas de nœuds en favoris
-        (ou s’ils ne communiquent pas leurs homologues),
-        Scala Vault va communiquer directement avec les nœuds d’ensemencement codés en dur dans Scala. La
-        recherche s’arrête lorsqu’un total de 10 nœuds distant est récupéré.</p>
+        <h2>TL;DR</h2>
+        <p>Actualisez la liste des nœuds en tirant vers le bas et Scala Vault se connectera automatiquement au meilleur disponible !</p>
+        <h2>Qu\'est-ce qu\'un nœud ?</h2>
+        <p>Scala Vault utilise un nœud distant (parfois aussi appelé Daemon) pour communiquer avec
+        le réseau Scala sans avoir à télécharger et stocker une copie de
+        toute la blockchain elle-même.</p>
+        <h2>Liste des nœuds</h2>
+        <p>Si la liste est vide, vous pouvez soit ajouter de nouveaux nœuds manuellement, soit laisser Scala Vault
+        choisir le meilleur nœud disponible pour vous. Ou les deux. Continuez à lire…</p>
+        <p>La liste des nœuds affiche tous les nœuds actuellement connus. De plus, l\'horodatage
+        du dernier bloc connu de chaque nœud est affiché sous le nom du nœud. Une icône
+        représentant le comportement de réponse du nœud
+        (qui indique le niveau de connectivité à prévoir)
+        est affichée à côté de chaque nœud.</p>
+        <p>Scala Vault choisira le nœud optimal chaque fois que vous l\'utiliserez.
+        Il le fait en vérifiant la hauteur du bloc (à quel point
+        le nœud est-il à jour ?) ainsi que le comportement de réponse (à quelle vitesse le nœud répond-il aux requêtes ?).</p>
+        <p>La liste est triée selon ces caractéristiques, donc le nœud en haut serait celui que Scala Vault
+        choisirait en ce moment. Le bas de la liste afficherait les nœuds très lents ou indisponibles.</p>
+        <h2>Ajouter un nœud</h2>
+        <p>En touchant le bouton « Ajouter un nœud » en bas, vous serez invité à
+        saisir les détails du nœud dans la boîte de dialogue suivante.
+        L\'« Adresse » est le nom d\'hôte ou l\'adresse IP du nœud - c\'est la seule
+        entrée obligatoire.
+        Saisissez le « Port » si le nœud fonctionne sur un port non standard (par exemple, 18089).
+        Vous pouvez également nommer le nœud, afin de pouvoir l\'identifier plus facilement par la suite.
+        Certains nœuds nécessitent desIdentifiants pour être utilisés. Saisissez le nom d\'utilisateur et le
+        mot de passe fournis dans les champs appropriés. Vous pouvez maintenant « Tester » ces paramètres.
+        Les « Résultats du test » afficheront la hauteur du bloc, le temps de réponse et l\'adresse IP réelle utilisée.
+        Le résultat peut également être une erreur - généralement parce que le nom d\'hôte fourni est
+        inaccessible dans un délai raisonnable ou que lesIdentifiants sont incorrects.
+        Ou la combinaison nom d\'hôte/port ne pointe pas vers un véritable nœud Scala !
+        Une fois le test réussi (pas d\'erreur) - vous êtes prêt à appuyer sur « OK » pour enregistrer ce nœud.</p>
+    ]]></string>
+
+    <string name="help_mobile_miner"><![CDATA[
+        <h1>Scala Miner</h1>
+        <p>Commencez à miner sur tous les derniers appareils Android en toute sécurité et efficacité !</p>
+        <p>Scala Miner fournit des informations utiles sur vos activités de minage et empêche votre appareil de surchauffer.</p>
+        <p>Téléchargez-le ici : <a href="https://github.com/scala-network/MobileMiner/releases">Scala Miner</a>
     ]]></string>
 
     <!-- Note for translators: new/changed text also in help_send -->
@@ -322,5 +326,5 @@
         <p>Les détails du paiement seront remplis. Vérifiez-les et procédez de la même manière que pour toute autre transaction.</p>
     ]]></string>
 
-    <string name="help_ok">Got it!</string> <!-- Note: "Got it" as in "I understand this" -->
+    <string name="help_ok">Compris !</string> <!-- Note: "Got it" as in "I understand this" -->
 </resources>

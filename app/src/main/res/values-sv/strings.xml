@@ -315,87 +315,125 @@
     <string name="send_address_resolve_openalias">Slår upp OpenAlias&#8230;</string>
     <string name="send_address_no_dnssec">OpenAlias utan DNSSEC - adressen kan vara förfalskad</string>
 
-    <string name="status_wallet_connect_wrongversion">Node version incompatible - please upgrade!</string>
+    <string name="status_wallet_connect_wrongversion">Version av noden är inkompatibel - vänligen uppgradera!</string>
 
-    <string name="menu_info">Detaljer</string><!--Changed to: Show Secrets!-->
-    <string name="menu_StealthMode">Stealth Mode</string>
+    <string name="menu_info">Visa hemligheter!</string>
+    <string name="menu_StealthMode">Stealth-läge</string>
 
-    <string name="info_nodes_enabled">Node-o-matiC enabled, tap for more info.</string>
-    <string name="node_height">Last block updated: %1$s</string>
-    <string name="label_nodes">Nodes</string>
-    <string name="node_name_hint">Node Name (Optional)</string>
-    <string name="node_address_hint">Hostname</string>
+    <string name="node_wrong_net" translatable="false">Nodskanning endast för mainnet!</string>
+
+    <string name="info_mobile_miner">Starta mining på din mobila enhet med Scala Miner. Tryck här för mer information.</string>
+    <string name="info_nodes_enabled" translatable="false">UTGÅTT</string>
+    <string name="info_nodes_enabled_2">Scala Vault söker efter de bästa tillgängliga noderna. Tryck här för mer information.</string>
+    <string name="node_height">Senast uppdaterad block: %1$s</string>
+    <string name="label_nodes">Noder</string>
+    <string name="node_name_hint">Namn på nod (Valfritt)</string>
+    <string name="node_address_hint">Värdnamn</string>
     <string name="node_port_hint">Port</string>
-    <string name="node_user_hint">Username (Optional)</string>
-    <string name="node_pass_hint">Password (Optional)</string>
-    <string name="node_host_unresolved">Cannot resolve host</string>
-    <string name="node_host_empty">We need this!</string>
-    <string name="node_port_numeric">Must be numeric</string>
-    <string name="node_port_range">Must be 1&#8211;65535</string>
-    <string name="node_fab_add">Add Node</string>
-    <string name="node_refresh_hint">Touch to refresh!</string>
-    <string name="node_test_error">CONNECTION ERROR %1$d</string>
-    <string name="node_general_error">CONNECTION ERROR</string>
-    <string name="node_auth_error">AUTHENTICATION FAILED</string>
-    <string name="node_result_label">Test Result:</string>
-    <string name="node_result">Height: %1$s (v%2$d), Ping: %3$.0fms, IP: %4$s</string>
-    <string name="node_testing">Testing IP: %1$s &#8230;</string>
-    <string name="node_refresh_wait">Please wait for scan to finish</string>
-    <string name="node_create_hint">Touch to select or add nodes</string>
-    <string name="node_pull_hint">Add nodes manually or pull down to scan</string>
-    <string name="node_scanning">Scanning network&#8230;</string>
-    <string name="node_nobookmark">Automatically bookmarked best %1$d nodes</string>
+    <string name="node_user_hint">Användarnamn (Valfritt)</string>
+    <string name="node_pass_hint">Lösenord (Valfritt)</string>
+    <string name="node_host_unresolved">Kan inte lösa värd</string>
+    <string name="node_host_empty">Detta behövs!</string>
+    <string name="node_port_numeric">Måste vara numeriskt</string>
+    <string name="node_port_range">Måste vara 1&#8211;65535</string>
+    <string name="node_fab_add">Lägg till nod</string>
+    <string name="node_refresh_hint">Tryck för att uppdatera!</string>
+    <string name="node_test_error">ANSLUTNINGSFEL %1$d</string>
+    <string name="node_general_error">ANSLUTNINGSFEL</string>
+    <string name="node_auth_error">AUTENTISERING MISSLYCKADES</string>
+    <string name="node_result_label">Testresultat:</string>
+    <string name="node_result">Höjd: %1$s (v%2$d), Ping: %3$.0fms, IP: %4$s</string>
+    <string name="node_testing">Testar IP: %1$s&#8230;</string>
+    <string name="node_refresh_wait">Vänta medan skanningen slutförs</string>
+    <string name="node_create_hint">Tryck för att välja eller lägga till noder</string>
+    <string name="node_pull_hint">Lägg till noder manuellt eller dra ned för att skanna</string>
+    <string name="node_scanning">Skannar nätverk&#8230;</string>
+    <string name="node_nobookmark">Automatiskt bokmärkta bästa %1$d noder</string>
     <string name="label_test">Test</string><!--note: as in "Test a network connection"-->
 
     <string name="remote_nodes_subtitle">Dra ner för att skanna och automatiskt välja den bästa tillgängliga noden</string>
     <string name="change_remote_node_conf">Ändra fjärrnod till %1$s?</string>
-    <string name="send_address_resolve_bip70">Resolving Payment URI&#8230;</string>
-    <string name="send_address_not_bip70">Could not resolve Payment URI</string>
-    <string name="send_address_bip70">Resolved Payment URI &#x2714;</string>
-    <!-- please verify this means "Receiver" or "Recipient" as in "Receiver in the transaction" -->
-    <string name="send_address_hint">Mottagaren</string>
 
-    <string name="xlato_error_001">XLA.TO offline - try again later</string>
-    <string name="xlato_error_004">BTC amount out of bounds</string>
-    <string name="xlato_error_010">Invalid or outdated Payment URL</string>
-    <string name="xlato_error_012">Too many requests</string>
+    <string name="send_address_resolve_bip70">Löser Betalnings-URI&#8230;</string>
+    <string name="send_address_not_bip70">Kunde inte lösa Betalnings-URI</string>
+    <string name="send_address_bip70">Löst Betalnings-URI &#x2714;</string>
+    <string name="send_address_hint">Mottagare</string>
 
-    <string name="street_sweep_amount">EVERYTHING!</string> <!-- as in: "everything in the account" = "all the money" -->
+    <string name="xlato_error_001">XLA.TO offline - försök igen senare</string>
+    <string name="xlato_error_004">BTC-belopp utanför gränserna</string>
+    <string name="xlato_error_010">Ogiltig eller föråldrad Betalnings-URL</string>
+    <string name="xlato_error_012">För många förfrågningar</string>
 
-    <string name="menu_ledger_seed">Convert Ledger Seed</string>
-    <string name="prompt_ledger_seed">Ledger Seed Words</string>
-    <string name="prompt_ledger_phrase">Ledger Passphrase (optional)</string>
-    <string name="bad_ledger_seed">Invalid Ledger Seed!</string>
-    <string name="prompt_ledger_seed_warn">Entering your Ledger Seed here is a major security risk!</string>
+    <string name="xlato_error" translatable="false">XLA.TO Servicefel</string>
 
-    <string name="label_restoreheight">Återställningshöjd</string> <!-- Restore Height -->
+    <string name="street_sweep_amount">ALLTING!</string>
 
-    <string name="toast_ledger_start_app">Start Scala App on %1$s</string>
+    <string name="menu_ledger_seed">Konvertera Ledger Seed</string>
+    <string name="prompt_ledger_seed">Ledger Seed Ord</string>
+    <string name="prompt_ledger_phrase">Ledger Lösenfras (avancerad)</string>
+    <string name="bad_ledger_seed">Ogiltig Ledger Seed!</string>
+    <string name="prompt_ledger_seed_warn">Att ange din Ledger Seed här är en stor säkerhetsrisk!</string>
 
-    <string name="menu_rescan">Rescan!</string>
-    <string name="privacy_policy_intro">We care about your privacy. To learn more, please read our Privacy Policy.</string>
-    <string name="privacy_policy_label">Privacy Policy</string>
-    <string name="primary_address">Primary Address</string>
-    <string name="mm_url">https://github.com/scala-network/MobileMiner/releases</string>
-    <string name="connection_remote_daemon">Connecting to remote node...</string>
-    <string name="remote_nodes">Remote Nodes</string>
-    <string name="address_book">Address Book</string>
-    <string name="delete_contact_conf">Delete entry %1$s?</string>
-    <string name="contact_value_empty">We need this!</string>
-    <string name="no_entry">No entry</string>
-    <string name="save_to_address_book">Save to address book</string>
-    <string name="contact_name_empty_error">Name cannot be empty!</string>
-    <string name="entry_name">Entry Name</string>
-    <string name="start_mining">Start mining on your Android device safely and efficiently with the Scala Mobile Miner.</string>
-    <string name="mobile_miner">Mobile Miner</string>
-    <string name="download">Download</string>
-    <string name="select_image">Select Image</string>
-    <string name="contact_avatar_hint">An image that represents this address book entry.</string>
-    <string name="upload">Upload</string>
-    <string name="delete">Delete</string>
-    <string name="edit">Edit</string>
-    <string name="enable_debug_info">Enable Debug Info</string>
-    <string name="disable_debug_info">Disable Debug Info</string>
-    <string name="send_address_resolve_ud">Resolving ENS / UD&#8230;</string>
-    <string name="send_address_no_ud_records">No address found for ENS / UD domain</string>
+    <string name="label_account" translatable="false">%1$s (%2$s)</string>
+
+    <string name="label_restoreheight">Återställ Höjd</string>
+
+    <string name="toast_ledger_start_app">Starta Scala App på %1$s</string>
+
+    <string name="menu_rescan">Skanna om!</string>
+    <string name="privacy_policy_intro">Vi bryr oss om din integritet. För att lära dig mer, vänligen läs vår Integritetspolicy.</string>
+    <string name="privacy_policy_label">Integritetspolicy</string>
+    <string name="primary_address">Primäradress</string>
+    <string name="mm_url" translatable="false">https://github.com/scala-network/MobileMiner/releases</string>
+    <string name="connection_remote_daemon">Ansluter till fjärrnod&#8230;</string>
+    <string name="remote_nodes">Fjärrnoder</string>
+    <string name="address_book">Adressbok</string>
+    <string name="delete_contact_conf">Radera post %1$s?</string>
+    <string name="contact_value_empty">Detta behövs!</string>
+    <string name="no_entry">Ingen post</string>
+    <string name="save_to_address_book">Spara i adressbok</string>
+    <string name="contact_name_empty_error">Namnet får inte vara tomt!</string>
+    <string name="entry_name">Postnamn</string>
+    <string name="start_mining">Starta mining på din Android-enhet säkert och effektivt med Scala Mobile Miner.</string>
+    <string name="mobile_miner">Mobil Miner</string>
+    <string name="download">Ladda ner</string>
+    <string name="select_image">Välj Bild</string>
+    <string name="contact_avatar_hint">En bild som representerar denna adressbokspost.</string>
+    <string name="upload">Ladda upp</string>
+    <string name="delete">Radera</string>
+    <string name="edit">Redigera</string>
+    <string name="enable_debug_info">Aktivera Debug Info</string>
+    <string name="disable_debug_info">Inaktivera Debug Info</string>
+    <string name="send_address_resolve_ud">Löser Unstoppable Domains-adress&#8230;</string>
+    <string name="send_address_no_ud_records">Ogiltig Unstoppable Domains-adress</string>
+    <string name="transaction_history">Transaktionshistorik</string>
+    <string name="send">Skicka</string>
+    <string name="receive">Motta</string>
+    <string name="balance">Saldo</string>
+    <string name="balance_primary_address">Primäradress</string>
+    <string name="balance_wallet_address">Plånboksadress</string>
+    <string name="history_no_transaction">Ingen transaktion</string>
+    <string name="mobileminer_scala_miner">SCALA MINER</string>
+    <string name="mobileminer_start_mining">Starta mining på din Android-enhet säkert och effektivt.</string>
+    <string name="close">Stäng</string>
+    <string name="scala_logo" translatable="false">Scala-logotyp</string>
+    <string name="credits">Tack</string>
+    <string name="credits_made_with">Gjort med </string>
+    <string name="credits_by"> av </string>
+    <string name="credits_forked_from">Forkad från </string>
+    <string name="credits_heart" translatable="false">hjärta ikon</string>
+    <string name="wizard_home">En säker och lätt plånbok för att förvara dina Scala-mynt</string>
+    <string name="wizard_home_description">Scala Vault ger dig allt du behöver för att hantera och använda Scala-plånböcker på Android</string>
+    <string name="wizard_home_create_new_wallet">Skapa ny plånbok</string>
+    <string name="wizard_home_import_from_seed">Importera från seed</string>
+    <string name="wizard_home_or">eller</string>
+    <string name="wizard_home_skip">Hoppa över</string>
+    <string name="no_wallet">Ingen plånbok</string>
+    <string name="wallet_address">Plånboksadress</string>
+    <string name="subaddresses">Underadresser</string>
+    <string name="message_exchange_success">Valutakurs uppdaterad</string>
+    <string name="splashcreen_check_network">Kontrollerar Nätverk…</string>
+    <string name="splashcreen_check_network_success">Ansluten till internet, får åtkomst till Scala Vault</string>
+    <string name="splashcreen_check_network_failure">Den här appen kräver nätverksanslutning för att fungera. Kontrollera din internetanslutning och försök igen…</string>
+
 </resources>

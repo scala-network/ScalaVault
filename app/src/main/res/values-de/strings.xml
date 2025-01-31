@@ -389,32 +389,60 @@
 
     <string name="label_restoreheight">Wiederherstellungshöhe</string>
 
-    <string name="toast_ledger_start_app">Start Scala App on %1$s</string>
-
-    <string name="menu_rescan">Rescan!</string>
-    <string name="privacy_policy_intro">We care about your privacy. To learn more, please read our Privacy Policy.</string>
-    <string name="privacy_policy_label">Privacy Policy</string>
-    <string name="primary_address">Primary Address</string>
-    <string name="mm_url">https://github.com/scala-network/MobileMiner/releases</string>
-    <string name="connection_remote_daemon">Connecting to remote node...</string>
-    <string name="remote_nodes">Remote Nodes</string>
-    <string name="address_book">Address Book</string>
-    <string name="delete_contact_conf">Delete entry %1$s?</string>
-    <string name="contact_value_empty">We need this!</string>
-    <string name="no_entry">No entry</string>
-    <string name="save_to_address_book">Save to address book</string>
-    <string name="contact_name_empty_error">Name cannot be empty!</string>
-    <string name="entry_name">Entry Name</string>
-    <string name="start_mining">Start mining on your Android device safely and efficiently with the Scala Mobile Miner.</string>
+    <string name="toast_ledger_start_app">Scala App starten auf %1$s</string>
+    <string name="menu_rescan">Erneut scannen!</string>
+    <string name="privacy_policy_intro">Wir kümmern uns um Ihre Privatsphäre. Um mehr zu erfahren, lesen Sie bitte unsere Datenschutzrichtlinie.</string>
+    <string name="privacy_policy_label">Datenschutzrichtlinie</string>
+    <string name="primary_address">Primäre Adresse</string>
+    <string name="mm_url" translatable="false">https://github.com/scala-network/MobileMiner/releases</string>
+    <string name="connection_remote_daemon">Verbindung zum Remote-Knoten herstellen…</string>
+    <string name="remote_nodes">Remote-Knoten</string>
+    <string name="address_book">Adressbuch</string>
+    <string name="delete_contact_conf">Eintrag %1$s löschen?</string>
+    <string name="contact_value_empty">Das brauchen wir!</string>
+    <string name="no_entry">Kein Eintrag</string>
+    <string name="save_to_address_book">Im Adressbuch speichern</string>
+    <string name="contact_name_empty_error">Der Name darf nicht leer sein!</string>
+    <string name="entry_name">Eintragsname</string>
+    <string name="start_mining">Starten Sie das Mining auf Ihrem Android-Gerät sicher und effizient mit dem Scala Mobile Miner.</string>
     <string name="mobile_miner">Mobile Miner</string>
-    <string name="download">Download</string>
-    <string name="select_image">Select Image</string>
-    <string name="contact_avatar_hint">An image that represents this address book entry.</string>
-    <string name="upload">Upload</string>
-    <string name="delete">Delete</string>
-    <string name="edit">Edit</string>
-    <string name="enable_debug_info">Enable Debug Info</string>
-    <string name="disable_debug_info">Disable Debug Info</string>
-    <string name="send_address_resolve_ud">Resolving ENS / UD&#8230;</string>
-    <string name="send_address_no_ud_records">No address found for ENS / UD domain</string>
+    <string name="download">Herunterladen</string>
+    <string name="select_image">Bild auswählen</string>
+    <string name="contact_avatar_hint">Ein Bild, das diesen Adressbucheintrag darstellt.</string>
+    <string name="upload">Hochladen</string>
+    <string name="delete">Löschen</string>
+    <string name="edit">Bearbeiten</string>
+    <string name="enable_debug_info">Debug-Info aktivieren</string>
+    <string name="disable_debug_info">Debug-Info deaktivieren</string>
+    <string name="send_address_resolve_ud">Unstoppable Domains-Adresse auflösen…</string>
+    <string name="send_address_no_ud_records">Ungültige Unstoppable Domains-Adresse</string>
+    <string name="transaction_history">Transaktionsverlauf</string>
+    <string name="send">Senden</string>
+    <string name="receive">Empfangen</string>
+    <string name="balance">Guthaben</string>
+    <string name="balance_primary_address">Primäre Adresse</string>
+    <string name="balance_wallet_address">Wallet-Adresse</string>
+    <string name="history_no_transaction">Keine Transaktion</string>
+    <string name="mobileminer_scala_miner">SCALA MINER</string>
+    <string name="mobileminer_start_mining">Starten Sie das Mining auf Ihrem Android-Gerät sicher und effizient.</string>
+    <string name="close">Schließen</string>
+    <string name="scala_logo" translatable="false">Scala Logo</string>
+    <string name="credits">Danksagungen</string>
+    <string name="credits_made_with">Erstellt mit </string>
+    <string name="credits_by"> von </string>
+    <string name="credits_forked_from">Abgeleitet von </string>
+    <string name="credits_heart" translatable="false">Herz-Symbol</string>
+    <string name="wizard_home">Ein sicheres und leichtgewichtiges Wallet zum Speichern Ihrer Scala-Coins</string>
+    <string name="wizard_home_description">Scala Vault bietet alles, was Sie zum Verwalten und Verwenden von Scala-Wallets auf Android benötigen</string>
+    <string name="wizard_home_create_new_wallet">Neue Wallet erstellen</string>
+    <string name="wizard_home_import_from_seed">Von Seed importieren</string>
+    <string name="wizard_home_or">oder</string>
+    <string name="wizard_home_skip">Überspringen</string>
+    <string name="no_wallet">Keine Wallet</string>
+    <string name="wallet_address">Wallet-Adresse</string>
+    <string name="subaddresses">Subadressen</string>
+    <string name="message_exchange_success">Währungskurs aktualisiert</string>
+    <string name="splashcreen_check_network">Netzwerk überprüfen…</string>
+    <string name="splashcreen_check_network_success">Mit dem Internet verbunden, Zugriff auf Scala Vault</string>
+    <string name="splashcreen_check_network_failure">Diese App benötigt eine Netzwerkverbindung, um zu funktionieren. Bitte überprüfen Sie Ihre Internetverbindung und versuchen Sie es erneut…</string>
 </resources>

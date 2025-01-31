@@ -437,4 +437,7 @@
     <string name="wallet_address">Rahakoti aadress</string>
     <string name="subaddresses">Alamaadressid</string>
     <string name="message_exchange_success">Valuuta hind uuendatud</string>
+    <string name="splashcreen_check_network">Võrgu kontrollimine…</string>
+    <string name="splashcreen_check_network_success">Internetiga ühendatud, Scala Vaulti sisenemine</string>
+    <string name="splashcreen_check_network_failure">See rakendus vajab toimimiseks võrguühendust. Palun kontrollige oma internetiühendust ja proovige uuesti…</string>
 </resources>
