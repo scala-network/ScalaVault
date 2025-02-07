@@ -1,6 +1,6 @@
-<resources>
+<resources xmlns:tools="http://schemas.android.com/tools" tools:locale="hu">
     <string name="wallet_activity_name">Tárca</string>
-
+    <string name="menu_mobileminer">Mobil bányász</string>
     <string name="menu_about">Névjegy</string>
     <string name="menu_privacy">Adatvédelem</string>
 
@@ -184,7 +184,7 @@
     <string name="generate_wallet_created">Tárca létrehozva</string>
 
     <string name="generate_restoreheight_error">Számot vagy dátumot (ÉÉÉÉ-HH-NN) adj meg</string>
-
+    <string name="generate_restoreheight_min_error">A dátumnak nagyobbnak vagy egyenlőnek kell lennie, mint %1$s</string>
     <string name="generate_wallet_type_key">Kulcsok</string>
     <string name="generate_wallet_type_new">Új</string>
     <string name="generate_wallet_type_seed">Mag</string>
@@ -230,7 +230,6 @@
     <string name="send_total_btc_label">Összesen (XLA)</string>
     <string name="send_total_label">Összesen</string>
 
-    <string name="send_amount">%1$s XLA</string>
     <string name="send_fee">+%1$s díj</string>
 
     <string name="send_create_tx_error_title">Tranzakciólétrehozási hiba</string>
@@ -271,9 +270,13 @@
     <string name="receive_amount_nan">XLA nem egy szám</string>
 
     <string name="details_alert_message">Bizalmas adatok kerülnek megjelenítésre.\nBizonyosodj meg róla, hogy más nem látja!</string>
+    <string name="details_alert_yes">Elfogad</string>
+    <string name="details_alert_no">Mégse</string>
     <string name="details_title">Részletek</string>
 
     <string name="archive_alert_message">A tárcáról biztonsági másolat készül, majd törlésre fog kerülni!</string>
+    <string name="archive_alert_yes">Elfogad</string>
+    <string name="archive_alert_no">Mégse</string>
 
     <string name="fab_create_new">Új tárca létrehozása</string>
     <string name="fab_restore_viewonly">Figyelőtárca visszaállítása</string>
@@ -290,6 +293,7 @@
 
     <string name="menu_language">Nyelv</string>
     <string name="language_system_default">Rendszernyelv használata</string>
+    <string name="menu_nodes">Távoli csomópontok</string>
 
     <string name="fab_restore_ledger">Visszaállítás Ledger Nano S-ről</string>
 
@@ -355,6 +359,8 @@
     <string name="node_nobookmark">Automatically bookmarked best %1$d nodes</string>
     <string name="label_test">Test</string><!--note: as in "Test a network connection"-->
 
+    <string name="remote_nodes_subtitle">Húzza lefelé a képernyőt a beolvasáshoz és az automatikus legjobb csomópont kiválasztásához</string>
+    <string name="change_remote_node_conf">Távoli csomópont módosítása %1$s-re?</string>
     <string name="backup_success">Backup successful</string>
 
     <string name="send_address_resolve_bip70">Resolving Payment URI&#8230;</string>

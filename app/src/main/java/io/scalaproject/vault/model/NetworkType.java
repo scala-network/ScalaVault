@@ -27,15 +27,12 @@ public enum NetworkType {
     NetworkType_Stagenet(2);
 
     public static NetworkType fromInteger(int n) {
-        switch (n) {
-            case 0:
-                return NetworkType_Mainnet;
-            case 1:
-                return NetworkType_Testnet;
-            case 2:
-                return NetworkType_Stagenet;
-        }
-        return null;
+        return switch (n) {
+            case 0 -> NetworkType_Mainnet;
+            case 1 -> NetworkType_Testnet;
+            case 2 -> NetworkType_Stagenet;
+            default -> null;
+        };
     }
 
     public int getValue() {

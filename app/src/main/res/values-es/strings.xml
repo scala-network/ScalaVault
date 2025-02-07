@@ -1,5 +1,6 @@
-<resources>
+<resources xmlns:tools="http://schemas.android.com/tools" tools:locale="es">
     <string name="wallet_activity_name">Monedero</string>
+    <string name="menu_mobileminer">Minero Móvil</string>
 
     <string name="menu_about">Acerca De</string>
     <string name="menu_privacy">Política de Privacidad</string>
@@ -56,7 +57,7 @@
 
     <string name="label_daemon">Nodo</string>
     <string name="status_wallet_loading">Cargando monedero&#8230;</string>
-    <string name="status_wallet_unloaded">Monedero guardada</string>
+    <string name="status_wallet_unloaded">Monedero guardado</string>
     <string name="status_wallet_unload_failed">¡Guardado de monedero fallido!</string>
     <string name="status_wallet_connecting">Conectando&#8230;</string>
     <string name="status_wallet_connect_failed">¡Conexión con el nodo fallida!\nComprueba el usuario/contraseña</string>
@@ -134,9 +135,10 @@
     <string name="generate_wallet_exists">¡El monedero ya existe!</string>
     <string name="generate_wallet_dot">No puede empezar con .</string>
     <string name="generate_wallet_creating">Creando monedero</string>
-    <string name="generate_wallet_created">Monedero creada</string>
+    <string name="generate_wallet_created">Monedero creado</string>
 
     <string name="generate_restoreheight_error">Introduce un número o una fecha (AAAA-MM-DD)</string>
+    <string name="generate_restoreheight_min_error">La fecha debe ser mayor o igual a %1$s</string>
 
     <string name="generate_wallet_type_key">Claves</string>
     <string name="generate_wallet_type_new">Nuevo</string>
@@ -146,14 +148,14 @@
     <string name="generate_address_hint">Dirección Pública</string>
     <string name="generate_viewkey_hint">Clave de Vista</string>
     <string name="generate_spendkey_hint">Clave de Gasto</string>
-    <string name="generate_mnemonic_hint">Semilla Mnemotécnica de 25 Palabras</string>
+    <string name="generate_mnemonic_hint">Semilla Mnemónica de 25 Palabras</string>
     <string name="generate_restoreheight_hint">Altura o Fecha (YYYY-MM-DD) de Restauración</string>
 
     <string name="generate_address_label">Dirección Pública</string>
     <string name="generate_viewkey_label">Clave de Vista</string>
     <string name="generate_spendkey_label">Clave de Gasto</string>
-    <string name="generate_mnemonic_label">Semilla Mnemotécnica</string>
-    <string name="generate_crazypass_label">Contraseña de restauración para el archivo del monedero</string>
+    <string name="generate_mnemonic_label">Semilla Mnemónica</string>
+    <string name="generate_crazypass_label">Contraseña de restauración para el monedero</string>
 
     <string name="generate_check_key">Introduce una clave válida</string>
     <string name="generate_check_address">Introduce una dirección válida</string>
@@ -212,9 +214,13 @@
     <string name="receive_amount_nan">XLA no es un número</string>
 
     <string name="details_alert_message">Se va a mostrar información delicada.\n¡Mira por encima del hombro!</string>
+    <string name="details_alert_yes">Aceptar</string>
+    <string name="details_alert_no">Cancelar</string>
     <string name="details_title">Detalles</string>
 
     <string name="archive_alert_message">¡El monedero será copiada y después borrada!</string>
+    <string name="archive_alert_yes">Aceptar</string>
+    <string name="archive_alert_no">Cancelar</string>
 
     <string name="fab_create_new">Crear nuevo monedero</string>
     <string name="fab_restore_viewonly">Restaurar monedero de sólo vista</string>
@@ -263,7 +269,6 @@
     <string name="send_address_invalid">No es una dirección válida</string>
     <string name="send_fee_btc_label">Comisión (XLA)</string>
     <string name="send_total_btc_label">Total (XLA)</string>
-    <string name="send_amount">%1$s XLA</string>
     <string name="send_fee">+%1$s Comisión</string>
     <string name="tx_destination_btc">Destino\n(BTC)</string>
     <string name="tx_amount_btc">Monto\n(BTC)</string>
@@ -283,6 +288,7 @@
 
     <string name="menu_language">Lenguaje</string>
     <string name="language_system_default">Usar Idioma del Sistema</string>
+    <string name="menu_nodes">Nodos remotos</string>
 
     <string name="fab_restore_ledger">Restaurar desde Ledger Nano S</string>
 
@@ -318,11 +324,13 @@
 
     <string name="status_wallet_connect_wrongversion">Versión de nodo incompatible - ¡por favor actualiza!</string>
 
-    <string name="menu_info">Detalles</string><!--Changed to: Show Secrets!-->
+    <string name="menu_info">¡Mostrar Secretos!</string><!--Changed to: Show Secrets!-->
 
     <string name="menu_StealthMode">Modo Público</string>
 
-    <string name="info_nodes_enabled">Nodo-o-matiC habilitado, toque para más información.</string>
+    <string name="info_mobile_miner">Comienza a minar en tu dispositivo móvil con Scala Miner. Toca aquí para más información.</string>
+    <string name="info_nodes_enabled">OBSOLETO</string>
+    <string name="info_nodes_enabled_2">Scala Vault busca los mejores nodos disponibles. Toca aquí para más información.</string>
     <string name="node_height">Último bloque actualizado: %1$s</string>
     <string name="label_nodes">Nodos</string>
     <string name="node_name_hint">Nombre del Nodo (Opcional)</string>
@@ -336,8 +344,8 @@
     <string name="node_port_range">Debe ser 1&#8211;65535</string>
     <string name="node_fab_add">Agregar Nodo</string>
     <string name="node_refresh_hint">¡Toca para refrescar!</string>
-    <string name="node_test_error">ERROR DE CONECCIÓN %1$d</string>
-    <string name="node_general_error">ERROR DE CONECCIÓN</string>
+    <string name="node_test_error">ERROR DE CONEXIÓN %1$d</string>
+    <string name="node_general_error">ERROR DE CONEXIÓN</string>
     <string name="node_auth_error">AUTENTIFICACIÓN FALLIDA</string>
     <string name="node_result_label">Resultados de la prueba:</string>
     <string name="node_result">Altura: %1$s (v%2$d), Ping: %3$.0fms, IP: %4$s</string>
@@ -349,53 +357,83 @@
     <string name="node_nobookmark">Mejores %1$d nodos marcados automáticamente</string>
     <string name="label_test">Probar</string><!--note: as in "Test a network connection"-->
 
-    <string name="send_address_resolve_bip70">Resolving Payment URI&#8230;</string>
-    <string name="send_address_not_bip70">Could not resolve Payment URI</string>
-    <string name="send_address_bip70">Resolved Payment URI &#x2714;</string>
+    <string name="remote_nodes_subtitle">Desliza hacia abajo para escanear y seleccionar automáticamente el mejor nodo disponible</string>
+    <string name="change_remote_node_conf">¿Cambiar nodo remoto a %1$s?</string>
+
+    <string name="send_address_resolve_bip70">Resolviendo URI de pago&#8230;</string>
+    <string name="send_address_not_bip70">No se pudo resolver el URI de pago</string>
+    <string name="send_address_bip70">URI de pago resuelto &#x2714;</string>
     <!-- please verify this means "Receiver" or "Recipient" as in "Receiver in the transaction" -->
     <string name="send_address_hint">Receptor</string>
 
-    <string name="xlato_error_001">XLA.TO offline - try again later</string>
-    <string name="xlato_error_004">BTC amount out of bounds</string>
+    <string name="xlato_error_001">XLA.TO está fuera de línea. Vuelve a intentarlo más tarde</string>
+    <string name="xlato_error_004">La cantidad de BTC está fuera del rango permitido</string>
     <string name="xlato_error_010">Invalid or outdated Payment URL</string>
-    <string name="xlato_error_012">Too many requests</string>
+    <string name="xlato_error_012">Demasiadas solicitudes</string>
 
-    <string name="street_sweep_amount">EVERYTHING!</string> <!-- as in: "everything in the account" = "all the money" -->
+    <string name="street_sweep_amount">¡TODO!</string> <!-- as in: "everything in the account" = "all the money" -->
 
-    <string name="menu_ledger_seed">Convert Ledger Seed</string>
-    <string name="prompt_ledger_seed">Ledger Seed Words</string>
-    <string name="prompt_ledger_phrase">Ledger Passphrase (optional)</string>
-    <string name="bad_ledger_seed">Invalid Ledger Seed!</string>
-    <string name="prompt_ledger_seed_warn">Entering your Ledger Seed here is a major security risk!</string>
+    <string name="menu_ledger_seed">Convertir Semilla de Ledger</string>
+    <string name="prompt_ledger_seed">Palabras Semilla de Ledger</string>
+    <string name="prompt_ledger_phrase">Frase de Paso Ledger (opcional)</string>
+    <string name="bad_ledger_seed">¡Semilla de Ledger inválida!</string>
+    <string name="prompt_ledger_seed_warn">¡Introducir su Semilla de Ledger en este lugar supone un importante riesgo para su seguridad!</string>
 
     <string name="label_restoreheight">Altura de Restauración</string> <!-- Restore Height -->
 
-    <string name="toast_ledger_start_app">Start Scala App on %1$s</string>
+    <string name="toast_ledger_start_app">Iniciar aplicación Scala en %1$s</string>
 
-    <string name="menu_rescan">Rescan!</string>
-    <string name="privacy_policy_intro">We care about your privacy. To learn more, please read our Privacy Policy.</string>
-    <string name="privacy_policy_label">Privacy Policy</string>
-    <string name="primary_address">Primary Address</string>
+    <string name="menu_rescan">¡Reexplorar!</string>
+    <string name="privacy_policy_intro">Nos preocupamos por su privacidad. Para obtener más información, lea nuestra Política de Privacidad.</string>
+    <string name="privacy_policy_label">Política de Privacidad</string>
+    <string name="primary_address">Dirección principal</string>
     <string name="mm_url">https://github.com/scala-network/MobileMiner/releases</string>
-    <string name="connection_remote_daemon">Connecting to remote node...</string>
-    <string name="remote_nodes">Remote Nodes</string>
-    <string name="address_book">Address Book</string>
-    <string name="delete_contact_conf">Delete entry %1$s?</string>
-    <string name="contact_value_empty">We need this!</string>
-    <string name="no_entry">No entry</string>
-    <string name="save_to_address_book">Save to address book</string>
-    <string name="contact_name_empty_error">Name cannot be empty!</string>
-    <string name="entry_name">Entry Name</string>
-    <string name="start_mining">Start mining on your Android device safely and efficiently with the Scala Mobile Miner.</string>
-    <string name="mobile_miner">Mobile Miner</string>
-    <string name="download">Download</string>
-    <string name="select_image">Select Image</string>
-    <string name="contact_avatar_hint">An image that represents this address book entry.</string>
-    <string name="upload">Upload</string>
-    <string name="delete">Delete</string>
-    <string name="edit">Edit</string>
-    <string name="enable_debug_info">Enable Debug Info</string>
-    <string name="disable_debug_info">Disable Debug Info</string>
-    <string name="send_address_resolve_ud">Resolving ENS / UD&#8230;</string>
-    <string name="send_address_no_ud_records">No address found for ENS / UD domain</string>
+    <string name="connection_remote_daemon">Conectando al nodo remoto…</string>
+    <string name="remote_nodes">Nodos remotos</string>
+    <string name="address_book">libreta de direcciones</string>
+    <string name="delete_contact_conf">¿Eliminar la entrada %1$s?</string>
+    <string name="contact_value_empty">¡Necesitamos esto!</string>
+    <string name="no_entry">Sin entradas</string>
+    <string name="save_to_address_book">Guardar en la libreta de direcciones</string>
+    <string name="contact_name_empty_error">¡El nombre no puede estar vacío!</string>
+    <string name="entry_name">Nombre de Registro</string>
+    <string name="start_mining">Comienza a minar en tu dispositivo Android de forma segura y eficiente con Scala Mobile Miner.</string>
+    <string name="mobile_miner">Minero Móvil</string>
+    <string name="download">Descargar</string>
+    <string name="select_image">Seleccionar imagen</string>
+    <string name="contact_avatar_hint">Una imagen que represente esta entrada en la libreta de direcciones</string>
+    <string name="upload">Cargar</string>
+    <string name="delete">Eliminar</string>
+    <string name="edit">Editar</string>
+    <string name="enable_debug_info">Activar depuración</string>
+    <string name="disable_debug_info">Desactivar depuración</string>
+    <string name="send_address_resolve_ud">Resolviendo ENS / UD&#8230;</string>
+    <string name="send_address_no_ud_records">No se encontró ninguna dirección para el dominio ENS / UD</string>
+    <string name="transaction_history">Historial de transacciones</string>
+    <string name="send">Enviar</string>
+    <string name="receive">Recibir</string>
+    <string name="balance">Balance</string>
+    <string name="balance_primary_address">Dirección principal</string>
+    <string name="balance_wallet_address">Dirección del monedero</string>
+    <string name="history_no_transaction">Sin transacciones</string>
+    <string name="mobileminer_scala_miner">MINERO SCALA</string>
+    <string name="mobileminer_start_mining">Comienza a minar en tu dispositivo Android de forma segura y eficiente.</string>
+    <string name="close">Close</string>
+    <string name="credits">Creditos</string>
+    <string name="credits_made_with">Hecho con </string>
+    <string name="credits_by"> por </string>
+    <string name="credits_forked_from">Derivado de </string>
+    <string name="wizard_home">Un monedero seguro y ligero para almacenar tus monedas Scala</string>
+    <string name="wizard_home_description">Scala Vault proporciona todo lo que necesitas para gestionar y utilizar monederos Scala en Android</string>
+    <string name="wizard_home_create_new_wallet">Crear nueva billetera</string>
+    <string name="wizard_home_import_from_seed">Importar desde semilla</string>
+    <string name="wizard_home_or">o</string>
+    <string name="wizard_home_skip">Saltar</string>
+    <string name="no_wallet">Sin monedero</string>
+    <string name="wallet_address">Dirección del monedero</string>
+    <string name="subaddresses">Subcuentas</string>
+    <string name="message_exchange_success">Precio de la moneda actualizado</string>
+    <string name="splashcreen_check_network">Verificando la red…</string>
+    <string name="splashcreen_check_network_success">Conectado a internet, accediendo a Scala Vault</string>
+    <string name="splashcreen_check_network_failure">Esta aplicación requiere conexión a internet para funcionar. Por favor, verifica tu conexión a internet e inténtalo de nuevo…</string>
 </resources>

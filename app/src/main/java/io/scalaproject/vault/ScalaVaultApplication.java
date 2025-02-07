@@ -27,6 +27,8 @@ import android.content.Context;
 import android.content.SharedPreferences;
 import android.content.res.Configuration;
 
+import androidx.annotation.NonNull;
+
 import io.scalaproject.vault.model.NetworkType;
 import io.scalaproject.vault.util.LocaleHelper;
 
@@ -64,22 +66,19 @@ public class ScalaVaultApplication extends Application {
     }
 
     @Override
-    public void onConfigurationChanged(Configuration configuration) {
+    public void onConfigurationChanged(@NonNull Configuration configuration) {
         super.onConfigurationChanged(configuration);
         LocaleHelper.updateSystemDefaultLocale(configuration.locale);
         LocaleHelper.setLocale(ScalaVaultApplication.this, LocaleHelper.getLocale(ScalaVaultApplication.this));
     }
 
     static public NetworkType getNetworkType() {
-        switch (BuildConfig.FLAVOR_net) {
-            case "mainnet":
-                return NetworkType.NetworkType_Mainnet;
-            case "stagenet":
-                return NetworkType.NetworkType_Stagenet;
-            case "testnet":
-                return NetworkType.NetworkType_Testnet;
-            default:
-                throw new IllegalStateException("unknown net flavor " + BuildConfig.FLAVOR_net);
-        }
+        return switch (BuildConfig.FLAVOR_net) {
+            case "mainnet" -> NetworkType.NetworkType_Mainnet;
+            case "stagenet" -> NetworkType.NetworkType_Stagenet;
+            case "testnet" -> NetworkType.NetworkType_Testnet;
+            default ->
+                    throw new IllegalStateException("unknown net flavor " + BuildConfig.FLAVOR_net);
+        };
     }
 }

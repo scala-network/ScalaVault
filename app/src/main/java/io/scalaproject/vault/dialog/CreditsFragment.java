@@ -27,6 +27,8 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
+
+import androidx.annotation.NonNull;
 import androidx.fragment.app.DialogFragment;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
@@ -40,6 +42,8 @@ import android.widget.Button;
 import android.widget.TextView;
 
 import com.google.android.material.dialog.MaterialAlertDialogBuilder;
+
+import java.util.Objects;
 
 import io.scalaproject.vault.R;
 
@@ -60,9 +64,10 @@ public class CreditsFragment extends DialogFragment {
         CreditsFragment.newInstance().show(ft, TAG);
     }
 
+    @NonNull
     @Override
     public Dialog onCreateDialog(Bundle savedInstanceState) {
-        final View view = LayoutInflater.from(getActivity()).inflate(R.layout.fragment_credits, null);
+        final View view = getLayoutInflater().inflate(R.layout.fragment_credits, null);
 
         TextView tvScalaURL = view.findViewById(R.id.ScalaURL);
         tvScalaURL.setText(Html.fromHtml(getString(R.string.ScalaLink)));
@@ -82,15 +87,10 @@ public class CreditsFragment extends DialogFragment {
             }
         });
 
-        MaterialAlertDialogBuilder builder = new MaterialAlertDialogBuilder(getActivity(), R.style.MaterialAlertDialogCustom);
+        MaterialAlertDialogBuilder builder = new MaterialAlertDialogBuilder(requireActivity(), R.style.MaterialAlertDialogCustom);
         builder.setView(view);
         builder.setNegativeButton(R.string.about_close,
-                new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int id) {
-                        dialog.dismiss();
-                    }
-                });
+                (dialog, id) -> dialog.dismiss());
 
         return builder.create();
     }

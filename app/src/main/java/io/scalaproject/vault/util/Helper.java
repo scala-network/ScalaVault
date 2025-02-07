@@ -22,6 +22,7 @@
 package io.scalaproject.vault.util;
 
 import android.Manifest;
+import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.Dialog;
@@ -29,7 +30,6 @@ import android.content.ClipData;
 import android.content.ClipDescription;
 import android.content.ClipboardManager;
 import android.content.Context;
-import android.content.DialogInterface;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -45,19 +45,16 @@ import android.hardware.fingerprint.FingerprintManager;
 import android.os.AsyncTask;
 import android.os.Build;
 import android.os.CancellationSignal;
-import android.os.Environment;
 import android.os.StrictMode;
 
 import com.google.android.material.dialog.MaterialAlertDialogBuilder;
 import com.google.android.material.textfield.TextInputLayout;
 
-import androidx.annotation.RequiresApi;
 import androidx.core.content.ContextCompat;
 import android.system.ErrnoException;
 import android.system.Os;
 import android.text.Editable;
 import android.text.TextWatcher;
-import android.util.Log;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -82,6 +79,7 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.math.BigDecimal;
 import java.math.BigInteger;
+import java.math.RoundingMode;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.SocketTimeoutException;
@@ -127,15 +125,11 @@ public class Helper {
     static public final int PERMISSIONS_REQUEST_READ_IMAGES = 8;
 
     static public boolean getCameraPermission(Activity context) {
-        if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.M) {
-            if (context.checkSelfPermission(Manifest.permission.CAMERA) == PackageManager.PERMISSION_DENIED) {
-                Timber.w("Permission denied for CAMERA - requesting it");
-                String[] permissions = {Manifest.permission.CAMERA};
-                context.requestPermissions(permissions, PERMISSIONS_REQUEST_CAMERA);
-                return false;
-            } else {
-                return true;
-            }
+        if (context.checkSelfPermission(Manifest.permission.CAMERA) == PackageManager.PERMISSION_DENIED) {
+            Timber.w("Permission denied for CAMERA - requesting it");
+            String[] permissions = {Manifest.permission.CAMERA};
+            context.requestPermissions(permissions, PERMISSIONS_REQUEST_CAMERA);
+            return false;
         } else {
             return true;
         }
@@ -143,17 +137,13 @@ public class Helper {
 
     static public boolean getReadExternalStoragePermission(Activity context) {
         String perm = Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU ? Manifest.permission.READ_MEDIA_IMAGES : Manifest.permission.READ_EXTERNAL_STORAGE;
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-            if (context.checkSelfPermission(perm) == PackageManager.PERMISSION_DENIED) {
-                Timber.w("Permission denied for READ_EXTERNAL_STORAGE - requesting it");
-                String[] permissions = {perm};
-                context.requestPermissions(permissions, PERMISSIONS_REQUEST_READ_IMAGES);
-                return false;
-            } else {
-                return true;
-            }
-        } else {
+        if (context.checkSelfPermission(perm) == PackageManager.PERMISSION_DENIED) {
+            Timber.w("Permission denied for READ_EXTERNAL_STORAGE - requesting it");
+            String[] permissions = {perm};
+            context.requestPermissions(permissions, PERMISSIONS_REQUEST_READ_IMAGES);
             return false;
+        } else {
+            return true;
         }
     }
 
@@ -207,10 +197,10 @@ public class Helper {
         // a Java bug does not strip zeros properly if the value is 0
         if (amount == 0) return "0.00";
         BigDecimal d = getDecimalAmount(amount)
-                .setScale(maxDecimals, BigDecimal.ROUND_HALF_UP)
+                .setScale(maxDecimals, RoundingMode.HALF_UP)
                 .stripTrailingZeros();
         if (d.scale() < 2)
-            d = d.setScale(2, BigDecimal.ROUND_UNNECESSARY);
+            d = d.setScale(2, RoundingMode.UNNECESSARY);
         return d.toPlainString();
     }
 
@@ -218,7 +208,7 @@ public class Helper {
         // at this point selection is XLA in case of error
         String displayB;
         if (isCrypto) {
-            if ((amount >= 0) || (amount == 0)) {
+            if (amount >= 0) {
                 displayB = String.format(Locale.US, "%,.2f", amount);
             } else {
                 displayB = null;
@@ -237,9 +227,12 @@ public class Helper {
             int decimals = 1 - (int) Math.floor(Math.log10(amount));
             if (decimals < 2) decimals = 2;
             if (decimals > 12) decimals = 12;
-            return String.format(Locale.US, "%,." + decimals + "f", amount);
+            // Create the format string
+            String formatString = "%,." + decimals + "f";
+            return String.format(Locale.US, formatString, amount);
         }
     }
+
 
     static public Bitmap getBitmap(Context context, int drawableId) {
         Drawable drawable = ContextCompat.getDrawable(context, drawableId);
@@ -263,7 +256,7 @@ public class Helper {
         paint.setAntiAlias(true);
         canvas.drawARGB(0, 0, 0, 0);
         paint.setColor(color);
-        canvas.drawCircle(bitmap.getWidth() / 2, bitmap.getHeight() / 2, bitmap.getWidth() / 2, paint);
+        canvas.drawCircle((float) bitmap.getWidth() / 2, (float) bitmap.getHeight() / 2, (float) bitmap.getWidth() / 2, paint);
         paint.setXfermode(new PorterDuffXfermode(PorterDuff.Mode.SRC_IN));
         canvas.drawBitmap(bitmap, rect, rect, paint);
 
@@ -289,7 +282,7 @@ public class Helper {
             urlConnection.setConnectTimeout(HTTP_TIMEOUT);
             urlConnection.setReadTimeout(HTTP_TIMEOUT);
             InputStreamReader in = new InputStreamReader(urlConnection.getInputStream());
-            StringBuffer sb = new StringBuffer();
+            StringBuilder sb = new StringBuilder();
             final int BUFFER_SIZE = 512;
             char[] buffer = new char[BUFFER_SIZE];
             int length = in.read(buffer, 0, BUFFER_SIZE);
@@ -322,8 +315,8 @@ public class Helper {
         final ClipboardManager clipboardManager = (ClipboardManager) context.getSystemService(Context.CLIPBOARD_SERVICE);
         try {
             if (clipboardManager.hasPrimaryClip()
-                    && clipboardManager.getPrimaryClipDescription().hasMimeType(ClipDescription.MIMETYPE_TEXT_PLAIN)) {
-                final ClipData.Item item = clipboardManager.getPrimaryClip().getItemAt(0);
+                    && Objects.requireNonNull(clipboardManager.getPrimaryClipDescription()).hasMimeType(ClipDescription.MIMETYPE_TEXT_PLAIN)) {
+                final ClipData.Item item = Objects.requireNonNull(clipboardManager.getPrimaryClip()).getItemAt(0);
                 return item.getText().toString();
             }
         } catch (NullPointerException ex) {
@@ -333,7 +326,7 @@ public class Helper {
         return null;
     }
 
-    static private Animation ShakeAnimation;
+    static private volatile Animation ShakeAnimation;
 
     static public Animation getShakeAnimation(Context context) {
         if (ShakeAnimation == null) {
@@ -346,9 +339,10 @@ public class Helper {
         return ShakeAnimation;
     }
 
+    // Domain xla.to don't exist can be register
+    // TODO Fix this function
     static public HttpUrl getxlaToBaseUrl() {
-        if ((WalletManager.getInstance() == null)
-                || (WalletManager.getInstance().getNetworkType() != NetworkType.NetworkType_Mainnet)) {
+        if ((WalletManager.getInstance() == null) || (WalletManager.getInstance().getNetworkType() != NetworkType.NetworkType_Mainnet)) {
             return HttpUrl.parse("https://test.xla.to/api/v3/xla2btc/");
         } else {
             return HttpUrl.parse("https://xla.to/api/v3/xla2btc/");
@@ -459,8 +453,11 @@ public class Helper {
         etPassword.setHint(context.getString(R.string.prompt_password, wallet));
 
         final TextView tvOpenPrompt = promptsView.findViewById(R.id.tvOpenPrompt);
+        @SuppressLint("UseCompatLoadingForDrawables")
         final Drawable icFingerprint = context.getDrawable(R.drawable.ic_fingerprint);
+        @SuppressLint("UseCompatLoadingForDrawables")
         final Drawable icError = context.getDrawable(R.drawable.ic_error_red_36dp);
+        @SuppressLint("UseCompatLoadingForDrawables")
         final Drawable icInfo = context.getDrawable(R.drawable.ic_info_green);
 
         final boolean fingerprintAuthCheck = FingerprintHelper.isFingerPassValid(context, wallet);
@@ -471,8 +468,8 @@ public class Helper {
         final AtomicBoolean incorrectSavedPass = new AtomicBoolean(false);
 
         class LoginWalletTask extends AsyncTask<Void, Void, Boolean> {
-            private String pass;
-            private boolean fingerprintUsed;
+            private final String pass;
+            private final boolean fingerprintUsed;
 
             LoginWalletTask(String pass, boolean fingerprintUsed) {
                 this.pass = pass;
@@ -520,7 +517,7 @@ public class Helper {
             }
         }
 
-        etPassword.getEditText().addTextChangedListener(new TextWatcher() {
+        Objects.requireNonNull(etPassword.getEditText()).addTextChangedListener(new TextWatcher() {
 
             @Override
             public void afterTextChanged(Editable s) {
@@ -530,14 +527,10 @@ public class Helper {
             }
 
             @Override
-            public void beforeTextChanged(CharSequence s, int start,
-                                          int count, int after) {
-            }
+            public void beforeTextChanged(CharSequence s, int start,  int count, int after) { }
 
             @Override
-            public void onTextChanged(CharSequence s, int start,
-                                      int before, int count) {
-            }
+            public void onTextChanged(CharSequence s, int start, int before, int count) { }
         });
 
         // set dialog message
@@ -545,103 +538,89 @@ public class Helper {
                 .setCancelable(false)
                 .setPositiveButton(context.getString(R.string.label_ok), null)
                 .setNegativeButton(context.getString(R.string.label_cancel),
-                        new DialogInterface.OnClickListener() {
-                            public void onClick(DialogInterface dialog, int id) {
-                                Helper.hideKeyboardAlways((Activity) context);
-                                cancelSignal.cancel();
-                                if (loginTask != null) {
-                                    loginTask.cancel(true);
-                                    loginTask = null;
-                                }
-                                dialog.cancel();
-                                openDialog = null;
+                        (dialog, id) -> {
+                            Helper.hideKeyboardAlways((Activity) context);
+                            cancelSignal.cancel();
+                            if (loginTask != null) {
+                                loginTask.cancel(true);
+                                loginTask = null;
                             }
+                            dialog.cancel();
+                            openDialog = null;
                         });
 
         openDialog = alertDialogBuilder.create();
 
         final FingerprintManager.AuthenticationCallback fingerprintAuthCallback;
-        if (Build.VERSION.SDK_INT < Build.VERSION_CODES.M) {
-            fingerprintAuthCallback = null;
-        } else {
-            fingerprintAuthCallback = new FingerprintManager.AuthenticationCallback() {
-                @Override
-                public void onAuthenticationError(int errMsgId, CharSequence errString) {
-                    tvOpenPrompt.setCompoundDrawablesRelativeWithIntrinsicBounds(icError, null, null, null);
-                    tvOpenPrompt.setText(errString);
-                }
-
-                @Override
-                public void onAuthenticationHelp(int helpMsgId, CharSequence helpString) {
-                    tvOpenPrompt.setCompoundDrawablesRelativeWithIntrinsicBounds(icError, null, null, null);
-                    tvOpenPrompt.setText(helpString);
-                }
-
-                @Override
-                public void onAuthenticationSucceeded(FingerprintManager.AuthenticationResult result) {
-                    try {
-                        String userPass = KeyStoreHelper.loadWalletUserPass(context, wallet);
-                        if (loginTask == null) {
-                            loginTask = new LoginWalletTask(userPass, true);
-                            loginTask.execute();
-                        }
-                    } catch (KeyStoreHelper.BrokenPasswordStoreException ex) {
-                        etPassword.setError(context.getString(R.string.bad_password));
-                        // TODO: better error message here - what would it be?
-                    }
-                }
-
-                @Override
-                public void onAuthenticationFailed() {
-                    tvOpenPrompt.setCompoundDrawablesRelativeWithIntrinsicBounds(icError, null, null, null);
-                    tvOpenPrompt.setText(context.getString(R.string.bad_fingerprint));
-                }
-            };
-        }
-
-        openDialog.setOnShowListener(new DialogInterface.OnShowListener() {
+        fingerprintAuthCallback = new FingerprintManager.AuthenticationCallback() {
             @Override
-            public void onShow(DialogInterface dialog) {
-                if (fingerprintAuthAllowed && fingerprintAuthCallback != null) {
-                    tvOpenPrompt.setCompoundDrawablesRelativeWithIntrinsicBounds(icFingerprint, null, null, null);
-                    tvOpenPrompt.setText(context.getText(R.string.prompt_fingerprint_auth));
-                    tvOpenPrompt.setVisibility(View.VISIBLE);
-                    FingerprintHelper.authenticate(context, cancelSignal, fingerprintAuthCallback);
-                } else {
-                    etPassword.requestFocus();
-                }
-                Button posButton = openDialog.getButton(AlertDialog.BUTTON_POSITIVE);
-                posButton.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View view) {
-                        String pass = etPassword.getEditText().getText().toString();
-                        if (loginTask == null) {
-                            loginTask = new LoginWalletTask(pass, false);
-                            loginTask.execute();
-                        }
-                    }
-                });
+            public void onAuthenticationError(int errMsgId, CharSequence errString) {
+                tvOpenPrompt.setCompoundDrawablesRelativeWithIntrinsicBounds(icError, null, null, null);
+                tvOpenPrompt.setText(errString);
             }
+
+            @Override
+            public void onAuthenticationHelp(int helpMsgId, CharSequence helpString) {
+                tvOpenPrompt.setCompoundDrawablesRelativeWithIntrinsicBounds(icError, null, null, null);
+                tvOpenPrompt.setText(helpString);
+            }
+
+            @Override
+            public void onAuthenticationSucceeded(FingerprintManager.AuthenticationResult result) {
+                try {
+                    String userPass = KeyStoreHelper.loadWalletUserPass(context, wallet);
+                    if (loginTask == null) {
+                        loginTask = new LoginWalletTask(userPass, true);
+                        loginTask.execute();
+                    }
+                } catch (KeyStoreHelper.BrokenPasswordStoreException ex) {
+                    etPassword.setError(context.getString(R.string.bad_password));
+                    // TODO: better error message here - what would it be?
+                }
+            }
+
+            @Override
+            public void onAuthenticationFailed() {
+                tvOpenPrompt.setCompoundDrawablesRelativeWithIntrinsicBounds(icError, null, null, null);
+                tvOpenPrompt.setText(context.getString(R.string.bad_fingerprint));
+            }
+        };
+
+        openDialog.setOnShowListener(dialog -> {
+            if (fingerprintAuthAllowed) {
+                tvOpenPrompt.setCompoundDrawablesRelativeWithIntrinsicBounds(icFingerprint, null, null, null);
+                tvOpenPrompt.setText(context.getText(R.string.prompt_fingerprint_auth));
+                tvOpenPrompt.setVisibility(View.VISIBLE);
+                FingerprintHelper.authenticate(context, cancelSignal, fingerprintAuthCallback);
+            } else {
+                etPassword.requestFocus();
+            }
+            Button posButton = openDialog.getButton(AlertDialog.BUTTON_POSITIVE);
+            posButton.setOnClickListener(view -> {
+                String pass = etPassword.getEditText().getText().toString();
+                if (loginTask == null) {
+                    loginTask = new LoginWalletTask(pass, false);
+                    loginTask.execute();
+                }
+            });
         });
 
         // accept keyboard "ok"
-        etPassword.getEditText().setOnEditorActionListener(new TextView.OnEditorActionListener() {
-            public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
-                if ((event != null && (event.getKeyCode() == KeyEvent.KEYCODE_ENTER) && (event.getAction() == KeyEvent.ACTION_DOWN))
-                        || (actionId == EditorInfo.IME_ACTION_DONE)) {
-                    String pass = etPassword.getEditText().getText().toString();
-                    if (loginTask == null) {
-                        loginTask = new LoginWalletTask(pass, false);
-                        loginTask.execute();
-                    }
-                    return true;
+        etPassword.getEditText().setOnEditorActionListener((v, actionId, event) -> {
+            if ((event != null && (event.getKeyCode() == KeyEvent.KEYCODE_ENTER) && (event.getAction() == KeyEvent.ACTION_DOWN))
+                    || (actionId == EditorInfo.IME_ACTION_DONE)) {
+                String pass = etPassword.getEditText().getText().toString();
+                if (loginTask == null) {
+                    loginTask = new LoginWalletTask(pass, false);
+                    loginTask.execute();
                 }
-                return false;
+                return true;
             }
+            return false;
         });
 
         if (Helper.preventScreenshot()) {
-            openDialog.getWindow().setFlags(WindowManager.LayoutParams.FLAG_SECURE, WindowManager.LayoutParams.FLAG_SECURE);
+            Objects.requireNonNull(openDialog.getWindow()).setFlags(WindowManager.LayoutParams.FLAG_SECURE, WindowManager.LayoutParams.FLAG_SECURE);
         }
 
         Helper.showKeyboard(openDialog);
@@ -663,7 +642,8 @@ public class Helper {
     }
 
     static public ExchangeApi getExchangeApi() {
-        return new io.scalaproject.vault.service.exchange.krakenEcb.ExchangeApiImpl(OkHttpHelper.getOkHttpClient());
+        // This returns ecb first?
+        return new io.scalaproject.vault.service.exchange.main.ExchangeApiImpl(OkHttpHelper.getOkHttpClient());
     }
 
     public interface Action {
@@ -706,7 +686,7 @@ public class Helper {
         } catch (java.net.SocketTimeoutException e) {
             return false;
         } catch (IOException e) {
-            e.printStackTrace();
+            //e.printStackTrace();
             return false;
         }
     }

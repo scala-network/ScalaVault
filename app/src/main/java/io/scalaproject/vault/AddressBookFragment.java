@@ -71,34 +71,23 @@ import java.util.Set;
 
 import timber.log.Timber;
 
-public class AddressBookFragment extends Fragment
-        implements ContactInfoAdapter.OnSelectContactListener, ContactInfoAdapter.OnDeleteContactListener, View.OnClickListener {
+public class AddressBookFragment extends Fragment implements ContactInfoAdapter.OnSelectContactListener, ContactInfoAdapter.OnDeleteContactListener, View.OnClickListener {
 
     public static final String REQUEST_MODE = "mode";
-
     static final public String MODE_TYPE_READONLY = "readonly";
-
     private boolean readonly = false;
-
     private RecyclerView rvContacts;
     private LinearLayout llNoContact;
-
     private ContactInfoAdapter contactsAdapter;
-
     private AddressBookFragment.Listener activityCallback;
-
     private static ActivityResultLauncher<String> mGetContentLauncher;
     private ActivityResultLauncher<Intent> mCropImageLauncher;
 
     public interface Listener {
         void setToolbarButton(int type);
-
         void setSubtitle(String title);
-
         Set<Contact> getContacts();
-
         void saveContacts(final List<Contact> contactItems);
-
         void onBackPressed();
     }
 
@@ -131,8 +120,7 @@ public class AddressBookFragment extends Fragment
     }
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         Timber.d("onCreateView");
         View view = inflater.inflate(R.layout.fragment_address_book, container, false);
 
@@ -228,12 +216,9 @@ public class AddressBookFragment extends Fragment
         MaterialAlertDialogBuilder builder = new MaterialAlertDialogBuilder(requireActivity(), R.style.MaterialAlertDialogCustom);
         builder.setMessage(getString(R.string.delete_contact_conf, contact.getName()))
                 .setCancelable(true)
-                .setPositiveButton(getString(R.string.details_alert_yes), new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialogInterface, int i) {
-                        contactsAdapter.deleteContact(contact);
-                        refreshContacts();
-                    }
+                .setPositiveButton(getString(R.string.details_alert_yes), (dialogInterface, i) -> {
+                    contactsAdapter.deleteContact(contact);
+                    refreshContacts();
                 })
                 .setNegativeButton(getString(R.string.details_alert_no), null)
                 .show();
@@ -430,28 +415,18 @@ public class AddressBookFragment extends Fragment
                     .setCancelable(false)
                     .setPositiveButton(getString(R.string.label_ok), null)
                     .setNegativeButton(getString(R.string.label_cancel),
-                            new DialogInterface.OnClickListener() {
-                                public void onClick(DialogInterface dialog, int id) {
-                                    undoChanges();
-                                    closeDialog();
-                                    contactsAdapter.dataSetChanged(); // to refresh test results
-                                }
+                            (dialog, id) -> {
+                                undoChanges();
+                                closeDialog();
+                                contactsAdapter.dataSetChanged(); // to refresh test results
                             });
 
             editDialog = alertDialogBuilder.create();
 
             // these need to be here, since we don't always close the dialog
-            editDialog.setOnShowListener(new DialogInterface.OnShowListener() {
-                @Override
-                public void onShow(final DialogInterface dialog) {
-                    Button button = editDialog.getButton(AlertDialog.BUTTON_POSITIVE);
-                    button.setOnClickListener(new View.OnClickListener() {
-                        @Override
-                        public void onClick(View view) {
-                            apply();
-                        }
-                    });
-                }
+            editDialog.setOnShowListener(dialog -> {
+                Button button = editDialog.getButton(AlertDialog.BUTTON_POSITIVE);
+                button.setOnClickListener(view -> apply());
             });
 
             if (Helper.preventScreenshot()) {

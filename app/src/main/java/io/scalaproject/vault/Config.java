@@ -25,7 +25,7 @@ public class Config {
 
     public static final String version = "1";
 
-    private HashMap<String,String> mConfigs = new HashMap<String, String>();
+    private final HashMap<String,String> mConfigs = new HashMap<String, String>();
 
     static void initialize(SharedPreferences preferences) {
         mSettings = new Config();

@@ -28,9 +28,14 @@ import android.os.AsyncTask;
 import android.os.Bundle;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+
+import com.google.android.material.dialog.MaterialAlertDialogBuilder;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.RecyclerView;
+
+import android.os.Handler;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -44,6 +49,7 @@ import android.widget.ImageButton;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import io.scalaproject.vault.data.NodeInfo;
 import io.scalaproject.vault.layout.NodeInfoAdapter;
@@ -63,62 +69,47 @@ import java.util.Set;
 
 import timber.log.Timber;
 
-public class LoginFragment extends Fragment implements WalletInfoAdapter.OnInteractionListener,
-        View.OnClickListener {
+public class LoginFragment extends Fragment implements WalletInfoAdapter.OnInteractionListener, View.OnClickListener {
 
     private WalletInfoAdapter adapter;
-
-    private List<WalletManager.WalletInfo> walletList = new ArrayList<>();
+    private final List<WalletManager.WalletInfo> walletList = new ArrayList<>();
     private ImageButton ibNode;
     private TextView tvNodeName;
     private TextView tvNodeAddress;
     private View pbNode;
     private View llNode;
-
     private RecyclerView recyclerView;
     private LinearLayout llNoWallet;
-
     private Listener activityCallback;
-
     private Menu loginMenu;
+    private static int connectionStatus = -1;
+
+    public static void setConnectionStatus(int connectionState) {
+        connectionStatus = connectionState;
+    }
 
     // Container Activity must implement this interface
     public interface Listener {
         File getStorageRoot();
-
         void onWalletSelected(String wallet, boolean stealthMode);
-
         void onWalletDetails(String wallet);
-
         void onWalletReceive(String wallet);
-
         void onWalletRename(String name);
-
         void onWalletBackup(String name);
-
         void onWalletArchive(String walletName);
-
         void onAddWallet(String type);
-
         void onNodePrefs();
-
         void showNet();
-
         void setToolbarButton(int type);
-
         void setTitle(String title);
-
         void setNode(NodeInfo node);
-
         NodeInfo getNode();
-
         Set<NodeInfo> getAllNodes();
-
         boolean hasLedger();
-
         void showProgressDialog(final Integer msg_id);
-
         void hideProgressDialog();
+
+        void loadNodesWithNetwork();
     }
 
     @Override
@@ -127,8 +118,7 @@ public class LoginFragment extends Fragment implements WalletInfoAdapter.OnInter
         if (context instanceof Listener) {
             this.activityCallback = (Listener) context;
         } else {
-            throw new ClassCastException(context.toString()
-                    + " must implement Listener");
+            throw new ClassCastException(context.toString() + " must implement Listener");
         }
     }
 
@@ -153,8 +143,7 @@ public class LoginFragment extends Fragment implements WalletInfoAdapter.OnInter
     }
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         Timber.d("onCreateView");
         View view = inflater.inflate(R.layout.fragment_login, container, false);
 
@@ -172,6 +161,7 @@ public class LoginFragment extends Fragment implements WalletInfoAdapter.OnInter
         fabSeedL = view.findViewById(R.id.fabSeedL);
         fabLedgerL = view.findViewById(R.id.fabLedgerL);
 
+        // Set up animations
         fab_pulse = AnimationUtils.loadAnimation(getContext(), R.anim.fab_pulse);
         fab_open_screen = AnimationUtils.loadAnimation(getContext(), R.anim.fab_open_screen);
         fab_close_screen = AnimationUtils.loadAnimation(getContext(), R.anim.fab_close_screen);
@@ -179,6 +169,8 @@ public class LoginFragment extends Fragment implements WalletInfoAdapter.OnInter
         fab_close = AnimationUtils.loadAnimation(getContext(), R.anim.fab_close);
         rotate_forward = AnimationUtils.loadAnimation(getContext(), R.anim.rotate_forward);
         rotate_backward = AnimationUtils.loadAnimation(getContext(), R.anim.rotate_backward);
+
+        // Set up click listeners
         fab.setOnClickListener(this);
         fabNew.setOnClickListener(this);
         fabView.setOnClickListener(this);
@@ -187,32 +179,33 @@ public class LoginFragment extends Fragment implements WalletInfoAdapter.OnInter
         fabLedger.setOnClickListener(this);
         fabScreen.setOnClickListener(this);
 
+        // Set up wallets
         llNoWallet = view.findViewById(R.id.llNoWallet);
-
         recyclerView = view.findViewById(R.id.listWallets);
         registerForContextMenu(recyclerView);
         this.adapter = new WalletInfoAdapter(getActivity(), this);
         recyclerView.setAdapter(adapter);
 
-        ViewGroup llNotice = view.findViewById(R.id.llNotice);
-        llNotice.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                startActivity(new Intent(getActivity(), MobileMinerActivity.class));
-            }
-        });
-        Notice.showAll(llNotice, "notice_miner", false);
+        // Check network and notice user
+        // Allow to do basic stuffs without network and sync when is online
+        if (connectionStatus == 0) {
+            ViewGroup lafNotice = view.findViewById(R.id.llNotice);
+            Notice.showAll(lafNotice, "notice_network");
+            lafNotice.setOnClickListener(v -> activityCallback.showNet());
+        } else {
+            // Show mobile miner aviability info notice
+            ViewGroup llNotice = view.findViewById(R.id.llNotice);
+            llNotice.setOnClickListener(v -> startActivity(new Intent(getActivity(), MobileMinerActivity.class)));
+            Notice.showAll(llNotice, "notice_miner", false);
+        }
 
         pbNode = view.findViewById(R.id.pbNode);
         llNode = view.findViewById(R.id.llNode);
-        llNode.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if (activityCallback.getAllNodes().isEmpty())
-                    startNodePrefs();
-                else
-                    findBestNode();
-            }
+        llNode.setOnClickListener(v -> {
+            if (activityCallback.getAllNodes().isEmpty())
+                startNodePrefs();
+            else
+                findBestNode();
         });
 
         ibNode = view.findViewById(R.id.ibNode);
@@ -220,11 +213,8 @@ public class LoginFragment extends Fragment implements WalletInfoAdapter.OnInter
         tvNodeAddress = view.findViewById(R.id.tvNodeAddress);
 
         view.findViewById(R.id.ibOption).setOnClickListener(v -> startNodePrefs());
-
         Helper.hideKeyboard(getActivity());
-
         loadList();
-
         return view;
     }
 
@@ -240,6 +230,8 @@ public class LoginFragment extends Fragment implements WalletInfoAdapter.OnInter
         activityCallback.onWalletSelected(name, stealthMode);
     }
 
+    // Create wallets action menu list
+    @SuppressLint("NonConstantResourceId")
     @Override
     public boolean onContextInteraction(MenuItem item, WalletManager.WalletInfo listItem) {
         switch (item.getItemId()) {
@@ -267,6 +259,7 @@ public class LoginFragment extends Fragment implements WalletInfoAdapter.OnInter
         return true;
     }
 
+    @SuppressLint("NotifyDataSetChanged")
     public void loadList() {
         Timber.d("loadList");
 
@@ -296,7 +289,7 @@ public class LoginFragment extends Fragment implements WalletInfoAdapter.OnInter
         }
 
         // remove information of non-existent wallet
-        Set<String> removedWallets = getActivity()
+        Set<String> removedWallets = requireActivity()
                 .getSharedPreferences(KeyStoreHelper.SecurityConstants.WALLET_PASS_PREFS_NAME, Context.MODE_PRIVATE)
                 .getAll().keySet();
 
@@ -307,6 +300,16 @@ public class LoginFragment extends Fragment implements WalletInfoAdapter.OnInter
             for (String name : removedWallets) {
                 KeyStoreHelper.removeWalletUserPass(getActivity(), name);
             }
+        }
+
+        // This handles post render layout loading network nodes. better ui experience.
+        if (activityCallback.getAllNodes().isEmpty() && connectionStatus != -1) {
+            //requireActivity().runOnUiThread(() -> Toast.makeText(this.getContext(), "something", Toast.LENGTH_SHORT).show());
+            Handler handler = new Handler();
+            handler.postDelayed(() -> {
+                activityCallback.loadNodesWithNetwork();
+                findBestNode();
+            }, 500);
         }
     }
 
@@ -333,6 +336,8 @@ public class LoginFragment extends Fragment implements WalletInfoAdapter.OnInter
         updateDebugMenu();
     }
 
+    // Update menu debug information
+    // Todo remove this in production version and debug features
     public void updateDebugMenu() {
         boolean sendDebugInfo = Config.read(Config.CONFIG_SEND_DEBUG_INFO, "1").equals("1");
 
@@ -406,6 +411,7 @@ public class LoginFragment extends Fragment implements WalletInfoAdapter.OnInter
         }
     }
 
+    @SuppressLint("NonConstantResourceId")
     @Override
     public void onClick(View v) {
         int id = v.getId();
@@ -510,6 +516,7 @@ public class LoginFragment extends Fragment implements WalletInfoAdapter.OnInter
             }
         }
 
+        @SuppressLint("UseCompatLoadingForDrawables")
         @Override
         protected void onPostExecute(NodeInfo result) {
             activityCallback.hideProgressDialog();
@@ -544,6 +551,7 @@ public class LoginFragment extends Fragment implements WalletInfoAdapter.OnInter
         }
     }
 
+    @SuppressLint("UseCompatLoadingForDrawables")
     private void showNode(NodeInfo nodeInfo) {
         tvNodeName.setText(nodeInfo.getName());
         ibNode.setVisibility(View.VISIBLE);

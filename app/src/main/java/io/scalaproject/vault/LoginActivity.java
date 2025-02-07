@@ -21,6 +21,7 @@
 
 package io.scalaproject.vault;
 
+import android.annotation.SuppressLint;
 import android.app.PendingIntent;
 import android.content.BroadcastReceiver;
 import android.content.Context;
@@ -33,6 +34,7 @@ import android.hardware.usb.UsbDevice;
 import android.hardware.usb.UsbManager;
 import android.media.MediaScannerConnection;
 import android.os.AsyncTask;
+import android.os.Build;
 import android.os.Bundle;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
@@ -40,10 +42,13 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
+import android.os.Handler;
+import android.util.Log;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.ViewGroup;
 import android.view.inputmethod.EditorInfo;
 import android.widget.EditText;
 import android.widget.TextView;
@@ -53,10 +58,11 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-
 import com.google.android.material.dialog.MaterialAlertDialogBuilder;
 
 import org.acra.ACRA;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import io.scalaproject.vault.data.Node;
 import io.scalaproject.vault.data.NodeInfo;
@@ -73,6 +79,7 @@ import io.scalaproject.vault.service.WalletService;
 import io.scalaproject.vault.util.Helper;
 import io.scalaproject.vault.util.KeyStoreHelper;
 import io.scalaproject.vault.util.LocaleHelper;
+import io.scalaproject.vault.util.Notice;
 import io.scalaproject.vault.util.ScalaThreadPoolExecutor;
 import io.scalaproject.vault.widget.Toolbar;
 import io.scalaproject.vault.util.LegacyStorageHelper;
@@ -85,10 +92,10 @@ import java.nio.channels.FileChannel;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
-import java.util.Comparator;
 import java.util.HashSet;
 import java.util.Locale;
 import java.util.Map;
+import java.util.Objects;
 import java.util.Set;
 
 import timber.log.Timber;
@@ -121,6 +128,7 @@ public class LoginActivity extends BaseActivity
             "}";
 
     private static final String NODES_USERDEFINED_NAME = "userdefined_nodes";
+    private static final Logger log = LoggerFactory.getLogger(LoginActivity.class);
 
     static public boolean useDefaultNode = false;
 
@@ -132,6 +140,7 @@ public class LoginActivity extends BaseActivity
     private boolean startCreateWalletFragment = false;
     private String generateFragmentType = "";
 
+
     @Override
     public NodeInfo getNode() {
         return node;
@@ -139,8 +148,9 @@ public class LoginActivity extends BaseActivity
 
     @Override
     public void setNode(NodeInfo node) {
-        if ((node != null) && (node.getNetworkType() != WalletManager.getInstance().getNetworkType()))
+        if ((node != null) && (node.getNetworkType() != WalletManager.getInstance().getNetworkType())) {
             throw new IllegalArgumentException("network type does not match");
+        }
 
         this.node = node;
 
@@ -179,13 +189,10 @@ public class LoginActivity extends BaseActivity
         saveUserDefinedNodes();
     }
 
-    private void loadNodesWithNetwork() {
-        Helper.runWithNetwork(new Helper.Action() {
-            @Override
-            public boolean run() {
-                loadAllNodes();
-                return true;
-            }
+    public void loadNodesWithNetwork() {
+        Helper.runWithNetwork(() -> {
+            loadAllNodes();
+            return true;
         });
     }
 
@@ -246,18 +253,20 @@ public class LoginActivity extends BaseActivity
 
     public void loadDefaultNodes() {
         defaultNodes.clear();
-
+        showProgressDialog(R.string.about_version);
         String jsonString = "";
-
+        Timber.tag("loadDefaultNodes").d("loadDefaultNodes start");
         // Load Pools data from the GitHub repository by default
         if(Helper.isURLReachable(DEFAULT_NODES_REPOSITORY))
             jsonString  = Helper.fetchJSON(DEFAULT_NODES_REPOSITORY);
+        Timber.tag("loadDefaultNodes").d("loadDefaultNodes from GitHub");
 
         // If GitHub file is not available or is blocked by firewalls, use IPFS
         if(jsonString.isEmpty()) {
             for (String strNodeURLDir : NODES_REPOSITORY_IPNS_GATEWAYS) {
                 String strNodeURL = strNodeURLDir + IPNS_NAME;
                 if(Helper.isURLReachable(strNodeURL)) {
+                    Timber.tag("loadDefaultNodes").d("loadDefaultNodes from IPFS");
                     jsonString = Helper.fetchJSON(strNodeURL);
                     if (!jsonString.isEmpty())
                         break;
@@ -269,6 +278,7 @@ public class LoginActivity extends BaseActivity
         if(jsonString.isEmpty()) {
             useDefaultNode = true;
             jsonString = DEFAULT_NODE;
+            Timber.tag("loadDefaultNodes").d("loadDefaultNodes from default");
         } else {
             useDefaultNode = false;
         }
@@ -282,11 +292,13 @@ public class LoginActivity extends BaseActivity
 
                 if(node.has("host") && node.has("port")) {
                     addNode(node.getString("host") + ":" + node.getString("port"));
+                    //setNode(NodeInfo.fromString(node.getString("host") + ":" + node.getString("port")));
                 }
             }
         } catch (JSONException e) {
-            e.printStackTrace();
+            //e.printStackTrace();
         }
+        Timber.tag("loadDefaultNodes").d("loadDefaultNodes end");
     }
 
     private Toolbar toolbar;
@@ -337,33 +349,49 @@ public class LoginActivity extends BaseActivity
         setContentView(R.layout.activity_login);
         toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-        getSupportActionBar().setDisplayShowTitleEnabled(false);
+        Objects.requireNonNull(getSupportActionBar()).setDisplayShowTitleEnabled(false);
 
-        toolbar.setOnButtonListener(new Toolbar.OnButtonListener() {
-            @Override
-            public void onButton(int type) {
-                switch (type) {
-                    case Toolbar.BUTTON_BACK:
-                        onBackPressed();
-                        break;
-                    case Toolbar.BUTTON_CLOSE:
-                        finish();
-                        break;
-                    case Toolbar.BUTTON_CREDITS:
-                        CreditsFragment.display(getSupportFragmentManager());
-                        break;
-                    case Toolbar.BUTTON_NONE:
-                        break;
-                    default:
-                        Timber.e("Button " + type + "pressed - how can this be?");
-                }
+        toolbar.setOnButtonListener(type -> {
+            switch (type) {
+                case Toolbar.BUTTON_BACK:
+                    onBackPressed();
+                    break;
+                case Toolbar.BUTTON_CLOSE:
+                    finish();
+                    break;
+                case Toolbar.BUTTON_CREDITS:
+                    CreditsFragment.display(getSupportFragmentManager());
+                    break;
+                case Toolbar.BUTTON_NONE:
+                    break;
+                default:
+                    Timber.e("Button " + type + " pressed - how can this be?");
             }
         });
 
-        loadNodesWithNetwork();
-
         // try intents
         Intent intent = getIntent();
+
+        // Get the connection state
+        int connectionState = intent.getIntExtra("connection_state", -1);
+
+        // Use the connection state as needed
+        if (connectionState == 1) {
+            Timber.tag("LoginActivity").d("Connection available");
+            // Add logic for connection available
+            LoginFragment.setConnectionStatus(connectionState);
+        } else if (connectionState == 0) {
+            Timber.tag("LoginActivity").d("No connection");
+            // Add logic for no connection
+
+            // Notice to user we require internet to work properly
+            // Make the notice persistance...
+            LoginFragment.setConnectionStatus(connectionState);
+        } else {
+            Timber.tag("LoginActivity").d("Connection state unknown");
+            // Handle unknown connection state
+            LoginFragment.setConnectionStatus(connectionState);
+        }
 
         if (!processUsbIntent(intent))
             processUriIntent(intent);
@@ -378,34 +406,29 @@ public class LoginActivity extends BaseActivity
 
         // If activity is created from Home Wizard
         String generateFragmentTypeTmp = intent.getStringExtra("GenerateFragmentType");
-        if(generateFragmentTypeTmp != null && !generateFragmentTypeTmp.isEmpty()) {
+        if (generateFragmentTypeTmp != null && !generateFragmentTypeTmp.isEmpty()) {
             startCreateWalletFragment = true;
             generateFragmentType = generateFragmentTypeTmp;
         }
     }
 
     @Override
-    public void onRequestPermissionsResult(int requestCode, @NonNull String permissions[],
-                                           @NonNull int[] grantResults) {
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults);
 
         Timber.d("onRequestPermissionsResult()");
-        switch (requestCode) {
-            case LegacyStorageHelper.PERMISSIONS_REQUEST_READ_EXTERNAL_STORAGE:
-
-                // If request is cancelled, the result arrays are empty.
-                if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-                    isPermissionGranted = true;
-                } else {
-                    String msg = getString(R.string.message_strorage_not_permitted);
-                    Timber.e(msg);
-                    Toast.makeText(this, msg, Toast.LENGTH_LONG).show();
-                }
-                break;
-            default:
+        if (requestCode == LegacyStorageHelper.PERMISSIONS_REQUEST_READ_EXTERNAL_STORAGE) {// If request is cancelled, the result arrays are empty.
+            if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                isPermissionGranted = true;
+            } else {
+                String msg = getString(R.string.message_strorage_not_permitted);
+                Timber.e(msg);
+                Toast.makeText(this, msg, Toast.LENGTH_LONG).show();
+            }
         }
     }
 
+    // TODO check all reasons to call this.
     boolean checkServiceRunning() {
         if (WalletService.Running) {
             Toast.makeText(this, getString(R.string.service_busy), Toast.LENGTH_SHORT).show();
@@ -434,30 +457,24 @@ public class LoginActivity extends BaseActivity
     public void onWalletDetails(final String walletName) {
         Timber.d("details for wallet .%s.", walletName);
         if (checkServiceRunning()) return;
-        DialogInterface.OnClickListener dialogClickListener = new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialog, int which) {
-                switch (which) {
-                    case DialogInterface.BUTTON_POSITIVE:
-                        final File walletFile = Helper.getWalletFile(LoginActivity.this, walletName);
-                        if (WalletManager.getInstance().walletExists(walletFile)) {
-                            Helper.promptPassword(LoginActivity.this, walletName, true, new Helper.PasswordAction() {
-                                @Override
-                                public void action(String walletName, String password, boolean fingerprintUsed) {
-                                    if (checkDevice(walletName, password))
-                                        startDetails(walletFile, password, GenerateReviewFragment.VIEW_TYPE_DETAILS);
-                                }
-                            });
-                        } else { // this cannot really happen as we prefilter choices
-                            Timber.e("Wallet missing: %s", walletName);
-                            Toast.makeText(LoginActivity.this, getString(R.string.bad_wallet), Toast.LENGTH_SHORT).show();
-                        }
-                        break;
+        DialogInterface.OnClickListener dialogClickListener = (dialog, which) -> {
+            switch (which) {
+                case DialogInterface.BUTTON_POSITIVE:
+                    final File walletFile = Helper.getWalletFile(LoginActivity.this, walletName);
+                    if (WalletManager.getInstance().walletExists(walletFile)) {
+                        Helper.promptPassword(LoginActivity.this, walletName, true, (walletName1, password, fingerprintUsed) -> {
+                            if (checkDevice(walletName1, password))
+                                startDetails(walletFile, password, GenerateReviewFragment.VIEW_TYPE_DETAILS);
+                        });
+                    } else { // this cannot really happen as we prefilter choices
+                        Timber.e("Wallet missing: %s", walletName);
+                        Toast.makeText(LoginActivity.this, getString(R.string.bad_wallet), Toast.LENGTH_SHORT).show();
+                    }
+                    break;
 
-                    case DialogInterface.BUTTON_NEGATIVE:
-                        // do nothing
-                        break;
-                }
+                case DialogInterface.BUTTON_NEGATIVE:
+                    // do nothing
+                    break;
             }
         };
 
@@ -474,12 +491,9 @@ public class LoginActivity extends BaseActivity
         if (checkServiceRunning()) return;
         final File walletFile = Helper.getWalletFile(this, walletName);
         if (WalletManager.getInstance().walletExists(walletFile)) {
-            Helper.promptPassword(LoginActivity.this, walletName, false, new Helper.PasswordAction() {
-                @Override
-                public void action(String walletName, String password, boolean fingerprintUsed) {
-                    if (checkDevice(walletName, password))
-                        startReceive(walletFile, password);
-                }
+            Helper.promptPassword(LoginActivity.this, walletName, false, (walletName1, password, fingerprintUsed) -> {
+                if (checkDevice(walletName1, password))
+                    startReceive(walletFile, password);
             });
         } else { // this cannot really happen as we prefilter choices
             Toast.makeText(this, getString(R.string.bad_wallet), Toast.LENGTH_SHORT).show();
@@ -498,7 +512,7 @@ public class LoginActivity extends BaseActivity
 
     // copy + delete seems safer than rename because we can rollback easily
     boolean renameWallet(File walletFile, String newName) {
-        if (copyWallet(walletFile, new File(walletFile.getParentFile(), newName), false, true)) {
+        if (copyWallet(walletFile, new File(walletFile.getParentFile(), newName), false)) {
             try {
                 KeyStoreHelper.copyWalletUserPass(this, walletFile.getName(), newName);
             } catch (KeyStoreHelper.BrokenPasswordStoreException ex) {
@@ -530,42 +544,37 @@ public class LoginActivity extends BaseActivity
         alertDialogBuilder
                 .setCancelable(false)
                 .setPositiveButton(getString(R.string.label_ok),
-                        new DialogInterface.OnClickListener() {
-                            public void onClick(DialogInterface dialog, int id) {
-                                Helper.hideKeyboardAlways(LoginActivity.this);
-                                String newName = etRename.getText().toString();
-                                renameWallet(walletName, newName);
-                            }
+                        (dialog, id) -> {
+                            Helper.hideKeyboardAlways(LoginActivity.this);
+                            String newName = etRename.getText().toString();
+                            renameWallet(walletName, newName);
                         })
                 .setNegativeButton(getString(R.string.label_cancel),
-                        new DialogInterface.OnClickListener() {
-                            public void onClick(DialogInterface dialog, int id) {
-                                Helper.hideKeyboardAlways(LoginActivity.this);
-                                dialog.cancel();
-                            }
+                        (dialog, id) -> {
+                            Helper.hideKeyboardAlways(LoginActivity.this);
+                            dialog.cancel();
                         });
 
         final androidx.appcompat.app.AlertDialog dialog = alertDialogBuilder.create();
         Helper.showKeyboard(dialog);
 
         // accept keyboard "ok"
-        etRename.setOnEditorActionListener(new TextView.OnEditorActionListener() {
-            public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
-                if ((event != null && (event.getKeyCode() == KeyEvent.KEYCODE_ENTER) && (event.getAction() == KeyEvent.ACTION_DOWN))
-                        || (actionId == EditorInfo.IME_ACTION_DONE)) {
-                    Helper.hideKeyboardAlways(LoginActivity.this);
-                    String newName = etRename.getText().toString();
-                    dialog.cancel();
-                    renameWallet(walletName, newName);
-                    return false;
-                }
+        etRename.setOnEditorActionListener((v, actionId, event) -> {
+            if ((event != null && (event.getKeyCode() == KeyEvent.KEYCODE_ENTER) && (event.getAction() == KeyEvent.ACTION_DOWN))
+                    || (actionId == EditorInfo.IME_ACTION_DONE)) {
+                Helper.hideKeyboardAlways(LoginActivity.this);
+                String newName = etRename.getText().toString();
+                dialog.cancel();
+                renameWallet(walletName, newName);
                 return false;
             }
+            return false;
         });
 
         dialog.show();
     }
 
+    @SuppressLint("StaticFieldLeak")
     private class AsyncBackup extends AsyncTask<String, Void, Boolean> {
         @Override
         protected void onPreExecute() {
@@ -610,7 +619,7 @@ public class LoginActivity extends BaseActivity
         // TODO probably better to copy to a new file and then rename
         // then if something fails we have the old backup at least
         // or just create a new backup every time and keep n old backups
-        boolean success = copyWallet(walletFile, backupFile, true, true);
+        boolean success = copyWallet(walletFile, backupFile, true);
         Timber.d("copyWallet is %s", success);
         return success;
     }
@@ -621,6 +630,7 @@ public class LoginActivity extends BaseActivity
         new AsyncBackup().execute(walletName);
     }
 
+    @SuppressLint("StaticFieldLeak")
     private class AsyncArchive extends AsyncTask<String, Void, Boolean> {
         @Override
         protected void onPreExecute() {
@@ -659,29 +669,19 @@ public class LoginActivity extends BaseActivity
     public void onWalletArchive(final String walletName) {
         Timber.d("archive for wallet ." + walletName + ".");
         if (checkServiceRunning()) return;
-        DialogInterface.OnClickListener dialogClickListener = new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialog, int which) {
-                switch (which) {
-                    case DialogInterface.BUTTON_POSITIVE:
-                        Helper.promptPassword(LoginActivity.this, walletName, false, new Helper.PasswordAction() {
-                            @Override
-                            public void action(final String walletName, String password, boolean fingerprintUsed) {
-                                if (checkDevice(walletName, password)) {
-                                    runOnUiThread(new Runnable() {
-                                        public void run() {
-                                            new AsyncArchive().execute(walletName);
-                                        }
-                                    });
-                                }
-                            }
-                        });
+        DialogInterface.OnClickListener dialogClickListener = (dialog, which) -> {
+            switch (which) {
+                case DialogInterface.BUTTON_POSITIVE:
+                    Helper.promptPassword(LoginActivity.this, walletName, false, (walletName1, password, fingerprintUsed) -> {
+                        if (checkDevice(walletName1, password)) {
+                            runOnUiThread(() -> new AsyncArchive().execute(walletName1));
+                        }
+                    });
 
-                        break;
-                    case DialogInterface.BUTTON_NEGATIVE:
-                        // do nothing
-                        break;
-                }
+                    break;
+                case DialogInterface.BUTTON_NEGATIVE:
+                    // do nothing
+                    break;
             }
         };
 
@@ -696,19 +696,18 @@ public class LoginActivity extends BaseActivity
     void reloadWalletList() {
         Timber.d("reloadWalletList()");
         try {
-            LoginFragment loginFragment = (LoginFragment)
-                    getSupportFragmentManager().findFragmentById(R.id.fragment_container);
+            LoginFragment loginFragment = (LoginFragment) getSupportFragmentManager().findFragmentById(R.id.fragment_container);
             if (loginFragment != null) {
                 loginFragment.loadList();
             }
-        } catch (ClassCastException ex) {
+        } catch (ClassCastException ignored) {
         }
     }
 
     public void onWalletChangePassword() {//final String walletName, final String walletPassword) {
         try {
-            GenerateReviewFragment detailsFragment = (GenerateReviewFragment)
-                    getSupportFragmentManager().findFragmentById(R.id.fragment_container);
+            GenerateReviewFragment detailsFragment = (GenerateReviewFragment) getSupportFragmentManager().findFragmentById(R.id.fragment_container);
+            assert detailsFragment != null;
             AlertDialog dialog = detailsFragment.createChangePasswordDialog();
             if (dialog != null) {
                 Helper.showKeyboard(dialog);
@@ -798,6 +797,7 @@ public class LoginActivity extends BaseActivity
         if (!Ledger.isConnected()) attachLedger();
     }
 
+    @SuppressLint("StaticFieldLeak")
     private class AsyncWaitForService extends AsyncTask<Void, Void, Void> {
         @Override
         protected void onPreExecute() {
@@ -885,8 +885,7 @@ public class LoginActivity extends BaseActivity
         Helper.initLogger(this);
 
         Fragment fragment = new LoginFragment();
-        getSupportFragmentManager().beginTransaction()
-                .add(R.id.fragment_container, fragment).commit();
+        getSupportFragmentManager().beginTransaction().add(R.id.fragment_container, fragment).commit();
 
         Timber.d("LoginFragment added");
     }
@@ -938,6 +937,7 @@ public class LoginActivity extends BaseActivity
     //////////////////////////////////////////
     static final String MNEMONIC_LANGUAGE = "English"; // see mnemonics/electrum-words.cpp for more
 
+    @SuppressLint("StaticFieldLeak")
     private class AsyncCreateWallet extends AsyncTask<Void, Void, Boolean> {
         final String walletName;
         final String walletPassword;
@@ -945,8 +945,7 @@ public class LoginActivity extends BaseActivity
 
         File newWalletFile;
 
-        AsyncCreateWallet(final String name, final String password,
-                          final WalletCreator walletCreator) {
+        AsyncCreateWallet(final String name, final String password, final WalletCreator walletCreator) {
             super();
             this.walletName = name;
             this.walletPassword = password;
@@ -1010,25 +1009,22 @@ public class LoginActivity extends BaseActivity
         }
     }
 
-    public void createWallet(final String name, final String password,
-                             final WalletCreator walletCreator) {
-        new AsyncCreateWallet(name, password, walletCreator)
-                .executeOnExecutor(ScalaThreadPoolExecutor.SCALA_THREAD_POOL_EXECUTOR);
+    public void createWallet(final String name, final String password, final WalletCreator walletCreator) {
+        new AsyncCreateWallet(name, password, walletCreator).executeOnExecutor(ScalaThreadPoolExecutor.SCALA_THREAD_POOL_EXECUTOR);
     }
 
     void walletGenerateError() {
         try {
-            GenerateFragment genFragment = (GenerateFragment)
-                    getSupportFragmentManager().findFragmentById(R.id.fragment_container);
+            GenerateFragment genFragment = (GenerateFragment) getSupportFragmentManager().findFragmentById(R.id.fragment_container);
+            assert genFragment != null;
             genFragment.walletGenerateError();
         } catch (ClassCastException ex) {
             Timber.e("walletGenerateError() but not in GenerateFragment");
         }
     }
 
-    interface WalletCreator {
+    public interface WalletCreator {
         boolean createWallet(File aFile, String password);
-
         boolean isLedger();
     }
 
@@ -1040,7 +1036,6 @@ public class LoginActivity extends BaseActivity
         }
 
         aWallet.close();
-
         return walletStatus.isOk();
     }
 
@@ -1057,18 +1052,15 @@ public class LoginActivity extends BaseActivity
                     public boolean createWallet(File aFile, String password) {
                         NodeInfo currentNode = getNode();
                         // get it from the connected node if we have one, and go back ca. 4 days
-                        final long restoreHeight =
-                                (currentNode != null) ? currentNode.getHeight() - 2000 : -1;
-                        Wallet newWallet = WalletManager.getInstance()
-                                .createWallet(aFile, password, MNEMONIC_LANGUAGE, restoreHeight);
+                        final long restoreHeight = (currentNode != null) ? currentNode.getHeight() - 2000 : -1;
+                        Wallet newWallet = WalletManager.getInstance().createWallet(aFile, password, MNEMONIC_LANGUAGE, restoreHeight);
                         return checkAndCloseWallet(newWallet);
                     }
                 });
     }
 
     @Override
-    public void onGenerate(final String name, final String password, final String seed,
-                           final long restoreHeight) {
+    public void onGenerate(final String name, final String password, final String seed, final long restoreHeight) {
         createWallet(name, password,
                 new WalletCreator() {
                     @Override
@@ -1086,8 +1078,7 @@ public class LoginActivity extends BaseActivity
     }
 
     @Override
-    public void onGenerateLedger(final String name, final String password,
-                                 final long restoreHeight) {
+    public void onGenerateLedger(final String name, final String password, final long restoreHeight) {
         createWallet(name, password,
                 new WalletCreator() {
                     @Override
@@ -1127,21 +1118,11 @@ public class LoginActivity extends BaseActivity
     }
 
     void toast(final String msg) {
-        runOnUiThread(new Runnable() {
-            @Override
-            public void run() {
-                Toast.makeText(LoginActivity.this, msg, Toast.LENGTH_LONG).show();
-            }
-        });
+        runOnUiThread(() -> Toast.makeText(LoginActivity.this, msg, Toast.LENGTH_LONG).show());
     }
 
     void toast(final int msgId) {
-        runOnUiThread(new Runnable() {
-            @Override
-            public void run() {
-                Toast.makeText(LoginActivity.this, getString(msgId), Toast.LENGTH_LONG).show();
-            }
-        });
+        runOnUiThread(() -> Toast.makeText(LoginActivity.this, getString(msgId), Toast.LENGTH_LONG).show());
     }
 
     @Override
@@ -1164,16 +1145,13 @@ public class LoginActivity extends BaseActivity
         File dir = walletFile.getParentFile();
         String name = walletFile.getName();
         if (any) {
-            return new File(dir, name).exists()
-                    || new File(dir, name + ".keys").exists();
+            return new File(dir, name).exists() || new File(dir, name + ".keys").exists();
         } else {
-            return new File(dir, name).exists()
-                    && new File(dir, name + ".keys").exists();
+            return new File(dir, name).exists() && new File(dir, name + ".keys").exists();
         }
     }
 
-    boolean copyWallet(File srcWallet, File dstWallet, boolean overwrite,
-                       boolean ignoreCacheError) {
+    boolean copyWallet(File srcWallet, File dstWallet, boolean overwrite) {
         if (walletExists(dstWallet, true) && !overwrite) return false;
         boolean success = false;
         File srcDir = srcWallet.getParentFile();
@@ -1184,10 +1162,7 @@ public class LoginActivity extends BaseActivity
             try {
                 copyFile(new File(srcDir, srcName), new File(dstDir, dstName));
             } catch (IOException ex) {
-                Timber.d("CACHE %s", ignoreCacheError);
-                if (!ignoreCacheError) { // ignore cache backup error if backing up (can be resynced)
-                    throw ex;
-                }
+                Timber.d("CACHE %s", true);
             }
             copyFile(new File(srcDir, srcName + ".keys"), new File(dstDir, dstName + ".keys"));
             success = true;
@@ -1219,15 +1194,8 @@ public class LoginActivity extends BaseActivity
     }
 
     void copyFile(File src, File dst) throws IOException {
-        FileChannel inChannel = new FileInputStream(src).getChannel();
-        FileChannel outChannel = new FileOutputStream(dst).getChannel();
-        try {
+        try (FileChannel inChannel = new FileInputStream(src).getChannel(); FileChannel outChannel = new FileOutputStream(dst).getChannel()) {
             inChannel.transferTo(0, inChannel.size(), outChannel);
-        } finally {
-            if (inChannel != null)
-                inChannel.close();
-            if (outChannel != null)
-                outChannel.close();
         }
     }
 
@@ -1235,13 +1203,10 @@ public class LoginActivity extends BaseActivity
         final ArrayList<Locale> availableLocales = LocaleHelper.getAvailableLocales(LoginActivity.this);
         String[] localeDisplayName = new String[1 + availableLocales.size()];
 
-        Collections.sort(availableLocales, new Comparator<Locale>() {
-            @Override
-            public int compare(Locale locale1, Locale locale2) {
-                String localeString1 = LocaleHelper.getDisplayName(locale1, true);
-                String localeString2 = LocaleHelper.getDisplayName(locale2, true);
-                return localeString1.compareTo(localeString2);
-            }
+        Collections.sort(availableLocales, (locale1, locale2) -> {
+            String localeString1 = LocaleHelper.getDisplayName(locale1, true);
+            String localeString2 = LocaleHelper.getDisplayName(locale2, true);
+            return localeString1.compareTo(localeString2);
         });
 
         localeDisplayName[0] = getString(R.string.language_system_default);
@@ -1261,6 +1226,7 @@ public class LoginActivity extends BaseActivity
         MaterialAlertDialogBuilder builder = new MaterialAlertDialogBuilder(LoginActivity.this, R.style.MaterialAlertDialogCustom);
         builder.setTitle(getString(R.string.menu_language));
         builder.setSingleChoiceItems(localeDisplayName, currentLocaleIndex, new DialogInterface.OnClickListener() {
+            @SuppressLint("UnsafeIntentLaunch")
             @Override
             public void onClick(DialogInterface dialog, int i) {
                 dialog.dismiss();
@@ -1298,62 +1264,76 @@ public class LoginActivity extends BaseActivity
         }
     }
 
+    @SuppressLint("NonConstantResourceId")
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        switch (item.getItemId()) {
-            case R.id.action_create_help_new:
+        return switch (item.getItemId()) {
+            case R.id.action_create_help_new -> {
                 HelpFragment.display(getSupportFragmentManager(), R.string.help_create_new);
-                return true;
-            case R.id.action_create_help_keys:
+                yield true;
+            }
+            case R.id.action_create_help_keys -> {
                 HelpFragment.display(getSupportFragmentManager(), R.string.help_create_keys);
-                return true;
-            case R.id.action_create_help_view:
+                yield true;
+            }
+            case R.id.action_create_help_view -> {
                 HelpFragment.display(getSupportFragmentManager(), R.string.help_create_view);
-                return true;
-            case R.id.action_create_help_seed:
+                yield true;
+            }
+            case R.id.action_create_help_seed -> {
                 HelpFragment.display(getSupportFragmentManager(), R.string.help_create_seed);
-                return true;
-            case R.id.action_create_help_ledger:
+                yield true;
+            }
+            case R.id.action_create_help_ledger -> {
                 HelpFragment.display(getSupportFragmentManager(), R.string.help_create_ledger);
-                return true;
-            case R.id.action_details_help:
+                yield true;
+            }
+            case R.id.action_details_help -> {
                 HelpFragment.display(getSupportFragmentManager(), R.string.help_details);
-                return true;
-            case R.id.action_details_changepw:
+                yield true;
+            }
+            case R.id.action_details_changepw -> {
                 onWalletChangePassword();
-                return true;
-            case R.id.action_license_info:
+                yield true;
+            }
+            case R.id.action_license_info -> {
                 AboutFragment.display(getSupportFragmentManager());
-                return true;
-            case R.id.action_help_list:
+                yield true;
+            }
+            case R.id.action_help_list -> {
                 HelpFragment.display(getSupportFragmentManager(), R.string.help_list);
-                return true;
-            case R.id.action_help_node:
+                yield true;
+            }
+            case R.id.action_help_node -> {
                 HelpFragment.display(getSupportFragmentManager(), R.string.help_node_2);
-                return true;
-            case R.id.action_privacy_policy:
+                yield true;
+            }
+            case R.id.action_privacy_policy -> {
                 PrivacyFragment.display(getSupportFragmentManager());
-                return true;
-            case R.id.action_language:
+                yield true;
+            }
+            case R.id.action_language -> {
                 onChangeLocale();
-                return true;
-            case R.id.action_nodes:
+                yield true;
+            }
+            case R.id.action_nodes -> {
                 onNodePrefs();
-                return true;
-            case R.id.action_mobile_miner:
+                yield true;
+            }
+            case R.id.action_mobile_miner -> {
                 startActivity(new Intent(this, MobileMinerActivity.class));
-                return true;
-            case R.id.action_debug:
+                yield true;
+            }
+            case R.id.action_debug -> {
                 toggleDebugInfo();
-                return true;
-            default:
-                return super.onOptionsItemSelected(item);
-        }
+                yield true;
+            }
+            default -> super.onOptionsItemSelected(item);
+        };
     }
 
     private void toggleDebugInfo() {
         boolean sendDebugInfo = Config.read(Config.CONFIG_SEND_DEBUG_INFO, "1").equals("1");
-
         if(sendDebugInfo) {
             Config.write(Config.CONFIG_SEND_DEBUG_INFO, "0");
             ACRA.getErrorReporter().setEnabled(false);
@@ -1372,6 +1352,7 @@ public class LoginActivity extends BaseActivity
     }
 
     // an AsyncTask which tests the node before trying to open the wallet
+    @SuppressLint("StaticFieldLeak")
     private class AsyncOpenWallet extends AsyncTask<Void, Void, Boolean> {
         private final String walletName;
         //private final String walletAddress;
@@ -1421,20 +1402,16 @@ public class LoginActivity extends BaseActivity
         String keyPath = new File(Helper.getWalletRoot(LoginActivity.this),
                 walletName + ".keys").getAbsolutePath();
         // check if we need connected hardware
-        Wallet.Device device =
-                WalletManager.getInstance().queryWalletDevice(keyPath, password);
-        switch (device) {
-            case Device_Ledger:
-                if (!hasLedger()) {
-                    toast(R.string.open_wallet_ledger_missing);
-                } else {
-                    return true;
-                }
-                break;
-            default:
-                // device could be undefined meaning the password is wrong
-                // this gets dealt with later
+        Wallet.Device device = WalletManager.getInstance().queryWalletDevice(keyPath, password);
+        if (Objects.requireNonNull(device) == Wallet.Device.Device_Ledger) {
+            if (!hasLedger()) {
+                toast(R.string.open_wallet_ledger_missing);
+            } else {
                 return true;
+            }
+        } else {// device could be undefined meaning the password is wrong
+            // this gets dealt with later
+            return true;
         }
         return false;
     }
@@ -1443,12 +1420,9 @@ public class LoginActivity extends BaseActivity
         File walletFile = Helper.getWalletFile(this, walletName);
         if (WalletManager.getInstance().walletExists(walletFile)) {
             Helper.promptPassword(LoginActivity.this, walletName, false,
-                    new Helper.PasswordAction() {
-                        @Override
-                        public void action(String walletName, String password, boolean fingerprintUsed) {
-                            if (checkDevice(walletName, password))
-                                startWallet(walletName, password, fingerprintUsed, stealthMode);
-                        }
+                    (walletName1, password, fingerprintUsed) -> {
+                        if (checkDevice(walletName1, password))
+                            startWallet(walletName1, password, fingerprintUsed, stealthMode);
                     });
         } else { // this cannot really happen as we prefilter choices
             Toast.makeText(this, getString(R.string.bad_wallet), Toast.LENGTH_SHORT).show();
@@ -1459,6 +1433,7 @@ public class LoginActivity extends BaseActivity
 
     private static final String ACTION_USB_PERMISSION = "io.scalaproject.vault.USB_PERMISSION";
 
+    @SuppressLint("UnspecifiedRegisterReceiverFlag")
     void attachLedger() {
         final UsbManager usbManager = getUsbManager();
         UsbDevice device = Ledger.findDevice(usbManager);
@@ -1466,10 +1441,10 @@ public class LoginActivity extends BaseActivity
             if (usbManager.hasPermission(device)) {
                 connectLedger(usbManager, device);
             } else {
-                registerReceiver(usbPermissionReceiver, new IntentFilter(ACTION_USB_PERMISSION));
-                usbManager.requestPermission(device,
-                        PendingIntent.getBroadcast(this, 0,
-                                new Intent(ACTION_USB_PERMISSION), PendingIntent.FLAG_IMMUTABLE));
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+                    registerReceiver(usbPermissionReceiver, new IntentFilter(ACTION_USB_PERMISSION));
+                }
+                usbManager.requestPermission(device, PendingIntent.getBroadcast(this, 0, new Intent(ACTION_USB_PERMISSION), PendingIntent.FLAG_IMMUTABLE));
             }
         } else {
             Timber.d("no ledger device found");
@@ -1488,6 +1463,7 @@ public class LoginActivity extends BaseActivity
                             connectLedger(getUsbManager(), device);
                         }
                     } else {
+                        assert device != null;
                         Timber.w("User denied permission for device %s", device.getProductName());
                     }
                 }
@@ -1501,38 +1477,14 @@ public class LoginActivity extends BaseActivity
                 Ledger.connect(usbManager, usbDevice);
                 if (!Ledger.check()) {
                     Ledger.disconnect();
-                    runOnUiThread(new Runnable() {
-                        @Override
-                        public void run() {
-                            Toast.makeText(LoginActivity.this,
-                                    getString(R.string.toast_ledger_start_app, usbDevice.getProductName()),
-                                    Toast.LENGTH_SHORT)
-                                    .show();
-                        }
-                    });
+                    runOnUiThread(() -> Toast.makeText(LoginActivity.this, getString(R.string.toast_ledger_start_app, usbDevice.getProductName()), Toast.LENGTH_SHORT).show());
                 } else {
                     registerDetachReceiver();
                     onLedgerAction();
-                    runOnUiThread(new Runnable() {
-                        @Override
-                        public void run() {
-                            Toast.makeText(LoginActivity.this,
-                                    getString(R.string.toast_ledger_attached, usbDevice.getProductName()),
-                                    Toast.LENGTH_SHORT)
-                                    .show();
-                        }
-                    });
+                    runOnUiThread(() -> Toast.makeText(LoginActivity.this, getString(R.string.toast_ledger_attached, usbDevice.getProductName()), Toast.LENGTH_SHORT).show());
                 }
             } catch (IOException ex) {
-                runOnUiThread(new Runnable() {
-                    @Override
-                    public void run() {
-                        Toast.makeText(LoginActivity.this,
-                                getString(R.string.open_wallet_ledger_missing),
-                                Toast.LENGTH_SHORT)
-                                .show();
-                    }
-                });
+                runOnUiThread(() -> Toast.makeText(LoginActivity.this, getString(R.string.open_wallet_ledger_missing), Toast.LENGTH_SHORT).show());
             }
     }
 
@@ -1585,20 +1537,12 @@ public class LoginActivity extends BaseActivity
     private void registerDetachReceiver() {
         detachReceiver = new BroadcastReceiver() {
             public void onReceive(Context context, Intent intent) {
-                if (intent.getAction().equals(UsbManager.ACTION_USB_DEVICE_DETACHED)) {
+                if (Objects.equals(intent.getAction(), UsbManager.ACTION_USB_DEVICE_DETACHED)) {
                     unregisterDetachReceiver();
                     final UsbDevice device = intent.getParcelableExtra(UsbManager.EXTRA_DEVICE);
                     Timber.i("Ledger detached!");
                     if (device != null)
-                        runOnUiThread(new Runnable() {
-                            @Override
-                            public void run() {
-                                Toast.makeText(LoginActivity.this,
-                                        getString(R.string.toast_ledger_detached, device.getProductName()),
-                                        Toast.LENGTH_SHORT)
-                                        .show();
-                            }
-                        });
+                        runOnUiThread(() -> Toast.makeText(LoginActivity.this, getString(R.string.toast_ledger_detached, device.getProductName()), Toast.LENGTH_SHORT).show());
                     Ledger.disconnect();
                     onLedgerAction();
                 }

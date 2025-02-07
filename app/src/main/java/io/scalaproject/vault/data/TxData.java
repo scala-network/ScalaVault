@@ -24,6 +24,8 @@ package io.scalaproject.vault.data;
 import android.os.Parcel;
 import android.os.Parcelable;
 
+import androidx.annotation.NonNull;
+
 import io.scalaproject.vault.model.PendingTransaction;
 
 // https://stackoverflow.com/questions/2139134/how-to-send-an-object-from-one-android-activity-to-another-using-intents
@@ -128,17 +130,16 @@ public class TxData implements Parcelable {
         return 0;
     }
 
+    @NonNull
     @Override
     public String toString() {
-        StringBuffer sb = new StringBuffer();
-        sb.append("dstAddr:");
-        sb.append(dstAddr);
-        sb.append(",amount:");
-        sb.append(amount);
-        sb.append(",mixin:");
-        sb.append(mixin);
-        sb.append(",priority:");
-        sb.append(priority);
-        return sb.toString();
+        return "dstAddr:" +
+                dstAddr +
+                ",amount:" +
+                amount +
+                ",mixin:" +
+                mixin +
+                ",priority:" +
+                priority;
     }
 }

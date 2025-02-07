@@ -21,6 +21,7 @@
 
 package io.scalaproject.vault.layout;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import androidx.annotation.NonNull;
 import androidx.appcompat.widget.PopupMenu;
@@ -48,6 +49,7 @@ import java.util.List;
 import java.util.TimeZone;
 
 public class NodeInfoAdapter extends RecyclerView.Adapter<NodeInfoAdapter.ViewHolder> {
+    @SuppressLint("SimpleDateFormat")
     private final SimpleDateFormat TS_FORMATTER = new SimpleDateFormat("yyyy-MM-dd HH:mm");
 
     public interface OnMenuNodeListener {
@@ -62,7 +64,7 @@ public class NodeInfoAdapter extends RecyclerView.Adapter<NodeInfoAdapter.ViewHo
     private final OnMenuNodeListener onMenuNodeListener;
     private final OnSelectNodeListener onSelectNodeListener;
 
-    private Context context;
+    private final Context context;
 
     public NodeInfoAdapter(Context context, OnMenuNodeListener onMenuNodeListener, OnSelectNodeListener onSelectNodeListener) {
         this.context = context;
@@ -110,6 +112,7 @@ public class NodeInfoAdapter extends RecyclerView.Adapter<NodeInfoAdapter.ViewHo
         dataSetChanged();
     }
 
+    @SuppressLint("NotifyDataSetChanged")
     public void dataSetChanged() {
         Collections.sort(nodeItems, NodeInfo.BestNodeComparator);
         notifyDataSetChanged();
@@ -133,12 +136,13 @@ public class NodeInfoAdapter extends RecyclerView.Adapter<NodeInfoAdapter.ViewHo
 
     private boolean itemsClickable = true;
 
+    @SuppressLint("NotifyDataSetChanged")
     public void allowClick(boolean clickable) {
         itemsClickable = clickable;
         notifyDataSetChanged();
     }
 
-    class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
+    public class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
         final TextView tvName;
         final TextView tvIp;
         final ImageView ivPing;
@@ -155,40 +159,29 @@ public class NodeInfoAdapter extends RecyclerView.Adapter<NodeInfoAdapter.ViewHo
             ivPing = itemView.findViewById(R.id.ivPing);
 
             ibOptions = itemView.findViewById(R.id.ibOptions);
-            ibOptions.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
-                    if (popupOpen)
-                        return;
+            ibOptions.setOnClickListener(view -> {
+                if (popupOpen)
+                    return;
 
-                    PopupMenu popup = new PopupMenu(context, ibOptions);
-                    popup.inflate(R.menu.node_context_menu);
-                    popupOpen = true;
+                PopupMenu popup = new PopupMenu(context, ibOptions);
+                popup.inflate(R.menu.node_context_menu);
+                popupOpen = true;
 
-                    MenuItem itemEdit = popup.getMenu().findItem(R.id.action_edit_node);
-                    itemEdit.setTitle(context.getResources().getString(R.string.edit));
+                MenuItem itemEdit = popup.getMenu().findItem(R.id.action_edit_node);
+                itemEdit.setTitle(context.getResources().getString(R.string.edit));
 
-                    MenuItem itemDelete = popup.getMenu().findItem(R.id.action_delete_node);
-                    itemDelete.setVisible(nodeItem.isUserDefined());
+                MenuItem itemDelete = popup.getMenu().findItem(R.id.action_delete_node);
+                itemDelete.setVisible(nodeItem.isUserDefined());
 
-                    popup.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
-                        @Override
-                        public boolean onMenuItemClick(MenuItem item) {
-                            if (onMenuNodeListener != null) {
-                                return onMenuNodeListener.onContextInteraction(item, nodeItem);
-                            }
-                            return false;
-                        }
-                    });
+                popup.setOnMenuItemClickListener(item -> {
+                    if (onMenuNodeListener != null) {
+                        return onMenuNodeListener.onContextInteraction(item, nodeItem);
+                    }
+                    return false;
+                });
 
-                    popup.show();
-                    popup.setOnDismissListener(new PopupMenu.OnDismissListener() {
-                        @Override
-                        public void onDismiss(PopupMenu menu) {
-                            popupOpen = false;
-                        }
-                    });
-                }
+                popup.show();
+                popup.setOnDismissListener(menu -> popupOpen = false);
             });
         }
 

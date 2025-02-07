@@ -4,6 +4,7 @@ import android.content.Context;
 import android.os.Handler;
 import android.os.Looper;
 import android.os.PowerManager;
+import android.util.Log;
 
 import androidx.annotation.CallSuper;
 
@@ -19,7 +20,7 @@ public class BaseActivity extends SecureActivity implements GenerateReviewFragme
 
     ProgressDialog progressDialog = null;
 
-    private class SimpleProgressDialog extends ProgressDialog {
+    private static class SimpleProgressDialog extends ProgressDialog {
 
         SimpleProgressDialog(Context context, int msgId) {
             super(context);
@@ -43,10 +44,8 @@ public class BaseActivity extends SecureActivity implements GenerateReviewFragme
         progressDialog = new SimpleProgressDialog(BaseActivity.this, msgId);
         if (delayMillis > 0) {
             Handler handler = new Handler();
-            handler.postDelayed(new Runnable() {
-                public void run() {
-                    if (progressDialog != null) progressDialog.show();
-                }
+            handler.postDelayed(() -> {
+                if (progressDialog != null) progressDialog.show();
             }, delayMillis);
         } else {
             progressDialog.show();
@@ -84,20 +83,17 @@ public class BaseActivity extends SecureActivity implements GenerateReviewFragme
         try {
             wl.acquire();
             Timber.d("WakeLock acquired");
+            Log.d("BaseActivity", "WakeLock acquired");
         } catch (SecurityException ex) {
             Timber.w("WakeLock NOT acquired: %s", ex.getLocalizedMessage());
+            Log.d("BaseActivity", "WakeLock NOT acquired: " + ex.getLocalizedMessage());
             wl = null;
         }
     }
 
     void releaseWakeLock(int delayMillis) {
         Handler handler = new Handler(Looper.getMainLooper());
-        handler.postDelayed(new Runnable() {
-            @Override
-            public void run() {
-                releaseWakeLock();
-            }
-        }, delayMillis);
+        handler.postDelayed(this::releaseWakeLock, delayMillis);
     }
 
     void releaseWakeLock() {
@@ -105,6 +101,7 @@ public class BaseActivity extends SecureActivity implements GenerateReviewFragme
         wl.release();
         wl = null;
         Timber.d("WakeLock released");
+        Log.d("BaseActivity", "WakeLock released");
     }
 
     // this gets called only if we get data

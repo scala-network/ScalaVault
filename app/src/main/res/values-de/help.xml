@@ -138,6 +138,13 @@
         Dies ist der Block, der deine Transaktion beinhaltet.
     ]]></string>
 
+    <string name="help_address_book"><![CDATA[
+        <h1>Adressbuch</h1>
+        <p>Im Adressbuch können Sie die Wallet-Adresse und andere Kontaktinformationen von häufig verwendeten Adressen speichern.</p>
+        <p>Sie können für jeden Ihrer Kontakte den Namen, die Wallet-Adresse und ein Bild angeben.</p>
+        <p>Das Adressbuch wird lokal auf Ihrem Gerät gespeichert und zwischen allen Ihren Wallets geteilt.</p>
+    ]]></string>
+
     <string name="help_send"><![CDATA[
         <h1>Senden</h1>
         <h2>Empfängeradresse</h2>
@@ -238,53 +245,46 @@
         <p>Eine Liste deiner Transaktionen. In View-Wallets werden nur die eingehenden Transaktionen angezeigt.</p>
     ]]></string>
 
-    <string name="help_node"><![CDATA[
-        <h1>Nodes</h1>
-        <h2>Kurzfassung</h2>
-        <p>Aktualisiere die Liste der Nodes, indem du nach unten ziehst &amp; merke 3&#8211;5 davon vor, um es Scala Vault zu ermöglichen,
-        den bestmöglichen für dich auszuwählen!</p>
-        <h2>Was ist ein Node?</h2>
-        <p>Scala Vault nutzt einen Drittanbieter-Node (manchmal auch Scala Knoten oder Daemon genannt), um mit
-        dem Scala-Netzwerk zu kommunizieren, ohne die Blockchain selbst herunterladen und
-        speichern zu müssen.<p>
-        <h2>Node-Liste</h2>
-        <p>Wenn die Liste leer ist, kannst du entweder selbst manuell neue Nodes hinzufügen oder Scala Vault
-        das Netzwerk für dich scannen lassen – oder beides. Weiterlesen&#8230;</p>
-        <p>Die Node-Liste zeigt alle derzeit bekannten Nodes an. Außerdem wird der Zeitstempel
-        des letzten, diesem Node bekannten, Block unter dem Namen eines jeden Nodes angezeigt. Ein Icon,
-        das das Antwortverhalten dieses Nodes anzeigt 
-        (was die zu erwartende Verbindungsqualität anzeigt),
-        wird neben jedem Node angezeigt.</p>
-        <p>Jeder Node in dieser Liste kann für spätere Verwendung vorgemerkt werden.
-        Nicht vorgemerkte Nodes werden vergessen.<p>
-        <p>Jedes Mal, wenn du Scala Vault nutzt, wird es aus den vorgemerkten Nodes den optimalen auswählen.
-        Das macht es, indem es die Blockhöhe (wie aktuell
-         ist der Node?) sowie das Antwortverhalten (wie schnell reagiert der Node auf Anfragen?) prüft.</p>
-        <p>Die Liste wird anhand dieser Eigenschaften geordnet. Der oberste Node ist also immer der, den Scala Vault
-        momentan auswählen würde. Ganz unten in der Liste würden sehr langsame oder nicht erreichbare Nodes angezeigt werden.</p>
-        <h2>Füge einen Node hinzu</h2>
-        <p>Wenn du den &quot;Node hinzufügen&quot; Button unten berührst, wirst du nach den
-        Node-Details im nachfolgenden Dialog gefragt werden.
-        Die &quot;Adresse&quot; ist die Web- oder IP-Adresse des Nodes – dies ist der einzig
-        notwendige Eintrag.
-        Gebe den &quot;Port&quot; ein, wenn der Node nicht den standardmäßigen Port (also 18089) benutzt.
-        Du kannst auch optional den Node benennen, damit du ihn später einfacher identifizieren kannst.
-        Einige Nodes erfordern Login-Informationen, um sie zu benutzen. Gebe den dir zugekommenen Nutzernamen &amp;
-        das Passwort in die entsprechenden Felder ein. Jetzt kannst du diese Einstellung &quot;Testen&quot;.
-        Die &quot;Testergebnisse&quot; werden die Blockhöhe, Reaktionszeit und verwendete IP anzeigen.
-        Das Ergebnis kann aber auch fehlerbehaftet sein – meistens weil die eingegebene Webadresse
-        im Moment nicht in einer vertretbaren Zeit erreicht werden konnte oder weil die Login-Informationen falsch waren.
-        Oder die Kombination aus Webadresse und Port zeigt nicht auf einen richtigen Scala-Node!
-        Wenn der Test bestanden wird (keine Fehler), kannst du &quot;OK&quot; drücken, um diesen Node zu speichern &amp;
-        vorzumerken.</p>
-        <h2>Suche nach Nodes</h2>
-        <p>Außerdem kannst du das Netzwerk nach Nodes durchsuchen. Scala Vault wird
-        das Netzwerk nach Drittanbieter-Nodes auf Port 18089 durchsuchen. Es fängt damit an, deine
-        vorgemerkten Nodes nach anderen Teilnehmern im Scala-P2P-Netzwerk zu fragen und fährt dann damit fort,
-        diese nach ihren Verbindungen zu fragen und so weiter. Wenn du keine vorgemerkten Nodes hast
-        (oder diese uns nicht über ihre Verbindungen informieren),
-        wird sich Scala Vault direkt mit den, in Scala fest eingebetteten, Ursprungsnodes verbinden. Die
-        Suche stoppt, wenn insgesamt 10 Nodes gefunden wurden.</p>
+    <string name="help_mobile_miner"><![CDATA[
+        <h1>Scala Miner</h1>
+        <p>Starten Sie das Mining auf allen neuesten Android-Geräten sicher und effizient!</p>
+        <p>Scala Miner bietet nützliche Informationen zu Ihren Mining-Aktivitäten und verhindert eine Überhitzung Ihres Geräts.</p>
+        <p>Hier herunterladen: <a href="https://github.com/scala-network/MobileMiner/releases">Scala Miner</a></p>
+    ]]></string>
+
+    <string name="help_node" translatable="false">OBSOLET</string>
+
+    <string name="help_node_2"><![CDATA[
+        <h1>Knoten</h1>
+        <h2>TL;DR</h2>
+        <p>Aktualisieren Sie die Knotenliste durch Herunterziehen und Scala Vault verbindet sich automatisch mit dem besten verfügbaren Knoten!</p>
+        <h2>Was ist ein Knoten?</h2>
+        <p>Scala Vault verwendet einen Remote-Knoten (manchmal auch Daemon genannt), um mit
+        dem Scala-Netzwerk zu kommunizieren, ohne eine Kopie der gesamten Blockchain herunterladen und speichern zu müssen.</p>
+        <h2>Knotenliste</h2>
+        <p>Wenn die Liste leer ist, können Sie entweder manuell neue Knoten hinzufügen oder Scala Vault
+        den besten verfügbaren Knoten für Sie auswählen lassen. Oder beides. Lesen Sie weiter…</p>
+        <p>Die Knotenliste zeigt alle aktuell bekannten Knoten. Zusätzlich wird der Zeitstempel
+        des neuesten Blocks, der jedem Knoten bekannt ist, unter dem Knotennamen angezeigt. Ein Symbol
+        das das Antwortverhalten des Knotens darstellt
+        (das die zu erwartende Verbindungsqualität angibt)
+        wird neben jedem Knoten angezeigt.</p>
+        <p>Scala Vault wählt bei jeder Verwendung den optimalen Knoten aus.
+        Dies geschieht durch Überprüfen der Blockhöhe (wie aktuell
+        ist der Knoten?) sowie das Antwortverhalten (wie schnell reagiert der Knoten auf Anfragen?).</p>
+        <p>Die Liste ist nach diesen Merkmalen sortiert, sodass der oberste Knoten derjenige wäre, den Scala Vault
+        im Moment auswählen würde. Unten in der Liste werden sehr langsame oder nicht verfügbare Knoten angezeigt.</p>
+        <h2>Hinzufügen eines Knotens</h2>
+        <p>Durch Tippen auf die Schaltfläche „Knoten hinzufügen“ unten werden Sie aufgefordert, die Knotendetails im folgenden Dialogfeld einzugeben.
+        Die „Adresse“ ist der Hostname oder die IP-Adresse des Knotens - dies ist die einzige
+        obligatorische Eingabe.
+        Geben Sie den „Port“ ein, wenn der Knoten auf einem Nicht-Standardport ausgeführt wird (z. B. 18089).
+        Sie können den Knoten optional auch benennen, damit Sie ihn später leichter identifizieren können.
+        Einige Knoten erfordern Anmeldeinformationen, um sie verwenden zu können. Geben Sie den bereitgestellten Benutzernamen und das Passwort in die entsprechenden Felder ein. Jetzt können Sie diese Einstellungen „Testen“.
+        Die „Testergebnisse“ zeigen die Blockhöhe, die Antwortzeit und die tatsächlich verwendete IP-Adresse an.
+        Das Ergebnis kann auch ein Fehler sein - normalerweise, weil der bereitgestellte Hostname nicht innerhalb eines angemessenen Zeitraums erreichbar ist oder die Anmeldeinformationen falsch sind.
+        Oder die Hostname/Port-Kombination verweist nicht auf einen tatsächlichen Scala-Knoten!
+        Sobald der Test bestanden ist (kein Fehler), können Sie auf „OK“ drücken, um diesen Knoten zu speichern.</p>
     ]]></string>
 
     <!-- Note for translators: new/changed text also in help_send -->

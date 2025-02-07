@@ -1,5 +1,6 @@
 <resources>
     <string name="wallet_activity_name">錢包</string>
+    <string name="menu_mobileminer">行動礦工</string>
 
     <string name="menu_about">關於</string>
     <string name="menu_privacy">隱私權政策</string>
@@ -234,7 +235,6 @@
     <string name="send_total_btc_label">總計 (XLA)</string>
     <string name="send_total_label">總計</string>
 
-    <string name="send_amount">%1$s XLA</string>
     <string name="send_fee">+%1$s 手續費</string>
 
     <string name="send_create_tx_error_title">建立交易錯誤</string>

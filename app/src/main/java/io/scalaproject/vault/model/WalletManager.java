@@ -59,16 +59,12 @@ public class WalletManager {
     }
 
     static public String addressPrefix(NetworkType networkType) {
-        switch (networkType) {
-            case NetworkType_Testnet:
-                return "9A-";
-            case NetworkType_Mainnet:
-                return "S-";
-            case NetworkType_Stagenet:
-                return "5-";
-            default:
-                throw new IllegalStateException("Unsupported Network: " + networkType);
-        }
+        return switch (networkType) {
+            case NetworkType_Testnet -> "9A-";
+            case NetworkType_Mainnet -> "S-";
+            case NetworkType_Stagenet -> "5-";
+            default -> throw new IllegalStateException("Unsupported Network: " + networkType);
+        };
     }
 
     private Wallet managedWallet = null;
@@ -214,7 +210,7 @@ public class WalletManager {
 
 
 
-    public class WalletInfo implements Comparable<WalletInfo> {
+    public static class WalletInfo implements Comparable<WalletInfo> {
         public File path;
         public String name;
 
@@ -232,11 +228,7 @@ public class WalletManager {
     public List<WalletInfo> findWallets(File path) {
         List<WalletInfo> wallets = new ArrayList<>();
         Timber.d("Scanning: %s", path.getAbsolutePath());
-        File[] found = path.listFiles(new FilenameFilter() {
-            public boolean accept(File dir, String filename) {
-                return filename.endsWith(".keys");
-            }
-        });
+        File[] found = path.listFiles((dir, filename) -> filename.endsWith(".keys"));
 
         assert found != null;
         for (File file : found) {
@@ -304,7 +296,6 @@ public class WalletManager {
     static public int LOGLEVEL_MAX = 4;
 
     static public native void setLogLevel(int level);
-
 
     static public native String scalaVersion();
 }

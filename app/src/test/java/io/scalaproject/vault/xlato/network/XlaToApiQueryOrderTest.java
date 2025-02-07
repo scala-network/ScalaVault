@@ -61,7 +61,7 @@ public class XlaToApiQueryOrderTest {
 
     private XlaToApi xlaToApi;
 
-    private OkHttpClient okHttpClient = new OkHttpClient();
+    private final OkHttpClient okHttpClient = new OkHttpClient();
     private Waiter waiter;
 
     @Mock
@@ -119,7 +119,7 @@ public class XlaToApiQueryOrderTest {
 
     @Test
     public void orderStatus_wasSuccessfulShouldRespondWithOrder()
-            throws TimeoutException {
+            throws TimeoutException, InterruptedException {
 
 //TODO: state enum
 // TODO dates are dates
@@ -191,7 +191,7 @@ public class XlaToApiQueryOrderTest {
 
     @Test
     public void orderStatus_wasNotSuccessfulShouldCallOnError()
-            throws TimeoutException {
+            throws TimeoutException, InterruptedException {
         mockWebServer.enqueue(new MockResponse().setResponseCode(500));
         xlaToApi.queryOrderStatus("xlato - efMsiU", new XlaToCallback<QueryOrderStatus>() {
             @Override
@@ -213,7 +213,7 @@ public class XlaToApiQueryOrderTest {
 
     @Test
     public void orderStatus_orderNotFoundShouldCallOnError()
-            throws TimeoutException {
+            throws TimeoutException, InterruptedException {
         mockWebServer.enqueue(new MockResponse().
                 setResponseCode(404).
                 setBody("{\"error_msg\":\"requested order not found\",\"error\":\"XLATO-ERROR-006\"}"));

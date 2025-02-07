@@ -1,6 +1,6 @@
-<resources>
+<resources xmlns:tools="http://schemas.android.com/tools" tools:locale="sk">
     <string name="wallet_activity_name">Peňaženka</string>
-
+    <string name="menu_mobileminer">Mobilný Baník</string>
     <string name="menu_about">O aplikácii</string>
     <string name="menu_privacy">Zásady ochrany osobných údajov</string>
 
@@ -187,7 +187,7 @@
     <string name="generate_wallet_created">Peňaženka vytvorená</string>
 
     <string name="generate_restoreheight_error">Vlož číslo alebo dátum (YYYY-MM-DD)</string>
-
+    <string name="generate_restoreheight_min_error">Dátum musí byť väčší alebo rovný ako %1$s</string>
     <string name="generate_wallet_type_key">Kľúče</string>
     <string name="generate_wallet_type_new">Nová</string>
     <string name="generate_wallet_type_seed">Seed</string>
@@ -233,7 +233,6 @@
     <string name="send_total_btc_label">Total (XLA)</string>
     <string name="send_total_label">Total</string>
 
-    <string name="send_amount">%1$s XLA</string>
     <string name="send_fee">+%1$s poplatok</string>
 
     <string name="send_create_tx_error_title">Vytvor Chybu Transakcie</string>
@@ -274,9 +273,13 @@
     <string name="receive_amount_nan">XLA nie číslo</string>
 
     <string name="details_alert_message">Budú zobrazené citlivé dáta.\nPozri cez plece!</string>
+    <string name="details_alert_yes">Prijať</string>
+    <string name="details_alert_no">Zrušiť</string>
     <string name="details_title">Detaily</string>
 
     <string name="archive_alert_message">Peňaženka bude zálohovaná a následne zmazaná!</string>
+    <string name="archive_alert_yes">Prijať</string>
+    <string name="archive_alert_no">Zrušiť</string>
 
     <string name="fab_create_new">Vytvor novú peňaženku</string>
     <string name="fab_restore_viewonly">Obnoviť prezeraciu peňaženku</string>
@@ -293,6 +296,7 @@
 
     <string name="menu_language">Jazyk</string>
     <string name="language_system_default">Použi jazyk systému</string>
+    <string name="menu_nodes">Vzdialené uzly</string>
 
     <string name="fab_restore_ledger">Obnoviť z Ledger Nano S</string>
 
@@ -358,6 +362,8 @@
     <string name="node_nobookmark">Automaticky ukladám %1$d najlepších uzlov</string>
     <string name="label_test">Test</string><!--note: as in "Test a network connection"-->
 
+    <string name="remote_nodes_subtitle">Pretiahnutím nadol sa spustí skenovanie a automatický výber najlepšieho dostupného uzla</string>
+    <string name="change_remote_node_conf">Zmeniť vzdialený uzol na %1$s?</string>
     <string name="backup_success">úspešne zálohované</string>
 
     <string name="send_address_resolve_bip70">Prekladám URI platby&#8230;</string>

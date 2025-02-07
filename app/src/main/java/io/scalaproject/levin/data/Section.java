@@ -21,6 +21,8 @@
 
 package io.scalaproject.levin.data;
 
+import androidx.annotation.NonNull;
+
 import io.scalaproject.levin.util.HexHelper;
 import io.scalaproject.levin.util.LevinReader;
 import io.scalaproject.levin.util.LevinWriter;
@@ -86,6 +88,7 @@ public class Section {
         return entries.get(key);
     }
 
+    @NonNull
     public String toString() {
         final StringBuilder sb = new StringBuilder();
         sb.append("\n");

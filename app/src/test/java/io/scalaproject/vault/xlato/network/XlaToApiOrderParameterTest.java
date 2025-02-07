@@ -86,7 +86,7 @@ public class XlaToApiOrderParameterTest {
 
     @Test
     public void orderParameter_wasSuccessfulShouldRespondWithParameters()
-            throws TimeoutException {
+            throws TimeoutException, InterruptedException {
         final boolean isZeroConfEnabled = true;
         final double price = 0.015537;
         final double upperLimit = 20.0;
@@ -119,7 +119,7 @@ public class XlaToApiOrderParameterTest {
 
     @Test
     public void orderParameter_wasNotSuccessfulShouldCallOnError()
-            throws TimeoutException {
+            throws TimeoutException, InterruptedException {
         mockWebServer.enqueue(new MockResponse().setResponseCode(500));
         xlaToApi.queryOrderParameters(new XlaToCallback<QueryOrderParameters>() {
             @Override
@@ -141,7 +141,7 @@ public class XlaToApiOrderParameterTest {
 
     @Test
     public void orderParameter_thirdPartyServiceNotAvailableShouldCallOnError()
-            throws TimeoutException {
+            throws TimeoutException, InterruptedException {
         mockWebServer.enqueue(new MockResponse().
                 setResponseCode(503).
                 setBody("{\"error_msg\":\"third party service not available\",\"error\":\"XLATO-ERROR-007\"}"));

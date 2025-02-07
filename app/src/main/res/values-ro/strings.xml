@@ -1,6 +1,6 @@
-<resources>
+<resources xmlns:tools="http://schemas.android.com/tools" tools:locale="ro">
     <string name="wallet_activity_name">Portofel</string>
-
+    <string name="menu_mobileminer">Miner mobil</string>
     <string name="menu_about">Despre</string>
     <string name="menu_privacy">Politică de confidențialitate</string>
 
@@ -165,7 +165,7 @@
     <string name="generate_wallet_created">Portofel creat</string>
 
     <string name="generate_restoreheight_error">Introdu număr sau dată (YYYY-MM-ZZ)</string>
-
+    <string name="generate_restoreheight_min_error">Data trebuie să fie mai mare sau egală cu %1$s</string>
     <string name="generate_wallet_type_key">Chei</string>
     <string name="generate_wallet_type_new">Nou</string>
     <string name="generate_wallet_type_seed">Semnătură Mnemonică</string>
@@ -210,7 +210,6 @@
     <string name="send_total_btc_label">Total (XLA)</string>
     <string name="send_total_label">Total</string>
 
-    <string name="send_amount">%1$s XLA</string>
     <string name="send_fee">+%1$s Comision</string>
 
     <string name="send_create_tx_error_title">Eroare creare tranzacție</string>
@@ -251,9 +250,13 @@
     <string name="receive_amount_nan">XLA fără valoare</string>
 
     <string name="details_alert_message">Acum vor fi afișate date sensibile.\nUită-te peste umărul tău!</string>
+    <string name="details_alert_yes">Acceptă</string>
+    <string name="details_alert_no">Anulare</string>
     <string name="details_title">Detalii</string>
 
     <string name="archive_alert_message">Voi face o copie de siguranță a portofelului apoi va fi șters!</string>
+    <string name="archive_alert_yes">Acceptă</string>
+    <string name="archive_alert_no">Anulare</string>
 
     <string name="fab_create_new">Creeaza portofel nou</string>
     <string name="fab_restore_viewonly">Restaurează portofel-vizualizare</string>
@@ -295,6 +298,7 @@
 
     <string name="menu_language">Language</string>
     <string name="language_system_default">Use System Language</string>
+    <string name="menu_nodes">Noduri Remote</string>
 
     <string name="fab_restore_ledger">Restore from Ledger Nano S</string>
 
@@ -360,6 +364,8 @@
     <string name="node_nobookmark">Automatically bookmarked best %1$d nodes</string>
     <string name="label_test">Test</string><!--note: as in "Test a network connection"-->
 
+    <string name="remote_nodes_subtitle">Trageți în jos pentru a scana și selecta automat cel mai bun nod disponibil</string>
+    <string name="change_remote_node_conf">Schimba nodulul la distanță la %1$s?</string>
     <string name="send_address_resolve_bip70">Resolving Payment URI&#8230;</string>
     <string name="send_address_not_bip70">Could not resolve Payment URI</string>
     <string name="send_address_bip70">Resolved Payment URI &#x2714;</string>

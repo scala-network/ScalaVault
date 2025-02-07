@@ -36,7 +36,6 @@ import io.scalaproject.vault.data.TxDataBtc;
 import io.scalaproject.vault.model.Wallet;
 import io.scalaproject.vault.util.Helper;
 import io.scalaproject.vault.util.OkHttpHelper;
-import io.scalaproject.vault.widget.ExchangeEditText;
 import io.scalaproject.vault.widget.ExchangeOtherEditText;
 import io.scalaproject.vault.widget.SendProgressView;
 import io.scalaproject.vault.xlato.XlaToError;
@@ -61,9 +60,8 @@ public class SendBtcAmountWizardFragment extends SendWizardFragment {
 
     SendAmountWizardFragment.Listener sendListener;
 
-    public SendBtcAmountWizardFragment setSendListener(SendAmountWizardFragment.Listener listener) {
+    public void setSendListener(SendAmountWizardFragment.Listener listener) {
         this.sendListener = listener;
-        return this;
     }
 
     private TextView tvFunds;
@@ -169,45 +167,42 @@ public class SendBtcAmountWizardFragment extends SendWizardFragment {
 
     private void processOrderParms(final QueryOrderParameters orderParameters) {
         this.orderParameters = orderParameters;
-        getView().post(new Runnable() {
-            @Override
-            public void run() {
-                etAmount.setExchangeRate(1.0d / orderParameters.getPrice());
-                NumberFormat df = NumberFormat.getInstance(Locale.US);
-                df.setMaximumFractionDigits(6);
-                String min = df.format(orderParameters.getLowerLimit());
-                String max = df.format(orderParameters.getUpperLimit());
-                String rate = df.format(orderParameters.getPrice());
-                Spanned xlaParmText = Html.fromHtml(getString(R.string.info_send_xlato_parms, min, max, rate));
-                if (orderParameters.isZeroConfEnabled()) {
-                    String zeroConf = df.format(orderParameters.getZeroConfMaxAmount());
-                    Spanned zeroConfText = Html.fromHtml(getString(R.string.info_send_xlato_zeroconf, zeroConf));
-                    xlaParmText = (Spanned) TextUtils.concat(xlaParmText, " ", zeroConfText);
-                }
-                tvxlaToParms.setText(xlaParmText);
-                maxBtc = orderParameters.getUpperLimit();
-                minBtc = orderParameters.getLowerLimit();
-                Timber.d("minBtc=%f / maxBtc=%f", minBtc, maxBtc);
-
-                final long funds = getTotalFunds();
-                double availablexla = 1.0 * funds / 1000000000000L;
-                maxBtc = Math.min(maxBtc, availablexla * orderParameters.getPrice());
-
-                String availBtcString;
-                String availxlaString;
-                if (!sendListener.getActivityCallback().isStealthMode()) {
-                    availBtcString = df.format(availablexla * orderParameters.getPrice());
-                    availxlaString = df.format(availablexla);
-                } else {
-                    availBtcString = getString(R.string.unknown_amount);
-                    availxlaString = availBtcString;
-                }
-                tvFunds.setText(getString(R.string.send_available_btc,
-                        availxlaString,
-                        availBtcString));
-                llxlaToParms.setVisibility(View.VISIBLE);
-                evParams.hideProgress();
+        requireView().post(() -> {
+            etAmount.setExchangeRate(1.0d / orderParameters.getPrice());
+            NumberFormat df = NumberFormat.getInstance(Locale.US);
+            df.setMaximumFractionDigits(6);
+            String min = df.format(orderParameters.getLowerLimit());
+            String max = df.format(orderParameters.getUpperLimit());
+            String rate = df.format(orderParameters.getPrice());
+            Spanned xlaParmText = Html.fromHtml(getString(R.string.info_send_xlato_parms, min, max, rate));
+            if (orderParameters.isZeroConfEnabled()) {
+                String zeroConf = df.format(orderParameters.getZeroConfMaxAmount());
+                Spanned zeroConfText = Html.fromHtml(getString(R.string.info_send_xlato_zeroconf, zeroConf));
+                xlaParmText = (Spanned) TextUtils.concat(xlaParmText, " ", zeroConfText);
             }
+            tvxlaToParms.setText(xlaParmText);
+            maxBtc = orderParameters.getUpperLimit();
+            minBtc = orderParameters.getLowerLimit();
+            Timber.d("minBtc=%f / maxBtc=%f", minBtc, maxBtc);
+
+            final long funds = getTotalFunds();
+            double availablexla = 1.0 * funds / 1000000000000L;
+            maxBtc = Math.min(maxBtc, availablexla * orderParameters.getPrice());
+
+            String availBtcString;
+            String availxlaString;
+            if (!sendListener.getActivityCallback().isStealthMode()) {
+                availBtcString = df.format(availablexla * orderParameters.getPrice());
+                availxlaString = df.format(availablexla);
+            } else {
+                availBtcString = getString(R.string.unknown_amount);
+                availxlaString = availBtcString;
+            }
+            tvFunds.setText(getString(R.string.send_available_btc,
+                    availxlaString,
+                    availBtcString));
+            llxlaToParms.setVisibility(View.VISIBLE);
+            evParams.hideProgress();
         });
     }
 
@@ -217,37 +212,30 @@ public class SendBtcAmountWizardFragment extends SendWizardFragment {
         maxBtc = 0;
         minBtc = 0;
         Timber.e(ex);
-        getView().post(new Runnable() {
-            @Override
-            public void run() {
-                if (ex instanceof XlaToException) {
-                    XlaToException xlaEx = (XlaToException) ex;
-                    XlaToError xlaErr = xlaEx.getError();
-                    if (xlaErr != null) {
-                        if (xlaErr.isRetryable()) {
-                            evParams.showMessage(xlaErr.getErrorId().toString(), xlaErr.getErrorMsg(),
-                                    getString(R.string.text_retry));
-                            evParams.setOnClickListener(new View.OnClickListener() {
-                                @Override
-                                public void onClick(View v) {
-                                    evParams.setOnClickListener(null);
-                                    callxlaTo();
-                                }
-                            });
-                        } else {
-                            evParams.showMessage(xlaErr.getErrorId().toString(), xlaErr.getErrorMsg(),
-                                    getString(R.string.text_noretry));
-                        }
+        requireView().post(() -> {
+            if (ex instanceof XlaToException xlaEx) {
+                XlaToError xlaErr = xlaEx.getError();
+                if (xlaErr != null) {
+                    if (xlaErr.isRetryable()) {
+                        evParams.showMessage(xlaErr.getErrorId().toString(), xlaErr.getErrorMsg(),
+                                getString(R.string.text_retry));
+                        evParams.setOnClickListener(v -> {
+                            evParams.setOnClickListener(null);
+                            callxlaTo();
+                        });
                     } else {
-                        evParams.showMessage(getString(R.string.label_generic_xlato_error),
-                                getString(R.string.text_generic_xlato_error, xlaEx.getCode()),
+                        evParams.showMessage(xlaErr.getErrorId().toString(), xlaErr.getErrorMsg(),
                                 getString(R.string.text_noretry));
                     }
                 } else {
                     evParams.showMessage(getString(R.string.label_generic_xlato_error),
-                            ex.getLocalizedMessage(),
+                            getString(R.string.text_generic_xlato_error, xlaEx.getCode()),
                             getString(R.string.text_noretry));
                 }
+            } else {
+                evParams.showMessage(getString(R.string.label_generic_xlato_error),
+                        ex.getLocalizedMessage(),
+                        getString(R.string.text_noretry));
             }
         });
     }
@@ -267,7 +255,7 @@ public class SendBtcAmountWizardFragment extends SendWizardFragment {
         });
     }
 
-    private XlaToApi xlaToApi = null;
+    private volatile XlaToApi xlaToApi = null;
 
     private XlaToApi getxlaToApi() {
         if (xlaToApi == null) {

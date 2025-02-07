@@ -51,8 +51,8 @@ public class PeerRetriever implements Callable<PeerRetriever> {
 
     final private List<LevinPeer> peers = new ArrayList<>();
 
-    private NodeInfo nodeInfo;
-    private OnGetPeers onGetPeersCallback;
+    private final NodeInfo nodeInfo;
+    private final OnGetPeers onGetPeersCallback;
 
     public interface OnGetPeers {
         boolean getMorePeers();
@@ -102,7 +102,7 @@ public class PeerRetriever implements Callable<PeerRetriever> {
                         Timber.d("Ignored LEVIN COMMAND %d", recv.command);
                     }
                 }
-            } catch (IOException ex) {
+            } catch (IOException ignored) {
             } finally {
                 disconnect(); // we have what we want - byebye
                 Timber.d("%s DISCONN", nodeInfo.getLevinSocketAddress());
@@ -182,7 +182,7 @@ public class PeerRetriever implements Callable<PeerRetriever> {
         }
     }
 
-    private DataOutput dataOutput = null;
+    private volatile DataOutput dataOutput = null;
 
     private DataOutput getDataOutput() throws IOException {
         if (dataOutput == null)
@@ -194,7 +194,7 @@ public class PeerRetriever implements Callable<PeerRetriever> {
         return dataOutput;
     }
 
-    private DataInput dataInput = null;
+    private volatile DataInput dataInput = null;
 
     private DataInput getDataInput() throws IOException {
         if (dataInput == null)

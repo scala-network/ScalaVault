@@ -168,7 +168,7 @@
     <string name="generate_title">Create Wallet</string>
     <string name="generate_name_hint">Wallet Name</string>
     <string name="generate_password_hint">Password (optional)</string>
-    <string name="prompt_password_hint" translatable="false">Password (Leave empty if none)</string>
+    <string name="prompt_password_hint">Password (Leave empty if none)</string>
     <string name="generate_fingerprint_hint">Allow to open wallet using fingerprint</string>
     <string name="generate_fingerprint_warn"><![CDATA[
         <strong>Fingerprint Authentication</strong>
@@ -224,7 +224,7 @@
     <string name="send_amount_hint">0.00</string>
     <string name="send_notes_hint">Private Notes (optional)</string>
     <string name="send_generate_paymentid_hint">Generate</string>
-    <string name="send_qr_hint" translatable="false">Scan</string>
+    <string name="send_qr_hint">Scan</string>
     <string name="send_send_label">Spend my sweet Scala</string>
     <string name="send_send_timed_label">Spend my sweet Scala (%1$s)</string>
     <string name="send_qr_invalid">Not a QR Code</string>
@@ -247,7 +247,7 @@
     <string name="send_total_btc_label">Total (XLA)</string>
     <string name="send_total_label">Total</string>
 
-    <string name="send_amount">%1$s XLA</string>
+    <string name="send_amount" translatable="false">%1$s XLA</string>
     <string name="send_fee">+%1$s Fee</string>
 
     <string name="send_create_tx_error_title">Create Transaction Error</string>
@@ -304,7 +304,6 @@
         <item>GBP</item>
         <item>CHF</item>
         <item>CAD</item>
-
         <item>AUD</item>
         <item>BGN</item>
         <item>BRL</item>
@@ -387,9 +386,9 @@
 
     <string name="node_wrong_net" translatable="false">Node scanning only for mainnet!</string>
 
-    <string name="info_xlato">OBSOLETE</string>
+    <string name="info_xlato" translatable="false">OBSOLETE</string>
     <string name="info_mobile_miner">Start mining on your mobile device with Scala Miner. Tap here for more information.</string>
-    <string name="info_nodes_enabled">OBSOLETE</string>
+    <string name="info_nodes_enabled" translatable="false">OBSOLETE</string>
     <string name="info_nodes_enabled_2">Scala Vault scans for the best available nodes. Tap here for more information.</string>
     <string name="node_height">Last block updated: %1$s</string>
     <string name="label_nodes">Nodes</string>
@@ -450,8 +449,8 @@
     <string name="privacy_policy_intro">We care about your privacy. To learn more, please read our Privacy Policy.</string>
     <string name="privacy_policy_label">Privacy Policy</string>
     <string name="primary_address">Primary Address</string>
-    <string name="mm_url">https://github.com/scala-network/MobileMiner/releases</string>
-    <string name="connection_remote_daemon">Connecting to remote node...</string>
+    <string name="mm_url" translatable="false">https://github.com/scala-network/MobileMiner/releases</string>
+    <string name="connection_remote_daemon">Connecting to remote node&#8230;</string>
     <string name="remote_nodes">Remote Nodes</string>
     <string name="address_book">Address Book</string>
     <string name="delete_contact_conf">Delete entry %1$s?</string>
@@ -470,6 +469,35 @@
     <string name="edit">Edit</string>
     <string name="enable_debug_info">Enable Debug Info</string>
     <string name="disable_debug_info">Disable Debug Info</string>
-    <string name="send_address_resolve_ud">Resolving Unstoppable Domains address...</string>
+    <string name="send_address_resolve_ud">Resolving Unstoppable Domains address&#8230;</string>
     <string name="send_address_no_ud_records">Invalid Unstoppable Domains address</string>
+    <string name="transaction_history">Transaction History</string>
+    <string name="send">Send</string>
+    <string name="receive">Receive</string>
+    <string name="balance">Balance</string>
+    <string name="balance_primary_address">Primary address</string>
+    <string name="balance_wallet_address">Wallet Address</string>
+    <string name="history_no_transaction">No transaction</string>
+    <string name="mobileminer_scala_miner">SCALA MINER</string>
+    <string name="mobileminer_start_mining">Start mining on your Android device safely and efficiently.</string>
+    <string name="close">Close</string>
+    <string name="scala_logo" translatable="false">Scala Logo</string>
+    <string name="credits">Credits</string>
+    <string name="credits_made_with">Made with </string>
+    <string name="credits_by"> by </string>
+    <string name="credits_forked_from">Forked from </string>
+    <string name="credits_heart" translatable="false">heart icon</string>
+    <string name="wizard_home">A secure and lightweight wallet to store your Scala coins</string>
+    <string name="wizard_home_description">Scala Vault provides everything you need for managing and using Scala wallets on Android</string>
+    <string name="wizard_home_create_new_wallet">Create new wallet</string>
+    <string name="wizard_home_import_from_seed">Import from seed</string>
+    <string name="wizard_home_or">or</string>
+    <string name="wizard_home_skip">Skip</string>
+    <string name="no_wallet">No wallet</string>
+    <string name="wallet_address">Wallet Address</string>
+    <string name="subaddresses">Subaddresses</string>
+    <string name="message_exchange_success">Currency price updated</string>
+    <string name="splashcreen_check_network">Checking Network…</string>
+    <string name="splashcreen_check_network_success">Connected to the internet, accesing to Scala Vault</string>
+    <string name="splashcreen_check_network_failure">This app requires network connection to work. Please check your internet connection and try again…</string>
 </resources>

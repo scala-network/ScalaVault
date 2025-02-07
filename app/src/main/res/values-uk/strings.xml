@@ -1,6 +1,6 @@
-<resources>
+<resources xmlns:tools="http://schemas.android.com/tools" tools:locale="uk">
     <string name="wallet_activity_name">Гаманець</string>
-
+    <string name="menu_mobileminer">Мобільний Майнер</string>
     <string name="menu_about">Про програму</string>
     <string name="menu_privacy">Політика конфіденційності</string>
 
@@ -190,7 +190,7 @@
     <string name="generate_wallet_created">Гаманець створено</string>
 
     <string name="generate_restoreheight_error">Введіть номер блоку або дату (YYYY-MM-DD)</string>
-
+    <string name="generate_restoreheight_min_error">Дата має бути більшою або дорівнювати %1$s</string>
     <string name="generate_wallet_type_key">Ключ</string>
     <string name="generate_wallet_type_new">Новий</string>
     <string name="generate_wallet_type_seed">Фраза</string>
@@ -236,7 +236,6 @@
     <string name="send_total_btc_label">Всього (XLA)</string>
     <string name="send_total_label">Всього</string>
 
-    <string name="send_amount">%1$s XLA</string>
     <string name="send_fee">+%1$s Комісія</string>
 
     <string name="send_create_tx_error_title">Помилка створення транзакції</string>
@@ -277,9 +276,13 @@
     <string name="receive_amount_nan">Не числове значення XLA</string>
 
     <string name="details_alert_message">Зараз будуть показані конфіденційні дані. Озирнись навколо!</string>
+    <string name="details_alert_yes">Прийняти</string>
+    <string name="details_alert_no">Скасувати</string>
     <string name="details_title">Детальна інформація</string>
 
     <string name="archive_alert_message">Цей гаманець буде скопійовано, а потім знищено!</string>
+    <string name="archive_alert_yes">Прийняти</string>
+    <string name="archive_alert_no">Скасувати</string>
 
     <string name="fab_create_new">Створити новий гаманець</string>
     <string name="fab_restore_viewonly">Відновити гаманець тільки для перегляду</string>
@@ -296,6 +299,7 @@
 
     <string name="menu_language">Мова</string>
     <string name="language_system_default">Використовувати мову системи</string>
+    <string name="menu_nodes">Віддалені вузли</string>
 
     <string name="fab_restore_ledger">Відновлення з Ledger Nano S</string>
 
@@ -361,6 +365,8 @@
     <string name="node_nobookmark">Автоматично відмічені кращі %1$d вузли</string>
     <string name="label_test">Провірка</string><!--note: as in "Test a network connection"-->
 
+    <string name="remote_nodes_subtitle">Проведіть пальцем вниз, щоб сканувати та автоматично вибрати найкращий доступний вузол</string>
+    <string name="change_remote_node_conf">Змінити віддалений вузол на %1$s?</string>
     <string name="backup_success">Резервне копіювання успішне</string>
 
     <string name="send_address_resolve_bip70">Розміщення URI платежу&#8230;</string>

@@ -21,6 +21,7 @@
 
 package io.scalaproject.vault;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
@@ -29,6 +30,8 @@ import android.graphics.drawable.BitmapDrawable;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
+
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import com.google.android.material.textfield.TextInputLayout;
 import androidx.fragment.app.Fragment;
@@ -74,6 +77,7 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Objects;
 
 import timber.log.Timber;
 
@@ -122,43 +126,31 @@ public class ReceiveFragment extends Fragment {
 
         etDummy.setRawInputType(InputType.TYPE_TEXT_FLAG_NO_SUGGESTIONS);
 
-        bCopyAddress.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                copyAddress();
-            }
-        });
+        bCopyAddress.setOnClickListener(v -> copyAddress());
         enableCopyAddress(false);
 
-        evAmount.setOnNewAmountListener(new ExchangeView.OnNewAmountListener() {
-            @Override
-            public void onNewAmount(String xla) {
-                Timber.d("new amount = %s", xla);
-                generateQr();
-            }
+        evAmount.setOnNewAmountListener(xla -> {
+            Timber.d("new amount = %s", xla);
+            generateQr();
         });
 
-        evAmount.setOnFailedExchangeListener(new ExchangeView.OnFailedExchangeListener() {
-            @Override
-            public void onFailedExchange() {
-                if (isAdded()) {
-                    clearQR();
-                    Toast.makeText(getActivity(), getString(R.string.message_exchange_failed), Toast.LENGTH_LONG).show();
-                }
+        evAmount.setOnFailedExchangeListener(() -> {
+            if (isAdded()) {
+                clearQR();
+                Toast.makeText(getActivity(), getString(R.string.message_exchange_failed), Toast.LENGTH_LONG).show();
             }
         });
 
         final EditText notesEdit = etNotes.getEditText();
+        assert notesEdit != null;
         notesEdit.setRawInputType(InputType.TYPE_CLASS_TEXT);
-        notesEdit.setOnEditorActionListener(new TextView.OnEditorActionListener() {
-            public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
-                if ((event != null && (event.getKeyCode() == KeyEvent.KEYCODE_ENTER) && (event.getAction() == KeyEvent.ACTION_DOWN))
-                        || (actionId == EditorInfo.IME_ACTION_DONE)) {
-                    generateQr();
-                    return true;
-                }
-                return false;
+        notesEdit.setOnEditorActionListener((v, actionId, event) -> {
+            if ((event != null && (event.getKeyCode() == KeyEvent.KEYCODE_ENTER) && (event.getAction() == KeyEvent.ACTION_DOWN))
+                    || (actionId == EditorInfo.IME_ACTION_DONE)) {
+                generateQr();
+                return true;
             }
+            return false;
         });
         notesEdit.addTextChangedListener(new TextWatcher() {
             @Override
@@ -177,49 +169,37 @@ public class ReceiveFragment extends Fragment {
             }
         });
 
-        bSubaddress.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                enableSubaddressButton(false);
-                enableCopyAddress(false);
+        bSubaddress.setOnClickListener(v -> {
+            enableSubaddressButton(false);
+            enableCopyAddress(false);
 
-                final Runnable newAddress = new Runnable() {
-                    public void run() {
-                        getNewSubaddress();
-                    }
-                };
+            final Runnable newAddress = this::getNewSubaddress;
 
-                tvAddress.animate().alpha(0).setDuration(250)
-                        .withEndAction(newAddress).start();
+            tvAddress.animate().alpha(0).setDuration(250)
+                    .withEndAction(newAddress).start();
+        });
+
+        ivQrCode.setOnClickListener(v -> {
+            Helper.hideKeyboard(getActivity());
+            etDummy.requestFocus();
+            if (qrValid) {
+                ivQrCodeFull.setImageBitmap(((BitmapDrawable) ivQrCode.getDrawable()).getBitmap());
+                ivQrCodeFull.setVisibility(View.VISIBLE);
+            } else {
+                evAmount.doExchange();
             }
         });
 
-        ivQrCode.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Helper.hideKeyboard(getActivity());
-                etDummy.requestFocus();
-                if (qrValid) {
-                    ivQrCodeFull.setImageBitmap(((BitmapDrawable) ivQrCode.getDrawable()).getBitmap());
-                    ivQrCodeFull.setVisibility(View.VISIBLE);
-                } else {
-                    evAmount.doExchange();
-                }
-            }
-        });
-
-        ivQrCodeFull.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                ivQrCodeFull.setImageBitmap(null);
-                ivQrCodeFull.setVisibility(View.GONE);
-            }
+        ivQrCodeFull.setOnClickListener(v -> {
+            ivQrCodeFull.setImageBitmap(null);
+            ivQrCodeFull.setVisibility(View.GONE);
         });
 
         showProgress();
         clearQR();
 
         Bundle b = getArguments();
+        assert b != null;
         String address = b.getString("address");
         String walletName = b.getString("name");
         Timber.d("%s/%s", address, walletName);
@@ -248,7 +228,7 @@ public class ReceiveFragment extends Fragment {
     private ShareActionProvider shareActionProvider;
 
     @Override
-    public void onCreateOptionsMenu(Menu menu, final MenuInflater inflater) {
+    public void onCreateOptionsMenu(@NonNull Menu menu, final MenuInflater inflater) {
         inflater.inflate(R.menu.receive_menu, menu);
         super.onCreateOptionsMenu(menu, inflater);
 
@@ -258,12 +238,10 @@ public class ReceiveFragment extends Fragment {
         // Fetch and store ShareActionProvider
         shareActionProvider = (ShareActionProvider) MenuItemCompat.getActionProvider(item);
 
-        shareActionProvider.setOnShareTargetSelectedListener(new ShareActionProvider.OnShareTargetSelectedListener() {
-            @Override
-            public boolean onShareTargetSelected(ShareActionProvider shareActionProvider, Intent intent) {
-                saveQrCode(); // save it only if we need it
-                return false;
-            }
+        assert shareActionProvider != null;
+        shareActionProvider.setOnShareTargetSelectedListener((shareActionProvider, intent) -> {
+            saveQrCode(); // save it only if we need it
+            return false;
         });
     }
 
@@ -280,7 +258,7 @@ public class ReceiveFragment extends Fragment {
     private void saveQrCode() {
         if (!qrValid) throw new IllegalStateException("trying to save null qr code!");
 
-        File cachePath = new File(getActivity().getCacheDir(), "images");
+        File cachePath = new File(requireActivity().getCacheDir(), "images");
         if (!cachePath.exists())
             if (!cachePath.mkdirs()) throw new IllegalStateException("cannot create images folder");
         File png = new File(cachePath, "QR.png");
@@ -298,15 +276,15 @@ public class ReceiveFragment extends Fragment {
     }
 
     private Intent getShareIntent() {
-        File imagePath = new File(getActivity().getCacheDir(), "images");
+        File imagePath = new File(requireActivity().getCacheDir(), "images");
         File png = new File(imagePath, "QR.png");
-        Uri contentUri = FileProvider.getUriForFile(getActivity(),
+        Uri contentUri = FileProvider.getUriForFile(requireActivity(),
                 BuildConfig.APPLICATION_ID + ".fileprovider", png);
         if (contentUri != null) {
             Intent shareIntent = new Intent();
             shareIntent.setAction(Intent.ACTION_SEND);
             shareIntent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION); // temp permission for receiving app to read this file
-            shareIntent.setDataAndType(contentUri, getActivity().getContentResolver().getType(contentUri));
+            shareIntent.setDataAndType(contentUri, requireActivity().getContentResolver().getType(contentUri));
             shareIntent.putExtra(Intent.EXTRA_STREAM, contentUri);
             shareIntent.putExtra(Intent.EXTRA_TEXT, bcData.getUriString());
             return shareIntent;
@@ -324,7 +302,7 @@ public class ReceiveFragment extends Fragment {
     }
 
     void copyAddress() {
-        Helper.clipBoardCopy(getActivity(), getString(R.string.label_copy_address), tvAddress.getText().toString());
+        Helper.clipBoardCopy(requireActivity(), getString(R.string.label_copy_address), tvAddress.getText().toString());
         Toast.makeText(getActivity(), getString(R.string.message_copy_address), Toast.LENGTH_SHORT).show();
     }
 
@@ -388,6 +366,7 @@ public class ReceiveFragment extends Fragment {
 
     GenerateReviewFragment.ProgressListener progressCallback = null;
 
+    @SuppressLint("StaticFieldLeak")
     private class AsyncShow extends AsyncTask<Void, Void, Boolean> {
         final private String walletPath;
         final private String password;
@@ -441,6 +420,7 @@ public class ReceiveFragment extends Fragment {
         new AsyncStore().executeOnExecutor(ScalaThreadPoolExecutor.SCALA_THREAD_POOL_EXECUTOR);
     }
 
+    @SuppressLint("StaticFieldLeak")
     private class AsyncStore extends AsyncTask<String, Void, Boolean> {
 
         @Override
@@ -469,7 +449,7 @@ public class ReceiveFragment extends Fragment {
     private void generateQr() {
         Timber.d("GENQR");
         String address = tvAddress.getText().toString();
-        String notes = etNotes.getEditText().getText().toString();
+        String notes = Objects.requireNonNull(etNotes.getEditText()).getText().toString();
         String xlaAmount = evAmount.getAmount();
         Timber.d("%s/%s/%s", xlaAmount, notes, address);
         if ((xlaAmount == null) || !Wallet.isAddressValid(address)) {
@@ -527,12 +507,12 @@ public class ReceiveFragment extends Fragment {
         canvas.save();
         // figure out how to scale the logo
         float scaleSize = 1.0f;
-        while ((logoWidth / scaleSize) > (qrWidth / 5) || (logoHeight / scaleSize) > (qrHeight / 5)) {
+        while ((logoWidth / scaleSize) > ((float) qrWidth / 5) || (logoHeight / scaleSize) > ((float) qrHeight / 5)) {
             scaleSize *= 2;
         }
         float sx = 1.0f / scaleSize;
-        canvas.scale(sx, sx, qrWidth / 2, qrHeight / 2);
-        canvas.drawBitmap(logo, (qrWidth - logoWidth) / 2, (qrHeight - logoHeight) / 2, null);
+        canvas.scale(sx, sx, (float) qrWidth / 2, (float) qrHeight / 2);
+        canvas.drawBitmap(logo, (float) (qrWidth - logoWidth) / 2, (float) (qrHeight - logoHeight) / 2, null);
         canvas.restore();
         return logoBitmap;
     }
@@ -557,7 +537,7 @@ public class ReceiveFragment extends Fragment {
     Listener listenerCallback = null;
 
     @Override
-    public void onAttach(Context context) {
+    public void onAttach(@NonNull Context context) {
         super.onAttach(context);
         if (context instanceof Listener) {
             this.listenerCallback = (Listener) context;
@@ -592,6 +572,7 @@ public class ReceiveFragment extends Fragment {
         new AsyncSubaddress().executeOnExecutor(ScalaThreadPoolExecutor.SCALA_THREAD_POOL_EXECUTOR);
     }
 
+    @SuppressLint("StaticFieldLeak")
     private class AsyncSubaddress extends AsyncTask<Void, Void, Boolean> {
         private String newSubaddress;
 
@@ -624,11 +605,7 @@ public class ReceiveFragment extends Fragment {
                     wallet.getNumSubaddresses() - 1));
             generateQr();
             enableCopyAddress(true);
-            final Runnable resetSize = new Runnable() {
-                public void run() {
-                    tvAddress.animate().setDuration(125).scaleX(1).scaleY(1).start();
-                }
-            };
+            final Runnable resetSize = () -> tvAddress.animate().setDuration(125).scaleX(1).scaleY(1).start();
             tvAddress.animate().alpha(1).setDuration(125)
                     .scaleX(1.2f).scaleY(1.2f)
                     .withEndAction(resetSize).start();

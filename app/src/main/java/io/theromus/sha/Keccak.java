@@ -1,9 +1,9 @@
-package com.theromus.sha;
+package io.theromus.sha;
 
-import static com.theromus.utils.HexUtils.leftRotate64;
-import static com.theromus.utils.HexUtils.convertToUint;
-import static com.theromus.utils.HexUtils.convertFromLittleEndianTo64;
-import static com.theromus.utils.HexUtils.convertFrom64ToLittleEndian;
+import static io.theromus.utils.HexUtils.leftRotate64;
+import static io.theromus.utils.HexUtils.convertToUint;
+import static io.theromus.utils.HexUtils.convertFromLittleEndianTo64;
+import static io.theromus.utils.HexUtils.convertFrom64ToLittleEndian;
 import static java.lang.Math.min;
 import static java.lang.System.arraycopy;
 import static java.util.Arrays.fill;
@@ -19,7 +19,7 @@ import java.math.BigInteger;
  */
 public class Keccak {
 
-    private static BigInteger BIT_64 = new BigInteger("18446744073709551615");
+    private static final BigInteger BIT_64 = new BigInteger("18446744073709551615");
 
     /**
      * Do hash.

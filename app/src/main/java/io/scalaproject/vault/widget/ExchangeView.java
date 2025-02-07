@@ -30,6 +30,7 @@ import com.google.android.material.textfield.TextInputLayout;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.util.AttributeSet;
+import android.util.Log;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -53,6 +54,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Locale;
+import java.util.Objects;
 
 import timber.log.Timber;
 
@@ -76,7 +78,7 @@ public class ExchangeView extends LinearLayout {
     public void setAmount(String xlaAmount) {
         if (xlaAmount != null) {
             setCurrencyA(0);
-            etAmount.getEditText().setText(xlaAmount);
+            Objects.requireNonNull(etAmount.getEditText()).setText(xlaAmount);
             setxla(xlaAmount);
             this.notxlaAmount = null;
             doExchange();
@@ -137,9 +139,7 @@ public class ExchangeView extends LinearLayout {
         initializeViews(context);
     }
 
-    public ExchangeView(Context context,
-                        AttributeSet attrs,
-                        int defStyle) {
+    public ExchangeView(Context context, AttributeSet attrs, int defStyle) {
         super(context, attrs, defStyle);
         initializeViews(context);
     }
@@ -150,8 +150,7 @@ public class ExchangeView extends LinearLayout {
      * @param context the current context for the view.
      */
     private void initializeViews(Context context) {
-        LayoutInflater inflater = (LayoutInflater) context
-                .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+        LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         inflater.inflate(R.layout.view_exchange, this);
     }
 
@@ -170,7 +169,7 @@ public class ExchangeView extends LinearLayout {
         etAmount = findViewById(R.id.etAmount);
         tvAmountB = findViewById(R.id.tvAmountB);
         sCurrencyA = findViewById(R.id.sCurrencyA);
-        ArrayAdapter adapter = ArrayAdapter.createFromResource(getContext(), R.array.currency, R.layout.item_spinner);
+        ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(getContext(), R.array.currency, R.layout.item_spinner);
         adapter.setDropDownViewResource(R.layout.item_spinner_dropdown_item);
         sCurrencyA.setAdapter(adapter);
         sCurrencyB = findViewById(R.id.sCurrencyB);
@@ -182,11 +181,7 @@ public class ExchangeView extends LinearLayout {
         setCurrencyAdapter(sCurrencyB);
 
         // make progress circle gray
-        pbExchange.getIndeterminateDrawable().
-                setColorFilter(getResources().getColor(R.color.trafficGray),
-                        android.graphics.PorterDuff.Mode.MULTIPLY);
-
-
+        pbExchange.getIndeterminateDrawable().setColorFilter(getResources().getColor(R.color.trafficGray), android.graphics.PorterDuff.Mode.MULTIPLY);
         sCurrencyA.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parentView, View selectedItemView, int position, long id) {
@@ -199,6 +194,7 @@ public class ExchangeView extends LinearLayout {
             @Override
             public void onNothingSelected(AdapterView<?> parentView) {
                 // nothing (yet?)
+                Timber.tag("ExchangeView").d("onNothingSelected");
             }
         });
 
@@ -208,39 +204,30 @@ public class ExchangeView extends LinearLayout {
                 if (position != 0) { // if not XLA, select XLA on other
                     sCurrencyA.setSelection(0, true);
                 }
-                parentView.post(new Runnable() {
-                    @Override
-                    public void run() {
-                        ((TextView) parentView.getChildAt(0)).setTextColor(getResources().getColor(R.color.scalaGray));
-                    }
-                });
+                parentView.post(() -> ((TextView) parentView.getChildAt(0)).setTextColor(getResources().getColor(R.color.scalaGray)));
                 doExchange();
             }
 
             @Override
             public void onNothingSelected(AdapterView<?> parentView) {
                 // nothing
+                Timber.tag("ExchangeView").d("onNothingSelected");
             }
         });
 
-        etAmount.getEditText().setOnFocusChangeListener(new OnFocusChangeListener() {
-            @Override
-            public void onFocusChange(View v, boolean hasFocus) {
-                if (!hasFocus) {
-                    doExchange();
-                }
+        Objects.requireNonNull(etAmount.getEditText()).setOnFocusChangeListener((v, hasFocus) -> {
+            if (!hasFocus) {
+                doExchange();
             }
         });
 
-        etAmount.getEditText().setOnEditorActionListener(new TextView.OnEditorActionListener() {
-            public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
-                if ((event != null && (event.getKeyCode() == KeyEvent.KEYCODE_ENTER) && (event.getAction() == KeyEvent.ACTION_DOWN))
-                        || (actionId == EditorInfo.IME_ACTION_DONE)) {
-                    doExchange();
-                    return true;
-                }
-                return false;
+        etAmount.getEditText().setOnEditorActionListener((v, actionId, event) -> {
+            if ((event != null && (event.getKeyCode() == KeyEvent.KEYCODE_ENTER) && (event.getAction() == KeyEvent.ACTION_DOWN))
+                    || (actionId == EditorInfo.IME_ACTION_DONE)) {
+                doExchange();
+                return true;
             }
+            return false;
         });
 
 
@@ -253,10 +240,12 @@ public class ExchangeView extends LinearLayout {
 
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+                Timber.tag("ExchangeView").d("beforeTextChanged");
             }
 
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
+                Timber.tag("ExchangeView").d("onTextChanged");
             }
         });
     }
@@ -267,7 +256,7 @@ public class ExchangeView extends LinearLayout {
     public boolean checkEnteredAmount() {
         boolean ok = true;
         Timber.d("checkEnteredAmount");
-        String amountEntry = etAmount.getEditText().getText().toString();
+        String amountEntry = Objects.requireNonNull(etAmount.getEditText()).getText().toString();
         if (!amountEntry.isEmpty()) {
             try {
                 double a = Double.parseDouble(amountEntry);
@@ -328,30 +317,19 @@ public class ExchangeView extends LinearLayout {
         String currencyA = (String) sCurrencyA.getSelectedItem();
         String currencyB = (String) sCurrencyB.getSelectedItem();
 
-        exchangeApi.queryExchangeRate(currencyA, currencyB,
-                new ExchangeCallback() {
-                    @Override
-                    public void onSuccess(final ExchangeRate exchangeRate) {
-                        if (isAttachedToWindow())
-                            new Handler(Looper.getMainLooper()).post(new Runnable() {
-                                @Override
-                                public void run() {
-                                    exchange(exchangeRate);
-                                }
-                            });
-                    }
+        exchangeApi.queryExchangeRate(currencyA, currencyB, new ExchangeCallback() {
+            @Override
+            public void onSuccess(final ExchangeRate exchangeRate) {
+                if (isAttachedToWindow())
+                    new Handler(Looper.getMainLooper()).post(() -> exchange(exchangeRate));
+            }
 
-                    @Override
-                    public void onError(final Exception e) {
-                        Timber.e(e.getLocalizedMessage());
-                        new Handler(Looper.getMainLooper()).post(new Runnable() {
-                            @Override
-                            public void run() {
-                                exchangeFailed();
-                            }
-                        });
-                    }
-                });
+            @Override
+            public void onError(final Exception e) {
+                Timber.e(e.getLocalizedMessage());
+                new Handler(Looper.getMainLooper()).post(() -> exchangeFailed());
+            }
+        });
     }
 
     public void exchange(double rate) {
@@ -384,7 +362,7 @@ public class ExchangeView extends LinearLayout {
     boolean prepareExchange() {
         Timber.d("prepareExchange()");
         if (checkEnteredAmount()) {
-            String enteredAmount = etAmount.getEditText().getText().toString();
+            String enteredAmount = Objects.requireNonNull(etAmount.getEditText()).getText().toString();
             if (!enteredAmount.isEmpty()) {
                 String cleanAmount = "";
                 if (getCurrencyA() == 0) {
@@ -423,6 +401,7 @@ public class ExchangeView extends LinearLayout {
         exchange(0);
         if (onFailedExchangeListener != null) {
             onFailedExchangeListener.onFailedExchange();
+            Timber.tag("ExchangeView").d("onFailedExchange");
         }
     }
 

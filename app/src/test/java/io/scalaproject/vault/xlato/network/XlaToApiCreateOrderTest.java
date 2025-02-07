@@ -51,7 +51,7 @@ public class XlaToApiCreateOrderTest {
 
     private XlaToApi xlaToApi;
 
-    private OkHttpClient okHttpClient = new OkHttpClient();
+    private final OkHttpClient okHttpClient = new OkHttpClient();
     private Waiter waiter;
 
     @Mock
@@ -109,7 +109,7 @@ public class XlaToApiCreateOrderTest {
 
     @Test
     public void createOrder_wasSuccessfulShouldRespondWithOrder()
-            throws TimeoutException {
+            throws TimeoutException, InterruptedException {
         final double amount = 1.23456789;
         final String address = "19y91nJyzXsLEuR7Nj9pc3o5SeHNc8A9RW";
         final String uuid = "xlato-abcdef";
@@ -139,7 +139,7 @@ public class XlaToApiCreateOrderTest {
 
     @Test
     public void createOrder_wasNotSuccessfulShouldCallOnError()
-            throws TimeoutException {
+            throws TimeoutException, InterruptedException {
         mockWebServer.enqueue(new MockResponse().setResponseCode(500));
         xlaToApi.createOrder(0.5, "19y91nJyzXsLEuR7Nj9pc3o5SeHNc8A9RW", new XlaToCallback<CreateOrder>() {
             @Override
@@ -161,7 +161,7 @@ public class XlaToApiCreateOrderTest {
 
     @Test
     public void createOrder_malformedAddressShouldCallOnError()
-            throws TimeoutException {
+            throws TimeoutException, InterruptedException {
         mockWebServer.enqueue(new MockResponse().
                 setResponseCode(400).
                 setBody("{\"error_msg\":\"malformed bitcoin address\",\"error\":\"XLATO-ERROR-002\"}"));

@@ -46,17 +46,13 @@ public class PendingTransaction {
         Priority_Last(4);
 
         public static Priority fromInteger(int n) {
-            switch (n) {
-                case 0:
-                    return Priority_Default;
-                case 1:
-                    return Priority_Low;
-                case 2:
-                    return Priority_Medium;
-                case 3:
-                    return Priority_High;
-            }
-            return null;
+            return switch (n) {
+                case 0 -> Priority_Default;
+                case 1 -> Priority_Low;
+                case 2 -> Priority_Medium;
+                case 3 -> Priority_High;
+                default -> null;
+            };
         }
 
         public int getValue() {

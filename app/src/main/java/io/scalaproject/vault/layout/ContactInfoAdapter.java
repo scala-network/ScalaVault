@@ -21,6 +21,7 @@
 
 package io.scalaproject.vault.layout;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
@@ -56,8 +57,8 @@ public class ContactInfoAdapter extends RecyclerView.Adapter<ContactInfoAdapter.
     private final OnSelectContactListener onSelectContactListener;
     private final OnDeleteContactListener onDeleteContactListener;
 
-    private Boolean readonly;
-    private Context context;
+    private final Boolean readonly;
+    private final Context context;
 
     public ContactInfoAdapter(Context context, Boolean readonly, OnSelectContactListener onSelectContactListener, OnDeleteContactListener onDeleteContactListener) {
         this.context = context;
@@ -97,6 +98,7 @@ public class ContactInfoAdapter extends RecyclerView.Adapter<ContactInfoAdapter.
         dataSetChanged();
     }
 
+    @SuppressLint("NotifyDataSetChanged")
     public void dataSetChanged() {
         Collections.sort(contactItems, Contact.ContactComparator);
         notifyDataSetChanged();
@@ -146,11 +148,7 @@ public class ContactInfoAdapter extends RecyclerView.Adapter<ContactInfoAdapter.
             itemView.setOnClickListener(this);
 
             if(!readonly) {
-                ivDelete.setOnClickListener(new View.OnClickListener() {
-                    public void onClick(View v) {
-                        onDeleteContactListener.onDeleteContact(v, contactItems.get(position));
-                    }
-                });
+                ivDelete.setOnClickListener(v -> onDeleteContactListener.onDeleteContact(v, contactItems.get(position)));
             }
 
             Bitmap avatar = contactItem.getAvatar();

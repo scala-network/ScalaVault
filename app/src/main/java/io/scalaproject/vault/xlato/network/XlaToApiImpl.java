@@ -101,16 +101,17 @@ public class XlaToApiImpl implements XlaToApi, XlaToApiCall {
 
         okHttpClient.newCall(httpRequest).enqueue(new okhttp3.Callback() {
             @Override
-            public void onFailure(final Call call, final IOException ex) {
+            public void onFailure(@NonNull final Call call, @NonNull final IOException ex) {
                 Timber.d("A");
                 callback.onError(ex);
             }
 
             @Override
-            public void onResponse(final Call call, final Response response) throws IOException {
+            public void onResponse(@NonNull final Call call, @NonNull final Response response) throws IOException {
                 Timber.d("onResponse code=%d", response.code());
                 if (response.isSuccessful()) {
                     try {
+                        assert response.body() != null;
                         final JSONObject json = new JSONObject(response.body().string());
                         callback.onSuccess(json);
                     } catch (JSONException ex) {
@@ -118,6 +119,7 @@ public class XlaToApiImpl implements XlaToApi, XlaToApiCall {
                     }
                 } else {
                     try {
+                        assert response.body() != null;
                         final JSONObject json = new JSONObject(response.body().string());
                         Timber.d(json.toString(2));
                         final XlaToError error = new XlaToError(json);

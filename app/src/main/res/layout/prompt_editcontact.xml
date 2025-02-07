@@ -48,7 +48,7 @@
                     style="@style/ScalaEdit"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:hint="Wallet Address"
+                    android:hint="@string/wallet_address"
                     android:imeOptions="actionDone"
                     android:textAlignment="textStart" />
             </com.google.android.material.textfield.TextInputLayout>

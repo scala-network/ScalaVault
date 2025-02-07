@@ -44,6 +44,7 @@ public class Notice {
 
     private static final String NOTICE_SHOW_NODES = "notice_nodes";
     private static final String NOTICE_SHOW_MINER = "notice_miner";
+    private static final String NOTICE_SHOW_NETWORK = "notice_network";
 
     private static boolean bHandleOnClick = true;
 
@@ -62,6 +63,13 @@ public class Notice {
             notices.add(
                     new Notice(NOTICE_SHOW_MINER,
                             R.string.info_mobile_miner,
+                            R.string.help_mobile_miner,
+                            1)
+            );
+
+            notices.add(
+                    new Notice(NOTICE_SHOW_NETWORK,
+                            R.string.splashcreen_check_network_failure,
                             R.string.help_mobile_miner,
                             1)
             );
@@ -94,6 +102,7 @@ public class Notice {
         this.defaultCount = defaultCount;
     }
 
+
     // show this notice as a child of the given parent view
     // NB: it assumes the parent is in a Fragment
     private void show(final ViewGroup parent) {
@@ -106,21 +115,13 @@ public class Notice {
 
         if(bHandleOnClick) {
             final FragmentManager fragmentManager = ((FragmentActivity) context).getSupportFragmentManager();
-            ll.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    HelpFragment.display(fragmentManager, helpResId);
-                }
-            });
+            ll.setOnClickListener(v -> HelpFragment.display(fragmentManager, helpResId));
         }
 
         ImageButton ib = ll.findViewById(R.id.ibClose);
-        ib.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                ll.setVisibility(View.GONE);
-                decCount(context);
-            }
+        ib.setOnClickListener(v -> {
+            ll.setVisibility(View.GONE);
+            decCount(context);
         });
         parent.addView(ll);
     }

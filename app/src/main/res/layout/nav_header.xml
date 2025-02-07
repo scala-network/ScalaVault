@@ -12,6 +12,7 @@
         android:layout_width="48dp"
         android:layout_height="48dp"
         android:layout_gravity="center_horizontal"
+        android:contentDescription="@null"
         android:src="@mipmap/ic_logo_colors" />
 
     <TextView
@@ -45,6 +46,6 @@
         android:layout_gravity="start"
         android:textAllCaps="true"
         android:textStyle="bold"
-        android:text="Subaddresses" />
+        android:text="@string/subaddresses" />
 
 </LinearLayout>

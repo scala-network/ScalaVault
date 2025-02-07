@@ -1,6 +1,6 @@
 <resources xmlns:tools="http://schemas.android.com/tools" tools:locale="pt-rBR">
     <string name="wallet_activity_name">Carteira</string>
-
+    <string name="menu_mobileminer">Minerador Móvel</string>
     <string name="menu_about">Sobre</string>
     <string name="menu_privacy">Política de Privacidade</string>
 
@@ -234,7 +234,6 @@
     <string name="send_total_btc_label">Total (XLA)</string>
     <string name="send_total_label">Total</string>
 
-    <string name="send_amount">%1$s XLA</string>
     <string name="send_fee">+%1$s de taxa</string>
 
     <string name="send_create_tx_error_title">Erro ao criar a transação</string>

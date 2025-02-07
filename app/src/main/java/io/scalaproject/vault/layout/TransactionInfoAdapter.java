@@ -21,6 +21,7 @@
 
 package io.scalaproject.vault.layout;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 
 import androidx.annotation.NonNull;
@@ -56,6 +57,7 @@ import java.util.TimeZone;
 import timber.log.Timber;
 
 public class TransactionInfoAdapter extends RecyclerView.Adapter<TransactionInfoAdapter.ViewHolder> {
+    @SuppressLint("SimpleDateFormat")
     private final static SimpleDateFormat DATETIME_FORMATTER = new SimpleDateFormat("yyyy-MM-dd HH:mm");
 
     private final int outboundColour;
@@ -118,6 +120,7 @@ public class TransactionInfoAdapter extends RecyclerView.Adapter<TransactionInfo
         return infoItems.size();
     }
 
+    @SuppressLint("NotifyDataSetChanged")
     public void setInfos(List<TransactionInfo> data) {
         // TODO do stuff with data so we can really recycle elements (i.e. add only new tx)
         // as the TransactionInfo items are always recreated, we cannot recycle
@@ -167,6 +170,7 @@ public class TransactionInfoAdapter extends RecyclerView.Adapter<TransactionInfo
             tvAmount.setTextColor(clr);
         }
 
+        @SuppressLint({"UseCompatLoadingForColorStateLists", "UseCompatLoadingForDrawables", "SetTextI18n"})
         void bind(int position) {
             this.infoItem = infoItems.get(position);
 

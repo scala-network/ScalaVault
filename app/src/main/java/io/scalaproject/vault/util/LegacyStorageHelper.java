@@ -23,6 +23,7 @@
 package io.scalaproject.vault.util;
 
 import android.Manifest;
+import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.Context;
 import android.content.pm.PackageManager;
@@ -39,6 +40,7 @@ import java.io.FileOutputStream;
 import java.io.FileReader;
 import java.io.IOException;
 import java.nio.channels.FileChannel;
+import java.util.Objects;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -48,6 +50,7 @@ public class LegacyStorageHelper {
     private final File srcDir;
     private final File dstDir;
 
+    @SuppressLint("StaticFieldLeak")
     static private Context ctx = null;
 
     LegacyStorageHelper(File src, File dest) {
@@ -153,13 +156,19 @@ public class LegacyStorageHelper {
         return Environment.MEDIA_MOUNTED.equals(state);
     }
 
+    // Checks if a volume containing external storage is available to at least read.
+    private boolean isExternalStorageReadable() {
+        return Environment.getExternalStorageState().equals(Environment.MEDIA_MOUNTED) ||
+                Environment.getExternalStorageState().equals(Environment.MEDIA_MOUNTED_READ_ONLY);
+    }
+
     private static File getWalletRoot() {
         if (!isExternalStorageWritable())
             throw new IllegalStateException();
 
         // wallet folder for legacy (pre-Q) installations
         final String FLAVOR_SUFFIX =
-                (BuildConfig.FLAVOR.startsWith("prod") ? "" : "." + BuildConfig.FLAVOR)
+                "." + BuildConfig.FLAVOR
                         + (BuildConfig.DEBUG ? "-debug" : "");
 
         final String WALLET_DIR = "scala" + FLAVOR_SUFFIX;
@@ -173,7 +182,7 @@ public class LegacyStorageHelper {
     static public final int PERMISSIONS_REQUEST_READ_EXTERNAL_STORAGE = 1;
 
     static public boolean getReadPermission(Activity context) {
-        if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.M && android.os.Build.VERSION.SDK_INT < android.os.Build.VERSION_CODES.TIRAMISU) {
+        if (android.os.Build.VERSION.SDK_INT < android.os.Build.VERSION_CODES.TIRAMISU) {
             if (context.checkSelfPermission(Manifest.permission.READ_EXTERNAL_STORAGE) == PackageManager.PERMISSION_DENIED) {
                 Timber.w("Permission denied to READ_EXTERNAL_STORAGE - requesting it");
                 String[] permissions = {Manifest.permission.READ_EXTERNAL_STORAGE};
@@ -197,9 +206,10 @@ public class LegacyStorageHelper {
                 (dir, filename) -> {
                     Matcher m = WALLET_PATTERN.matcher(filename);
                     if (m.find())
-                        return m.group(1).equals(name);
+                        return Objects.equals(m.group(1), name);
                     else return false;
                 });
+        assert wallets != null;
         if (wallets.length == 0) return name + " (1)";
         int maxIndex = 0;
         for (File wallet : wallets) {

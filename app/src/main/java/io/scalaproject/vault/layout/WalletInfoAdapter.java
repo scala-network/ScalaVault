@@ -21,7 +21,10 @@
 
 package io.scalaproject.vault.layout;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
+
+import androidx.annotation.NonNull;
 import androidx.appcompat.widget.PopupMenu;
 import androidx.recyclerview.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -47,6 +50,7 @@ import timber.log.Timber;
 
 public class WalletInfoAdapter extends RecyclerView.Adapter<WalletInfoAdapter.ViewHolder> {
 
+    @SuppressLint("SimpleDateFormat")
     private final SimpleDateFormat DATETIME_FORMATTER = new SimpleDateFormat("yyyy-MM-dd HH:mm");
 
     public interface OnInteractionListener {
@@ -69,10 +73,10 @@ public class WalletInfoAdapter extends RecyclerView.Adapter<WalletInfoAdapter.Vi
         DATETIME_FORMATTER.setTimeZone(tz);
     }
 
+    @NonNull
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(parent.getContext())
-                .inflate(R.layout.item_wallet, parent, false);
+        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_wallet, parent, false);
         return new ViewHolder(view);
     }
 
@@ -90,6 +94,7 @@ public class WalletInfoAdapter extends RecyclerView.Adapter<WalletInfoAdapter.Vi
         return infoItems.get(position);
     }
 
+    @SuppressLint("NotifyDataSetChanged")
     public void setInfos(List<WalletManager.WalletInfo> data) {
         // TODO do stuff with data so we can really recycle elements (i.e. add only new tx)
         // as the WalletInfo items are always recreated, we cannot recycle
@@ -104,7 +109,7 @@ public class WalletInfoAdapter extends RecyclerView.Adapter<WalletInfoAdapter.Vi
         notifyDataSetChanged();
     }
 
-    class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
+    public class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
         final TextView tvName;
         final ImageButton ibOptions;
         WalletManager.WalletInfo infoItem;
@@ -116,34 +121,23 @@ public class WalletInfoAdapter extends RecyclerView.Adapter<WalletInfoAdapter.Vi
             tvName = itemView.findViewById(R.id.tvName);
 
             ibOptions = itemView.findViewById(R.id.ibOptions);
-            ibOptions.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
-                    if (popupOpen) return;
-                    //creating a popup menu
-                    PopupMenu popup = new PopupMenu(context, ibOptions);
-                    //inflating menu from xml resource
-                    popup.inflate(R.menu.list_context_menu);
-                    popupOpen = true;
-                    //adding click listener
-                    popup.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
-                        @Override
-                        public boolean onMenuItemClick(MenuItem item) {
-                            if (listener != null) {
-                                return listener.onContextInteraction(item, infoItem);
-                            }
-                            return false;
-                        }
-                    });
-                    //displaying the popup
-                    popup.show();
-                    popup.setOnDismissListener(new PopupMenu.OnDismissListener() {
-                        @Override
-                        public void onDismiss(PopupMenu menu) {
-                            popupOpen = false;
-                        }
-                    });
-                }
+            ibOptions.setOnClickListener(view -> {
+                if (popupOpen) return;
+                //creating a popup menu
+                PopupMenu popup = new PopupMenu(context, ibOptions);
+                //inflating menu from xml resource
+                popup.inflate(R.menu.list_context_menu);
+                popupOpen = true;
+                //adding click listener
+                popup.setOnMenuItemClickListener(item -> {
+                    if (listener != null) {
+                        return listener.onContextInteraction(item, infoItem);
+                    }
+                    return false;
+                });
+                //displaying the popup
+                popup.show();
+                popup.setOnDismissListener(menu -> popupOpen = false);
             });
 
             itemView.setOnClickListener(this);

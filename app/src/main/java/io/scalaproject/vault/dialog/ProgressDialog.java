@@ -22,6 +22,7 @@ package io.scalaproject.vault.dialog;
  *
  * Please see the included LICENSE file for more information.*/
 
+import android.annotation.SuppressLint;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.os.Bundle;
@@ -36,6 +37,7 @@ import io.scalaproject.vault.R;
 import io.scalaproject.vault.util.Helper;
 
 import java.util.Locale;
+import java.util.Objects;
 
 import timber.log.Timber;
 
@@ -61,6 +63,7 @@ public class ProgressDialog extends AlertDialog {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        @SuppressLint("InflateParams")
         final View view = LayoutInflater.from(getContext()).inflate(R.layout.dialog_ledger_progress, null);
         pbCircle = view.findViewById(R.id.pbCircle);
         tvMessage = view.findViewById(R.id.tvMessage);
@@ -83,7 +86,7 @@ public class ProgressDialog extends AlertDialog {
         super.onCreate(savedInstanceState);
 
         if (Helper.preventScreenshot()) {
-            getWindow().setFlags(WindowManager.LayoutParams.FLAG_SECURE, WindowManager.LayoutParams.FLAG_SECURE);
+            Objects.requireNonNull(getWindow()).setFlags(WindowManager.LayoutParams.FLAG_SECURE, WindowManager.LayoutParams.FLAG_SECURE);
         }
     }
 

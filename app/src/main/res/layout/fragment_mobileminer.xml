@@ -15,6 +15,7 @@
 		android:layout_alignParentTop="true"
 		android:layout_alignParentEnd="true"
 		android:onClick="onCloseVault"
+		android:contentDescription="@string/close"
 		app:srcCompat="@drawable/ic_close_white_24dp"/>
 
 	<LinearLayout
@@ -51,7 +52,7 @@
 				<TextView
 					android:layout_width="wrap_content"
 					android:layout_height="wrap_content"
-					android:text="SCALA MINER"
+					android:text="@string/mobileminer_scala_miner"
 					android:gravity="center"
 					android:layout_gravity="center"
 					android:textSize="24sp"
@@ -65,7 +66,7 @@
 			android:layout_height="wrap_content"
 			android:layout_gravity="center"
 			android:layout_marginTop="5dp"
-			android:text="Start mining on your Android device safely and efficiently."
+			android:text="@string/mobileminer_start_mining"
 			android:textColor="@color/txt_main"
 			android:textAlignment="center"
 			android:textSize="18sp" />

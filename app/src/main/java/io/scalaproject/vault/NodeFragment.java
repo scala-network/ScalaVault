@@ -27,6 +27,8 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.os.AsyncTask;
 import android.os.Bundle;
+
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
 import com.google.android.material.dialog.MaterialAlertDialogBuilder;
@@ -35,8 +37,6 @@ import androidx.fragment.app.Fragment;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 import androidx.recyclerview.widget.RecyclerView;
 
-import android.text.Html;
-import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -46,7 +46,6 @@ import android.view.ViewGroup;
 import android.view.WindowManager;
 import android.view.inputmethod.EditorInfo;
 import android.widget.Button;
-import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -62,66 +61,47 @@ import io.scalaproject.vault.util.Notice;
 import io.scalaproject.vault.widget.Toolbar;
 
 import java.io.File;
-import java.net.InetSocketAddress;
 import java.net.UnknownHostException;
 import java.text.NumberFormat;
-import java.util.Collection;
 import java.util.HashSet;
-import java.util.Iterator;
 import java.util.List;
+import java.util.Objects;
 import java.util.Set;
 
 import timber.log.Timber;
 
-public class NodeFragment extends Fragment
-        implements NodeInfoAdapter.OnMenuNodeListener, NodeInfoAdapter.OnSelectNodeListener, View.OnClickListener {
-
-    static private int NODES_TO_FIND = 15;
+public class NodeFragment extends Fragment implements NodeInfoAdapter.OnMenuNodeListener, NodeInfoAdapter.OnSelectNodeListener, View.OnClickListener {
 
     static private final NumberFormat FORMATTER = NumberFormat.getInstance();
-
     private SwipeRefreshLayout pullToRefresh;
     private View fabAddNode;
     private RecyclerView rvNodes;
-
     private Set<NodeInfo> allNodes = new HashSet<>();
     private final Set<NodeInfo> userdefinedNodes = new HashSet<>();
-
     private NodeInfoAdapter nodesAdapter;
-
     private Listener activityCallback;
-
     private View selectedNodeView = null;
     private NodeInfo selectedNode = null;
-
     public NodeInfo getNode() { return selectedNode; }
 
     public interface Listener {
         File getStorageRoot();
-
         void setToolbarButton(int type);
-
         void setSubtitle(String title);
-
         Set<NodeInfo> getAllNodes();
-
         NodeInfo getNode();
-
         void setNode(NodeInfo node);
-
         void addUserDefinedNodes(Set<NodeInfo> userDefinedNodes);
-
         void deleteUserDefinedNode(NodeInfo nodeInfo);
     }
 
     @Override
-    public void onAttach(Context context) {
+    public void onAttach(@NonNull Context context) {
         super.onAttach(context);
         if (context instanceof Listener) {
             this.activityCallback = (Listener) context;
         } else {
-            throw new ClassCastException(context.toString()
-                    + " must implement Listener");
+            throw new ClassCastException(context.toString() + " must implement Listener");
         }
     }
 
@@ -164,7 +144,7 @@ public class NodeFragment extends Fragment
 
     private void updateSelectedNodeLayout() {
         // If recycler view has not been rendered yet
-        if(rvNodes.getLayoutManager().getItemCount() <= 0)
+        if(Objects.requireNonNull(rvNodes.getLayoutManager()).getItemCount() <= 0)
             return;
 
         NodeInfo selectedNode = activityCallback.getNode();
@@ -197,8 +177,7 @@ public class NodeFragment extends Fragment
     }
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         Timber.d("onCreateView");
         View view = inflater.inflate(R.layout.fragment_node, container, false);
 
@@ -209,23 +188,15 @@ public class NodeFragment extends Fragment
         nodesAdapter = new NodeInfoAdapter(getActivity(), this, this);
         rvNodes.setAdapter(nodesAdapter);
 
-        rvNodes.post(new Runnable() {
-            @Override
-            public void run() {
-                updateSelectedNodeLayout();
-            }
-        });
+        rvNodes.post(this::updateSelectedNodeLayout);
 
         pullToRefresh = view.findViewById(R.id.pullToRefresh);
-        pullToRefresh.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
-            @Override
-            public void onRefresh() {
-                if (WalletManager.getInstance().getNetworkType() == NetworkType.NetworkType_Mainnet) {
-                    refresh();
-                } else {
-                    Toast.makeText(getActivity(), getString(R.string.node_wrong_net), Toast.LENGTH_LONG).show();
-                    pullToRefresh.setRefreshing(false);
-                }
+        pullToRefresh.setOnRefreshListener(() -> {
+            if (WalletManager.getInstance().getNetworkType() == NetworkType.NetworkType_Mainnet) {
+                refresh();
+            } else {
+                Toast.makeText(getActivity(), getString(R.string.node_wrong_net), Toast.LENGTH_LONG).show();
+                pullToRefresh.setRefreshing(false);
             }
         });
 
@@ -257,7 +228,7 @@ public class NodeFragment extends Fragment
     }
 
     @Override
-    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
+    public void onCreateOptionsMenu(@NonNull Menu menu, MenuInflater inflater) {
         inflater.inflate(R.menu.node_menu, menu);
         super.onCreateOptionsMenu(menu, inflater);
     }
@@ -285,37 +256,34 @@ public class NodeFragment extends Fragment
     }
 
     public void onDeleteNode(final NodeInfo nodeInfo) {
-        DialogInterface.OnClickListener dialogClickListener = new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialog, int action) {
-                switch (action) {
-                    case DialogInterface.BUTTON_POSITIVE:
-                        if(nodeInfo.isUserDefined()) {
-                            nodesAdapter.deleteNode(nodeInfo);
-                            allNodes.remove(nodeInfo);
-                            userdefinedNodes.remove(nodeInfo);
+        DialogInterface.OnClickListener dialogClickListener = (dialog, action) -> {
+            switch (action) {
+                case DialogInterface.BUTTON_POSITIVE:
+                    if(nodeInfo.isUserDefined()) {
+                        nodesAdapter.deleteNode(nodeInfo);
+                        allNodes.remove(nodeInfo);
+                        userdefinedNodes.remove(nodeInfo);
 
-                            activityCallback.deleteUserDefinedNode(nodeInfo);
+                        activityCallback.deleteUserDefinedNode(nodeInfo);
 
-                            refresh();
-                        }
+                        refresh();
+                    }
 
-                        break;
-                    case DialogInterface.BUTTON_NEGATIVE:
-                        // do nothing
-                        break;
-                }
+                    break;
+                case DialogInterface.BUTTON_NEGATIVE:
+                    // do nothing
+                    break;
             }
         };
 
         if(!nodeInfo.isUserDefined()) {
-            MaterialAlertDialogBuilder builder = new MaterialAlertDialogBuilder(getContext(), R.style.MaterialAlertDialogCustom);
+            MaterialAlertDialogBuilder builder = new MaterialAlertDialogBuilder(requireContext(), R.style.MaterialAlertDialogCustom);
             builder.setMessage("Default nodes cannot be deleted.")
                     .setTitle(nodeInfo.getName())
                     .setPositiveButton(getString(R.string.label_ok), dialogClickListener)
                     .show();
         } else {
-            MaterialAlertDialogBuilder builder = new MaterialAlertDialogBuilder(getContext(), R.style.MaterialAlertDialogCustom);
+            MaterialAlertDialogBuilder builder = new MaterialAlertDialogBuilder(requireContext(), R.style.MaterialAlertDialogCustom);
             builder.setMessage("Do you really want to delete this node?")
                     .setTitle(nodeInfo.getName())
                     .setPositiveButton(getString(R.string.details_alert_yes), dialogClickListener)
@@ -329,27 +297,24 @@ public class NodeFragment extends Fragment
     public void onSelectNode(final View view, final NodeInfo nodeInfo) {
         Timber.d("onSelecteNode");
 
-        MaterialAlertDialogBuilder builder = new MaterialAlertDialogBuilder(getActivity(), R.style.MaterialAlertDialogCustom);
+        MaterialAlertDialogBuilder builder = new MaterialAlertDialogBuilder(requireActivity(), R.style.MaterialAlertDialogCustom);
         builder.setMessage(getString(R.string.change_remote_node_conf, nodeInfo.getName()))
                 .setCancelable(true)
-                .setPositiveButton(getString(R.string.details_alert_yes), new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialogInterface, int i) {
-                        if(nodeInfo.isValid()) {
-                            setItemNodeLayout(selectedNodeView, false);
-                            selectedNodeView = view;
-                            selectedNode = nodeInfo;
-                            setItemNodeLayout(selectedNodeView, true);
+                .setPositiveButton(getString(R.string.details_alert_yes), (dialogInterface, i) -> {
+                    if(nodeInfo.isValid()) {
+                        setItemNodeLayout(selectedNodeView, false);
+                        selectedNodeView = view;
+                        selectedNode = nodeInfo;
+                        setItemNodeLayout(selectedNodeView, true);
 
-                            Config.write(Config.CONFIG_KEY_USER_SELECTED_NODE, nodeInfo.toNodeString());
-                        }
-                        else {
-                            MaterialAlertDialogBuilder builder = new MaterialAlertDialogBuilder(getActivity(), R.style.MaterialAlertDialogCustom);
-                            builder.setMessage(getString(R.string.status_wallet_node_invalid))
-                                    .setCancelable(true)
-                                    .setNegativeButton(getString(R.string.label_ok), null)
-                            .show();
-                        }
+                        Config.write(Config.CONFIG_KEY_USER_SELECTED_NODE, nodeInfo.toNodeString());
+                    }
+                    else {
+                        MaterialAlertDialogBuilder builder1 = new MaterialAlertDialogBuilder(requireActivity(), R.style.MaterialAlertDialogCustom);
+                        builder1.setMessage(getString(R.string.status_wallet_node_invalid))
+                                .setCancelable(true)
+                                .setNegativeButton(getString(R.string.label_ok), null)
+                        .show();
                     }
                 })
                 .setNegativeButton(getString(R.string.details_alert_no), null)
@@ -367,6 +332,7 @@ public class NodeFragment extends Fragment
         }
     }
 
+    @SuppressLint("StaticFieldLeak")
     private class AsyncFindNodes extends AsyncTask<Void, NodeInfo, Boolean> {
         @Override
         protected void onPreExecute() {
@@ -387,13 +353,9 @@ public class NodeFragment extends Fragment
 
             Timber.d("seed %d", seedList.size());
 
-            Dispatcher d = new Dispatcher(new Dispatcher.Listener() {
-                @Override
-                public void onGet(NodeInfo info) {
-                    publishProgress(info);
-                }
-            });
+            Dispatcher d = new Dispatcher(this::publishProgress);
             d.seedPeers(seedList);
+            int NODES_TO_FIND = 15;
             d.awaitTermination(NODES_TO_FIND);
 
             // we didn't find enough because we didn't ask around enough? ask more!
@@ -401,12 +363,7 @@ public class NodeFragment extends Fragment
                     (d.getPeerCount() < NODES_TO_FIND + seedList.size())) {
                 // try again
                 publishProgress((NodeInfo[]) null);
-                d = new Dispatcher(new Dispatcher.Listener() {
-                    @Override
-                    public void onGet(NodeInfo info) {
-                        publishProgress(info);
-                    }
-                });
+                d = new Dispatcher(this::publishProgress);
                 // also seed with scala seed nodes (see p2p/net_node.inl:410 in scala src)
                 //seedList.add(new NodeInfo(new InetSocketAddress("62.171.149.67", 11811)));
                 //seedList.add(new NodeInfo(new InetSocketAddress("164.68.117.160", 11811)));
@@ -451,7 +408,7 @@ public class NodeFragment extends Fragment
             nodesAdapter.setNodes(allNodes);
             nodesAdapter.allowClick(true);
 
-            selectedNodeView = rvNodes.getChildAt(0);;
+            selectedNodeView = rvNodes.getChildAt(0);
             if(!nodesAdapter.getNodes().isEmpty())
                 selectedNode = nodesAdapter.getNodes().get(0);
             setItemNodeLayout(selectedNodeView, true);
@@ -484,7 +441,7 @@ public class NodeFragment extends Fragment
             nodeInfo.clear();
             showTestResult();
 
-            final String portString = etNodePort.getEditText().getText().toString().trim();
+            final String portString = Objects.requireNonNull(etNodePort.getEditText()).getText().toString().trim();
             int port;
             if (portString.isEmpty()) {
                 port = Node.getDefaultRpcPort();
@@ -502,21 +459,18 @@ public class NodeFragment extends Fragment
                 return false;
             }
 
-            final String host = etNodeHost.getEditText().getText().toString().trim();
+            final String host = Objects.requireNonNull(etNodeHost.getEditText()).getText().toString().trim();
             if (host.isEmpty()) {
                 etNodeHost.setError(getString(R.string.node_host_empty));
                 return false;
             }
-            final boolean setHostSuccess = Helper.runWithNetwork(new Helper.Action() {
-                @Override
-                public boolean run() {
-                    try {
-                        nodeInfo.setHost(host);
-                        return true;
-                    } catch (UnknownHostException ex) {
-                        etNodeHost.setError(getString(R.string.node_host_unresolved));
-                        return false;
-                    }
+            final boolean setHostSuccess = Helper.runWithNetwork(() -> {
+                try {
+                    nodeInfo.setHost(host);
+                    return true;
+                } catch (UnknownHostException ex) {
+                    etNodeHost.setError(getString(R.string.node_host_unresolved));
+                    return false;
                 }
             });
             if (!setHostSuccess) {
@@ -526,16 +480,13 @@ public class NodeFragment extends Fragment
             etNodeHost.setError(null);
             nodeInfo.setRpcPort(port);
             // setName() may trigger reverse DNS
-            Helper.runWithNetwork(new Helper.Action() {
-                @Override
-                public boolean run() {
-                    nodeInfo.setName(etNodeName.getEditText().getText().toString().trim());
-                    return true;
-                }
+            Helper.runWithNetwork(() -> {
+                nodeInfo.setName(Objects.requireNonNull(etNodeName.getEditText()).getText().toString().trim());
+                return true;
             });
 
-            nodeInfo.setUsername(etNodeUser.getEditText().getText().toString().trim());
-            nodeInfo.setPassword(etNodePass.getEditText().getText().toString()); // no trim for pw
+            nodeInfo.setUsername(Objects.requireNonNull(etNodeUser.getEditText()).getText().toString().trim());
+            nodeInfo.setPassword(Objects.requireNonNull(etNodePass.getEditText()).getText().toString()); // no trim for pw
 
             return true;
         }
@@ -559,7 +510,7 @@ public class NodeFragment extends Fragment
 
         private void closeDialog() {
             if (editDialog == null) throw new IllegalStateException();
-            Helper.hideKeyboardAlways(getActivity());
+            Helper.hideKeyboardAlways(requireActivity());
             editDialog.dismiss();
             editDialog = null;
             NodeFragment.this.editDialog = null;
@@ -598,8 +549,9 @@ public class NodeFragment extends Fragment
             }
         }
 
+        @SuppressLint("SetTextI18n")
         EditDialog(final NodeInfo nodeInfo) {
-            MaterialAlertDialogBuilder alertDialogBuilder = new MaterialAlertDialogBuilder(getActivity(), R.style.MaterialAlertDialogCustom);
+            MaterialAlertDialogBuilder alertDialogBuilder = new MaterialAlertDialogBuilder(requireActivity(), R.style.MaterialAlertDialogCustom);
             LayoutInflater li = LayoutInflater.from(alertDialogBuilder.getContext());
             View promptsView = li.inflate(R.layout.prompt_editnode, null);
             alertDialogBuilder.setView(promptsView);
@@ -621,11 +573,11 @@ public class NodeFragment extends Fragment
 
                 this.nodeInfo = nodeInfo;
                 nodeBackup = new NodeInfo(nodeInfo);
-                etNodeName.getEditText().setText(nodeInfo.getName());
-                etNodeHost.getEditText().setText(nodeInfo.getHost());
-                etNodePort.getEditText().setText(Integer.toString(nodeInfo.getRpcPort()));
-                etNodeUser.getEditText().setText(nodeInfo.getUsername());
-                etNodePass.getEditText().setText(nodeInfo.getPassword());
+                Objects.requireNonNull(etNodeName.getEditText()).setText(nodeInfo.getName());
+                Objects.requireNonNull(etNodeHost.getEditText()).setText(nodeInfo.getHost());
+                Objects.requireNonNull(etNodePort.getEditText()).setText(Integer.toString(nodeInfo.getRpcPort()));
+                Objects.requireNonNull(etNodeUser.getEditText()).setText(nodeInfo.getUsername());
+                Objects.requireNonNull(etNodePass.getEditText()).setText(nodeInfo.getPassword());
                 showTestResult();
             } else {
                 this.nodeInfo = new NodeInfo();
@@ -638,59 +590,43 @@ public class NodeFragment extends Fragment
                     .setPositiveButton(getString(R.string.label_ok), null)
                     .setNeutralButton(getString(R.string.label_test), null)
                     .setNegativeButton(getString(R.string.label_cancel),
-                            new DialogInterface.OnClickListener() {
-                                public void onClick(DialogInterface dialog, int id) {
-                                    undoChanges();
-                                    closeDialog();
-                                    nodesAdapter.dataSetChanged(); // to refresh test results
-                                }
+                            (dialog, id) -> {
+                                undoChanges();
+                                closeDialog();
+                                nodesAdapter.dataSetChanged(); // to refresh test results
                             });
 
             editDialog = alertDialogBuilder.create();
             // these need to be here, since we don't always close the dialog
-            editDialog.setOnShowListener(new DialogInterface.OnShowListener() {
-                @Override
-                public void onShow(final DialogInterface dialog) {
-                    Button testButton = editDialog.getButton(AlertDialog.BUTTON_NEUTRAL);
-                    testButton.setOnClickListener(new View.OnClickListener() {
-                        @Override
-                        public void onClick(View view) {
-                            test();
-                        }
-                    });
+            editDialog.setOnShowListener(dialog -> {
+                Button testButton = editDialog.getButton(AlertDialog.BUTTON_NEUTRAL);
+                testButton.setOnClickListener(view -> test());
 
-                    Button button = editDialog.getButton(AlertDialog.BUTTON_POSITIVE);
-                    button.setOnClickListener(new View.OnClickListener() {
-                        @Override
-                        public void onClick(View view) {
-                            apply();
-                        }
-                    });
-                }
+                Button button = editDialog.getButton(AlertDialog.BUTTON_POSITIVE);
+                button.setOnClickListener(view -> apply());
             });
 
             if (Helper.preventScreenshot()) {
-                editDialog.getWindow().setFlags(WindowManager.LayoutParams.FLAG_SECURE, WindowManager.LayoutParams.FLAG_SECURE);
+                Objects.requireNonNull(editDialog.getWindow()).setFlags(WindowManager.LayoutParams.FLAG_SECURE, WindowManager.LayoutParams.FLAG_SECURE);
             }
 
-            etNodePass.getEditText().setOnEditorActionListener(new TextView.OnEditorActionListener() {
-                public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
-                    if (actionId == EditorInfo.IME_ACTION_DONE) {
-                        editDialog.getButton(DialogInterface.BUTTON_NEUTRAL).requestFocus();
-                        test();
-                        return true;
-                    }
-                    return false;
+            Objects.requireNonNull(etNodePass.getEditText()).setOnEditorActionListener((v, actionId, event) -> {
+                if (actionId == EditorInfo.IME_ACTION_DONE) {
+                    editDialog.getButton(DialogInterface.BUTTON_NEUTRAL).requestFocus();
+                    test();
+                    return true;
                 }
+                return false;
             });
         }
 
+        @SuppressLint("StaticFieldLeak")
         private class AsyncTestNode extends AsyncTask<Void, Void, Boolean> {
             @Override
             protected void onPreExecute() {
                 super.onPreExecute();
                 nodeInfo.clear();
-                tvResult.setText(getString(R.string.node_testing, nodeInfo.getHostAddress()));
+                tvResult.setText( getString(R.string.node_testing, nodeInfo.getHostAddress()));
             }
 
             @Override

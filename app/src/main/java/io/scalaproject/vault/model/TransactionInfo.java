@@ -38,13 +38,11 @@ public class TransactionInfo implements Parcelable, Comparable<TransactionInfo> 
         Direction_Out(1);
 
         public static Direction fromInteger(int n) {
-            switch (n) {
-                case 0:
-                    return Direction_In;
-                case 1:
-                    return Direction_Out;
-            }
-            return null;
+            return switch (n) {
+                case 0 -> Direction_In;
+                case 1 -> Direction_Out;
+                default -> null;
+            };
         }
 
         public int getValue() {

@@ -25,6 +25,8 @@ import android.app.AlertDialog;
 import android.app.Dialog;
 import android.content.DialogInterface;
 import android.os.Bundle;
+
+import androidx.annotation.NonNull;
 import androidx.fragment.app.DialogFragment;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
@@ -35,6 +37,8 @@ import android.view.View;
 import android.widget.TextView;
 
 import com.google.android.material.dialog.MaterialAlertDialogBuilder;
+
+import java.util.Objects;
 
 import io.scalaproject.vault.R;
 
@@ -60,9 +64,10 @@ public class HelpFragment extends DialogFragment {
         HelpFragment.newInstance(helpResourceId).show(ft, TAG);
     }
 
+    @NonNull
     @Override
     public Dialog onCreateDialog(Bundle savedInstanceState) {
-        final View view = LayoutInflater.from(getActivity()).inflate(R.layout.fragment_help, null);
+        final View view = getLayoutInflater().inflate(R.layout.fragment_help, null);
 
         int helpId = 0;
         Bundle arguments = getArguments();
@@ -72,15 +77,10 @@ public class HelpFragment extends DialogFragment {
         if (helpId > 0)
             ((TextView) view.findViewById(R.id.tvHelp)).setText(Html.fromHtml(getString(helpId)));
 
-        MaterialAlertDialogBuilder builder = new MaterialAlertDialogBuilder(getActivity(), R.style.MaterialAlertDialogCustom);
+        MaterialAlertDialogBuilder builder = new MaterialAlertDialogBuilder(requireActivity(), R.style.MaterialAlertDialogCustom);
         builder.setView(view);
         builder.setNegativeButton(R.string.help_ok,
-                new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int id) {
-                        dialog.dismiss();
-                    }
-                });
+                (dialog, id) -> dialog.dismiss());
         return builder.create();
     }
 }

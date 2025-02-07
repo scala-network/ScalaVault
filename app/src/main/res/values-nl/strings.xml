@@ -1,6 +1,7 @@
-<resources>
+<resources xmlns:tools="http://schemas.android.com/tools" tools:locale="nl">
     <string name="wallet_activity_name">Portemonnee</string>
 
+    <string name="menu_mobileminer">Mobiele Miner</string>
     <string name="menu_about">Info</string>
     <string name="menu_privacy">Privacybeleid</string>
 
@@ -186,7 +187,7 @@
     <string name="generate_wallet_created">Portemonnee is gemaakt</string>
 
     <string name="generate_restoreheight_error">Voer getal of datum (JJJJ-MM-DD) in</string>
-
+    <string name="generate_restoreheight_min_error">Datum moet groter dan of gelijk zijn aan %1$s</string>
     <string name="generate_wallet_type_key">Sleutels</string>
     <string name="generate_wallet_type_new">Nieuw</string>
     <string name="generate_wallet_type_seed">Hersteltekst</string>
@@ -232,7 +233,6 @@
     <string name="send_total_btc_label">Totaal (XLA)</string>
     <string name="send_total_label">Totaal</string>
 
-    <string name="send_amount">%1$s XLA</string>
     <string name="send_fee">+%1$s kosten</string>
 
     <string name="send_create_tx_error_title">Fout bij transactie maken</string>
@@ -273,9 +273,13 @@
     <string name="receive_amount_nan">XLA geen getal</string>
 
     <string name="details_alert_message">Nu worden vertrouwelijke gegevens getoond.\nKijk achter je!</string>
+    <string name="details_alert_yes">Accepteren</string>
+    <string name="details_alert_no">Annuleren</string>
     <string name="details_title">Details</string>
 
     <string name="archive_alert_message">Er wordt een back-up gemaakt en daarna wordt de portemonnee verwijderd!</string>
+    <string name="archive_alert_yes">Accepteren</string>
+    <string name="archive_alert_no">Annuleren</string>
 
     <string name="fab_create_new">Nieuwe portemonnee</string>
     <string name="fab_restore_viewonly">Alleen-lezen portemonnee herstellen</string>
@@ -292,6 +296,7 @@
 
     <string name="menu_language">Taal</string>
     <string name="language_system_default">Systeemtaal gebruiken</string>
+    <string name="menu_nodes">Externe knooppunten</string>
 
     <string name="fab_restore_ledger">Herstellen met Ledger Nano S</string>
 
@@ -357,6 +362,8 @@
     <string name="node_nobookmark">Automatically bookmarked best %1$d nodes</string>
     <string name="label_test">Test</string><!--note: as in "Test a network connection"-->
 
+    <string name="remote_nodes_subtitle">Vee omlaag om te scannen en automatisch het beste beschikbare knooppunt te selecteren</string>
+    <string name="change_remote_node_conf">Verander externe knooppunt naar %1$s?</string>
     <string name="backup_success">Backup successful</string>
 
     <string name="send_address_resolve_bip70">Resolving Payment URI&#8230;</string>

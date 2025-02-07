@@ -1,6 +1,6 @@
-<resources>
+<resources xmlns:tools="http://schemas.android.com/tools" tools:locale="ru">
     <string name="wallet_activity_name">Кошелек</string>
-
+    <string name="menu_mobileminer">Мобильный Майнер</string>
     <string name="menu_about">О программе</string>
     <string name="menu_privacy">Политика конфиденциальности</string>
 
@@ -190,7 +190,7 @@
     <string name="generate_wallet_created">Кошелек создан</string>
 
     <string name="generate_restoreheight_error">Введите номер блока или дату (YYYY-MM-DD)</string>
-
+    <string name="generate_restoreheight_min_error">Дата должна быть больше или равна %1$s</string>
     <string name="generate_wallet_type_key">Ключ</string>
     <string name="generate_wallet_type_new">Новый</string>
     <string name="generate_wallet_type_seed">Фраза</string>
@@ -236,7 +236,6 @@
     <string name="send_total_btc_label">Всего (XLA)</string>
     <string name="send_total_label">Всего</string>
 
-    <string name="send_amount">%1$s XLA</string>
     <string name="send_fee">+%1$s Комиссия</string>
 
     <string name="send_create_tx_error_title">Ошибка создания транзакции</string>
@@ -277,9 +276,13 @@
     <string name="receive_amount_nan">Не числовое значение XLA</string>
 
     <string name="details_alert_message">Сейчас будут показаны конфиденциальные данные. Оглянись вокруг!</string>
+    <string name="details_alert_yes">Принять</string>
+    <string name="details_alert_no">Отмена</string>
     <string name="details_title">Подробная информация</string>
 
     <string name="archive_alert_message">Этот кошелек будет скопирован, а затем удален!</string>
+    <string name="archive_alert_yes">Принять</string>
+    <string name="archive_alert_no">Отмена</string>
 
     <string name="fab_create_new">Создать новый кошелек</string>
     <string name="fab_restore_viewonly">Восстановить кошелек только для просмотра</string>
@@ -296,6 +299,7 @@
 
     <string name="menu_language">Язык</string>
     <string name="language_system_default">Использовать язык системы</string>
+    <string name="menu_nodes">Удаленные узлы</string>
 
     <string name="fab_restore_ledger">Восстановление из Ledger Nano S</string>
 
@@ -361,6 +365,8 @@
     <string name="node_nobookmark">Автоматически отмечены лучшие %1$d узлы</string>
     <string name="label_test">Проверка</string><!--note: as in "Test a network connection"-->
 
+    <string name="remote_nodes_subtitle">Потяните вниз, чтобы выполнить сканирование и автоматически выбрать лучший доступный узел</string>
+    <string name="change_remote_node_conf">Изменить удаленный узел на %1$s?</string>
     <string name="backup_success">Резервное копирование успешно</string>
 
     <string name="send_address_resolve_bip70">Размещение URI платежа&#8230;</string>
@@ -385,31 +391,60 @@
     <string name="label_restoreheight">Восстановить высоту</string> <!-- Restore Height -->
 
     <string name="toast_ledger_start_app">Запуск приложения Scala на %1$s</string>
+    <string name="menu_rescan">Пересканировать!</string>
+    <string name="privacy_policy_intro">Мы заботимся о вашей конфиденциальности. Чтобы узнать больше, пожалуйста, прочитайте нашу Политику конфиденциальности.</string>
+    <string name="privacy_policy_label">Политика конфиденциальности</string>
+    <string name="primary_address">Основной адрес</string>
+    <string name="mm_url" translatable="false">https://github.com/scala-network/MobileMiner/releases</string>
+    <string name="connection_remote_daemon">Подключение к удаленному узлу&#8230;</string>
+    <string name="remote_nodes">Удаленные узлы</string>
+    <string name="address_book">Адресная книга</string>
+    <string name="delete_contact_conf">Удалить запись %1$s?</string>
+    <string name="contact_value_empty">Это необходимо!</string>
+    <string name="no_entry">Нет записи</string>
+    <string name="save_to_address_book">Сохранить в адресную книгу</string>
+    <string name="contact_name_empty_error">Имя не может быть пустым!</string>
+    <string name="entry_name">Название записи</string>
+    <string name="start_mining">Начните майнинг на вашем устройстве Android безопасно и эффективно с Scala Mobile Miner.</string>
+    <string name="mobile_miner">Мобильный Майнер</string>
+    <string name="download">Скачать</string>
+    <string name="select_image">Выбрать изображение</string>
+    <string name="contact_avatar_hint">Изображение, представляющее эту запись в адресной книге.</string>
+    <string name="upload">Загрузить</string>
+    <string name="delete">Удалить</string>
+    <string name="edit">Редактировать</string>
+    <string name="enable_debug_info">Включить отладочную информацию</string>
+    <string name="disable_debug_info">Отключить отладочную информацию</string>
+    <string name="send_address_resolve_ud">Разрешение адреса Unstoppable Domains&#8230;</string>
+    <string name="send_address_no_ud_records">Неверный адрес Unstoppable Domains</string>
+    <string name="transaction_history">История транзакций</string>
+    <string name="send">Отправить</string>
+    <string name="receive">Получить</string>
+    <string name="balance">Баланс</string>
+    <string name="balance_primary_address">Основной адрес</string>
+    <string name="balance_wallet_address">Адрес кошелька</string>
+    <string name="history_no_transaction">Нет транзакций</string>
+    <string name="mobileminer_scala_miner">SCALA МАЙНЕР</string>
+    <string name="mobileminer_start_mining">Начните майнинг на вашем устройстве Android безопасно и эффективно.</string>
+    <string name="close">Закрыть</string>
+    <string name="scala_logo" translatable="false">Логотип Scala</string>
+    <string name="credits">Кредиты</string>
+    <string name="credits_made_with">Сделано с </string>
+    <string name="credits_by"> от </string>
+    <string name="credits_forked_from">Ветвь от </string>
+    <string name="credits_heart" translatable="false">иконка сердца</string>
+    <string name="wizard_home">Безопасный и легкий кошелек для хранения ваших монет Scala</string>
+    <string name="wizard_home_description">Scala Vault предоставляет все необходимое для управления и использования кошельков Scala на Android</string>
+    <string name="wizard_home_create_new_wallet">Создать новый кошелек</string>
+    <string name="wizard_home_import_from_seed">Импортировать из seed</string>
+    <string name="wizard_home_or">или</string>
+    <string name="wizard_home_skip">Пропустить</string>
+    <string name="no_wallet">Нет кошелька</string>
+    <string name="wallet_address">Адрес кошелька</string>
+    <string name="subaddresses">Подадреса</string>
+    <string name="message_exchange_success">Цена валюты обновлена</string>
+    <string name="splashcreen_check_network">Проверка сети…</string>
+    <string name="splashcreen_check_network_success">Подключено к интернету, доступ к Scala Vault</string>
+    <string name="splashcreen_check_network_failure">Для работы этого приложения требуется подключение к сети. Пожалуйста, проверьте свое интернет-соединение и попробуйте снова…</string>
 
-    <string name="menu_rescan">Rescan!</string>
-    <string name="privacy_policy_intro">We care about your privacy. To learn more, please read our Privacy Policy.</string>
-    <string name="privacy_policy_label">Privacy Policy</string>
-    <string name="primary_address">Primary Address</string>
-    <string name="mm_url">https://github.com/scala-network/MobileMiner/releases</string>
-    <string name="connection_remote_daemon">Connecting to remote node...</string>
-    <string name="remote_nodes">Remote Nodes</string>
-    <string name="address_book">Address Book</string>
-    <string name="delete_contact_conf">Delete entry %1$s?</string>
-    <string name="contact_value_empty">We need this!</string>
-    <string name="no_entry">No entry</string>
-    <string name="save_to_address_book">Save to address book</string>
-    <string name="contact_name_empty_error">Name cannot be empty!</string>
-    <string name="entry_name">Entry Name</string>
-    <string name="start_mining">Start mining on your Android device safely and efficiently with the Scala Mobile Miner.</string>
-    <string name="mobile_miner">Mobile Miner</string>
-    <string name="download">Download</string>
-    <string name="select_image">Select Image</string>
-    <string name="contact_avatar_hint">An image that represents this address book entry.</string>
-    <string name="upload">Upload</string>
-    <string name="delete">Delete</string>
-    <string name="edit">Edit</string>
-    <string name="enable_debug_info">Enable Debug Info</string>
-    <string name="disable_debug_info">Disable Debug Info</string>
-    <string name="send_address_resolve_ud">Resolving ENS / UD&#8230;</string>
-    <string name="send_address_no_ud_records">No address found for ENS / UD domain</string>
 </resources>

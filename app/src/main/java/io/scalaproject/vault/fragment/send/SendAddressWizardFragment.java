@@ -21,9 +21,12 @@
 
 package io.scalaproject.vault.fragment.send;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.os.Bundle;
 import com.google.android.material.textfield.TextInputLayout;
+
+import androidx.annotation.NonNull;
 import androidx.cardview.widget.CardView;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
@@ -65,6 +68,7 @@ import io.scalaproject.vault.xlato.XlaToError;
 import io.scalaproject.vault.xlato.XlaToException;
 
 import java.util.Map;
+import java.util.Objects;
 
 import timber.log.Timber;
 
@@ -129,22 +133,17 @@ public class SendAddressWizardFragment extends SendWizardFragment {
         tvPaymentIdIntegrated = view.findViewById(R.id.tvPaymentIdIntegrated);
 
         etAddress = view.findViewById(R.id.etAddress);
-        etAddress.getEditText().setRawInputType(InputType.TYPE_TEXT_FLAG_NO_SUGGESTIONS);
-        etAddress.getEditText().setOnEditorActionListener(new TextView.OnEditorActionListener() {
-            public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
-                // ignore ENTER
-                return ((event != null) && (event.getKeyCode() == KeyEvent.KEYCODE_ENTER));
-            }
+        Objects.requireNonNull(etAddress.getEditText()).setRawInputType(InputType.TYPE_TEXT_FLAG_NO_SUGGESTIONS);
+        etAddress.getEditText().setOnEditorActionListener((v, actionId, event) -> {
+            // ignore ENTER
+            return ((event != null) && (event.getKeyCode() == KeyEvent.KEYCODE_ENTER));
         });
-        etAddress.getEditText().setOnFocusChangeListener(new View.OnFocusChangeListener() {
-            @Override
-            public void onFocusChange(View v, boolean hasFocus) {
-                if (!hasFocus) {
-                    /*View next = etAddress;
-                    String enteredAddress = etAddress.getEditText().getText().toString().trim();
-                    processUD(enteredAddress);
-                */
-                }
+        etAddress.getEditText().setOnFocusChangeListener((v, hasFocus) -> {
+            if (!hasFocus) {
+                /*View next = etAddress;
+                String enteredAddress = etAddress.getEditText().getText().toString().trim();
+                processUD(enteredAddress);
+            */
             }
         });
         etAddress.getEditText().addTextChangedListener(new TextWatcher() {
@@ -179,71 +178,53 @@ public class SendAddressWizardFragment extends SendWizardFragment {
         });
 
         bPasteAddress = view.findViewById(R.id.bPasteAddress);
-        bPasteAddress.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                final String clip = Helper.getClipBoardText(getActivity());
-                if (clip == null) return;
-                // clean it up
-                final String address = clip.replaceAll("[^0-9A-Z-a-z]", "");
-                if (Wallet.isAddressValid(address) || BitcoinAddressValidator.validate(address)) {
+        bPasteAddress.setOnClickListener(v -> {
+            final String clip = Helper.getClipBoardText(requireActivity());
+            if (clip == null) return;
+            // clean it up
+            final String address = clip.replaceAll("[^0-9A-Z-a-z]", "");
+            if (Wallet.isAddressValid(address) || BitcoinAddressValidator.validate(address)) {
+                final EditText et = etAddress.getEditText();
+                et.setText(address);
+                et.setSelection(et.getText().length());
+                etAddress.requestFocus();
+            } else {
+                final String bip70 = PaymentProtocolHelper.getBip70(clip);
+                if (bip70 != null) {
                     final EditText et = etAddress.getEditText();
-                    et.setText(address);
+                    et.setText(clip);
                     et.setSelection(et.getText().length());
-                    etAddress.requestFocus();
-                } else {
-                    final String bip70 = PaymentProtocolHelper.getBip70(clip);
-                    if (bip70 != null) {
-                        final EditText et = etAddress.getEditText();
-                        et.setText(clip);
-                        et.setSelection(et.getText().length());
-                        //processBip70(bip70);
-                    } else
-                        Toast.makeText(getActivity(), getString(R.string.send_address_invalid), Toast.LENGTH_SHORT).show();
-                }
+                    //processBip70(bip70);
+                } else
+                    Toast.makeText(getActivity(), getString(R.string.send_address_invalid), Toast.LENGTH_SHORT).show();
             }
         });
 
         bAddressBook = view.findViewById(R.id.bAddressBook);
-        bAddressBook.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                final Bundle extras = new Bundle();
-                extras.putString(AddressBookFragment.REQUEST_MODE, AddressBookFragment.MODE_TYPE_READONLY);
-                replaceFragment(new AddressBookFragment(), null, extras);
-            }
+        bAddressBook.setOnClickListener(v -> {
+            final Bundle extras = new Bundle();
+            extras.putString(AddressBookFragment.REQUEST_MODE, AddressBookFragment.MODE_TYPE_READONLY);
+            replaceFragment(new AddressBookFragment(), null, extras);
         });
 
         etContactName = view.findViewById(R.id.etContactName);
 
         ckSaveAddress = view.findViewById(R.id.ckSaveAddress);
-        ckSaveAddress.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                etContactName.setVisibility(ckSaveAddress.isChecked() ? View.VISIBLE : View.GONE);
-            }
-        });
+        ckSaveAddress.setOnClickListener(v -> etContactName.setVisibility(ckSaveAddress.isChecked() ? View.VISIBLE : View.GONE));
 
         etNotes = view.findViewById(R.id.etNotes);
-        etNotes.getEditText().setRawInputType(InputType.TYPE_CLASS_TEXT);
-        etNotes.getEditText().setOnEditorActionListener(new TextView.OnEditorActionListener() {
-            public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
-                if ((event != null && (event.getKeyCode() == KeyEvent.KEYCODE_ENTER) && (event.getAction() == KeyEvent.ACTION_DOWN))
-                        || (actionId == EditorInfo.IME_ACTION_DONE)) {
-                    etDummy.requestFocus();
-                    return true;
-                }
-                return false;
+        Objects.requireNonNull(etNotes.getEditText()).setRawInputType(InputType.TYPE_CLASS_TEXT);
+        etNotes.getEditText().setOnEditorActionListener((v, actionId, event) -> {
+            if ((event != null && (event.getKeyCode() == KeyEvent.KEYCODE_ENTER) && (event.getAction() == KeyEvent.ACTION_DOWN))
+                    || (actionId == EditorInfo.IME_ACTION_DONE)) {
+                etDummy.requestFocus();
+                return true;
             }
+            return false;
         });
 
         cvScan = view.findViewById(R.id.bScan);
-        cvScan.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                onScanListener.onScan();
-            }
-        });
+        cvScan.setOnClickListener(v -> onScanListener.onScan());
 
         etDummy = view.findViewById(R.id.etDummy);
         etDummy.setRawInputType(InputType.TYPE_TEXT_FLAG_NO_SUGGESTIONS);
@@ -270,7 +251,7 @@ public class SendAddressWizardFragment extends SendWizardFragment {
             newFragment.setArguments(extras);
         }
 
-        FragmentTransaction transaction = getActivity().getSupportFragmentManager().beginTransaction();
+        FragmentTransaction transaction = requireActivity().getSupportFragmentManager().beginTransaction();
         transaction.replace(R.id.fragment_container, newFragment);
         transaction.addToBackStack(stackName);
         transaction.commit();
@@ -312,6 +293,7 @@ public class SendAddressWizardFragment extends SendWizardFragment {
         });
     }*/
 
+    @SuppressLint("UseCompatLoadingForColorStateLists")
     private void processUD(String udString) {
         sendListener.popBarcodeData();
 
@@ -338,16 +320,18 @@ public class SendAddressWizardFragment extends SendWizardFragment {
                     }
                 }
 
-            requireActivity().runOnUiThread(() -> {
-                if (domainIsUD[0]) {
-                    BarcodeData barcodeData = new BarcodeData(BarcodeData.Asset.XLA, address[0], udString,
-                            null, null, BarcodeData.Security.NORMAL);
-                    processScannedData(barcodeData);
-                } else {
+            requireActivity().runOnUiThread(new Runnable() {
+                @SuppressLint("UseCompatLoadingForColorStateLists")
+                public void run() {
+                    if (domainIsUD[0]) {
+                        BarcodeData barcodeData = new BarcodeData(BarcodeData.Asset.XLA, address[0], udString, null, null, BarcodeData.Security.NORMAL);
+                        processScannedData(barcodeData);
+                    } else {
                         shakeAddress();
                         Timber.d("Non ENS / UD address %s", udString);
-                    etAddress.setErrorTextColor(getResources().getColorStateList(R.color.c_red));
+                        etAddress.setErrorTextColor(getResources().getColorStateList(R.color.c_red));
                         etAddress.setError(getString(R.string.send_address_invalid));
+                    }
                 }
             });
         }).start();
@@ -405,12 +389,13 @@ public class SendAddressWizardFragment extends SendWizardFragment {
     }*/
 
     private boolean checkAddressNoError() {
-        String address = etAddress.getEditText().getText().toString();
+        String address = Objects.requireNonNull(etAddress.getEditText()).getText().toString();
         return Wallet.isAddressValid(address)
                 || BitcoinAddressValidator.validate(address)
                 || (resolvedPP != null);
     }
 
+    @SuppressLint("UseCompatLoadingForColorStateLists")
     private boolean checkAddress() {
         etAddress.setErrorTextColor(getResources().getColorStateList(R.color.c_red));
         boolean ok = checkAddressNoError();
@@ -423,13 +408,13 @@ public class SendAddressWizardFragment extends SendWizardFragment {
     }
 
     private boolean isIntegratedAddress() {
-        String address = etAddress.getEditText().getText().toString();
+        String address = Objects.requireNonNull(etAddress.getEditText()).getText().toString();
         return (address.length() == INTEGRATED_ADDRESS_LENGTH)
                 && Wallet.isAddressValid(address);
     }
 
     private boolean isBitcoinAddress() {
-        final String address = etAddress.getEditText().getText().toString();
+        final String address = Objects.requireNonNull(etAddress.getEditText()).getText().toString();
         return BitcoinAddressValidator.validate(address);
     }
 
@@ -440,7 +425,7 @@ public class SendAddressWizardFragment extends SendWizardFragment {
     @Override
     public boolean onValidateFields() {
         if (!checkAddress()) {
-            String enteredAddress = etAddress.getEditText().getText().toString().trim();
+            String enteredAddress = Objects.requireNonNull(etAddress.getEditText()).getText().toString().trim();
             processUD(enteredAddress);
             return false;
         }
@@ -451,25 +436,25 @@ public class SendAddressWizardFragment extends SendWizardFragment {
                 if (resolvedPP != null) {
                     // take the value from the field nonetheless as this is what the user sees
                     // (in case we have a bug somewhere)
-                    ((TxDataBtc) txData).setBip70(etAddress.getEditText().getText().toString());
+                    ((TxDataBtc) txData).setBip70(Objects.requireNonNull(etAddress.getEditText()).getText().toString());
                     ((TxDataBtc) txData).setBtcAddress(null);
                 } else {
-                    ((TxDataBtc) txData).setBtcAddress(etAddress.getEditText().getText().toString());
+                    ((TxDataBtc) txData).setBtcAddress(Objects.requireNonNull(etAddress.getEditText()).getText().toString());
                     ((TxDataBtc) txData).setBip70(null);
                 }
                 txData.setDestinationAddress(null);
             } else {
-                txData.setDestinationAddress(etAddress.getEditText().getText().toString());
+                txData.setDestinationAddress(Objects.requireNonNull(etAddress.getEditText()).getText().toString());
             }
 
-            txData.setUserNotes(new UserNotes(etNotes.getEditText().getText().toString()));
+            txData.setUserNotes(new UserNotes(Objects.requireNonNull(etNotes.getEditText()).getText().toString()));
             txData.setPriority(PendingTransaction.Priority.Priority_Default);
             txData.setMixin(SendFragment.MIXIN);
         }
 
         if(ckSaveAddress.isChecked()) {
-            String contactName = etContactName.getEditText().getText().toString().trim();
-            String destinationAddress = etAddress.getEditText().getText().toString().trim();
+            String contactName = Objects.requireNonNull(etContactName.getEditText()).getText().toString().trim();
+            String destinationAddress = Objects.requireNonNull(etAddress.getEditText()).getText().toString().trim();
 
             if (contactName.isEmpty()) {
                 etContactName.setError(getString(R.string.contact_name_empty_error));
@@ -484,13 +469,12 @@ public class SendAddressWizardFragment extends SendWizardFragment {
     }
 
     @Override
-    public void onAttach(Context context) {
+    public void onAttach(@NonNull Context context) {
         super.onAttach(context);
         if (context instanceof OnScanListener) {
             onScanListener = (OnScanListener) context;
         } else {
-            throw new ClassCastException(context.toString()
-                    + " must implement ScanListener");
+            throw new ClassCastException(context.toString() + " must implement ScanListener");
         }
     }
 
@@ -505,7 +489,7 @@ public class SendAddressWizardFragment extends SendWizardFragment {
         String address = Config.read(Config.CONFIG_KEY_SELECTED_ADDRESS);
         if(!address.isEmpty()) {
             Config.write(Config.CONFIG_KEY_SELECTED_ADDRESS, "");
-            etAddress.getEditText().setText(address);
+            Objects.requireNonNull(etAddress.getEditText()).setText(address);
         }
     }
 
@@ -529,9 +513,9 @@ public class SendAddressWizardFragment extends SendWizardFragment {
                 } else {
                     //processBip70(barcodeData.bip70);
                 }
-                etAddress.getEditText().setText(barcodeData.bip70);
+                Objects.requireNonNull(etAddress.getEditText()).setText(barcodeData.bip70);
             } else if (barcodeData.address != null) {
-                etAddress.getEditText().setText(barcodeData.address);
+                Objects.requireNonNull(etAddress.getEditText()).setText(barcodeData.address);
                 if (checkAddress()) {
                     if (barcodeData.security == BarcodeData.Security.OA_NO_DNSSEC)
                         etAddress.setError(getString(R.string.send_address_no_dnssec));
@@ -539,15 +523,15 @@ public class SendAddressWizardFragment extends SendWizardFragment {
                         etAddress.setError(getString(R.string.send_address_openalias));
                 }
             } else {
-                etAddress.getEditText().getText().clear();
+                Objects.requireNonNull(etAddress.getEditText()).getText().clear();
                 etAddress.setError(null);
             }
 
             String scannedNotes = barcodeData.description;
             if (scannedNotes != null) {
-                etNotes.getEditText().setText(scannedNotes);
+                Objects.requireNonNull(etNotes.getEditText()).setText(scannedNotes);
             } else {
-                etNotes.getEditText().getText().clear();
+                Objects.requireNonNull(etNotes.getEditText()).getText().clear();
                 etNotes.setError(null);
             }
         } else

@@ -21,10 +21,13 @@
 
 package io.scalaproject.vault.fragment.send;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
+
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
@@ -58,6 +61,7 @@ import io.scalaproject.vault.widget.DotBar;
 import io.scalaproject.vault.widget.Toolbar;
 
 import java.lang.ref.WeakReference;
+import java.util.Objects;
 
 import timber.log.Timber;
 
@@ -111,7 +115,7 @@ public class SendFragment extends Fragment
 
     private Button bDone;
 
-    static private int MAX_FALLBACK = Integer.MAX_VALUE;
+    static private final int MAX_FALLBACK = Integer.MAX_VALUE;
 
     public static SendFragment newInstance(String uri) {
         SendFragment f = new SendFragment();
@@ -121,6 +125,7 @@ public class SendFragment extends Fragment
         return f;
     }
 
+    @SuppressLint("UseCompatLoadingForDrawables")
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -178,23 +183,13 @@ public class SendFragment extends Fragment
             }
         });
 
-        bPrev.setOnClickListener(new View.OnClickListener() {
-            public void onClick(View v) {
-                spendViewPager.previous();
-            }
-        });
+        bPrev.setOnClickListener(v -> spendViewPager.previous());
 
-        bNext.setOnClickListener(new View.OnClickListener() {
-            public void onClick(View v) {
-                spendViewPager.next();
-            }
-        });
+        bNext.setOnClickListener(v -> spendViewPager.next());
 
-        bDone.setOnClickListener(new View.OnClickListener() {
-            public void onClick(View v) {
-                Timber.d("bDone.onClick");
-                activityCallback.onFragmentDone();
-            }
+        bDone.setOnClickListener(v -> {
+            Timber.d("bDone.onClick");
+            activityCallback.onFragmentDone();
         });
 
         updatePosition(0);
@@ -250,15 +245,14 @@ public class SendFragment extends Fragment
     }
 
     @Override
-    public void onAttach(Context context) {
+    public void onAttach(@NonNull Context context) {
         Timber.d("onAttach %s", context);
         super.onAttach(context);
         if (context instanceof Listener) {
             activityCallback = (Listener) context;
             activityCallback.setOnUriScannedListener(this);
         } else {
-            throw new ClassCastException(context.toString()
-                    + " must implement Listener");
+            throw new ClassCastException(context.toString() + " must implement Listener");
         }
     }
 
@@ -283,15 +277,13 @@ public class SendFragment extends Fragment
     }
 
     @Override
-    public boolean onUriScanned(BarcodeData barcodeData) {
+    public void onUriScanned(BarcodeData barcodeData) {
         if (spendViewPager.getCurrentItem() == SpendPagerAdapter.POS_ADDRESS) {
             final SendWizardFragment fragment = pagerAdapter.getFragment(SpendPagerAdapter.POS_ADDRESS);
             if (fragment instanceof SendAddressWizardFragment) {
                 ((SendAddressWizardFragment) fragment).processScannedData(barcodeData);
-                return true;
             }
         }
-        return false;
     }
 
     enum Mode {
@@ -314,12 +306,7 @@ public class SendFragment extends Fragment
                 default:
                     throw new IllegalArgumentException("Mode " + String.valueOf(aMode) + " unknown!");
             }
-            getView().post(new Runnable() {
-                @Override
-                public void run() {
-                    pagerAdapter.notifyDataSetChanged();
-                }
-            });
+            requireView().post(() -> pagerAdapter.notifyDataSetChanged());
             Timber.d("New Mode = %s", mode.toString());
         }
     }
@@ -352,8 +339,9 @@ public class SendFragment extends Fragment
             return numPages;
         }
 
+        @NonNull
         @Override
-        public Object instantiateItem(ViewGroup container, int position) {
+        public Object instantiateItem(@NonNull ViewGroup container, int position) {
             Timber.d("instantiateItem %d", position);
             SendWizardFragment fragment = (SendWizardFragment) super.instantiateItem(container, position);
             myFragments.put(position, new WeakReference<>(fragment));
@@ -361,50 +349,43 @@ public class SendFragment extends Fragment
         }
 
         @Override
-        public void destroyItem(ViewGroup container, int position, Object object) {
+        public void destroyItem(@NonNull ViewGroup container, int position, @NonNull Object object) {
             Timber.d("destroyItem %d", position);
             myFragments.remove(position);
             super.destroyItem(container, position, object);
         }
 
         public SendWizardFragment getFragment(int position) {
-            WeakReference ref = myFragments.get(position);
+            WeakReference<SendWizardFragment> ref = myFragments.get(position);
             if (ref != null)
                 return myFragments.get(position).get();
             else
                 return null;
         }
 
+        @NonNull
         @Override
         public SendWizardFragment getItem(int position) {
             Timber.d("getItem(%d) CREATE", position);
             Timber.d("Mode=%s", mode.toString());
             if (mode == Mode.XLA) {
-                switch (position) {
-                    case POS_ADDRESS:
-                        return SendAddressWizardFragment.newInstance(SendFragment.this);
-                    case POS_AMOUNT:
-                        return SendAmountWizardFragment.newInstance(SendFragment.this);
-                    case POS_CONFIRM:
-                        return SendConfirmWizardFragment.newInstance(SendFragment.this);
-                    case POS_SUCCESS:
-                        return SendSuccessWizardFragment.newInstance(SendFragment.this);
-                    default:
-                        throw new IllegalArgumentException("no such send position(" + position + ")");
-                }
+                return switch (position) {
+                    case POS_ADDRESS -> SendAddressWizardFragment.newInstance(SendFragment.this);
+                    case POS_AMOUNT -> SendAmountWizardFragment.newInstance(SendFragment.this);
+                    case POS_CONFIRM -> SendConfirmWizardFragment.newInstance(SendFragment.this);
+                    case POS_SUCCESS -> SendSuccessWizardFragment.newInstance(SendFragment.this);
+                    default ->
+                            throw new IllegalArgumentException("no such send position(" + position + ")");
+                };
             } else if (mode == Mode.BTC) {
-                switch (position) {
-                    case POS_ADDRESS:
-                        return SendAddressWizardFragment.newInstance(SendFragment.this);
-                    case POS_AMOUNT:
-                        return SendBtcAmountWizardFragment.newInstance(SendFragment.this);
-                    case POS_CONFIRM:
-                        return SendBtcConfirmWizardFragment.newInstance(SendFragment.this);
-                    case POS_SUCCESS:
-                        return SendBtcSuccessWizardFragment.newInstance(SendFragment.this);
-                    default:
-                        throw new IllegalArgumentException("no such send position(" + position + ")");
-                }
+                return switch (position) {
+                    case POS_ADDRESS -> SendAddressWizardFragment.newInstance(SendFragment.this);
+                    case POS_AMOUNT -> SendBtcAmountWizardFragment.newInstance(SendFragment.this);
+                    case POS_CONFIRM -> SendBtcConfirmWizardFragment.newInstance(SendFragment.this);
+                    case POS_SUCCESS -> SendBtcSuccessWizardFragment.newInstance(SendFragment.this);
+                    default ->
+                            throw new IllegalArgumentException("no such send position(" + position + ")");
+                };
             } else {
                 throw new IllegalStateException("Unknown mode!");
             }
@@ -414,22 +395,17 @@ public class SendFragment extends Fragment
         public CharSequence getPageTitle(int position) {
             Timber.d("getPageTitle(%d)", position);
             if (position >= numPages) return null;
-            switch (position) {
-                case POS_ADDRESS:
-                    return getString(R.string.send_address_title);
-                case POS_AMOUNT:
-                    return getString(R.string.send_amount_title);
-                case POS_CONFIRM:
-                    return getString(R.string.send_confirm_title);
-                case POS_SUCCESS:
-                    return getString(R.string.send_success_title);
-                default:
-                    return null;
-            }
+            return switch (position) {
+                case POS_ADDRESS -> getString(R.string.send_address_title);
+                case POS_AMOUNT -> getString(R.string.send_amount_title);
+                case POS_CONFIRM -> getString(R.string.send_confirm_title);
+                case POS_SUCCESS -> getString(R.string.send_success_title);
+                default -> null;
+            };
         }
 
         @Override
-        public int getItemPosition(Object object) {
+        public int getItemPosition(@NonNull Object object) {
             Timber.d("getItemPosition %s", String.valueOf(object));
             if (object instanceof SendAddressWizardFragment) {
                 // keep these pages
@@ -556,7 +532,7 @@ public class SendFragment extends Fragment
     public void onTransactionSent(final String txId) {
         Timber.d("txid=%s", txId);
         pagerAdapter.addSuccess();
-        Timber.d("numPages=%d", spendViewPager.getAdapter().getCount());
+        Timber.d("numPages=%d", Objects.requireNonNull(spendViewPager.getAdapter()).getCount());
         activityCallback.setToolbarButton(Toolbar.BUTTON_NONE);
         spendViewPager.setCurrentItem(SpendPagerAdapter.POS_SUCCESS);
     }
@@ -578,7 +554,7 @@ public class SendFragment extends Fragment
     }
 
     @Override
-    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
+    public void onCreateOptionsMenu(@NonNull Menu menu, MenuInflater inflater) {
         inflater.inflate(R.menu.send_menu, menu);
         super.onCreateOptionsMenu(menu, inflater);
     }
@@ -590,7 +566,7 @@ public class SendFragment extends Fragment
 
     void loadPrefs() {
         String enabled = Config.read("PREF_SHOW_XLATO_ENABLED");
-        showxlatoEnabled = !(enabled.isEmpty() || enabled == "0");
+        showxlatoEnabled = !(enabled.isEmpty() || enabled.equals("0"));
 
     }
 

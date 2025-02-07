@@ -21,11 +21,14 @@
 
 package io.scalaproject.vault;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Looper;
+
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.RecyclerView;
@@ -45,7 +48,6 @@ import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.Spinner;
 import android.widget.TextView;
-
 import com.github.brnunes.swipeablerecyclerview.SwipeableRecyclerViewTouchListener;
 
 import io.scalaproject.vault.data.Contact;
@@ -69,7 +71,7 @@ import timber.log.Timber;
 public class WalletFragment extends Fragment
         implements TransactionInfoAdapter.OnInteractionListener, TransactionInfoAdapter.OnFindContactListener {
     private TransactionInfoAdapter txInfoAdapter;
-    private NumberFormat formatter = NumberFormat.getInstance();
+    private final NumberFormat formatter = NumberFormat.getInstance();
 
     private TextView tvStealthMode;
     private LinearLayout llBalance, llWalletAddress;
@@ -86,7 +88,7 @@ public class WalletFragment extends Fragment
 
     private Spinner sCurrency;
 
-    private List<String> dismissedTransactions = new ArrayList<>();
+    private final List<String> dismissedTransactions = new ArrayList<>();
 
     public void resetDismissedTransactions() {
         dismissedTransactions.clear();
@@ -99,7 +101,7 @@ public class WalletFragment extends Fragment
     }
 
     @Override
-    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
+    public void onCreateOptionsMenu(@NonNull Menu menu, @NonNull MenuInflater inflater) {
         if (activityCallback.hasWallet()) {
             inflater.inflate(R.menu.wallet_menu, menu);
         }
@@ -107,8 +109,7 @@ public class WalletFragment extends Fragment
     }
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_wallet, container, false);
 
         tvStealthMode = view.findViewById(R.id.tvStreetView);
@@ -143,7 +144,7 @@ public class WalletFragment extends Fragment
         List<String> currencies = new ArrayList<>();
         currencies.add(Helper.BASE_CRYPTO);
         currencies.addAll(Arrays.asList(getResources().getStringArray(R.array.currency)));
-        ArrayAdapter<String> spinnerAdapter = new ArrayAdapter<>(getContext(), R.layout.item_spinner_balance, currencies);
+        ArrayAdapter<String> spinnerAdapter = new ArrayAdapter<>(requireContext(), R.layout.item_spinner_balance, currencies);
         spinnerAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         sCurrency.setAdapter(spinnerAdapter);
 
@@ -151,62 +152,47 @@ public class WalletFragment extends Fragment
         bReceive = view.findViewById(R.id.bReceive);
 
         pullToRefresh = view.findViewById(R.id.pullToRefresh);
-        pullToRefresh.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
-            @Override
-            public void onRefresh() {
-                refresh();
-            }
-        });
+        pullToRefresh.setOnRefreshListener(this::refresh);
 
         txInfoAdapter = new TransactionInfoAdapter(getActivity(), this, this);
         rvTransactions.setAdapter(txInfoAdapter);
 
-        SwipeableRecyclerViewTouchListener swipeTouchListener =
-                new SwipeableRecyclerViewTouchListener(rvTransactions,
-                        new SwipeableRecyclerViewTouchListener.SwipeListener() {
-                            @Override
-                            public boolean canSwipeLeft(int position) {
-                                return activityCallback.isStealthMode();
-                            }
+        SwipeableRecyclerViewTouchListener swipeTouchListener = new SwipeableRecyclerViewTouchListener(rvTransactions, new SwipeableRecyclerViewTouchListener.SwipeListener() {
+            @Override
+            public boolean canSwipeLeft(int position) {
+                return activityCallback.isStealthMode();
+            }
 
-                            @Override
-                            public boolean canSwipeRight(int position) {
-                                return activityCallback.isStealthMode();
-                            }
+            @Override
+            public boolean canSwipeRight(int position) {
+                return activityCallback.isStealthMode();
+            }
 
-                            @Override
-                            public void onDismissedBySwipeLeft(RecyclerView recyclerView, int[] reverseSortedPositions) {
-                                for (int position : reverseSortedPositions) {
-                                    dismissedTransactions.add(txInfoAdapter.getItem(position).hash);
-                                    txInfoAdapter.removeItem(position);
-                                }
-                                txInfoAdapter.notifyDataSetChanged();
-                            }
+            @SuppressLint("NotifyDataSetChanged")
+            @Override
+            public void onDismissedBySwipeLeft(RecyclerView recyclerView, int[] reverseSortedPositions) {
+                for (int position : reverseSortedPositions) {
+                    dismissedTransactions.add(txInfoAdapter.getItem(position).hash);
+                    txInfoAdapter.removeItem(position);
+                }
+                txInfoAdapter.notifyDataSetChanged();
+            }
 
-                            @Override
-                            public void onDismissedBySwipeRight(RecyclerView recyclerView, int[] reverseSortedPositions) {
-                                for (int position : reverseSortedPositions) {
-                                    dismissedTransactions.add(txInfoAdapter.getItem(position).hash);
-                                    txInfoAdapter.removeItem(position);
-                                }
-                                txInfoAdapter.notifyDataSetChanged();
-                            }
-                        });
+            @SuppressLint("NotifyDataSetChanged")
+            @Override
+            public void onDismissedBySwipeRight(RecyclerView recyclerView, int[] reverseSortedPositions) {
+                for (int position : reverseSortedPositions) {
+                    dismissedTransactions.add(txInfoAdapter.getItem(position).hash);
+                    txInfoAdapter.removeItem(position);
+                }
+                txInfoAdapter.notifyDataSetChanged();
+            }
+        });
 
         rvTransactions.addOnItemTouchListener(swipeTouchListener);
 
-        bSend.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                activityCallback.onSendRequest();
-            }
-        });
-        bReceive.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                activityCallback.onWalletReceive();
-            }
-        });
+        bSend.setOnClickListener(v -> activityCallback.onSendRequest());
+        bReceive.setOnClickListener(v -> activityCallback.onWalletReceive());
 
         sCurrency.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
@@ -238,6 +224,7 @@ public class WalletFragment extends Fragment
         asyncRefreshWallet.execute();
     }
 
+    @SuppressLint("StaticFieldLeak")
     private class AsyncRefreshWallet extends AsyncTask<Void, WalletManager.WalletInfo, Boolean> {
         @Override
         protected void onPreExecute() {
@@ -326,24 +313,14 @@ public class WalletFragment extends Fragment
                             @Override
                             public void onSuccess(final ExchangeRate exchangeRate) {
                                 if (isAdded())
-                                    new Handler(Looper.getMainLooper()).post(new Runnable() {
-                                        @Override
-                                        public void run() {
-                                            exchange(exchangeRate);
-                                        }
-                                    });
+                                    new Handler(Looper.getMainLooper()).post(() -> exchange(exchangeRate));
                             }
 
                             @Override
                             public void onError(final Exception e) {
                                 Timber.e(e.getLocalizedMessage());
                                 if (isAdded())
-                                    new Handler(Looper.getMainLooper()).post(new Runnable() {
-                                        @Override
-                                        public void run() {
-                                            exchangeFailed();
-                                        }
-                                    });
+                                    new Handler(Looper.getMainLooper()).post(() -> exchangeFailed());
                             }
                         });
             } else {
@@ -375,6 +352,7 @@ public class WalletFragment extends Fragment
         hideExchanging();
     }
 
+    // Called from ExchangeApi
     public void exchange(final ExchangeRate exchangeRate) {
         hideExchanging();
         if (!Helper.BASE_CRYPTO.equals(exchangeRate.getBaseCurrency())) {
@@ -411,6 +389,7 @@ public class WalletFragment extends Fragment
 
     // called from activity
 
+    @SuppressLint("NotifyDataSetChanged")
     public void onRefreshed(final Wallet wallet, boolean full) {
         Timber.d("onRefreshed(%b)", full);
 
@@ -507,6 +486,7 @@ public class WalletFragment extends Fragment
         tvWalletName.setText(_walletName);
     }
 
+    @SuppressLint({"UseCompatLoadingForDrawables", "SetTextI18n"})
     public void initWalletAddress(String walletAddress) {
         llWalletAddress.setVisibility(View.VISIBLE);
 
@@ -516,6 +496,7 @@ public class WalletFragment extends Fragment
         tvWalletAddress.setText(Helper.getPrettyAddress(walletAddress));
     }
 
+    @SuppressLint({"UseCompatLoadingForDrawables", "SetTextI18n"})
     private void updateWalletInfo(Wallet wallet) {
         llWalletAddress.setVisibility(View.VISIBLE);
 
@@ -544,8 +525,8 @@ public class WalletFragment extends Fragment
 
     private long firstBlock = 0;
     private String _walletName = null;
-    private String walletTitle = null;
-    private String walletSubtitle = null;
+    private final String walletTitle = null;
+    private final String walletSubtitle = null;
     private long unlockedBalance = 0;
     private long balance = 0;
 
@@ -555,10 +536,8 @@ public class WalletFragment extends Fragment
         if (!isAdded()) return;
 
         Timber.d("updateStatus()");
-        if ((walletTitle == null) || (accountIdx != wallet.getAccountIndex())) {
-            accountIdx = wallet.getAccountIndex();
-            setActivityTitle(wallet);
-        }
+        accountIdx = wallet.getAccountIndex();
+        setActivityTitle(wallet);
 
         balance = wallet.getBalance();
         unlockedBalance = wallet.getUnlockedBalance();
@@ -586,6 +565,9 @@ public class WalletFragment extends Fragment
                 ivSynced.setVisibility(View.GONE);
             } else {
                 sync = getString(R.string.status_synced) + " " + formatter.format(wallet.getBlockChainHeight());
+                String newMessage = "Updating data...";
+                //show notification on finished?
+                Timber.d("newMessage=%s", newMessage);
                 ivSynced.setVisibility(View.VISIBLE);
                 setProgress(-1);
             }
@@ -650,13 +632,12 @@ public class WalletFragment extends Fragment
     }
 
     @Override
-    public void onAttach(Context context) {
+    public void onAttach(@NonNull Context context) {
         super.onAttach(context);
         if (context instanceof Listener) {
             this.activityCallback = (Listener) context;
         } else {
-            throw new ClassCastException(context.toString()
-                    + " must implement Listener");
+            throw new ClassCastException(context.toString() + " must implement Listener");
         }
     }
 
@@ -664,7 +645,7 @@ public class WalletFragment extends Fragment
     public void onResume() {
         super.onResume();
         Timber.d("onResume()");
-        activityCallback.setTitle(walletTitle, walletSubtitle);
+        activityCallback.setTitle(walletTitle, null);
         //activityCallback.setToolbarButton(Toolbar.BUTTON_CLOSE); // TODO: Close button somewhere else
 
         if(activityCallback.hasBoundService()) {

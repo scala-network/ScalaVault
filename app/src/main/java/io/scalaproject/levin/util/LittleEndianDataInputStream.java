@@ -91,7 +91,7 @@ public class LittleEndianDataInputStream extends FilterInputStream implements
      * @see FilterInputStream#in
      * @see InputStream#read(byte[], int, int)
      */
-    public final int read(byte b[]) throws IOException {
+    public final int read(byte[] b) throws IOException {
         return in.read(b, 0, b.length);
     }
 
@@ -143,7 +143,7 @@ public class LittleEndianDataInputStream extends FilterInputStream implements
      * @see FilterInputStream#in
      * @see InputStream#read(byte[], int, int)
      */
-    public final int read(byte b[], int off, int len) throws IOException {
+    public final int read(byte[] b, int off, int len) throws IOException {
         return in.read(b, off, len);
     }
 
@@ -161,7 +161,7 @@ public class LittleEndianDataInputStream extends FilterInputStream implements
      *                      occurs.
      * @see FilterInputStream#in
      */
-    public final void readFully(byte b[]) throws IOException {
+    public final void readFully(byte[] b) throws IOException {
         readFully(b, 0, b.length);
     }
 
@@ -181,7 +181,7 @@ public class LittleEndianDataInputStream extends FilterInputStream implements
      *                      occurs.
      * @see FilterInputStream#in
      */
-    public final void readFully(byte b[], int off, int len) throws IOException {
+    public final void readFully(byte[] b, int off, int len) throws IOException {
         if (len < 0)
             throw new IndexOutOfBoundsException();
         int n = 0;
@@ -299,7 +299,7 @@ public class LittleEndianDataInputStream extends FilterInputStream implements
         int ch2 = in.read();
         if ((ch1 | ch2) < 0)
             throw new EOFException();
-        return (short) ((ch1 << 0) + (ch2 << 8));
+        return (short) ((ch1) + (ch2 << 8));
     }
 
     /**
@@ -322,7 +322,7 @@ public class LittleEndianDataInputStream extends FilterInputStream implements
         int ch2 = in.read();
         if ((ch1 | ch2) < 0)
             throw new EOFException();
-        return (ch1 << 0) + (ch2 << 8);
+        return (ch1) + (ch2 << 8);
     }
 
     /**
@@ -345,7 +345,7 @@ public class LittleEndianDataInputStream extends FilterInputStream implements
         int ch2 = in.read();
         if ((ch1 | ch2) < 0)
             throw new EOFException();
-        return (char) ((ch1 << 0) + (ch2 << 8));
+        return (char) ((ch1) + (ch2 << 8));
     }
 
     /**
@@ -370,10 +370,10 @@ public class LittleEndianDataInputStream extends FilterInputStream implements
         int ch4 = in.read();
         if ((ch1 | ch2 | ch3 | ch4) < 0)
             throw new EOFException();
-        return ((ch1 << 0) + (ch2 << 8) + (ch3 << 16) + (ch4 << 24));
+        return ((ch1) + (ch2 << 8) + (ch3 << 16) + (ch4 << 24));
     }
 
-    private byte readBuffer[] = new byte[8];
+    private final byte[] readBuffer = new byte[8];
 
     /**
      * See the general contract of the <code>readLong</code> method of
@@ -397,7 +397,7 @@ public class LittleEndianDataInputStream extends FilterInputStream implements
                 + ((long) (readBuffer[5] & 255) << 40)
                 + ((long) (readBuffer[4] & 255) << 32)
                 + ((long) (readBuffer[3] & 255) << 24)
-                + ((readBuffer[2] & 255) << 16) + ((readBuffer[1] & 255) << 8) + ((readBuffer[0] & 255) << 0));
+                + ((readBuffer[2] & 255) << 16) + ((readBuffer[1] & 255) << 8) + ((readBuffer[0] & 255)));
     }
 
     /**
@@ -463,8 +463,8 @@ public class LittleEndianDataInputStream extends FilterInputStream implements
     /**
      * working arrays initialized on demand by readUTF
      */
-    private byte bytearr[] = new byte[80];
-    private char chararr[] = new char[80];
+    private byte[] bytearr = new byte[80];
+    private char[] chararr = new char[80];
 
     /**
      * Reads from the stream <code>in</code> a representation of a Unicode
@@ -484,12 +484,11 @@ public class LittleEndianDataInputStream extends FilterInputStream implements
      *                                encoding of a Unicode string.
      * @see java.io.DataInputStream#readUnsignedShort()
      */
-    public final static String readUTF(DataInput in) throws IOException {
+    public static String readUTF(DataInput in) throws IOException {
         int utflen = in.readUnsignedShort();
         byte[] bytearr = null;
         char[] chararr = null;
-        if (in instanceof LittleEndianDataInputStream) {
-            LittleEndianDataInputStream dis = (LittleEndianDataInputStream) in;
+        if (in instanceof LittleEndianDataInputStream dis) {
             if (dis.bytearr.length < utflen) {
                 dis.bytearr = new byte[utflen * 2];
                 dis.chararr = new char[utflen * 2];
@@ -555,7 +554,7 @@ public class LittleEndianDataInputStream extends FilterInputStream implements
                         throw new UTFDataFormatException(
                                 "malformed input around byte " + (count - 1));
                     chararr[chararr_count++] = (char) (((c & 0x0F) << 12)
-                            | ((char2 & 0x3F) << 6) | ((char3 & 0x3F) << 0));
+                            | ((char2 & 0x3F) << 6) | ((char3 & 0x3F)));
                     break;
                 default:
                     /* 10xx xxxx, 1111 xxxx */

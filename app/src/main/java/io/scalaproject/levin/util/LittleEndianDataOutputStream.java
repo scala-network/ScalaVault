@@ -93,7 +93,7 @@ public class LittleEndianDataOutputStream extends FilterOutputStream implements
      * @throws IOException if an I/O error occurs.
      * @see FilterOutputStream#out
      */
-    public synchronized void write(byte b[], int off, int len)
+    public synchronized void write(byte[] b, int off, int len)
             throws IOException {
         out.write(b, off, len);
         incCount(len);
@@ -154,7 +154,7 @@ public class LittleEndianDataOutputStream extends FilterOutputStream implements
      * @see FilterOutputStream#out
      */
     public final void writeShort(int v) throws IOException {
-        out.write((v >>> 0) & 0xFF);
+        out.write((v) & 0xFF);
         out.write((v >>> 8) & 0xFF);
         incCount(2);
     }
@@ -169,7 +169,7 @@ public class LittleEndianDataOutputStream extends FilterOutputStream implements
      * @see FilterOutputStream#out
      */
     public final void writeChar(int v) throws IOException {
-        out.write((v >>> 0) & 0xFF);
+        out.write((v) & 0xFF);
         out.write((v >>> 8) & 0xFF);
         incCount(2);
     }
@@ -184,14 +184,14 @@ public class LittleEndianDataOutputStream extends FilterOutputStream implements
      * @see FilterOutputStream#out
      */
     public final void writeInt(int v) throws IOException {
-        out.write((v >>> 0) & 0xFF);
+        out.write((v) & 0xFF);
         out.write((v >>> 8) & 0xFF);
         out.write((v >>> 16) & 0xFF);
         out.write((v >>> 24) & 0xFF);
         incCount(4);
     }
 
-    private byte writeBuffer[] = new byte[8];
+    private final byte[] writeBuffer = new byte[8];
 
     /**
      * Writes a <code>long</code> to the underlying output stream as eight
@@ -210,7 +210,7 @@ public class LittleEndianDataOutputStream extends FilterOutputStream implements
         writeBuffer[3] = (byte) (v >>> 24);
         writeBuffer[2] = (byte) (v >>> 16);
         writeBuffer[1] = (byte) (v >>> 8);
-        writeBuffer[0] = (byte) (v >>> 0);
+        writeBuffer[0] = (byte) (v);
         out.write(writeBuffer, 0, 8);
         incCount(8);
     }
@@ -281,7 +281,7 @@ public class LittleEndianDataOutputStream extends FilterOutputStream implements
         int len = s.length();
         for (int i = 0; i < len; i++) {
             int v = s.charAt(i);
-            out.write((v >>> 0) & 0xFF);
+            out.write((v) & 0xFF);
             out.write((v >>> 8) & 0xFF);
         }
         incCount(len * 2);
@@ -331,10 +331,9 @@ public class LittleEndianDataOutputStream extends FilterOutputStream implements
      *
      * @param str a string to be written.
      * @param out destination to write to
-     * @return The number of bytes written out.
      * @throws IOException if an I/O error occurs.
      */
-    static int writeUTF(String str, DataOutput out) throws IOException {
+    static void writeUTF(String str, DataOutput out) throws IOException {
         int strlen = str.length();
         int utflen = 0;
         int c, count = 0;
@@ -356,8 +355,7 @@ public class LittleEndianDataOutputStream extends FilterOutputStream implements
                     + utflen + " bytes");
 
         byte[] bytearr = null;
-        if (out instanceof LittleEndianDataOutputStream) {
-            LittleEndianDataOutputStream dos = (LittleEndianDataOutputStream) out;
+        if (out instanceof LittleEndianDataOutputStream dos) {
             if (dos.bytearr == null || (dos.bytearr.length < (utflen + 2)))
                 dos.bytearr = new byte[(utflen * 2) + 2];
             bytearr = dos.bytearr;
@@ -366,7 +364,7 @@ public class LittleEndianDataOutputStream extends FilterOutputStream implements
         }
 
         bytearr[count++] = (byte) ((utflen >>> 8) & 0xFF);
-        bytearr[count++] = (byte) ((utflen >>> 0) & 0xFF);
+        bytearr[count++] = (byte) ((utflen) & 0xFF);
 
         int i = 0;
         for (i = 0; i < strlen; i++) {
@@ -384,14 +382,13 @@ public class LittleEndianDataOutputStream extends FilterOutputStream implements
             } else if (c > 0x07FF) {
                 bytearr[count++] = (byte) (0xE0 | ((c >> 12) & 0x0F));
                 bytearr[count++] = (byte) (0x80 | ((c >> 6) & 0x3F));
-                bytearr[count++] = (byte) (0x80 | ((c >> 0) & 0x3F));
+                bytearr[count++] = (byte) (0x80 | ((c) & 0x3F));
             } else {
                 bytearr[count++] = (byte) (0xC0 | ((c >> 6) & 0x1F));
-                bytearr[count++] = (byte) (0x80 | ((c >> 0) & 0x3F));
+                bytearr[count++] = (byte) (0x80 | ((c) & 0x3F));
             }
         }
         out.write(bytearr, 0, utflen + 2);
-        return utflen + 2;
     }
 
     /**
@@ -400,7 +397,6 @@ public class LittleEndianDataOutputStream extends FilterOutputStream implements
      * overflows, it will be wrapped to Integer.MAX_VALUE.
      *
      * @return the value of the <code>written</code> field.
-     * @see java.io.DataOutputStream#written
      */
     public final int size() {
         return written;

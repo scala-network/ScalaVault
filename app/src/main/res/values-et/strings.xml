@@ -1,6 +1,6 @@
-<resources>
+<resources xmlns:tools="http://schemas.android.com/tools" tools:locale="et">
     <string name="wallet_activity_name">Rahakott</string>
-
+    <string name="menu_mobileminer">Mobiilkaevur</string>
     <string name="menu_about">Meist</string>
     <string name="menu_privacy">Privaatsuspoliitika</string>
 
@@ -186,6 +186,7 @@
     <string name="generate_wallet_created">Rahakott loodud</string>
 
     <string name="generate_restoreheight_error">Sisesta plokinumber või kuupäev (YYYY-MM-DD)</string>
+    <string name="generate_restoreheight_min_error">Kuupäev peab olema suurem või võrdne kui %1$s</string>
 
     <string name="generate_wallet_type_key">Võtmed</string>
     <string name="generate_wallet_type_new">Uus</string>
@@ -236,7 +237,6 @@
     <string name="send_total_btc_label">Kokku (XLA)</string>
     <string name="send_total_label">Kokku</string>
 
-    <string name="send_amount">%1$s XLA</string>
     <string name="send_fee">+%1$s teenustasu</string>
 
     <string name="send_create_tx_error_title">Viga ülekande genereerimisel</string>
@@ -278,9 +278,13 @@
     <string name="receive_amount_nan">XLA pole arv</string>
 
     <string name="details_alert_message">Nüüd näidatakse tundlikku infot.\nPiilu oma seljataha!</string>
+    <string name="details_alert_yes">Okei</string>
+    <string name="details_alert_no">Loobu</string>
     <string name="details_title">Lisainfo</string>
 
     <string name="archive_alert_message">Rahakotist tehakse tagavarakoopia ja siis see kustutatakse!</string>
+    <string name="archive_alert_yes">Okei</string>
+    <string name="archive_alert_no">Loobu</string>
 
     <string name="fab_create_new">Loo uus rahakott</string>
     <string name="fab_restore_viewonly">Taasta rahakott vaatamiseks</string>
@@ -297,6 +301,7 @@
 
     <string name="menu_language">Keel</string>
     <string name="language_system_default">Kasuta süsteemi keelt</string>
+    <string name="menu_nodes">Kaugserverid</string>
 
     <string name="fab_restore_ledger">Taasta seadmelt Ledger Nano S</string>
 
@@ -355,55 +360,84 @@
     <string name="node_nobookmark">Automaatselt salvestati parimad %1$d serverit</string>
     <string name="label_test">Testi</string><!--note: as in "Test a network connection"-->
 
-    <string name="backup_success">Tagavarakoopia õnnestus</string>
-
-    <string name="send_address_resolve_bip70">Resolving Payment URI&#8230;</string>
-    <string name="send_address_not_bip70">Could not resolve Payment URI</string>
-    <string name="send_address_bip70">Resolved Payment URI &#x2714;</string>
-    <!-- please verify this means "Receiver" or "Recipient" as in "Receiver in the transaction" -->
+    <string name="remote_nodes_subtitle">Libistage allapoole, et skannida ja valida automaatselt parim saadavalolev sõlm</string>
+    <string name="change_remote_node_conf">Vaheta kaugnoodi %1$s-ks?</string>
+    <string name="backup_success">Tagavarakoopia õnnestus</string><string name="send_address_resolve_bip70">Makseaadressi URI lahendamine&#8230;</string>
+    <string name="send_address_not_bip70">Ei saanud makseaadressi URI lahendada</string>
+    <string name="send_address_bip70">Makseaadressi URI lahendatud &#x2714;</string>
+    <!-- verify this means "Receiver" or "Recipient" as in "Receiver in the transaction" -->
     <string name="send_address_hint">Saaja</string>
 
-    <string name="xlato_error_001">XLA.TO offline - try again later</string>
-    <string name="xlato_error_004">BTC amount out of bounds</string>
-    <string name="xlato_error_010">Invalid or outdated Payment URL</string>
-    <string name="xlato_error_012">Too many requests</string>
+    <string name="xlato_error_001">XLA.TO on võrguühenduseta - proovige hiljem uuesti</string>
+    <string name="xlato_error_004">BTC summa on lubatud piiridest väljas</string>
+    <string name="xlato_error_010">Kehtetu või aegunud makselink</string>
+    <string name="xlato_error_012">Liiga palju päringuid</string>
 
-    <string name="street_sweep_amount">EVERYTHING!</string> <!-- as in: "everything in the account" = "all the money" -->
+    <string name="street_sweep_amount">KÕIK!</string> <!-- as in: "everything in the account" = "all the money" -->
 
-    <string name="menu_ledger_seed">Convert Ledger Seed</string>
-    <string name="prompt_ledger_seed">Ledger Seed Words</string>
-    <string name="prompt_ledger_phrase">Ledger Passphrase (optional)</string>
-    <string name="bad_ledger_seed">Invalid Ledger Seed!</string>
-    <string name="prompt_ledger_seed_warn">Entering your Ledger Seed here is a major security risk!</string>
+    <string name="menu_ledger_seed">Konverteeri Ledger seemne</string>
+    <string name="prompt_ledger_seed">Ledger seemne sõnad</string>
+    <string name="prompt_ledger_phrase">Ledgeri paroolifraas (valikuline)</string>
+    <string name="bad_ledger_seed">Kehtetu Ledger seemne!</string>
+    <string name="prompt_ledger_seed_warn">Teie Ledger seemne sisestamine siia on suur turvarisk!</string>
 
     <string name="label_restoreheight">Taastamise plokinumber</string> <!-- Restore Height -->
 
-    <string name="toast_ledger_start_app">Start Scala App on %1$s</string>
+    <string name="toast_ledger_start_app">Käivitage Scala rakendus %1$s seadmes</string>
 
-    <string name="menu_rescan">Rescan!</string>
-    <string name="privacy_policy_intro">We care about your privacy. To learn more, please read our Privacy Policy.</string>
-    <string name="privacy_policy_label">Privacy Policy</string>
-    <string name="primary_address">Primary Address</string>
+    <string name="menu_rescan">Käivita uuesti!</string>
+    <string name="privacy_policy_intro">Me hoolime teie privaatsusest. Lisateabe saamiseks lugege meie privaatsuseeskirju.</string>
+    <string name="info_mobile_miner">Alusta kaevandamist oma mobiilseadmes Scala Miner\'iga. Lisateabe saamiseks puudutage siia.</string>
+    <string name="info_nodes_enabled_2">Scala Vault otsib parimaid saadaolevaid sõlmi. Lisateabe saamiseks puudutage siia.</string>
+    <string name="privacy_policy_label">Privaatsuseeskirjad</string>
+    <string name="primary_address">Primaarne aadress</string>
     <string name="mm_url">https://github.com/scala-network/MobileMiner/releases</string>
-    <string name="connection_remote_daemon">Connecting to remote node...</string>
-    <string name="remote_nodes">Remote Nodes</string>
-    <string name="address_book">Address Book</string>
-    <string name="delete_contact_conf">Delete entry %1$s?</string>
-    <string name="contact_value_empty">We need this!</string>
-    <string name="no_entry">No entry</string>
-    <string name="save_to_address_book">Save to address book</string>
-    <string name="contact_name_empty_error">Name cannot be empty!</string>
-    <string name="entry_name">Entry Name</string>
-    <string name="start_mining">Start mining on your Android device safely and efficiently with the Scala Mobile Miner.</string>
-    <string name="mobile_miner">Mobile Miner</string>
-    <string name="download">Download</string>
-    <string name="select_image">Select Image</string>
-    <string name="contact_avatar_hint">An image that represents this address book entry.</string>
-    <string name="upload">Upload</string>
-    <string name="delete">Delete</string>
-    <string name="edit">Edit</string>
-    <string name="enable_debug_info">Enable Debug Info</string>
-    <string name="disable_debug_info">Disable Debug Info</string>
-    <string name="send_address_resolve_ud">Resolving ENS / UD&#8230;</string>
-    <string name="send_address_no_ud_records">No address found for ENS / UD domain</string>
+    <string name="connection_remote_daemon">Ühendamine kaugserveriga&#8230;</string>
+    <string name="remote_nodes">Kaugserverid</string>
+    <string name="address_book">Aadressiraamat</string>
+    <string name="delete_contact_conf">Kas kustutada kirje %1$s?</string>
+    <string name="contact_value_empty">Vajame seda!</string>
+    <string name="no_entry">Kirje puudub</string>
+    <string name="save_to_address_book">Salvesta aadressiraamatusse</string>
+    <string name="contact_name_empty_error">Nimi ei tohi olla tühi!</string>
+    <string name="entry_name">Kirje nimi</string>
+    <string name="start_mining">Käivitage Scala Mobile Miner turvaliselt ja tõhusalt oma Android-seadmes.</string>
+    <string name="mobile_miner">Mobiilne kaevandaja</string>
+    <string name="download">Lae alla</string>
+    <string name="select_image">Vali pilt</string>
+    <string name="contact_avatar_hint">Pilt, mis esindab seda aadressiraamatu kirjet.</string>
+    <string name="upload">Laadi üles</string>
+    <string name="delete">Kustuta</string>
+    <string name="edit">Muuda</string>
+    <string name="enable_debug_info">Luba tõrkeotsingu info</string>
+    <string name="disable_debug_info">Keela tõrkeotsingu info</string>
+    <string name="send_address_resolve_ud">ENS / UD lahendamine&#8230;</string>
+    <string name="send_address_no_ud_records">ENS / UD domeeni jaoks ei leitud aadressi</string>
+    <string name="transaction_history">Tehingute ajalugu</string>
+    <string name="send">Saada</string>
+    <string name="receive">Võta vastu</string>
+    <string name="balance">Saldo</string>
+    <string name="balance_primary_address">Esmane aadress</string>
+    <string name="balance_wallet_address">Rahakoti aadress</string>
+    <string name="history_no_transaction">Tehing puudub</string>
+    <string name="mobileminer_scala_miner">SCALA KAIVANDAMISE</string>
+    <string name="mobileminer_start_mining">Alusta kaevandamist oma Android-seadmes turvaliselt ja tõhusalt.</string>
+    <string name="close">Sulge</string>
+    <string name="credits">Autorid</string>
+    <string name="credits_made_with">Valmistatud </string>
+    <string name="credits_by"> poolt </string>
+    <string name="credits_forked_from">Hargitatud </string>
+    <string name="wizard_home">Turvaline ja kerge rahakott teie Scala müntide hoidmiseks</string>
+    <string name="wizard_home_description">Scala Vault pakub kõike, mida vajate Scala rahakottide haldamiseks ja kasutamiseks Android-seadmes</string>
+    <string name="wizard_home_create_new_wallet">Loo uus rahakott</string>
+    <string name="wizard_home_import_from_seed">Impordi seemnest</string>
+    <string name="wizard_home_or">või</string>
+    <string name="wizard_home_skip">Jäta vahele</string>
+    <string name="no_wallet">Rahakott puudub</string>
+    <string name="wallet_address">Rahakoti aadress</string>
+    <string name="subaddresses">Alamaadressid</string>
+    <string name="message_exchange_success">Valuuta hind uuendatud</string>
+    <string name="splashcreen_check_network">Võrgu kontrollimine…</string>
+    <string name="splashcreen_check_network_success">Internetiga ühendatud, Scala Vaulti sisenemine</string>
+    <string name="splashcreen_check_network_failure">See rakendus vajab toimimiseks võrguühendust. Palun kontrollige oma internetiühendust ja proovige uuesti…</string>
 </resources>

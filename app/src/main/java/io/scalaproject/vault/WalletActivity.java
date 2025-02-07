@@ -39,27 +39,24 @@ import com.google.android.material.navigation.NavigationView;
 
 import androidx.appcompat.app.AlertDialog;
 import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.appcompat.app.ActionBarDrawerToggle;
+
+import android.util.Log;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.inputmethod.EditorInfo;
-import android.widget.Button;
 import android.widget.EditText;
-import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import io.scalaproject.vault.data.BarcodeData;
 import io.scalaproject.vault.data.Contact;
-import io.scalaproject.vault.data.Node;
-import io.scalaproject.vault.data.NodeInfo;
 import io.scalaproject.vault.data.TxData;
 import io.scalaproject.vault.data.UserNotes;
 import io.scalaproject.vault.dialog.CreditsFragment;
@@ -70,7 +67,6 @@ import io.scalaproject.vault.ledger.LedgerProgressDialog;
 import io.scalaproject.vault.model.PendingTransaction;
 import io.scalaproject.vault.model.TransactionInfo;
 import io.scalaproject.vault.model.Wallet;
-import io.scalaproject.vault.model.WalletManager;
 import io.scalaproject.vault.service.WalletService;
 import io.scalaproject.vault.util.Helper;
 import io.scalaproject.vault.util.ScalaThreadPoolExecutor;
@@ -80,6 +76,7 @@ import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
+import java.util.Objects;
 import java.util.Set;
 
 import timber.log.Timber;
@@ -179,12 +176,7 @@ public class WalletActivity extends BaseActivity implements WalletFragment.Liste
                 getSupportFragmentManager().findFragmentByTag(WalletFragment.class.getName());
         if (walletFragment != null) walletFragment.resetDismissedTransactions();
         forceUpdate();
-        runOnUiThread(new Runnable() {
-            @Override
-            public void run() {
-                updateAccountsBalance();
-            }
-        });
+        runOnUiThread(this::updateAccountsBalance);
     }
 
     @Override
@@ -208,8 +200,8 @@ public class WalletActivity extends BaseActivity implements WalletFragment.Liste
     }
 
     @Override
-    public boolean setTxNotes(String txId, String txNotes) {
-        return getWallet().setUserNote(txId, txNotes);
+    public void setTxNotes(String txId, String txNotes) {
+        getWallet().setUserNote(txId, txNotes);
     }
 
     @Override
@@ -247,10 +239,10 @@ public class WalletActivity extends BaseActivity implements WalletFragment.Liste
 
     private void onWalletRescan() {
         try {
-            final WalletFragment walletFragment = (WalletFragment)
-                    getSupportFragmentManager().findFragmentByTag(WalletFragment.class.getName());
+            final WalletFragment walletFragment = (WalletFragment) getSupportFragmentManager().findFragmentByTag(WalletFragment.class.getName());
             getWallet().rescanBlockchainAsync();
             synced = false;
+            assert walletFragment != null;
             walletFragment.unsync();
             invalidateOptionsMenu();
         } catch (ClassCastException ex) {
@@ -260,14 +252,14 @@ public class WalletActivity extends BaseActivity implements WalletFragment.Liste
     }
 
     private void initWalletFragmentName(String walletName) {
-        final WalletFragment walletFragment = (WalletFragment)
-                getSupportFragmentManager().findFragmentByTag(WalletFragment.class.getName());
+        final WalletFragment walletFragment = (WalletFragment) getSupportFragmentManager().findFragmentByTag(WalletFragment.class.getName());
+        assert walletFragment != null;
         walletFragment.initWalletName(walletName);
     }
 
     private void initWalletFragmentAddress(String walletAddress) {
-        final WalletFragment walletFragment = (WalletFragment)
-                getSupportFragmentManager().findFragmentByTag(WalletFragment.class.getName());
+        final WalletFragment walletFragment = (WalletFragment) getSupportFragmentManager().findFragmentByTag(WalletFragment.class.getName());
+        assert walletFragment != null;
         walletFragment.initWalletAddress(walletAddress);
     }
 
@@ -312,52 +304,67 @@ public class WalletActivity extends BaseActivity implements WalletFragment.Liste
         return super.onPrepareOptionsMenu(menu);
     }
 
+    @SuppressLint("NonConstantResourceId")
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        switch (item.getItemId()) {
-            case R.id.action_addressbook:
+        return switch (item.getItemId()) {
+            case R.id.action_addressbook -> {
                 onAddressBook();
-                return true;
-            case R.id.action_wallets:
+                yield true;
+            }
+            case R.id.action_wallets -> {
                 showLoginFragment();
-                return true;
-            case R.id.action_rescan:
+                yield true;
+            }
+            case R.id.action_rescan -> {
                 onWalletRescan();
-                return true;
-            case R.id.action_info:
+                yield true;
+            }
+            case R.id.action_info -> {
                 onWalletDetails();
-                return true;
-            case R.id.action_credits:
+                yield true;
+            }
+            case R.id.action_credits -> {
                 CreditsFragment.display(getSupportFragmentManager());
-                return true;
-            case R.id.action_share:
+                yield true;
+            }
+            case R.id.action_share -> {
                 onShareTxInfo();
-                return true;
-            case R.id.action_help_tx_info:
+                yield true;
+            }
+            case R.id.action_help_tx_info -> {
                 HelpFragment.display(getSupportFragmentManager(), R.string.help_tx_details);
-                return true;
-            case R.id.action_help_wallet:
+                yield true;
+            }
+            case R.id.action_help_wallet -> {
                 HelpFragment.display(getSupportFragmentManager(), R.string.help_wallet);
-                return true;
-            case R.id.action_details_help:
+                yield true;
+            }
+            case R.id.action_details_help -> {
                 HelpFragment.display(getSupportFragmentManager(), R.string.help_details);
-                return true;
-            case R.id.action_details_changepw:
+                yield true;
+            }
+            case R.id.action_details_changepw -> {
                 onWalletChangePassword();
-                return true;
-            case R.id.action_help_send:
+                yield true;
+            }
+            case R.id.action_help_send -> {
                 HelpFragment.display(getSupportFragmentManager(), R.string.help_send);
-                return true;
-            case R.id.action_help_address_book:
+                yield true;
+            }
+            case R.id.action_help_address_book -> {
                 HelpFragment.display(getSupportFragmentManager(), R.string.help_address_book);
-                return true;
-            case R.id.action_rename:
+                yield true;
+            }
+            case R.id.action_rename -> {
                 onAccountRename();
-                return true;
-            case R.id.action_mobile_miner:
+                yield true;
+            }
+            case R.id.action_mobile_miner -> {
                 startActivity(new Intent(this, MobileMinerActivity.class));
-                return true;
-            case R.id.action_stealthmode:
+                yield true;
+            }
+            case R.id.action_stealthmode -> {
                 if (isStealthMode()) { // disable stealthMode
                     item.setIcon(R.drawable.ic_stealth_mode_on);
                     onDisableStealthMode();
@@ -365,10 +372,10 @@ public class WalletActivity extends BaseActivity implements WalletFragment.Liste
                     item.setIcon(R.drawable.ic_stealth_mode_off);
                     onEnableStealthMode();
                 }
-                return true;
-            default:
-                return super.onOptionsItemSelected(item);
-        }
+                yield true; // disable stealthMode
+            }
+            default -> super.onOptionsItemSelected(item);
+        };
     }
 
     private void showLoginFragment() {
@@ -376,6 +383,7 @@ public class WalletActivity extends BaseActivity implements WalletFragment.Liste
         try {
             onBackPressed();
         } catch (ClassCastException ex) {
+            Timber.d(ex.getLocalizedMessage());
         }
     }
 
@@ -394,16 +402,13 @@ public class WalletActivity extends BaseActivity implements WalletFragment.Liste
         Contact contact = Contact.fromString(contactString);
         if (contact != null) {
             allContacts.add(contact);
-        } else
+        } else {
             Timber.w("contactString invalid: %s", contactString);
+        }
     }
 
     public Set<Contact> getContacts() {
-        Set<Contact> contacts = new HashSet<>();
-
-        contacts.addAll(allContacts);
-
-        return contacts;
+        return new HashSet<>(allContacts);
     }
 
     public void saveContacts(final List<Contact> contactItems) {
@@ -433,8 +438,9 @@ public class WalletActivity extends BaseActivity implements WalletFragment.Liste
         Timber.d("onAddressBook()");
         try {
             Bundle extras = new Bundle();
-            replaceFragment(new AddressBookFragment(), null, extras);
-        } catch (ClassCastException ex) {
+            replaceFragment(new AddressBookFragment(), extras);
+        } catch (ClassCastException ignored) {
+            Timber.d("onAddressBook() called, but no AddressBookFragment active");
         }
     }
 
@@ -447,24 +453,14 @@ public class WalletActivity extends BaseActivity implements WalletFragment.Liste
     }
 
     private void onDisableStealthMode() {
-        Helper.promptPassword(WalletActivity.this, getWallet().getName(), false, new Helper.PasswordAction() {
-            @Override
-            public void action(String walletName, String password, boolean fingerprintUsed) {
-                runOnUiThread(new Runnable() {
-                    @Override
-                    public void run() {
-                        enableStealthMode(false);
-                    }
-                });
-            }
-        });
+        Helper.promptPassword(WalletActivity.this, getWallet().getName(), false, (walletName, password, fingerprintUsed) -> runOnUiThread(() -> enableStealthMode(false)));
     }
-
 
     public void onWalletChangePassword() {
         try {
             GenerateReviewFragment detailsFragment = (GenerateReviewFragment)
                     getSupportFragmentManager().findFragmentById(R.id.fragment_container);
+            assert detailsFragment != null;
             AlertDialog dialog = detailsFragment.createChangePasswordDialog();
             if (dialog != null) {
                 Helper.showKeyboard(dialog);
@@ -482,6 +478,7 @@ public class WalletActivity extends BaseActivity implements WalletFragment.Liste
         if (savedInstanceState != null) {
             // activity restarted
             // we don't want that - finish it and fall back to previous activity
+            Log.d("BaseActivity", "onCreate() - activity restarted");
             finish();
             return;
         }
@@ -489,30 +486,27 @@ public class WalletActivity extends BaseActivity implements WalletFragment.Liste
         setContentView(R.layout.activity_wallet);
         toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-        getSupportActionBar().setDisplayShowTitleEnabled(false);
+        Objects.requireNonNull(getSupportActionBar()).setDisplayShowTitleEnabled(false);
 
-        toolbar.setOnButtonListener(new Toolbar.OnButtonListener() {
-            @Override
-            public void onButton(int type) {
-                switch (type) {
-                    case Toolbar.BUTTON_BACK:
-                        onDisposeRequest();
-                        onBackPressed();
-                        break;
-                    case Toolbar.BUTTON_CANCEL:
-                        onDisposeRequest();
-                        Helper.hideKeyboard(WalletActivity.this);
-                        WalletActivity.super.onBackPressed();
-                        break;
-                    case Toolbar.BUTTON_CLOSE:
-                        finish();
-                        break;
-                    case Toolbar.BUTTON_CREDITS:
-                        CreditsFragment.display(getSupportFragmentManager());
-                    case Toolbar.BUTTON_NONE:
-                    default:
-                        Timber.e("Button " + type + "pressed - how can this be?");
-                }
+        toolbar.setOnButtonListener(type -> {
+            switch (type) {
+                case Toolbar.BUTTON_BACK:
+                    onDisposeRequest();
+                    onBackPressed();
+                    break;
+                case Toolbar.BUTTON_CANCEL:
+                    onDisposeRequest();
+                    Helper.hideKeyboard(WalletActivity.this);
+                    WalletActivity.super.onBackPressed();
+                    break;
+                case Toolbar.BUTTON_CLOSE:
+                    finish();
+                    break;
+                case Toolbar.BUTTON_CREDITS:
+                    CreditsFragment.display(getSupportFragmentManager());
+                case Toolbar.BUTTON_NONE:
+                default:
+                    Timber.e("Button " + type + "pressed - how can this be?");
             }
         });
 
@@ -526,14 +520,10 @@ public class WalletActivity extends BaseActivity implements WalletFragment.Liste
         accountsView.setNavigationItemSelectedListener(this);
 
         Fragment walletFragment = new WalletFragment();
-        getSupportFragmentManager().beginTransaction()
-                .add(R.id.fragment_container, walletFragment, WalletFragment.class.getName()).commit();
+        getSupportFragmentManager().beginTransaction().add(R.id.fragment_container, walletFragment, WalletFragment.class.getName()).commit();
         Timber.d("fragment added");
-
         loadContacts();
-
         startWalletService();
-
         Timber.d("onCreate() done.");
     }
 
@@ -546,7 +536,7 @@ public class WalletActivity extends BaseActivity implements WalletFragment.Liste
     private WalletService mBoundService = null;
     private boolean mIsBound = false;
 
-    private ServiceConnection mConnection = new ServiceConnection() {
+    private final ServiceConnection mConnection = new ServiceConnection() {
         public void onServiceConnected(ComponentName className, IBinder service) {
             // This is called when the connection with the service has been
             // established, giving us the service object we can use to
@@ -559,11 +549,7 @@ public class WalletActivity extends BaseActivity implements WalletFragment.Liste
             if (extras != null) {
                 String walletName = extras.getString(REQUEST_ID);
                 if (walletName != null) {
-                    runOnUiThread(new Runnable() {
-                        public void run() {
-                            initWalletFragmentName(walletName);
-                        }
-                    });
+                    runOnUiThread(() -> initWalletFragmentName(walletName));
                 }
             }
 
@@ -651,7 +637,7 @@ public class WalletActivity extends BaseActivity implements WalletFragment.Liste
 
     @Override
     public void onSendRequest() {
-        replaceFragment(SendFragment.newInstance(uri), null, null);
+        replaceFragment(SendFragment.newInstance(uri), null);
         uri = null; // only use uri once
     }
 
@@ -659,7 +645,7 @@ public class WalletActivity extends BaseActivity implements WalletFragment.Liste
     public void onTxDetailsRequest(TransactionInfo txInfo) {
         Bundle args = new Bundle();
         args.putParcelable(TxFragment.ARG_INFO, txInfo);
-        replaceFragment(new TxFragment(), null, args);
+        replaceFragment(new TxFragment(), args);
     }
 
     @Override
@@ -696,26 +682,17 @@ public class WalletActivity extends BaseActivity implements WalletFragment.Liste
     @Override
     public boolean onRefreshed(final Wallet wallet, final boolean full) {
         Timber.d("onRefreshed()");
-        runOnUiThread(new Runnable() {
-            public void run() {
-                updateAccountsBalance();
-            }
-        });
+        runOnUiThread(this::updateAccountsBalance);
 
         if(wallet == null)
             return false;
 
         if (numAccounts != wallet.getNumAccounts()) {
             numAccounts = wallet.getNumAccounts();
-            runOnUiThread(new Runnable() {
-                public void run() {
-                    updateAccountsList();
-                }
-            });
+            runOnUiThread(this::updateAccountsList);
         }
         try {
-            final WalletFragment walletFragment = (WalletFragment)
-                    getSupportFragmentManager().findFragmentByTag(WalletFragment.class.getName());
+            final WalletFragment walletFragment = (WalletFragment) getSupportFragmentManager().findFragmentByTag(WalletFragment.class.getName());
             if (wallet.isSynchronized()) {
                 Timber.d("onRefreshed() synced");
                 releaseWakeLock(RELEASE_WAKE_LOCK_DELAY); // the idea is to stay awake until synced
@@ -723,17 +700,15 @@ public class WalletActivity extends BaseActivity implements WalletFragment.Liste
                     onProgress(-1);
                     saveWallet(); // save on first sync
                     synced = true;
-                    runOnUiThread(new Runnable() {
-                        public void run() {
-                            walletFragment.onSynced();
-                        }
+                    runOnUiThread(() -> {
+                        assert walletFragment != null;
+                        walletFragment.onSynced();
                     });
                 }
             }
-            runOnUiThread(new Runnable() {
-                public void run() {
-                    walletFragment.onRefreshed(wallet, full);
-                }
+            runOnUiThread(() -> {
+                assert walletFragment != null;
+                walletFragment.onRefreshed(wallet, full);
             });
             return true;
         } catch (ClassCastException ex) {
@@ -744,15 +719,14 @@ public class WalletActivity extends BaseActivity implements WalletFragment.Liste
         return false;
     }
 
+    // Send toast message to user when wallet is stored successfully or not
     @Override
     public void onWalletStored(final boolean success) {
-        runOnUiThread(new Runnable() {
-            public void run() {
-                if (success) {
-                    Toast.makeText(WalletActivity.this, getString(R.string.status_wallet_unloaded), Toast.LENGTH_SHORT).show();
-                } else {
-                    Toast.makeText(WalletActivity.this, getString(R.string.status_wallet_unload_failed), Toast.LENGTH_LONG).show();
-                }
+        runOnUiThread(() -> {
+            if (success) {
+                Toast.makeText(WalletActivity.this, getString(R.string.status_wallet_unloaded), Toast.LENGTH_SHORT).show();
+            } else {
+                Toast.makeText(WalletActivity.this, getString(R.string.status_wallet_unload_failed), Toast.LENGTH_LONG).show();
             }
         });
     }
@@ -761,30 +735,23 @@ public class WalletActivity extends BaseActivity implements WalletFragment.Liste
 
     @Override
     public void onWalletOpen(final Wallet.Device device) {
-        switch (device) {
-            case Device_Ledger:
-                runOnUiThread(new Runnable() {
-                    public void run() {
-                        showLedgerProgressDialog(LedgerProgressDialog.TYPE_RESTORE);
-                    }
-                });
+        if (Objects.requireNonNull(device) == Wallet.Device.Device_Ledger) {
+            runOnUiThread(() -> showLedgerProgressDialog(LedgerProgressDialog.TYPE_RESTORE));
         }
     }
 
     @Override
     public void onWalletStarted(final Wallet.Status walletStatus) {
-        runOnUiThread(new Runnable() {
-            public void run() {
-                dismissProgressDialog();
-                if (walletStatus == null) {
-                    // guess what went wrong
-                    Toast.makeText(WalletActivity.this, getString(R.string.status_wallet_connect_failed), Toast.LENGTH_LONG).show();
-                } else {
-                    if (Wallet.ConnectionStatus.ConnectionStatus_WrongVersion == walletStatus.getConnectionStatus())
-                        Toast.makeText(WalletActivity.this, getString(R.string.status_wallet_connect_wrongversion), Toast.LENGTH_LONG).show();
-                    else if (!walletStatus.isOk())
-                        Toast.makeText(WalletActivity.this, walletStatus.getErrorString(), Toast.LENGTH_LONG).show();
-                }
+        runOnUiThread(() -> {
+            dismissProgressDialog();
+            if (walletStatus == null) {
+                // guess what went wrong
+                Toast.makeText(WalletActivity.this, getString(R.string.status_wallet_connect_failed), Toast.LENGTH_LONG).show();
+            } else {
+                if (Wallet.ConnectionStatus.ConnectionStatus_WrongVersion == walletStatus.getConnectionStatus())
+                    Toast.makeText(WalletActivity.this, getString(R.string.status_wallet_connect_wrongversion), Toast.LENGTH_LONG).show();
+                else if (!walletStatus.isOk())
+                    Toast.makeText(WalletActivity.this, walletStatus.getErrorString(), Toast.LENGTH_LONG).show();
             }
         });
         if ((walletStatus == null) || (Wallet.ConnectionStatus.ConnectionStatus_Connected != walletStatus.getConnectionStatus())) {
@@ -795,14 +762,11 @@ public class WalletActivity extends BaseActivity implements WalletFragment.Liste
 
             enableStealthMode(requestStealthMode);
 
-            final WalletFragment walletFragment = (WalletFragment)
-                    getSupportFragmentManager().findFragmentById(R.id.fragment_container);
-            runOnUiThread(new Runnable() {
-                public void run() {
-                    updateAccountsHeader();
-                    if (walletFragment != null) {
-                        walletFragment.onLoaded();
-                    }
+            final WalletFragment walletFragment = (WalletFragment) getSupportFragmentManager().findFragmentById(R.id.fragment_container);
+            runOnUiThread(() -> {
+                updateAccountsHeader();
+                if (walletFragment != null) {
+                    walletFragment.onLoaded();
                 }
             });
         }
@@ -811,11 +775,7 @@ public class WalletActivity extends BaseActivity implements WalletFragment.Liste
         if(wallet != null ) {
             String walletAddress = wallet.getAddress();
             if (walletAddress != null) {
-                runOnUiThread(new Runnable() {
-                    public void run() {
-                        initWalletFragmentAddress(walletAddress);
-                    }
-                });
+                runOnUiThread(() -> initWalletFragmentAddress(walletAddress));
             }
         }
     }
@@ -823,19 +783,18 @@ public class WalletActivity extends BaseActivity implements WalletFragment.Liste
     @Override
     public void onTransactionCreated(final String txTag, final PendingTransaction pendingTransaction) {
         try {
-            final SendFragment sendFragment = (SendFragment)
-                    getSupportFragmentManager().findFragmentById(R.id.fragment_container);
-            runOnUiThread(new Runnable() {
-                public void run() {
-                    dismissProgressDialog();
-                    PendingTransaction.Status status = pendingTransaction.getStatus();
-                    if (status != PendingTransaction.Status.Status_Ok) {
-                        String errorText = pendingTransaction.getErrorString();
-                        getWallet().disposePendingTransaction();
-                        sendFragment.onCreateTransactionFailed(errorText);
-                    } else {
-                        sendFragment.onTransactionCreated(txTag, pendingTransaction);
-                    }
+            final SendFragment sendFragment = (SendFragment) getSupportFragmentManager().findFragmentById(R.id.fragment_container);
+            runOnUiThread(() -> {
+                dismissProgressDialog();
+                PendingTransaction.Status status = pendingTransaction.getStatus();
+                if (status != PendingTransaction.Status.Status_Ok) {
+                    String errorText = pendingTransaction.getErrorString();
+                    getWallet().disposePendingTransaction();
+                    assert sendFragment != null;
+                    sendFragment.onCreateTransactionFailed(errorText);
+                } else {
+                    assert sendFragment != null;
+                    sendFragment.onTransactionCreated(txTag, pendingTransaction);
                 }
             });
         } catch (ClassCastException ex) {
@@ -849,12 +808,10 @@ public class WalletActivity extends BaseActivity implements WalletFragment.Liste
     @Override
     public void onSendTransactionFailed(final String error) {
         try {
-            final SendFragment sendFragment = (SendFragment)
-                    getSupportFragmentManager().findFragmentById(R.id.fragment_container);
-            runOnUiThread(new Runnable() {
-                public void run() {
-                    sendFragment.onSendTransactionFailed(error);
-                }
+            final SendFragment sendFragment = (SendFragment) getSupportFragmentManager().findFragmentById(R.id.fragment_container);
+            runOnUiThread(() -> {
+                assert sendFragment != null;
+                sendFragment.onSendTransactionFailed(error);
             });
         } catch (ClassCastException ex) {
             // not in spend fragment
@@ -865,12 +822,10 @@ public class WalletActivity extends BaseActivity implements WalletFragment.Liste
     @Override
     public void onTransactionSent(final String txId) {
         try {
-            final SendFragment sendFragment = (SendFragment)
-                    getSupportFragmentManager().findFragmentById(R.id.fragment_container);
-            runOnUiThread(new Runnable() {
-                public void run() {
-                    sendFragment.onTransactionSent(txId);
-                }
+            final SendFragment sendFragment = (SendFragment) getSupportFragmentManager().findFragmentById(R.id.fragment_container);
+            runOnUiThread(() -> {
+                assert sendFragment != null;
+                sendFragment.onTransactionSent(txId);
             });
         } catch (ClassCastException ex) {
             // not in spend fragment
@@ -881,14 +836,9 @@ public class WalletActivity extends BaseActivity implements WalletFragment.Liste
     @Override
     public void onProgress(final String text) {
         try {
-            final WalletFragment walletFragment = (WalletFragment)
-                    getSupportFragmentManager().findFragmentByTag(WalletFragment.class.getName());
+            final WalletFragment walletFragment = (WalletFragment) getSupportFragmentManager().findFragmentByTag(WalletFragment.class.getName());
             if(walletFragment != null) {
-                runOnUiThread(new Runnable() {
-                    public void run() {
-                        walletFragment.setProgress(text);
-                    }
-                });
+                runOnUiThread(() -> walletFragment.setProgress(text));
             }
         } catch (ClassCastException ex) {
             // not in wallet fragment (probably send scala)
@@ -899,18 +849,15 @@ public class WalletActivity extends BaseActivity implements WalletFragment.Liste
 
     @Override
     public void onProgress(final int n) {
-        runOnUiThread(new Runnable() {
-            public void run() {
-                try {
-                    WalletFragment walletFragment = (WalletFragment)
-                            getSupportFragmentManager().findFragmentByTag(WalletFragment.class.getName());
-                    if (walletFragment != null)
-                        walletFragment.setProgress(n);
-                } catch (ClassCastException ex) {
-                    // not in wallet fragment (probably send scala)
-                    Timber.d(ex.getLocalizedMessage());
-                    // keep calm and carry on
-                }
+        runOnUiThread(() -> {
+            try {
+                WalletFragment walletFragment = (WalletFragment) getSupportFragmentManager().findFragmentByTag(WalletFragment.class.getName());
+                if (walletFragment != null)
+                    walletFragment.setProgress(n);
+            } catch (ClassCastException ex) {
+                // not in wallet fragment (probably send scala)
+                Timber.d(ex.getLocalizedMessage());
+                // keep calm and carry on
             }
         });
     }
@@ -943,13 +890,9 @@ public class WalletActivity extends BaseActivity implements WalletFragment.Liste
 
     public void onSaveContact(String name, String address) {
         Contact contact = new Contact(name, address);
-        if (contact != null) {
-            allContacts.add(contact);
-            List<Contact> contactItems = new ArrayList<>();
-            contactItems.addAll(allContacts);
-            saveContacts(contactItems);
-        } else
-            Timber.w("contact invalid");
+        allContacts.add(contact);
+        List<Contact> contactItems = new ArrayList<>(allContacts);
+        saveContacts(contactItems);
     }
 
     @Override
@@ -977,50 +920,40 @@ public class WalletActivity extends BaseActivity implements WalletFragment.Liste
         return getWallet().getName();
     }
 
-    void popFragmentStack(String name) {
-        if (name == null) {
-            getSupportFragmentManager().popBackStack();
-        } else {
-            getSupportFragmentManager().popBackStack(name, FragmentManager.POP_BACK_STACK_INCLUSIVE);
-        }
+    void popFragmentStack() {
+        getSupportFragmentManager().popBackStack();
     }
 
-    void replaceFragment(Fragment newFragment, String stackName, Bundle extras) {
+    void replaceFragment(Fragment newFragment, Bundle extras) {
         if (extras != null) {
             newFragment.setArguments(extras);
         }
         FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
         transaction.replace(R.id.fragment_container, newFragment);
-        transaction.addToBackStack(stackName);
+        transaction.addToBackStack(null);
         transaction.commit();
     }
 
     private void onWalletDetails() {
-        DialogInterface.OnClickListener dialogClickListener = new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialog, int which) {
-                switch (which) {
-                    case DialogInterface.BUTTON_POSITIVE:
-                        final Bundle extras = new Bundle();
-                        extras.putString(GenerateReviewFragment.REQUEST_TYPE, GenerateReviewFragment.VIEW_TYPE_WALLET);
+        DialogInterface.OnClickListener dialogClickListener = (dialog, which) -> {
+            switch (which) {
+                case DialogInterface.BUTTON_POSITIVE:
+                    final Bundle extras = new Bundle();
+                    extras.putString(GenerateReviewFragment.REQUEST_TYPE, GenerateReviewFragment.VIEW_TYPE_WALLET);
 
-                        if (needVerifyIdentity) {
-                            Helper.promptPassword(WalletActivity.this, getWallet().getName(), true, new Helper.PasswordAction() {
-                                @Override
-                                public void action(String walletName, String password, boolean fingerprintUsed) {
-                                    replaceFragment(new GenerateReviewFragment(), null, extras);
-                                    needVerifyIdentity = false;
-                                }
-                            });
-                        } else {
-                            replaceFragment(new GenerateReviewFragment(), null, extras);
-                        }
+                    if (needVerifyIdentity) {
+                        Helper.promptPassword(WalletActivity.this, getWallet().getName(), true, (walletName, password, fingerprintUsed) -> {
+                            replaceFragment(new GenerateReviewFragment(), extras);
+                            needVerifyIdentity = false;
+                        });
+                    } else {
+                        replaceFragment(new GenerateReviewFragment(), extras);
+                    }
 
-                        break;
-                    case DialogInterface.BUTTON_NEGATIVE:
-                        // do nothing
-                        break;
-                }
+                    break;
+                case DialogInterface.BUTTON_NEGATIVE:
+                    // do nothing
+                    break;
             }
         };
 
@@ -1033,8 +966,8 @@ public class WalletActivity extends BaseActivity implements WalletFragment.Liste
 
     void onShareTxInfo() {
         try {
-            TxFragment fragment = (TxFragment)
-                    getSupportFragmentManager().findFragmentById(R.id.fragment_container);
+            TxFragment fragment = (TxFragment) getSupportFragmentManager().findFragmentById(R.id.fragment_container);
+            assert fragment != null;
             fragment.shareTxInfo();
         } catch (ClassCastException ex) {
             // not in wallet fragment
@@ -1062,7 +995,7 @@ public class WalletActivity extends BaseActivity implements WalletFragment.Liste
 
     private void startScanFragment() {
         Bundle extras = new Bundle();
-        replaceFragment(new ScannerFragment(), null, extras);
+        replaceFragment(new ScannerFragment(), extras);
     }
 
     /// QR scanner callbacks
@@ -1081,7 +1014,7 @@ public class WalletActivity extends BaseActivity implements WalletFragment.Liste
         // #gurke
         BarcodeData.fromString(qrCode, (bcData) -> {
             if (bcData != null) {
-                popFragmentStack(null);
+                popFragmentStack();
                 Timber.d("AAA");
                 onUriScanned(bcData);
                 listener.onScanned(true);
@@ -1109,14 +1042,12 @@ public class WalletActivity extends BaseActivity implements WalletFragment.Liste
 
     @SuppressLint("MissingSuperCall")
     @Override
-    public void onRequestPermissionsResult(int requestCode, @NonNull String permissions[],
-                                           @NonNull int[] grantResults) {
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
         Timber.d("onRequestPermissionsResult()");
         switch (requestCode) {
             case Helper.PERMISSIONS_REQUEST_CAMERA: {
                 // If request is cancelled, the result arrays are empty.
-                if (grantResults.length > 0
-                        && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
                     startScanFragment = true;
                 } else {
                     String msg = getString(R.string.message_camera_not_permitted);
@@ -1132,6 +1063,7 @@ public class WalletActivity extends BaseActivity implements WalletFragment.Liste
             default:
             {
                 // nothing
+                Log.d("BaseActivity", "Unknown request code: " + requestCode);
             }
         }
     }
@@ -1150,7 +1082,7 @@ public class WalletActivity extends BaseActivity implements WalletFragment.Liste
     }
 
     void startReceiveFragment(Bundle extras) {
-        replaceFragment(new ReceiveFragment(), null, extras);
+        replaceFragment(new ReceiveFragment(), extras);
         Timber.d("ReceiveFragment placed");
     }
 
@@ -1171,6 +1103,7 @@ public class WalletActivity extends BaseActivity implements WalletFragment.Liste
             drawer.closeDrawer(GravityCompat.START);
             return;
         }
+
         final Fragment fragment = getSupportFragmentManager().findFragmentById(R.id.fragment_container);
         if (fragment instanceof OnBackPressedListener) {
             if (!((OnBackPressedListener) fragment).onBackPressed()) {
@@ -1183,7 +1116,7 @@ public class WalletActivity extends BaseActivity implements WalletFragment.Liste
 
     @Override
     public void onFragmentDone() {
-        popFragmentStack(null);
+        popFragmentStack();
     }
 
     @Override
@@ -1191,7 +1124,7 @@ public class WalletActivity extends BaseActivity implements WalletFragment.Liste
         return getPreferences(Context.MODE_PRIVATE);
     }
 
-    private List<Integer> accountIds = new ArrayList<>();
+    private final List<Integer> accountIds = new ArrayList<>();
 
     // generate and cache unique ids for use in accounts list
     private int getAccountId(int accountIndex) {
@@ -1272,42 +1205,34 @@ public class WalletActivity extends BaseActivity implements WalletFragment.Liste
         tvRenameLabel.setText(getString(R.string.prompt_rename, wallet.getAccountLabel()));
 
         // set dialog message
-        alertDialogBuilder
-                .setCancelable(false)
-                .setPositiveButton(getString(R.string.label_ok),
-                        new DialogInterface.OnClickListener() {
-                            public void onClick(DialogInterface dialog, int id) {
-                                Helper.hideKeyboardAlways(WalletActivity.this);
-                                String newName = etRename.getText().toString();
-                                wallet.setAccountLabel(newName);
-                                updateAccountName();
-                            }
-                        })
-                .setNegativeButton(getString(R.string.label_cancel),
-                        new DialogInterface.OnClickListener() {
-                            public void onClick(DialogInterface dialog, int id) {
-                                Helper.hideKeyboardAlways(WalletActivity.this);
-                                dialog.cancel();
-                            }
-                        });
+        alertDialogBuilder.setCancelable(false).setPositiveButton(getString(R.string.label_ok), (dialog, id) -> {
+            Helper.hideKeyboardAlways(WalletActivity.this);
+            String newName = etRename.getText().toString();
+            wallet.setAccountLabel(newName);
+            updateAccountName();
+        }).setNegativeButton(getString(R.string.label_cancel), (dialog, id) -> {
+            Helper.hideKeyboardAlways(WalletActivity.this);
+            dialog.cancel();
+        });
 
         final androidx.appcompat.app.AlertDialog dialog = alertDialogBuilder.create();
         Helper.showKeyboard(dialog);
 
         // accept keyboard "ok"
-        etRename.setOnEditorActionListener(new TextView.OnEditorActionListener() {
-            public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
-                if ((event != null && (event.getKeyCode() == KeyEvent.KEYCODE_ENTER) && (event.getAction() == KeyEvent.ACTION_DOWN))
-                        || (actionId == EditorInfo.IME_ACTION_DONE)) {
-                    Helper.hideKeyboardAlways(WalletActivity.this);
-                    String newName = etRename.getText().toString();
-                    dialog.cancel();
-                    wallet.setAccountLabel(newName);
-                    updateAccountName();
-                    return false;
-                }
+        /*
+            TODO check if IME creates bug in android, no action needed, this dosnt affect in the app,
+            and
+         */
+        etRename.setOnEditorActionListener((v, actionId, event) -> {
+            if ((event != null && (event.getKeyCode() == KeyEvent.KEYCODE_ENTER) && (event.getAction() == KeyEvent.ACTION_DOWN)) || (actionId == EditorInfo.IME_ACTION_DONE)) {
+                Helper.hideKeyboardAlways(WalletActivity.this);
+                String newName = etRename.getText().toString();
+                dialog.cancel();
+                wallet.setAccountLabel(newName);
+                updateAccountName();
                 return false;
             }
+            return false;
         });
 
         dialog.show();
@@ -1316,19 +1241,17 @@ public class WalletActivity extends BaseActivity implements WalletFragment.Liste
     @Override
     public boolean onNavigationItemSelected(MenuItem item) {
         final int id = item.getItemId();
-        switch (id) {
-            case R.id.account_new:
-                addAccount();
-                break;
-            default:
-                Timber.d("NavigationDrawer ID=%d", id);
-                int accountIdx = accountIds.indexOf(id);
-                if (accountIdx >= 0) {
-                    Timber.d("found @%d", accountIdx);
-                    getWallet().setAccountIndex(accountIdx);
-                }
-                forceUpdate();
-                drawer.closeDrawer(GravityCompat.START);
+        if (id == R.id.account_new) {
+            addAccount();
+        } else {
+            Timber.d("NavigationDrawer ID=%d", id);
+            int accountIdx = accountIds.indexOf(id);
+            if (accountIdx >= 0) {
+                Timber.d("found @%d", accountIdx);
+                getWallet().setAccountIndex(accountIdx);
+            }
+            forceUpdate();
+            drawer.closeDrawer(GravityCompat.START);
         }
         return true;
     }
@@ -1345,6 +1268,7 @@ public class WalletActivity extends BaseActivity implements WalletFragment.Liste
         }
     }
 
+    @SuppressLint("StaticFieldLeak")
     private class AsyncAddAccount extends AsyncTask<Void, Void, Boolean> {
         boolean dialogOpened = false;
 

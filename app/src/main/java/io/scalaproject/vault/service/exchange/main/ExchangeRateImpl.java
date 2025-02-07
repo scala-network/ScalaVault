@@ -19,10 +19,10 @@
  *
  * Please see the included LICENSE file for more information.*/
 
-package io.scalaproject.vault.service.exchange.kraken;
+package io.scalaproject.vault.service.exchange.main;
+import android.util.Log;
 
 import androidx.annotation.NonNull;
-
 import io.scalaproject.vault.service.exchange.api.ExchangeException;
 import io.scalaproject.vault.service.exchange.api.ExchangeRate;
 
@@ -42,7 +42,7 @@ class ExchangeRateImpl implements ExchangeRate {
 
     @Override
     public String getServiceName() {
-        return "api.kraken.com";
+        return "prices.scala.network";
     }
 
     @Override
@@ -68,9 +68,46 @@ class ExchangeRateImpl implements ExchangeRate {
     }
 
     ExchangeRateImpl(final JSONObject jsonObject, final boolean swapAssets) throws JSONException, ExchangeException {
-        this.baseCurrency = "XLA";
-        this.quoteCurrency = "EUR";
-        this.rate = 1.0;
-        return;
+        super();
+        try {
+            // Current API provides BTC, LTC, USD, EUR
+            // Uppercase provides general info, lowercase provides price
+            baseCurrency = "XLA";
+            quoteCurrency = "EUR";
+            // for now is dirty fix... but works.
+/*
+            Pattern pattern = Pattern.compile("^X(.*?)Z(.*?)$");
+            Matcher matcher = pattern.matcher(key);
+            if (matcher.find()) {
+                Log.w("MainExchangeRateImpl", "matcher.find()");
+                baseCurrency = swapAssets ? matcher.group(2) : matcher.group(1);
+                quoteCurrency = swapAssets ? matcher.group(1) : matcher.group(2);
+            } else {
+                Log.w("MainExchangeRateImpl", "no match");
+                throw new ExchangeException("no pair returned!");
+            }
+*/
+            JSONObject pair = jsonObject.getJSONObject("eur");
+            String priceKey = "price";
+            if (pair.has("c")) {
+                JSONArray close = pair.getJSONArray("c");
+                priceKey = close.getString(0);
+            } else if (pair.has(priceKey)) {
+                priceKey = pair.getString(priceKey);
+            }
+
+            if (priceKey != null) {
+                try {
+                    double rate = Double.parseDouble(priceKey);
+                    this.rate = swapAssets ? (1 / rate) : rate;
+                } catch (NumberFormatException ex) {
+                    throw new ExchangeException(ex.getLocalizedMessage());
+                }
+            } else {
+                throw new ExchangeException("no price returned!");
+            }
+        } catch (NoSuchElementException ex) {
+            throw new ExchangeException(ex.getLocalizedMessage());
+        }
     }
 }

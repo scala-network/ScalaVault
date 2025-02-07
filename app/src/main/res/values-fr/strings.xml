@@ -1,6 +1,6 @@
-<resources>
+<resources xmlns:tools="http://schemas.android.com/tools" tools:locale="fr">
     <string name="wallet_activity_name">Portefeuille</string>
-
+    <string name="menu_mobileminer">Mineur mobile</string>
     <string name="menu_about">À Propos</string>
     <string name="menu_privacy">Politique de Confidentialité</string>
 
@@ -32,14 +32,7 @@
 
     <string name="info_xlato_enabled">Paiement BTC activé, tapez pour plus d\'infos.</string>
     <string name="info_ledger_enabled">Ledger activé, tapez pour plus d\'infos.</string>
-
-    <string name="info_xlato"><![CDATA[
-        <b>Vous avez entré une adresse Bitcoin.</b><br/>
-        <i>Vous envoyez des XLA et le destinataire recevra des BTC via le service <b>XLA.TO</b>.</i>
-    ]]></string>
-
     <string name="info_send_xlato_success_order_label">Ordres XLA.TO</string>
-
     <string name="info_send_xlato_success_btc">%1$s BTC</string>
 
 
@@ -166,6 +159,7 @@
     <string name="generate_title">Créer un portefeuille</string>
     <string name="generate_name_hint">Nom du portefeuille</string>
     <string name="generate_password_hint">Mot de passe du portefeuille (optionnel)</string>
+    <string name="prompt_password_hint">Mot de passe (Laisser vide si aucun)</string>
     <string name="generate_fingerprint_hint">Allow to open wallet using fingerprint</string>
     <string name="generate_fingerprint_warn"><![CDATA[
         <strong>Authentification par empreinte dgitale</strong>
@@ -192,7 +186,7 @@
     <string name="generate_wallet_created">Portefeuille créé</string>
 
     <string name="generate_restoreheight_error">Entrer un nombre ou une date (YYYY-MM-DD)</string>
-
+    <string name="generate_restoreheight_min_error">La date doit être supérieure ou égale à %1$s</string>
     <string name="generate_wallet_type_key">Clefs</string>
     <string name="generate_wallet_type_new">Nouveau</string>
     <string name="generate_wallet_type_seed">Phrase mnémonique</string>
@@ -220,6 +214,7 @@
     <string name="send_amount_hint">0.00</string>
     <string name="send_notes_hint">Notes privées (optionnelles)</string>
     <string name="send_generate_paymentid_hint">Générer</string>
+    <string name="send_qr_hint">Scanner</string>
     <string name="send_send_label">Dépenser mes beaux Scala</string>
     <string name="send_send_timed_label">Dépenser mes beaux Scala (%1$s)</string>
     <string name="send_qr_invalid">QR Code invalide</string>
@@ -238,7 +233,6 @@
     <string name="send_total_btc_label">Total (XLA)</string>
     <string name="send_total_label">Total</string>
 
-    <string name="send_amount">%1$s XLA</string>
     <string name="send_fee">+%1$s Frais</string>
 
     <string name="send_create_tx_error_title">Erreur de création de transaction</string>
@@ -279,9 +273,13 @@
     <string name="receive_amount_nan">XLA pas un nombre</string>
 
     <string name="details_alert_message">Des données sensible vont être affichées.\nRegardez autour de vous !</string>
+    <string name="details_alert_yes">Accepter</string>
+    <string name="details_alert_no">Annuler</string>
     <string name="details_title">Détails</string>
 
     <string name="archive_alert_message">Le portefeuille sera sauvegardé puis supprimé !</string>
+    <string name="archive_alert_yes">Accepter</string>
+    <string name="archive_alert_no">Annuler</string>
 
     <string name="fab_create_new">Créer un nouveau portefeuille</string>
     <string name="fab_restore_viewonly">Restaurer un portefeuille d\'audit</string>
@@ -323,6 +321,7 @@
 
     <string name="menu_language">Langue</string>
     <string name="language_system_default">Utiliser la Langue du Système</string>
+    <string name="menu_nodes">Nœuds Distants</string>
 
     <string name="receive_desc_hint">Description (optionnelle)</string>
 
@@ -336,7 +335,10 @@
     <string name="menu_info">Montrer les secrets !</string><!--Changed to: Show Secrets!-->
     <string name="menu_StealthMode">Mode furtif</string>
 
-    <string name="info_nodes_enabled">Nœud-tomatiC activé, tapez pour plus d\'infos.</string>
+    <string name="info_xlato" translatable="false">OBSOLÈTE</string>
+    <string name="info_mobile_miner">Commencez à miner sur votre appareil mobile avec Scala Miner. Appuyez ici pour plus d\'informations.</string>
+    <string name="info_nodes_enabled" translatable="false">OBSOLÈTE</string>
+    <string name="info_nodes_enabled_2">Scala Vault recherche les meilleurs nœuds disponibles. Appuyez ici pour plus d\'informations.</string>
     <string name="node_height">Dernier bloc mis à jour : %1$s</string>
     <string name="label_nodes">Nœuds</string>
     <string name="node_name_hint">Nom du Nœud (Optionnel)</string>
@@ -363,6 +365,8 @@
     <string name="node_nobookmark">%1$d meilleurs nœuds mis en favoris automatiquement</string>
     <string name="label_test">Tester</string><!--note: as in "Test a network connection"-->
 
+    <string name="remote_nodes_subtitle">Faites glisser vers le bas pour scanner et sélectionner automatiquement le meilleur nœud disponible</string>
+    <string name="change_remote_node_conf">Changer le nœud distant vers %1$s ?</string>
     <string name="send_address_resolve_bip70">Résolution de l\'URI de Paiement&#8230;</string>
     <string name="send_address_not_bip70">Résolution de l\'URI de Paiement impossible</string>
     <string name="send_address_bip70">URI de Paiement Résolue &#x2714;</string>
@@ -384,32 +388,61 @@
 
     <string name="label_restoreheight">Hauteur de restauration</string> <!-- Restore Height -->
 
-    <string name="toast_ledger_start_app">Start Scala App on %1$s</string>
-
-    <string name="menu_rescan">Rescan!</string>
-    <string name="privacy_policy_intro">We care about your privacy. To learn more, please read our Privacy Policy.</string>
-    <string name="privacy_policy_label">Privacy Policy</string>
-    <string name="primary_address">Primary Address</string>
-    <string name="mm_url">https://github.com/scala-network/MobileMiner/releases</string>
-    <string name="connection_remote_daemon">Connecting to remote node...</string>
-    <string name="remote_nodes">Remote Nodes</string>
-    <string name="address_book">Address Book</string>
-    <string name="delete_contact_conf">Delete entry %1$s?</string>
-    <string name="contact_value_empty">We need this!</string>
-    <string name="no_entry">No entry</string>
-    <string name="save_to_address_book">Save to address book</string>
-    <string name="contact_name_empty_error">Name cannot be empty!</string>
-    <string name="entry_name">Entry Name</string>
-    <string name="start_mining">Start mining on your Android device safely and efficiently with the Scala Mobile Miner.</string>
+    <string name="toast_ledger_start_app">Démarrer l\'application Scala sur %1$s</string>
+    <string name="menu_rescan">Rescanner!</string>
+    <string name="privacy_policy_intro">Nous nous soucions de votre vie privée. Pour en savoir plus, veuillez lire notre politique de confidentialité.</string>
+    <string name="privacy_policy_label">Politique de confidentialité</string>
+    <string name="primary_address">Adresse principale</string>
+    <string name="mm_url" translatable="false">https://github.com/scala-network/MobileMiner/releases</string>
+    <string name="connection_remote_daemon">Connexion au nœud distant&#8230;</string>
+    <string name="remote_nodes">Nœuds distants</string>
+    <string name="address_book">Carnet d\'adresses</string>
+    <string name="delete_contact_conf">Supprimer l\'entrée %1$s ?</string>
+    <string name="contact_value_empty">Nous avons besoin de cela !</string>
+    <string name="no_entry">Aucune entrée</string>
+    <string name="save_to_address_book">Enregistrer dans le carnet d\'adresses</string>
+    <string name="contact_name_empty_error">Le nom ne peut pas être vide !</string>
+    <string name="entry_name">Nom de l\'entrée</string>
+    <string name="start_mining">Commencez à miner sur votre appareil Android de manière sûre et efficace avec Scala Mobile Miner.</string>
     <string name="mobile_miner">Mobile Miner</string>
-    <string name="download">Download</string>
-    <string name="select_image">Select Image</string>
-    <string name="contact_avatar_hint">An image that represents this address book entry.</string>
-    <string name="upload">Upload</string>
-    <string name="delete">Delete</string>
-    <string name="edit">Edit</string>
-    <string name="enable_debug_info">Enable Debug Info</string>
-    <string name="disable_debug_info">Disable Debug Info</string>
-    <string name="send_address_resolve_ud">Resolving Unstoppable Domains address...</string>
-    <string name="send_address_no_ud_records">Invalid Unstoppable Domains address</string>
+    <string name="download">Télécharger</string>
+    <string name="select_image">Sélectionner une image</string>
+    <string name="contact_avatar_hint">Une image qui représente cette entrée du carnet d\'adresses.</string>
+    <string name="upload">Télécharger</string>
+    <string name="delete">Supprimer</string>
+    <string name="edit">Modifier</string>
+    <string name="enable_debug_info">Activer les infos de débogage</string>
+    <string name="disable_debug_info">Désactiver les infos de débogage</string>
+    <string name="send_address_resolve_ud">Résolution de l\'adresse Unstoppable Domains&#8230;</string>
+    <string name="send_address_no_ud_records">Adresse Unstoppable Domains invalide</string>
+    <string name="transaction_history">Historique des transactions</string>
+    <string name="send">Envoyer</string>
+    <string name="receive">Recevoir</string>
+    <string name="balance">Solde</string>
+    <string name="balance_primary_address">Adresse principale</string>
+    <string name="balance_wallet_address">Adresse du portefeuille</string>
+    <string name="history_no_transaction">Aucune transaction</string>
+    <string name="mobileminer_scala_miner">SCALA MINER</string>
+    <string name="mobileminer_start_mining">Commencez à miner sur votre appareil Android de manière sûre et efficace.</string>
+    <string name="close">Fermer</string>
+    <string name="scala_logo" translatable="false">Logo Scala</string>
+    <string name="credits">Crédits</string>
+    <string name="credits_made_with">Fait avec </string>
+    <string name="credits_by"> par </string>
+    <string name="credits_forked_from">Basé sur </string>
+    <string name="credits_heart" translatable="false">icône de cœur</string>
+    <string name="wizard_home">Un portefeuille sécurisé et léger pour stocker vos pièces Scala</string>
+    <string name="wizard_home_description">Scala Vault fournit tout ce dont vous avez besoin pour gérer et utiliser les portefeuilles Scala sur Android</string>
+    <string name="wizard_home_create_new_wallet">Créer un nouveau portefeuille</string>
+    <string name="wizard_home_import_from_seed">Importer depuis la graine</string>
+    <string name="wizard_home_or">ou</string>
+    <string name="wizard_home_skip">Passer</string>
+    <string name="no_wallet">Pas de portefeuille</string>
+    <string name="wallet_address">Adresse du portefeuille</string>
+    <string name="subaddresses">Sous-adresses</string>
+    <string name="message_exchange_success">Prix de la devise mis à jour</string>
+    <string name="splashcreen_check_network" translatable="false">Vérification du réseau…</string>
+    <string name="splashcreen_check_network_success" translatable="false">Connecté à Internet, accès à Scala Vault</string>
+    <string name="splashcreen_check_network_failure" translatable="false">Cette application nécessite une connexion réseau pour fonctionner. Veuillez vérifier votre connexion Internet et réessayer…</string>
+
 </resources>

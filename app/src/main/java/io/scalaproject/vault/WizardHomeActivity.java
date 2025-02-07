@@ -4,10 +4,8 @@
 
 package io.scalaproject.vault;
 
-import android.app.Dialog;
 import android.content.Intent;
 import android.graphics.Color;
-import android.net.Uri;
 import android.os.Bundle;
 import android.text.SpannableString;
 import android.text.Spanned;
@@ -17,7 +15,10 @@ import android.text.style.ClickableSpan;
 import android.view.View;
 import android.widget.TextView;
 
+import androidx.annotation.NonNull;
+
 import io.scalaproject.vault.dialog.PrivacyFragment;
+import timber.log.Timber;
 
 public class WizardHomeActivity extends BaseActivity
 {
@@ -41,20 +42,29 @@ public class WizardHomeActivity extends BaseActivity
         SpannableString ss = new SpannableString(sDisclaimerText);
         ClickableSpan clickableSpan = new ClickableSpan() {
             @Override
-            public void onClick(View textView) {
+            public void onClick(@NonNull View textView) {
                 showPrivacyPolicy();
             }
 
             @Override
-            public void updateDrawState(TextPaint ds) {
+            public void updateDrawState(@NonNull TextPaint ds) {
                 super.updateDrawState(ds);
                 ds.setUnderlineText(false);
             }
         };
 
+        // This fixes default home page on wizard screen
+        // Uses per default system language so configured app stays same language
+        // need test for compatibility
         int iStart = sDisclaimerText.indexOf(sDiclaimer);
-        int iEnd = iStart + sDiclaimer.length();
-        ss.setSpan(clickableSpan, iStart, iEnd, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
+        if (iStart != -1) {// Check if sDiclaimer is found
+            int iEnd = iStart + sDiclaimer.length();
+            ss.setSpan(clickableSpan, iStart, iEnd, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
+        } else {
+            // Handle the case where sDiclaimer is not found
+            // You might want to log a warning or display an error message
+            Timber.w("Privacy policy label not found in disclaimer text");
+        }
 
         TextView tvDisclaimer = view.findViewById(R.id.disclaimer);
         tvDisclaimer.setText(ss);

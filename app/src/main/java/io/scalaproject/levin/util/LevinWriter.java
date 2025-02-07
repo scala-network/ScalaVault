@@ -31,7 +31,7 @@ import java.util.Map;
 // a simplified Levin Writer WITHOUT support for arrays
 
 public class LevinWriter {
-    private DataOutput out;
+    private final DataOutput out;
 
     public LevinWriter(DataOutput out) {
         this.out = out;
@@ -74,8 +74,7 @@ public class LevinWriter {
     }
 
     private void write(Object object) throws IOException {
-        if (object instanceof byte[]) {
-            byte[] value = (byte[]) object;
+        if (object instanceof byte[] value) {
             out.writeByte(Section.SERIALIZE_TYPE_STRING);
             writeVarint(value.length);
             out.write(value);

@@ -25,6 +25,8 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.util.Base64;
 
+import androidx.annotation.NonNull;
+
 import java.io.ByteArrayOutputStream;
 import java.util.Comparator;
 
@@ -44,9 +46,8 @@ public class Contact {
     // Contacts are equal if they are the same address
     @Override
     public boolean equals(Object other) {
-        if (!(other instanceof Contact)) return false;
+        if (!(other instanceof Contact anotherContact)) return false;
 
-        final Contact anotherContact = (Contact) other;
         return name.equals(((Contact) other).name) && address.equals(anotherContact.address);
     }
 
@@ -71,11 +72,11 @@ public class Contact {
         if ((contactString == null) || contactString.isEmpty())
             throw new IllegalArgumentException("contact is empty");
 
-        String a[] = contactString.split(":");
+        String[] a = contactString.split(":");
         if (a.length == 2) {
             this.name = a[0];
 
-            String av[] = a[1].split("@");
+            String[] av = a[1].split("@");
             this.address = av[0];
 
             if(av.length == 2) { // there is an avatar
@@ -91,6 +92,7 @@ public class Contact {
         return toString();
     }
 
+    @NonNull
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder();
@@ -147,10 +149,5 @@ public class Contact {
         avatar = anotherContact.avatar;
     }
 
-    static public Comparator<Contact> ContactComparator = new Comparator<Contact>() {
-        @Override
-        public int compare(Contact o1, Contact o2) {
-            return o1.getName().compareToIgnoreCase(o2.getName());
-        }
-    };
+    static public Comparator<Contact> ContactComparator = (o1, o2) -> o1.getName().compareToIgnoreCase(o2.getName());
 }

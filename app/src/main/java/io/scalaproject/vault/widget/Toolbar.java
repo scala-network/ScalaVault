@@ -23,6 +23,7 @@
 
 package io.scalaproject.vault.widget;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.os.Build;
 import android.util.AttributeSet;
@@ -94,11 +95,9 @@ public class Toolbar extends androidx.appcompat.widget.Toolbar {
         //toolbarSubtitle = findViewById(R.id.toolbarSubtitle);
 
         bMainLogo = findViewById(R.id.bMainLogo);
-        bMainLogo.setOnClickListener(new View.OnClickListener() {
-            public void onClick(View v) {
-                if (onButtonListener != null) {
-                    onButtonListener.onButton(buttonType);
-                }
+        bMainLogo.setOnClickListener(v -> {
+            if (onButtonListener != null) {
+                onButtonListener.onButton(buttonType);
             }
         });
     }
@@ -128,6 +127,7 @@ public class Toolbar extends androidx.appcompat.widget.Toolbar {
 
     int buttonType = BUTTON_CREDITS;
 
+    @SuppressLint("UseCompatLoadingForDrawables")
     public void setButton(int type) {
         switch (type) {
             case BUTTON_BACK:
