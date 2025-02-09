@@ -1,0 +1,76 @@
+name: Compilation
+
+env:
+  app_name: ScalaVault
+  
+on:
+  push:
+    paths-ignore:
+      - 'doc/**'
+      - '**/README.md'
+  pull_request:
+    paths-ignore:
+      - 'doc/**'
+      - '**/README.md'
+  workflow_dispatch:
+    inputs:
+      run_release:
+        description: 'Release the Artifacts'
+        required: true
+        default: 'false'
+        type: choice
+        options:
+          - 'true'
+          - 'false'
+      version_number:
+        description: 'Release version'
+        required: true
+        default: 'v1.0.0'
+
+jobs:
+  build:
+    name: Android ARM & x86
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: JDK Installation
+        uses: actions/setup-java@v4
+        with:
+          distribution: 'zulu'
+          java-version: '17'
+          cache: 'gradle'
+      - name: Change wrapper permissions
+        run: chmod +x ./gradlew
+      - name: Build app bundle release
+        run: ./gradlew assembleProdMainnet
+      - name: Remove JSON file
+        run: rm -rf app/build/outputs/apk/prodMainnet/release/*.json 
+      - name: Upload APK Release
+        uses: actions/upload-artifact@v4
+        with:
+          name: ${{env.app_name}}
+          path: |
+            app/build/outputs/apk/prodMainnet/release/
+  
+  download:
+    name: Release Artifacts
+    needs: ['build']
+    runs-on: ubuntu-latest
+    if: ${{ github.event.inputs.run_release == 'true' }}
+    steps:
+    - name: Download All Artifacts
+      uses: actions/download-artifact@v4
+      with:
+        path: release
+        merge-multiple: false
+    - name: Create GitHub Release
+      id: create_release
+      uses: softprops/action-gh-release@v2
+      with:
+        name: ${{env.app_name}} ${{ github.event.inputs.version_number }}
+        tag_name: ${{ github.event.inputs.version_number }}
+        draft: true
+        prerelease: false
+        files: release/${{env.app_name}}/*
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
