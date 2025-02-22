@@ -117,7 +117,7 @@
 
     <string name="prompt_changepw">Nouvelle Phase secrète pour %1$s</string>
     <string name="prompt_changepwB">Répéter la Phase secrète pour %1$s</string>
-    <string name="prompt_password">Mot de passe pour %1$s (optionnel)</string>
+    <string name="prompt_password">Mot de passe (Laisser vide si aucun)</string>
     <string name="prompt_fingerprint_auth">Vous pouvez également ouvrir le portefeuille avec votre empreinte digitale.\nMerci de toucher le capteur.</string>
     <string name="prompt_send_password">Confirmez le mot de passe</string>
     <string name="prompt_open_wallet">Ouverture du portefeuille &#8230;</string>
@@ -158,7 +158,7 @@
 
     <string name="generate_title">Créer un portefeuille</string>
     <string name="generate_name_hint">Nom du portefeuille</string>
-    <string name="generate_password_hint">Mot de passe du portefeuille (optionnel)</string>
+    <string name="generate_password_hint">Mot de passe (Laisser vide si aucun)</string>
     <string name="prompt_password_hint">Mot de passe (Laisser vide si aucun)</string>
     <string name="generate_fingerprint_hint">Allow to open wallet using fingerprint</string>
     <string name="generate_fingerprint_warn"><![CDATA[

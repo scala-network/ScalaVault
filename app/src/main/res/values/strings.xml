@@ -126,7 +126,7 @@
 
     <string name="prompt_changepw">New Passphrase for %1$s</string>
     <string name="prompt_changepwB">Repeat Passphrase for %1$s</string>
-    <string name="prompt_password">Password for %1$s (optional)</string>
+    <string name="prompt_password">Password (Leave empty if none)</string>
     <string name="prompt_fingerprint_auth">You can also open wallet using fingerprint.\nPlease touch sensor.</string>
     <string name="prompt_send_password">Confirm Password</string>
     <string name="prompt_open_wallet">Opening the wallet&#8230;</string>

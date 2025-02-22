@@ -35,14 +35,14 @@ public class SplashActivity extends Activity {
 
         setContentView(R.layout.splashscreen);
 
-        txtView = findViewById(R.id.textView);
+        /*txtView = findViewById(R.id.textView);
         txtView.setVisibility(View.VISIBLE);
 
         // Set base text from TextView (without dots)
         baseText = txtView.getText().toString().replace("...", "");
 
         // Start the infinite animation
-        startAnimation();
+        startAnimation();*/
 
         int millisecondsDelay = 2000;
 

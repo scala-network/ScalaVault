@@ -8,8 +8,8 @@ android {
         minSdk 23
         //noinspection OldTargetApi
         targetSdk 34
-        versionCode 17
-        versionName "1.2.0"
+        versionCode 18
+        versionName "1.2.1"
 
         testInstrumentationRunner 'androidx.test.runner.AndroidJUnitRunner'
         externalNativeBuild {
@@ -177,15 +177,5 @@ dependencies {
     implementation "ch.acra:acra-mail:$acraVersion"
 
     implementation 'com.unstoppabledomains:resolution:3.0.0'
-    // implementation 'com.yubico.yubikit:core:(insert version here)' for Multi factor auth --> extra security layer
-
-    // This is for the game or multiuser realtime interaction branch ... Title ???
-    // ===============================================================
-    // implementation 'com.github.heroiclabs.nakama-java:nakama-java:<commit>'
-    // implementation 'com.github.heroiclabs.nakama-java:satori-java:<commit>'
-
-
-    // or, depend on the fat Jar which bundles all of the Nakama Java dependencies into a single Jar.
-    // implementation 'com.github.heroiclabs.nakama-java:nakama-java-all:<commit>'
-    // implementation 'com.github.heroiclabs.nakama-java:satori-java-all:<commit>'
+    implementation 'pl.droidsonroids.gif:android-gif-drawable:1.2.0'
 }
