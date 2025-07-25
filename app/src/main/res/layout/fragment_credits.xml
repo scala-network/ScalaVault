@@ -149,5 +149,17 @@
             app:iconTint="@color/btn_icon_default"
             app:icon="@drawable/ic_download"/>
 
+        <TextView
+            android:id="@+id/appVersion"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="5dp"
+            android:text="version"
+            android:layout_gravity="center"
+            android:textSize="16sp"
+            android:textColor="@color/c_white"
+            android:textStyle="bold"
+            android:layout_marginTop="20sp"/>
+
     </LinearLayout>
 </ScrollView>

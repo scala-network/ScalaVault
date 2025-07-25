@@ -45,6 +45,7 @@ import com.google.android.material.dialog.MaterialAlertDialogBuilder;
 
 import java.util.Objects;
 
+import io.scalaproject.vault.BuildConfig;
 import io.scalaproject.vault.R;
 
 public class CreditsFragment extends DialogFragment {
@@ -76,6 +77,9 @@ public class CreditsFragment extends DialogFragment {
         TextView tvmonerujoURL = view.findViewById(R.id.monerujoURL);
         tvmonerujoURL.setText(Html.fromHtml(getString(R.string.monerujoLink)));
         tvmonerujoURL.setMovementMethod(LinkMovementMethod.getInstance());
+
+        TextView tvappVersion = view.findViewById(R.id.appVersion);
+        tvappVersion.setText(BuildConfig.VERSION_NAME);
 
         Button btnDownloadMM = view.findViewById(R.id.btnDownloadMM);
         btnDownloadMM.setOnClickListener(new View.OnClickListener() {
